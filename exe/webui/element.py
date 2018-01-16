@@ -47,7 +47,7 @@ def replaceLinks(matchobj, package_name):
     and do.group(1).startswith('resources/'):
         clean_url = urllib.quote(package_name.encode('utf-8'))
         return re.sub(r'(?i)href\s*=\s*"?([^>"]+)"?',
-                r'''href="\1" onclick="browseURL('%s/%s/\1'); return false"''' % (G.application.exeAppUri, clean_url),
+                r'''href="\1" onclick="browseURL('%s/%s/\1',this); return false"''' % (G.application.exeAppUri, clean_url),
                 anchor)
     else:
         return anchor
@@ -673,8 +673,7 @@ class PlainTextAreaElement(Element):
         """
         Returns an XHTML string with the form element for editing this field
         """
-        log.debug("renderEdit content="+self.field.content+
-                  ", height="+unicode(self.height))
+        log.debug("renderEdit content="+self.field.content)
         # package not needed for PlainTextArea, only for rich-text fields:
         this_package = None
         html = common.formField('textArea', this_package, self.field.name,'',

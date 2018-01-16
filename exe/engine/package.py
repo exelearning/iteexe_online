@@ -312,7 +312,7 @@ class Package(Persistable):
     Package represents the collection of resources the user is editing
     i.e. the "package".
     """
-    persistenceVersion = 13
+    persistenceVersion = 14
     nonpersistant      = ['resourceDir', 'filename', 'previewDir', 'printDir']
     # Name is used in filenames and urls (saving and navigating)
     _name              = '' 
@@ -356,7 +356,12 @@ class Package(Persistable):
         self.printDir      = None
         self.idevices      = []
         self.dublinCore    = DublinCore()
-        self._lang = G.application.config.locale.split('_')[0]
+        # When working with chinese, we need to add the full language string
+        # TODO: We should test if we really need to split the locale
+        if G.application.config.locale.split('_')[0] != 'zh':
+            self._lang = G.application.config.locale.split('_')[0]
+        else:
+            self._lang = G.application.config.locale
         self.setLomDefaults()
         self.setLomEsDefaults()
         self.scolinks      = False
@@ -386,11 +391,15 @@ class Package(Persistable):
         self.mxmlwidth = ""
         self.mxmlforcemediaonly = False
         
+        #Flag to add page counters
+        self._addPagination = False
 
         # Temporary directory to hold resources in
         self.resourceDir = TempDirPath()
         self.resources = {} # Checksum-[_Resource(),..]
         self._docType    = G.application.config.docType
+        
+        self.isLoading = False
 
     def setLomDefaults(self):
         self.lom = lomsubs.lomSub.factory()
@@ -438,6 +447,10 @@ class Package(Persistable):
         if self.dublinCore.language in [self._lang, '']:
             self.dublinCore.language = value
         value_str = value.encode('utf-8')
+        if self.lom.get_general() is None:
+            self.setLomDefaults()
+        if self.lomEs.get_general() is None:
+            self.setLomEsDefaults()
         for metadata in [self.lom, self.lomEs]:
             language = metadata.get_general().get_language()
             if language:
@@ -709,7 +722,26 @@ class Package(Persistable):
                     educational = [lomsubs.educationalSub(description=[description])]
                     metadata.set_educational(educational)        
         self._preknowledge = toUnicode(value)
-
+        
+    def set_addPagination(self, addPagination):
+        """
+        Set _addPagination flag.
+    
+        :type addPagination: boolean
+        :param addPagination: New value for the _addPagination flag.
+        """
+        self._addPagination = addPagination
+    
+    def get_addPagination(self):
+        """
+        Returns _addPagination flag value.
+    
+        :rtype: boolean
+        :return: Flag indicating wheter we should add pagination counters or not.
+        """
+        return self._addPagination
+    
+        
     def license_map(self, source, value):
         '''From document "ANEXO XIII ANÁLISIS DE MAPEABILIDAD LOM/LOM-ES V1.0"'''
         if source == 'LOM-ESv1.0':
@@ -982,6 +1014,7 @@ class Package(Persistable):
     intendedEndUserRoleTutor = property(lambda self: self._intendedEndUserRoleTutor, set_intendedEndUserRoleTutor)
     contextPlace = property(lambda self: self._contextPlace, set_contextPlace)
     contextMode = property(lambda self: self._contextMode, set_contextMode)
+    addPagination = property(get_addPagination, set_addPagination)
 
     def findNode(self, nodeId):
         """
@@ -992,7 +1025,7 @@ class Package(Persistable):
         node = self._nodeIdDict.get(nodeId)
         if node and node.package is self:
             return node
-        else: 
+        else:
             return None
 
 
@@ -1081,9 +1114,9 @@ class Package(Persistable):
             self.downgradeToVersion9()
         zippedFile = zipfile.ZipFile(fileObj, "w", zipfile.ZIP_DEFLATED)
         try:
-            for resourceFile in self.resourceDir.files():
+            for resourceFile in self.resourceDir.walkfiles():
                 zippedFile.write(unicode(resourceFile.normpath()),
-                        resourceFile.name.encode('utf8'), zipfile.ZIP_DEFLATED)
+                        self.resourceDir.relpathto(resourceFile), zipfile.ZIP_DEFLATED)
 
             zinfo = zipfile.ZipInfo(filename='content.data',
                     date_time=time.localtime()[0:6])
@@ -1180,16 +1213,19 @@ class Package(Persistable):
             
         # Need to add a TempDirPath because it is a nonpersistant member
         resourceDir = TempDirPath()
-
+        
+        excludeDir = ["common", "extend","unique","vocab"]
         # Extract resource files from package to temporary directory
         for fn in zippedFile.namelist():
             if unicode(fn, 'utf8') not in [u"content.data", u"content.xml", u"contentv2.xml", u"contentv3.xml", u"content.xsd" ]:
                 #JR: Hacemos las comprobaciones necesarias por si hay directorios
                 if ("/" in fn):
-                    dir = fn[:fn.index("/")]
+                    dir = fn[:fn.rindex("/")]
+                    if dir in excludeDir:
+                        continue
                     Dir = Path(resourceDir/dir)
                     if not Dir.exists():
-                        Dir.mkdir()
+                        Dir.makedirs()
                 Fn = Path(resourceDir/fn)
                 if not Fn.isdir():
                     outFile = open(resourceDir/fn, "wb")
@@ -1222,6 +1258,9 @@ class Package(Persistable):
             except:
                 pass
             G.application.afterUpgradeHandlers = []
+            
+            newPackage.isLoading = True
+            
             newPackage.resourceDir = resourceDir
             G.application.afterUpgradeZombies2Delete = []
             if not validxml and (xml or fromxml or "content.xml" in zippedFile.namelist()):
@@ -1243,6 +1282,8 @@ class Package(Persistable):
                 #JR: Si por casualidad quedase vacio le damos un nombre por defecto
                 if newPackage._name == "":
                     newPackage._name = "invalidpackagename"
+                elif newPackage._name in G.application.webServer.invalidPackageName:
+                    newPackage._name = newPackage._name+'_1'
                 log.debug("load() about to doUpgrade newPackage \"" 
                         + newPackage._name + "\" " + repr(newPackage) )
                 if hasattr(newPackage, 'resourceDir'):
@@ -1303,6 +1344,10 @@ class Package(Persistable):
             # newPackage.filename is the name that the package was last loaded from
             # or saved to
             newPackage.filename = Path(filename)
+
+        # If eXe is configured to force editable exports we have to set it here
+        if G.application.config.forceEditableExport == "1":
+            newPackage.exportSource = True
 
         checker = Checker(newPackage)
         inconsistencies = checker.check()
@@ -1380,6 +1425,9 @@ class Package(Persistable):
         if not nstyle.isdir():
             newPackage.style=G.application.config.defaultStyle       
         newPackage.lang = newPackage._lang
+        
+        newPackage.isLoading = False
+        
         return newPackage
 
     def getUserResourcesFiles(self, node):
@@ -1606,7 +1654,12 @@ class Package(Persistable):
         """
 
         if not hasattr(self, 'lang'):
-            self._lang = G.application.config.locale.split('_')[0]
+            # When working with chinese, we need to add the full language string
+            # TODO: We should test if we really need to split the locale
+            if G.application.config.locale.split('_')[0] != 'zh':
+                self._lang = G.application.config.locale.split('_')[0]
+            else:
+                self._lang = G.application.config.locale
         entry = str(uuid.uuid4())
         if not hasattr(self, 'lomEs') or not isinstance(self.lomEs, lomsubs.lomSub):
             self.lomEs = lomsubs.lomSub.factory()
@@ -1727,4 +1780,8 @@ class Package(Persistable):
                 idevice.delete()            
         for child in node.children:
             self.delNotes(child)
+    
+    def upgradeToVersion14(self):
+        if not hasattr(self, '_addPagination'):
+            self._addPagination = False
 # ===========================================================================

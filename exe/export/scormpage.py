@@ -26,7 +26,7 @@ class ScormPage(Page):
         self.metadataType = metadataType
         super(ScormPage, self).__init__(name, depth, node)
 
-    def save(self, outputDir):
+    def save(self, outputDir, pages):
         """
         This is the main function.  It will render the page and save it to a
         file.  
@@ -34,12 +34,15 @@ class ScormPage(Page):
         the filename will be the 'self.node.id'.html or 'index.html' if
         self.node is the root node. 'outputDir' must be a 'Path' instance
         """
-        out = open(outputDir/self.name+".html", "wb")
-        out.write(self.render())
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+            ext = 'htm'
+        out = open(outputDir/self.name + '.' + ext, "wb")
+        out.write(self.render(pages))
         out.close()
 
 
-    def render(self):
+    def render(self, pages):
         """
         Returns an XHTML string rendering this page.
         """
@@ -94,6 +97,8 @@ class ScormPage(Page):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_highlighter.css\" />"+lb
         if common.hasGames(self.node):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />"+lb
+        if common.hasABCMusic(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />"+lb            
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />"+lb
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->'+lb
@@ -118,6 +123,8 @@ class ScormPage(Page):
             # The games require additional strings
             html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>'+lb
+        if common.hasABCMusic(self.node):
+            html += u'<script type="text/javascript" src="exe_abcmusic.js"></script>'+lb
         html += u'<script type="text/javascript" src="common.js"></script>'+lb
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
@@ -125,19 +132,19 @@ class ScormPage(Page):
             if style.hasValidConfig:
                 html += style.get_extra_head()        
             html += u"</head>"+lb
-            html += u"<body class=\"exe-scorm\" "
+            html += u"<body id=\""+self.node.id+"\" class=\"exe-scorm\" "
         else:
             html += u"<script type=\"text/javascript\" src=\"SCORM_API_wrapper.js\"></script>"+lb
             html += u"<script type=\"text/javascript\" src=\"SCOFunctions.js\"></script>"+lb
             if style.hasValidConfig:
                 html += style.get_extra_head()
             html += u"</head>"+lb            
-            html += u'<body class=\"exe-scorm\" onload="loadPage()" '
+            html += u'<body id="exe-node-'+self.node.id+'" class=\"exe-scorm\" '
         if common.hasQuizTest(self.node):
             html += u'onunload="unloadPage(true)">'
         else:
             html += u'onunload="unloadPage()">'
-        html += u'<script type="text/javascript">document.body.className+=" js"</script>'+lb
+        html += u'<script type="text/javascript">document.body.className+=" js";jQuery(function(){loadPage()})</script>'+lb
         html += u"<div id=\"outer\">"+lb
         html += u"<"+sectionTag+" id=\"main\">"+lb
         html += u"<"+headerTag+" id=\"nodeDecoration\">"
@@ -168,6 +175,8 @@ class ScormPage(Page):
 
         html += u"</"+sectionTag+">"+lb # /#main
         themeHasXML = common.themeHasConfigXML(self.node.package.style)
+        if self.node.package.get_addPagination():
+            html += "<div class = 'pagination' align='right'>" + c_('Page %i of %i') % (pages.index(self) + 1,len(pages))+ "</div>"+lb 
         if themeHasXML:
         #if style.hasValidConfig:
             html += self.renderLicense()

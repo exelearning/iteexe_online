@@ -224,9 +224,9 @@ Ext.define('eXe.view.forms.LomDataPanel', {
             widgets.section(_('Annotation'), this.prefix + 'annotation', true, false, false),
             widgets.section(_('Classification'), this.prefix + 'classification', true, false, false),
             {
-                xtype: 'button',
-                text: _('Save'),
-                itemId: 'save_properties'
+            	xtype: 'button',
+            	text: _('Save'),
+            	itemId: 'save_properties'
             },
             {
                 xtype: 'button',
@@ -264,9 +264,9 @@ Ext.define('eXe.view.forms.LomDataPanel', {
                 widgets.section(_('Annotation'), this.prefix + 'annotation', true, false, false),
                 widgets.section(_('Classification'), this.prefix + 'classification', true, false, false),
                 {
-                    xtype: 'button',
-                    text: _('Save'),
-                    itemId: 'save_properties'
+                	xtype: 'button',
+                	text: _('Save'),
+                	itemId: 'save_properties'
                 },
                 {
                     xtype: 'button',

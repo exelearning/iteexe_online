@@ -30,7 +30,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
             bodyPadding: 4,
             items: [{
                 xtype: 'tabpanel',
-                height: 250,
+                height: 310,
                 activeTab: 0,
                 plain: true,
                 items: [
@@ -159,7 +159,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 									xtype: 'combobox',
 									inputId: 'docType',
 									dirtyCls: 'property-form-dirty',
-									labelWidth: 250,
+									labelWidth: 325,
 									fieldLabel: _('Default format for the new documents'),
 									store: [
 										["XHTML", ("XHTML")],
@@ -179,7 +179,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 									xtype: 'combobox',
 									inputId: 'editorMode',
 									dirtyCls: 'property-form-dirty',
-									labelWidth: 250,
+									labelWidth: 325,
 									fieldLabel: _('Editor mode'),
 									store: [
 										["permissive", _("Permissive")],
@@ -199,7 +199,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 									xtype: 'combobox',
 									inputId: 'editorVersion',
 									dirtyCls: 'property-form-dirty',
-									labelWidth: 250,
+									labelWidth: 325,
 									fieldLabel: _('Editor version'),
 									store: [
 										["3", "TinyMCE 3" ],
@@ -218,7 +218,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 								inputId: 'internalAnchors',
 								dirtyCls: 'property-form-dirty',
 								fieldLabel: _("Internal Linking (for Web Site Exports only)"),
-								labelWidth: 250,
+								labelWidth: 325,
 								width:465,
 								store: [
 									["enable_all", _("Enable All Internal Linking")],
@@ -227,14 +227,52 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 								],
 								margin: 10
 							},
+							// Force editable exports
+							{
+								xtype: 'helpcontainer',
+								item: {
+									xtype: 'combobox',
+									inputId: 'forceEditableExport',
+									dirtyCls: 'property-form-dirty',
+									labelWidth: 325,
+									fieldLabel: _('Always force editable exports on package load'),
+									store: [
+										["0", _("No") ],
+										["1", _("Yes") ]
+									]
+								},
+								margin: 10,
+								help: _('This will ignore the package "Create editable export?" setting every time it\'s loaded. You will be able to disable it before exporting, but it will be reset every time you open the package.')
+							},
+							// Compatibility with ISO 9660
+							{
+								xtype: 'helpcontainer',
+								item: {
+									xtype: 'combobox',
+									inputId: 'cutFileName',
+									dirtyCls: 'property-form-dirty',
+									labelWidth: 325,
+									fieldLabel: _('Naming standard for exported content'),
+									store: [
+										["0", _("Default") ],
+										["1", "ISO 9660" ]
+									]
+								},
+								margin: 10,
+								help: _('If "ISO 9660" is selected, file names will be cut to 8.3 format to be compliant with ISO 9660. Note: This option only works with SCORM and Web Site export types.')
+							},
+							{
+								xtype: 'label',
+								forId: 'defaultLicense',
+								text:  _("Default license for the new documents"),
+								margin: '0 0 0 10'
+							}, 							
 							{
 								xtype: 'helpcontainer',
 								item: {
 									xtype: 'combobox',
 									inputId: 'defaultLicense',
 									dirtyCls: 'property-form-dirty',
-									fieldLabel: _("Default license for the new documents"),
-									labelWidth: 350,
 									labelAlign:'top',
 									queryModel: 'local',
 									displayField: 'text',
@@ -250,9 +288,9 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 											}
 										},
 										autoLoad: true
-									},
+									}
 								},
-								margin: 10,
+								margin: '5 10 10 10',
 								help: _('The current document license can be modified in the Properties tab.')								
 							}
 						]
@@ -286,17 +324,15 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
                     flex: 1
                 }, {
                     xtype: 'checkboxfield',
-                    //margin: 10,
+                    // margin: 10,
                     inputId: 'showPreferencesOnStart',
                     inputValue: '1',
                     uncheckedValue: '0',
                     dirtyCls: 'property-form-dirty',
-                    boxLabelAlign: 'before',
+                    // boxLabelAlign: 'before',
                     boxLabel: _('Show this window on eXe start')
                 }]
             }]
-
-
         });
 
         me.callParent(arguments);

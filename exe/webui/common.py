@@ -23,6 +23,7 @@ This module is for the common HTML used in all webpages.
 """
 
 import logging
+import os
 from nevow                     import tags as T
 from nevow.flat                import flatten
 from exe                       import globals as G
@@ -491,6 +492,7 @@ def getJavaScriptStrings():
     s += 'correct:"'+c_("Correct")+'",'
     s += 'incorrect:"'+c_("Incorrect")+'",'
     s += 'menu:"'+c_("Menu")+'",'
+    s += 'download:"'+c_("Download")+'",'
     s += 'print:"'+c_("Print")+'"'	
     s += '}</script>'
     
@@ -1341,7 +1343,23 @@ def nodeHasTooltips(node):
             return True
     return False
 
+def hasABCMusic(node):
+    for idevice in node.idevices:
+        if ideviceHasABCMusic(idevice):
+            return True
+    return False
 
+def ideviceHasABCMusic(idevice):
+    block = g_blockFactory.createBlock(None, idevice)
+    if not block:
+        log.critical("Unable to render iDevice.")
+        raise Error("Unable to render iDevice.")
+    content = block.renderView('default')
+    
+    if re.search(' class=[\'"]abc-music', content):
+        return True
+    return False
+    
 ## Added for [#2501] Add masteryscore to manifest in evaluable nodes
 ## Maybe we should reorder all this common code and move it to an Objecto Oriented logic
 def hasQuizTest(node):
@@ -1378,17 +1396,18 @@ def getFilesJSToMinify(type, scriptsDir):
 
 
 def getFilesCSSToMinify(type, styleDir):
-    listCSSFiles=[]
-    if(type =='ims'):
-        listCSSFiles+=[{'path':styleDir/'..'/'base.css','basename':'base.css'}]
-    elif(type=='epub3'):
-        listCSSFiles+=[{'path':styleDir/'..'/'base.css','basename':'base.css'}] 
-    elif(type=='scorm'):
-        listCSSFiles+=[{'path':styleDir/'..'/'base.css','basename':'base.css'}] 
-    elif(type=='singlepage'):
-        listCSSFiles+=[{'path':styleDir/'..'/'base.css','basename':'base.css'}]
-    elif(type=='website'):
-        listCSSFiles+=[{'path':styleDir/'..'/'base.css','basename':'base.css'}]
+    '''
+    Returns a list of CSS files that should by minified
+    depending on the export type
+    '''
+    list_css_files = []
     
-    
-    return listCSSFiles
+    # Whatever the type is, we always include base.css
+    # But if the style has a base.css file, we should always
+    # include that one 
+    if os.path.isfile(styleDir/'base.css'):
+        list_css_files += [{ 'path': styleDir/'base.css', 'basename': 'base.css' }]
+    else:
+        list_css_files += [{ 'path': styleDir/'..'/'base.css', 'basename': 'base.css' }]
+        
+    return list_css_files

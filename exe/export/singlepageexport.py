@@ -28,6 +28,7 @@ from exe.webui                import common
 from exe                      import globals as G
 from exe.engine.persist       import encodeObject
 from exe.engine.persistxml    import encodeObjectToXML
+from exe.engine.resource      import Resource
 from helper                   import exportMinFileJS
 from helper                   import exportMinFileCSS
 from exe.webui.common         import getFilesCSSToMinify
@@ -72,8 +73,11 @@ class SinglePageExport(object):
         self.style = package.style
 
         self.page = SinglePage("index", 1, package.root)
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+            ext = 'htm'
 
-        self.page.save(self.outputDir/"index.html", for_print)
+        self.page.save(self.outputDir/"index" + '.' + ext, for_print)
         if hasattr(package, 'exportSource') and package.exportSource and not for_print:
             (G.application.config.webDir/'templates'/'content.xsd').copyfile(self.outputDir/'content.xsd')
             (self.outputDir/'content.data').write_bytes(encodeObject(package))
@@ -86,28 +90,28 @@ class SinglePageExport(object):
         """
         Copy all the files used by the website.
         """
-        # Copy the style sheet files to the output dir
+        # Copy the style files to the output dir
         # But not nav.css
         if os.path.isdir(self.stylesDir):
-            # Copy the style sheet files to the output dir
             styleFiles = [self.stylesDir/'..'/'popup_bg.gif']
-            styleFiles += self.stylesDir.files("*.css")
+            styleFiles += self.stylesDir.files("*.*")
             if "nav.css" in styleFiles:
                 styleFiles.remove("nav.css")
-            styleFiles += self.stylesDir.files("*.jpg")
-            styleFiles += self.stylesDir.files("*.gif")
-            styleFiles += self.stylesDir.files("*.png")
-            styleFiles += self.stylesDir.files("*.js")
-            styleFiles += self.stylesDir.files("*.html")
-            styleFiles += self.stylesDir.files("*.ico")
-            styleFiles += self.stylesDir.files("*.ttf")
-            styleFiles += self.stylesDir.files("*.eot")
-            styleFiles += self.stylesDir.files("*.otf")
-            styleFiles += self.stylesDir.files("*.woff")
             self.stylesDir.copylist(styleFiles, self.outputDir)
             
         # copy the package's resource files
-        package.resourceDir.copyfiles(self.outputDir)
+        for resourceFile in package.resourceDir.walkfiles():
+            file = package.resourceDir.relpathto(resourceFile)
+            
+            if ("/" in file):
+                Dir = Path(self.outputDir/file[:file.rindex("/")])
+
+                if not Dir.exists():
+                    Dir.makedirs()
+        
+                resourceFile.copy(self.outputDir/Dir)
+            else:
+                resourceFile.copy(self.outputDir)
 
         listCSSFiles=getFilesCSSToMinify('singlepage', self.stylesDir)
         exportMinFileCSS(listCSSFiles, self.outputDir)
@@ -146,7 +150,10 @@ class SinglePageExport(object):
 
         if package.license == "license GFDL":
             # include a copy of the GNU Free Documentation Licence
-            (self.templatesDir/'fdl.html').copyfile(self.outputDir/'fdl.html')
+            ext = 'html'
+            if G.application.config.cutFileName == "1":
+                ext = 'htm'
+            (self.templatesDir/'fdl' + '.' + ext).copyfile(self.outputDir/'fdl' + '.' + ext)
 
     def compruebaReproductores(self, node):
         """
@@ -165,9 +172,10 @@ class SinglePageExport(object):
         hasInstructions   = False
         hasMediaelement   = False
         hasTooltips       = False
+        hasABCMusic       = False
 
     	for idevice in node.idevices:
-    	    if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips):
+    	    if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
     	    	break
     	    if not hasFlowplayer:
     	    	if 'flowPlayer.swf' in idevice.systemResources:
@@ -196,6 +204,8 @@ class SinglePageExport(object):
                     hasMediaelement = common.ideviceHasMediaelement(idevice)
             if not hasTooltips:
                 hasTooltips = common.ideviceHasTooltips(idevice)
+            if not hasABCMusic:
+                hasABCMusic = common.ideviceHasABCMusic(idevice)
                             
         if hasFlowplayer:
             videofile = (self.templatesDir/'flowPlayer.swf')
@@ -236,9 +246,20 @@ class SinglePageExport(object):
         if hasTooltips:
             exe_tooltips = (self.scriptsDir/'exe_tooltips')
             exe_tooltips.copyfiles(self.outputDir)
+        if hasABCMusic:
+            pluginScripts = (self.scriptsDir/'tinymce_4/js/tinymce/plugins/abcmusic/export')
+            pluginScripts.copyfiles(self.outputDir)
 
         for child in node.children:
             self.compruebaReproductores(child)
 
-
+    def hasUncutResources(self):
+        """
+        Check if any of the resources in the exported package has an uncut filename
+        """
+        for idevice in self.page.node.idevices:
+            for resource in idevice.userResources:
+                if type(resource) == Resource and len(resource.storageName) > 12:
+                    return True
+        return False
 # ===========================================================================

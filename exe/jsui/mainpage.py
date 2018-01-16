@@ -267,6 +267,12 @@ class MainPage(RenderableLivePage):
             config['user'] = session.user.name
             config['user_picture'] = session.user.picture
             config['user_root'] = session.user.root
+
+        # When working with chinese, we need to add the full language string
+        # TODO: We should test if we really need to split the locale
+        if G.application.config.locale.split('_')[0] == 'zh':
+            config['lang'] = G.application.config.locale
+
         G.application.preferencesShowed = True
         G.application.loadErrors = []
         return tags.script(type="text/javascript")["var config = %s" % json.dumps(config)]
@@ -1091,6 +1097,10 @@ class MainPage(RenderableLivePage):
             singlePageExport = SinglePageExport(stylesDir, filename, \
                                          imagesDir, scriptsDir, cssDir, templatesDir)
             singlePageExport.export(self.package, printFlag)
+
+            has_uncut_resources = False
+            if G.application.config.cutFileName == "1":
+                has_uncut_resources = singlePageExport.hasUncutResources()
         except Exception, e:
             if client:
                 client.alert(_('SAVE FAILED!\n%s') % str(e))
@@ -1099,7 +1109,10 @@ class MainPage(RenderableLivePage):
         if not printFlag:
             self._startFile(filename)
             if client:
-                client.alert(_(u'Exported to %s') % filename)
+                if not has_uncut_resources:
+                    client.alert(_(u'Exported to %s') % filename)
+                else:
+                    client.alert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
         # and return a string of the actual directory name,
         # in case the package name was added, etc.:
@@ -1139,12 +1152,19 @@ class MainPage(RenderableLivePage):
             # Now do the export
             websiteExport = WebsiteExport(self.config, stylesDir, filename)
             websiteExport.export(self.package)
+
+            has_uncut_resources = False
+            if G.application.config.cutFileName == "1":
+                has_uncut_resources = websiteExport.hasUncutResources()
         except Exception, e:
             if client:
                 client.alert(_('EXPORT FAILED!\n%s') % str(e))
             raise
         if client:
-            client.alert(_(u'Exported to %s') % filename)
+            if not has_uncut_resources:
+                client.alert(_(u'Exported to %s') % filename)
+            else:
+                client.alert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
             # Show the newly exported web site in a new window
             self._startFile(filename)
 
@@ -1156,10 +1176,18 @@ class MainPage(RenderableLivePage):
             filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
             websiteExport = WebsiteExport(self.config, stylesDir, filename)
             websiteExport.exportZip(self.package)
+
+            has_uncut_resources = False
+            if G.application.config.cutFileName == "1":
+                has_uncut_resources = websiteExport.hasUncutResources()
         except Exception, e:
             client.alert(_('EXPORT FAILED!\n%s') % str(e))
             raise
-        client.filePickerAlert(_(u'Exported to %s') % filename)
+
+        if not has_uncut_resources:
+            client.filePickerAlert(_(u'Exported to %s') % filename)
+        else:
+            client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     def exportText(self, client, filename):
         try:
@@ -1214,11 +1242,21 @@ class MainPage(RenderableLivePage):
                     return
             # Do the export
             scormExport = ScormExport(self.config, stylesDir, filename, scormType)
-            scormExport.export(self.package)
+            modifiedMetaData = scormExport.export(self.package)
+
+            has_uncut_resources = False
+            if G.application.config.cutFileName == "1":
+                has_uncut_resources = scormExport.hasUncutResources()
         except Exception, e:
             client.alert(_('EXPORT FAILED!\n%s') % str(e))
             raise
-        client.filePickerAlert(_(u'Exported to %s') % filename)
+        if modifiedMetaData != False and modifiedMetaData['modifiedMetaData']:  
+            client.filePickerAlert(_(u'The following fields have been cut to meet the SCORM 1.2 standard: %s') % ', '.join(modifiedMetaData['fieldsModified']))
+        else:
+            if not has_uncut_resources:
+                client.filePickerAlert(_(u'Exported to %s') % filename)
+            else:
+                client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     def exportEpub3(self, client, filename, stylesDir):
         try:
@@ -1271,10 +1309,18 @@ class MainPage(RenderableLivePage):
             # Do the export
             imsExport = IMSExport(self.config, stylesDir, filename)
             imsExport.export(self.package)
+
+            has_uncut_resources = False
+            if G.application.config.cutFileName == "1":
+                has_uncut_resources = imsExport.hasUncutResources()
         except Exception, e:
             client.alert(_('EXPORT FAILED!\n%s') % str(e))
             raise
-        client.filePickerAlert(_(u'Exported to %s') % filename)
+
+        if not has_uncut_resources:
+            client.filePickerAlert(_(u'Exported to %s') % filename)
+        else:
+            client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     # Utility methods
     def _startFile(self, filename):
@@ -1288,8 +1334,11 @@ class MainPage(RenderableLivePage):
                 except UnicodeEncodeError:
                     os.startfile(filename.encode(Path.fileSystemEncoding))
             else:
-                filename /= 'index.html'
-                G.application.config.browser.open('file://'+filename)
+                if (filename / 'index.html').exists():
+                    filename /= 'index.html'
+                else:
+                    filename /= 'index.htm'
+                G.application.config.browser.open('file://' + filename)
 
     def _loadPackage(self, client, filename, newLoad=True,
                      destinationPackage=None):

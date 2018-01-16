@@ -17,7 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # ===========================================================================
-from exe.engine.resource import Resource
 """
 WebsiteExport will export a package as a website of HTML pages
 """
@@ -28,6 +27,7 @@ import imp
 import os
 from shutil                   import rmtree
 from exe.engine.path          import Path, TempDirPath
+from exe.engine.resource      import Resource
 from exe.export.pages         import uniquifyNames
 from exe.export.websitepage   import WebsitePage
 from zipfile                  import ZipFile, ZIP_DEFLATED
@@ -109,19 +109,22 @@ class WebsiteExport(object):
         Actually saves the zip data. Called by 'Path.safeSave'
         """
         zipped = ZipFile(fileObj, "w")
-        for scormFile in outputDir.files():
-            zipped.write(scormFile, scormFile.basename().encode('utf8'), ZIP_DEFLATED)
+        for scormFile in outputDir.walkfiles():
+            zipped.write(scormFile,  outputDir.relpathto(scormFile), ZIP_DEFLATED)
         zipped.close()
 
     def appendPageReport(self, page, package):
-        if not page.node.idevices:self.report += u'"%s","%s",%d,"%s",,,,,,\n' % (package.filename,page.node.title, page.depth, page.name + '.html')
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+            ext = 'htm'
+        if not page.node.idevices:self.report += u'"%s","%s",%d,"%s",,,,,,\n' % (package.filename,page.node.title, page.depth, page.name + '.' + ext)
         for idevice in page.node.idevices:
-            if not idevice.userResources:self.report += u'"%s","%s",%d,"%s","%s","%s",,,,\n' % (package.filename,page.node.title, page.depth, page.name + '.html', idevice.klass, idevice.title)
+            if not idevice.userResources:self.report += u'"%s","%s",%d,"%s","%s","%s",,,,\n' % (package.filename,page.node.title, page.depth, page.name + '.' + ext, idevice.klass, idevice.title)
             for resource in idevice.userResources:
                 if type(resource) == Resource:
-                    self.report += u'"%s","%s",%d,"%s","%s","%s","%s","%s","%s","%s"\n' % (package.filename,page.node.title, page.depth, page.name + '.html', idevice.klass, idevice.title, resource.storageName, resource.userName, resource.path, resource.checksum)
+                    self.report += u'"%s","%s",%d,"%s","%s","%s","%s","%s","%s","%s"\n' % (package.filename,page.node.title, page.depth, page.name + '.' + ext, idevice.klass, idevice.title, resource.storageName, resource.userName, resource.path, resource.checksum)
                 else:
-                    self.report += u'"%s",%d,"%s","%s","%s","%s",,,\n' % (package.filename,page.node.title, page.depth, page.name + '.html', idevice.klass, idevice.title, resource)
+                    self.report += u'"%s",%d,"%s","%s","%s","%s",,,\n' % (package.filename,page.node.title, page.depth, page.name + '.' + ext, idevice.klass, idevice.title, resource)
 
     def export(self, package):
         """ 
@@ -177,24 +180,25 @@ class WebsiteExport(object):
         """
        
         if os.path.isdir(self.stylesDir):
-            # Copy the style sheet files to the output dir
+            # Copy the style files to the output dir
             styleFiles = [self.stylesDir/'..'/'popup_bg.gif']
-            styleFiles += self.stylesDir.files("*.css")
-            styleFiles += self.stylesDir.files("*.jpg")
-            styleFiles += self.stylesDir.files("*.gif")
-            styleFiles += self.stylesDir.files("*.png")
-            styleFiles += self.stylesDir.files("*.js")
-            styleFiles += self.stylesDir.files("*.html")
-            styleFiles += self.stylesDir.files("*.ico")
-            styleFiles += self.stylesDir.files("*.ttf")
-            styleFiles += self.stylesDir.files("*.eot")
-            styleFiles += self.stylesDir.files("*.otf")
-            styleFiles += self.stylesDir.files("*.woff")
+            styleFiles += self.stylesDir.files("*.*")
             self.stylesDir.copylist(styleFiles, outputDir)
 
         # copy the package's resource files
-        package.resourceDir.copyfiles(outputDir)
+        for resourceFile in package.resourceDir.walkfiles():
+            file = package.resourceDir.relpathto(resourceFile)
             
+            if ("/" in file):
+                Dir = Path(outputDir/file[:file.rindex("/")])
+
+                if not Dir.exists():
+                    Dir.makedirs()
+        
+                resourceFile.copy(outputDir/Dir)
+            else:
+                resourceFile.copy(outputDir)
+                   
         listCSSFiles=getFilesCSSToMinify('website', self.stylesDir)
         exportMinFileCSS(listCSSFiles, outputDir)          
             
@@ -240,12 +244,13 @@ class WebsiteExport(object):
         hasInstructions   = False
         hasMediaelement   = False
         hasTooltips       = False
+        hasABCMusic       = False
         
         for page in self.pages:
             if isBreak:
                 break
             for idevice in page.node.idevices:
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips):
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
                     isBreak = True
                     break
                 if not hasFlowplayer:
@@ -275,6 +280,9 @@ class WebsiteExport(object):
                     hasMediaelement = common.ideviceHasMediaelement(idevice)
                 if not hasTooltips:
                     hasTooltips = common.ideviceHasTooltips(idevice)
+                if not hasABCMusic:
+                    hasABCMusic = common.ideviceHasABCMusic(idevice)
+
 
         if hasFlowplayer:
             videofile = (self.templatesDir/'flowPlayer.swf')
@@ -299,6 +307,9 @@ class WebsiteExport(object):
         if hasGames:
             exeGames = (self.scriptsDir/'exe_games')
             exeGames.copyfiles(outputDir)
+        if hasABCMusic:
+            pluginScripts = (self.scriptsDir/'tinymce_4/js/tinymce/plugins/abcmusic/export')
+            pluginScripts.copyfiles(outputDir)
         if hasWikipedia:
             wikipediaCSS = (self.cssDir/'exe_wikipedia.css')
             wikipediaCSS.copyfile(outputDir/'exe_wikipedia.css')
@@ -320,10 +331,12 @@ class WebsiteExport(object):
             (G.application.config.webDir/'templates'/'content.xsd').copyfile(outputDir/'content.xsd')
             (outputDir/'content.data').write_bytes(encodeObject(package))
             (outputDir/'contentv3.xml').write_bytes(encodeObjectToXML(package))
-
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+            ext = 'htm'
         if package.license == "license GFDL":
             # include a copy of the GNU Free Documentation Licence
-            (self.templatesDir/'fdl.html').copyfile(outputDir/'fdl.html')
+            (self.templatesDir/'fdl' + '.' + ext).copyfile(outputDir/'fdl' + '.' + ext)
 
 
     def generatePages(self, node, depth):
@@ -341,3 +354,13 @@ class WebsiteExport(object):
             self.pages.append(WebsitePage(self.prefix + pageName, depth, child))
             self.generatePages(child, depth + 1)
 
+    def hasUncutResources(self):
+        """
+        Check if any of the resources in the exported package has an uncut filename
+        """
+        for page in self.pages:
+            for idevice in page.node.idevices:
+                for resource in idevice.userResources:
+                    if type(resource) == Resource and len(resource.storageName) > 12:
+                        return True
+        return False

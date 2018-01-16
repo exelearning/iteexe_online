@@ -322,7 +322,9 @@ class Epub3Page(Page):
         if common.hasSH(self.node):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_highlighter.css\" />" + lb
         if common.hasGames(self.node):
-            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />" + lb       
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />" + lb
+        if common.hasABCMusic(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />" + lb            
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />" + lb
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->' + lb
@@ -349,13 +351,16 @@ class Epub3Page(Page):
             html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>' + lb
         html += u'<script type="text/javascript" src="common.js"></script>' + lb
+        if common.hasABCMusic(self.node):
+            html += u'<script type="text/javascript" src="exe_abcmusic.js"></script>' + lb
+        html += u'<script type="text/javascript" src="common.js"></script>' + lb
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>' + lb
         # Some styles might have their own JavaScript files (see their config.xml file)
         if style.hasValidConfig:
             html += style.get_extra_head()
         html += u"</head>" + lb
-        html += u'<body class="exe-epub3"><script type="text/javascript">document.body.className+=" js"</script>' + lb
+        html += u'<body class="exe-epub3" id="exe-node-'+self.node.id+'"><script type="text/javascript">document.body.className+=" js"</script>' + lb
         html += u"<div id=\"outer\">" + lb
         html += u"<" + sectionTag + " id=\"main\">" + lb
         html += u"<" + headerTag + " id=\"nodeDecoration\">"
@@ -520,32 +525,19 @@ class Epub3SubExport(object):
         mimetypeFile.write('application/epub+zip')
         mimetypeFile.close()
 
-        # Copy the style sheet files to the output dir
+        # Copy the style files to the output dir
         # But not nav.css
-        cssStyleFiles = [self.styleDir / '..' / 'base.css']
-        cssStyleFiles += [f for f in self.styleDir.files("*.css") if f.basename() != "nav.css"]
+        filesStyleFiles = [self.styleDir / '..' / 'base.css']
+        filesStyleFiles += [f for f in self.styleDir.files("*.*") if f.basename() != "nav.css"]
 
-        imgStyleFiles = [self.styleDir / '..' / 'popup_bg.gif']
-        imgStyleFiles += self.styleDir.files("*.jpg")
-        imgStyleFiles += self.styleDir.files("*.gif")
-        imgStyleFiles += self.styleDir.files("*.png")
-
-        scriptStyleFiles = self.styleDir.files("*.js")
-
-        filesStyleFiles = self.styleDir.files("*.html")
-        filesStyleFiles += self.styleDir.files("*.ttf")
-        filesStyleFiles += self.styleDir.files("*.eot")
-        filesStyleFiles += self.styleDir.files("*.otf")
-        filesStyleFiles += self.styleDir.files("*.woff")
+        filesStyleFiles += [self.styleDir / '..' / 'popup_bg.gif']
+        
         # FIXME for now, only copy files referenced in Common Cartridge
         # this really should apply to all exports, but without a manifest
         # of the files needed by an included stylesheet it is too restrictive
 
         package.resourceDir.copyfiles(contentPages)
 
-        self.styleDir.copylist(cssStyleFiles, quizCssPages)
-        self.styleDir.copylist(imgStyleFiles, quizImagesPages)
-        self.styleDir.copylist(scriptStyleFiles, quizScriptsPages)
         self.styleDir.copylist(filesStyleFiles, quizFilesPages)
 
 
@@ -563,12 +555,13 @@ class Epub3SubExport(object):
         isBreak = False
         hasInstructions = False
         hasTooltips = False
+        hasABCMusic = False
 
         for page in self.pages:
             if isBreak:
                 break
             for idevice in page.node.idevices:
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia):
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasTooltips and hasABCMusic):
                     isBreak = True
                     break
                 if not hasFlowplayer:
@@ -596,6 +589,8 @@ class Epub3SubExport(object):
                         hasInstructions = True
                 if not hasTooltips:
                     hasTooltips = common.ideviceHasTooltips(idevice)
+                if not hasABCMusic:
+                    hasABCMusic = common.ideviceHasABCMusic(idevice)
 
         if hasFlowplayer:
             videofile = (self.templatesDir / 'flowPlayer.swf')
@@ -629,6 +624,9 @@ class Epub3SubExport(object):
         if hasTooltips:
             exe_tooltips = (self.scriptsDir / 'exe_tooltips')
             exe_tooltips.copyfiles(contentPages)
+        if hasABCMusic:
+            pluginScripts = (self.scriptsDir/'tinymce_4/js/tinymce/plugins/abcmusic/export')
+            pluginScripts.copyfiles(contentPages)
 
         my_style = G.application.config.styleStore.getStyle(package.style)
         if my_style.hasValidConfig:

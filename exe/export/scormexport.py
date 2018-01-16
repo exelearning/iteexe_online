@@ -35,6 +35,7 @@ from zipfile                       import ZipFile, ZIP_DEFLATED
 from exe.webui                     import common
 from exe.engine.path               import Path, TempDirPath
 from exe.export.pages              import uniquifyNames
+from exe.engine.resource           import Resource
 from exe.engine.uniqueidgenerator  import UniqueIdGenerator
 from exe.export.singlepage         import SinglePage
 from exe.export.websiteexport      import WebsiteExport
@@ -73,6 +74,36 @@ class Manifest(object):
         self.metadataType = metadataType
         self.dependencies = {}
 
+    def _validateMetaData(self, metadata):
+    
+        modifiedMetaData = False
+        fieldsModified = []
+    
+        if metadata.get_general().get_description():
+            for description in metadata.get_general().get_description():
+                strings = description.get_string()
+                for string in strings:
+                    value = string.get_valueOf_()
+#                     general description: The field must be 1000 characters maximum, standard SCORM 2.1
+                    if len(value) > 1000:
+                        string.set_valueOf_(value[:1000])
+                        modifiedMetaData = True
+                        fieldsModified.append(_('general description')) 
+                        
+        if metadata.get_educational():
+            for educational in metadata.get_educational():
+                if educational.get_description():
+                    for description in educational.get_description():
+                        strings = description.get_string()
+                        for string in strings:
+                            value = string.get_valueOf_()
+#                     educational description: The field must be 1000 characters maximum, standard SCORM 2.1
+                            if len(value) > 1000:
+                                string.set_valueOf_(value[:1000])
+                                modifiedMetaData = True
+                                fieldsModified.append(_('educational description'))
+        
+        return {'modifiedMetaData': modifiedMetaData, 'fieldsModified': fieldsModified}
 
     def createMetaData(self, template):
         """
@@ -83,6 +114,9 @@ class Manifest(object):
         """
         xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
         namespace = 'xmlns="http://ltsc.ieee.org/xsd/LOM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ltsc.ieee.org/xsd/LOM lomCustom.xsd"'          
+        
+        modifiedMetaData = False
+        
         # depending on (user desired) the metadata type:
         if self.metadataType == 'LOMES':
             output = StringIO.StringIO()
@@ -91,6 +125,9 @@ class Manifest(object):
             if not title.get_string():
                 title.add_string(lomsubs.LangStringSub(self.package.lang.encode('utf-8'), self.package.name))
                 metadata.get_general().set_title(title)
+            if self.scormType == "scorm1.2":
+                modifiedMetaData = self._validateMetaData(metadata)
+
             if self.package.exportSource:
                 technical = metadata.get_technical()
                 if not technical:
@@ -100,12 +137,15 @@ class Manifest(object):
                 if not opr:
                     opr = lomsubs.otherPlatformRequirementsSub()
                     technical.set_otherPlatformRequirements(opr)
+                opr.add_string(lomsubs.LangStringSub(self.package.lang.encode('utf-8'), 'editor: eXe Learning'))
+
                 found = False
                 for platform in opr.get_string():
                     if platform.get_valueOf_() == self.package.lomESPlatformMark:
                         found = True
                 if not found:
                     opr.add_string(lomsubs.LangStringSub(self.package.lang.encode('utf-8'), self.package.lomESPlatformMark))
+
             metadata.export(output, 0, namespacedef_=namespace, pretty_print=False)
             xml += output.getvalue()
         if self.metadataType == 'LOM':
@@ -115,6 +155,10 @@ class Manifest(object):
             if not title.get_string():
                 title.add_string(lomsubs.LangStringSub(self.package.lang.encode('utf-8'), self.package.name))
                 metadata.get_general().set_title(title)
+                
+            if self.scormType == "scorm1.2":  
+                modifiedMetaData = self._validateMetaData(metadata)
+                
             metadata.export(output, 0, namespacedef_=namespace, pretty_print=False)
             xml += output.getvalue()
         if self.metadataType == 'DC':
@@ -137,13 +181,16 @@ class Manifest(object):
                 if re.match('.*[:;]', lrm[f]) == None:
                     lrm[f] = u'FN:' + lrm[f]
             xml = template % lrm
-        return xml
+            
+        return {'xml': xml, 'modifiedMetaData' : modifiedMetaData}
 
     def save(self, filename):
         """
         Save a imsmanifest file to self.outputDir
         Two works: createXML and createMetaData
         """
+        modifiedMetaData = False
+        
         out = open(self.outputDir/filename, "w")
         if filename == "imsmanifest.xml":
             out.write(self.createXML().encode('utf8'))
@@ -161,11 +208,14 @@ class Manifest(object):
                 template = None
             # Now the file with metadatas. 
             # Notice that its name is independent of metadataType:  
-            xml = self.createMetaData(template)
+            metaData = self.createMetaData(template)
+            xml = metaData['xml']
+            modifiedMetaData = metaData['modifiedMetaData']
             out = open(self.outputDir/'imslrm.xml', 'wb')
             out.write(xml.encode('utf8'))
             out.close()
          
+        return modifiedMetaData
     
     def createXML(self):
         """
@@ -231,7 +281,8 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc/imscp_v1p1 imscp_v1p1.xsd">\n''' % manifestId
             templateFilename = self.config.webDir/'templates'/'cc.xml'
             template = open(templateFilename, 'rb').read()
-            xmlStr += self.createMetaData(template)
+            metaData = self.createMetaData(template)
+            xmlStr += metaData['xml']
         
         # ORGANIZATION
 
@@ -339,7 +390,11 @@ xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc/imscp_v1p1 imscp_v1p1.xsd
         """
         itemId   = "ITEM-"+unicode(self.idGenerator.generate())
         resId    = "RES-"+unicode(self.idGenerator.generate())
-        filename = page.name+".html"
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+                ext = 'htm'
+                
+        filename = page.name + '.' + ext
             
         
         self.itemStr += '<item identifier="'+itemId+'" '
@@ -425,6 +480,9 @@ xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc/imscp_v1p1 imscp_v1p1.xsd
             
         if common.hasGames(page.node):
             resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'exe_games').files()]
+            
+        if common.hasABCMusic(page.node):
+            resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'tinymce_4'/'js'/'tinymce'/'plugins'/'abcmusic'/'export').files()]
 
         for resource in resources:            
             fileStr += "    <file href=\""+escape(resource)+"\"/>\n"
@@ -476,7 +534,18 @@ class ScormExport(object):
         self.metadataType = package.exportMetadataType
 
         # copy the package's resource files
-        package.resourceDir.copyfiles(outputDir)
+        for resourceFile in package.resourceDir.walkfiles():
+            file = package.resourceDir.relpathto(resourceFile)
+            
+            if ("/" in file):
+                Dir = Path(outputDir/file[:file.rindex("/")])
+
+                if not Dir.exists():
+                    Dir.makedirs()
+        
+                resourceFile.copy(outputDir/Dir)
+            else:
+                resourceFile.copy(outputDir)
 
         # copy the package's resource files, only non existant in outputDir
 #        outputDirFiles = outputDir.files()
@@ -506,7 +575,7 @@ class ScormExport(object):
         uniquifyNames(self.pages)
 
         for page in self.pages:
-            page.save(outputDir)
+            page.save(outputDir, self.pages)
             if not self.hasForum:
                 for idevice in page.node.idevices:
                     if hasattr(idevice, "isForum"):
@@ -516,11 +585,11 @@ class ScormExport(object):
 
         # Create the manifest file
         manifest = Manifest(self.config, outputDir, package, self.pages, self.scormType, self.metadataType)
-        manifest.save("imsmanifest.xml")
+        modifiedMetaData = manifest.save("imsmanifest.xml")
         if self.hasForum:
             manifest.save("discussionforum.xml")
         
-        # Copy the style sheet files to the output dir
+        # Copy the style files to the output dir
         
         styleFiles = [self.styleDir/'..'/'popup_bg.gif']
         # And with all the files of the style we avoid problems:
@@ -624,12 +693,13 @@ class ScormExport(object):
         hasInstructions   = False
         hasMediaelement   = False
         hasTooltips       = False
+        hasABCMusic       = False
 
         for page in self.pages:
             if isBreak:
                 break
             for idevice in page.node.idevices:
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips):
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
                     isBreak = True
                     break
                 if not hasFlowplayer:
@@ -659,6 +729,8 @@ class ScormExport(object):
                     hasMediaelement = common.ideviceHasMediaelement(idevice)
                 if not hasTooltips:
                     hasTooltips = common.ideviceHasTooltips(idevice)
+                if not hasABCMusic:
+                    hasABCMusic = common.ideviceHasABCMusic(idevice)
 
         if hasFlowplayer:
             videofile = (self.templatesDir/'flowPlayer.swf')
@@ -697,15 +769,21 @@ class ScormExport(object):
         if hasTooltips:
             exe_tooltips = (self.scriptsDir/'exe_tooltips')
             exe_tooltips.copyfiles(outputDir)
+        if hasABCMusic:
+            pluginScripts = (self.scriptsDir/'tinymce_4/js/tinymce/plugins/abcmusic/export')
+            pluginScripts.copyfiles(outputDir)
+        ext = ".html"
+        if G.application.config.cutFileName == "1":
+            ext = ".htm"
 
         if self.scormType == "scorm1.2" or self.scormType == "scorm2004":
             if package.license == "license GFDL":
                 # include a copy of the GNU Free Documentation Licence
-                (self.templatesDir/'fdl.html').copyfile(outputDir/'fdl.html')
+                (self.templatesDir/'fdl' + ext).copyfile(outputDir/'fdl' + ext)
         
         if hasattr(package, 'scowsinglepage') and package.scowsinglepage:
             page = SinglePage("singlepage_index", 1, package.root)
-            page.save(outputDir/"singlepage_index.html")
+            page.save(outputDir/"singlepage_index" + ext)
             # Incluide eXe's icon if the Style doesn't have one
             themePath = Path(G.application.config.stylesDir/package.style)
             themeFavicon = themePath.joinpath("favicon.ico")
@@ -731,6 +809,9 @@ class ScormExport(object):
         self.filename.safeSave(self.doZip, _('EXPORT FAILED!\nLast succesful export is %s.'), outputDir)
         # Clean up the temporary dir
         outputDir.rmtree()
+        
+        
+        return modifiedMetaData
 
     def doZip(self, fileObj, outputDir):
         """
@@ -768,5 +849,15 @@ class ScormExport(object):
 
             self.pages.append(page)
             self.generatePages(child, depth + 1)
-    
+
+    def hasUncutResources(self):
+        """
+        Check if any of the resources in the exported package has an uncut filename
+        """
+        for page in self.pages:
+            for idevice in page.node.idevices:
+                for resource in idevice.userResources:
+                    if type(resource) == Resource and len(resource.storageName) > 12:
+                        return True
+        return False
 # ===========================================================================

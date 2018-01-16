@@ -179,10 +179,10 @@ Ext.define('eXe.view.forms.DublinCoreDataPanel', {
                     ]
                 },
                 {
-                    xtype: 'button',
-                    text: _('Save'),
-                    margin: 10,
-                    itemId: 'save_properties'
+                	xtype: 'button',
+                	text: _('Save'),
+                	itemId: 'save_properties',
+                	margin: 10
                 },
                 {
                     xtype: 'button',

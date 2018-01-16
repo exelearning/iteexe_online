@@ -55,16 +55,39 @@ class Config(object):
 
     # Class attributes
     optionNames = {
-        'system': ('webDir', 'jsDir', 'port', 'dataDir',
-                   'configDir', 'localeDir', 'stylesRepository',
-                   'browser', 'mediaProfilePath',
-                   'videoMediaConverter_ogv', 'videoMediaConverter_3gp',
-                   'videoMediaConverter_mpg',
-                   'videoMediaConverter_avi', 'audioMediaConverter_ogg',
-                   'audioMediaConverter_au', 'audioMediaConverter_mp3',
-                   'audioMediaConverter_wav', 'ffmpegPath'),
-        'user': ('locale', 'lastDir', 'showPreferencesOnStart',
-                 'defaultStyle', 'showIdevicesGrouped', 'docType', 'editorMode', 'editorVersion', 'defaultLicense'),
+        'system': (
+            'webDir',
+            'jsDir',
+            'port',
+            'dataDir',
+            'configDir',
+            'localeDir',
+            'stylesRepository',
+            'browser',
+            'mediaProfilePath',
+            'videoMediaConverter_ogv',
+            'videoMediaConverter_3gp',
+            'videoMediaConverter_mpg',
+            'videoMediaConverter_avi',
+            'audioMediaConverter_ogg',
+            'audioMediaConverter_au',
+            'audioMediaConverter_mp3',
+            'audioMediaConverter_wav',
+            'ffmpegPath'
+        ),
+        'user': (
+            'locale',
+            'lastDir',
+            'showPreferencesOnStart',
+            'defaultStyle',
+            'showIdevicesGrouped',
+            'docType',
+            'editorMode',
+            'editorVersion',
+            'defaultLicense',
+            'forceEditableExport',
+            'cutFileName'
+        ),
     }
 
     idevicesCategories = {
@@ -199,12 +222,21 @@ class Config(object):
         self.defaultLicense='creative commons: attribution - share alike 4.0'
 
         self.assumeMediaPlugins = False
+        
+        # Force the editable export when load an existing
+        # package with it disabled (defaults to disabled)
+        self.forceEditableExport = "0"
+        
         # Let our children override our defaults depending
         # on the OS that we're running on
         self._overrideDefaultVals()
         # locale is the language of the user. localeDir can be overridden
         # that's why we must set it _after_ the call to _overrideDefaultVals()
         self.locale = chooseDefaultLocale(self.localeDir)
+        
+        # Format the files and images to standard ISO 9660
+        self.cutFileName = "0"
+        
         # Try to make the defaults a little intelligent
         # Under devel trees, webui is the default webdir
         self.webDir = Path(self.webDir)
@@ -449,6 +481,10 @@ class Config(object):
                 self.locale = self.configParser.user.locale
             if self.configParser.user.has_option('defaultLicense'):
                 self.defaultLicense = self.configParser.user.defaultLicense
+            if self.configParser.user.has_option('forceEditableExport'):
+                self.forceEditableExport = self.configParser.user.forceEditableExport
+            if self.configParser.user.has_option('cutFileName'):
+                self.cutFileName = self.configParser.user.cutFileName
 
     def onWrite(self, configParser):
         """

@@ -35,6 +35,7 @@ from exe.webui                     import common
 from exe.webui.blockfactory        import g_blockFactory
 from exe.engine.error              import Error
 from exe.engine.path               import Path, TempDirPath
+from exe.engine.resource           import Resource
 from exe.engine.version            import release
 from exe.export.pages              import Page, uniquifyNames
 from exe.engine.uniqueidgenerator  import UniqueIdGenerator
@@ -215,7 +216,12 @@ class Manifest(object):
         """
         itemId   = "ITEM-"+unicode(self.idGenerator.generate())
         resId    = "RES-"+unicode(self.idGenerator.generate())
-        filename = page.name+".html"
+        # If ISO9660 compatible mode is active, we want '.htm' as the extension 
+        ext = 'html'
+        if G.application.config.cutFileName == '1':
+            ext = 'htm'
+
+        filename = page.name + '.' + ext
             
         
         self.itemStr += "<item identifier=\""+itemId+"\" isvisible=\"true\" "
@@ -253,6 +259,8 @@ class Manifest(object):
             resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'exe_highlighter').files()]
         if common.hasGames(page.node):
             resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'exe_games').files()]
+        if common.hasABCMusic(page.node):
+            resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'tinymce_4'/'js'/'tinymce'/'plugins'/'abcmusic'/'export').files()]
         if my_style.hasValidConfig:
             if my_style.get_jquery() == True:
                 self.resStr += '    <file href="exe_jquery.js"/>\n'
@@ -276,7 +284,7 @@ class IMSPage(Page):
         super(IMSPage, self).__init__(name, depth, node)
 
 
-    def save(self, outputDir):
+    def save(self, outputDir, pages):
         """
         This is the main function.  It will render the page and save it to a
         file.  
@@ -284,12 +292,15 @@ class IMSPage(Page):
         the filename will be the 'self.node.id'.html or 'index.html' if
         self.node is the root node. 'outputDir' must be a 'Path' instance
         """
-        out = open(outputDir/self.name+".html", "wb")
-        out.write(self.render())
+        ext = 'html'
+        if G.application.config.cutFileName == '1':
+            ext = 'htm'
+        out = open(outputDir/self.name + '.' + ext, "wb")
+        out.write(self.render(pages))
         out.close()
         
 
-    def render(self):
+    def render(self,pages):
         """
         Returns an XHTML string rendering this page.
         """
@@ -343,6 +354,8 @@ class IMSPage(Page):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_highlighter.css\" />"+lb
         if common.hasGames(self.node):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />"+lb
+        if common.hasABCMusic(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />"+lb
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />"+lb
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->'+lb
@@ -368,6 +381,8 @@ class IMSPage(Page):
             # The games require additional strings
             html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>'+lb
+        if common.hasABCMusic(self.node):
+            html += u'<script type="text/javascript" src="exe_abcmusic.js"></script>'+lb
         html += u'<script type="text/javascript" src="common.js"></script>'+lb
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
@@ -375,7 +390,7 @@ class IMSPage(Page):
         if style.hasValidConfig:
             html += style.get_extra_head()
         html += u"</head>"+lb
-        html += u'<body class="exe-ims"><script type="text/javascript">document.body.className+=" js"</script>'+lb
+        html += u'<body class="exe-ims" id="exe-node-'+self.node.id+'"><script type="text/javascript">document.body.className+=" js"</script>'+lb
         html += u"<div id=\"outer\">"+lb
         html += u"<"+sectionTag+" id=\"main\">"+lb
         html += u"<"+headerTag+" id=\"nodeDecoration\">"
@@ -405,6 +420,9 @@ class IMSPage(Page):
                         block.renderView(self.node.package.style))
             html += u'</'+articleTag+'>'+lb # iDevice div
 
+        if self.node.package.get_addPagination():
+            html += "<div class = 'pagination' align='right'>" + c_('Page %i of %i') % (pages.index(self) + 1,len(pages))+ "</div>"+lb 
+            
         html += u"</"+sectionTag+">"+lb # /#main
         html += self.renderLicense()
         html += self.renderFooter()
@@ -471,25 +489,26 @@ class IMSExport(object):
         self.metadataType = package.exportMetadataType
 
 
-        # Copy the style sheet files to the output dir
+        # Copy the style files to the output dir
         # But not nav.css
         styleFiles = [self.styleDir/'..'/'popup_bg.gif']
-        styleFiles += self.styleDir.files("*.css")
+        styleFiles += self.styleDir.files("*.*")
         if "nav.css" in styleFiles:
             styleFiles.remove("nav.css")
-        styleFiles += self.styleDir.files("*.jpg")
-        styleFiles += self.styleDir.files("*.gif")
-        styleFiles += self.styleDir.files("*.png")
-        styleFiles += self.styleDir.files("*.js")
-        styleFiles += self.styleDir.files("*.html")
-        styleFiles += self.styleDir.files("*.ttf")
-        styleFiles += self.styleDir.files("*.eot")
-        styleFiles += self.styleDir.files("*.otf")
-        styleFiles += self.styleDir.files("*.woff")
         self.styleDir.copylist(styleFiles, outputDir)
 
         # copy the package's resource files
-        package.resourceDir.copyfiles(outputDir)
+        for resourceFile in package.resourceDir.walkfiles():
+            file = package.resourceDir.relpathto(resourceFile)
+            
+            if ("/" in file):
+                Dir = Path(outputDir/file[:file.rindex("/")])
+                if not Dir.exists():
+                    Dir.makedirs()
+            
+                resourceFile.copy(outputDir/Dir)
+            else:
+                resourceFile.copy(outputDir)
         
         listCSSFiles=getFilesCSSToMinify('ims', self.styleDir)
         exportMinFileCSS(listCSSFiles, outputDir)
@@ -502,7 +521,7 @@ class IMSExport(object):
         uniquifyNames(self.pages)
 
         for page in self.pages:
-            page.save(outputDir)
+            page.save(outputDir, self.pages)
 
         # Create the manifest file
         manifest = Manifest(self.config, outputDir, package, self.pages, self.metadataType)
@@ -548,12 +567,13 @@ class IMSExport(object):
         hasInstructions   = False
         hasMediaelement   = False
         hasTooltips       = False
+        hasABCMusic       = False
         
         for page in self.pages:
             if isBreak:
                 break
             for idevice in page.node.idevices:
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips):
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
                     isBreak = True
                     break
                 if not hasFlowplayer:
@@ -583,6 +603,8 @@ class IMSExport(object):
                     hasMediaelement = common.ideviceHasMediaelement(idevice)
                 if not hasTooltips:
                     hasTooltips = common.ideviceHasTooltips(idevice)
+                if not hasABCMusic:
+                    hasABCMusic = common.ideviceHasABCMusic(idevice)
 
         if hasFlowplayer:
             videofile = (self.templatesDir/'flowPlayer.swf')
@@ -622,6 +644,9 @@ class IMSExport(object):
         if hasTooltips:
             exe_tooltips = (self.scriptsDir/'exe_tooltips')
             exe_tooltips.copyfiles(outputDir)
+        if hasABCMusic:
+            pluginScripts = (self.scriptsDir/'tinymce_4/js/tinymce/plugins/abcmusic/export')
+            pluginScripts.copyfiles(outputDir)     
         if hasattr(package, 'exportSource') and package.exportSource:
             (G.application.config.webDir/'templates'/'content.xsd').copyfile(outputDir/'content.xsd')
             (outputDir/'content.data').write_bytes(encodeObject(package))
@@ -641,9 +666,9 @@ class IMSExport(object):
         Actually does the zipping of the file. Called by 'Path.safeSave'
         """
         zipped = ZipFile(fileObj, "w")
-        for scormFile in outputDir.files():
+        for scormFile in outputDir.walkfiles():
             zipped.write(scormFile,
-                    scormFile.basename().encode('utf8'), ZIP_DEFLATED)
+                    outputDir.relpathto(scormFile), ZIP_DEFLATED)
         zipped.close()
 
     def generatePages(self, node, depth):
@@ -655,6 +680,8 @@ class IMSExport(object):
         for child in node.children:
             pageName = child.titleShort.lower().replace(" ", "_")
             pageName = re.sub(r"\W", "", pageName)
+            if G.application.config.cutFileName == "1":
+                pageName = pageName[0:8]
             if not pageName:
                 pageName = "__"
 
@@ -662,5 +689,16 @@ class IMSExport(object):
 
             self.pages.append(page)
             self.generatePages(child, depth + 1)
-    
+
+    def hasUncutResources(self):
+        """
+        Check if any of the resources in the exported package has an uncut filename
+        """
+        for page in self.pages:
+            for idevice in page.node.idevices:
+                for resource in idevice.userResources:
+                    if type(resource) == Resource and len(resource.storageName) > 12:
+                        return True
+        return False
+
 # ===========================================================================

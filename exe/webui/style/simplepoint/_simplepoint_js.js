@@ -32,7 +32,7 @@ var myTheme = {
         document.onkeydown = myTheme.checkKey;
         // License icon
         var l = $("#packageLicense");
-        if (l.attr("class").indexOf("cc ")==0) {
+        if (l.length==1 && l.attr("class").indexOf("cc ")==0) {
             l.css("cursor","pointer").click(function(){
                 window.open($("A",this).attr("href"));
             });
@@ -138,7 +138,7 @@ var myTheme = {
         if (act=="add") {
             var ref = e.href;
             var con = "?";
-            if (ref.indexOf(".html?")!=-1) con = "&";
+            if (ref.indexOf(".html?")!=-1 || ref.indexOf(".htm?")!=-1) con = "&";
             var param = "nav=false";
             if (ref.indexOf(param)==-1) {
                 ref += con+param;

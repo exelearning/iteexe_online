@@ -604,13 +604,13 @@ if (exe_editor_version==4) {
 }
 
 // browse the specified URL in system browser
-function browseURL(e) {
+function browseURL(e,elm) {
     /* Links with rel="lightbox" */
-    if (typeof(e)=='object') {
-        if (typeof(e.rel)=='string' && e.rel.indexOf('lightbox')==0) {
-            return false;
-        }
-        e = e.href;
+    if (
+        (typeof(e)=='object' && typeof(e.rel)=='string' && e.rel.indexOf('lightbox')==0) || 
+        (elm && typeof(elm.rel)=='string' && elm.rel.indexOf('lightbox')==0)
+    ) {
+        return false;
     }
     window.parent.nevow_clientToServerEvent('browseURL', this, '', e);
 }
@@ -773,6 +773,7 @@ var exe_tinymce = {
 								fieldOrder = Number(fieldOrder[1]);
 								$("#mceu_"+(fieldOrder+3)).val(img.width);
 								$("#mceu_"+(fieldOrder+5)).val(img.height);
+								exe_tinymce.current_image_size = [ img.width, img.height ];
 							}
 						}
 					}
@@ -795,6 +796,15 @@ var exe_tinymce = {
 							window.tinyMCE.getImageData();
 						}
 					}
+                } else {
+                    // See exeimage/plugin.min.js
+                    if (type == "image" && typeof(exeImageDialog)!="undefined") {
+                        try {
+                            exeImageDialog.updateImageDimensions(full_previewImage_url);
+                        } catch(e) {
+                            
+                        }
+                    }
                 }
 
                 eXe.app.un('previewTinyMCEImageDone', previewTinyMCEImageDone);

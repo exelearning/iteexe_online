@@ -207,20 +207,30 @@ class RenderableResource(_RenderablePage, Resource):
         request.setHeader("X-XSS-Protection", "0")
         return Resource.render(self, request)
 
-
 class File(static.File):
     def render(self, request):
+        """
+        Disable cache of static files and add missing content MimeTypes
+        """
         if not G.application.server:
-            "Disable cache of static files"
             request.setHeader('Expires', 'Fri, 25 Nov 1966 08:22:00 EST')
             request.setHeader("Cache-Control", "no-store, no-cache, must-revalidate")
             request.setHeader("Pragma", "no-cache")
+        
+        # SVG files must have MimeType "image/svg+xml",
+        # otherwise the browser will show nothing
+        self.contentTypes['.svg'] = 'image/svg+xml'
+        
         return static.File.render(self, request)
-
 
 class Download(File):
     def render(self, request):
-        self.type, self.encoding = static.getTypeAndEncoding(self.basename(), self.contentTypes, self.contentEncodings,
-                                                             self.defaultType)
+        self.type, self.encoding = static.getTypeAndEncoding(
+            self.basename(),
+            self.contentTypes,
+            self.contentEncodings,
+            self.defaultType
+        )
         self.type = self.defaultType
+
         return File.render(self, request)

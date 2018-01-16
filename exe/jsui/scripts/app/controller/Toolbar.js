@@ -389,8 +389,8 @@ Ext.define('eXe.controller.Toolbar', {
 
     toolsPreferences: function() {
         var preferences = new Ext.Window ({
-	          height: 360, 
-	          width: 550, 
+	          height: 390, 
+	          width: 650, 
 	          modal: true,
 	          id: 'preferenceswin',
 	          title: _("Preferences"),
@@ -465,13 +465,13 @@ Ext.define('eXe.controller.Toolbar', {
 			eXe.app.browseURL("/tools/style-designer/previews/website/?lang="+lang, _('Style Designer'), 'style_designer_tab');
 		},
 		notCompatible : function(){
-			Ext.Msg.alert("", _("The current Style is not compatible with the Style Designer"));
+			Ext.Msg.alert("", _("Sorry, only styles created with the Editor can be edited. eXe's Styles are not editable"));
 		},
 		error : function(){
 			Ext.Msg.alert(_('Error'), _("An unknown error occurred."));
 		},	
 		createNewStyleInstead : function(){
-			Ext.Msg.alert(_('Information'), _("That's one of eXe's default Styles, and it cannot be edited.\n\nPlease choose a different Style or create a new one."));
+			Ext.Msg.alert(_('Information'), _("That's one of eXe's default Styles, and it cannot be edited.\n\nPlease choose a different style or create a new one."));
 		},
 		errorSaving : function(){
 			Ext.Msg.alert(_('Error'), _("Your Style could not be saved because an unknown error occurred."));

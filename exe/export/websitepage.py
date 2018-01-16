@@ -47,7 +47,10 @@ class WebsitePage(Page):
         file.  'outputDir' is the directory where the filenames will be saved
         (a 'path' instance)
         """
-        outfile = open(outputDir / self.name+".html", "wb")
+        ext = 'html'
+        if G.application.config.cutFileName == '1':
+            ext = 'htm'
+        outfile = open(outputDir / self.name + '.' + ext, "wb")
         outfile.write(self.render(prevPage, nextPage, pages))
         outfile.close()
         
@@ -89,6 +92,8 @@ class WebsitePage(Page):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_highlighter.css\" />"+lb
         if common.hasGames(self.node):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />"+lb
+        if common.hasABCMusic(self.node):
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />"+lb            
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />"+lb
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"nav.css\" />"+lb
         html += u"<meta http-equiv=\"content-type\" content=\"text/html; "
@@ -141,6 +146,8 @@ class WebsitePage(Page):
             # The games require additional strings
             html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>'+lb
+        if common.hasABCMusic(self.node):
+            html += u'<script type="text/javascript" src="exe_abcmusic.js"></script>'+lb            
         html += u'<script type="text/javascript" src="common.js"></script>'+lb
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
@@ -148,7 +155,7 @@ class WebsitePage(Page):
         if style.hasValidConfig:
             html += style.get_extra_head()
         html += u"</head>"+lb
-        html += u'<body class="exe-web-site"><script type="text/javascript">document.body.className+=" js"</script>'+lb
+        html += u'<body class="exe-web-site" id="exe-node-'+self.node.id+'"><script type="text/javascript">document.body.className+=" js"</script>'+lb
         html += u"<div id=\"content\">"+lb
         html += '<p id="skipNav"><a href="#main" class="sr-av">' + c_('Skip navigation')+'</a></p>'+lb
 
@@ -179,7 +186,7 @@ class WebsitePage(Page):
         html += self.leftNavigationBar(pages)
         html += u"</"+navTag+">"+lb
         html += "<div id='topPagination'>"+lb
-        html += self.getNavigationLink(prevPage, nextPage)
+        html += self.getNavigationLink(prevPage, nextPage, pages)
         html += "</div>"+lb
         html += u"<div id=\"main-wrapper\">"+lb
         html += u"<"+sectionTag+" id=\"main\">"
@@ -214,7 +221,7 @@ class WebsitePage(Page):
 
         if not themeHasXML:
             html += "<div id='bottomPagination'>"+lb
-            html += self.getNavigationLink(prevPage, nextPage)
+            html += self.getNavigationLink(prevPage, nextPage, pages)
             html += "</div>"+lb
         # writes the footer for each page 
         html += self.renderLicense()
@@ -226,7 +233,7 @@ class WebsitePage(Page):
         if themeHasXML:
         #if style.hasValidConfig:
             html += "<div id='bottomPagination'>"+lb
-            html += self.getNavigationLink(prevPage, nextPage)
+            html += self.getNavigationLink(prevPage, nextPage, pages)
             html += "</div>"+lb        
             html += self.renderFooter()
         html += u"</div>"+lb # /content
@@ -282,25 +289,28 @@ class WebsitePage(Page):
             while depth > page.depth and page.depth > 0:
                 html += lb+self.indent(depth-1)+"</ul>"+lb+self.indent(depth-1)+"</li>"
                 depth -= 1
-            
+            # If checked ISO 9660 change the file extension 
+            ext = 'html'
+            if G.application.config.cutFileName == '1':
+                ext = 'htm'
             # The active node must have a special style
             if page.node == self.node:
-                html += lb+self.indent(depth)+"<li id=\"active\"><a href=\""+quote(page.name)+".html\" "
+                html += lb + self.indent(depth) + "<li id=\"active\"><a href=\"" + quote(page.name) + '.' + ext + "\""
 
                 if page.node.children:
-                    html += "class=\"active daddy"
+                    html += " class=\"active daddy"
                 else:
-                    html += "class=\"active no-ch"
+                    html += " class=\"active no-ch"
 
             # A node in the path of the active node (but not the main one) 
             elif page.node in nodePath and page.node.parent != None:
-                html += lb+self.indent(depth)+"<li class=\"current-page-parent\"><a href=\""+quote(page.name)+".html\" "
+                html += lb + self.indent(depth) + "<li class=\"current-page-parent\"><a href=\"" + quote(page.name) + '.' + ext + "\""
 
                 if page.node.children:
-                    html += "class=\"current-page-parent daddy"
+                    html += " class=\"current-page-parent daddy"
 
             else:
-                html += lb+self.indent(depth)+"<li><a href=\""+quote(page.name)+".html\" class=\""
+                html += lb + self.indent(depth) + "<li><a href=\"" + quote(page.name) + '.' + ext + "\" class=\""
                 if page.node.children:
                     html += "daddy"
                 else:
@@ -331,7 +341,7 @@ class WebsitePage(Page):
 
         return html
         
-    def getNavigationLink(self, prevPage, nextPage):
+    def getNavigationLink(self, prevPage, nextPage, pages):
         """
         return the next link url of this page
         """
@@ -341,18 +351,24 @@ class WebsitePage(Page):
         if dT == "HTML5":
             navTag = "nav"
         html = "<"+navTag+" class=\"pagination noprt\">"+lb
-
+        ext = 'html'
+        if G.application.config.cutFileName == '1':
+            ext = 'htm'
+            
         if prevPage:
-            html += "<a href=\""+quote(prevPage.name)+".html\" class=\"prev\"><span>"
+            html += "<a href=\"" + quote(prevPage.name) + '.' + ext + "\" class=\"prev\"><span>"
             html += "<span>&laquo; </span>%s</span></a>" % c_('Previous')
 
+        if self.node.package.get_addPagination():      
+            html += "<span> " + c_('Page %i of %i') % (pages.index(self) + 1,len(pages))+ "</span>"
+        
         if nextPage:
             if prevPage:
                 html += ' <span class="sep">| </span>'
-            html += "<a href=\""+quote(nextPage.name)+".html\" class=\"next\"><span>"
+            html += "<a href=\"" + quote(nextPage.name) + '.' + ext + "\" class=\"next\"><span>"
             html += "%s<span> &raquo;</span></span></a>" % c_('Next')
             
-        html += lb+"</"+navTag+">"+lb
+        html += lb + "</" + navTag + ">" + lb
         return html
 
 
