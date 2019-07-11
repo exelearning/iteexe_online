@@ -23,6 +23,7 @@
 This is the main Javascript page.
 """
 
+import copy
 import os
 import json
 import sys
@@ -37,12 +38,13 @@ from twisted.internet            import threads, reactor, defer
 from exe.webui.livepage          import RenderableLivePage,\
     otherSessionPackageClients, allSessionClients, allSessionPackageClients
 from nevow                       import loaders, inevow, tags
-from nevow.livepage              import handler, IClientHandle
+from nevow.livepage              import handler, IClientHandle, js
 from exe.jsui.idevicepane        import IdevicePane
 from exe.jsui.outlinepane        import OutlinePane
 from exe.jsui.recentmenu         import RecentMenu
 from exe.jsui.stylemenu          import StyleMenu
 from exe.jsui.propertiespage     import PropertiesPage
+from exe.jsui.templatemenu       import TemplateMenu
 from exe.webui.authoringpage     import AuthoringPage
 from exe.webui.stylemanagerpage  import StyleManagerPage
 from exe.webui.renderable        import File, Download
@@ -56,8 +58,9 @@ from exe.importers.xliffimport   import XliffImport
 from exe.importers.scanresources import Resources
 from exe.engine.path             import Path, toUnicode, TempDirPath
 from exe.engine.package          import Package
+from exe.engine.template         import Template
 from exe                         import globals as G
-from tempfile                    import mkstemp
+from tempfile                    import mkdtemp, mkstemp
 from exe.engine.mimetex          import compile
 from urllib                      import unquote, urlretrieve
 from exe.engine.locationbuttons  import LocationButtons
@@ -66,12 +69,14 @@ from exe.export.xmlexport        import XMLExport
 from requests_oauthlib           import OAuth2Session
 from exe.webui.oauthpage         import ProcomunOauth
 from suds.client                 import Client
+from exe.export.pages            import forbiddenPageNames
 
 from exe.engine.lom import lomsubs
 from exe.engine.lom.lomclassification import Classification
 import zipfile
 log = logging.getLogger(__name__)
 PROCOMUN_WSDL = ProcomunOauth.BASE_URL + '/oauth_services?wsdl'
+
 
 
 class MainPage(RenderableLivePage):
@@ -104,6 +109,7 @@ class MainPage(RenderableLivePage):
         self.idevicePane = IdevicePane(self)
         self.styleMenu = StyleMenu(self)
         self.recentMenu = RecentMenu(self)
+        self.templateMenu = TemplateMenu(self)
 
         # And in the main section
         self.propertiesPage = PropertiesPage(self)
@@ -117,8 +123,52 @@ class MainPage(RenderableLivePage):
 
         self.location_buttons = LocationButtons()
 
-    def __repr__(self):
-        return super(MainPage, self).__repr__() + repr(self.authoringPages)
+        # Save package temporarily
+        self.tempPackage = None
+
+    def renderHTTP(self, ctx):
+        """
+        Called when rendering the MainPage.
+        """
+        # If we are realoading a template, try to translate it in
+        # case its language has changed
+        if self.package.isTemplate and not self.package.isChanged:
+            # We have to reload the template in case it has been already translated before
+            template = Package.load(self.config.templatesDir / self.package.get_templateFile() + '.elt', isTemplate=True)
+            template.set_lang(self.package.lang)
+
+            # Copy level names and iDevices
+            self.package._levelNames = copy.copy(template._levelNames)
+            self.package.idevices = copy.copy(template.idevices)
+
+            # TODO: This should be done properly
+            self.package.description = copy.copy(template.description)
+            self.package.title = copy.copy(template.title)
+            self.package.footer = copy.copy(template.footer)
+            self.package.objectives = copy.copy(template.objectives)
+            self.package.preknowledge = copy.copy(template.preknowledge)
+            self.package.author = copy.copy(template.author)
+
+            # Copy the nodes and update the root and current ones
+            # Be carefull not to use copy.copy when assigning root and currentNode as this will create entirely new nodes
+            self.package._nodeIdDict = copy.copy(template._nodeIdDict)
+            self.package.root = self.package._nodeIdDict['0']
+            self.package.currentNode = self.package._nodeIdDict['0']
+
+            # Delete the template as we don't need it in memory anymore
+            del template
+
+            # We have to go through all nodes to add the correct reference
+            # to the current package
+            for node in self.package._nodeIdDict.itervalues():
+                node._package = self.package
+
+            self.package.translatePackage()
+
+            self.package.isChanged = False
+
+        # Call parent's renderHTTP method
+        return super(MainPage, self).renderHTTP(ctx)
 
     def child_authoring(self, ctx):
         """
@@ -131,6 +181,7 @@ class MainPage(RenderableLivePage):
             if clientid not in self.authoringPages:
                 self.authoringPages[clientid] = AuthoringPage(self)
                 self.children.pop('authoring')
+
             return self.authoringPages[clientid]
         else:
             raise Exception('No clientHandleId in request')
@@ -201,6 +252,7 @@ class MainPage(RenderableLivePage):
             hndlr = handler(func, *args, **kwargs)
             hndlr(ctx, client)     # Stores it
         setUpHandler(self.handleIsPackageDirty, 'isPackageDirty')
+        setUpHandler(self.handleIsPackageTemplate, 'isPackageTemplate')
         setUpHandler(self.handlePackageFileName, 'getPackageFileName')
         setUpHandler(self.handleSavePackage, 'savePackage')
         setUpHandler(self.handleLoadPackage, 'loadPackage')
@@ -214,6 +266,7 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleExportProcomun, 'exportProcomun')
         setUpHandler(self.handleXliffExport, 'exportXliffPackage')
         setUpHandler(self.handleQuit, 'quit')
+        setUpHandler(self.handleBrowseURL, 'browseURL')
         setUpHandler(self.handleMergeXliffPackage, 'mergeXliffPackage')
         setUpHandler(self.handleInsertPackage, 'insertPackage')
         setUpHandler(self.handleExtractPackage, 'extractPackage')
@@ -238,9 +291,18 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleCreateDir, 'CreateDir')
         setUpHandler(self.handleOverwriteLocalStyle, 'overwriteLocalStyle')
 
+        setUpHandler(self.handleSaveTemplate, 'saveTemplate')
+        setUpHandler(self.handleLoadTemplate, 'loadTemplate')
+
+        setUpHandler(self.handleMetadataWarning, 'showMetadataWarning')
+        setUpHandler(self.hideMetadataWarningForever, 'hideMetadataWarningForever')
+        setUpHandler(self.handlePackagePropertiesValidation, 'validatePackageProperties')
+
         self.idevicePane.client = client
         self.styleMenu.client = client
+        self.templateMenu.client = client
         self.webServer.stylemanager.client = client
+        self.webServer.templatemanager.client = client
 
         if not self.webServer.monitoring:
             self.webServer.monitoring = True
@@ -254,14 +316,15 @@ class MainPage(RenderableLivePage):
             'locationButtons': self.location_buttons.buttons,
             'lang': G.application.config.locale.split('_')[0],
             'showPreferences': G.application.config.showPreferencesOnStart == '1' and not G.application.preferencesShowed,
+            'showNewVersionWarning': G.application.config.showNewVersionWarningOnStart == '1' and not G.application.newVersionWarningShowed,
+            'release' : release,
             'loadErrors': G.application.loadErrors,
             'showIdevicesGrouped': G.application.config.showIdevicesGrouped == '1',
-            'authoringIFrameSrc': '%s/authoring?clientHandleId=%s' % (
-                self.package.name, IClientHandle(ctx).handleId
-            ),
+            'authoringIFrameSrc': '%s/authoring?clientHandleId=%s' % (self.package.name, IClientHandle(ctx).handleId),
             'pathSep': os.path.sep,
             'server': G.application.server,
-            'user_root': '/'
+            'user_root': '/',
+			'autosaveTime': float(G.application.config.autosaveTime)
         }
         if session.user:
             config['user'] = session.user.name
@@ -274,6 +337,7 @@ class MainPage(RenderableLivePage):
             config['lang'] = G.application.config.locale
 
         G.application.preferencesShowed = True
+        G.application.newVersionWarningShowed = True
         G.application.loadErrors = []
         return tags.script(type="text/javascript")["var config = %s" % json.dumps(config)]
 
@@ -315,7 +379,17 @@ class MainPage(RenderableLivePage):
         else:
             client.sendScript(ifClean)
 
-    def handlePackageFileName(self, client, onDone, onDoneParam):
+    def handleIsPackageTemplate(self, client, ifTemplate, ifNotTemplate):
+        """
+        Called by js to know if the package is a template or not.
+        It also checks if the package has already been modified.
+        """
+        if self.package.isTemplate and not self.package.isChanged:
+            client.sendScript(ifTemplate)
+        else:
+            client.sendScript(ifNotTemplate)
+
+    def handlePackageFileName(self, client, onDone, onDoneParam,export_type_name):
         """
         Calls the javascript func named by 'onDone' passing as the
         only parameter the filename of our package. If the package
@@ -323,7 +397,7 @@ class MainPage(RenderableLivePage):
         'onDoneParam' will be passed to onDone as a param after the
         filename
         """
-        client.call(onDone, unicode(self.package.filename), onDoneParam)
+        client.call(onDone, unicode(self.package.filename), onDoneParam,export_type_name)
 
     def b4save(self, client, inputFilename, ext, msg):
         """
@@ -335,14 +409,26 @@ class MainPage(RenderableLivePage):
         """
         if not inputFilename.lower().endswith(ext):
             inputFilename += ext
+            # If after adding the extension there is a file
+            # with the same name, fail and show an error
             if Path(inputFilename).exists():
                 explanation = _(u'"%s" already exists.\nPlease try again with a different filename') % inputFilename
                 msg = u'%s\n%s' % (msg, explanation)
                 client.alert(msg)
                 raise Exception(msg)
+
+        # When saving a template, we don't check for the filename
+        # before this state, so we have to check for duplicates
+        # here
+        if ext.lower() == '.elt' and Path(inputFilename).exists():
+            explanation = _(u'"%s" already exists.\nPlease try again with a different filename') % inputFilename
+            msg = u'%s\n%s' % (msg, explanation)
+            client.alert(msg)
+            raise Exception(msg)
+
         return inputFilename
 
-    def handleSavePackage(self, client, filename=None, onDone=None):
+    def handleSavePackage(self, client, filename=None, onDone=None,export_type_name=None):
         """
         Save the current package
         'filename' is the filename to save the package to
@@ -362,24 +448,80 @@ class MainPage(RenderableLivePage):
         if not filename:
             filename = self.package.filename
             assert filename, 'Somehow save was called without a filename on a package that has no default filename.'
+
+        extension = filename.splitext()[1]
+        if extension == '.elt':
+            return self.handleSaveTemplate(client, filename.basename(), onDone, edit=True)
         # Add the extension if its not already there and give message if not saved
         filename = self.b4save(client, filename, '.elp', _(u'SAVE FAILED!'))
+
+        name = str(filename.basename().splitext()[0])
+        if name.upper() in forbiddenPageNames:
+            client.alert(_('SAVE FAILED!\n"%s" is not a valid name for a package') % str(name))
+            return
+
         try:
             self.package.save(filename)  # This can change the package name
         except Exception, e:
             client.alert(_('SAVE FAILED!\n%s') % str(e))
             raise
-        # Tell the user and continue
-        if onDone:
-            client.filePickerAlert(_(u'Package saved to: %s') % filename, onDone)
-        elif self.package.name != oldName:
-            # Redirect the client if the package name has changed
-            self.webServer.root.putChild(self.package.name, self)
-            log.info('Package saved, redirecting client to /%s' % self.package.name)
-            client.filePickerAlert(_(u'Package saved to: %s') % filename, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'), \
-                         filter_func=otherSessionPackageClients)
+
+        # Take into account that some names are not allowed, so we have to take care of that before reloading
+        if G.application.webServer is not None and self.package.name in G.application.webServer.invalidPackageName:
+            self.package._name = self.package._name + '_1'
+
+
+        if export_type_name == None:
+            # Tell the user and continue
+            if onDone:
+                client.filePickerAlert(_(u'Package saved to: %s') % filename, onDone)
+            elif self.package.name != oldName:
+                # Redirect the client if the package name has changed
+                self.webServer.root.putChild(self.package.name, self)
+                log.info('Package saved, redirecting client to /%s' % self.package.name)
+                client.filePickerAlert(_(u'Package saved to: %s') % filename, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'), \
+                            filter_func=otherSessionPackageClients)
+            else:
+                #client.filePickerAlert(_(u'Package saved to: %s') % filename, filter_func=otherSessionPackageClients)
+				# A nice notification instead of an alert
+                filename = _('Package saved to: %s') % filename.replace("\\","\\/")
+                client.sendScript(u'eXe.app.notifications.savedPackage("%s")' % filename)
+
+    def handleSaveTemplate(self, client, templatename=None, onDone=None, edit=False):
+        '''Save template'''
+        if not templatename.endswith(".elt"):
+            filename = Path(self.config.templatesDir/templatename +'.elt', 'utf-8')
         else:
-            client.filePickerAlert(_(u'Package saved to: %s') % filename, filter_func=otherSessionPackageClients)
+            filename = Path(self.config.templatesDir/templatename, 'utf-8')
+            templatename = str(filename.basename().splitext()[0])
+
+        if edit == False:
+            filename = self.b4save(client, filename, '.elt', _(u'SAVE FAILED!'))
+
+        name = str(filename.basename().splitext()[0])
+        if name.upper() in forbiddenPageNames:
+            client.alert(_('SAVE FAILED!\n"%s" is not a valid name for a template') % str(templatename))
+            return
+
+        try:
+            configxmlData = '<?xml version="1.0"?>\n'
+            configxmlData += '<template>\n'
+            configxmlData += '<name>'+templatename+'</name>\n'
+            configxmlData += '</template>'
+
+            # Make the root node the current one
+            self.package.currentNode = self.package.root
+
+            # Save the template
+            self.package.save(filename, isTemplate=True, configxml=configxmlData)
+        except Exception, e:
+            client.alert(_('SAVE FAILED!\n%s') % str(e))
+            raise
+
+        template = Template(filename)
+        self.config.templateStore.addTemplate(template)
+
+        client.alert(_(u'Template saved: %s') % templatename, onDone)
 
     def handleLoadPackage(self, client, filename, filter_func=None):
         """Load the package named 'filename'"""
@@ -387,7 +529,54 @@ class MainPage(RenderableLivePage):
         self.session.packageStore.addPackage(package)
         self.webServer.root.bindNewPackage(package, self.session)
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                          package.name).encode('utf8'), filter_func=filter_func)
+                        package.name).encode('utf8'), filter_func=filter_func)
+
+    def handleLoadTemplate(self, client, filename):
+        """Load the template named 'filename'"""
+        # By transforming it into a Path, we ensure that it is using the correct directory separator
+        template = self._loadPackage(client, Path(filename), newLoad=True, isTemplate=True)
+        self.webServer.root.bindNewPackage(template, self.session)
+        client.sendScript((u'eXe.app.gotoUrl("/%s")' % template.name).encode('utf8'), filter_func=allSessionPackageClients)
+
+    def handleMetadataWarning(self, client, export_type):
+        """
+        Checks if the package metadata has been changed and shows
+        a warning to the user.
+        """
+        if self.config.metadataWarning == "1" and self.package.has_custom_metadata():
+            client.call(u'eXe.app.getController("Toolbar").showMetadataWarning', export_type, '')
+        else:
+            client.call(u'eXe.app.getController("Toolbar").processExportEventValidationStep', export_type, '')
+
+    def hideMetadataWarningForever(self, client):
+        """
+        Updates the user configuration to hide the metadata warning when exporting
+        for the current user.
+        """
+        self.config.metadataWarning = "0"
+
+    def handlePackagePropertiesValidation(self, client, export_type):
+        invalid_properties = self.package.valid_properties(export_type)
+        if len(invalid_properties) == 0:
+            client.call(u'eXe.app.getController("Toolbar").exportPackage', export_type, '')
+        else:
+            invalid_properties_str = u''
+            for prop in invalid_properties:
+                invalid_properties_str += prop.get('name') + '|' + prop.get('reason')
+
+                if 'allowed_values' in prop:
+                    invalid_properties_str += '|' + prop.get('allowed_values')
+
+                invalid_properties_str +=  ','
+            invalid_properties_str = invalid_properties_str[:-1]
+
+            # Get file system encoding
+            encoding = sys.getfilesystemencoding()
+            if encoding is None:
+                encoding = 'utf-8'
+
+            # Turns package filename passed it to unicode when call javascript function
+            client.call(u'eXe.app.getController("Toolbar").packagePropertiesCompletion', export_type, unicode(str(self.package.filename), encoding), invalid_properties_str)
 
     # No longer used - Task 1080, jrf
     # def handleLoadTutorial(self, client):
@@ -401,9 +590,11 @@ class MainPage(RenderableLivePage):
     def progressDownload(self, numblocks, blocksize, filesize, client):
         try:
             percent = min((numblocks * blocksize * 100) / filesize, 100)
+            if percent < 0:
+                percent = 0
         except:
             percent = 100
-        client.sendScript('Ext.MessageBox.updateProgress(%f, "%d%%", "Downloading...")' % (float(percent) / 100, percent))
+        client.sendScript('Ext.MessageBox.updateProgress(%f, "%d%%", "%s")' % (float(percent) / 100, percent, _("Downloading...")))
         log.info('%3d' % (percent))
 
     def handleSourcesDownload(self, client):
@@ -411,18 +602,19 @@ class MainPage(RenderableLivePage):
         Download taxon sources from url and deploy in $HOME/.exe/classification_sources
         """
         url = 'https://github.com/exelearning/classification_sources/raw/master/classification_sources.zip'
-        client.sendScript('Ext.MessageBox.progress("Sources Download", "Connecting to classification sources repository...")')
+        client.sendScript('Ext.MessageBox.progress("%s", "%s")' %(_("Sources Download"), _("Connecting to classification sources repository...")))
         d = threads.deferToThread(urlretrieve, url, None, lambda n, b, f: self.progressDownload(n, b, f, client))
 
         def successDownload(result):
             filename = result[0]
             if not zipfile.is_zipfile(filename):
+                client.sendScript('Ext.MessageBox.alert("%s", "%s" )' % (_("Sources Download"), _("There has been an error while trying to download classification sources. Please try again later.")))
                 return None
 
             zipFile = zipfile.ZipFile(filename, "r")
             try:
                 zipFile.extractall(G.application.config.configDir)
-                client.sendScript('Ext.MessageBox.updateProgress(1, "100%", "Success!")')
+                client.sendScript('Ext.MessageBox.hide()')
             finally:
                 Path(filename).remove()
 
@@ -828,41 +1020,69 @@ class MainPage(RenderableLivePage):
                 verify = 'cacerts.txt'
             oauth2Session = OAuth2Session(ProcomunOauth.CLIENT_ID, redirect_uri=ProcomunOauth.REDIRECT_URI)
             oauth2Session.verify = verify
+
             authorization_url, state = oauth2Session.authorization_url(ProcomunOauth.AUTHORIZATION_BASE_URL)
             self.webServer.oauth.procomun.saveState(state, oauth2Session, client)
 
+            # Call the script to start the Procomún authentication process
             client.call('eXe.app.getController("Toolbar").getProcomunAuthToken', authorization_url)
 
             return
 
-        title = 'Procomún'
-        statusTitle = _(u'Publishing document to Procomún')
-
         def exportScorm():
-            client.notifyStatus(statusTitle, _(u'Exporting package as SCORM'))
+            """
+            Exports the package we are about to upload to Procomún to SCORM 1.2.
+
+            :returns: Full path to the exported ZIP.
+            """
+            # Update progress for the user
+            client.call('Ext.MessageBox.updateProgress', 0.3, '30%', _(u'Exporting package as SCORM 1.2...'))
+
             stylesDir = self.config.stylesDir / self.package.style
+
             fd, filename = mkstemp('.zip')
             os.close(fd)
+
             scorm = ScormExport(self.config, stylesDir, filename, 'scorm1.2')
             scorm.export(self.package)
 
             return filename
 
         def publish(filename):
-            token = client.session.oauthToken['procomun']
-            headers = {'Authorization': 'Bearer %s' % str(token['access_token']),
-                       'Connection': 'close'}
+            """
+            Upload the exported package to Procomún.
 
+            :param filename: Full path to the exported ZIP.
+            """
+            # Update progress for the user
+            client.call('Ext.MessageBox.updateProgress', 0.7, '70%', _(u'Uploading package to Procomún...'))
+
+            # Get OAuth Acess Token and add it to the request headers
+            token = client.session.oauthToken['procomun']
+            headers = {
+                'Authorization': 'Bearer %s' % str(token['access_token']),
+                'Connection': 'close'
+            }
+
+            # Create the WSDL client
             procomun = Client(PROCOMUN_WSDL, headers=headers)
 
+            # Create and configure the ODE object
             ode = procomun.factory.create('xsd:anyType')
-
             ode.file = base64.b64encode(open(filename, 'rb').read())
             ode.file_name = self.package.name
 
-            client.notifyStatus(statusTitle, _(u'Starting authorized connection to Procomún API'))
-            result = procomun.service.odes_soap_create(ode)
+            # Try to upload the ODE to Procomún
+            try:
+                result = procomun.service.odes_soap_create(ode)
+            except Exception as e:
+                # If there is an exception, log it and show a generic error message to the user
+                log.error('An error has ocurred while trying to publish a package to Procomún. The error message is: %s', str(e))
+                client.call('Ext.MessageBox.hide')
+                client.alert(_(u'Unknown error when trying to upload package to Procomún.'), title=_(u'Publishing document to Procomún'))
+                return
 
+            # Parse the result received from Procomún
             parsedResult = {}
             for item in result.item:
                 parsedResult[item.key] = item.value
@@ -871,12 +1091,40 @@ class MainPage(RenderableLivePage):
                     if item.value:
                         parsedResult[item.key][item.value.item.key] = item.value.item.value
 
+            # Show a message to the user based on the result
+            client.call('Ext.MessageBox.hide')
             if parsedResult['status'] == 'true':
                 link_url = ProcomunOauth.BASE_URL + '/ode/view/%s' % parsedResult['data']['documentId']
-                client.notifyStatus(statusTitle, _(u'Package exported to <a href="%s" target="_blank" title="Click to visit exported site">%s</a>') % (link_url, self.package.title))
+                client.alert(
+                    js(
+                        '\''
+                        + _(u'Package exported to <a href="%s" target="_blank" title="Click to view the exported package">%s</a>.') % (link_url, self.package.title)
+                        + u'<br />'
+                        + u'<br />'
+                        + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % ProcomunOauth.BASE_URL
+                        + '\''
+                    ),
+                    title=_(u'Publishing document to Procomún')
+                )
             else:
-                client.hideStatus()
-                client.notifyNotice(title, _(u'Error exporting package %s to Procomún: %s') % (self.package.name, parsedResult['message']), 'error')
+                client.alert(
+                    js(
+                        '\'<h3>'
+                        + _(u'Error exporting package "%s" to Procomún.') % self.package.name
+                        + u'</h3><br />'
+                        + _(u'The most common reasons for this are:')
+                        + u'<br />'
+                        + _(u'1. Package metadata is not properly filled.')
+                        + u'<br />'
+                        + _(u'2. There is a problem with you connection (or with Procomún servers), so you should just try again later.')
+                        + u'<br /><br />'
+                        + _(u'If you have problems publishing you can close this dialogue, export as SCORM 2004 and upload the generated zip file manually to Procomún.')
+                        + u'<br /><br />'
+                        + _(u'The reported error we got from Procomún was: <pre>%s</pre>') % parsedResult['message']
+                        + '\''
+                    ),
+                    title=_(u'Publishing document to Procomún')
+                )
 
         d = threads.deferToThread(exportScorm)
         d.addCallback(lambda filename: threads.deferToThread(publish, filename))
@@ -898,6 +1146,11 @@ class MainPage(RenderableLivePage):
             client.alert(_(u'Cannot access directory named ') +
                          unicode(exportDir) +
                          _(u'. Please use ASCII names.'))
+            return
+
+        name = str(filename.basename().splitext()[0])
+        if name.upper() in forbiddenPageNames:
+            client.alert(_('SAVE FAILED!\n"%s" is not a valid name for the file') % str(name))
             return
 
         """
@@ -956,14 +1209,31 @@ class MainPage(RenderableLivePage):
             else:
                 log.debug("Not quiting. %d clients alive." % len(self.clientHandleFactory.clientHandles))
 
+    def handleBrowseURL(self, client, url):
+        """
+        visit the specified URL using the system browser
+        if the URL contains %s, substitute the local webDir
+        """
+        url = url.replace('%s', self.config.webDir)
+        log.debug(u'browseURL: ' + url)
+        if hasattr(os, 'startfile'):
+            os.startfile(url)
+        else:
+            G.application.config.browser.open(url, new=True)
+
     def handleMergeXliffPackage(self, client, filename, from_source):
         """
         Parse the XLIFF file and import the contents based on
         translation-unit id-s
         """
+
+        encoding = sys.getfilesystemencoding()
+        if encoding is None:
+            encoding = 'utf-8'
+
         from_source = True if from_source == "true" else False
         try:
-            importer = XliffImport(self.package, unquote(filename))
+            importer = XliffImport(self.package, unquote(filename).encode(encoding))
             importer.parseAndImport(from_source)
             client.alert(_(u'Correct XLIFF import'), (u'eXe.app.gotoUrl("/%s")' % \
                            self.package.name).encode('utf8'), filter_func=otherSessionPackageClients)
@@ -975,11 +1245,15 @@ class MainPage(RenderableLivePage):
         """
         Load the package and insert in current node
         """
-        package = self._loadPackage(client, filename, newLoad=True)
+        # For templates, we need to set isChanged to True to prevent the
+        # translation mechanism to execute
+        if not self.package.isChanged and self.package.isTemplate:
+            self.package.isChanged = True
+
+        package = self._loadPackage(client, filename, newLoad=True, preventUpdateRecent=True)
         tmpfile = Path(tempfile.mktemp())
-        package.save(tmpfile)
-        loadedPackage = self._loadPackage(client, tmpfile, newLoad=False,
-                                          destinationPackage=self.package)
+        package.save(tmpfile, preventUpdateRecent=True)
+        loadedPackage = self._loadPackage(client, tmpfile, newLoad=False, destinationPackage=self.package, preventUpdateRecent=True)
         newNode = loadedPackage.root.copyToPackage(self.package,
                                                    self.package.currentNode)
         # trigger a rename of all of the internal nodes and links,
@@ -1091,8 +1365,8 @@ class MainPage(RenderableLivePage):
             else:
                 if client:
                     client.alert(_(u'Folder name %s already exists. '
-                                'Please choose another one or delete existing one then try again.') % filename)           
-                return 
+                                'Please choose another one or delete existing one then try again.') % filename)
+                return
             # Now do the export
             singlePageExport = SinglePageExport(stylesDir, filename, \
                                          imagesDir, scriptsDir, cssDir, templatesDir)
@@ -1215,10 +1489,16 @@ class MainPage(RenderableLivePage):
         copy = True if copy == "true" else False
         cdata = True if cdata == "true" else False
         try:
-            filename = Path(unquote(filename))
+            filename = Path(filename, 'utf-8')
             log.debug(u"exportXliff, filename=%s" % filename)
             if not filename.lower().endswith('.xlf'):
                 filename += '.xlf'
+
+            name = str(filename.basename().splitext()[0])
+            if name.upper() in forbiddenPageNames:
+                client.filePickerAlert(_('SAVE FAILED!\n"%s" is not a valid name for the file') % str(name))
+                return
+
             xliffExport = XliffExport(self.config, filename, source, target, copy, cdata)
             xliffExport.export(self.package)
         except Exception, e:
@@ -1250,7 +1530,7 @@ class MainPage(RenderableLivePage):
         except Exception, e:
             client.alert(_('EXPORT FAILED!\n%s') % str(e))
             raise
-        if modifiedMetaData != False and modifiedMetaData['modifiedMetaData']:  
+        if modifiedMetaData != False and modifiedMetaData['modifiedMetaData']:
             client.filePickerAlert(_(u'The following fields have been cut to meet the SCORM 1.2 standard: %s') % ', '.join(modifiedMetaData['fieldsModified']))
         else:
             if not has_uncut_resources:
@@ -1341,7 +1621,7 @@ class MainPage(RenderableLivePage):
                 G.application.config.browser.open('file://' + filename)
 
     def _loadPackage(self, client, filename, newLoad=True,
-                     destinationPackage=None):
+                     destinationPackage=None, isTemplate=False, preventUpdateRecent=False):
         """Load the package named 'filename'"""
         try:
             encoding = sys.getfilesystemencoding()
@@ -1359,7 +1639,10 @@ class MainPage(RenderableLivePage):
                 except IOError:
                     client.alert(_(u'File %s does not exist or is not readable.') % filename2)
                     return None
-            package = Package.load(filename2, newLoad, destinationPackage)
+            if isTemplate == False:
+                package = Package.load(filename2, newLoad, destinationPackage, preventUpdateRecent=preventUpdateRecent)
+            else:
+                package = self.session.packageStore.createPackageFromTemplate(filename)
             if package is None:
                 raise Exception(_("Couldn't load file, please email file to bugs@exelearning.org"))
         except Exception, exc:
@@ -1371,3 +1654,5 @@ class MainPage(RenderableLivePage):
             log.error(u'Traceback:\n%s' % traceback.format_exc())
             raise
         return package
+
+

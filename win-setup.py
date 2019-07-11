@@ -73,7 +73,7 @@ def dataFiles(dirs, excludes=[]):
                 else:
                     # We get all of the path
                     path = file
-                
+
                 # Get the full new path
                 dir = os.path.join(g_newBase, os.path.dirname(path))
 
@@ -99,6 +99,7 @@ g_newBase = "."
 dataFiles(
     [
         "exe/webui/style",
+        "exe/webui/content_template",
         "exe/webui/css",
         "exe/webui/images",
         # jrf - task 1080, the manual is no longer included
@@ -111,6 +112,11 @@ dataFiles(
     # We exlude mimetext executables for other OS
     excludes = ['mimetex-darwin.cgi']
 )
+
+# Process metadata validation rules
+g_oldBase = "exe/webui"
+g_newBase = "."
+dataFiles(['exe/webui/exportvalidation.json'])
 
 # Process Mobile Profiles
 g_oldBase = "exe"
@@ -149,18 +155,11 @@ opts = {
             "chardet",
             "lxml",
             "feedparser",
-            "BeautifulSoup",
+            "bs4",
             "BaseHTTPServer",
             "oauthlib",
             "webassets",
             "cssmin"
-        ],
-        "includes": [
-            "PngImagePlugin",
-            "JpegImagePlugin",
-            "GifImagePlugin",
-            "IcoImagePlugin",
-            "BmpImagePlugin"
         ]
     }
 }
@@ -202,7 +201,8 @@ any Learning Management System.
         "exe.export",
         "exe.importers",
         "exe.jsui",
-        "exe.engine.lom"
+        "exe.engine.lom",
+        "exe.engine.exceptions"
     ],
     # Files list
     data_files=g_files.items(),

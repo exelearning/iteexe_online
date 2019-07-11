@@ -69,6 +69,40 @@ class FileAttachIdeviceInc(Idevice):
         self.introHTML = TextAreaField(x_("Intro Text"))
         self.icon = "assignment"
 
+    def getRichTextFields(self):
+        """
+        Like getResourcesField(), a general helper to allow nodes to search 
+        through all of their fields without having to know the specifics of each
+        iDevice type.  
+        """
+        fields_list = []
+        if hasattr(self, 'introHTML'):
+            fields_list.append(self.introHTML)
+        return fields_list
+
+    def get_translatable_fields(self):
+        """
+        This function returns the Idevice's translatable fields.
+
+        :rtype: list
+        :return: A list of translatable fields that will be used for template translation.
+        """
+        translatable_fields = self.getRichTextFields()
+        translatable_fields.extend(self.fileAttachmentFields)
+
+        return translatable_fields
+
+    def translate(self):
+        """
+        Perform the Idevice translation using the package's language.
+        """
+        # First of all, translate the title
+        self.title = c_(self.title)
+
+        # Then, go through all translatable fields translating them
+        for field in self.get_translatable_fields():
+            field.translate()
+
 # ===========================================================================
 def register(ideviceStore):
     """Register with the ideviceStore"""

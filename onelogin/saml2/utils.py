@@ -240,6 +240,9 @@ class OneLogin_Saml2_Utils(object):
                 url += param_prefix + param
                 param_prefix = '&'
 
+	if ',' in url:
+	    url = url.split(',')[0]
+
         return url
 
     @staticmethod
@@ -298,6 +301,9 @@ class OneLogin_Saml2_Utils(object):
                 current_host = current_host_data[0]
             except ValueError:
                 current_host = ':'.join(current_host_data)
+
+	if ',' in current_host:
+	    current_host = current_host.split(',')[0]
 
         return current_host
 

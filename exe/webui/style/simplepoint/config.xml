@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <theme>
-    <name>SimplePoint (presentations)</name>
-    <version>1.0</version>
-    <compatibility>2.0.3+</compatibility>
+    <name>Presentation</name>
+    <version>2019</version>
+    <compatibility>2.4</compatibility>
     <author>Ignacio Gros</author>
     <author-url>http://www.gros.es/</author-url>
 	<license>Creative Commons by-sa</license>

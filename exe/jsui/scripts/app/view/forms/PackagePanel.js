@@ -27,111 +27,111 @@ Ext.define('eXe.view.forms.PackagePanel', {
                              "(" + _("void") + ")"
                          ],
                          [
-                             "propietary license", 
+                             "propietary license",
                              _("propietary license")
-                         ], 
+                         ],
                          [
-                             "free software license EUPL", 
+                             "free software license EUPL",
                              _("free software license EUPL")
-                         ], 
+                         ],
                          [
-                             "free software license GPL", 
+                             "free software license GPL",
                              _("free software license GPL")
-                         ], 
+                         ],
                          [
-                             "dual free content license GPL and EUPL", 
+                             "dual free content license GPL and EUPL",
                              _("dual free content license GPL and EUPL")
-                         ], 
+                         ],
                          [
-                             "other free software licenses", 
+                             "other free software licenses",
                              _("other free software licenses")
-                         ], 
+                         ],
                          [
-                             "public domain", 
+                             "public domain",
                              _("public domain")
-                         ], 
+                         ],
                          [
-                             "not appropriate", 
+                             "not appropriate",
                              _("not appropriate")
-                         ], 
+                         ],
                          [
-                             "intellectual property license", 
+                             "intellectual property license",
                              _("intellectual property license")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution 4.0", 
+                             "creative commons: attribution 4.0",
                              _("creative commons: attribution 4.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work 4.0", 
+                             "creative commons: attribution - non derived work 4.0",
                              _("creative commons: attribution - non derived work 4.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work - non commercial 4.0", 
+                             "creative commons: attribution - non derived work - non commercial 4.0",
                              _("creative commons: attribution - non derived work - non commercial 4.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial 4.0", 
+                             "creative commons: attribution - non commercial 4.0",
                              _("creative commons: attribution - non commercial 4.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial - share alike 4.0", 
+                             "creative commons: attribution - non commercial - share alike 4.0",
                              _("creative commons: attribution - non commercial - share alike 4.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - share alike 4.0", 
+                             "creative commons: attribution - share alike 4.0",
                              _("creative commons: attribution - share alike 4.0")
                          ],
                          [
-                             "creative commons: attribution 3.0", 
+                             "creative commons: attribution 3.0",
                              _("creative commons: attribution 3.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work 3.0", 
+                             "creative commons: attribution - non derived work 3.0",
                              _("creative commons: attribution - non derived work 3.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work - non commercial 3.0", 
+                             "creative commons: attribution - non derived work - non commercial 3.0",
                              _("creative commons: attribution - non derived work - non commercial 3.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial 3.0", 
+                             "creative commons: attribution - non commercial 3.0",
                              _("creative commons: attribution - non commercial 3.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial - share alike 3.0", 
+                             "creative commons: attribution - non commercial - share alike 3.0",
                              _("creative commons: attribution - non commercial - share alike 3.0")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - share alike 3.0", 
+                             "creative commons: attribution - share alike 3.0",
                              _("creative commons: attribution - share alike 3.0")
                          ],
                          [
-                             "creative commons: attribution 2.5", 
+                             "creative commons: attribution 2.5",
                              _("creative commons: attribution 2.5")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work 2.5", 
+                             "creative commons: attribution - non derived work 2.5",
                              _("creative commons: attribution - non derived work 2.5")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non derived work - non commercial 2.5", 
+                             "creative commons: attribution - non derived work - non commercial 2.5",
                              _("creative commons: attribution - non derived work - non commercial 2.5")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial 2.5", 
+                             "creative commons: attribution - non commercial 2.5",
                              _("creative commons: attribution - non commercial 2.5")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - non commercial - share alike 2.5", 
+                             "creative commons: attribution - non commercial - share alike 2.5",
                              _("creative commons: attribution - non commercial - share alike 2.5")
-                         ], 
+                         ],
                          [
-                             "creative commons: attribution - share alike 2.5", 
+                             "creative commons: attribution - share alike 2.5",
                              _("creative commons: attribution - share alike 2.5")
                          ],
                          [
-                             "license GFDL", 
+                             "license GFDL",
                              _("license GFDL")
                          ]
                      ]},
@@ -176,6 +176,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             item: {
                                 xtype: 'combobox',
                                 inputId: 'pp_lang',
+                                itemId: 'pp_lang',
                                 dirtyCls: 'property-form-dirty',
                                 fieldLabel: _('Language'),
                                 store: langsStore,
@@ -199,7 +200,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
 			                            xtype: 'textarea',
 			                            inputId: 'pp_description',
                                         dirtyCls: 'property-form-dirty',
-			                            fieldLabel: _('General'),
+			                            fieldLabel: _('General description'),
 			                            tooltip: _('An account of the content of the resource.'),
 			                            height: 60,
 			                            anchor: '100%'
@@ -207,6 +208,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                                     help: _('An account of the content of the resource.')
                                 },
                                 {
+                                    cls: 'exe-advanced',
                                     xtype: 'helpcontainer',
                                     margin: '0 0 10 0',
                                     item: {
@@ -221,6 +223,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                                     help: _('Objectives.')
                                 },
                                 {
+                                    cls: 'exe-advanced',
                                     xtype: 'helpcontainer',
                                     margin: '0 0 10 0',
                                     item: {
@@ -262,7 +265,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                                 store: eXe.view.forms.PackagePanel.eXeLicenses,
                                 tooltip: _('Select a license.'),
                                 anchor: '100%',
-                                forceSelection: true,
+                                forceSelection: false,
                                 listeners: {
                                     'change': me.onChange
                                 }
@@ -270,6 +273,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             help: _('Select a license or write your own one.')
                         },
                         {
+                            cls: 'exe-advanced',
                             xtype: 'helpcontainer',
                             margin: '0 0 10 0',
                             item: {
@@ -278,7 +282,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                                 dirtyCls: 'property-form-dirty',
                                 fieldLabel: _('Learning Resource Type'),
                                 labelWidth: '180px',
-                                store: lomesVocab.learningResourceTypeValues.slice(39),
+                                store: lomesVocab.learningResourceTypeValues.slice(38),
                                 tooltip: _('Learning Resource Type'),
                                 anchor: '100%',
                                 forceSelection: true,
@@ -289,6 +293,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             help: _('Learning Resource Type')
                         },
                         {
+                            cls: 'exe-advanced',
                             xtype: 'fieldset',
                             title: _('Usage'),
                             items: [
@@ -465,6 +470,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                     ]
                 },
                 {
+                    cls: 'exe-advanced',
                     xtype: 'fieldset',
                     title: _('Project Properties'),
                     margin: 10,
@@ -542,8 +548,9 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             anchor: '100%'
                         }
                     ]
-                },				
+                },
                 {
+                    cls: 'exe-advanced',
                     xtype: 'fieldset',
 					title: _('Format'),
                     margin: 10,
@@ -572,7 +579,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
 											if(typeof(ed)!='undefined' && ed.activeEditor) {
 												Ext.Msg.alert(_('Warning'), _("Save the changes of your iDevice before changing the DOCTYPE"));
 											}
-										}										
+										}
 									}
 								}
                             },
@@ -580,8 +587,9 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             help: _('This overrides for this Package the "Default format for the new documents" set in Tools - Preferences')
                         }
 					]
-                },				
+                },
                 {
+                    cls: 'exe-advanced',
                     xtype: 'fieldset',
                     title: _('Taxonomy'),
                     margin: 10,
@@ -618,6 +626,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                     ]
                 },
                 {
+					cls: 'exe-advanced',
 					xtype: 'preservescrollfieldset',
 					title: _('Advanced Options'),
 					margin: 10,
@@ -628,18 +637,12 @@ Ext.define('eXe.view.forms.PackagePanel', {
                     collapsed: true,
                     items: [
                         {
-                            xtype: 'helpcontainer',
-                            item: {
-                                xtype: 'checkboxfield',
-                                inputId: 'pp_compatibleWithVersion9',
-                                boxLabel: _('Create package compatible with old eXe versions?'),
-                                inputValue: true,
-                                uncheckedValue: false,
-                                dirtyCls: 'property-form-dirty',
-                                tooltip: _('Checking this option, the saved package may be opened with eXe >= 0.20.4')
-                            },
-                            flex: 0,
-                            help: _('Checking this option, the saved package may be opened with eXe >= 0.20.4')
+                            xtype: 'textarea',
+                            inputId: 'pp_extraHeadContent',
+                            fieldLabel: _('Custom HEAD'),
+                            tooltip: _('Any code you enter here (STYLE, META, SCRIPT...) will be added in the HEAD section to every page.').replace(" HEAD "," &lt;HEAD&gt; "),
+                            height: 80,
+                            anchor: '100%'
                         }
                     ]
                 },

@@ -28,6 +28,7 @@ h3{font-size:1.25em;color:#777}
 
 /* iDevice icons */
 .iDevice_header{background:url(icon_generic.gif) no-repeat 0 5px;padding-left:40px;margin-bottom:10px}
+.textIdevice .iDevice_header{background-position:0 12px}
 .activityIdevice .iDevice_header{background-image:url(icon_activity.gif)}
 .readingIdevice .iDevice_header{background-image:url(icon_reading.gif)}
 .ListaIdevice .iDevice_header,
@@ -52,6 +53,8 @@ input,select,textarea{font-family:Arial,Verdana,Helvetica,sans-serif;font-size:1
 #lbOverlay{background-color:#f3f3f3}
 #lbOuterContainer{border-color:#ddd}
 .ExternalUrlIdevice iframe{border:none}
+/* Download package iDevice */
+.download-packageIdevice .exe-download-package-link a{background:#1679c3}
 /* Lightbox */
 .exeImageGallery{width:100%}
 /* base.css */
@@ -73,7 +76,7 @@ li{list-style-position:outside}
 .toggle-idevice .show-idevice{background-position:-50px -100px}
 .toggle-idevice span{position:absolute;overflow:hidden;clip:rect(0,0,0,0);height:0}
 
-.FreeTextIdevice{max-width:900px;margin:2em auto;font-size:1.3em;line-height:2em}
+.textIdevice,.FreeTextIdevice{max-width:900px;margin:2em auto;font-size:1.3em;line-height:2em}
 .exe-fx{font-size:.85em}
 .iDevice_content_wrapper{overflow:hidden}
 .FreeTextIdevice .figcaption{font-size:.85em}
@@ -89,3 +92,9 @@ li{list-style-position:outside}
 #packageLicense{text-align:left;margin:0;background:#000;color:#fff;line-height:25px;font-size:.75em;padding:0 20px}
 #packageLicense p{margin:0}
 #packageLicense a{color:#fff}
+/* Steps (use arrows) */
+#steps-instructions{color:#BBB;font-size:.75em}
+#steps-instructions strong{margin-right:.5em}
+#steps-instructions a{color:#BBB;text-decoration:underline;margin-left:.5em}
+#steps-instructions a:hover,#steps-instructions a:focus{text-decoration:none}
+.exe-web-site.js .presentation-slide{display:none}

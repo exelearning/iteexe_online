@@ -51,7 +51,7 @@ def dataFiles(dirs, excludes=[]):
                 else:
                     # We get all of the path
                     path = file
-                
+
                 # Get the full new path
                 dir = os.path.join(g_newBase, os.path.dirname(path))
 
@@ -77,6 +77,7 @@ g_newBase = "/usr/share/exe"
 dataFiles(
     [
         "exe/webui/style",
+        "exe/webui/content_template",
         "exe/webui/css",
         # jrf - task 1080, the manual is no longer included
         # "exe/webui/docs",
@@ -93,6 +94,11 @@ dataFiles(
         "exe/webui/docs/credits.xhtml"
     ]
 )
+
+# Process metadata validation rules
+g_oldBase = "exe/webui"
+g_newBase = "/usr/share/exe"
+dataFiles(['exe/webui/exportvalidation.json'])
 
 # Process Mobile Profiles
 g_oldBase = "exe"
@@ -155,7 +161,8 @@ any Learning Management System.
         "exe.engine",
         "exe.export",
         "exe.importers",
-        "exe.engine.lom"
+        "exe.engine.lom",
+        "exe.engine.exceptions"
     ],
     # Files list
     data_files=g_files.items()

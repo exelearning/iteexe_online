@@ -78,7 +78,7 @@ class ScormPage(Page):
         if dT != "HTML5" and self.node.package.dublinCore.language!="":
             html += '<meta http-equiv="content-language" content="'+lenguaje+'" />'+lb
         if self.node.package.author!="":
-            html += '<meta name="author" content="'+self.node.package.author+'" />'+lb
+            html += '<meta name="author" content="'+escape(self.node.package.author, True)+'" />'+lb
         html += common.getLicenseMetadata(self.node.package.license)
         html += '<meta name="generator" content="eXeLearning '+release+' - exelearning.net" />'+lb
         if self.node.id=='0':
@@ -118,19 +118,22 @@ class ScormPage(Page):
             html += u'<script type="text/javascript" src="exe_effects.js"></script>'+lb
         if common.hasSH(self.node):
             html += u'<script type="text/javascript" src="exe_highlighter.js"></script>'+lb
-        html += common.getJavaScriptStrings()+lb
+        html += u'<script type="text/javascript" src="common_i18n.js"></script>' + lb
         if common.hasGames(self.node):
-            # The games require additional strings
-            html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>'+lb
         if common.hasABCMusic(self.node):
             html += u'<script type="text/javascript" src="exe_abcmusic.js"></script>'+lb
         html += u'<script type="text/javascript" src="common.js"></script>'+lb
+        
+        # Add JS iDevices' files
+        html += common.printJavaScriptIdevicesScripts('export', self)
+        
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
         if self.scormType == 'commoncartridge':
             if style.hasValidConfig:
                 html += style.get_extra_head()        
+            html += common.getExtraHeadContent(self.node.package)
             html += u"</head>"+lb
             html += u"<body id=\""+self.node.id+"\" class=\"exe-scorm\" "
         else:
@@ -138,6 +141,7 @@ class ScormPage(Page):
             html += u"<script type=\"text/javascript\" src=\"SCOFunctions.js\"></script>"+lb
             if style.hasValidConfig:
                 html += style.get_extra_head()
+            html += common.getExtraHeadContent(self.node.package)
             html += u"</head>"+lb            
             html += u'<body id="exe-node-'+self.node.id+'" class=\"exe-scorm\" '
         if common.hasQuizTest(self.node):
@@ -176,7 +180,7 @@ class ScormPage(Page):
         html += u"</"+sectionTag+">"+lb # /#main
         themeHasXML = common.themeHasConfigXML(self.node.package.style)
         if self.node.package.get_addPagination():
-            html += "<div class = 'pagination' align='right'>" + c_('Page %i of %i') % (pages.index(self) + 1,len(pages))+ "</div>"+lb 
+            html += "<p class='pagination page-counter'>" + c_('Page %s of %s') % ('<strong>'+str(pages.index(self) + 1)+'</strong>','<strong>'+str(len(pages))+'</strong>')+ "</p>"+lb 
         if themeHasXML:
         #if style.hasValidConfig:
             html += self.renderLicense()
@@ -217,7 +221,9 @@ class ScormPage(Page):
            href="exe-node:Home:Topic:etc#Anchor"
         For this SCORM Export, go ahead and remove the link entirely,
         leaving only its text, since such links are not to be in the LMS.
+        Keep the links to the elp file (if the elp file exists).
         """
+        html = common.enableLinksToElp(self.node.package,html)       
         return common.removeInternalLinks(html)
         
 

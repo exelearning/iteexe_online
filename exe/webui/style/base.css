@@ -41,6 +41,10 @@ input.feedbackbutton{margin-top:10px;margin-bottom:10px}
 .iDevice_content{position:relative;max-width:100%}
 .exe-epub3 .iDevice_content{position:static}
 .iDevice_header{background-position:0 50%;background-repeat:no-repeat}
+.iDevice_header.iDevice_header_noIcon{background-image:none;padding:5px 0}
+
+/* iDevices */
+.TrueFalseIdevice label{white-space:nowrap;margin-right:1em;line-height:1.7em}
 
 .exe-dl{margin-bottom:2em;margin-left:1.5em}
 .exe-dl dt{font-weight:bold}
@@ -123,9 +127,14 @@ a.exe-enlarge:hover .exe-enlarge-icon,a.exe-enlarge:focus .exe-enlarge-icon{disp
 /* To review */
 .hidden-idevice .image_text{display:none} /* iDevice Toggler : Required for Magnifier */
 abbr[title],acronym[title]{text-decoration:none;border-bottom:1px dotted} /* Until text-decoration:dotted underline works in most browsers */
+/* Pagination */
+.pagination.page-counter{text-align:center} /* IMS, etc. */
+.pagination.noprt .sep{display:none}
+.pagination.noprt .page-counter{margin-right:20px}
+#topPagination .page-counter{margin-left:20px;margin-right:0}
 /* Accessibility */
 #skipNav{margin:0;position:absolute;width:100%}
-.sr-av,.js .js-sr-av,#skipNav a,.exe-hidden-accessible{position:absolute;overflow:hidden;clip:rect(0 0 0 0);clip:rect(0,0,0,0);height:0} /* sr-av: Avaible for Screen Readers. (0 0 0 0) is for IE6 & 7 */
+.sr-av,.js .js-sr-av,#skipNav a,.exe-hidden-accessible,.js .exe-tooltip-text{position:absolute;overflow:hidden;clip:rect(0 0 0 0);clip:rect(0,0,0,0);height:0} /* sr-av: Avaible for Screen Readers. (0 0 0 0) is for IE6 & 7 */
 #skipNav a{background:#333;color:#fff;padding:.4em .85em}
 #skipNav a:active,#skipNav a:focus{position:static;overflow:visible;clip:auto;height:auto}
 /* Tables */
@@ -142,7 +151,7 @@ abbr[title],acronym[title]{text-decoration:none;border-bottom:1px dotted} /* Unt
 .exe-table-minimalist caption{text-align:center;font-style:italic;border-bottom:2px solid #CCC;padding:.6em 0}
 /* Tooltips */
 body .qtip {font-size:.85em;line-height:1.5em}
-.js .exe-tooltip-text{display:none}
+.qtip .exe-tooltip-text{position:relative;overflow:auto;clip:auto;height:auto}
 /* Structured lists */
 ol.auto-numbered{counter-reset:item}
 .auto-numbered ol{counter-reset:item}
@@ -156,10 +165,43 @@ ol.auto-numbered{counter-reset:item}
 /* Quote With Authorship */
 .styled-qc{font-family:Georgia,serif;font-style:italic;margin:1.5em 2.5em;padding:0.25em 3.5em;position:relative}
 .styled-qc:before{display:block;content:"\201C";font-size:5em;position:absolute;left:0;top:-20px}
+
+/* Task iDevice */
+ .js .pbl-task-info{visibility:hidden}
+ .pbl-task-info dt{float:left;font-weight:bold;margin-right:.5em}
+/* Align right example */
+/* 150px will be replaced with JavaScript (see common.js) */
+.pbl-task-info{overflow:hidden;margin:1em 0 1.5em 20px;width:auto;float:right;text-align:right}
+.pbl-task-info dt{margin:0;float:left;clear:left;width:150px}
+.pbl-task-info dd{margin:0 0 0 150px;text-align:left;padding-left:.5em}
+.pbl-task-info dd:after{content:'';display:block;clear:both}
+.pbl-task-description{clear:both}
+
 /* Responsive design */
 iframe,object,embed{max-width:100%}
 img,video{max-width:100%;height:auto} 
 @media all and (max-width: 780px) {
 	.styled-qc{margin:1.5em .5em}
 	.exe-layout-2-cols .exe-col,.exe-layout-3-cols .exe-col{float:none;width:100%;padding:0}   
+}
+/* Search bar */
+#exe-client-search-form{text-align:right;margin-bottom:2em}
+#exe-client-search-form p{margin:0}
+#exe-client-search-text{border:1px solid #ddd;padding:5px 10px;width:250px;max-width:60%}
+#exe-client-search-submit{border:1px solid #ddd;padding:5px 10px;background:#ddd;margin-left:-.4em;color:#333}
+.exe-client-search-results #nodeTitle,.exe-client-search-results .iDevice_wrapper,#exe-client-search-results,#exe-client-search-reset{display:none}
+.exe-client-search-results #exe-client-search-results{display:block}
+.exe-client-search-results #exe-client-search-reset{display:inline;line-height:2em}
+#exe-client-search-results p{margin-top:1.5em}
+#exe-client-search-results ul{margin:1.5em 1.5em 3em 1.5em;padding:0;list-style:none}
+#main #exe-client-search-results li{list-style-image:none;margin-bottom:1.5em}
+#exe-client-search-results a{font-size:1.15em}
+.exe-client-search-result{background:yellow}
+.exe-client-search-read-more{font-size:.7em;margin-left:.2em}
+#exe-client-search-reset{margin-left:.5em}
+@media all and (max-width: 700px) {
+	#exe-client-search-form{text-align:center}
+}
+@media all and (max-width: 600px) {
+	.exe-client-search-results #exe-client-search-reset{display:block;margin:1em 0 0 0}
 }

@@ -31,6 +31,11 @@ var $appVars = [
 	['contentBGURL',');',21],
 	['contentBGPosition',13,20],
 	['contentBGRepeat',9,18],
+	// fieldset #3
+	['searchBarBGColor',6,12],
+	['searchBarTextColor',6,7],
+	['searchBarButtonBGColor',6,12],
+	['searchBarButtonTextColor',6,7],
 	
 	// Header and footer tab
 	// fieldset #1
@@ -104,6 +109,10 @@ var $app = {
 		borderColor : "DDDDDD",
 		shadowColor : "999999"
 	},
+	nonEditableStyles : [
+		"base",
+		"docs"
+	],
 	mark : "/* eXeLearning Style Designer */",
 	advancedMark : "/* eXeLearning Style Designer (custom CSS) */",
 	defaultMark : "/* eXeLearning Style Designer (default CSS) */",
@@ -158,50 +167,63 @@ var $app = {
 		});
 
 		$("#save").click(function(){
+
+			var currentStyle = $app.getCurrentStyle();	
+			if (opener && opener.location.href.indexOf("?style=")==-1) {
+				// The user's creating a new Style, so we open the "Save as" dialog:
+				$("#saveAs").trigger("click");
+				return;
+			}
+			if ($app.nonEditableStyles.indexOf(currentStyle)!=-1) {
+				// If user is editing a non editable style it must be because style has not been saved yet,
+				// We tell the user to click on "Save as"
+				Ext.Msg.alert($i18n.Information, $i18n.Use_Save_as.replace('%s','"'+$i18n.Save_as+'"'));
+				return;
+			}
 			$app.getPreview("save");
 			var content = $("#my-content-css").val();
-			var nav = $("#my-nav-css").val();
-			var currentStyle = $app.getCurrentStyle();
+			var nav = $("#my-nav-css").val();			
 			
-			if (currentStyle == 'base') {
-				// If user is editing base style it must be because style has not been saved yet,
-				// open dialog to create a new one from base style
-				$app.createStyle(content, nav);
-			}
-			else {
-				// Send POST request to update current style
- 				var data = $app.collectAjaxData(content, nav, 'saveStyle');
- 				$app.preloader.show();
- 				jQuery.ajax({
- 					url: '/styleDesigner',
-					data: data,
-					cache: false,
-					contentType: false,
-					processData: false,
-					type: 'POST',
-					success: function(response, action) {
-						$app.preloader.hide();
-						// Form request can success, even if the create/save operation failed
-						result = JSON.parse(response);
-						if (result.success) {
-							Ext.Msg.alert($i18n.Information, result.message);
-							opener.window.location.reload();
-						}
-						else {
-							Ext.Msg.alert($i18n.Error, result.message);
-						}
-					},
-					error: function(response) {
-						$app.preloader.hide();
-						Ext.Msg.alert($i18n.Error, response.statusText);
+			// Send POST request to update current style
+			var data = $app.collectAjaxData(content, nav, 'saveStyle');
+			$app.preloader.show();
+			jQuery.ajax({
+				url: '/styleDesigner',
+				data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				type: 'POST',
+				success: function(response, action) {
+					$app.preloader.hide();
+					// Form request can success, even if the create/save operation failed
+					result = JSON.parse(response);
+					if (result.success) {
+						Ext.Msg.alert($i18n.Information, result.message);
+						opener.window.location.reload();
 					}
- 				});
-			}
+					else {
+						Ext.Msg.alert($i18n.Error, result.message);
+					}
+				},
+				error: function(response) {
+					$app.preloader.hide();
+					Ext.Msg.alert($i18n.Error, response.statusText);
+				}
+			});
+			
 		});		
 
 		$("#finish").click(function(){
-			$app.getPreview("save");
+			
 			var currentStyle = $app.getCurrentStyle();
+			if ($app.nonEditableStyles.indexOf(currentStyle)!=-1) {
+				// If user is editing a non editable style it must be because style has not been saved yet,
+				// We tell the user to click on "Save as"
+				Ext.Msg.alert($i18n.Information, $i18n.Use_Save_as.replace('%s','"'+$i18n.Save_as+'"'));
+				return;
+			}			
+			$app.getPreview("save");
 			var content = $app.formatToSave($("#my-content-css").val());
 			var nav = $app.formatToSave($("#my-nav-css").val());
 			
@@ -363,6 +385,22 @@ var $app = {
 		var contentCSS = opener.$designer.contentCSS.split($app.mark);
 		// To review: $app.baseContentCSS = contentCSS[0].replace(/\s+$/, ''); // Remove the last space
 		$app.baseContentCSS = contentCSS[0];
+		
+		var currentStyle = $app.getCurrentStyle();
+		
+		// Get the Style's content.css content:
+		jQuery.ajax({
+			url: '/style/'+currentStyle+'/content.css',
+			type: 'POST',
+			success: function(response) {
+				var contentCSS = response.split($app.mark);
+				$app.baseContentCSS = contentCSS[0];
+			},
+			error: function(response) {
+				Ext.Msg.alert($i18n.Error, response.statusText);
+			}
+		});
+		
 		var myContentCSS = "";
 		if (contentCSS.length==2) {
 			myContentCSS = contentCSS[1];
@@ -376,6 +414,20 @@ var $app = {
 		var navCSS = opener.$designer.navCSS.split($app.mark);
 		// To review: $app.baseNavCSS = navCSS[0].replace(/\s+$/, ''); // Remove the last space
 		$app.baseNavCSS = navCSS[0];
+		
+		// Get the Style's nav.css content:
+		jQuery.ajax({
+			url: '/style/'+currentStyle+'/nav.css',
+			type: 'POST',
+			success: function(response) {
+				var navCSS = response.split($app.mark);
+				$app.baseNavCSS = navCSS[0];
+			},
+			error: function(response) {
+				Ext.Msg.alert($i18n.Error, response.statusText);
+			}
+		});
+		
 		var myNavCSS = "";
 		if (navCSS.length==2) {
 			myNavCSS = navCSS[1];
@@ -717,6 +769,12 @@ var $app = {
 		var contentBGURL = $app.removeLocalPath("contentBGURL",mode);
 		var contentBGPosition = $("#contentBGPosition").val();
 		var contentBGRepeat = $("#contentBGRepeat").val();
+		
+		// Search bar
+		var searchBarBGColor = $("#searchBarBGColor").val();
+		var searchBarTextColor = $("#searchBarTextColor").val();
+		var searchBarButtonBGColor = $("#searchBarButtonBGColor").val();
+		var searchBarButtonTextColor = $("#searchBarButtonTextColor").val();
 
 		// body (content.css)
 		var fontFamily = $("#fontFamily").val();
@@ -863,6 +921,22 @@ var $app = {
 			navCSS+="}";
 		}
 		
+		if (searchBarBGColor!="" || searchBarTextColor!="" || searchBarButtonBGColor!="" || searchBarButtonTextColor!="") {
+			if (searchBarBGColor!="" || searchBarTextColor!="" || searchBarButtonBGColor!="") {
+				navCSS+="#exe-client-search-text{";
+					if (searchBarBGColor!="") navCSS+="/*searchBarBGColor*/background:#"+searchBarBGColor+";";
+					if (searchBarTextColor!="") navCSS+="/*searchBarTextColor*/color:#"+searchBarTextColor+";";
+					if (searchBarButtonBGColor!="") navCSS+="border-color:#"+searchBarButtonBGColor+";";
+				navCSS+="}";
+			}
+			if (searchBarButtonTextColor!="" || searchBarButtonBGColor!="") {
+				navCSS+="#exe-client-search-submit{";
+					if (searchBarButtonBGColor!="") navCSS+="/*searchBarButtonBGColor*/background:#"+searchBarButtonBGColor+";border-color:#"+searchBarButtonBGColor+";";
+					if (searchBarButtonTextColor!="") navCSS+="/*searchBarButtonTextColor*/color:#"+searchBarButtonTextColor+";";
+				navCSS+="}"
+			}
+		}
+		
 		var nav2BGColor = $("#nav2BGColor").val();
 		var nav2HoverBGColor = $("#nav2HoverBGColor").val();
 		var nav2AColor = $("#nav2AColor").val();
@@ -878,11 +952,12 @@ var $app = {
 			}
 			var icon = $app.stylePath+'_style_icons'+iconsColor+'.png';
 			navCSS += '/*useNavigationIcons*/'+iconColorComment+'.pagination a span{position:absolute;overflow:hidden;clip:rect(0,0,0,0);height:0;}\
-.pagination a,.pagination a:hover,.pagination a:focus{display:block;float:left;width:32px;height:32px;padding:0;background:url('+icon+') no-repeat 0 0;}\
-.pagination .next,.pagination .next:hover,.pagination .next:focus{background-position:-50px 0;}\
-.pagination .print-page,.pagination .print-page:hover,.pagination .print-page:focus{background-position:-200px 0;}\
+.pagination a,.pagination a:hover,.pagination a:focus{display:block;position:absolute;right:52px;width:32px;height:32px;padding:0;background:url('+icon+') no-repeat 0 0;}\
+.pagination .next,.pagination .next:hover,.pagination .next:focus{right:0;background-position:-50px 0;}\
+.pagination .print-page,.pagination .print-page:hover,.pagination .print-page:focus{right:104px;background-position:-200px 0;}\
+#topPagination{width:50%;min-width:400px;}\
 #bottomPagination{height:72px;position:relative;overflow:hidden}\
-#bottomPagination a{position:absolute;top:20px;right:74px;margin:0;}\
+#bottomPagination a{top:20px;right:72px;margin:0;}\
 #bottomPagination .next{right:20px;}\
 #nav-toggler a span{position:absolute;overflow:hidden;clip:rect(0,0,0,0);height:0;}\
 #nav-toggler a{display:block;width:32px;height:32px;padding:0;background:url('+icon+') no-repeat -100px 0;}\
@@ -891,10 +966,16 @@ var $app = {
 #nav-toggler .show-nav:hover{background-position:-150px 0;}\
 .pagination a,#nav-toggler a{filter:alpha(opacity=70);opacity:.7;}\
 .pagination a:hover,.pagination a:focus,#nav-toggler a:hover{filter:alpha(opacity=100);opacity:1;}\
+.pagination .page-counter{position:absolute;line-height:32px;padding:0;right:156px;}\
+#bottomPagination .page-counter{right:104px;}\
 @media all and (max-width: 700px){\
-#nav-toggler{height:32px;position:relative;}\
-#nav-toggler a{padding:0;width:32px;position:absolute;left:50%;margin-left:-16px;}\
+#nav-toggler{height:32px;}\
+#nav-toggler a{padding:0;width:32px;position:absolute;left:50%}\
 #siteNav{border-top:1px solid #ddd;}\
+.pagination .page-counter{width:300px;left:50%;right:auto;margin-left:-150px}\
+}\
+@media all and (max-width: 400px){\
+.pagination .page-counter{overflow:hidden;clip:rect(0,0,0,0);height:0;}\
 }';
 		} else {
 			if (nav2BGColor!="" || nav2AColor!="") {
@@ -967,11 +1048,19 @@ var $app = {
 				contentCSS+="#headerContent{";
 					if (headerTitleTopMargin!="") contentCSS+="/*headerTitleTopMargin*/padding-top:"+headerTitleTopMargin+"px;";
 					if (headerTitleFontFamily!="") contentCSS+="/*headerTitleFontFamily*/font-family:"+headerTitleFontFamily+";";
-					if (headerTitleColor!="") contentCSS+="/*headerTitleColor*/color:#"+headerTitleColor+";";
+					if (headerTitleColor!="") {
+						contentCSS+="/*headerTitleColor*/color:#"+headerTitleColor+";";
+						navCSS+="#topPagination .page-counter{";
+							navCSS+="color:#"+headerTitleColor+";";
+						navCSS+="}";						
+					}
 					if (headerTitleTextShadowColor!="") contentCSS+="/*headerTitleTextShadowColor*/text-shadow:1px 1px 1px #"+headerTitleTextShadowColor+";";
 					if (headerTitleAlign!="") contentCSS+="/*headerTitleAlign*/text-align:"+headerTitleAlign+";";
 					if (headerTitleFontSize!="") contentCSS+="/*headerTitleFontSize*/font-size:"+headerTitleFontSize+"%;";
 				contentCSS+="}";
+				if (headerTitleColor!="") {
+					
+				}
 			}
 		} else {
 			contentCSS+="#headerContent{";
@@ -1007,15 +1096,10 @@ var $app = {
 						navCSS+='}';
 						if (navBGColor!="") navCSS+='#siteNav li{background-color:#'+navBGColor+';}'						
 					navCSS+="}";
-					if (navBorderColor!="") {
-						navCSS+="@media all and (max-width: 700px){";
-								navCSS+='.js #siteNav{border-top:1px solid #'+navBorderColor+';}';
-						navCSS+="}";
-					}
 				}
 			}
 			if (navHoverBGColor!="" || navAHoverColor!="") {
-				navCSS+="#siteNav a:hover,#siteNav a:focus{";
+				navCSS+="#siteNav a:hover,#siteNav a:focus,#siteNav a.active{";
 					if (navHoverBGColor!="") navCSS+="/*navHoverBGColor*/background-color:#"+navHoverBGColor+";";
 					if (navAHoverColor!="") navCSS+="/*navAHoverColor*/color:#"+navAHoverColor+";";
 				navCSS+="}";
@@ -1043,7 +1127,12 @@ var $app = {
 						navCSS += "border-color:#"+footerBorderColor+";";
 					navCSS += "}";
 				}
-				if (footerColor!="") contentCSS += "/*footerColor*/color:#"+footerColor+";"
+				if (footerColor!="") {
+					contentCSS += "/*footerColor*/color:#"+footerColor+";"
+					navCSS+="#bottomPagination .page-counter{";
+						navCSS+="color:#"+footerColor+";";
+					navCSS+="}"				
+				}
 				if (footerTextAlign!="") contentCSS+="/*footerTextAlign*/text-align:"+footerTextAlign+";";
 				if (footerBGColor!='') contentCSS+="/*footerBGColor*/background-color:#"+footerBGColor+";";
 				if (footerFontSize!="") contentCSS += "/*footerFontSize*/font-size:"+footerFontSize+"%;"
@@ -1095,11 +1184,11 @@ var $app = {
 		return css;
 	},
 	enableColorPickers : function(){
-		$.fn.jPicker.defaults.images.clientPath='images/jpicker/';	
+		$.fn.jPicker.defaults.images.clientPath='../color-picker/images/';	
 		$('.color').jPicker(
 			{
 				window:{
-					title: $i18n.Color_Picker,
+					title: $Color_Picker_i18n.Color_Picker,
 					position:{
 						x: 'top',
 						y: 'left'
@@ -1112,7 +1201,7 @@ var $app = {
 						}
 					}
 				},
-				localization : $i18n.Color_Picker_Strings
+				localization : $Color_Picker_i18n.Color_Picker_Strings
 			},
 			function(color, context){
 				$("div.jPicker").hide();

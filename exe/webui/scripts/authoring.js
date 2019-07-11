@@ -29,7 +29,7 @@ var Ext = parent.Ext;
 var eXe = parent.eXe;
 var onLoadHandlers = [clearHidden, setWmodeToFlash, loadAuthoringPluginObjects, 
 	enableAnchors, httpsInNewWindow, gotoAnchor, preventEscKey, preventHistoryBack,
-    loadKeymap, hideObjectTags];
+    loadKeymap, hideObjectTags, createLeftPanelToggler, createEmptyPageInstructions, checkIdevicesVisibility];
 var beforeSubmitHandlers = new Array();
 
 // Called on document load
@@ -589,19 +589,20 @@ function loadKeymap() {
 /* ********************************* */
 
 // Common settings
+// Default editor
+if (typeof(exe_editor_version)=='undefined') exe_editor_version=4;
 var eXeLearning_settings = {
-    wysiwyg_path : "/scripts/tinymce_3.5.11/jscripts/tiny_mce/tiny_mce.js",
-    wysiwyg_settings_path : "/scripts/tinymce_3.5.11_settings.js"
+	wysiwyg_version : false, // Set to true to allow other versions
+	wysiwyg_path : "/scripts/tinymce_4/js/tinymce/tinymce.min.js",
+	wysiwyg_settings_path : "/scripts/tinymce_4_settings.js"
 }
-
-if (typeof(exe_editor_version)=='undefined') exe_editor_version=3;
-
-if (exe_editor_version==4) {
+if (eXeLearning_settings.wysiwyg_version && exe_editor_version==3) {
 	eXeLearning_settings = {
-		wysiwyg_path : "/scripts/tinymce_4/js/tinymce/tinymce.min.js",
-		wysiwyg_settings_path : "/scripts/tinymce_4_settings.js"
+		wysiwyg_path : "/scripts/tinymce_3.5.11/jscripts/tiny_mce/tiny_mce.js",
+		wysiwyg_settings_path : "/scripts/tinymce_3.5.11_settings.js"
 	}
 }
+if (eXeLearning_settings.wysiwyg_version == false) exe_editor_version = 4;
 
 // browse the specified URL in system browser
 function browseURL(e,elm) {
@@ -612,7 +613,8 @@ function browseURL(e,elm) {
     ) {
         return false;
     }
-    window.parent.nevow_clientToServerEvent('browseURL', this, '', e);
+    // window.parent.nevow_clientToServerEvent('browseURL', this, '', e);
+    window.open(e);
 }
 
 //TinyMCE
@@ -890,11 +892,163 @@ var $exeAuthoring = {
         }
 
     },
+    iDevice : {
+        init : function() {
+            
+            var errorMsg = "";
+            
+            // Check if the object and the required methods are defined
+            if (typeof($exeDevice)=='undefined') errorMsg += "$exeDevice";
+            else if (typeof($exeDevice.init)=='undefined') errorMsg += "$exeDevice.init";
+            else if (typeof($exeDevice.save)=='undefined') errorMsg += "$exeDevice.save";
+            
+            // Show a message if they are not defined
+            if (errorMsg!="") {
+                errorMsg = _("IDevice broken") + ": " + errorMsg + " is not defined.";
+                eXe.app.alert(errorMsg);
+                return;
+            }
+            
+            // Check if the submit image exists (it will unless renderEditButtons changes)
+            var myLink = $("#exe-submitButton a").eq(0);
+            if (myLink.length!=1) {
+                eXe.app.alert(_("Report an Issue")+": $exeAuthoring.iDevice.init (#exe-submitButton)");
+                return;
+            }
+
+            // Execute $exeDevice.save onclick (to validate)
+            var onclick = myLink.attr("onclick");
+            myLink[0].onclick = function(){
+                var html = $exeDevice.save();
+                if (html) {
+                    $("textarea.mceEditor, textarea.jsContentEditor").val(html);
+                    // Execute the IMG default behavior if everything is OK
+                    eval(onclick);
+                }                
+            }         
+            
+            // Replace the _ function
+			_ = function(str){
+				if (typeof($exeDevice.i18n)!="undefined") {
+					var lang = $("HTML").attr("lang");
+					if (typeof($exeDevice.i18n[lang])!="undefined") {
+						return top.translations[str] || $exeDevice.i18n[lang][str] || str;
+					}
+				}
+				return top.translations[str] || str;
+			}
+			
+			// Enable the iDevice
+            $exeDevice.init();
+            
+            // Enable TinyMCE
+            if (tinymce.majorVersion==4) $exeTinyMCE.init("multiple-visible",".exe-html-editor");
+            else if (tinymce.majorVersion==3) $exeTinyMCE.init("specific_textareas","exe-html-editor");
+			
+			// Enable the FIELDSETs Toggler
+			$(".exe-fieldset legend a").click(function(){
+				$(this).parent().parent().toggleClass("exe-fieldset-closed");
+				return false;
+			});
+
+            // Enable color pickers (provisional solution)
+            // To review: 100 ms delay because the color picker won't work when combined with $exeTinyMCE.init
+            setTimeout(function(){
+                $exeAuthoring.iDevice.colorPicker.init();
+            },100);
+			
+            // Enable file uploaders
+            $exeAuthoring.iDevice.filePicker.init();
+            
+        },
+        filePicker : {
+            init : function(){
+                $(".exe-file-picker,.exe-image-picker").each(
+                    function(){
+                        var id = this.id;
+                        var css = 'exe-pick-any-file';
+                        var e = $(this);
+                        if (e.hasClass("exe-image-picker")) css = 'exe-pick-image';
+                        e.after(' <input type="button" class="'+css+'" value="'+_("Select a file")+'" id="_browseFor'+id+'" onclick="$exeAuthoring.iDevice.filePicker.openFilePicker(this)" />');
+                    }
+                );
+            },
+            openFilePicker : function(e){
+                var id = e.id.replace("_browseFor","");
+                var type = 'media';
+                if ($(e).hasClass("exe-pick-image")) type = 'image';
+                try {
+                    exe_tinymce.chooseImage(id, "", type, window);
+                } catch(e) {
+                    eXe.app.alert(e);
+                }
+            }
+        },
+        // Save the iDevice
+        save : function() {
+            // Check if the object and the required methods are defined
+            if (typeof($exeDevice) != 'undefined' && typeof($exeDevice.init) != 'undefined' && typeof($exeDevice.save) == 'function') {
+                // Trigger the click event so the form is submitted
+                $("#exe-submitButton a").trigger("click");
+            }
+        },		
+        colorPicker : {
+            init : function(){
+                var colorFields = $(".exe-color-picker");
+                if (colorFields.length>0) {
+                    $exeAuthoring.iDevice.colorPicker.fields = colorFields;
+                    $exe.loadScript("/tools/color-picker/js/jpicker-1.1.6.min.js","$exeAuthoring.iDevice.colorPicker.getCSS()");
+                }
+            },
+            getCSS : function(){
+                $exe.loadScript("/tools/color-picker/css/jpicker.css","$exeAuthoring.iDevice.colorPicker.getStrings()");
+            },
+            getStrings : function(){
+                $exe.loadScript("/tools/color-picker/langs/all.js","$exeAuthoring.iDevice.colorPicker.enable()");
+            },
+            enable : function(){
+                $.fn.jPicker.defaults.images.clientPath='/tools/color-picker/images/';	
+                $exeAuthoring.iDevice.colorPicker.fields.jPicker(
+                    {
+                        window:{
+                            title: $Color_Picker_i18n.Color_Picker,
+                            effects:{
+                                type:'show',
+                                speed:{
+                                    show : 0,
+                                    hide : 0
+                                }
+                            }
+                        },
+                        localization : $Color_Picker_i18n.Color_Picker_Strings
+                    },
+                    function(color, context){
+                        // Save color
+                        $("body").removeClass("with-color-picker");
+                        $("div.jPicker").hide();
+                    },
+                    function(color, context){
+                        // Live callback
+                    },
+                    function(color, context){
+                        // Cancel button clicked
+                        $("body").removeClass("with-color-picker");
+                    }			
+                );
+                $(".jPicker .Icon").click(function(){
+                    // Add a CSS class to the BODY so the picker is always visible
+                    $("body").addClass("with-color-picker");
+                    // Color picker position
+                    $(".jPicker.Container").css("top",$(document).scrollTop()+"px");
+                });
+            }
+        }
+    },
     // Some iDevices (like Cloze Activity) have a button to select (underline) words
     toggleWordInEditor : function(id){
         if (exe_editor_version==3) tinyMCE.execInstanceCommand(id, 'Underline', false);
         else tinyMCE.activeEditor.getDoc().execCommand('Underline', false, false);
-    },
+    },    
     changeFlowPlayerPathInIE : function(){
         var objs = document.getElementsByTagName("OBJECT");
         var i = objs.length;
@@ -953,6 +1107,11 @@ var $exeAuthoring = {
                 $exeAuthoring.changeFlowPlayerPathInIE();
             }
             eXe.app.fireEvent('authoringLoaded');
+			// Links to the elp file won't work before exporting
+			$("a[href='exe-package:elp']").click(function(){
+				eXe.app.alert(_('Go to Tools - Preview to see this working'));
+				return false;
+			});
         }
     }
 }
@@ -1043,4 +1202,44 @@ function showMessageBox(id) {
 		icon: 'info',
         modal: false
 	});
+}
+
+function selectStyleIcon(icon, e, iconSrc, idiDevice) {
+	var div = document.getElementById("styleIcons");
+	var imgs = div.getElementsByTagName("IMG");
+	for (var i = 0; i < imgs.length; i++) {
+		imgs[i].style.border = "1px solid #E8E8E8";
+	}
+	e.style.border = "1px solid #333333";
+
+	var fieldIcon = '#iconiDevice' + idiDevice;
+
+	$("#activeIdevice #iconiDevice").attr("src", iconSrc);
+	$(fieldIcon).val(icon);
+
+	var deleteIcon = '#deleteIcon' + idiDevice;
+	$(deleteIcon).show();
+
+}
+
+
+function deleteIcon(idiDevice) {
+    var fieldIcon = '#iconiDevice'+idiDevice;
+    $("#activeIdevice #iconiDevice").attr("src", '/images/empty.gif');
+    $(fieldIcon).val('');
+    
+    var deleteIcon = '#deleteIcon'+idiDevice;
+    $(deleteIcon).hide();
+}
+
+function createLeftPanelToggler(){
+    eXe.app.createLeftPanelToggler(true);
+}
+
+function createEmptyPageInstructions(){
+	eXe.app.createEmptyPageInstructions();	
+}
+
+function checkIdevicesVisibility(){
+	eXe.app.checkIdevicesVisibility();	
 }

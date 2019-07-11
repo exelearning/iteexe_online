@@ -23,7 +23,9 @@ anything it just redirects the user to a new package.
 """
 
 import logging
-from exe.webui.renderable import RenderableResource
+import os
+from exe                      import globals as G
+from exe.webui.renderable     import RenderableResource
 from exe.jsui.mainpage import MainPage
 from twisted.web import error, http
 
@@ -81,7 +83,7 @@ class PackageRedirectPage(RenderableResource):
                 log.error("Session uid: %s, Mainpages: %s" % (session.uid, self.mainpages))
                 return error.NoResource("No such child resource %(resource)s. Try again clicking %(link)s" % {
                                         "resource": name.encode('utf-8'),
-                                        "link": "<a href='%s'>%s</a>" % ('/', 'eXe')})
+                                        "link": "<a href='%s' target='_top'>%s</a>" % ('/', 'eXe')})
 
     def bindNewPackage(self, package, session):
         """
@@ -104,10 +106,17 @@ class PackageRedirectPage(RenderableResource):
         log.debug("render_GET" + repr(request.args))
         # Create new package
         session = request.getSession()
+        template_base = self.config.templatesDir / (self.config.defaultContentTemplate + '.elt')
+        
+        if os.path.exists(template_base):
+            package = session.packageStore.createPackageFromTemplate(template_base)
+        else:
+            package = session.packageStore.createPackage()
+
         if self.webServer.application.server and not session.user:
             request.setResponseCode(http.FORBIDDEN)
             return ''
-        package = session.packageStore.createPackage()
+
         self.bindNewPackage(package, session)
         log.info("Created a new package name=" + package.name)
         # Tell the web browser to show it

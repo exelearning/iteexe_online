@@ -22,6 +22,7 @@ p{margin:1em 0}
 .iDevice_header[style]{background-image:none!important}
 .iDeviceTitle{font-size:1.3em;vertical-align:bottom;top:auto;display:inline-block;font-weight:300;
 padding:0 10px 0 35px;background-repeat:no-repeat;background-position:0 50%;margin:0}
+.iDevice_header_noIcon .iDeviceTitle{background-image:none;padding-left:20px}
 .iDeviceTitle{*display:inline;*line-height:2em}/* IE6, IE7 */
 .iDevice_inner{padding:10px 20px;border-width:1px;border-style:solid;border-radius:5px}
 
@@ -65,7 +66,7 @@ input,select{font-size:1em;font-family:inherit}
 .TrueFalseIdevice .activity-form{margin-top:1.5em}
 .TrueFalseIdevice .activity-form:first-child{margin-top:0}
 .TrueFalseIdevice label{margin:0 1em}
-.MultichoiceIdevice input,.MultiSelectIdevice input[type=checkbox],.QuizTestIdevice input[type=radio]{width:16px;height:16px;margin:5px 0 0 12px}
+.MultichoiceIdevice input[type=radio],.MultiSelectIdevice input[type=checkbox],.QuizTestIdevice input[type=radio]{width:16px;height:16px;margin:5px 0 0 12px}
 .custom-inputs .iDevice_answer-field{width:40px}
 .custom-inputs  .iDevice_answer-content,.custom-inputs  .iDevice_answer-feedback{padding-left:55px}
 .custom-inputs  .iDevice_answer-content{padding-top:4px}
@@ -77,6 +78,7 @@ input,select{font-size:1em;font-family:inherit}
 .readingIdevice .feedbackbutton,
 .CasestudyIdevice .feedbackbutton,
 .ReflectionIdevice .feedbackbutton{margin:.5em 0 1em 0}
+.TrueFalseIdevice .exe-radio-option.styledRadio{display:inline-block;vertical-align:middle;margin:-2px 5px 0 0}
 
 /* Licenses */
 #packageLicense{margin:2.5em 0 1.5em 0;text-align:left;line-height:1.2em;font-size:.9em}
@@ -87,6 +89,9 @@ input,select{font-size:1em;font-family:inherit}
 #packageLicense.cc-by-nc-nd{background-position:0 -400px}
 #packageLicense.cc-0{background-position:0 -500px}
 #siteFooter{padding:20px}
+
+/* Download package iDevice */
+.download-packageIdevice .exe-download-package-link a{background:#333}
 
 /* Lightbox */
 .lightboxOverlay{filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=95);opacity:0.95}

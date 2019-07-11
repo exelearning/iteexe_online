@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">    
+        <title>Assistant | eXeLearning</title>
+        <script src="../../scripts/exe_jquery.js"></script>
+        <script type="text/javascript" src="langs/all.js"></script>
+        <script src="js/assistant.js"></script>
+        <link href="css/assistant.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div id="assistant">
+            <h1><span>eXeLearning</span></h1>
+            <p id="tabs-toggler"><a href="#tabs">%Menu%</a></p>
+            <p id="pagination"><a href="#tabs0" id="prev"><span>%Previous%</span></a> <span id="current">1</span><span class="sep">/</span>6 <a href="#tabs1" id="next"><span>%Next%</span></a></p>
+            <ul id="tabs">
+                <li><a href="#tab0" class="current">1. %What_is_eXe%</a></li>
+                <li><a href="#tab1">2. %Create_a_project%</a></li>
+                <li><a href="#tab2">3. %Adding_pages%</a></li>
+                <li><a href="#tab3">4. %Adding_content%</a></li>
+                <li><a href="#tab4">5. %Export%</a></li>
+                <li><a href="#tab5">6. %Other_options%</a></li>
+            </ul>
+            <div id="tab0" class="tab">
+                <h2>%What_is_eXe%</h2>
+                <p>%eXe_is%</p>
+                <p><strong>%With_eXe%</strong></p>
+                <ul>
+                    <li>%With_eXe_Create%</li>
+                    <li>%With_eXe_Choose%</li>
+                    <li>%With_eXe_Export%</li>
+                </ul>
+                <p><strong>%Guide_Intro%</strong></p>
+                <p>%Step_1_Objective%</p>
+                <p><a href="#tab1" class="next">%How_to_create_a_project%</a></p>
+            </div>
+            <div id="tab1" class="tab">
+                <h2>%Create_a_project%</h2>
+                <ol>
+                    <li>%Go_to_Properties%</li>
+                    <li>%Fill_the_fields%
+                        <ul>
+                            <li>%Title%</li>
+                            <li>%Language%</li>
+                            <li>%General_description%</li>
+                            <li>%Authorship%</li>
+                            <li>%Content_License%</li><!-- To do: Explain the licenses -->
+                        </ul>
+                    </li>
+                    <li>%Click_Save%</li>
+                    <li>%Go_to_Authoring%</li>
+                </ol>
+                <p>%Remember_to_save%</p>
+                <p><strong>%Now_you_can_add_pages%</strong></p>
+                <p><a href="#tab2" class="next">%How_to_add_pages%</a></p>
+            </div>
+            <div id="tab2" class="tab">
+                <h2>%Adding_pages%</h2>
+                <p>%Outline_buttons_instructions%</p>
+                <ol>
+                    <li>%Click_on_Add_Page%</li>
+                    <li>%Edit_name_instructions%</li>
+                    <li>%Delete_page_instructions%</li>
+                </ol>
+                <p>%Move_pages_instructions%</p>
+                <p class="img"><img src="img/arrows.png" width="88" height="16" alt="%Move_pages_image%" /></p>
+                <p><strong>%Now_you_can_add_content%</strong></p>
+                <p><a href="#tab3" class="next">%How_to_add_content%</a></p>
+            </div>
+            <div id="tab3" class="tab">
+                <h2>%Adding_content%</h2>
+                <p id="iDevices">%iDevices_position%</p>
+                <p>%iDevices_definition%</p>
+                <p>%iDevices_organization%</p>
+                <p><strong>%A_simple_test%</strong></p>
+                <ol>
+                    <li>%Add_a_Free_Text_iDevice%</li>
+                    <li>%Write%</li>
+                    <li>%Save_what_you_wrote% <img src="img/idevice_save_button.png" width="16" height="16" alt="%Save_image%" /></li>
+                </ol>
+                <p>%That_is_all%</p>
+                <p class="img"><img src="img/idevice_buttons.png" width="112" height="16" alt="iDevice" /></p>
+                <p>%Try_other_iDevices% <strong>%Creating_contents_is_easy%</strong></p>
+                <p>%Now_you_have_to_export%</p>
+                <p><a href="#tab4" class="next">%How_to_export%</a></p>
+            </div>
+            <div id="tab4" class="tab">
+                <h2>%Export%</h2>
+                <p>%Export_instructions_1%</p>
+                <ul>
+                    <li>%Export_instructions_1_A%</li>
+                    <li>%Export_instructions_1_B%</li>
+                    <li>%Export_instructions_1_C%</li>
+                    <li>%Export_instructions_1_D%</li>
+                </ul>
+                <p>%Export_instructions_2%</p>
+                <p>%Export_is_finished%</p>
+                <p class="em">%Export_reminder%</p>
+                <p>%There_are_more_export_options%</p>
+                <p><a href="#tab5" class="next">%Other_options%</a></p>
+            </div>
+            <div id="tab5" class="tab">
+                <h2>%Other_options%</h2>
+                <p>%Advanced_user_toggler_instructions%</p>
+                <p><strong>%Other_help_options%</strong></p>
+                <ul>
+                    <li><a href="%eXe_Tutorial_lnk%" target="_blank" title="%New_window%">%eXe_Tutorial%</a></li>
+                    <li><a href="%eXe_Forums_lnk%" target="_blank" title="%New_window%">%eXe_Forums%</a> %eXe_Forums_objective%</li>
+                    <li><a href="https://github.com/exelearning/iteexe/issues" target="_blank" title="%New_window%">%Report_an_Issue%</a></li>
+                </ul>
+                <p><strong>%More_information%</strong></p>
+                <ul>
+                    <li><a href="/about" class="trigger">%About_eXe%</a></li>
+                    <li><a href="/release-notes" class="trigger size-700-900">%Release_Notes%</a></li>
+                    <li><a href="/legal" class="trigger">%Legal_Notes%</a></li>
+                    <li><a href="%eXe_Web_Site_lnk%" target="_blank" title="%New_window%">%eXe_Web_Site%</a></li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

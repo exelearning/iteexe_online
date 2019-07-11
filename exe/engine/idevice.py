@@ -24,6 +24,7 @@ The base class for all iDevices
 import copy
 import logging
 import re
+import collections
 from copy                 import deepcopy
 from exe.engine.persist   import Persistable
 from exe.engine.translate import lateTranslate
@@ -44,27 +45,29 @@ class Idevice(Persistable):
     nextId = 1
     NoEmphasis, SomeEmphasis, StrongEmphasis = range(3)
 
-    def __init__(self, title, author, purpose, tip, icon, parentNode=None):
+    def __init__(self, title, author, purpose, tip, icon, parentNode = None):
         """Initialize a new iDevice, setting a unique id"""
         log.debug("Creating iDevice")
+        
         self.edit        = True
         self.lastIdevice = True
         self.emphasis    = Idevice.NoEmphasis
-        self.version     = 0
         self.id          = unicode(Idevice.nextId)
         Idevice.nextId  += 1
-        self.parentNode  = parentNode
-        self._title      = title
-        self._author     = author
-        self._purpose    = purpose
-        self._tip        = tip
-        self.icon        = icon
+        self.version      = 0
+        self.parentNode   = parentNode
+        self._title       = title
+        self._author      = author
+        self._purpose     = purpose
+        self._tip         = tip
+        self.icon         = icon
+        self.originalicon = icon
+            
         # userResources are copied into and stored in the package
         self.userResources = []
         # systemResources are resources from whatever style dir we are using at render time
         self.systemResources = []
-        self.originalicon= icon
-
+            
     # Properties
     def get_title(self):
         """
@@ -303,8 +306,29 @@ class Idevice(Persistable):
                 + "implementation available for this particular iDevice "
                 + "class: " + repr(self) )
         return []
-        
-        
+
+    def get_translatable_fields(self):
+        """
+        This function will return the Idevice's translatable fields.
+        This allows us to define this behavior for each Idevice and have a fallback
+        in case is not defined (by default it returns a list of all Rich Text Fields).
+
+        :rtype: list
+        :return: A list of translatable fields.
+        """
+        return self.getRichTextFields()
+
+    def translate(self):
+        """
+        Perform the Idevice translation using the package's language.
+        """
+        # First of all, translate the title
+        self.title = c_(self.title)
+
+        # Then, go through all translatable fields translatting them
+        for field in self.get_translatable_fields():
+            field.translate()
+
     # Protected Methods
 
     def _upgradeIdeviceToVersion1(self):

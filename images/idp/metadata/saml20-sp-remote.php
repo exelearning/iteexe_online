@@ -1,4 +1,6 @@
 <?php
+$domain_value = 'https://front.local';
+
 $metadata['http://localhost/saml/metadata/'] = array (
   'entityid' => 'http://localhost/saml/metadata/',
   'metadata-set' => 'saml20-sp-remote',
@@ -36,15 +38,15 @@ MIIDYTCCAkmgAwIBAgIJAJiTLubDiBvxMA0GCSqGSIb3DQEBCwUAMEcxCzAJBgNVBAYTAkVTMQ0wCwYD
   'validate.authnrequest' => true,
   'saml20.sign.assertion' => true,
 );
-$metadata['https://front.local/saml/metadata/'] = array (
-  'entityid' => 'https://front.local/saml/metadata/',
+$metadata[$domain_value . '/saml/metadata/'] = array (
+  'entityid' => $domain_value . '/saml/metadata/',
   'metadata-set' => 'saml20-sp-remote',
   'AssertionConsumerService' =>
   array (
     0 =>
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST',
-      'Location' => 'https://front.local/saml/acs',
+      'Location' => $domain_value . '/saml/acs',
       'index' => 1,
     ),
   ),
@@ -53,7 +55,7 @@ $metadata['https://front.local/saml/metadata/'] = array (
     0 =>
     array (
       'Binding' => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
-      'Location' => 'https://front.local/saml/sls',
+      'Location' => $domain_value . '/saml/sls',
     ),
   ),
   'NameIDFormat' => 'urn:oasis:names:tc:SAML:2.0:nameid-format:transient',

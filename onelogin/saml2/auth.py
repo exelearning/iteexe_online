@@ -176,6 +176,10 @@ class OneLogin_Saml2_Auth(object):
         """
         if url is None and 'RelayState' in self.__request_data['get_data']:
             url = self.__request_data['get_data']['RelayState']
+
+	if ',' in url:
+	    url = url.split(',')[0]
+
         return OneLogin_Saml2_Utils.redirect(url, parameters, request_data=self.__request_data)
 
     def is_authenticated(self):

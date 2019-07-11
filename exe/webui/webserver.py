@@ -48,6 +48,7 @@ from exe.webui.oauthpage import OauthPage
 from exe.webui.openpackagepage import OpenPackagePage
 from exe import globals as G
 
+from exe.webui.templatemanagerpage import TemplateManagerPage
 
 import logging
 log = logging.getLogger(__name__)
@@ -83,6 +84,7 @@ class WebServer:
         self.openpackage = OpenPackagePage(self.root)
         self.monitoring = False
         self.invalidPackageName = []
+        self.templatemanager = TemplateManagerPage(self.root)               
 
     def find_port(self):
         """
@@ -195,5 +197,5 @@ class WebServer:
                     if mainpage.clientHandleFactory.clientHandles:
                         reactor.callLater(10, self.monitor)
                         return
-            self.application.config.configParser.set('user', 'lastDir', G.application.config.lastDir)
+            G.application.config.configParser.set('user', 'lastDir', G.application.config.lastDir)
             reactor.stop()

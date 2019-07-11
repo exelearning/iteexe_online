@@ -148,6 +148,7 @@ Ext.application({
     	'Outline',
         'Toolbar',
         'StyleManager',
+        'TemplateManager',
     	'filepicker.Directory',
     	'filepicker.File'
     ],
@@ -220,13 +221,76 @@ browser restrictions, you must click in the url: {0}'),
         for(var i in messages)
             messages[i].close();
     },
-
+    
+    notifications: {
+        savedPackage : function(filePath) {
+            Ext.Msg.close();
+            eXe.controller.eXeViewport.prototype.eXeNotificationStatus(_("Success"),filePath);
+            setTimeout(function(){
+                Ext.ComponentQuery.query("#eXeNotification")[0].hide();
+            },3000);
+        }
+    },
+    
     showLoadError: function() {
     	if (eXe.app.config.loadErrors.length > 0) {
     		Ext.Msg.alert(_('Load Error'), eXe.app.config.loadErrors.pop(), eXe.app.showLoadError);
     	}
     	else
     		eXe.app.afterShowLoadErrors();
+    },
+    
+    showNewVersionWarning: function(){
+        // Show a warning message if a new version is available
+        // Not need in eXe Online?
+        /*if (navigator.onLine && eXe.app.config.showNewVersionWarning && typeof(eXe.app.config.release)=='string') {
+            function openNewVersionWarning(no){
+                
+                var latest = no;
+                var current = eXe.app.config.release;
+                
+                if (current=="" || latest==current) return; // No release number for testing packages
+                
+                latest = latest.replace(/\./g,"");
+                current = current.replace(/\./g,"");
+
+                while (latest.length>current.length) current += '0';
+                while (current.length>latest.length) latest += '0';                
+                
+                current = parseFloat(current);
+                latest = parseFloat(latest);
+                
+                if (latest>current) {
+                    var msg = _('A new version of eXeLearning (%) is available. Would you like to download it now?');
+                    msg = msg.replace("%",no);
+                    Ext.Msg.show({
+                        title: _('Warning!'),
+                        msg: msg,
+                        scope: this,
+                        modal: true,
+                        buttons: Ext.Msg.YESNO,
+                        fn: function(button) {
+                            if (button == "yes") {
+                                window.open("http://exelearning.net/");
+                            }
+                        }
+                    });
+                }                
+            }
+            Ext.data.JsonP.request({
+                url: 'https://api.github.com/repos/exelearning/iteexe/releases/latest',
+                crossDomain: true,
+                type: "GET",
+                dataType: "json",
+                callbackKey: 'callback',
+                scope: this,
+                callback: function (response, value, request) {
+                    if (typeof(value)!='undefined' && typeof(value.data)!='undefined' && typeof(value.data.name)=='string') {
+                        openNewVersionWarning(value.data.name);
+                    }
+                }
+            });
+        }*/
     },
 
     alert: function(title, message, func) {
@@ -235,7 +299,7 @@ browser restrictions, you must click in the url: {0}'),
         }
 
         Ext.Msg.alert(title, message, func);
-    },
+	},
 
     launch: function() {
         Ext.QuickTips.init();
@@ -281,7 +345,7 @@ browser restrictions, you must click in the url: {0}'),
 		    Ext.get('loading').hide();
 		    Ext.get('loading-mask').fadeOut();
 		  }, 50);
-        
+
         if (!eXe.app.config.showIdevicesGrouped) {
         	var panel = Ext.ComponentQuery.query('#idevice_panel')[0],
         		button = panel.down('button');
@@ -291,12 +355,106 @@ browser restrictions, you must click in the url: {0}'),
         }
 
         eXe.app.afterShowLoadErrors = function() {
-        	if (eXe.app.config.showPreferences)
-        		eXe.app.getController('Toolbar').toolsPreferences();
+        	if (eXe.app.config.showPreferences) eXe.app.getController('Toolbar').toolsPreferences(true); // true to open the new version warning
+            else eXe.app.showNewVersionWarning();
         };
 
         eXe.app.showLoadError();
     },
+    
+    createLeftPanelToggler : function(isLoadEvent){
+        if (isLoadEvent) {
+            var a = document.getElementById("hide_exe_leftpanel");
+            if (a && a.offsetParent != null) return; // The left panel is visible (do not create the link)
+        }
+        var iframe = document.getElementsByTagName('iframe');
+        if (iframe.length==1) {
+            iframe = iframe[0];
+            var doc = iframe.contentWindow.document;
+            lnk = doc.getElementById('show_exe_leftpanel');
+            if (!lnk) {
+                var l = document.createElement("a");
+                l.href = "#";
+                l.id = "show_exe_leftpanel";
+                l.title = _("Show panel");
+                l.style.position = "fixed";
+                l.style.top = "5px";
+                l.style.left = "0";
+                l.style.outline = "none";
+                l.onclick = function(){
+                    var panel = top.Ext.ComponentQuery.query('#exe_leftpanel')[0];
+                    panel.show();
+                    this.style.display = 'none';
+                    return false;
+                }
+                l.innerHTML = '<img width="35" height="37" src="/images/show-left-panel.png" alt="'+_("Show panel")+'" />';
+                doc.body.appendChild(l);
+            } else {
+                lnk.style.display = 'inline';
+            }
+        }
+    },
+    
+    createEmptyPageInstructions : function(){
+        var a = document.getElementById("hide_exe_leftpanel");
+        if (a && a.offsetParent != null) { // The left panel is visible
+            if (!Ext.util.Cookies.get('eXeShowContentInstructions')) {
+                var iframe = document.getElementsByTagName('iframe');
+                if (iframe.length==1) {
+                    var iframe = iframe[0];
+                    var doc = iframe.contentWindow.document;                    
+                    if (doc && doc.getElementsByClassName) {
+                        var iDevices = doc.getElementsByClassName("iDevice");
+                        if (iDevices.length==0 && !doc.getElementById("activeIdevice")) {
+                            var div = doc.getElementById("main");
+                            if (div) {
+                                div.style.minHeight = "400px";
+                                var msg = _('Click on the elements of the left panel to add content.');
+                                    msg += ' ' + '<a href="#" id="emptyPageInstructionsLink"><span class="sr-av">' + _("Don't show this warning again") + ' </span>×</a>';
+                                div.innerHTML += '<p class="exe-block-info" id="emptyPageInstructions">'+msg+'</p>';
+                                var a = doc.getElementById("emptyPageInstructionsLink");
+                                if (a) {
+                                    a.onclick = function(){
+                                        var div = doc.getElementById("emptyPageInstructions");
+                                        if (div) div.style.display = "none";
+                                        Ext.util.Cookies.set('eXeShowContentInstructions', 'no');
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }        
+    },
+	
+	// Add a class to the empty non-emphasized iDevices so the user can see the buttons to edit them
+	checkIdevicesVisibility : function(){
+		var iframe = document.getElementsByTagName('iframe');
+		if (iframe.length==1) {
+			var iframe = iframe[0];
+			var doc = iframe.contentWindow.document;                    
+			if (doc && doc.getElementsByClassName) {
+				var iDevices = doc.getElementsByClassName("iDevice");
+				if (iDevices.length>0) {
+					for (var i=0;i<iDevices.length;i++) {
+						var e = iDevices[i];
+						if (e.className.indexOf(" emphasis0")!=-1) {
+							var iDeviceContent = e.getElementsByClassName("iDevice_content");
+							if (iDeviceContent.length>0) {
+								iDeviceContent = iDeviceContent[0];
+								var html = iDeviceContent.innerHTML;
+									html = html.replace(/ /g,"");
+									html = html.replace(/(?:\r\n|\r|\n)/g, "");
+								if (html=="") e.className += " emphasis0-empty";
+							}
+						}
+					}
+				}
+			}
+		}
+	},
 
     appFolder: "jsui/app"
 

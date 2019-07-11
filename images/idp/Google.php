@@ -6,6 +6,7 @@
  * @version $Id$
  */
 set_include_path(get_include_path() . PATH_SEPARATOR . dirname(dirname(dirname(dirname(__FILE__)))) . '/extlib/');
+require_once 'ExceptionAb.php';
 require_once 'Exception.php';
 require_once 'Pem.php';
 require_once 'Utils.php';
@@ -26,7 +27,7 @@ class sspmod_authgoogle_Auth_Source_Google extends SimpleSAML_Auth_Source {
 	const ISSUER = 'accounts.google.com';
 	
 	const federated_signon_certs_url = 'https://www.googleapis.com/oauth2/v1/certs';
-	const MAX_TOKEN_LIFETIME_SECS = 3600;
+	const MAX_TOKEN_LIFETIME_SECS = 38000;
 	const CLOCK_SKEW_SECS = 180;
 	
 	private $state;
@@ -181,7 +182,10 @@ class sspmod_authgoogle_Auth_Source_Google extends SimpleSAML_Auth_Source {
 		if (!isset($result)) throw new SimpleSAML_Error_AuthSource($this->authId, 'Google Error getting tokens.');
 		
 		$response =  json_decode($result,true);
-		
+	
+
+
+	
 		$accesstoken = $response['access_token'];
 		if (!isset($accesstoken)) 	throw new SimpleSAML_Error_AuthSource($this->authId, 'Google Error : No access token.');
 		SimpleSAML_Logger::debug('Google DEBUG : AccessToken: '.$accesstoken);

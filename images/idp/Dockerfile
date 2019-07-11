@@ -10,6 +10,8 @@ RUN cd /usr/share/simplesamlphp/modules && svn export https://github.com/sylvain
 
 RUN touch /usr/share/simplesamlphp/modules/openid/enable
 
+ADD Google.php /usr/share/simplesamlphp/modules/authgoogle/lib/Auth/Source/Google.php
+
 ADD run.sh /run.sh
 
 RUN chmod 755 /*.sh

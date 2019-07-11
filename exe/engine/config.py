@@ -39,6 +39,7 @@ import twisted
 import shutil
 from exe import globals as G
 from exe.engine.stylestore  import StyleStore
+from exe.engine.templatestore  import TemplateStore
 from exe.webui import common
 from twisted.python.log import PythonLoggingObserver, startLoggingWithObserver
 
@@ -79,6 +80,7 @@ class Config(object):
             'locale',
             'lastDir',
             'showPreferencesOnStart',
+            'showNewVersionWarningOnStart',
             'defaultStyle',
             'showIdevicesGrouped',
             'docType',
@@ -86,18 +88,21 @@ class Config(object):
             'editorVersion',
             'defaultLicense',
             'forceEditableExport',
-            'cutFileName'
+            'cutFileName',
+            'autosaveTime',
+            'metadataWarning'
         ),
     }
 
     idevicesCategories = {
-        'activity': [x_('Non-Interactive Activities')],
-        'reading activity': [x_('Non-Interactive Activities')],
+        # Use Experimental for complex non-tested iDevices and Hidden for those that should not be added any more
+        'activity': [x_('Text and Tasks')],
+        'reading activity': [x_('Text and Tasks')],
         'dropdown activity': [x_('Interactive Activities')],
-        'java applet': [x_('Non-Textual Information')],
-        'wiki article': [x_('Non-Textual Information')],
-        'case study': [x_('Non-Interactive Activities')],
-        'preknowledge': [x_('Textual Information')],
+        'java applet': [x_('Interactive Activities')],
+        'wiki article': [x_('Other Contents')],
+        'case study': [x_('Text and Tasks')],
+        'preknowledge': [x_('Text and Tasks')],
         'scorm quiz': [x_('Interactive Activities')],
         'fpd - multi choice activity': [x_('FPD')],
         'fpd - cloze activity': [x_('FPD')],
@@ -116,24 +121,24 @@ class Config(object):
         'fpd - think about it (with feedback)': [x_('FPD')],
         'fpd - think about it (without feedback)': [x_('FPD')],
         'fpd - free text': [x_('FPD')],
-        'image gallery': [x_('Non-Textual Information')],
-        'image magnifier': [x_('Non-Textual Information')],
-        'note': [x_('Textual Information')],
-        'objectives': [x_('Textual Information')],
+        'image gallery': [x_('Other Contents')],
+        'image magnifier': [x_('Other Contents')],
+        'note': [x_('Other Contents')],
+        'objectives': [x_('Text and Tasks')],
         'multi-choice': [x_('Interactive Activities')],
         'multi-select': [x_('Interactive Activities')],
         'true-false question': [x_('Interactive Activities')],
-        'reflection': [x_('Non-Interactive Activities')],
+        'reflection': [x_('Text and Tasks')],
         'cloze activity': [x_('Interactive Activities')],
-        'rss': [x_('Non-Textual Information')],
-        'external web site': [x_('Non-Textual Information')],
-        'free text': [x_('Textual Information')],
-        'click in order game': [x_('Experimental')],
-        'hangman game': [x_('Experimental')],
+        'rss': [x_('Other Contents')],
+        'external web site': [x_('Other Contents')],
+        'free text': [x_('Text and Tasks')],
+        'click in order game': [x_('Hidden')],
+        'hangman game': [x_('Hidden')],
         'place the objects': [x_('Interactive Activities')],
-        'memory match game': [x_('Experimental')],
-        'file attachments': [x_('Non-Textual Information')],
-        'sort items': [x_('Experimental')]
+        'memory match game': [x_('Hidden')],
+        'file attachments': [x_('Other Contents')],
+        'sort items': [x_('Hidden')]
     }
 
     @classmethod
@@ -186,6 +191,7 @@ class Config(object):
         self.internalAnchors = "enable_all"
         self.lastDir = None
         self.showPreferencesOnStart = "1"
+        self.showNewVersionWarningOnStart = "1"
         self.showIdevicesGrouped = "1"
         # tinymce option
         self.editorMode = 'permissive'
@@ -223,9 +229,17 @@ class Config(object):
 
         self.assumeMediaPlugins = False
         
-        # Force the editable export when load an existing
+        # Force the editable export when loading an existing
         # package with it disabled (defaults to disabled)
         self.forceEditableExport = "0"
+        
+        # Content templates directory
+        self.templatesDir = Path(self.configDir/'content_template').abspath()
+        # Default template that will be used to all new content
+        self.defaultContentTemplate = "Base"
+        
+        # JS Idevices directory
+        self.jsIdevicesDir = Path(self.configDir/'scripts'/'idevices').abspath()
         
         # Let our children override our defaults depending
         # on the OS that we're running on
@@ -237,6 +251,10 @@ class Config(object):
         # Format the files and images to standard ISO 9660
         self.cutFileName = "0"
         
+        self.autosaveTime = "10"
+
+        self.metadataWarning = "1"
+
         # Try to make the defaults a little intelligent
         # Under devel trees, webui is the default webdir
         self.webDir = Path(self.webDir)
@@ -256,6 +274,7 @@ class Config(object):
         self.setupLogging()
         self.loadLocales()
         self.loadStyles()
+        self.loadTemplates()
 
     def _overrideDefaultVals(self):
         """
@@ -331,9 +350,13 @@ class Config(object):
                 # Older config files had configDir stored as appDataDir
                 self.configDir = Path(system.appDataDir)
                 self.stylesDir = Path(self.configDir)/'style'
+                self.templatesDir = Path(self.configDir)/'content_template'
+                self.jsIdevicesDir = Path(self.configDir)/'scripts'/'idevices'
                 # We'll just upgrade their config file for them for now...
                 system.configDir = self.configDir
                 system.stylesDir = Path(self.configDir)/'style'
+                system.templatesDir = Path(self.configDir)/'content_template'
+                system.jsIdevicesDir = Path(self.configDir)/'scripts'/'idevices'
                 del system.appDataDir
 
                 self.audioMediaConverter_au = system.audioMediaConverter_au
@@ -382,9 +405,13 @@ class Config(object):
                 self.configDir      = Path(system.configDir)
                 self.webDir         = Path(system.webDir)
                 self.stylesDir      = Path(self.configDir)/'style'
+                self.templatesDir   = Path(self.configDir)/'content_template'
+                self.jsIdevicesDir  = Path(self.configDir)/'scripts'/'idevices'
                 self.jsDir          = Path(system.jsDir)
             else:
                 self.stylesDir      = Path(self.webDir/'style').abspath()
+                self.templatesDir   = Path(self.webDir/'content_template').abspath()
+                self.jsIdevicesDir  = Path(self.webDir/'scripts'/'idevices').abspath()
 
             self.assumeMediaPlugins = False
             if self.configParser.has_option('system', 'assumeMediaPlugins'):
@@ -410,16 +437,42 @@ class Config(object):
                 self.copyStyles()
             else:
                 self.updateStyles()
+                
+            # Copy templates
+            if not os.path.exists(self.templatesDir) or not os.listdir(self.templatesDir):
+                self.copyTemplates()
+            else:
+                self.updateTemplates()
+
+            # Copy JavaScript Idevices
+            if not os.path.exists(self.jsIdevicesDir) or not os.listdir(self.jsIdevicesDir):
+                self.copy_js_idevices()
+            else:
+                self.update_js_idevices()
         else:
             if G.application.portable:
                 if os.name == 'posix':
                     self.stylesDir = Path(self.webDir/'..'/'..'/'..'/'style')
+                    self.templatesDir = Path(self.webDir/'..'/'..'/'..'/'content_template')
+                    self.jsIdevicesDir = Path(self.webDir/'..'/'..'/'..'/'scripts'/'idevices')
+                    
                 else:
                     self.stylesDir = Path(self.webDir/'..'/'style')
+                    self.templatesDir = Path(self.webDir/'..'/'content_template')
+                    self.jsIdevicesDir = Path(self.webDir/'..'/'scripts'/'idevices')
+                
                 if not os.path.exists(self.stylesDir) or not os.listdir(self.stylesDir):
                     self.copyStyles()
+                    
+                if not os.path.exists(self.templatesDir) or not os.listdir(self.templatesDir):
+                    self.copyTemplates()
+
+                if not os.path.exists(self.jsIdevicesDir) or not os.listdir(self.jsIdevicesDir):
+                    self.copy_js_idevices()
             else:
                 self.stylesDir = Path(self.webDir/'style').abspath()
+                self.templatesDir = Path(self.webDir/'content_template').abspath()
+                self.jsIdevicesDir  = Path(self.webDir/'scripts'/'idevices').abspath()
 
         # Get the list of recently opened projects
         self.recentProjects = []
@@ -475,6 +528,8 @@ class Config(object):
                 self.lastDir = self.configParser.user.lastDir
             if self.configParser.user.has_option('showPreferencesOnStart'):
                 self.showPreferencesOnStart = self.configParser.user.showPreferencesOnStart
+            if self.configParser.user.has_option('showNewVersionWarningOnStart'):
+                self.showNewVersionWarningOnStart = self.configParser.user.showNewVersionWarningOnStart
             if self.configParser.user.has_option('showIdevicesGrouped'):
                 self.showIdevicesGrouped = self.configParser.user.showIdevicesGrouped
             if self.configParser.user.has_option('locale'):
@@ -485,6 +540,10 @@ class Config(object):
                 self.forceEditableExport = self.configParser.user.forceEditableExport
             if self.configParser.user.has_option('cutFileName'):
                 self.cutFileName = self.configParser.user.cutFileName
+            if self.configParser.user.has_option('autosaveTime'):
+                self.autosaveTime = self.configParser.user.autosaveTime
+            if self.configParser.user.has_option('metadataWarning'):
+                self.metadataWarning = self.configParser.user.metadataWarning
 
     def onWrite(self, configParser):
         """
@@ -517,8 +576,7 @@ class Config(object):
                 # ignore the error we get if the log file is logged
                 hdlr = logging.FileHandler(self.configDir/'exe.log')
 
-            format = "%(asctime)s %(name)s %(levelname)s %(message)s"
-
+        format = "%(asctime)s %(name)s %(levelname)s %(message)s"
         log    = logging.getLogger()
         hdlr.setFormatter(logging.Formatter(format))
         log.addHandler(hdlr)
@@ -561,6 +619,13 @@ class Config(object):
         for style in listStyles:
             self.styles.append(style)
             # print style
+            
+    def loadTemplates(self):
+        """
+        Scans the eXe templates directory and builds a list of templates
+        """
+        self.templateStore = TemplateStore(self)
+        self.templateStore.load()
 
     def copyStyles(self):
         bkstyle = self.webDir/'style'
@@ -583,6 +648,77 @@ class Config(object):
                     shutil.copytree(bksdirstyle, dstdirstyle)
                 else:
                     shutil.copy(bksdirstyle, dstdirstyle)
+
+    def copyTemplates(self):
+        template_backup = self.webDir/'content_template'
+        dest_template = self.templatesDir
+        if os.path.exists(template_backup):
+            if os.path.exists(dest_template) and not os.listdir(self.dest_template):
+                shutil.rmtree(dest_template)
+            shutil.copytree(template_backup, dest_template)
+
+    def updateTemplates(self):
+        template_backup = self.webDir/'content_template'
+        dest_template = self.templatesDir
+        if os.stat(template_backup).st_mtime - os.stat(dest_template).st_mtime > 1:
+            for name in os.listdir(template_backup):
+                current_template = os.path.join(template_backup, name)
+                current_dest_template = os.path.join(dest_template, name)
+                if os.path.isdir(current_template):
+                    if os.path.exists(current_dest_template):
+                        shutil.rmtree(current_dest_template)
+                    shutil.copytree(current_template, current_dest_template)
+                else:
+                    shutil.copy(current_template, current_dest_template)
+
+    def copy_js_idevices(self):
+        """
+        Copies the default JS Idevices to the configuration folder.
+        It's usually only executed the first time eXe is installed or the
+        moment the user updates to the first version that used them.
+
+        :rtype: void
+        """
+        # Get the path where the JsIdevices are
+        jsidevices_backup = self.webDir / 'scripts' / 'idevices'
+
+        # Check if the path exists (if it doesn't there is nothing to be done)
+        if os.path.exists(jsidevices_backup):
+            # Remove the user's JsIdevices directory in case it exists
+            if os.path.exists(self.jsIdevicesDir) and not os.listdir(self.jsIdevicesDir):
+                shutil.rmtree(self.jsIdevicesDir)
+
+            # Copy the JsIdevices
+            shutil.copytree(jsidevices_backup, self.jsIdevicesDir)
+
+    def update_js_idevices(self):
+        """
+        Update JS Idevices from the ones that come with eXe.
+        This will be done everytime eXe is started, so in case
+        any JsIdevice is updated it will automatically update the first
+        time the user opens eXe.
+
+        :rtype: void
+        """
+        # Get the path where the JsIdevices are
+        jsidevices_backup = self.webDir / 'scripts' / 'idevices'
+
+        # Compare the directories' modification time to see if the update is necessary
+        if os.stat(jsidevices_backup).st_mtime - os.stat(self.jsIdevicesDir).st_mtime > 1:
+            # Go through all JsIdevices
+            for name in os.listdir(jsidevices_backup):
+                # Copy the Idevice
+                current_idevice = os.path.join(jsidevices_backup, name)
+                current_dest_idevice = os.path.join(self.jsIdevicesDir, name)
+
+                # This shouldn't really be necessary, but we keep it as
+                # it would copy the exact structure of the 'idevices' folder.
+                if os.path.isdir(current_idevice):
+                    if os.path.exists(current_dest_idevice):
+                        shutil.rmtree(current_dest_idevice)
+                    shutil.copytree(current_idevice, current_dest_idevice)
+                else:
+                    shutil.copy(current_idevice, current_dest_idevice)
 
     def loadLocales(self):
         """

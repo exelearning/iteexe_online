@@ -57,26 +57,26 @@ class eXeClientHandle(ClientHandle):
         else:
             ClientHandle.sendScript(self, script)
 
-    def _exec(self, what, js_func, onDone=None, filter_func=False):
+    def _exec(self, what, js_func, onDone=None, filter_func=False, title=''):
         if not isinstance(what, _js):
             what = "'%s'" % (self.flt(what), )
         if onDone:
-            script = "%s('',%s, function() { %s });" % (js_func, what, onDone)
+            script = "%s('%s',%s, function() { %s });" % (js_func, title, what, onDone)
         else:
-            script = "%s('',%s);" % (js_func, what, )
+            script = "%s('%s',%s);" % (js_func, title, what)
         if filter_func and onDone:
             for client in nevow.livepage.clientHandleFactory.clientHandles.values():
                 if filter_func(client, self):
                     client.sendScript(onDone)
         self.sendScript(script)
 
-    def alert(self, what, onDone=None, filter_func=False):
+    def alert(self, what, onDone=None, filter_func=False, title=''):
         """Show the user an alert 'what'
         """
-        self._exec(what, 'Ext.Msg.alert', onDone, filter_func)
+        self._exec(what, 'Ext.Msg.alert', onDone, filter_func, title)
 
-    def filePickerAlert(self, what, onDone=None, filter_func=False):
-        self._exec(what, 'eXe.app.alert', onDone, filter_func)
+    def filePickerAlert(self, what, onDone=None, filter_func=False, title=''):
+        self._exec(what, 'eXe.app.alert', onDone, filter_func, title)
 
     def notifyStatus(self, title, msg):
         self.sendScript("eXe.controller.eXeViewport.prototype.eXeNotificationStatus('%s', '%s');" % (jquote(title), jquote(msg)), filter_func=allSessionClients)

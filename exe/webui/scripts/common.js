@@ -23,33 +23,36 @@
 	2015. Refactored and completed by Ignacio Gros (http://www.gros.es) for http://exelearning.net/
 */
 
+if (typeof($exe_i18n)=='undefined') $exe_i18n={previous:"Previous",next:"Next",show:"Show",hide:"Hide",showFeedback:"Show Feedback",hideFeedback:"Hide Feedback",correct:"Correct",incorrect:"Incorrect",menu:"Menu",download:"Download",yourScoreIs:"Your score is ",dataError:"Error recovering data",epubJSerror:"This might not work in this ePub reader.",solution:"Solution",epubDisabled:"This activity does not work in ePub.",print:"Print"}
+
 var $exe = {
 	
     init: function() {
-        var e = document.body.className;
+        var bod = $('body');
         $exe.addRoles();
-        if (e != "exe-single-page js") {
+        if (!bod.hasClass("exe-single-page")) {
             var t = $exe.isIE();
             if (t) {
                 if (t > 7) $exe.iDeviceToggler.init()
             } else $exe.iDeviceToggler.init()
         }
-        // No MediaElement in ePub3
-		if (e.indexOf("exe-epub3") != 0) {
+		this.hasMultimediaGalleries = false;
+		this.setMultimediaGalleries();
+		this.setModalWindowContentSize(); // To review
+		// No MediaElement in ePub3
+		if (!bod.hasClass("exe-epub3")) {
             var n = document.body.innerHTML;
-            if ($(".mediaelement").length>0) {
-                $exe.loadMediaPlayer.getPlayer()
+            if (this.hasMultimediaGalleries || $(".mediaelement").length>0) {
+                $exe.loadMediaPlayer.getPlayer();
             }
-        }
+        } else {
+			// No inline SCRIPT tags in ePub (due to Chrome app Content Security Policy)
+			bod.addClass("js");
+		}
         $exe.hint.init();
         $exe.setIframesProperties();
         $exe.hasTooltips();
         $exe.math.init();
-        if (typeof($.prettyPhoto) != 'undefined') $("a[rel^='lightbox']").prettyPhoto({
-            social_tools: "",
-            deeplinking: false,
-            opacity: 0.85
-        });
         $exe.dl.init();
 		// Add a zoom icon to the images using CSS 
 		$("a.exe-enlarge").each(function(i){
@@ -62,7 +65,440 @@ var $exe = {
 		$exe.sfHover();
 		// Disable autocomplete
 		$("INPUT.autocomplete-off").attr("autocomplete", "off");
+		
+		// No inline JavaScript (see issue #258)
+		// Common feedback
+		$('.feedbackbutton.feedback-toggler').click(function(){
+			$exe.toggleFeedback(this,false);
+		});
+		// Text and Tasks
+		$(".textIdevice,.pblIdevice").each(function(i){
+			
+			// Feedback toggler
+			$(".feedbackbutton",this).each(function(){				
+				var buttonTxt = this.value.split("|");
+				// The button might have 2 texts (Show|Hide)
+				if (buttonTxt.length==2) {
+					// Remove spaces before and after the text
+					buttonTxt = [
+						$.trim(buttonTxt[0]),
+						$.trim(buttonTxt[1])
+					]
+					this.value = buttonTxt[0];
+					window['$exeTextIdeviceButtonText'+i] = buttonTxt;
+				}
+				$(this).click(function(){
+					var feedback = $(this).parent().next('.feedback');
+					var hasCustomText = typeof(window['$exeTextIdeviceButtonText'+i])!='undefined';
+					if (feedback.is(":visible")) {
+						if (hasCustomText) this.value = window['$exeTextIdeviceButtonText'+i][0];
+						feedback.slideUp();
+					} else {
+						if (hasCustomText) this.value = window['$exeTextIdeviceButtonText'+i][1];
+						feedback.slideDown();
+					}
+					return false;					
+				});
+			});
+            
+			// Task iDevice: Fade in each DL
+			$(".pbl-task-info",this).delay(1500).css({
+				"opacity" : 0,
+				"visibility" : "visible"
+			}).fadeTo("slow",1).each(function(){
+				var dts = $("dt",this);
+				// Set the DT width so the text can be properly aligned
+				var tA = $(this).css("text-align");
+				if (tA=="right") {
+					var width = 0;
+					dts.css("width","auto").each(function(){
+						var w = $(this).width();
+						if (w>width) width = w;
+					});
+					if (width!=0) {
+						dts.css("width",width+"px");
+						$("dd",this).css("margin-left",width+"px");
+					}
+				} else if (tA=="left") {
+					var width = 0;
+					dts.css("width","auto").each(function(){
+						$(this).next("dd").css("margin-left",$(this).width()+"px");
+					});
+				}
+				// Add a title (just in case the Style displays an icon instead of the text)
+				dts.each(function(){
+					$("span",this).attr("title",$(this).text());
+				});
+			});
+			
+		});        
+		// Cloze iDevice
+		$('.cloze-feedback-toggler').click(function(){
+			var e = $(this);
+			var id = e.attr('name').replace('feedback','');
+			$exe.cloze.toggleFeedback(id,this);
+		});
+		$('.cloze-score-toggler').click(function(){
+			var e = $(this);
+			var id = e.attr('name').replace('getScore','');
+			$exe.cloze.showScore(id,1);
+		});
+		$('form.cloze-form').submit(function(){
+			var e = $(this);
+			var id = e.attr('name').replace('cloze-form-','');
+			try {
+				$exe.cloze.showScore(id,1);
+			} catch(e) {
+				// Due to G. Chrome's Content Security Policy ('unsafe-eval' is not allowed)
+				var txt = $exe_i18n.dataError;
+				if ($('body').hasClass('exe-epub3')) txt += '<br /><br />'+$exe_i18n.epubJSerror;
+				$("#clozeScore" + id).html(txt);
+			}
+			return false;            
+		}); 
+		// SCORM Quiz iDevice
+		$('form.quiz-test-form').submit(function(){
+			try {
+				calcScore2();
+			} catch(e) {
+				// Due to G. Chrome's Content Security Policy ('unsafe-eval' is not allowed)
+				var txt = $exe_i18n.dataError;
+				if ($('body').hasClass('exe-epub3')) txt += '<br /><br />'+$exe_i18n.epubJSerror;
+				$('form.quiz-test-form input[type=submit]').hide().before(txt);
+			}
+			return false;
+		});	
+		// Multi-choice iDevice and True-False Question
+		$('.exe-radio-option').change(function(){
+			var c = this.className.split(" ");
+			if (c.length!=2) return;
+			c = c[1];
+			c = c.replace("exe-radio-option-","");
+			c = c.split("-");
+			if (c.length!=4) return;
+			$exe.getFeedback(c[0],c[1],c[2],c[3]);
+		});
+		// Multi-select iDevice
+		$('form.multi-select-form').submit(function(){
+			return false;
+		});
+		$('.multi-select-feedback-toggler').click(function(){
+			var i = this.id.replace("multi-select-feedback-toggler-","");
+			i = i.split("-");
+			if (i.length!=2) return;
+			$exe.showFeedback(this,i[0],i[1]);
+		});
+		// Cloze Activity iDevice
+		$('form.cloze-activity-form').submit(function(){
+			try {
+				var e = $(this);
+				var id = e.attr('name').replace('cloze-form-','');				
+				$exe.cloze.submit(id);
+			} catch(e) {
+				// Due to G. Chrome's Content Security Policy
+				var txt = $exe_i18n.dataError;
+				if ($('body').hasClass('exe-epub3')) txt += '<br /><br />'+$exe_i18n.epubJSerror;
+				if ($exe.cloze.hasBeenTested==false) {
+					$exe.cloze.hasBeenTested = true;
+					$('form.cloze-activity-form input[type=submit]').hide().before(txt);
+				}
+			}
+			return false;
+		});
+		// Search form
+		if (window.DOMParser) this.clientSearch.init(bod); // IE8- do not support the DOMParser object
+		
     },
+	
+	clientSearch : {
+		
+		init : function(bod){
+			// Search form
+			if (bod.hasClass("exe-web-site") && bod.hasClass("exe-search-bar")) {
+				$.ajax({
+					type: "GET",
+					url: "contentv3.xml",
+					dataType: "xml",
+					success: function(xml){
+						$exe.clientSearch.main = $("#main");
+						$exe.contentv3 = xml;
+						var sF = '<div id="exe-client-search">\
+							<form id="exe-client-search-form" action="#" method="GET">\
+								<p><label for="exe-client-search-text" class="sr-av">'+$exe_i18n.fullSearch+': </label><input type="text" id="exe-client-search-text" /> \
+								<input type="submit" id="exe-client-search-submit" value="'+$exe_i18n.search+'" />\
+								<a href="#main" id="exe-client-search-reset" title="'+$exe_i18n.hideResults+'"><span>'+$exe_i18n.hideResults+'</span></a></p>\
+							</form>\
+						</div>\
+						<div id="exe-client-search-results"></div>';                        
+						$exe.clientSearch.main.prepend(sF);
+                        $("#exe-client-search-form").submit(function(){
+							$exe.clientSearch.search($("#exe-client-search-text").val());
+							return false;
+						});
+						$("#exe-client-search-text").prop("placeholder",$exe_i18n.fullSearch+"...");
+						$("#exe-client-search-reset").click(function(){
+							$("#exe-client-search-text").val("")
+							$exe.clientSearch.search("");
+							return false;
+						});						
+						$exe.clientSearch.results = $("#exe-client-search-results");
+						$exe.clientSearch.results.css("min-height",$exe.clientSearch.main.height()+"px");
+						$("#skipNav").append(' <a href="#exe-client-search-text" id="exe-client-search-lnk" class="sr-av">'+$exe_i18n.fullSearch+'</a>');
+						$("#exe-client-search-lnk").click(function(){
+							$("#exe-client-search-text").focus();
+							return false;
+						});
+					},
+					error: function() {
+						
+					}
+				});
+			}			
+		},
+		
+		strip : function(html) {
+			var regex = /(<([^>]+)>)/ig
+			html = html.replace(regex, "");
+			html = html.replace(/</g, "&lt;");
+			html = html.replace(/>/g, "&gt;");
+			return html;
+		},		
+		
+		getNodeHTML : function(nodeNo,sTitle,query,html) {
+		
+			query = query.toLowerCase();
+		
+			// Create a tmp wprapper
+			var div = $("<div />");
+			
+			// Fill it
+			div.html(html);
+			
+			// Remove the nested nodes (children nodes)
+			$("instance",div).each(function(){
+				if ($(this).attr("class")=="exe.engine.node.Node") {
+					$(this).remove();
+				}
+			});
+			
+			// Get the content of those iDevices
+			var res = "";
+			var currHTML;
+			var as = $("#siteNav a");
+			var currTit = sTitle.toLowerCase();
+			div.find('unicode').each(function(){
+				if ($(this).attr("content")=="true") {
+					currHTML = $(this).attr("value");
+					if (typeof currHTML=='string') currHTML = $exe.clientSearch.strip(currHTML);
+					if (currTit.indexOf(query)!=-1 || currHTML.toLowerCase().indexOf(query)!=-1) {
+						var a = as.eq(nodeNo);
+						if (a.length==1) {
+							if (currHTML=="") currHTML = "...";
+							else res += '<li><strong><a href="'+a.attr("href")+'" class="exe-client-search-result-link">'+sTitle+'</a> &rarr; </strong><span class="exe-client-search-result-detail">'+currHTML+"</span></li>";
+						}					
+					}
+				}
+			});
+
+			return res;		
+		},	
+
+		splitByWords : function (text, startFrom, lengthFrom) {
+			var len = text.length,
+				re = /[ ,.]/, // Search any of those characters
+				fr = (startFrom <= 0) ? 0 : text.substr(startFrom).search(re) + startFrom + 1,
+				to = (lengthFrom >= len) ? len : text.substr(lengthFrom).search(re) + lengthFrom;
+
+				// If we don't find any character
+				if (fr === -1) fr = 0;
+				if (to === (lengthFrom -1)) to = len;
+				
+				return text.substr(fr, to);
+		},		
+		
+		search : function(query){
+			if (query.length<3) {
+				$("body").removeClass("exe-client-search-results");
+				return;
+			}
+			var xml = $exe.contentv3;
+			var nodeNo = 0;
+			$("body").addClass("exe-client-search-results");
+			$exe.clientSearch.results.html("");
+			var results = "";
+			$(xml).find('instance').each(function(){
+				if ($(this).attr("class")=="exe.engine.node.Node") {
+					var currentNode = $(this);					
+					// Get the node title and HTML
+					var sTitle = currentNode.find('unicode').eq(0).attr("value");
+					// Get the content
+					var str = "";
+					try {
+						// This won't work in some old browsers (not even in IE11)
+						str = currentNode.html();
+					} catch(e) {
+						var s = new XMLSerializer();
+						var d = this;
+						str = s.serializeToString(d);
+						var tmp = $("<div></div>");
+						tmp.html(str);
+						var html = $("instance",tmp).eq(0).html();
+						str = html;	
+					}					
+					results += $exe.clientSearch.getNodeHTML(nodeNo,sTitle,query,str.replace(/script/g,"script_"));
+					nodeNo ++;
+				}
+			});
+			if (results!="") {
+				results = '<p>'+$exe_i18n.searchResults.replace("%","<strong>"+query+"</strong>")+':</p><ul>' + results + '</ul>';
+				$exe.clientSearch.results.html(results);
+				// Underline the search text in the title
+				$(".exe-client-search-result-link",$exe.clientSearch.results).html(function(_, html) {
+					html = html.replace(/script_/g,"script");
+					var re = new RegExp('('+query+')',"gi");
+					return  html.replace(re, '<span class="exe-client-search-result">$1</span>');
+				});
+				$(".exe-client-search-result-detail",$exe.clientSearch.results).each(function(i){
+					// Add a "Read more" link if needed
+					var max = 200;
+					var c = $(this).text();
+						c = $exe.clientSearch.strip(c); // This will prevent some JavaScript code to be executed
+					var n = "";
+					if (c.length>(max+100)) {
+						var start = $exe.clientSearch.splitByWords(c,0,max);
+						var end = c.replace(start," ");
+						n += start;
+						n += '<a href="#exe-client-search-text-'+i+'" title="'+$exe_i18n.more+'" class="exe-client-search-read-more">[&hellip;]</a>';
+						n += '<span class="js-hidden" id="exe-client-search-text-'+i+'">';
+						n += end;
+						n += '</span>';
+						this.innerHTML = n;
+					}
+					// Underline the search text in the HTML
+					$(this).html(function(_, html) {
+						html = html.replace(/script_/g,"script");
+						var re = new RegExp('('+query+')',"gi");
+						return  html.replace(re, '<span class="exe-client-search-result">$1</span>');
+					});
+				});
+				// Make the "Read more" link work
+				$(".exe-client-search-read-more").click(function(){
+					var e = $(this);
+					$(e.attr("href")).fadeIn();
+					e.remove();
+					return false;
+				});
+				// Check if the menu is hidden before opening a page
+				$(".exe-client-search-result-link",$exe.clientSearch.results).click(function(){
+					var extra = "";
+					if (!$("#siteNav").is(":visible")) extra = "?nav=false";
+					window.location.href = this.href + extra;
+					return false;
+				});
+			} else {
+				// No results for that search
+				$exe.clientSearch.results.html('<p>'+$exe_i18n.noSearchResults.replace("%","<strong>"+query+"</strong>")+'</p>')
+			}
+		}
+		
+	},
+	
+	// Modal Window: Height problem in some browsers #328
+	setModalWindowContentSize : function(){
+		if (window.chrome) {
+			$(".exe-dialog-text img").each(
+				function(){
+					var e = $(this);
+					var h = e.attr("height");
+					var w = e.attr("width");
+					if (e.height()==0 && e.css("height")=="0px" && h && w) {
+						if (!isNaN(h) && h>0 && !isNaN(w) && w>0) {
+							var maxW = 480;
+							if (w<maxW) maxW = w;
+							h = Math.round(maxW*h/w);
+							e.css("height",h+"px");
+						}
+					}
+				}
+			);
+		}
+	},
+	
+    // Transform links to audios or videos (with rel^='lightbox') in links to inline content (see prettyPhoto documentation)
+    setMultimediaGalleries : function(){
+		if (typeof($.prettyPhoto) != 'undefined') {
+			var lightboxLinks = $("a[rel^='lightbox']");
+			lightboxLinks.each(function(i){
+				var ref = $(this).attr("href");
+				var _ref = ref.toLowerCase();
+				var isAudio = _ref.indexOf(".mp3")!=-1;
+				var isVideo = _ref.indexOf(".mp4")!=-1 || _ref.indexOf(".flv")!=-1 || _ref.indexOf(".ogg")!=-1 || _ref.indexOf(".ogv")!=-1;
+				if (isAudio || isVideo) {
+					var id = "media-box-"+i;
+					$(this).attr("href","#"+id);
+					var hiddenPlayer = $('<div class="exe-media-box js-hidden" id="'+id+'"></div>');
+						if (isAudio) hiddenPlayer.html('<div class="exe-media-audio-box"><audio controls="controls" src="'+ref+'" class="exe-media-box-element exe-media-box-audio"><a href="'+ref+'">audio/mpeg</a></audio></div>');
+						else hiddenPlayer.html('<div class="exe-media-video-box"><video width="480" height="385" controls="controls" class="exe-media-box-element"><source src="'+ref+'" /></video></div>');
+					$("body").append(hiddenPlayer);
+					$exe.hasMultimediaGalleries = true;
+				}
+                // Inline content title
+                var t = this.title;
+                if (ref.indexOf('#')==0 && $(ref).length==1 && t && t!="") $(ref).prepend('<h2 class="pp_title">'+t+'</h2>');
+			});
+			lightboxLinks.prettyPhoto({
+				social_tools: "",
+				deeplinking: false,
+				opacity: 0.85,
+                changepicturecallback: function() {
+					var block = $("#pp_full_res")
+					var media = $(".exe-media-box-element",block);
+					if ($exe.loadMediaPlayer.isReady) {
+						if (media.length==1) media.mediaelementplayer();
+						$exe.loadMediaPlayer.isCalledInBox = true;
+					}
+					// Add a download link and a CSS class to pp_content_container (see exe_lightbox.css)
+					var cont = $(".pp_content_container");
+					cont.attr("class","pp_content_container");
+					if (media.length==1 && media[0].hasAttribute('src')) {
+						if (media.hasClass("exe-media-box-audio")) cont.attr("class","pp_content_container with-audio");
+						var src = media.attr('src');
+						var ext = src.split("/");
+						ext = ext[ext.length-1];
+						ext = ext.split(".")[1];
+						$(".pp_details .pp_description").append(' <span class="exe-media-download"><a href="'+src+'" title="'+$exe_i18n.download+'" download>'+ext+'</a></span>');
+					} else {
+                        // Hide the title at the bottom (we use h2.pp_title instead)
+                        block = $(".pp_inline",block);
+                        if(block.length==1) $(".pp_description").hide();
+                    }
+				}
+			});
+			// If there are galleries, but lightboxLinks.length==0, there's an error
+			// No links with the rel attribute were selected
+			// This might happen in some ePub readers
+			// See issue #258
+			var eXeGalleries = $('.GalleryIdevice');
+			if (lightboxLinks.length==0 && eXeGalleries.length>0 && typeof(exe_editor_mode)=="undefined") {
+				// We execute this code only outside eXe or the Image Gallary edition will fail (see issue #317)
+				$('.exeImageGallery a').each(function(){
+					this.title += " ~ ["+this.href+"]";
+					this.href = "#";
+					this.onclick = function(){
+						var ul = $(this).parent().parent();
+						if (ul.length==1 && ul.attr('id')!="") {
+							if ($("#"+ul.attr('id')+"-warning").length==0) {
+								// Due to G. Chrome's Content Security Policy
+								var txt = $exe_i18n.dataError;
+								if ($('body').hasClass('exe-epub3')) txt += '<br /><br />'+$exe_i18n.epubJSerror;								
+								ul.prepend('<div id="'+ul.attr('id')+'-warning">'+txt+'</div>');
+							}
+						}
+					}
+				});
+			}
+		}
+	},
 	
 	// Apply the 'sfhover' class to li elements when they are 'moused over'
 	// Old browsers need this because they don't support li:hover
@@ -182,10 +618,20 @@ var $exe = {
                 $("dt", e).each(function() {
                     t = this;
                     h = $(t).html();
-                    $(t).html("<a href='#' onclick='$exe.dl.toggle(this);return false' class='exe-dl-" + i + "-a'><span class='icon'" + s + ">» </span>" + h + "</a>")
+                    $(t).html("<a href='#' class='exe-dd-toggler exe-dl-" + i + "-a'><span class='icon'" + s + ">» </span>" + h + "</a>")
                 });
-                $(e).before("<p class='exe-dl-toggler'><a href='#" + id + "' onclick='$exe.dl.toggle(\"show\",\"" + id + "\");return false;' title='" + $exe_i18n.show + "'" + s + ">+</a> <a href='#" + id + "' onclick='$exe.dl.toggle(\"hide\",\"" + id + "\");return false;' title='" + $exe_i18n.hide + "'" + s + ">-</a></p>")
-            })
+                $(e).before("<p class='exe-dl-toggler'><a href='#" + id + "' title='" + $exe_i18n.show + "'" + s + ">+</a> <a href='#" + id + "' title='" + $exe_i18n.hide + "'" + s + ">-</a></p>")
+            });
+            $('a.exe-dd-toggler').click(function(){
+                $exe.dl.toggle(this);
+                return false;
+            });
+            $('.exe-dl-toggler a').click(function(){
+                var id = $(this).attr('href').replace("#","");
+                var action = 'show';
+                if ($(this).attr('title')==$exe_i18n.hide) action = 'hide';
+                $exe.dl.toggle(action,id);
+            });
         },
         toggle: function(e, a) {
             if (e == "show") $("#" + a + " dd").show();
@@ -223,12 +669,16 @@ var $exe = {
                 if (img.length==1) html += '<a href="'+img.attr("src")+'" target="_blank">GIF</a>';
                 if (!mathjax) {
                     if (html!="") html += '<span> - </span>';
-                    html += '<a href="#" onclick="$exe.math.showCode(this)">'+txt+'</a>';
+                    html += '<a href="#" class="exe-math-code-lnk">'+txt+'</a>';
                 }
                 if (html!="") {
                     html = '<p class="exe-math-links">'+html+'</p>';
                     e.append(html);
                 }
+                $(".exe-math-code-lnk").click(function(){
+                    $exe.math.showCode(this);
+                    return false;
+                });
             });            
         },
         // Open a new window with the LaTeX or MathML code
@@ -301,6 +751,10 @@ var $exe = {
 	hint: {
         init: function() {
             $(".iDevice_hint").each(function(e) {
+				// To review (this should be in base.css)
+				if (typeof($exe.hint.imgs)=='undefined') {
+					$exe.hint.imgs = [ 'panel-amusements.png', 'stock-stop.png' ];
+				}
                 var t = e + 1;
                 var n = "hint-" + t;
                 var r = $(".iDevice_hint_content", this);
@@ -309,9 +763,13 @@ var $exe = {
                     r.eq(0).attr("id", n);
                     var s = i.eq(0);
                     var o = s.html();
-                    s.html('<a href="#' + n + '" title="' + $exe_i18n.show + '" class="hint-toggler show-hint" id="toggle-' + n + '" onclick="$exe.hint.toggle(this);return false" style="background-image:url(' + $exe.hint.imgs[0] + ')">' + o + "</a>")
+                    s.html('<a href="#' + n + '" title="' + $exe_i18n.show + '" class="hint-toggler show-hint" id="toggle-' + n + '" style="background-image:url(' + $exe.hint.imgs[0] + ')">' + o + "</a>")
                 }
-            })
+                $('.hint-toggler',this).click(function(){
+                    $exe.hint.toggle(this);
+                    return false;
+                });
+            });
         },
         toggle: function(e) {
             var t = e.id.replace("toggle-", "");
@@ -332,19 +790,34 @@ var $exe = {
     // Hide/Show iDevices (base.css hides this)
 	iDeviceToggler: {
         init: function() {
-            if ($(".iDevice").length < 2) return false;
+            var isEdition = typeof(exe_editor_mode)!="undefined" && $("#activeIdevice").length==1;
+            if ($(".iDevice").length < 2 && isEdition==false) return false;
             var t = $(".iDevice_header,.iDevice.emphasis0");
             t.each(function() {
                 var t = $exe_i18n.hide;
                 e = $(this), c = e.hasClass("iDevice_header") ? "em1" : "em0", eP = e.parents(".iDevice_wrapper");
                 if (eP.length) {
-                    var n = '<p class="toggle-idevice toggle-' + c + '"><a href="#" onclick="$exe.iDeviceToggler.toggle(this,\'' + eP.attr("id") + "','" + c + '\');return false" title="' + t + '"><span>' + t + "</span></a></p>";
+                    var n = '<p class="toggle-idevice toggle-' + c + '"><a href="#" id="toggle-idevice-'+eP.attr("id")+'-'+c+'" title="' + t + '"><span>' + t + "</span></a></p>";
                     if (c == "em1") {
                         var r = e.html();
                         e.html(r + n)
                     } else e.before(n)
                 }
             });
+			$(".toggle-idevice a").click(function(){
+				var id = this.id.replace("toggle-idevice-","");
+					id = id.split("-");
+				$exe.iDeviceToggler.toggle(this,id[0],id[1]);
+				return false;
+			});
+			if (isEdition) {
+                $(".toggle-idevice a").trigger("click");
+                $(".iDevice_wrapper").css("opacity",.5).hover(function(){
+                    $(this).animate({opacity:1});
+                },function(){
+                    $(this).animate({opacity:.5});
+                });
+            }
         },
         toggle: function(e, t, n) {
             var r = $exe_i18n.hide;
@@ -357,18 +830,21 @@ var $exe = {
             if (u.indexOf(" hidden-idevice") == -1) {
                 r = $exe_i18n.show;
                 u += " hidden-idevice";
-                o.slideUp("fast");
-                e.className = "show-idevice";
-                e.title = r;
-                e.innerHTML = "<span>" + r + "</span>"
+                o.slideUp("fast",function(){
+                    e.className = "show-idevice";
+                    e.title = r;
+                    e.innerHTML = "<span>" + r + "</span>"
+                    i.attr("class", u);
+                });
             } else {
                 u = u.replace(" hidden-idevice", "");
-                o.slideDown("fast");
-                e.className = "hide-idevice";
-                e.title = r;
-                e.innerHTML = "<span>" + r + "</span>"
+                o.slideDown("fast",function(){
+                    e.className = "hide-idevice";
+                    e.title = r;
+                    e.innerHTML = "<span>" + r + "</span>";
+                });
+                i.attr("class", u);
             }
-            i.attr("class", u)
         }
     },
 	
@@ -386,6 +862,8 @@ var $exe = {
 	
     // Load MediaElement if required
 	loadMediaPlayer: {
+        isCalledInBox: false, // Box = prettyPhoto with video or audio
+        isReady: false,
         getPlayer: function() {
             $exe.mediaelements = $(".mediaelement");
             $exe.mediaelements.each(function() {
@@ -417,13 +895,16 @@ var $exe = {
         },
         // Start MediaElement
 		init: function() {
-            if (typeof eXe != "undefined") {
+			if (typeof eXe != "undefined") {
                 mejs.MediaElementDefaults.flashName = "../scripts/mediaelement/" + mejs.MediaElementDefaults.flashName;
                 mejs.MediaElementDefaults.silverlightName = "../scripts/mediaelement/" + mejs.MediaElementDefaults.silverlightName
             }
             $exe.mediaelements.mediaelementplayer().show().each(function() {
                 $exe.alignMediaElement(this)
-            })
+            });
+			// Multimedia galleries
+			$exe.loadMediaPlayer.isReady = true;
+			if (!$exe.loadMediaPlayer.isCalledInBox) $("#pp_full_res .exe-media-box-element").mediaelementplayer();
         }
     },
 	
@@ -437,10 +918,12 @@ var $exe = {
 			$("iframe").each(function() {
 				var i = $(this);
 				var s = i.attr("src");
-				if (t && s.indexOf("//") == 0) $(this).attr("src", "http:" + s);
-				s = i.attr("src");
-				if (!i.hasClass("external-iframe") && s.indexOf("http")==0) {
-					i.addClass("external-iframe").before("<span class='external-iframe-src' style='display:none'><a href='"+s+"'>"+s+"</a></span>");
+				if (typeof(s)=="string") {
+					if (t && s.indexOf("//") == 0) $(this).attr("src", "http:" + s);
+					s = i.attr("src");
+					if (!i.hasClass("external-iframe") && s.indexOf("http")==0) {
+						i.addClass("external-iframe").before("<span class='external-iframe-src' style='display:none'><a href='"+s+"'>"+s+"</a></span>");
+					}
 				}
 			});			
 		}, 1000);
@@ -583,6 +1066,9 @@ $exe.cloze = {
 	NOT_ATTEMPTED : 0,
 	WRONG : 1,
 	CORRECT : 2,
+	
+	// Compatible reader
+	hasBeenTested : false,
 	
 	// Functions
 	
@@ -950,7 +1436,7 @@ $exe.cloze = {
 		}
 		// Show it in a nice paragraph
 		var a = document.getElementById("clozeScore" + e);
-		a.innerHTML = YOUR_SCORE_IS + n + "/" + i.length + "."
+		a.innerHTML = $exe_i18n.yourScoreIs + n + "/" + i.length + "."
 	},
 	
 	// Returns an array of input elements that are associated with a certain idevice
@@ -1287,7 +1773,7 @@ $exe.cloze = {
 				}
 				// Show it in a nice paragraph
 				var scorePara = document.getElementById("clozelangScore" + ident);
-				scorePara.innerHTML = YOUR_SCORE_IS + score + "/" + inputs.length + "."
+				scorePara.innerHTML = $exe_i18n.yourScoreIs + score + "/" + inputs.length + "."
 			}
 		},
 			

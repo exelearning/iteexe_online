@@ -250,7 +250,7 @@ class PropertiesPage(Renderable, Resource):
     name = 'properties'
 
     booleanFieldNames = ('pp_scolinks', 'pp_backgroundImgTile', 'pp_scowsinglepage', 'pp_scowwebsite', 'pp_exportSource',
-                         'pp_intendedEndUserRoleGroup', 'pp_intendedEndUserRoleTutor', 'pp_compatibleWithVersion9')
+                         'pp_intendedEndUserRoleGroup', 'pp_intendedEndUserRoleTutor', 'pp_compatibleWithVersion9', 'pp_addPagination', 'pp_addSearchBox', 'pp_exportElp')
 
     imgFieldNames = ('pp_backgroundImg')
 
@@ -280,7 +280,8 @@ class PropertiesPage(Renderable, Resource):
             if hasattr(obj, name):
                 return obj, name
             else:
-                if fieldId in ['pp_scowsinglepage', 'pp_scowwebsite', 'pp_exportSource']:
+                # If attributes don't exist, initialize them with value 'False'
+                if fieldId in ['pp_scowsinglepage', 'pp_scowwebsite', 'pp_exportSource', 'pp_addSearchBox', 'pp_exportElp']:
                     setattr(obj, name, False)
                     return obj, name
 
@@ -316,19 +317,19 @@ class PropertiesPage(Renderable, Resource):
                         if key in self.imgFieldNames:
                             if getattr(obj, name):
                                 data[key] = getattr(obj, name).basename()
-                        else:                            
-                            if name=='docType':              
+                        else:
+                            if name=='docType':
                                 data[key]=self.package.getExportDocType()
                             else:
                                 if name=='newlicense':
                                     _a=getattr(obj, name)
-                                    if getattr(obj, name)=='':                                                 
+                                    if getattr(obj, name)=='':
                                         data[key]=_(self.package.license)
                                     else:
                                         data[key]=getattr(obj, name)
                                 else:
                                     data[key] = getattr(obj, name)
-                            
+
 
         except Exception as e:
             log.exception(e)
@@ -338,12 +339,17 @@ class PropertiesPage(Renderable, Resource):
     def render_POST(self, request=None):
         log.debug("render_POST")
 
+        lang_only = False
+
         data = {}
         try:
             clear = False
             if 'clear' in request.args:
                 clear = True
                 request.args.pop('clear')
+            if 'lang_only' in request.args:
+                lang_only = True
+                request.args.pop('lang_only')
             if 'lom_general_title_string1' in request.args:
                 if clear:
                     self.package.setLomDefaults()
@@ -367,23 +373,26 @@ class PropertiesPage(Renderable, Resource):
                         setattr(obj, name, value[0] == 'true')
                     else:
                         if key in self.imgFieldNames:
-                            path = Path(value[0])
+                            path = Path(toUnicode(value[0]))
                             if path.isfile():
-                                setattr(obj, name, toUnicode(value[0]))
+                                setattr(obj, name, path)
                                 data[key] = getattr(obj, name).basename()
                             else:
                                 if getattr(obj, name):
                                     if getattr(obj, name).basename() != path:
                                         setattr(obj, name, None)
                         else:
-                            #if name=='docType': common.setExportDocType(toUnicode(value[0]))              
-                                 
+                            #if name=='docType': common.setExportDocType(toUnicode(value[0]))
+
                             setattr(obj, name, toUnicode(value[0]))
-                            
+
         except Exception as e:
             log.exception(e)
             return json.dumps({'success': False, 'errorMessage': _("Failed to save properties")})
-        self.package.isChanged = True
+
+        if not self.package.isTemplate or not lang_only:
+            self.package.isChanged = True
+
         return json.dumps({'success': True, 'data': data})
 
 # ===========================================================================

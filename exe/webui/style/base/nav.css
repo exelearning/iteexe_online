@@ -39,6 +39,7 @@ body{padding:0;text-align:center}
 #topPagination .pagination{border:none}
 #bottomPagination{clear:both}
 #bottomPagination a{margin:0 20px 0 0}
+.page-counter{padding:5px 0;display:inline-block}
 
 /* Autoclear */
 #content{overflow:auto}
@@ -50,6 +51,10 @@ body{padding:0;text-align:center}
 #nav-toggler a:hover{text-decoration:none}
 #skipNav{z-index:100px;padding-top:15px;text-align:center}
 
+/* Search bar */
+#exe-client-search-text{border-top-left-radius:5px;border-bottom-left-radius:5px}
+#exe-client-search-submit{border-top-right-radius:5px;border-bottom-right-radius:5px}
+
 @media screen and (max-width: 980px) {
 	.exe-web-site #content{width:100%;border:0;box-shadow:none}
 	#main{padding:20px 30px 0 280px}
@@ -57,18 +62,15 @@ body{padding:0;text-align:center}
 }
 
 @media all and (max-width: 700px) {
-	#headerContent{font-size:.7em;white-space:normal}
-	#topPagination{display:none}
+	#headerContent{font-size:.7em;white-space:normal;padding-bottom:.5em}
 	#siteNav{float:none;width:100%;padding:0}
 	#siteNav{line-height:1.5em;margin-bottom:15px}
 	#main-wrapper{width:100%;float:none}    
 	#main,.no-nav #main{padding:10px 20px 0 20px}    
 	#content .exe-col{float:none;width:100%;padding:0}
-	.pagination{text-align:center;height:35px;position:relative}
-	.pagination .prev{position:absolute;left:20px}
-	.pagination .next{position:absolute;right:0}
-	#nav-toggler{position:relative;top:0;left:0;margin:20px 19px;text-align:center}
-	#nav-toggler a{width:100%;display:block;padding:8px 0}
+	#bottomPagination{text-align:center;height:35px;position:relative}
+	#bottomPagination .prev{position:absolute;left:20px}
+	#bottomPagination .next{position:absolute;right:0}
 	#siteNav{border-top:1px solid}
 }
 
@@ -114,12 +116,7 @@ background-color:#f9f9f9;border-color:#dddddd;
 background-color:#f9f9f9;
 }
 }
-@media all and (max-width: 700px){
-.js #siteNav{
-border-top:1px solid #dddddd;
-}
-}
-#siteNav a:hover,#siteNav a:focus{
+#siteNav a:hover,#siteNav a:focus,#siteNav a.active{
 /*navHoverBGColor*/
 background-color:#ffffff;
 /*navAHoverColor*/
@@ -135,4 +132,8 @@ border-color:#dddddd;
 }
 #bottomPagination{
 background-color:#ffffff;
+}
+/* eXeLearning Style Designer (custom CSS) */
+.pagination .print-page{
+display:none;
 }

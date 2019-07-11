@@ -105,6 +105,17 @@ def nodeHasABCMusic(node):
                 return True
     return hasABCMusic
 
+def addListIdevicesFiles(node):
+    listIdevicesFiles = []
+    listIdevicesFiles.append(common.printJavaScriptIdevicesScripts('export',node))
+    for child in node.children:
+        if len(child.children) >0:
+            listIdevicesFilesChild = addListIdevicesFiles(child)
+            listIdevicesFiles.extend(listIdevicesFilesChild)
+        else:
+            listIdevicesFiles.append(common.printJavaScriptIdevicesScripts('export',child))
+    return listIdevicesFiles
+
 def replaceTopLinks(html):
     return html.replace('href="#auto_top"', 'href="#"')
 
@@ -117,7 +128,10 @@ def processInternalLinks(package, html):
     For this SinglePage Export, go ahead and keep the #Anchor portion,
     but remove the 'exe-node:Home:Topic:etc', since it is all 
     exported into the same file.
+    
+    Keep the links to the elp file (if the elp file exists).
     """
+    html = common.enableLinksToElp(package, html) 
     return common.renderInternalLinkNodeAnchor(package, html)
 
 def exportMinFileJS(listFiles, outputDir):

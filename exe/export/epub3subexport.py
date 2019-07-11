@@ -33,7 +33,7 @@ from exe.engine.path               import Path, TempDirPath
 from exe.engine.version            import release
 from exe.export.pages              import Page, uniquifyNames
 from exe                             import globals as G
-from BeautifulSoup                 import BeautifulSoup
+from bs4                 import BeautifulSoup
 from htmlentitydefs                import name2codepoint
 
 log = logging.getLogger(__name__)
@@ -324,7 +324,7 @@ class Epub3Page(Page):
         if common.hasGames(self.node):
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_games.css\" />" + lb
         if common.hasABCMusic(self.node):
-            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />" + lb            
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"exe_abcmusic.css\" />" + lb
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"content.css\" />" + lb
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->' + lb
@@ -345,10 +345,8 @@ class Epub3Page(Page):
             html += u'<script type="text/javascript" src="exe_effects.js"></script>' + lb
         if common.hasSH(self.node):
             html += u'<script type="text/javascript" src="exe_highlighter.js"></script>' + lb
-        html += common.getJavaScriptStrings() + lb
+        html += u'<script type="text/javascript" src="common_i18n"></script>' + lb
         if common.hasGames(self.node):
-            # The games require additional strings
-            html += common.getGamesJavaScriptStrings() + lb
             html += u'<script type="text/javascript" src="exe_games.js"></script>' + lb
         html += u'<script type="text/javascript" src="common.js"></script>' + lb
         if common.hasABCMusic(self.node):
@@ -359,8 +357,9 @@ class Epub3Page(Page):
         # Some styles might have their own JavaScript files (see their config.xml file)
         if style.hasValidConfig:
             html += style.get_extra_head()
+        html += common.getExtraHeadContent(self.node.package)
         html += u"</head>" + lb
-        html += u'<body class="exe-epub3" id="exe-node-'+self.node.id+'"><script type="text/javascript">document.body.className+=" js"</script>' + lb
+        html += u'<body class="exe-epub3" id="exe-node-'+self.node.id+'">' + lb
         html += u"<div id=\"outer\">" + lb
         html += u"<" + sectionTag + " id=\"main\">" + lb
         html += u"<" + headerTag + " id=\"nodeDecoration\">"
@@ -372,7 +371,7 @@ class Epub3Page(Page):
         html += u"</" + headerTag + ">" + lb
 
         self.node.exportType = 'epub'
-        
+
         for idevice in self.node.idevices:
             if idevice.klass != 'NotaIdevice':
                 e = " em_iDevice"
@@ -392,7 +391,7 @@ class Epub3Page(Page):
 
         html += u"</" + sectionTag + ">" + lb  # /#main
         html += self.renderLicense()
-        html += unicode(BeautifulSoup(self.renderFooter(), convertEntities=BeautifulSoup.XHTML_ENTITIES))
+        html += unicode(BeautifulSoup(self.renderFooter()))
         html += u"</div>" + lb  # /#outer
         if style.hasValidConfig:
             html += style.get_extra_body()
@@ -418,9 +417,11 @@ class Epub3Page(Page):
         """
         take care of any internal links which are in the form of:
            href="exe-node:Home:Topic:etc#Anchor"
-        For this SCORM Export, go ahead and remove the link entirely,
+        For this export, go ahead and remove the link entirely,
         leaving only its text, since such links are not to be in the LMS.
+        The links to the elp file will not be removed.
         """
+        html = common.enableLinksToElp(self.node.package, html)
         return common.removeInternalLinks(html)
 
 
@@ -525,13 +526,18 @@ class Epub3SubExport(object):
         mimetypeFile.write('application/epub+zip')
         mimetypeFile.close()
 
+        # Create lang file
+        langFile = open(contentPages + '/common_i18n.js', "w")
+        langFile.write(common.getJavaScriptStrings(False))
+        langFile.close()
+
         # Copy the style files to the output dir
         # But not nav.css
         filesStyleFiles = [self.styleDir / '..' / 'base.css']
         filesStyleFiles += [f for f in self.styleDir.files("*.*") if f.basename() != "nav.css"]
 
         filesStyleFiles += [self.styleDir / '..' / 'popup_bg.gif']
-        
+
         # FIXME for now, only copy files referenced in Common Cartridge
         # this really should apply to all exports, but without a manifest
         # of the files needed by an included stylesheet it is too restrictive
@@ -551,6 +557,7 @@ class Epub3SubExport(object):
         hasFX = False
         hasSH = False
         hasGames = False
+        hasElpLink = False
         hasWikipedia = False
         isBreak = False
         hasInstructions = False
@@ -561,7 +568,7 @@ class Epub3SubExport(object):
             if isBreak:
                 break
             for idevice in page.node.idevices:
-                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasTooltips and hasABCMusic):
+                if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasElpLink and hasWikipedia and hasInstructions and hasTooltips and hasABCMusic):
                     isBreak = True
                     break
                 if not hasFlowplayer:
@@ -581,6 +588,8 @@ class Epub3SubExport(object):
                     hasSH = common.ideviceHasSH(idevice)
                 if not hasGames:
                     hasGames = common.ideviceHasGames(idevice)
+                if not hasElpLink:
+                    hasElpLink = common.ideviceHasElpLink(idevice,package)
                 if not hasWikipedia:
                     if 'WikipediaIdevice' == idevice.klass:
                         hasWikipedia = True
@@ -615,6 +624,14 @@ class Epub3SubExport(object):
         if hasGames:
             exeGames = (self.scriptsDir / 'exe_games')
             exeGames.copyfiles(contentPages)
+            # Add game js string to common_i18n
+            langGameFile = open(contentPages + '/common_i18n.js', "a")
+            langGameFile.write(common.getGamesJavaScriptStrings(False))
+            langGameFile.close()
+        if hasElpLink or package.get_exportElp():
+            # Export the elp file
+            currentPackagePath = Path(package.filename)
+            currentPackagePath.copyfile(contentPages/package.name+'.elp')
         if hasWikipedia:
             wikipediaCSS = (self.cssDir / 'exe_wikipedia.css')
             wikipediaCSS.copyfile(contentPages / 'exe_wikipedia.css')

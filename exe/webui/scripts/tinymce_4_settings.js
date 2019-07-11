@@ -3,13 +3,13 @@ _ = parent._;
 var $exeTinyMCE = {
 	
 	// imagetools is disabled because it generates base64 images
-	plugins: "toggletoolbars compat3x nonbreaking exegames_hangman exeeffects easyattributes exelist autolink exelink charmap print preview anchor tooltips searchreplace visualchars visualblocks code codemagic fullscreen insertdatetime table colorpicker contextmenu paste template textcolor hr clearfloat addcontent definitionlist blockquoteandcite pastecode pastemath exeimage exealign exemedia abcmusic abbr",
+	plugins: "toggletoolbars compat3x nonbreaking exegames_hangman exeeffects easyattributes advlist lists autolink exelink charmap print preview anchor tooltips modalwindow searchreplace visualchars visualblocks code codemagic fullscreen insertdatetime table colorpicker contextmenu paste template textcolor hr clearfloat addcontent definitionlist blockquoteandcite pastecode pastemath exeimage exealign exemedia abcmusic abbr",
 	// These buttons will be visible when the others are hidden
 	buttons0 : "toggletoolbars | undo redo | bold italic | formatselect | alignleft aligncenter alignright alignjustify | exelink unlink | bullist numlist | exeimage exemedia | fullscreen",
 	// When buttons0 are hidden, 1, 2 and 3 are visible
 	buttons1 : "toggletoolbars | bold italic | formatselect fontsizeselect fontselect | forecolor backcolor",
 	buttons2 : "alignleft aligncenter alignright alignjustify clearfloat addcontent | bullist numlist definitionlist | exelink unlink | outdent indent | blockquote blockquoteandcite",	
-	buttons3 : "undo redo | cut copy paste pastetext | pastehtml pastecode pastemath | tooltips exeeffects | exeimage exemedia abcmusic | codemagic | fullscreen",	
+	buttons3 : "undo redo | cut copy paste pastetext | pastehtml pastecode pastemath | tooltips modalwindow exeeffects | exeimage exemedia abcmusic | codemagic | fullscreen",	
 	// To add:
 		// buttons2 : "exemath"
 	content_css: "/css/extra.css," + exe_style,
@@ -93,10 +93,26 @@ var $exeTinyMCE = {
     
 	init: function(mode,criteria,hide){
 		
-		var h = 300;
+		this.mode = mode;
+		
+		var h = 175;
 		if (mode=="multiple") h = 50;
 		var w = 882;
 		if (typeof($exeTinyMCEToggler.documentWidth)=='undefined' || (typeof($exeTinyMCEToggler.documentWidth)!='undefined' && $exeTinyMCEToggler.documentWidth<900)) w = '';
+		
+		// FR 303
+		var divExists = false;
+		if (mode=='multiple') {
+			var div = $(criteria).parent();
+			if (div.length==1 && div.attr("class")=="block" && !div[0].hasAttribute("style")) {
+				divExists = true;
+				div.css({
+					"width": w+"px",
+					"height": (h+50)+"px",
+					"border" : "1px solid #C0C0C0"
+				}).addClass("hidden-editor");
+			}
+		}
 		
 		tinymce.init({
 			language: this.language,
@@ -107,6 +123,7 @@ var $exeTinyMCE = {
 			schema: this.getSchema(),
 			content_css: this.content_css,			
 			resize: "both",
+			branding: false,
 			entity_encoding: "raw",
 			valid_children: this.getValidChildren(),
 			valid_elements: this.getValidElements(),
@@ -206,6 +223,7 @@ var $exeTinyMCE = {
 			],			
 			init_instance_callback: function(ed) {
 				if (mode=="multiple") {
+					if (divExists) div.removeAttr("style"); // FR 303
 					$exeTinyMCEToggler.init(ed.id,hide);
 				}
 			},
@@ -285,7 +303,7 @@ var $exeTinyMCEToggler = {
 						padding: "15px",
 						margin: "0 0 1.5em 0"
 					});
-					$exeTinyMCEToggler.createEditorLink(e,n);
+					// To review $exeTinyMCEToggler.createEditorLink(e,n);
 				} else {
 					$exeTinyMCEToggler.createViewer(e);
 				}
@@ -302,8 +320,8 @@ var $exeTinyMCEToggler = {
 		var c = e.val();
 		var w = ";width:852px";
 		if (this.documentWidth<900) w = "";
-		$exeTinyMCEToggler.createEditorLink(e,n);
-		var v = $('<div id="'+id+'-viewer" style="height:96px;padding:2px 15px;border:1px solid #ccc;overflow:auto'+w+'" onclick="$exeTinyMCEToggler.removeViewer(\''+id+'\')">'+c+'</div>');
+		// To review: $exeTinyMCEToggler.createEditorLink(e,n);
+		var v = $('<div class="exe-textarea-preview" id="'+id+'-viewer" style="height:96px;padding:2px 15px;border:1px solid #ccc;overflow:auto'+w+'" onclick="$exeTinyMCEToggler.removeViewer(\''+id+'\')">'+c+'</div>');
 		e.before(v).addClass("sr-av"); // If we use e.hide() TinyMCE won't be properly displayed
 	},
 	
@@ -358,11 +376,11 @@ var $exeTinyMCEToggler = {
 	createEditorLink: function(e,id) {
         var f = this.getHelpLink(e);
         if (f!="") {
-            var l = $('<a href="#" id="'+id+'-toggler" onclick="$exeTinyMCEToggler.startEditor(\''+id+'\',false);$(this).remove();return false" class="visible-editor">'+_("Editor")+'</a>');
+            var l = $('<a href="#" id="'+id+'-toggler" onclick="$exeTinyMCEToggler.startEditor(\''+id+'\',false);$(this).remove();return false" class="exe-editor-toggler visible-editor">'+_("Editor")+'</a>');
             f.css("margin-right","5px").after(l);
         } else {
             // We can't find the help link, so be just enable the editor
-            $exeTinyMCEToggler.startEditor(id,false);
+            // $exeTinyMCEToggler.startEditor(id,false);
         }        
 	},
 	
@@ -383,8 +401,9 @@ var $exeTinyMCEToggler = {
         var f = this.getHelpLink(e);
         
         if (f!="") {
-            var l = $('<a href="#" id="'+id+'-toggler" onclick="$exeTinyMCEToggler.toggle(\''+id+'\',this);return false" class="visible-editor">'+_("Editor")+'</a>');
-            this.addLinkAndToggle(id,f,l,hide);
+            // To review:
+            // var l = $('<a href="#" id="'+id+'-toggler" onclick="$exeTinyMCEToggler.toggle(\''+id+'\',this);return false" class="exe-editor-toggler visible-editor">'+_("Editor")+'</a>');
+            // this.addLinkAndToggle(id,f,l,hide);
         }
 
 	},
@@ -395,7 +414,7 @@ var $exeTinyMCEToggler = {
 		var t = $("IFRAME",p);
 		var i = "";
 		if (t.length==1) i = t.eq(0);
-		if (e.className=='visible-editor') {
+		if ($(e).hasClass('visible-editor')) {
 			// Hide toolbars
 			if (i!='') {
 				window[e.id+"-iframeHeight"] = i.css("height");
@@ -406,13 +425,13 @@ var $exeTinyMCEToggler = {
                 h = 100; // Force height: Comment this line to make it as high as the TinyMCE editor
 				i.css("height",h+"px");
 			}
-			e.className = 'hidden-editor';
+			$(e).removeClass('visible-editor').addClass('hidden-editor');
 			p.addClass("hidden-editor");
 			$(".mce-edit-area").css("border-width","0"); // So the box doesn't have a 2px border top
 		} else {
 			// Show toolbars
 			if (i!='') i.css("height",window[e.id+"-iframeHeight"]);
-			e.className = 'visible-editor';
+			$(e).removeClass('hidden-editor').addClass('visible-editor');
 			$(".mce-edit-area").css("border-width","1px 0 0");
 			p.removeClass("hidden-editor");
 		}

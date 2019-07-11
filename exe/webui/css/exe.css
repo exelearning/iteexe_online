@@ -140,12 +140,6 @@ color: #000000;
 
 .maths a { color: #000000; }
  
-/* adds tiny bit of padding to edit.png when in preview mode */
-img.submit {
-    padding: 0 0 2px 2px;
-    margin-right:2px;
-}
-
 /* exe_lightbox.css */
 /* The New eXeLearning */
 .exeImageGallery{margin:1em 0 0 15px;padding:0;overflow:auto}
@@ -231,6 +225,15 @@ div.pp_overlay{background:#fff}
 div.pp_default .pp_nav .currentTextHolder,
 div.pp_default .pp_description{font-size:1em}
 div.ppt{display:none!important}
+#pp_full_res .pp_inline{line-height:1.5em;padding:0 10px}
+#pp_full_res .pp_inline p{margin:0;padding:1em 0}
+#pp_full_res .pp_title{color:#000;margin:0;padding:1em 0 .25em 0}
+/* Multimedia galleries */
+div.with-audio .pp_gallery ul li a{border:1px solid #fff}
+div.with-audio .pp_gallery ul li a:hover,div.with-audio .pp_gallery ul li.selected a,.pp_gallery ul a:hover,div.with-audio .pp_gallery li.selected a{border-color:#aaa}
+.exe-media-audio-box{text-align:center;height:50px;padding:40px 0}
+.exe-media-video-box{text-align:center;min-width:480px;height:385px}
+.exe-media-download{font-weight:normal;float:right}
 
 /* In the edition page, hidden elements are shown */
 body .exe-hidden{display:inherit;filter:alpha(opacity=40);opacity:0.4;margin:0.5em;padding-left:25px;background:url(../images/exe_hidden.png) no-repeat 0 0}
@@ -239,7 +242,61 @@ body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:au
 .hidden-editor .mce-menubar,
 .hidden-editor .mce-toolbar,
 .hidden-editor .mce-statusbar,
-.hidden-editor .mce-toolbar-grp{display:none}
+.hidden-editor .mce-toolbar-grp,
+.hidden-editor .mce-branding-powered-by{display:none}
 /* TinyMCE Float Panel (to review - see #132) */
 .mce-floatpanel{max-height:100%;overflow:auto}
-.mce-fullscreen .idevice-edition-buttons{display:none}
+.mce-fullscreen .idevice-edition-buttons,.mce-fullscreen .toggle-idevice{display:none}
+
+/* iDevice edition */
+.exe-authoring-page #activeIdevice{padding-top:1.5em;border:0;box-shadow:none}
+.exe-authoring-page .iDevice_wrapper{position:relative}
+.exe-authoring-page .idevice-edition-buttons{margin:0;height:16px;position:absolute;bottom:0;left:0;line-height:16px;opacity:0;transition:opacity .3s linear}
+.exe-authoring-page .emphasis0-empty + .idevice-edition-buttons{opacity:.3} /* See exe.js */ 
+.exe-authoring-page .iDevice_wrapper:hover .idevice-edition-buttons{opacity:1}
+.exe-authoring-page .em_iDevice .idevice-edition-buttons{left:10px;bottom:10px}
+.exe-authoring-page .idevice-edition-buttons img{background:#FFF;border-radius:2px;box-shadow:rgba(0, 0, 0, 0.35) 1px 1px 4px;padding:0;margin:0 4px 0 0}
+#activeIdevice .exe-editButtons{margin:10px 0 60px 0;height:16px}
+#activeIdevice .exe-editButtons img{margin:0 4px 0 0}
+#activeIdevice .exe-editButtons select{font-size:11px;font-family:tahoma,arial,verdana,sans-serif;vertical-align:top;margin:1px 0 0 5px}
+
+/* JavaScript iDevices */
+#activeIdevice textarea.jsContentEditor{display:none}
+/* iDevice title and icon selection styles */
+.js-show-icon-panel-button{margin:0 5px;font-size:.9em}
+.js-idevide-icon-preview{vertical-align:middle;max-width:60px;height:auto}
+.js-delete-icon{margin:0 5px}
+.js-icon-panel-container{display:none;z-index:99}
+/* Forms */
+#activeIdevice .exe-idevice-description{font-size:.95em}
+#activeIdevice .exe-feedback-fieldset p:last-child{margin-top:30px}
+#activeIdevice .exe-textarea-field{margin:20px 0}
+#activeIdevice .exe-text-field label,
+#activeIdevice .exe-select-field label,
+#activeIdevice .exe-textarea-field label{font-weight:bold}
+#activeIdevice .exe-text-field-inline label,
+#activeIdevice .exe-select-field-inline label{padding-right:5px}
+#activeIdevice .exe-text-field input,
+#activeIdevice .exe-select-field select,
+#activeIdevice .exe-select-field textarea,
+#activeIdevice .exe-textarea-preview,
+#activeIdevice div.mce-tinymce{display:block;margin-top:5px}
+#activeIdevice .js-idevice-title-label{font-weight:bold;display:block;margin-bottom:5px}
+#activeIdevice .exe-checkbox-field input{margin-right:5px}
+#activeIdevice .exe-fieldset{padding:0 20px 5px 20px;border:1px solid #C0C0C0;margin:1.5em 0}
+#activeIdevice .exe-fieldset legend{font-weight:bold;padding:0 10px}
+#activeIdevice .exe-fieldset-closed legend a{text-decoration:underline}
+#activeIdevice .exe-fieldset-closed legend a:hover{text-decoration:none}
+#activeIdevice .exe-fieldset-closed{border:none;padding:0}
+#activeIdevice .exe-fieldset-closed legend{padding:0;margin-bottom:0}
+#activeIdevice .exe-fieldset-closed div{display:none}
+#activeIdevice .exe-field-instructions{display:block;font-size:.9em;margin-top:.4em}
+
+/* Empty page instructions */
+#emptyPageInstructions{margin-top:2em;position:relative;padding-right:30px}
+#emptyPageInstructions a{position:absolute;right:13px;top:7px;font-size:18px;font-family:Verdana,sans-serif;color:#86A9BB;text-shadow:0 1px 0 #fff;font-weight:bold}
+#emptyPageInstructions a:hover,#emptyPageInstructions a:focus{color:#063853;text-decoration:none}
+
+/* Provisional code to review */
+.exe-editor-toggler{margin:0 5px}
+body.with-color-picker{overflow:hidden}

@@ -9,18 +9,19 @@
 	<!-- / eXe's extjs -->
 	
 	<link rel="stylesheet" href="css/styles.css" type="text/css" />
+	<link rel="stylesheet" href="../color-picker/css/jpicker.css" type="text/css" />
 	<!--[if lt IE 9]>
 	<link rel="stylesheet" href="css/styles_ie_lt9.css" type="text/css" />
 	<![endif]-->    
 	<script type="text/javascript" src="/scripts/exe_jquery.js"></script>
-	<script src="js/jpicker-1.1.6.min.js" type="text/javascript"></script>
-	<!--<script type="text/javascript" src="langs/en.js"></script>-->
+	<script src="../color-picker/js/jpicker-1.1.6.min.js" type="text/javascript"></script>
 	<script type="text/javascript">/*<![CDATA[*/
 		function _(s) { return s; }	
 		if (opener && opener.opener) _ = opener.opener._;
-		document.write('<scr'+'ipt type="text/javascript" src="langs/'+opener.$designer.language+'.js"></sc'+'ript>');
 	/*]]>*/</script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="../color-picker/langs/all.js"></script>
+	<script type="text/javascript" src="langs/all.js?v=002"></script>
+	<script type="text/javascript" src="js/app.js?v=002"></script>
 	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
 	<title>%Style_Designer%</title>
 </head>
@@ -272,8 +273,36 @@
 						</div>
 					</div>
 				</fieldset>
+				<fieldset id="searchBarOptions">
+					<legend>%Search_bar%</legend>
+					<div class="col">
+						<div class="fields">
+							<div class="field">
+								<label for="searchBarBGColor">%Background_color_FULL%: </label>
+								<input type="text" maxlength="6" size="6" id="searchBarBGColor" class="color" />
+							</div>
+							<div class="field">
+								<label for="searchBarTextColor">%Text_color_FULL%: </label>
+								<input type="text" maxlength="6" size="6" id="searchBarTextColor" class="color" />
+							</div>
+						</div>
+					</div>
+					<div class="col">
+						<div class="fields">
+							<div class="field">
+								<label for="searchBarButtonBGColor">%Button_background_color%: </label>
+								<input type="text" maxlength="6" size="6" id="searchBarButtonBGColor" class="color" />
+							</div>
+							<div class="field">
+								<label for="searchBarButtonTextColor">%Button_text_color%: </label>
+								<input type="text" maxlength="6" size="6" id="searchBarButtonTextColor" class="color" />
+							</div>
+						</div>
+					</div>					
+				</fieldset>
 				<p>%Background_instructions_1%</p>
 				<p>%Background_instructions_2%</p>
+				<p>%Background_instructions_3%</p>
 			</div><!-- /#page-panel -->
 			
             <div id="header" class="panel">

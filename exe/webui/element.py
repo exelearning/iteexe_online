@@ -28,6 +28,7 @@ import urllib
 from exe.webui       import common
 from exe.engine.path import Path
 from exe             import globals as G
+from exe.engine.jsidevice import JsIdevice
 from urllib import quote
 
 log = logging.getLogger(__name__)
@@ -245,11 +246,17 @@ class TextAreaElement(ElementWithResources):
         if self.field_idevice is not None \
         and self.field_idevice.parentNode is not None:
             this_package = self.field_idevice.parentNode.package
+
         html = common.formField('richTextArea', this_package, 
                                 self.field.name,'',
                                 self.id, self.field.instruc,
                                 self.field.content,
                                 str(self.width), str(self.height))
+                                
+        # Check if is jsidevice
+        if isinstance(self.field_idevice, JsIdevice):
+            html = common.textArea(self.id, self.field.content, False, 80, 8, 'jsContentEditor')
+            
         return html
 
     def renderPreview(self, visible=True, class_="block"):
@@ -1481,11 +1488,10 @@ class ClozeElement(ElementWithResources):
         else:
             # to render, use the flattened content, withOUT resource paths: 
             self.field.encodedContent = self.field.content_wo_resourcePaths
-            html += ['<form name="cloze-form-'+self.id+'" action="#" onsubmit="$exe.cloze.submit(\''+self.id+'\');return false" class="activity-form">']
+            html += ['<form name="cloze-form-'+self.id+'" action="#" class="activity-form cloze-activity-form">']
 
         html += ['<div id="cloze%s">' % self.id]
 
-        html.append('<script type="text/javascript">var YOUR_SCORE_IS="%s"</script>' % c_('Your score is '))
         # Store our args in some hidden fields
         def storeValue(name):
             value = str(bool(getattr(self.field, name))).lower()
@@ -1742,7 +1748,6 @@ class ClozelangElement(ElementWithResources):
             self.field.encodedContent = self.field.content_wo_resourcePaths
 
         html = ['<div id="clozelang%s">' % self.id]
-        html.append('<script type="text/javascript">var YOUR_SCORE_IS = "%s"</script>' % c_('Your score is '))
         # Store our args in some hidden fields
         def storeValue(name):
             value = str(bool(getattr(self.field, name))).lower()
@@ -2455,7 +2460,7 @@ class SelectquestionElement(Element):
             html += '<'+titleTag1+' class="js-sr-av">' + c_("Question")+'</'+titleTag1+'>'+lb
             html += self.questionElement.renderPreview()
         else:
-            html += '<form name="multi-select-form-'+self.id+'" action="#" onsubmit="return false" class="activity-form">'+lb
+            html += '<form name="multi-select-form-'+self.id+'" action="#" class="activity-form multi-select-form">'+lb
             html += '<'+titleTag1+' class="js-sr-av">' + c_("Question")+'</'+titleTag1+'>'+lb           
             html += self.questionElement.renderView()        
             
@@ -2469,7 +2474,7 @@ class SelectquestionElement(Element):
         # Feedback button
         html += '<div class="block iDevice_buttons feedback-button js-required">'+lb
         html += '<p>'+lb
-        html += '<input type="button" name="submitSelect" class="feedbackbutton" value="%s" onclick="$exe.showFeedback(this,%d,\'%s\')"/> ' %( c_("Show Feedback"),len(self.field.options),self.field.id)   
+        html += '<input type="button" name="submitSelect" class="feedbackbutton multi-select-feedback-toggler" value="%s" id="multi-select-feedback-toggler-%d-%s" /> ' %( c_("Show Feedback"),len(self.field.options),self.field.id)   
         html += lb
         html += '</p>'+lb
         html += '</div>'+lb
@@ -2671,7 +2676,7 @@ class QuizOptionElement(Element):
         html += '<label for="i'+self.id+'" class="sr-av"><a href="#answer-'+self.id+'">' + c_("Option")+' '+str(self.index+1)+'</a></label>'
         html += '<input type="radio" name="option%s" ' % self.field.question.id
         html += 'id="i%s" ' % self.id
-        html += 'onclick="$exe.getFeedback(%d,%d,\'%s\',\'multi\')"/>' % (self.index, length, self.field.question.id)
+        html += 'class="exe-radio-option exe-radio-option-%d-%d-%s-multi"/>' % (self.index, length, self.field.question.id)
         html += lb
         html += '</p>'+lb
         

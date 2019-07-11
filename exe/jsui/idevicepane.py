@@ -22,11 +22,12 @@ IdevicePane is responsible for creating the XHTML for iDevice links
 """
 
 import logging
+import locale
+import json
 from exe.webui.renderable import Renderable
 from twisted.web.resource import Resource
 from exe.webui.livepage import allSessionClients
-import locale
-import json
+from exe.engine.jsidevice import JsIdevice;
 
 log = logging.getLogger(__name__)
 
@@ -122,14 +123,23 @@ class IdevicePane(Renderable, Resource):
 
         prototypesToRender = []
         for prototype in prototypes:
-            lower_title = prototype._title.lower()
-            visible = lower_title not in self.config.hiddeniDevices
-            if lower_title not in self.config.deprecatediDevices:
-                if lower_title in self.config.idevicesCategories:
-                    for category in self.config.idevicesCategories[lower_title]:
-                        prototypesToRender.append((prototype, category, visible))
+            if not isinstance(prototype, JsIdevice):
+                lower_title = prototype._title.lower()
+                visible = lower_title not in self.config.hiddeniDevices
+                if lower_title not in self.config.deprecatediDevices:
+                    if lower_title in self.config.idevicesCategories:
+                        for category in self.config.idevicesCategories[lower_title]:
+                            prototypesToRender.append((prototype, category, visible))
+                    else:
+                        prototypesToRender.append((prototype, _('My iDevices'), visible))
+            else:
+                lower_title = prototype._title.lower()
+                visible = lower_title not in self.config.hiddeniDevices
+                
+                if hasattr(prototype, 'ideviceCategory'):
+                    prototypesToRender.append((prototype, prototype.ideviceCategory, visible))
                 else:
-                    prototypesToRender.append((prototype, _('My iDevices'), visible))
+                    prototypesToRender.append((prototype, _('JS iDevices'), visible))
 
         def sortfunc(t1, t2):
             return locale.strcoll(t1[0].rawTitle, t2[0].rawTitle)
@@ -146,8 +156,21 @@ class IdevicePane(Renderable, Resource):
         else:
             prototypesToRender.sort(sortfunc)
             self.config.configParser.set('user', 'showIdevicesGrouped', '0')
+        # Text should be in the first place
         for prototype, category, visible in prototypesToRender:
-            xml += self.__renderPrototype(prototype, category, visible)
+            if (category=='Text and Tasks'):
+                if (prototype._title=='Text'):
+                    xml += self.__renderPrototype(prototype, category, visible)
+        # After Text, the other iDevices in the category
+        for prototype, category, visible in prototypesToRender:
+            if (category=='Text and Tasks'):
+                if (prototype._title!='Text'):
+                    xml += self.__renderPrototype(prototype, category, visible)
+        # Other categories
+        experimentalCategoryName = _('Experimental') # Keep this string here so the tranlation is not lost even when there are no iDevices in this category
+        for prototype, category, visible in prototypesToRender:
+            if (category!='Text and Tasks' and category!='Hidden'):
+                xml += self.__renderPrototype(prototype, category, visible)
         xml += u"</idevices>\n"
         xml += u"<!-- IDevice Pane End -->\n"
         return xml.encode('utf8')

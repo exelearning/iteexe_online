@@ -23,26 +23,30 @@
 Main application class, pulls together everything and runs it.
 """
 
-import os
-import sys
-import shutil
 import logging
+import os
+import shutil
+import sys
 
+from tempfile import mkdtemp
 # Make it so we can import our own nevow and twisted etc.
 if os.name == 'posix' and not ('--standalone' in sys.argv or '--portable' in sys.argv):
     sys.path.insert(0, '/usr/share/exe')
-from exe.engine.userstore import UserStore
-from getopt import getopt, GetoptError
-from exe.webui.webserver import WebServer
-from exe.webui.browser import launchBrowser
-from exe.engine.package import Package
-from exe.engine import version
-from exe import globals
-from tempfile import mkdtemp
-from twisted.internet import reactor
-from twisted.scripts.twistd import daemonize, checkPID
-from exe.engine.idevicestore import IdeviceStore
 
+# This *must* always be the first import to prevent a warning on Windows
+from exe.webui.webserver     import WebServer
+
+from exe.engine.userstore import UserStore
+from getopt                  import getopt, GetoptError
+from twisted.internet        import reactor
+from twisted.web.static      import File
+
+from exe                     import globals as G
+from exe.engine              import version
+from twisted.scripts.twistd  import daemonize, checkPID
+from exe.engine.idevicestore import IdeviceStore
+from exe.engine.package      import Package
+from exe.webui.browser       import launchBrowser
 
 log = logging.getLogger(__name__)
 PID_FILE = '/var/run/exe/exe.pid'
@@ -52,10 +56,8 @@ class WindowsLog(object):
     """
     Logging for py2exe application
     """
-
     def __init__(self, level):
         self.level = level
-
     def write(self, text):
         log.log(self.level, text)
 
@@ -68,8 +70,7 @@ if sys.platform[:3] == "win" and not (sys.argv[0].endswith("exe_do") or
 del WindowsLog
 
 # Global application variable
-globals.application = None
-
+G.application = None
 
 class Application:
     """
@@ -97,9 +98,10 @@ class Application:
         self.resourceDir = None
         self.afterUpgradeHandlers = []
         self.preferencesShowed = False
+        self.newVersionWarningShowed = False
         self.loadErrors = []
-        assert globals.application is None, "You tried to instantiate two Application objects"
-        globals.application = self
+        assert G.application is None, "You tried to instantiate two Application objects"
+        G.application = self
 
     def main(self):
         """
@@ -134,12 +136,12 @@ class Application:
         """Execute all upgrade_to_version_X functions from stored version to actual version"""
         version_file = self.config.configDir / 'version'
         stored_version = 0
-        
+
         if version_file.exists():
             # Try to read version from file, if that fails assume 0
             try:
                 stored_version = int(version_file.bytes())
-            except: 
+            except:
                 stored_version = 0
 
         # Execute upgrade_to_version_x (if they exist) until we reach current version
@@ -147,7 +149,7 @@ class Application:
             method = getattr(Application, 'upgrade_to_version_%d' % v, None)
             if method:
                 method(self)
-                
+
         version_file.write_text(str(self.version))
 
     def upgrade_to_version_1(self):
@@ -156,10 +158,24 @@ class Application:
         if not hasattr(self, 'ideviceStore'):
             return
 
-        # Go through all iDevices and hide them if the category is Experimental
+        # Go through all iDevices and hide them if the category is Experimental or they are old
+        iDevicesToHide = [
+            'reflection',
+            'case study',
+            'image magnifier',
+            'wiki article',
+            'external web site',
+            'rss',
+            'java applet',
+            'reading activity',
+            'objectives',
+            'preknowledge',
+            'activity',
+            'free text'
+        ]
         for idevice in self.ideviceStore.getIdevices():
             lower_title = idevice._title.lower()
-            if self.config.idevicesCategories.get(lower_title, '') == ['Experimental']:
+            if self.config.idevicesCategories.get(lower_title, '') == ['Experimental'] or lower_title in iDevicesToHide:
                 self.config.hiddeniDevices.append(lower_title)
                 self.config.configParser.set('idevices', lower_title, '0')
 
@@ -199,25 +215,22 @@ class Application:
             elif option[0].lower() == '--interface':
                 self.interface = option[1]
 
+
     def loadConfiguration(self):
         """
         Loads the config file and applies all the settings
         """
         if self.standalone:
             from exe.engine.standaloneconfig import StandaloneConfig
-
             configKlass = StandaloneConfig
         elif sys.platform[:3] == "win":
             from exe.engine.winconfig import WinConfig
-
             configKlass = WinConfig
         elif sys.platform[:6] == "darwin":
             from exe.engine.macconfig import MacConfig
-
             configKlass = MacConfig
         else:
             from exe.engine.linuxconfig import LinuxConfig
-
             configKlass = LinuxConfig
         try:
             self.config = configKlass()
@@ -261,6 +274,17 @@ class Application:
         # and determine the web server's port before launching the client, so it can use the same port#:
         self.webServer.find_port()
 
+
+        # Add missing mime types to Twisted for Windows
+        File.contentTypes.update({
+            '.odt': 'application/vnd.oasis.opendocument.text',
+            '.odp': 'application/vnd.oasis.opendocument.presentation',
+            '.ods': 'application/vnd.oasis.opendocument.spreadsheet',
+            '.docx': 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            '.pptx': 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            '.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            '.elp': 'application/zip'
+        })
 
     def serve(self):
         """

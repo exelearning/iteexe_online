@@ -166,6 +166,8 @@ class PreferencesPage(RenderableResource):
         for licenses in common.getPackageLicenses():
             self.licensesNames.append({'licenseName': licenses,'text':_(licenses)})
 
+
+
     def getChild(self, name, request):
         """
         Try and find the child for the name given
@@ -201,6 +203,7 @@ class PreferencesPage(RenderableResource):
             data['showPreferencesOnStart'] = self.config.showPreferencesOnStart
             data['forceEditableExport'] = self.config.forceEditableExport
             data['cutFileName'] = self.config.cutFileName
+            data['autosaveTime'] = self.config.autosaveTime
         except Exception as e:
             log.exception(e)
             return json.dumps({'success': False, 'errorMessage': _("Failed to get preferences")})
@@ -246,6 +249,14 @@ class PreferencesPage(RenderableResource):
             self.config.cutFileName = cutFileName
             self.config.configParser.set('user', 'cutFileName', cutFileName)
             
+            autosaveTime = request.args['autosaveTime'][0]
+            try: 
+                float(autosaveTime)
+            except Exception:
+                autosaveTime = '0'
+            self.config.autosaveTime = autosaveTime
+            self.config.configParser.set('user', 'autosaveTime', autosaveTime)
+
             if not G.application.server:
                 browser = request.args['browser'][0]
                 if browser == "None":
@@ -260,7 +271,7 @@ class PreferencesPage(RenderableResource):
                     else:
                         raise e
                 self.config.configParser.set('system', 'browser', browser)
-            
+
             showPreferencesOnStart = request.args['showPreferencesOnStart'][0]
             self.config.showPreferencesOnStart = showPreferencesOnStart
             self.config.configParser.set('user', 'showPreferencesOnStart', showPreferencesOnStart)

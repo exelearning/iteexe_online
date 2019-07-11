@@ -106,7 +106,7 @@ class EditorPage(RenderableResource):
             self.__createNewIdevice(request)
             
 
-        if "delete" in request.args:
+        if ("action" in request.args and request.args["action"][0] == "deleteIdevice"):
             self.ideviceStore.delIdevice(self.editorPane.idevice)
             #Lo borramos tambien de la lista factoryiDevices
             idevice = self.editorPane.idevice
@@ -119,6 +119,7 @@ class EditorPage(RenderableResource):
             if exist:
                 self.ideviceStore.factoryiDevices.remove(idevice)
             self.ideviceStore.save()
+            self.message = _("Done")
             self.__createNewIdevice(request) 
             
         if ("action" in request.args and 
@@ -132,6 +133,7 @@ class EditorPage(RenderableResource):
                 self.ideviceStore.addIdevice(newIdevice)
                 self.editorPane.setIdevice(newIdevice)
                 self.ideviceStore.save()
+                self.message = _("Settings Saved")
                 self.isNewIdevice = False
                 
         if ("action" in request.args and 
@@ -143,6 +145,7 @@ class EditorPage(RenderableResource):
             copyIdevice = self.editorPane.idevice.clone()
             self.__saveChanges(idevice, copyIdevice)
             self.ideviceStore.save()
+            self.message = _("Settings Saved")
             
         if ("action" in request.args and 
              request.args["action"][0] == "export"):          
@@ -245,7 +248,8 @@ class EditorPage(RenderableResource):
         html += common.hiddenField("action")
         html += common.hiddenField("object")
         html += common.hiddenField("isChanged", "1") 
-        html += "<font color=\"red\"><b>"+self.message+"</b></font>"
+        if self.message != '':
+            html += "<script>Ext.Msg.alert('"+_('Info')+"', '"+self.message+"');</script>"
         html += "<div id=\"editorButtons\"> \n"     
         html += self.renderList()
         html += self.editorPane.renderButtons(request)
@@ -253,7 +257,7 @@ class EditorPage(RenderableResource):
             html += "<br/>" + common.submitButton("delete", _("Delete"), 
                                                         False)
         else:
-            html += "<br/>" + common.submitButton("delete", _("Delete"))
+            html += '<br /><input type="button" class="button" onclick="deleteIdevice()" value="'+_("Delete")+'" />'
         html += '<br/><input class="button" type="button" name="save" '
         title = "none"
         if self.editorPane.idevice.edit == False:

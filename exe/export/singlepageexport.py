@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 # Copyright 2004-2008 eXe Project, http://eXeLearning.org/
 #
@@ -61,12 +61,12 @@ class SinglePageExport(object):
 	self.page         = None
 
         # Create the output dir if it doesn't already exist
-        if not self.outputDir.exists(): 
+        if not self.outputDir.exists():
             self.outputDir.mkdir()
 
 
     def export(self, package, for_print=0):
-        """ 
+        """
         Export web site
         Cleans up the previous packages pages and performs the export
         """
@@ -98,17 +98,17 @@ class SinglePageExport(object):
             if "nav.css" in styleFiles:
                 styleFiles.remove("nav.css")
             self.stylesDir.copylist(styleFiles, self.outputDir)
-            
+
         # copy the package's resource files
         for resourceFile in package.resourceDir.walkfiles():
             file = package.resourceDir.relpathto(resourceFile)
-            
+
             if ("/" in file):
                 Dir = Path(self.outputDir/file[:file.rindex("/")])
 
                 if not Dir.exists():
                     Dir.makedirs()
-        
+
                 resourceFile.copy(self.outputDir/Dir)
             else:
                 resourceFile.copy(self.outputDir)
@@ -118,7 +118,7 @@ class SinglePageExport(object):
 
         # copy script files.
         my_style = G.application.config.styleStore.getStyle(package.style)
-        
+
         # jQuery
         if my_style.hasValidConfig:
             if my_style.get_jquery() == True:
@@ -127,16 +127,21 @@ class SinglePageExport(object):
         else:
             jsFile = (self.scriptsDir/'exe_jquery.js')
             jsFile.copyfile(self.outputDir/'exe_jquery.js')
-        
+
         dT = common.getExportDocType()
         if dT == "HTML5":
             jsFile = (self.scriptsDir/'exe_html5.js')
             jsFile.copyfile(self.outputDir/'exe_html5.js')
-        
-        # Minify common.js file        
-        listFiles=getFilesJSToMinify('singlepage', self.scriptsDir)        
+
+        # Minify common.js file
+        listFiles=getFilesJSToMinify('singlepage', self.scriptsDir)
         exportMinFileJS(listFiles, self.outputDir)
-            
+
+        # Create lang file
+        langFile = open(self.outputDir + '/common_i18n.js', "w")
+        langFile.write(common.getJavaScriptStrings(False))
+        langFile.close()
+
         # Incluide eXe's icon if the Style doesn't have one
         themePath = Path(G.application.config.stylesDir/package.style)
         themeFavicon = themePath.joinpath("favicon.ico")
@@ -159,8 +164,8 @@ class SinglePageExport(object):
         """
         Comprobamos si hay que meter algun reproductor
         """
-        
-    	# copy players for media idevices.                
+
+    	# copy players for media idevices.
         hasFlowplayer     = False
         hasMagnifier      = False
         hasXspfplayer     = False
@@ -168,14 +173,16 @@ class SinglePageExport(object):
         hasFX             = False
         hasSH             = False
         hasGames          = False
+        hasElpLink        = False
         hasWikipedia      = False
         hasInstructions   = False
         hasMediaelement   = False
         hasTooltips       = False
         hasABCMusic       = False
+        listIdevicesFiles = []
 
     	for idevice in node.idevices:
-    	    if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
+    	    if (hasFlowplayer and hasMagnifier and hasXspfplayer and hasGallery and hasFX and hasSH and hasGames and hasElpLink and hasWikipedia and hasInstructions and hasMediaelement and hasTooltips and hasABCMusic):
     	    	break
     	    if not hasFlowplayer:
     	    	if 'flowPlayer.swf' in idevice.systemResources:
@@ -194,6 +201,8 @@ class SinglePageExport(object):
                 hasSH = common.ideviceHasSH(idevice)
             if not hasGames:
                 hasGames = common.ideviceHasGames(idevice)
+            if not hasElpLink:
+                hasElpLink = common.ideviceHasElpLink(idevice,self.page.node.package)
             if not hasWikipedia:
     			if 'WikipediaIdevice' == idevice.klass:
     				hasWikipedia = True
@@ -206,7 +215,9 @@ class SinglePageExport(object):
                 hasTooltips = common.ideviceHasTooltips(idevice)
             if not hasABCMusic:
                 hasABCMusic = common.ideviceHasABCMusic(idevice)
-                            
+            if hasattr(idevice, "_iDeviceDir"):
+                listIdevicesFiles.append((Path(idevice._iDeviceDir)/'export'))
+
         if hasFlowplayer:
             videofile = (self.templatesDir/'flowPlayer.swf')
             videofile.copyfile(self.outputDir/'flowPlayer.swf')
@@ -230,6 +241,14 @@ class SinglePageExport(object):
         if hasGames:
             exeGames = (self.scriptsDir/'exe_games')
             exeGames.copyfiles(self.outputDir)
+            # Add game js string to common_i18n
+            langGameFile = open(self.outputDir + '/common_i18n.js', "a")
+            langGameFile.write(common.getGamesJavaScriptStrings(False))
+            langGameFile.close()
+        if hasElpLink or self.page.node.package.get_exportElp():
+            # Export the elp file
+            currentPackagePath = Path(self.page.node.package.filename)
+            currentPackagePath.copyfile(self.outputDir/self.page.node.package.name+'.elp')
         if hasWikipedia:
             wikipediaCSS = (self.cssDir/'exe_wikipedia.css')
             wikipediaCSS.copyfile(self.outputDir/'exe_wikipedia.css')
@@ -252,6 +271,8 @@ class SinglePageExport(object):
 
         for child in node.children:
             self.compruebaReproductores(child)
+
+        common.exportJavaScriptIdevicesFiles(node.idevices, self.outputDir)
 
     def hasUncutResources(self):
         """

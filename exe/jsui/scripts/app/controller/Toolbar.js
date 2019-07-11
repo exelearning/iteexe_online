@@ -22,6 +22,8 @@ Ext.define('eXe.controller.Toolbar', {
     requires: [
         'eXe.view.forms.PreferencesPanel',
         'eXe.view.forms.StyleManagerPanel',
+        'eXe.view.forms.TemplateManagerPanel',
+        'eXe.view.forms.ValidatePanel'
     ],
 	refs: [{
         ref: 'recentMenu',
@@ -29,8 +31,14 @@ Ext.define('eXe.controller.Toolbar', {
     },{
     	ref: 'stylesMenu',
     	selector: '#styles_menu'
+    },{
+    	ref: 'stylesMenuAdvanced',
+    	selector: '#styles_menu_advanced'
+    },{
+    	ref: 'templatesMenu',
+    	selector: '#templates_menu'
     }
-    ],    
+    ],
     init: function() {
         this.control({
             '#file': {
@@ -40,6 +48,9 @@ Ext.define('eXe.controller.Toolbar', {
                 click: this.focusMenu
             },
             '#styles_button': {
+                click: this.focusMenu
+            },
+            '#templates_button': {
                 click: this.focusMenu
             },
             '#help': {
@@ -60,17 +71,32 @@ Ext.define('eXe.controller.Toolbar', {
         	'#styles_button': {
         		beforerender: this.stylesRender
         	},
+        	'#styles_button_advanced': {
+        		beforerender: this.stylesRenderAdvanced
+        	},            
+        	'#templates_button': {
+        		beforerender: this.templatesRender
+        	},
         	'#file_recent_menu > menuitem': {
         		click: this.recentClick
         	},
         	'#styles_menu > menuitem': {
         		click: this.stylesClick
         	},
+        	'#styles_menu_advanced > menuitem': {
+        		click: this.stylesClickAdvanced
+        	},            
+        	'#templates_menu > menuitem': {
+        		click: this.templatesClick
+        	},
         	'#file_save': {
         		click: this.fileSave
         	},
         	'#file_save_as': {
         		click: this.fileSaveAs
+        	},
+        	'#template_save': {
+        		click: this.templateSave
         	},
             '#file_print': {
                 click: this.filePrint
@@ -93,8 +119,19 @@ Ext.define('eXe.controller.Toolbar', {
             '#file_export_website': {
                 click: { fn: this.processExportEvent, exportType: "webSite" }
             },
+            // Advanced user
+            '#file_export_scorm': {
+                click: { fn: this.processExportEvent, exportType: "scorm2004" }
+            },
+            '#file_export_website_b': {
+                click: { fn: this.processExportEvent, exportType: "webSite" }
+            },
+            '#file_export_singlepage_b': {
+                click: { fn: this.processExportEvent, exportType: "singlePage" }
+            },
+            // / Advanced user
             '#file_export_procomun': {
-                click: { fn: this.exportProcomun }
+                click: { fn: this.processExportEvent, exportType: "procomun" }
             },
             '#file_export_zip': {
                 click: { fn: this.processExportEvent, exportType: "zipFile" }
@@ -105,9 +142,6 @@ Ext.define('eXe.controller.Toolbar', {
             '#file_export_text': {
                 click: { fn: this.processExportEvent, exportType: "textFile" }
             },
-            '#file_export_mxml': {
-                click: { fn: this.processExportEvent, exportType: "mxml" }
-             },
             '#file_export_epub3': {
                 click: { fn: this.processExportEvent, exportType: "epub3" }
             },
@@ -141,19 +175,9 @@ Ext.define('eXe.controller.Toolbar', {
             '#tools_stylemanager': {
                 click: this.toolsStyleManager
             },
-            // Style designer
-            // To do:
-            /* 
-                nav.css:
-                overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding-right:200px should be applied to #headerContent
-            */
-            '#style_designer_new_style': {
-                click: this.styleDesigner.open
+            '#tools_templatemanager': {
+                click: this.toolsTemplateManager
             },
-            '#style_designer_edit_style': {
-                click: this.styleDesigner.editStyle
-            },
-            // / Style designer            
             '#tools_preferences': {
                 click: this.toolsPreferences
             },
@@ -161,8 +185,11 @@ Ext.define('eXe.controller.Toolbar', {
             	click: { fn: this.processExportEvent, exportType: "csvReport" }
             },
             '#tools_preview': {
-                click: { fn: this.processBrowseEvent, url: location.href + '/preview/', title: _('Preview'), id: 'preview_tab' }
+                click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
             },
+            '#tools_preview_button': {
+                click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
+            },            
             '#tools_refresh': {
                 click: this.toolsRefresh
             },
@@ -174,7 +201,13 @@ Ext.define('eXe.controller.Toolbar', {
             //    click: { fn: this.processBrowseEvent, url: 'file://%s/docs/manual/Online_manual.html' }
             // },
             '#help_tutorial': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/html_manual/exe20_en/'), title: _('eXe Manual'), id: 'manual_tab' }
+                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/html_manual/exe20_en/') }
+            },
+            '#help_assistant': {
+                click: this.assistantPage
+            },
+            '#help_assistant_simplified': {
+                click: this.assistantPage
             },
             '#help_notes': {
                 click: { fn: this.releaseNotesPage }
@@ -184,22 +217,22 @@ Ext.define('eXe.controller.Toolbar', {
                 click: this.legalPage
             },
             '#help_website': {
-                click: { fn: this.processBrowseEvent, url: 'http://exelearning.net/?lang=en', title: _('eXe Website'), id: 'website_tab' }
+                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/?lang=en') }
             },
             '#help_issue': {
-                click: { fn: this.processBrowseEvent, url: 'https://github.com/exelearning/iteexe/issues', title: _('Report an Issue'), id: 'issue_tab' }
+                click: { fn: this.processBrowseEvent, url: 'https://github.com/exelearning/iteexe/issues' }
             },
             '#help_forums': {
-                click: { fn: this.processBrowseEvent, url: 'http://exelearning.net/forums/', title: _('eXe Forums'), id: 'forums_tab' }
+                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/forums/') }
             },
             '#help_last': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/downloads/'), title: _('Downloads'), id: 'downloads_tab' }
+                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/downloads/') }
             },
             '#help_about': {
                 click: this.aboutPage
             }
         });
-        
+
         this.keymap_config = [
 			{
 				key: Ext.EventObject.N,
@@ -279,7 +312,9 @@ Ext.define('eXe.controller.Toolbar', {
 			     key: Ext.EventObject.S,
 			     alt: true,
 			     handler: function() {
-			          this.showMenu(Ext.ComponentQuery.query('#styles_button')[0]);
+			          var selector = '#styles_button';
+			          if (document.body.className.indexOf("exe-advanced")!=-1) selector += '_advanced_wrapper';
+			          this.showMenu(Ext.ComponentQuery.query(selector)[0]);
 			     },
 			     scope: this,
 			     defaultEventAction: "stopEvent"
@@ -318,6 +353,41 @@ Ext.define('eXe.controller.Toolbar', {
         window.open(location.href);
     },
 
+    assistantPage: function() {
+        if (typeof(eXeAssistantPageIsOpen)!='undefined' && eXeAssistantPageIsOpen==true) {
+            eXeAssistantPage.close(true);
+            return;
+        }
+        eXeAssistantPage = new Ext.Window ({
+            height: eXe.app.getMaxHeight(700),
+            width: 650,
+            height: 500,
+            modal: false,
+            minimizable: true,
+            id: 'assistantwin',
+            title: _("Assistant"),
+            items: {
+                xtype: 'uxiframe',
+                src: '/tools/assistant',
+                height: '100%'
+            },
+            listeners: {
+                minimize: function(win,obj) {
+                    var cls = document.body.className;
+                    var elm = Ext.select("BODY");
+                    if (cls.indexOf("exe-window-minified")==-1) elm.addCls('exe-window-minified');
+                    else elm.removeCls('exe-window-minified');
+                    Ext.getCmp("assistantwin").doLayout();
+                },
+                'close': function(){
+                    eXeAssistantPageIsOpen = false;
+                }
+            }
+        });
+        eXeAssistantPageIsOpen = true;
+        eXeAssistantPage.show();
+    },
+
     aboutPage: function() {
         var about = new Ext.Window ({
           height: eXe.app.getMaxHeight(700),
@@ -333,7 +403,7 @@ Ext.define('eXe.controller.Toolbar', {
           }
         });
         about.show();
-	},
+    },
 
     releaseNotesPage: function() {
         var about = new Ext.Window ({
@@ -370,48 +440,92 @@ Ext.define('eXe.controller.Toolbar', {
         legalnotes.show();
     },
 
+    browseURL: function(url) {
+        nevow_clientToServerEvent('browseURL', this, '', url);
+    },
+
     processBrowseEvent: function(menu, item, e, eOpts) {
-        eXe.app.browseURL(e.url, e.title, e.id)
+        // this.browseURL(e.url)
+        window.open(e.url)
     },
 
     // Not used - Task 1080, jrf
     // fileOpenTutorial: function() {
     //    this.askDirty("eXe.app.getController('Toolbar').fileOpenTutorial2()");
     // },
-    
+
     // fileOpenTutorial2: function() {
     //     nevow_clientToServerEvent('loadTutorial', this, '');
     // },
-    
+
     toolsRefresh: function() {
         eXe.app.reload();
     },
 
-    toolsPreferences: function() {
+    toolsPreferences: function(newVersionWarning) {
+        var toolsPreferencesWasClosed = function(){}
+        // Show the "New eXeLearning version" warning after closing the preferences dialog
+        if (newVersionWarning==true) {
+            toolsPreferencesWasClosed = function(){
+                eXe.app.showNewVersionWarning();
+            }
+        }
         var preferences = new Ext.Window ({
-	          height: 390, 
-	          width: 650, 
+	          height: 420,
+	          width: 650,
 	          modal: true,
 	          id: 'preferenceswin',
 	          title: _("Preferences"),
 	          layout: 'fit',
 	          items: [{
                 xtype: 'preferences'
-              }]
+              }],
+              listeners:{
+                close: toolsPreferencesWasClosed
+              }           
 	        }),
             formpanel = preferences.down('form');
         formpanel.load({url: 'preferences', method: 'GET'});
-        preferences.show();        
+        preferences.show();
 	},
-	
+
+    packagePropertiesCompletion: function(export_type, filename, properties) {
+        // Create the window to ask for the values
+        var validate = new Ext.Window({
+            width: 650,
+            modal: true,
+            id: 'validatewin',
+            title: _("Export"),
+            layout: 'fit',
+            items: [{
+                xtype: 'validate',
+                exportType: export_type,
+                fileIsSaved: (filename != ''),
+                shownProperties: properties.split(',')
+            }]
+        });
+
+        // Get the form panel
+        var formpanel = validate.down('form');
+
+        // Preload the values for the form (in case a property has actually been established
+        // but the value is not valid for the selected export type)
+        formpanel.load({
+            url: location.pathname + "/properties",
+            params: formpanel.getForm().getFieldValues(),
+            method: 'GET'
+        });
+        validate.show();
+    },
+
     // Launch the iDevice Editor Window
 	toolsIdeviceEditor: function() {
         var editor = new Ext.Window ({
-          height: eXe.app.getMaxHeight(700), 
-          width: 800, 
+          height: eXe.app.getMaxHeight(700),
+          width: 800,
           modal: true,
           id: 'ideviceeditorwin',
-          title: _("iDevice Editor"), 
+          title: _("iDevice Editor"),
           items: {
               xtype: 'uxiframe',
               src: '/editor',
@@ -431,18 +545,18 @@ Ext.define('eXe.controller.Toolbar', {
                         }
                     }
                 });
-                return false;                
+                return false;
             }
           }
         });
-        editor.show();        
+        editor.show();
 	},
-	
+
 	// JRJ: Launch the Style Manager Window
 	toolsStyleManager: function() {
         var stylemanager = new Ext.Window ({
-          maxHeight: eXe.app.getMaxHeight(800), 
-          width: 500, 
+          maxHeight: eXe.app.getMaxHeight(800),
+          width: 500,
           modal: true,
           autoShow: true,
           autoScroll: true,
@@ -453,97 +567,33 @@ Ext.define('eXe.controller.Toolbar', {
               xtype: 'stylemanager'
           }
         });
-        stylemanager.show();        
+        stylemanager.show();
 	},
-    
-	// Style designer
-	styleDesigner : {
-		open : function(btn, text){
-			var lang = "en", // Default language
-			    l = document.documentElement.lang;
-			if (l && l!="") lang = l;
-			eXe.app.browseURL("/tools/style-designer/previews/website/?lang="+lang, _('Style Designer'), 'style_designer_tab');
-		},
-		notCompatible : function(){
-			Ext.Msg.alert("", _("Sorry, only styles created with the Editor can be edited. eXe's Styles are not editable"));
-		},
-		error : function(){
-			Ext.Msg.alert(_('Error'), _("An unknown error occurred."));
-		},	
-		createNewStyleInstead : function(){
-			Ext.Msg.alert(_('Information'), _("That's one of eXe's default Styles, and it cannot be edited.\n\nPlease choose a different style or create a new one."));
-		},
-		errorSaving : function(){
-			Ext.Msg.alert(_('Error'), _("Your Style could not be saved because an unknown error occurred."));
-		},
-		editStyle : function(){
-			var stylePath = this.styleDesigner.getCurrentStyleFilePath();
-			
-			// We check if the Style is in the list exelearning-default-styles.txt
-			// In that case, you cannot edit it
-			var styleName = stylePath.replace("/style/","").split("/")[0];
-			if (styleName=="base") {
-				this.styleDesigner.createNewStyleInstead();
-				return false;
-			}
-			Ext.Ajax.request({
-				url: "/tools/style-designer/exelearning-default-styles.txt",
-				scope: this,
-				success: function(response) {
-					var res = response.responseText;
-					if (res.indexOf(","+styleName)!=-1) {
-						this.styleDesigner.createNewStyleInstead();
-					} else {
-						// We check if the Style is compatible with the tool
-						Ext.Ajax.request({
-							url: stylePath,
-							scope: this,
-							success: function(response) {
-								var res = response.responseText;
-								if (res.indexOf("/* eXeLearning Style Designer Compatible Style */")!=0) {
-									this.styleDesigner.notCompatible();
-								} else {
-									// If it's compatible, we open the Style designer
-									var lang = "en", // Default language
-									    l = document.documentElement.lang,
-                                        url;
-									if (l && l!="")
-                                        lang = l;
+	// Launch the Template Manager
+	toolsTemplateManager: function() {
+        var templatemanager = new Ext.Window ({
+          maxHeight: eXe.app.getMaxHeight(800),
+          width: 500,
+          modal: true,
+          autoShow: true,
+          autoScroll: true,
+          id: 'templatemanagerwin',
+          title: _("Template Manager"),
+          layout: 'fit',
+          items: {
+              xtype: 'templatemanager'
+          }
+        });
+        templatemanager.show();
+	},
 
-									url = "/tools/style-designer/previews/website/?style=" + this.styleDesigner.getCurrentStyleId() + "&lang=" + lang;
-									eXe.app.browseURL(url, _('Style Designer'), 'style_designer_tab');
-								}
-							},
-							error: function(){
-								this.styleDesigner.error();
-							}
-						});
-					}
-				},
-				error: function(){
-					this.styleDesigner.error();
-				}
-			});
-			
-		},
-		getCurrentStyleId : function(){
-			var id = this.getCurrentStyleFilePath();
-			id = id.replace("/","");
-			id = id.split("/")[1];
-			return id;
-		},
-		getCurrentStyleFilePath : function(){ // It returns "/style/INTEF/content.css", being X your style
-			return document.getElementsByTagName("IFRAME")[0].contentWindow.exe_style;
-		}
-	},
-	// / Style designer    
-    
     fileQuit: function() {
 	    this.saveWorkInProgress();
 	    this.askDirty("eXe.app.getController('Toolbar').doQuit()", "quit");
 	},
 
     doQuit: function() {
+        Ext.util.Cookies.clear('eXeSaveReminderPreference');
         eXe.app.quitWarningEnabled = false;
         nevow_clientToServerEvent('quit', this, '');
         Ext.get('loading-mask').fadeIn();
@@ -568,7 +618,7 @@ Ext.define('eXe.controller.Toolbar', {
             { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
             ]
         );
-        f.show();        
+        f.show();
 	},
 
 	extractPackage: function() {
@@ -590,7 +640,7 @@ Ext.define('eXe.controller.Toolbar', {
             { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
             ]
         );
-        f.show();        
+        f.show();
 	},
 
     importHtml: function(){
@@ -646,12 +696,12 @@ Ext.define('eXe.controller.Toolbar', {
         ]);
         fp.show();
     },
-    
+
     updateImportProgressWindow: function(msg) {
         if (!this.importProgressDisabled)
             this.importProgress.updateText(msg);
     },
-    
+
     initImportProgressWindow: function(title) {
         this.importProgressDisabled = false;
         this.importProgress = Ext.Msg.show( {
@@ -678,9 +728,9 @@ Ext.define('eXe.controller.Toolbar', {
                     });
                 }
             }
-        });        
+        });
     },
-    
+
     closeImportProgressWindow: function() {
         this.importProgress.destroy();
     },
@@ -695,8 +745,8 @@ Ext.define('eXe.controller.Toolbar', {
             callback: function(fp) {
                 if (fp.status == eXe.view.filepicker.FilePicker.returnOk) {
                     var preferences = new Ext.Window ({
-                      height: 220, 
-                      width: 650, 
+                      height: 220,
+                      width: 650,
                       modal: true,
                       id: 'xliffimportwin',
                       title: _("XLIFF Import Preferences"),
@@ -826,16 +876,81 @@ Ext.define('eXe.controller.Toolbar', {
             { "typename": _("XLIFF Files"), "extension": "*.xlf", "regex": /.*\.xlf$/ },
             { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
         ]);
-        fp.show();            
+        fp.show();
     },
 
     processExportEvent: function(menu, item, e, eOpts) {
         this.saveWorkInProgress();
-        this.exportPackage(e.exportType, "");
+        
+        // Tools - Resources Report should have no validation
+        if (e.exportType=="csvReport") {
+            this.exportPackage(e.exportType, "");
+            return;
+        }        
+
+        // Check if we need to show a warning if the package has metadata
+        nevow_clientToServerEvent('showMetadataWarning', this, '', e.exportType);
     },
-    
+
+    /**
+     * Shows a message warning the user that the current package has metadata
+     * information in it before exporting it.
+     *
+     * @param {string} exportType
+     *      The export type selected by the user.
+     *
+     * @returns {void}
+     */
+    showMetadataWarning: function(exportType) {
+        // Show the warning alerting the user of the package's metadata
+        Ext.Msg.show({
+            title: _('Warning'),
+            msg: _('This package has metadata. You might be exporting incorrect information included by the original author. Go to Properties to edit it.')
+                + '<br /><br />'
+                + _('Do you want to export the package with the current metadata?')
+                + '<br /><br />'
+                + '<label for="metadata-warning-hide"><input type="checkbox" id="metadata-warning-hide" /> '
+                + _("Don't show this warning again")
+                + '</label>',
+            scope: this,
+            modal: true,
+            buttons: Ext.Msg.YESNO,
+            fn: function(button) {
+                // Only continue the export process if the user has clicked on Yes
+                if (button == 'yes') {
+                    this.processExportEventValidationStep(exportType);
+                }
+
+                // Either way, check if the user wants to hide the warning
+                if (Ext.query('#metadata-warning-hide')[0].checked) {
+                    this.hideMetadataWarningForever();
+                }
+            }
+        });
+    },
+
+    /**
+     * Hides the metadata warning on export for the user.
+     */
+    hideMetadataWarningForever: function() {
+        nevow_clientToServerEvent('hideMetadataWarningForever');
+    },
+
+    processExportEventValidationStep: function(exportType) {
+        nevow_clientToServerEvent('validatePackageProperties', this, '', exportType);
+    },
+
     exportProcomun: function() {
         this.saveWorkInProgress();
+        Ext.Msg.show({
+            title: _('Publishing document to Procomún'),
+            msg: _('Initializing Procomún export process...'),
+            width: 300,
+            progress: true,
+            progressText: '0%',
+            closable: false,
+            draggable: false
+        });
         nevow_clientToServerEvent('exportProcomun', this, '');
     },
 
@@ -866,8 +981,20 @@ Ext.define('eXe.controller.Toolbar', {
         });
     },
 
+    showOAuthError: function(packageName) {
+        Ext.Msg.show({
+            title: _("Error"),
+            msg: _('Error exporting package "%s" to Procomún.').replace("%s",packageName)
+                + '<br />'
+                + _('If you have problems publishing or you want to complete your cataloguing later, close this dialogue, export as SCORM 2004 and upload the generated zip file to Procomún.'),
+            scope: this,
+            modal: true,
+            buttons: Ext.Msg.OK
+        });
+    },
+
 	exportPackage: function(exportType, exportDir) {
-	    if (exportType == 'webSite' || exportType == 'singlePage' || exportType == 'ipod' || exportType == 'mxml' ) {
+	    if (exportType == 'webSite' || exportType == 'singlePage' || exportType == 'printSinglePage' || exportType == 'ipod' ) {
 	        if (exportDir == '') {
                 var fp = Ext.create("eXe.view.filepicker.FilePicker", {
 		            type: eXe.view.filepicker.FilePicker.modeGetFolder,
@@ -877,11 +1004,8 @@ Ext.define('eXe.controller.Toolbar', {
 		            callback: function(fp) {
 		                if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
 		                	// Show exporting message
-		                	// If export is Ustad Mobile don't show the message because don't disappear
-		                	if(exportType != 'mxml'){
-		                		Ext.Msg.wait(_('Please wait...'));
-		                	}
-		                    nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
+		                	Ext.Msg.wait(_('Please wait...'));
+		                	nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
 		                }
 		            }
 		        });
@@ -954,6 +1078,8 @@ Ext.define('eXe.controller.Toolbar', {
                     ]
                 );
                 fp.show();
+        } else if(exportType == 'procomun') {
+            this.exportProcomun();
 	    } else {
             var title;
 	        if (exportType == "scorm1.2" || exportType == 'scorm2004'|| exportType == 'agrega')
@@ -986,14 +1112,28 @@ Ext.define('eXe.controller.Toolbar', {
 	            { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
 	            ]
 	        );
-	        fp.show();            
+	        fp.show();
 	    }
 	},// exportPackage()
-    
+
     filePrint: function() {
-        eXe.app.browseURL(location.href + '/print/', _('Print'), 'print_tab');
-    },
-	
+	   // filePrint step#1: create a temporary print directory,
+	   // and return that to filePrint2, which will then call exportPackage():
+	   var tmpdir_suffix = ""
+	   var tmpdir_prefix = "eXeTempPrintDir_"
+	   nevow_clientToServerEvent('makeTempPrintDir', this, '', tmpdir_suffix,
+	                              tmpdir_prefix, "eXe.app.getController('Toolbar').filePrint2")
+	   // note: as discussed below, at the end of filePrint3_openPrintWin(),
+	   // the above makeTempPrintDir also removes any previous print jobs
+	},
+
+	filePrint2: function(tempPrintDir, printDir_warnings) {
+	   if (printDir_warnings.length > 0) {
+	      Ext.Msg.alert("", printDir_warnings)
+	   }
+	   this.exportPackage('printSinglePage', tempPrintDir);
+	},
+
     recentRender: function() {
     	Ext.Ajax.request({
     		url: location.pathname + '/recentMenu',
@@ -1016,14 +1156,15 @@ Ext.define('eXe.controller.Toolbar', {
     	})
     	return true;
     },
-    
-    stylesRender: function() {
-    	Ext.Ajax.request({
+
+    stylesRender: function(updateFromTheOtherMenu) {
+        Ext.Ajax.request({
     		url: location.pathname + '/styleMenu',
     		scope: this,
     		success: function(response) {
-				var styles = Ext.JSON.decode(response.responseText),
-					menu = this.getStylesMenu(), i, item;
+				var styles = Ext.JSON.decode(response.responseText), menu, i, item;
+                if (updateFromTheOtherMenu==true) menu = Ext.ComponentQuery.query("#styles_button")[0].menu;
+                else menu = this.getStylesMenu();
 					// JRJ: Primero los borro
 					menu.removeAll();
     			for (i = styles.length-1; i >= 0; i--) {
@@ -1034,6 +1175,48 @@ Ext.define('eXe.controller.Toolbar', {
     	})
     	return true;
     },
+    
+    stylesRenderAdvanced: function(updateFromTheOtherMenu) {
+        Ext.Ajax.request({
+    		url: location.pathname + '/styleMenu',
+    		scope: this,
+    		success: function(response) {
+				var styles = Ext.JSON.decode(response.responseText), menu, i, item;
+                if (updateFromTheOtherMenu==true) menu = Ext.ComponentQuery.query("#styles_button_advanced")[0].menu;
+                else menu = this.getStylesMenuAdvanced();
+					// JRJ: Primero los borro
+					menu.removeAll();
+    			for (i = styles.length-1; i >= 0; i--) {
+                    item = Ext.create('Ext.menu.CheckItem', { text: styles[i].label, itemId: styles[i].style, checked: styles[i].selected });
+    				menu.insert(0, item);
+    			}
+    		}
+    	})
+    	return true;
+    },    
+
+    templatesRender: function() {
+    	Ext.Ajax.request({
+    		url: location.pathname + '/templateMenu',
+    		scope: this,
+    		success: function(response) {
+				var templates = Ext.JSON.decode(response.responseText),
+					menu = this.getTemplatesMenu(), i, item;
+					menu.removeAll();
+				if (templates.length == 0) {
+					item = Ext.create('Ext.menu.Item', {text: _("No templates available"), disabled: true});
+					menu.insert(0, item);
+				} else {
+	    			for (i = templates.length-1; i >= 0; i--) {
+	    				item = Ext.create('Ext.menu.Item', { text: templates[i].label, path: templates[i].template });
+	    				menu.insert(0, item);
+	    			}
+				}
+    		}
+    	})
+    	return true;
+    },
+
 
     recentClick: function(item) {
     	if (item.itemId == "file_clear_recent") {
@@ -1042,14 +1225,14 @@ Ext.define('eXe.controller.Toolbar', {
     			items = menu.items.items.slice(),
     			i = 0,
     			len = items.length;
-    		for (; i < len; i++) 
+    		for (; i < len; i++)
     			if (items[i].text[1] == ".")
     				menu.remove(items[i], true);
     	}
     	else
     		this.askDirty("eXe.app.getController('Toolbar').fileOpenRecent2('" + item.text[0] + "');")
     },
-	
+
     executeStylesClick: function(item) {
 		for (var i = item.parentMenu.items.length-1; i >= 0; i--) {
 			if (item.parentMenu.items.getAt(i) != item)
@@ -1057,15 +1240,33 @@ Ext.define('eXe.controller.Toolbar', {
 		}
 		item.setChecked(true);
 		item.parentMenu.hide();
-		// provisional
-		// item.parentMenu.parentMenu.hide();
 		item.parentMenu.hide();
-		//
+		
         var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
         if (authoring)
             authoring.submitLink("ChangeStyle", item.itemId, 1);
+        
+        // Update the advanced menu
+        eXe.controller.Toolbar.prototype.stylesRenderAdvanced(true);
     },
     
+    executeStylesClickAdvanced: function(item) {
+		for (var i = item.parentMenu.items.length-1; i >= 0; i--) {
+			if (item.parentMenu.items.getAt(i) != item)
+				item.parentMenu.items.getAt(i).setChecked(false);
+		}
+		item.setChecked(true);
+		item.parentMenu.hide();
+		item.parentMenu.parentMenu.hide();
+		
+        var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
+        if (authoring)
+            authoring.submitLink("ChangeStyle", item.itemId, 1);
+        
+        // Update the Styles menu
+        eXe.controller.Toolbar.prototype.stylesRender(true);
+    },    
+
     stylesClick: function(item) {
         var ed = this.getTinyMCEFullScreen();
         if(ed!="") {
@@ -1076,20 +1277,41 @@ Ext.define('eXe.controller.Toolbar', {
         } else this.executeStylesClick(item);
     },
     
+    stylesClickAdvanced: function(item) {
+        var ed = this.getTinyMCEFullScreen();
+        if(ed!="") {
+            ed.execCommand('mceFullScreen');
+            setTimeout(function(){
+                eXe.controller.Toolbar.prototype.executeStylesClick(item);
+            },500);
+        } else this.executeStylesClickAdvanced(item);
+    },    
+
+    executeTemplatesClick: function(path) {
+    	nevow_clientToServerEvent('loadTemplate', this, '', path)
+    },
+
+    templatesClick: function(item) {
+    	// Sometimes it gets parsed twice, sometimes three times
+    	// This makes it impossible for us to use "\"
+    	// It will be transformed later according to the users OS
+    	this.askDirty("eXe.app.getController('Toolbar').executeTemplatesClick('" + item.path.replace(/\\/g, '/') + "');")
+    },
+
 	fileOpenRecent2: function(number) {
         Ext.Msg.wait(_('Loading package...'));
 	    nevow_clientToServerEvent('loadRecent', this, '', number)
 	},
-	
+
     fileNew: function() {
     	// Ask the server if the current package is dirty
     	this.askDirty("eXe.app.gotoUrl('/')");
 	},
-	
+
     fileOpen: function() {
     	this.askDirty("eXe.app.getController('Toolbar').fileOpen2()");
     },
-    
+
     fileOpen2: function() {
 		var f = Ext.create("eXe.view.filepicker.FilePicker", {
 			type: eXe.view.filepicker.FilePicker.modeOpen,
@@ -1110,11 +1332,11 @@ Ext.define('eXe.controller.Toolbar', {
 		);
 		f.show();
     },
-    
+
     checkDirty: function(ifClean, ifDirty) {
     	nevow_clientToServerEvent('isPackageDirty', this, '', ifClean, ifDirty)
 	},
-	
+
 	askSave: function(onProceed) {
 		Ext.Msg.show({
 			title: _("Save Package first?"),
@@ -1130,7 +1352,7 @@ Ext.define('eXe.controller.Toolbar', {
 			}
 		});
 	},
-    
+
     getTinyMCEFullScreen: function(){
         var ifs = document.getElementsByTagName("IFRAME");
         if (ifs.length==1) {
@@ -1143,33 +1365,55 @@ Ext.define('eXe.controller.Toolbar', {
         }
         return "";
     },
-    
-    executeFileSave: function(onProceed) {
-	    if (!onProceed || (onProceed && typeof(onProceed) != "string"))
-	        var onProceed = '';
-	    nevow_clientToServerEvent('getPackageFileName', this, '', 'eXe.app.getController("Toolbar").fileSave2', onProceed);
+
+    executeFileSave: function (onProceed,export_type_name) {
+        if (!onProceed || (onProceed && typeof(onProceed) != "string")) {
+            var onProceed = '';
+        }
+
+        eXeSaveReminder.clearScheduledSaveWarning();
+        eXeSaveReminder.scheduleDirtyCheck();
+
+        nevow_clientToServerEvent(
+            'getPackageFileName',
+            this,
+            '',
+            'eXe.app.getController("Toolbar").fileSave2',
+            onProceed,
+            export_type_name
+        );
     },
-	
-	fileSave: function(onProceed) {
+
+	fileSave: function(onProceed, export_type_name) {
         var ed = this.getTinyMCEFullScreen();
         if(ed!="") {
             ed.execCommand('mceFullScreen');
             setTimeout(function(){
                 eXe.controller.Toolbar.prototype.executeFileSave(onProceed);
             },500);
-        } else this.executeFileSave(onProceed);
+        } else if(typeof(export_type_name) == 'string'){
+            this.executeFileSave(onProceed,export_type_name);
+        }else{
+            this.executeFileSave(onProceed,"");
+        }
+
 	},
-	
-	fileSave2: function(filename, onDone) {
+
+	fileSave2: function(filename, onDone,export_type_name) {
 	    if (filename) {
 	        this.saveWorkInProgress();
 	        // If the package has been previously saved/loaded
 	        // Just save it over the old file
-            Ext.Msg.wait(new Ext.Template(_('Saving package to: {filename}')).apply({filename: filename}));
-	        if (onDone) {
-	            nevow_clientToServerEvent('savePackage', this, '', '', onDone);
+
+	        if (export_type_name === "") {
+                Ext.Msg.wait(new Ext.Template(_('Saving package to: {filename}')).apply({filename: filename}));
+                if (onDone){
+                    nevow_clientToServerEvent('savePackage', this, '', '', onDone);
+                }else{
+                    nevow_clientToServerEvent('savePackage', this, '');
+                }
 	        } else {
-	            nevow_clientToServerEvent('savePackage', this, '');
+                nevow_clientToServerEvent('savePackage', this, '','','',export_type_name);
 	        }
 	    } else {
 	        // If the package is new (never saved/loaded) show a
@@ -1177,6 +1421,38 @@ Ext.define('eXe.controller.Toolbar', {
 	        this.fileSaveAs(onDone)
 	    }
 	},
+
+	templateSave: function(onProceed) {
+        var ed = this.getTinyMCEFullScreen();
+        if(ed!="") {
+            ed.execCommand('mceFullScreen');
+            setTimeout(function(){
+                eXe.controller.Toolbar.prototype.executeTemplateSave(onProceed);
+            },500);
+        } else this.executeTemplateSave(onProceed);
+	},
+
+    executeTemplateSave: function(onProceed) {
+		Ext.Msg.show({
+			prompt: true,
+			title: _('Title for template:'),
+			msg: _('Enter the new name for template:'),
+			buttons: Ext.Msg.OKCANCEL,
+			multiline: false,
+			scope: this,
+			fn: function(button, text) {
+				if (button == "ok")	{
+					if (text) {
+						if (!onProceed || (onProceed && typeof(onProceed) != "string"))
+					        var onProceed = '';
+						nevow_clientToServerEvent('saveTemplate', this, '', text, onProceed);
+					}
+		    	}
+			}
+		});
+
+    },
+
 	// Called by the user when they want to save their package
 	executeFileSaveAs: function(onDone) {
 		var f = Ext.create("eXe.view.filepicker.FilePicker", {
@@ -1207,7 +1483,7 @@ Ext.define('eXe.controller.Toolbar', {
 		);
 		f.show();
 	},
-    
+
     fileSaveAs: function(onDone) {
         var ed = this.getTinyMCEFullScreen();
         if(ed!="") {
@@ -1217,18 +1493,25 @@ Ext.define('eXe.controller.Toolbar', {
             },500);
         } else this.executeFileSaveAs(onDone);
     },
-	
+
 	// Submit any open iDevices
 	saveWorkInProgress: function() {
 	    // Do a submit so any editing is saved to the server
         var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
         if (authoring && authoring.getContentForm) {
 		    var theForm = authoring.getContentForm();
-		    if (theForm)
-		        theForm.submit();
+            if (theForm) {
+                try {
+                    $exeAuthoring.iDevice.save();
+                } catch(e) {
+                    console.warn("Error saving iDevice");
+                }
+
+                theForm.submit();
+            }
         }
-	},
-	
+    },
+
     askDirty: function(nextStep) {
     	this.checkDirty(nextStep, 'eXe.app.getController("Toolbar").askSave("'+nextStep+'")');
     }

@@ -46,6 +46,8 @@ def prepare_nevow_request(request):
         post_data[k] = v[0]
     scheme = request.received_headers.get('x-forwarded-proto', 'http')
     host = request.received_headers.get('x-forwarded-host', request.getHeader('host'))
+    host = host if ',' not in host else host.split(',')[0]
+
     port = host.split(':')
     port = int(port[1]) if len(port) > 1 else (80 if scheme == 'http' else 443)
     return {
@@ -119,6 +121,7 @@ class SAMLPage(rend.Page):
         auth = init_saml_auth(req, self.configDir)
         if auth:
             start_url = auth.login('%s://%s%s' % (req['scheme'], req['http_host'], req['script_name']))
+
             return url.URL.fromString(start_url)
         else:
             return 'SAML authentication needs a saml configuration directory at %s. See an example ' \

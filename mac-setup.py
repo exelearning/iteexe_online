@@ -48,11 +48,14 @@ def dataFiles(baseSourceDir, baseDestDir, sourceDirs, excludes=[]):
 # Add all the webui dirs
 dataFiles('exe/webui', '../Resources/exe',
           [
-              'style', 'css', 'images', 'docs',
+              'style', 'content_template', 'css', 'images', 'docs',
               'scripts', 'schemas', 'templates',
               'tools'
           ],
           excludes=['mimetex.exe'])
+
+# Process metadata validation rules
+files['../Resources/exe'].append('exe/webui/exportvalidation.json')
 
 # Add in the
 dataFiles('exe', '../Resources/exe', ['locale'])
@@ -80,7 +83,7 @@ plist = dict(
 
 py2appParams = {
     'includes': 'PngImagePlugin,JpegImagePlugin,GifImagePlugin,IcoImagePlugin,BmpImagePlugin,BaseHTTPServer',
-    'packages': 'encodings,nevow,lxml',
+    'packages': 'encodings,nevow,lxml,PIL',
     'argv_emulation': True,
     'semi_standalone': False,
     'plist': plist,
@@ -100,7 +103,7 @@ Content generated using eXe can be used by any Learning Management System.
       author_email="admin@exelearning.net",
       license="GPL",
       packages=["exe", "exe.webui", "exe.jsui",
-                "exe.engine", "exe.export", "exe.importers", "exe.engine.lom"],
+                "exe.engine", "exe.export", "exe.importers", "exe.engine.lom", "exe.engine.exceptions"],
       data_files=files.items(),
       app=["exe/main.py"],
       options={'py2app': py2appParams},

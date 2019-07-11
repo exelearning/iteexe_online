@@ -23,6 +23,7 @@ has loaded, (and loading and saving them?)
 
 import logging
 from exe.engine.package      import Package
+from exe                     import globals as G
 log = logging.getLogger(__name__)
 
 
@@ -84,4 +85,39 @@ class PackageStore:
         return package
 
 
+    def createPackageFromTemplate(self, templateBase):
+        """
+        Creates a new package from Template
+        """
+        log.debug(u"createPackageFromTemplate")
+        package = Package.load(templateBase, isTemplate=True)
+        package.set_templateFile(str(templateBase.basename().splitext()[0]))
+        # Make up an initial unique name
+        i = 1
+        name = u"newPackage"
+        while name in self.loaded:
+            name = u"newPackage" + unicode(i)
+            i += 1
+        
+        # Prevent the package from opening on the last node edited
+        package.currentNode = package.root
+        
+        package.name = name
+        package.filename = ""
+
+        # We have to make sure the DocType of the package is the one selected
+        # in preferences and not the one used to save de template
+        package.docType = G.application.config.docType
+
+        if G.application.config.locale.split('_')[0] != 'zh':
+            package.lang = G.application.config.locale.split('_')[0]
+        else:
+            package.lang = G.application.config.locale
+            
+        package.translatePackage()
+        package.isChanged = False
+        
+        self.loaded[package.name] = package
+
+        return package
 # ===========================================================================
