@@ -279,6 +279,8 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleTestPrintMsg, 'testPrintMessage')
         setUpHandler(self.handleReload, 'reload')
         setUpHandler(self.handleSourcesDownload, 'sourcesDownload')
+        # PRINT handler
+        setUpHandler(self.handleClearAndMakeTempPrintDir, 'makeTempPrintDir')
 
         # For the new ExtJS 4.0 interface
         setUpHandler(self.outlinePane.handleAddChild, 'AddChild')
@@ -656,6 +658,105 @@ class MainPage(RenderableLivePage):
         # and finally, go ahead and remove the top-level tempdir itself:
         if int(rm_top_dir) != 0:
             os.rmdir(tempdir)
+
+    #### NECESSARY TO PRINT
+    def ClearParentTempPrintDirs(self, client, log_dir_warnings):
+        """
+        Determine the parent temporary printing directory, and clear them
+        if safe to do so (i.e., if not the config dir itself, for example)
+        Makes (if necessary), and clears out (if applicable) the parent
+        temporary directory.
+        The calling handleClearAndMakeTempPrintDir() shall then make a
+        specific print-job subdirectory.
+        """
+        #
+        # Create the parent temp print dir as hardcoded under the webdir, as:
+        #           http://temp_print_dirs
+        # (eventually may want to allow this information to be configured by
+        #  the user, stored in globals, etc.)
+        web_dirname = G.application.tempWebDir
+        under_dirname = os.path.join(web_dirname, "temp_print_dirs")
+        clear_tempdir = 0
+        dir_warnings = ""
+
+        # but first need to ensure that under_dirname itself is available;
+        # if not, create it:
+        if cmp(under_dirname, "") != 0:
+            if os.path.exists(under_dirname):
+                if os.path.isdir(under_dirname):
+                    # Yes, this directory already exists.
+                    # pre-clean it, keeping the clutter down:
+                    clear_tempdir = 1
+                else:
+                    dir_warnings = "WARNING: The desired Temporary Print " \
+                            + "Directory, \"" + under_dirname \
+                            + "\", already exists, but as a file!\n"
+                    if log_dir_warnings:
+                        log.warn("ClearParentTempPrintDirs(): The desired " \
+                                + "Temporary Print Directory, \"%s\", " \
+                                + "already exists, but as a file!", \
+                                under_dirname)
+                    under_dirname = web_dirname
+                    # but, we can't just put the tempdirs directly underneath
+                    # the webDir, since no server object exists for it.
+                    # So, as a quick and dirty solution, go ahead and put
+                    # them in the images folder:
+                    under_dirname = os.path.join(under_dirname, "images")
+
+                    dir_warnings += "    RECOMMENDATION: please " \
+                            + "remove/rename this file to allow eXe easier "\
+                            + "management of its temporary print files.\n"
+                    dir_warnings += "     eXe will create the temporary " \
+                           + "printing directory directly under \"" \
+                           + under_dirname + "\" instead, but this might "\
+                           + "leave some files around after eXe terminates..."
+                    if log_dir_warnings:
+                        log.warn("    RECOMMENDATION: please remove/rename "\
+                            + "this file to allow eXe easier management of "\
+                            + "its temporary print files.")
+                        log.warn("     eXe will create the temporary " \
+                            + "printing directory directly under \"%s\" " \
+                            + "instead, but this might leave some files " \
+                            + "around after eXe terminates...", \
+                            under_dirname)
+                    # and note that we do NOT want to clear_tempdir
+                    # on the config dir itself!!!!!
+            else:
+                os.makedirs(under_dirname)
+                # and while we could clear_tempdir on it, there's no need to.
+        if clear_tempdir:
+            # before making this particular print job's temporary print
+            # directory underneath the now-existing temp_print_dirs,
+            # go ahead and clear out temp_print_dirs such that we have
+            # AT MOST one old temporary set of print job files still existing
+            # once eXe terminates:
+            rm_topdir = "0"
+            # note: rm_topdir is passed in as a STRING since
+            # handleRemoveTempDir expects as such from nevow's
+            # clientToServerEvent() call:
+            self.handleRemoveTempDir(client, under_dirname, rm_topdir)
+
+        return under_dirname, dir_warnings
+
+    def handleClearAndMakeTempPrintDir(self, client, suffix, prefix, \
+                                        callback):
+        """
+        Makes a temporary printing directory, and yup, that's pretty much it!
+        """
+
+        # First get the name of the parent temp directory, after making it
+        # (if necessary) and clearing (if applicable):
+        log_dir_warnings = 1
+        (under_dirname, dir_warnings) = self.ClearParentTempPrintDirs( \
+                                             client, log_dir_warnings)
+
+        # Next, go ahead and create this particular print job's temporary
+        # directory under the parent temp directory:
+        temp_dir = mkdtemp(suffix, prefix, under_dirname)
+
+        # Finally, pass the created temp_dir back to the expecting callback:
+        client.call(callback, temp_dir, dir_warnings)
+    #### Edit by Manuel Mayo Lado
 
     def handleTinyMCEimageChoice(self, client, tinyMCEwin, tinyMCEwin_name, \
                              tinyMCEfield, local_filename, preview_filename):
@@ -1156,8 +1257,16 @@ class MainPage(RenderableLivePage):
         """
         adding the print feature in using the same export functionality:
         """
-        if exportType == 'singlePage':
-            self.exportSinglePage(client, filename, webDir, stylesDir, False)
+        if exportType == 'singlePage' or exportType == 'printSinglePage':
+            if exportType == 'printSinglePage':
+                printit = 1
+            else:
+                printit = 0
+            exported_dir = self.exportSinglePage(client, filename, webDir,
+                                                 stylesDir, printit)
+            if exported_dir is None:
+                client.alert(_(u"EXPORTED DIR ERROR"))
+
         elif exportType == 'webSite':
             self.exportWebSite(client, filename, stylesDir)
         elif exportType == 'csvReport':
@@ -1654,5 +1763,3 @@ class MainPage(RenderableLivePage):
             log.error(u'Traceback:\n%s' % traceback.format_exc())
             raise
         return package
-
-

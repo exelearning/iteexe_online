@@ -73,7 +73,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#styles_button_advanced': {
         		beforerender: this.stylesRenderAdvanced
-        	},            
+        	},
         	'#templates_button': {
         		beforerender: this.templatesRender
         	},
@@ -85,7 +85,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#styles_menu_advanced > menuitem': {
         		click: this.stylesClickAdvanced
-        	},            
+        	},
         	'#templates_menu > menuitem': {
         		click: this.templatesClick
         	},
@@ -189,7 +189,7 @@ Ext.define('eXe.controller.Toolbar', {
             },
             '#tools_preview_button': {
                 click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
-            },            
+            },
             '#tools_refresh': {
                 click: this.toolsRefresh
             },
@@ -482,7 +482,7 @@ Ext.define('eXe.controller.Toolbar', {
               }],
               listeners:{
                 close: toolsPreferencesWasClosed
-              }           
+              }
 	        }),
             formpanel = preferences.down('form');
         formpanel.load({url: 'preferences', method: 'GET'});
@@ -881,12 +881,12 @@ Ext.define('eXe.controller.Toolbar', {
 
     processExportEvent: function(menu, item, e, eOpts) {
         this.saveWorkInProgress();
-        
+
         // Tools - Resources Report should have no validation
         if (e.exportType=="csvReport") {
             this.exportPackage(e.exportType, "");
             return;
-        }        
+        }
 
         // Check if we need to show a warning if the package has metadata
         nevow_clientToServerEvent('showMetadataWarning', this, '', e.exportType);
@@ -1118,11 +1118,11 @@ Ext.define('eXe.controller.Toolbar', {
 
     filePrint: function() {
 	   // filePrint step#1: create a temporary print directory,
-	   // and return that to filePrint2, which will then call exportPackage():
+       // and return that to filePrint2, which will then call exportPackage():
 	   var tmpdir_suffix = ""
 	   var tmpdir_prefix = "eXeTempPrintDir_"
 	   nevow_clientToServerEvent('makeTempPrintDir', this, '', tmpdir_suffix,
-	                              tmpdir_prefix, "eXe.app.getController('Toolbar').filePrint2")
+	                        tmpdir_prefix, "eXe.app.getController('Toolbar').filePrint2")
 	   // note: as discussed below, at the end of filePrint3_openPrintWin(),
 	   // the above makeTempPrintDir also removes any previous print jobs
 	},
@@ -1130,9 +1130,16 @@ Ext.define('eXe.controller.Toolbar', {
 	filePrint2: function(tempPrintDir, printDir_warnings) {
 	   if (printDir_warnings.length > 0) {
 	      Ext.Msg.alert("", printDir_warnings)
-	   }
-	   this.exportPackage('printSinglePage', tempPrintDir);
-	},
+       }
+       //make tempPrintDir
+       this.exportPackage('printSinglePage', tempPrintDir);
+       //go to url
+       actualurl = location.href.split("/");
+       proyectName = actualurl.pop();
+       webPrintDir = tempPrintDir.split("/").slice(3,5).join("/");
+       printurl = webPrintDir+"/"+proyectName;
+       this.processBrowseEvent(false, false, {url: printurl});
+    },
 
     recentRender: function() {
     	Ext.Ajax.request({
@@ -1175,7 +1182,7 @@ Ext.define('eXe.controller.Toolbar', {
     	})
     	return true;
     },
-    
+
     stylesRenderAdvanced: function(updateFromTheOtherMenu) {
         Ext.Ajax.request({
     		url: location.pathname + '/styleMenu',
@@ -1193,7 +1200,7 @@ Ext.define('eXe.controller.Toolbar', {
     		}
     	})
     	return true;
-    },    
+    },
 
     templatesRender: function() {
     	Ext.Ajax.request({
@@ -1241,15 +1248,15 @@ Ext.define('eXe.controller.Toolbar', {
 		item.setChecked(true);
 		item.parentMenu.hide();
 		item.parentMenu.hide();
-		
+
         var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
         if (authoring)
             authoring.submitLink("ChangeStyle", item.itemId, 1);
-        
+
         // Update the advanced menu
         eXe.controller.Toolbar.prototype.stylesRenderAdvanced(true);
     },
-    
+
     executeStylesClickAdvanced: function(item) {
 		for (var i = item.parentMenu.items.length-1; i >= 0; i--) {
 			if (item.parentMenu.items.getAt(i) != item)
@@ -1258,14 +1265,14 @@ Ext.define('eXe.controller.Toolbar', {
 		item.setChecked(true);
 		item.parentMenu.hide();
 		item.parentMenu.parentMenu.hide();
-		
+
         var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
         if (authoring)
             authoring.submitLink("ChangeStyle", item.itemId, 1);
-        
+
         // Update the Styles menu
         eXe.controller.Toolbar.prototype.stylesRender(true);
-    },    
+    },
 
     stylesClick: function(item) {
         var ed = this.getTinyMCEFullScreen();
@@ -1276,7 +1283,7 @@ Ext.define('eXe.controller.Toolbar', {
             },500);
         } else this.executeStylesClick(item);
     },
-    
+
     stylesClickAdvanced: function(item) {
         var ed = this.getTinyMCEFullScreen();
         if(ed!="") {
@@ -1285,7 +1292,7 @@ Ext.define('eXe.controller.Toolbar', {
                 eXe.controller.Toolbar.prototype.executeStylesClick(item);
             },500);
         } else this.executeStylesClickAdvanced(item);
-    },    
+    },
 
     executeTemplatesClick: function(path) {
     	nevow_clientToServerEvent('loadTemplate', this, '', path)
