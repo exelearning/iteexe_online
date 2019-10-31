@@ -233,10 +233,14 @@ class MainPage(RenderableLivePage):
 
         return json.dumps({'success': True, 'data': data})
 
-    def child_temp_file(self, ctx):
+    def child_temp_file(self, ctx, randomFile=False):
         request = inevow.IRequest(ctx)
         filetype = request.args.get('filetype', [''])[0]
-        path = self.tempDir / uuid.uuid4() + filetype[1:]
+        if randomFile:
+            filename = uuid.uuid4()
+        else:
+            filename =  self.package.name
+        path = self.tempDir / filename + filetype[1:]
         return json.dumps({'success': True, 'path': path, 'name': path.basename()})
 
     def goingLive(self, ctx, client):
@@ -1642,10 +1646,10 @@ class MainPage(RenderableLivePage):
         if modifiedMetaData != False and modifiedMetaData['modifiedMetaData']:
             client.filePickerAlert(_(u'The following fields have been cut to meet the SCORM 1.2 standard: %s') % ', '.join(modifiedMetaData['fieldsModified']))
         else:
-            if not has_uncut_resources:
-                client.filePickerAlert(_(u'Exported to %s') % filename)
-            else:
-                client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+           if not has_uncut_resources:
+               client.filePickerAlert(_(u'Exported to %s') % filename)
+           else:
+               client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     def exportEpub3(self, client, filename, stylesDir):
         try:
@@ -1707,9 +1711,9 @@ class MainPage(RenderableLivePage):
             raise
 
         if not has_uncut_resources:
-            client.filePickerAlert(_(u'Exported to %s') % filename)
+           client.filePickerAlert(_(u'Exported to %s') % filename)
         else:
-            client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+           client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     # Utility methods
     def _startFile(self, filename):
