@@ -196,7 +196,7 @@ Ext.define('eXe.controller.filepicker.File', {
 			    this.getPlaceField().setValue(record.get('name'));
         }
         this.getPlaceField().focus();
-        
+
     },
     validatePerms: function(mode, record, explore) {
         var readable = record.get('is_readable'),
@@ -222,7 +222,7 @@ Ext.define('eXe.controller.filepicker.File', {
 	        return readable;
         }
     },
-    onHandleRowDblClick: function( grid, record, el, rowIndex, e ) { 
+    onHandleRowDblClick: function( grid, record, el, rowIndex, e ) {
 		var fp = this.getFilePicker();
         this.rowClickTask.cancel();
         if (fp.type == eXe.view.filepicker.FilePicker.modeGetFolder) {
@@ -392,8 +392,13 @@ Ext.define('eXe.controller.filepicker.File', {
 		var form = filefield.up('form'),
 			fp = filefield.up('#filepicker');
 
-        form.down('#upload_currentdir').setValue(this.currentDir);
-        form.down('#upload_filename').setValue(value.replace(/C:\\fakepath\\/g, ''));
+		form.down('#upload_currentdir').setValue(this.currentDir);
+
+		var filename = value.replace(/C:\\fakepath\\/g, '');
+
+		//remove the accent marks to avoid problems with the file upload.
+		newfilename = filename.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+		form.down('#upload_filename').setValue(newfilename);
 
 		Ext.Msg.wait(_('Uploading File...'));
         if (form.getForm().isValid()) {
@@ -411,7 +416,7 @@ Ext.define('eXe.controller.filepicker.File', {
 						})
 					} else {
 						fp.status = eXe.view.filepicker.FilePicker.returnOk;
-						fp.file = JSON.parse(action.response.responseText);;
+						fp.file = JSON.parse(action.response.responseText);
 						fp.callback.call(fp.scope, fp);
 						fp.destroy();
 						eXe.app.filepicker = null;
@@ -478,7 +483,7 @@ Ext.define('eXe.controller.filepicker.File', {
 	},
 	onFilterChange: function(field, newValue, oldValue, eOpts) {
 		var store = this.getFilepickerFileStore();
-		
+
 		store.filterBy( function(record, id) {
 			if (record.get("type") == "directory")
 				return true;
