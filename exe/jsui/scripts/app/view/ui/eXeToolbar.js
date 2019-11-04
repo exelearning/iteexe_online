@@ -48,7 +48,7 @@ Ext.define('eXe.view.ui.menuitem', {
 
     beforeRender: function() {
         var me = this, pat, rep, key, keymap, html, parts, txt, instructions;
-		
+
 		html = me.text;
 		parts = html.split('<span ');
 		txt = parts[0];
@@ -258,12 +258,13 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             menu: {
                                                 xtype: 'menu',
                                                 items: [
-                                                    {
+                                                    //it makes no sense to download an uncompressed folder
+                                                    /*{
                                                         xtype: 'accesskey_menuitem',
                                                         text: _('Self-contained Folder'),
                                                         accesskey: 'f',
                                                         itemId: 'file_export_website'
-                                                    },
+                                                    },*/
                                                     {
                                                         xtype: 'accesskey_menuitem',
                                                         text: _('Zip File'),
@@ -319,7 +320,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             itemId: 'file_extract',
                                             accesskey: 'e',
                                             text: _('Export the current page as elp')
-                                        },                                        
+                                        },
                                         {
                                             cls: 'exe-simplified',
                                             xtype: 'accesskey_menuitem',
@@ -350,7 +351,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             itemId: 'file_insert',
                                             accesskey: 'i',
                                             text: _('Insert elp in the current page')
-                                        },                                    
+                                        },
                                         {
                                             xtype: 'accesskey_menuitem',
                                             itemId: 'file_import_html',
@@ -384,7 +385,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                                     }
                                                 ]
                                             }
-                                        }                                     
+                                        }
                                     ]
                                 }
                             },
@@ -406,7 +407,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                         },
                                     ]
                                 },
-                            },                            
+                            },
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'menuseparator'
@@ -541,10 +542,10 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                     xtype: 'menu',
                                     itemId: 'styles_menu_advanced'
                                 }
-                            }                            
-                        ]                        
+                            }
+                        ]
                     }
-                },                
+                },
                 {
                     cls: 'exe-simplified',
                     xtype: 'accesskey_button',
@@ -635,7 +636,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             }
                         ]
                     }
-                },               
+                },
                 // Advanced user and Preview button
                 '->',
                 // Advanced user
@@ -671,7 +672,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                     } else {
 										Ext.util.Cookies.set('eXeUIversion', 'simplified');
                                         Ext.select("BODY").removeCls('exe-advanced');
-										Ext.select("BODY").addCls('exe-simplified');                                        
+										Ext.select("BODY").addCls('exe-simplified');
 										// Change some strings:
 										if (descriptionLabel && descriptionLabel.length==1) descriptionLabel[0].innerHTML = _("General description") + ":";
 										// Show Properties - Package
@@ -695,7 +696,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         }
                     ]
                 },
-                // Preview button                
+                // Preview button
                 {
 					xtype: 'fieldcontainer',
 					defaultType: 'button',

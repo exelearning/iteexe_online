@@ -22,13 +22,14 @@ SinglePageExport will export a package as a website of HTML pages
 """
 
 import os
-from exe.engine.path          import Path
+from exe.engine.path          import Path, TempDirPath
 from exe.export.singlepage    import SinglePage
 from exe.webui                import common
 from exe                      import globals as G
 from exe.engine.persist       import encodeObject
 from exe.engine.persistxml    import encodeObjectToXML
 from exe.engine.resource      import Resource
+from zipfile                  import ZipFile, ZIP_DEFLATED
 from helper                   import exportMinFileJS
 from helper                   import exportMinFileCSS
 from exe.webui.common         import getFilesCSSToMinify
@@ -49,21 +50,20 @@ class SinglePageExport(object):
         'outputDir' is the directory that will be [over]written
         with the website
         """
-        self.html         = ""
-        self.style        = None
-        self.name         = None
-        self.stylesDir    = Path(stylesDir)
-        self.outputDir    = Path(outputDir)
-        self.imagesDir    = Path(imagesDir)
-        self.scriptsDir   = Path(scriptsDir)
-        self.cssDir       = Path(cssDir)
-        self.templatesDir = Path(templatesDir)
-	self.page         = None
-
-        # Create the output dir if it doesn't already exist
-        if not self.outputDir.exists():
-            self.outputDir.mkdir()
-
+        self.html           = ""
+        self.style          = None
+        self.name           = None
+        self.stylesDir      = Path(stylesDir)
+        if outputDir[-4:] == ".zip":
+            self.outputDir  = TempDirPath()
+            self.filename   = Path(outputDir)
+        else:
+            self.outputDir  = Path(outputDir)
+        self.imagesDir      = Path(imagesDir)
+        self.scriptsDir     = Path(scriptsDir)
+        self.cssDir         = Path(cssDir)
+        self.templatesDir   = Path(templatesDir)
+        self.page           = None
 
     def export(self, package, for_print=0):
         """
@@ -85,6 +85,39 @@ class SinglePageExport(object):
 
         self.copyFiles(package)
 
+    def exportZip(self, package):
+        """
+        Export web site
+        Cleans up the previous packages pages and performs the export
+        """
+        self.style = package.style
+
+        self.page = SinglePage("index", 1, package.root)
+        ext = 'html'
+        if G.application.config.cutFileName == "1":
+            ext = 'htm'
+
+        self.page.save(self.outputDir/"index" + '.' + ext, 0)
+        if hasattr(package, 'exportSource') and package.exportSource:
+            (G.application.config.webDir/'templates'/'content.xsd').copyfile(self.outputDir/'content.xsd')
+            (self.outputDir/'content.data').write_bytes(encodeObject(package))
+            (self.outputDir/'contentv3.xml').write_bytes(encodeObjectToXML(package))
+
+        self.copyFiles(package)
+
+        # Zip up the website package
+        self.filename.safeSave(self.doZip, _('EXPORT FAILED!\nLast succesful export is %s.'), self.outputDir)
+        # Clean up the temporary dir
+        self.outputDir.rmtree()
+
+    def doZip(self, fileObj, outputDir):
+        """
+        Actually saves the zip data. Called by 'Path.safeSave'
+        """
+        zipped = ZipFile(fileObj, "w")
+        for File in outputDir.walkfiles():
+            zipped.write(File,  outputDir.relpathto(File), ZIP_DEFLATED)
+        zipped.close()
 
     def copyFiles(self, package):
         """

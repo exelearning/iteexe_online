@@ -1266,8 +1266,8 @@ class MainPage(RenderableLivePage):
                 printit = 1
             else:
                 printit = 0
-            exported_dir = self.exportSinglePage(client, filename, webDir,
-                                                 stylesDir, printit)
+                filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+            exported_dir = self.exportSinglePage(client, filename, webDir, stylesDir, printit)
             if exported_dir is None:
                 client.alert(_(u"EXPORTED DIR ERROR"))
 
@@ -1464,26 +1464,30 @@ class MainPage(RenderableLivePage):
             # and we just overwrite what's already there
             filename = Path(filename)
             # Append the package name to the folder path if necessary
-            if filename.basename() != self.package.name:
-                filename /= self.package.name
-            if not filename.exists():
-                filename.makedirs()
-            elif not filename.isdir():
-                if client:
-                    client.alert(_(u'Filename %s is a file, cannot replace it') %
-                             filename)
-                log.error("Couldn't export web page: " +
-                          "Filename %s is a file, cannot replace it" % filename)
-                return
-            else:
-                if client:
-                    client.alert(_(u'Folder name %s already exists. '
-                                'Please choose another one or delete existing one then try again.') % filename)
-                return
+            if printFlag:
+                if filename.basename() != self.package.name:
+                    filename /= self.package.name
+                if not filename.exists():
+                    filename.makedirs()
+                elif not filename.isdir():
+                    if client:
+                        client.alert(_(u'Filename %s is a file, cannot replace it') %
+                                filename)
+                    log.error("Couldn't export web page: " +
+                            "Filename %s is a file, cannot replace it" % filename)
+                    return
+                else:
+                    if client:
+                        client.alert(_(u'Folder name %s already exists. '
+                                    'Please choose another one or delete existing one then try again.') % filename)
+                    return
             # Now do the export
             singlePageExport = SinglePageExport(stylesDir, filename, \
                                          imagesDir, scriptsDir, cssDir, templatesDir)
-            singlePageExport.export(self.package, printFlag)
+            if printFlag:
+                singlePageExport.export(self.package, printFlag)
+            else:
+                singlePageExport.exportZip(self.package)
 
             has_uncut_resources = False
             if G.application.config.cutFileName == "1":
@@ -1492,14 +1496,14 @@ class MainPage(RenderableLivePage):
             if client:
                 client.alert(_('SAVE FAILED!\n%s') % str(e))
             raise
+
         # Show the newly exported web site in a new window
         if not printFlag:
-            self._startFile(filename)
             if client:
                 if not has_uncut_resources:
-                    client.alert(_(u'Exported to %s') % filename)
+                    client.filePickerAlert(_(u'Exported to %s') % filename)
                 else:
-                    client.alert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+                    client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
         # and return a string of the actual directory name,
         # in case the package name was added, etc.:
@@ -1609,7 +1613,7 @@ class MainPage(RenderableLivePage):
 
             name = str(filename.basename().splitext()[0])
             if name.upper() in forbiddenPageNames:
-                client.filePickerAlert(_('SAVE FAILED!\n"%s" is not a valid name for the file') % str(name))
+                client.filePickerAlert(_(u'SAVE FAILED!\n"%s" is not a valid name for the file') % str(name))
                 return
 
             xliffExport = XliffExport(self.config, filename, source, target, copy, cdata)
@@ -1646,10 +1650,10 @@ class MainPage(RenderableLivePage):
         if modifiedMetaData != False and modifiedMetaData['modifiedMetaData']:
             client.filePickerAlert(_(u'The following fields have been cut to meet the SCORM 1.2 standard: %s') % ', '.join(modifiedMetaData['fieldsModified']))
         else:
-           if not has_uncut_resources:
-               client.filePickerAlert(_(u'Exported to %s') % filename)
-           else:
-               client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+            if not has_uncut_resources:
+                client.filePickerAlert(_(u'Exported to %s') % filename)
+            else:
+                client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     def exportEpub3(self, client, filename, stylesDir):
         try:
@@ -1711,9 +1715,9 @@ class MainPage(RenderableLivePage):
             raise
 
         if not has_uncut_resources:
-           client.filePickerAlert(_(u'Exported to %s') % filename)
+            client.filePickerAlert(_(u'Exported to %s') % filename)
         else:
-           client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+            client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     # Utility methods
     def _startFile(self, filename):

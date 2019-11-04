@@ -124,7 +124,7 @@ Ext.define('eXe.controller.Toolbar', {
                 click: { fn: this.processExportEvent, exportType: "scorm2004" }
             },
             '#file_export_website_b': {
-                click: { fn: this.processExportEvent, exportType: "webSite" }
+                click: { fn: this.processExportEvent, exportType: "zipFile" }
             },
             '#file_export_singlepage_b': {
                 click: { fn: this.processExportEvent, exportType: "singlePage" }
@@ -994,7 +994,7 @@ Ext.define('eXe.controller.Toolbar', {
     },
 
 	exportPackage: function(exportType, exportDir) {
-	    if (exportType == 'webSite' || exportType == 'singlePage' || exportType == 'printSinglePage' || exportType == 'ipod' ) {
+	    if (exportType == 'webSite' || exportType == 'printSinglePage' || exportType == 'ipod' ) {
 	        if (exportDir == '') {
                 var fp = Ext.create("eXe.view.filepicker.FilePicker", {
 		            type: eXe.view.filepicker.FilePicker.modeGetFolder,
@@ -1014,7 +1014,8 @@ Ext.define('eXe.controller.Toolbar', {
 	        else {
 	            // use the supplied exportDir, rather than asking.
 	            nevow_clientToServerEvent('exportPackage', this, '', exportType, exportDir)
-	        }
+            }
+            exportType == 'singlePage'
 	    } else if(exportType == "textFile"){
                 var fp = Ext.create("eXe.view.filepicker.FilePicker", {
                     type: eXe.view.filepicker.FilePicker.modeSave,
@@ -1087,7 +1088,9 @@ Ext.define('eXe.controller.Toolbar', {
 	        else if (exportType == "ims")
 	            title = _("Export IMS package as");
 	        else if (exportType == "zipFile")
-	            title = _("Export Website package as");
+                title = _("Export Website package as");
+            else if (exportType == 'singlePage')
+                title == _("Export Single Page package as");
 	        else if (exportType == "commoncartridge")
 	            title = _("Export Common Cartridge as");
 	        else
@@ -1102,8 +1105,8 @@ Ext.define('eXe.controller.Toolbar', {
 	            callback: function(fp) {
 	                if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
 	                	// Show exporting message
-	                	Ext.Msg.wait(_('Please wait...'));
-	                	nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
+                        // Ext.Msg.wait(_('Please wait...'));
+                        nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
 	                }
 	            }
 	        });
