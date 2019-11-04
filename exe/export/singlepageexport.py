@@ -54,7 +54,7 @@ class SinglePageExport(object):
         self.style          = None
         self.name           = None
         self.stylesDir      = Path(stylesDir)
-        if outputDir[-4:] == ".zip":
+        if outputDir.lower().endswith('.zip'):
             self.outputDir  = TempDirPath()
             self.filename   = Path(outputDir)
         else:
