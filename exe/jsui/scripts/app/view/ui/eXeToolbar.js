@@ -183,6 +183,12 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 itemId: 'file_save_as'
                             },
                             {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Download'),
+                                accesskey: 'd',
+                                itemId: 'file_extract_all'
+                            },
+                            {
 								xtype: 'menuseparator'
                             },
                             {

@@ -97,7 +97,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#template_save': {
         		click: this.templateSave
-        	},
+            },
             '#file_print': {
                 click: this.filePrint
             },
@@ -164,7 +164,10 @@ Ext.define('eXe.controller.Toolbar', {
                 click: this.insertPackage
             },
             '#file_extract': {
-                click: this.extractPackage
+                click: {fn: this.extractPackage, all: 0 }
+            },
+            '#file_extract_all': {
+                click: {fn: this.extractPackage, all: 1 }
             },
             '#file_quit': {
                 click: this.fileQuit
@@ -621,7 +624,7 @@ Ext.define('eXe.controller.Toolbar', {
         f.show();
 	},
 
-	extractPackage: function() {
+	extractPackage: function(menu, item, e) {
         var f = Ext.create("eXe.view.filepicker.FilePicker", {
             type: eXe.view.filepicker.FilePicker.modeSave,
             title: _("Save extracted package as"),
@@ -631,7 +634,11 @@ Ext.define('eXe.controller.Toolbar', {
             callback: function(fp) {
                 if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
                     Ext.Msg.wait(new Ext.Template(_('Extracting package: {filename}')).apply({filename: fp.file.path}));
-                    nevow_clientToServerEvent('extractPackage', this, '', fp.file.path, fp.status == eXe.view.filepicker.FilePicker.returnReplace)
+                    if (e && e.all && e.all == 1) {
+                        nevow_clientToServerEvent('extractPackage', this, '', fp.file.path, fp.status == eXe.view.filepicker.FilePicker.returnReplace, e.all)
+                    } else {
+                        nevow_clientToServerEvent('extractPackage', this, '', fp.file.path, fp.status == eXe.view.filepicker.FilePicker.returnReplace)
+                    }
                 }
             }
         });
@@ -1105,7 +1112,7 @@ Ext.define('eXe.controller.Toolbar', {
 	            callback: function(fp) {
 	                if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
 	                	// Show exporting message
-                        // Ext.Msg.wait(_('Please wait...'));
+                        Ext.Msg.wait(_('Please wait...'));
                         nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
 	                }
 	            }

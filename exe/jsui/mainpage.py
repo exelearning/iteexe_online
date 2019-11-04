@@ -1379,11 +1379,12 @@ class MainPage(RenderableLivePage):
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
                           self.package.name).encode('utf8'), filter_func=allSessionPackageClients)
 
-    def handleExtractPackage(self, client, filename, existOk):
+    def handleExtractPackage(self, client, filename, existOk, allPackage=False):
         """
         Create a new package consisting of the current node and export
         'existOk' means the user has been informed of existance and ok'd it
         """
+
         filename = Path(filename, 'utf-8')
         saveDir = filename.dirname()
         if saveDir and not saveDir.exists():
@@ -1395,23 +1396,24 @@ class MainPage(RenderableLivePage):
             filename += '.elp'
 
         if Path(filename).exists() and existOk != 'true':
-            msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-            client.alert(_(u'EXTRACT FAILED!\n%s') % msg)
-            return
+            os.remove(filename)
 
         try:
-            # Create a new package for the extracted nodes
-            newPackage = self.package.extractNode()
+            if int(allPackage):
+                self.package.save(filename)
+            else:
+                # Create a new package for the extracted nodes
+                newPackage = self.package.extractNode()
 
-            # trigger a rename of all of the internal nodes and links,
-            # and to remove any old anchors from the dest package,
-            # and remove any zombie links via isExtract:
-            newNode = newPackage.root
-            if newNode:
-                newNode.RenamedNodePath(isExtract=True)
+                # trigger a rename of all of the internal nodes and links,
+                # and to remove any old anchors from the dest package,
+                # and remove any zombie links via isExtract:
+                newNode = newPackage.root
+                if newNode:
+                    newNode.RenamedNodePath(isExtract=True)
 
-            # Save the new package
-            newPackage.save(filename)
+                # Save the new packages
+                newPackage.save(filename)
         except Exception, e:
             client.alert(_('EXTRACT FAILED!\n%s') % str(e))
             raise
