@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2005, University of Auckland
 #
 # This program is free software; you can redistribute it and/or modify
@@ -44,10 +44,10 @@ class FileAttachBlockInc(Block):
         for fileField in self.idevice.fileAttachmentFields:
             fileElement = FileElement(fileField, False)
             self.fileAttachmentElements.append(fileElement)
-        
+
         self.showDescBlock = ChoiceElement(idevice.showDesc)
         self.introHTMLElement = TextAreaElement(idevice.introHTML)
-        
+
 
     def process(self, request):
         """
@@ -56,30 +56,30 @@ class FileAttachBlockInc(Block):
         """
         Block.process(self, request)
         is_cancel = common.requestHasCancel(request)
-        
+
         self.showDescBlock.process(request)
         self.introHTMLElement.process(request)
-        
+
         showDesc = False
         if self.showDescBlock.renderView() == "yes":
             showDesc = True
-        
+
         if showDesc == True:
             self.idevice.emphasis = Idevice.SomeEmphasis
         else:
             self.idevice.emphasis = Idevice.NoEmphasis
-        
+
         for fileElement in self.fileAttachmentElements:
             fileElement.process(request)
             if field_engine_is_delete(fileElement, request, self.idevice.fileAttachmentFields):
                 #fileElement.field.deleteFile()
                 field_engine_check_delete(fileElement, request, self.idevice.fileAttachmentFields)
-            
+
         if "addFileAttachment" + unicode(self.id) in request.args:
-            self.idevice.addFileAttachmentField()            
+            self.idevice.addFileAttachmentField()
             self.idevice.edit = True
             self.idevice.undo = False
-            
+
         #check the title - lifted from genericblock
         if "title"+self.id in request.args \
         and not is_cancel:
@@ -93,19 +93,19 @@ class FileAttachBlockInc(Block):
         html += _("<h2>File Attachment</h2>")
         html += _("<p>Here you can attach arbitary files to the package that will be included with the export</p>")
         html += _("<p>You can choose to display links or not below</p>")
-        
+
         html += _("<strong>Title:</strong><br/>")
         html += common.textInput("title"+self.id, self.idevice.title)
         html += "<br/>"
         html += self.showDescBlock.renderEdit()
         html += self.introHTMLElement.renderEdit()
-        
-        
+
+
         for fileElement in self.fileAttachmentElements:
             html += fileElement.renderEdit()
             html += "<hr/>"
-        
-        html += "<br/>"    
+
+        html += "<br/>"
         html += common.submitButton("addFileAttachment"+unicode(self.id), _("Add Another File Attachment"))
         html += "<br/>"
         html += self.renderEditButtons()
@@ -118,69 +118,64 @@ class FileAttachBlockInc(Block):
         showDesc = False
         if self.showDescBlock.renderView() == "yes":
             showDesc = True
-        
+
         html = u""
         viewMode = "view"
         if previewMode == True:
             viewMode = "preview"
-        
-        
+
+        if viewMode=="view" and showDesc==False:
+            return ""
+
+        html = common.ideviceHeader(self, style, viewMode)
+
         if showDesc == True:
-            html = common.ideviceHeader(self, style, viewMode)
             if previewMode == True:
                 html += self.introHTMLElement.renderPreview()
             else:
                 html += self.introHTMLElement.renderView()
-            
-            html += "<ul class='exeFileList'>"    
-        
+
+            html += "<ul class='exeFileList'>"
+
         prefix = ""
         if previewMode == True:
-            prefix = "resources/" 
-        
+            prefix = "resources/"
+
 
         if showDesc == False and previewMode == True:
-            html += "<strong> " + _("File List (this list shows only in preview mode):") + "</strong><br/>"
-        
-                    
+            html += "<p><strong> " + _("File List (this list shows only in preview mode):") + "</strong></p>"
+
         for fileElement in self.fileAttachmentElements:
             if showDesc == False:
                 if previewMode == True:
                     html += fileElement.renderPreview()
                 else:
                     html += fileElement.renderView()
-                
-                html += "<br/>"
             else:
                 html += "<li><a href='%(prefix)s%(filename)s' target='_blank'>%(desc)s" % \
                     {"filename" : fileElement.getFileName(), "desc" : fileElement.getDescription(),\
                      "prefix" : prefix}
                 html += "<span> (" + c_('New Window')+")</span></a></li>\n"
-                
+
         if showDesc == True:
             html += "</ul>"
-        
-        
-        if showDesc == True:
-            """End decoration"""
-            html += common.ideviceFooter(self, style, viewMode)
-        elif showDesc == False and previewMode == True:
-            html += self.renderViewButtons()
-        
+
+        html += common.ideviceFooter(self, style, viewMode)
+
         return html
 
     def renderPreview(self, style):
         """
         Returns an XHTML string for previewing this block
         """
-        
+
         html = self._renderMain(style, True)
-        
+
         #end of idevice
-        
-        
-        
-        
+
+
+
+
         return html
 
 
@@ -189,16 +184,16 @@ class FileAttachBlockInc(Block):
         Returns an XHTML string for viewing this block
         """
         html = self._renderMain(style, False)
-        
-        
+
+
         return html
-    
+
 
 # ===========================================================================
 
 """Register this block with the BlockFactory"""
 from exe.engine.fileattachidevice import FileAttachIdeviceInc
 from exe.webui.blockfactory     import g_blockFactory
-g_blockFactory.registerBlockType(FileAttachBlockInc, FileAttachIdeviceInc)    
+g_blockFactory.registerBlockType(FileAttachBlockInc, FileAttachIdeviceInc)
 
 # ===========================================================================
