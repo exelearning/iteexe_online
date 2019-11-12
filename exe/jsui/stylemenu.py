@@ -1,6 +1,6 @@
 # -- coding: utf-8 --
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2012, Pedro Peña Pérez, Open Phoenix IT
 #
 # This program is free software; you can redistribute it and/or modify
@@ -44,9 +44,9 @@ class StyleMenu(Renderable, Resource):
     name = 'styleMenu'
 
     def __init__(self, parent):
-        """ 
+        """
         Initialize
-        """ 
+        """
         Renderable.__init__(self, parent)
         if parent:
             self.parent.putChild(self.name, self)
@@ -56,43 +56,48 @@ class StyleMenu(Renderable, Resource):
 
     def process(self, request):
         log.debug("process")
-        
-        if ("action" in request.args and 
+
+        if ("action" in request.args and
             request.args["action"][0] == "ChangeStyle"):
             log.debug("changing style to "+request.args["object"][0])
             self.package.style = request.args["object"][0]
             self.package.isChanged = True
-            
-    """    
-    def stylename(self,direc): 
-        #FM: load style name 
+
+    """
+    def stylename(self,direc):
+        #FM: load style name
         themePath = G.application.config.stylesDir.joinpath(direc)
         themeXMLFile = Path(themePath/"config.xml")
         if themeXMLFile.isfile():
              xmldom = parse(themeXMLFile)
-             rf = xmldom.getElementsByTagName('name')[0].firstChild.nodeValue   
+             rf = xmldom.getElementsByTagName('name')[0].firstChild.nodeValue
         else:
             rf=direc.capitalize()
         return rf
         """
-          
+
     def render(self, request=None):
         """
         Returns a JSON string with the styles
         """
         log.debug("render")
+        self.config.loadStyles()
 
-        l = []       
-        printableStyles = [(x.get_name(), x.get_dirname()) for x in self.config.styleStore.getStyles()]
+        l = []
+        printableStyles = [(x.get_name(), x.get_dirname(), x.get_style_root_dir()) for x in self.config.styleStore.getStyles()]
 
-        def sortfunc(s1, s2):
-            return locale.strcoll(s1[0], s2[0])
+        #def sortfunc(s1, s2):
+        #    return locale.strcoll(s1[0], s2[0], s3[0])
         locale.setlocale(locale.LC_ALL, "")
-        printableStyles.sort(sortfunc)
-        for printableStyle, style in printableStyles:
-            l.append({ "label": printableStyle, "style": style, "selected": True if style == self.package.style else False})
-        return json.dumps(l).encode('utf-8')     
-    
+        #printableStyles.sort(sortfunc)
+        for s in printableStyles:
+            if s[2] == G.application.userStylesDir:
+                userStyle = 1
+            else:
+                userStyle = 0
+            l.append({ "label": s[0], "style": s[1], "userStyle": userStyle, "selected": True if s[1] == self.package.style else False})
+        return json.dumps(l).encode('utf-8')
+
     def addStyle(self, style):
         """
         Adds an Style to the list
@@ -101,12 +106,12 @@ class StyleMenu(Renderable, Resource):
         """
         The Styles are now in two different menus
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)        
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)
         """
         We reload the Styles manager panel too
         """
         self.client.sendScript('Ext.getCmp("stylemanagerwin").down("form").reload("doList")', filter_func=allSessionClients)
-    
+
     def delStyle(self, style):
         """
         Delete an Style to the list
@@ -114,7 +119,7 @@ class StyleMenu(Renderable, Resource):
         self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()', filter_func=allSessionClients)
         """
         The Styles are now in two different menus
-        """        
+        """
         self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)
-    
+
 # ===========================================================================

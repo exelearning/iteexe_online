@@ -93,10 +93,10 @@ class EditorPane(object):
         self._attachInstruc   = x_(u"Add an attachment file to your iDevice.")
 
         self.style            = self.styles[0]
-   
+
     # Properties
-    
-    nameInstruc     = lateTranslate('nameInstruc')    
+
+    nameInstruc     = lateTranslate('nameInstruc')
     authorInstruc   = lateTranslate('authorInstruc')
     purposeInstruc  = lateTranslate('purposeInstruc')
     emphasisInstruc = lateTranslate('emphasisInstruc')
@@ -107,7 +107,7 @@ class EditorPane(object):
     flashInstruc    = lateTranslate('flashInstruc')
     mp3Instruc      = lateTranslate('mp3Instruc')
     attachInstruc   = lateTranslate('attachInstruc')
-    
+
     def setIdevice(self, idevice):
         """
         Sets the iDevice to edit
@@ -115,81 +115,81 @@ class EditorPane(object):
         self.idevice         = idevice.clone()
         self.idevice.id      = idevice.id
         self.originalIdevice = idevice
-        
+
     def process(self, request, status):
         """
         Process
         """
-        
+
         log.debug("process " + repr(request.args))
         self.message = ""
-        
+
         if status == "old":
             for element in self.elements:
                 element.process(request)
-                           
+
             if "title" in request.args:
                 self.idevice.title = unicode(request.args["title"][0], 'utf8')
-    
-    
+
+
             if "tip" in request.args:
                 self.idevice.tip = unicode(request.args["tip"][0], 'utf8')
-                
+
             if "emphasis" in request.args:
                 self.idevice.emphasis = int(request.args["emphasis"][0])
                 if self.idevice.emphasis == 0:
                     self.idevice.icon = ""
-        
-        
+
+
         if "addText" in request.args:
             field = TextField(_(u"Enter the label here"),
                  _(u"Enter instructions for completion here"))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             self.idevice.edit = True
-        
+
         if "addTextArea" in request.args:
-            field = TextAreaField(_(u"Enter the label here"), 
+            field = TextAreaField(_(u"Enter the label here"),
                  _(u"Enter the instructions for completion here"))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             self.idevice.edit = True
-            
-            
+
+
         if "addFeedback" in request.args:
-            field = FeedbackField(_(u"Enter the label here"), 
-                 _(u"""Feedback button will not appear if no 
+            field = FeedbackField(_(u"Enter the label here"),
+                 _(u"""Feedback button will not appear if no
 data is entered into this field."""))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             self.idevice.edit = True
-            
+
         #if "addFlash" in request.args:
             #print "add a flash"
-            #field = FlashField(_(u"Enter the label here"), 
+            #field = FlashField(_(u"Enter the label here"),
                  #_(u"Enter the instructions for completion here"))
             #field.setIDevice(self.idevice)
             #self.idevice.addField(field)
-            
+
         if "addMP3" in request.args:
 
-            field = MultimediaField(_(u"Enter the label here"), 
+            field = MultimediaField(_(u"Enter the label here"),
                  _(u"Enter the instructions for completion here"))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             if not 'xspf_player.swf' in self.idevice.systemResources:
                 self.idevice.systemResources += ['xspf_player.swf']
             self.idevice.edit = True
-            
+
         if "addAttachment" in request.args:
 
-            field = AttachmentField(_(u"Enter the label here"), 
+            field = AttachmentField(_(u"Enter the label here"),
                  _(u"Enter the instructions for completion here"))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             self.idevice.edit = True
-            
-        if ("action" in request.args and 
+
+        if ("action" in request.args and
             request.args["action"][0] == "selectIcon"):
             self.idevice.icon = request.args["object"][0]
 
@@ -201,20 +201,20 @@ data is entered into this field."""))
 
         if "edit" in request.args:
             self.idevice.edit = True
-            
+
         if "cancel" in request.args:
             ideviceId       = self.idevice.id
             self.idevice    = self.originalIdevice.clone()
-            self.idevice.id = ideviceId 
+            self.idevice.id = ideviceId
             self.parent.showHide = False
-            
-        if ("action" in request.args and 
+
+        if ("action" in request.args and
             request.args["action"][0] == "changeStyle"):
             self.style = self.styles[int(request.args["object"][0])]
-            
-        self.__buildElements()  
-            
-        
+
+        self.__buildElements()
+
+
     def __buildElements(self):
         """
         Building up element array
@@ -227,7 +227,7 @@ data is entered into this field."""))
                           MultimediaField: MultimediaEditorElement,
                           FlashField:      FlashEditorElement,
                           AttachmentField: AttachmentEditorElement}
-        
+
         for field in self.idevice.fields:
             elementType = elementTypeMap.get(field.__class__)
 
@@ -239,14 +239,14 @@ data is entered into this field."""))
             else:
                 log.error(u"No element type registered for " +
                           field.__class__.__name__)
-        
-            
+
+
     def renderButtons(self, request):
         """
         Render the idevice being edited
         """
         html = "<font color=\"red\"><b>"+self.message+"</b></font>"
-        
+
         html += "<fieldset><legend><b>" + _("Add Field")+ "</b></legend>"
         html += common.submitButton("addText", _("Text Line"))
         html += common.elementInstruc(self.lineInstruc) + "<br/>"
@@ -290,10 +290,10 @@ data is entered into this field."""))
                 for (var i=0;i<imgs.length;i++) {
                     imgs[i].style.border = "1px solid #E8E8E8";
                 }
-                e.style.border = "1px solid #333333";            
+                e.style.border = "1px solid #333333";
                 submitLink("selectIcon",icon,1);
-            }        
-            function submitLink(action, object, changed) 
+            }
+            function submitLink(action, object, changed)
             {
                 var form = document.getElementById("contentForm")
                 form.action.value = action;
@@ -302,7 +302,7 @@ data is entered into this field."""))
                 form.submit();
             }\n"""
         html += """
-            function submitIdevice() 
+            function submitIdevice()
             {
                 var form = document.getElementById("contentForm")
                 if (form.ideviceSelect.value == "newIdevice")
@@ -324,23 +324,23 @@ data is entered into this field."""))
             }\n"""
         html += "//-->\n"
         html += "</script>\n"
-        
+
         self.purpose = self.idevice.purpose.replace("\r", "")
         self.purpose = self.purpose.replace("\n","\\n")
-        
+
         self.tip     = self.idevice.tip.replace("\r", "")
         self.tip     = self.tip.replace("\n","\\n")
-        
+
         if self.idevice.edit:
             html += "<b>" + _("Name") + ": </b>\n"
             html += common.elementInstruc(self.nameInstruc) + "<br/>"
             html += '<input type="text" name= "title" id="title" value="%s"/>' % self.idevice.title
-   
+
             this_package = None
             html += common.formField('richTextArea', this_package,
                                      _(u"Pedagogical Tip"),'tip',
                                      '', self.tipInstruc, self.tip)
-     
+
             html += "<b>" + _("Emphasis") + ":</b> "
             html += "<select onchange=\"submit();\" name=\"emphasis\">\n"
 
@@ -355,7 +355,7 @@ data is entered into this field."""))
             html += "</select> \n"
             html += common.elementInstruc(self.emphasisInstruc)
             html += "<br/><br/>\n"
-            
+
             if self.idevice.emphasis > 0:
                 html += self.__renderStyles() + " "
                 html += u'<a style="margin-right:.5em" href="javascript:void(0)" '
@@ -363,7 +363,7 @@ data is entered into this field."""))
                 html += u'%s</a>' % _('Select an icon')
                 icon = self.idevice.icon
                 if icon != "":
-                
+
                     iconExists = False
                     myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/"icon_" + self.idevice.icon + ".gif")
                     if myIcon.exists():
@@ -374,9 +374,9 @@ data is entered into this field."""))
                             iconExists = True
                     if iconExists:
                         html += '<img style="vertical-align:middle;max-width:60px;height:auto" '
-                        html += 'src="/style/%s/icon_%s' % (self.style.get_dirname(), icon)
+                        html += 'src="%s/icon_%s' % (self.style.get_web_path(), icon)
                         html += '%s"/><br />' % myIcon.ext
-                        
+
                 html += u'<div style="display:none;z-index:99;">'
                 html += u'<div id="iconpaneltitle">'+_("Icons")+'</div>'
                 html += u'<div id="iconpanelcontent">'
@@ -385,15 +385,15 @@ data is entered into this field."""))
                 html += u'</div>\n'
                 html += u'<br style="clear:both;margin-bottom:10px" />'
             for element in self.elements:
-                html += element.renderEdit()       
+                html += element.renderEdit()
         else:
             html += "<b>" + self.idevice.title + "</b><br/><br/>"
             for element in self.elements:
-                html += element.renderPreview()               
+                html += element.renderPreview()
             if self.idevice.purpose != "" or self.idevice.tip != "":
                 html += "<a title=\""+_("Pedagogical Help")+"\" "
-                html += "onclick=\"showMessageBox('phelp');\" " 
-                html += "href=\"javascript:void(0)\" style=\"cursor:help;\">\n " 
+                html += "onclick=\"showMessageBox('phelp');\" "
+                html += "href=\"javascript:void(0)\" style=\"cursor:help;\">\n "
                 html += '<img alt="%s" src="/images/info.png" border="0" ' % _('Info')
                 html += "align=\"middle\" /></a>\n"
                 html += "<div style='display:none;'>"
@@ -403,13 +403,13 @@ data is entered into this field."""))
                 if self.idevice.tip != "":
                     html += "<div id='phelptitle'>"+_('Tip:')+"</div>"
                     html += "<div id='phelpcontent'>"+self.idevice.tip+"</div>"
-                html += "</div>"  
+                html += "</div>"
                 html += "</div>\n"
         html += "</div>\n"
         self.message = ""
 
         return html
-    
+
     def __renderStyles(self):
         """
         Return xhtml string for rendering styles select
@@ -446,9 +446,9 @@ data is entered into this field."""))
             }\
             \
         </script>";
-        
+
         return html
-    
+
     def __renderIcons(self):
         """
         Return xhtml string for dispay all icons
@@ -456,11 +456,11 @@ data is entered into this field."""))
         iconpath  = self.style.get_style_dir()
         iconfiles = iconpath.files("icon_*")
         html = '<div id="styleIcons"><div style="height:300px;overflow:auto">'
-        
+
         for iconfile in iconfiles:
             iconname = iconfile.namebase
             icon     = iconname.split("_", 1)[1]
-            
+
             iconExists = False
             iconExtension = "gif"
             myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/iconname + ".gif")
@@ -469,11 +469,11 @@ data is entered into this field."""))
             else:
                 myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/iconname + ".png")
                 if myIcon.exists():
-                    iconExists = True 
+                    iconExists = True
                     iconExtension = "png"
-            
+
             if iconExists:
-                filename = "/style/%s/%s.%s" % (self.style.get_dirname(), iconname, iconExtension)
+                filename = "%s/%s.%s" % (self.style.get_web_path(), iconname, iconExtension)
                 html += u'<div style="float:left; text-align:center; width:105px;\n'
                 html += u'margin-right:10px; margin-bottom:15px" > '
                 html += u'<img src="%s" \n' % filename
@@ -482,8 +482,8 @@ data is entered into this field."""))
                 html += u"style=\"border:1px solid #E8E8E8;padding:5px;cursor:pointer;max-width:60px;height:auto\" onclick=\"window[1].selectStyleIcon('%s',this)\" title=\"%s.%s\">\n" % (icon, icon, iconExtension)
                 # html += u"style=\"cursor:pointer\" onclick=\"window[1].submitLink('selectIcon','%s',1)\">\n" % icon
                 html += u'<br /><span style="display:inline-block;width:100px;overflow:hidden;text-overflow:ellipsis">%s.%s</span></div>\n' % (icon, iconExtension)
-        
+
         html += '</div></div>'
-        
+
         return html
 # ===========================================================================

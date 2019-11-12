@@ -126,7 +126,7 @@ class SinglePageExport(object):
         # Copy the style files to the output dir
         # But not nav.css
         if os.path.isdir(self.stylesDir):
-            styleFiles = [self.stylesDir/'..'/'popup_bg.gif']
+            styleFiles = [self.config.stylesDir/'popup_bg.gif']
             styleFiles += self.stylesDir.files("*.*")
             if "nav.css" in styleFiles:
                 styleFiles.remove("nav.css")
@@ -146,7 +146,7 @@ class SinglePageExport(object):
             else:
                 resourceFile.copy(self.outputDir)
 
-        listCSSFiles=getFilesCSSToMinify('singlepage', self.stylesDir)
+        listCSSFiles=getFilesCSSToMinify('singlepage', self.config.stylesDir)
         exportMinFileCSS(listCSSFiles, self.outputDir)
 
         # copy script files.
@@ -176,8 +176,7 @@ class SinglePageExport(object):
         langFile.close()
 
         # Incluide eXe's icon if the Style doesn't have one
-        themePath = Path(G.application.config.stylesDir/package.style)
-        themeFavicon = themePath.joinpath("favicon.ico")
+        themeFavicon = stylesDir.joinpath("favicon.ico")
         if not themeFavicon.exists():
             faviconFile = (self.imagesDir/'favicon.ico')
             faviconFile.copyfile(self.outputDir/'favicon.ico')

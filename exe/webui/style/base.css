@@ -25,12 +25,12 @@ input.feedbackbutton{margin-top:10px;margin-bottom:10px}
 @media print{
     .feedback{display:block!important}
     .feedback.iDevice_solution a{text-decoration:none;color:inherit}
-    .iDevice_solution li span{display:none}    
+    .iDevice_solution li span{display:none}
     /*.feedbackbutton,.feedback-button{display:none!important}*/
     #main{margin-left:10px}
     div.node,article.node{page-break-after:always}
     .external-iframe{display:none}
-    .external-iframe-src{display:block!important;margin:2em 0;font-size:.95em;text-align:center}	
+    .external-iframe-src{display:block!important;margin:2em 0;font-size:.95em;text-align:center}
 }
 .external-iframe{border:0;}
 /* The New eXeLearning */
@@ -105,7 +105,7 @@ p.exe-block-success{padding:1em}
 .exe-enlarge-icon b{width:30px;height:30px;line-height:30px;text-align:center;display:block;font-size:1.3em;color:#FFF}
 .exe-enlarge-icon b:before{content:"+"}
 .js a.exe-enlarge:hover img,.js a.exe-enlarge:focus img{opacity:0.7;filter:alpha(opacity=70)}
-a.exe-enlarge:hover .exe-enlarge-icon,a.exe-enlarge:focus .exe-enlarge-icon{display:block;*display:none}/* IE6, IE7 */	
+a.exe-enlarge:hover .exe-enlarge-icon,a.exe-enlarge:focus .exe-enlarge-icon{display:block;*display:none}/* IE6, IE7 */
 /* Autoclear */
 .exe-clear{overflow:auto}
 /* JavaScript on/offf */
@@ -179,10 +179,10 @@ ol.auto-numbered{counter-reset:item}
 
 /* Responsive design */
 iframe,object,embed{max-width:100%}
-img,video{max-width:100%;height:auto} 
+img,video{max-width:100%;height:auto}
 @media all and (max-width: 780px) {
 	.styled-qc{margin:1.5em .5em}
-	.exe-layout-2-cols .exe-col,.exe-layout-3-cols .exe-col{float:none;width:100%;padding:0}   
+	.exe-layout-2-cols .exe-col,.exe-layout-3-cols .exe-col{float:none;width:100%;padding:0}
 }
 /* Search bar */
 #exe-client-search-form{text-align:right;margin-bottom:2em}

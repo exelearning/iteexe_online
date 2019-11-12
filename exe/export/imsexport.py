@@ -503,7 +503,7 @@ class IMSExport(object):
 
         # Copy the style files to the output dir
         # But not nav.css
-        styleFiles = [self.styleDir/'..'/'popup_bg.gif']
+        styleFiles = [self.config.stylesDir/'popup_bg.gif']
         styleFiles += self.styleDir.files("*.*")
         if "nav.css" in styleFiles:
             styleFiles.remove("nav.css")
@@ -522,7 +522,7 @@ class IMSExport(object):
             else:
                 resourceFile.copy(outputDir)
 
-        listCSSFiles=getFilesCSSToMinify('ims', self.styleDir)
+        listCSSFiles=getFilesCSSToMinify('ims', self.config.stylesDir)
         exportMinFileCSS(listCSSFiles, outputDir)
 
         # Export the package content

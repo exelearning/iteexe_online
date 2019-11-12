@@ -20,12 +20,12 @@
 Ext.define('eXe.view.filepicker.FilePicker', {
 	extend: 'Ext.Window',
 	id: 'filepicker',
-	
+
 	requires: [
 		'eXe.view.filepicker.FileList',
 		'eXe.view.filepicker.DirectoryTree'
 	],
-	
+
 	statics: {
 		returnOk: 0,
 		returnCancel: 1,
@@ -35,7 +35,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 		modeGetFolder: 2,
         modeOpenMultiple: 3
 	},
-	
+
 	status: null,
 
 	file: {},
@@ -54,7 +54,10 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 			} else {
 				Ext.Ajax.request({
 					url: window.location.href + '/temp_file',
-					params: { filetype: this.filetypes.getAt(0).get('extension') },
+					params: {
+						filetype: this.filetypes.getAt(0).get('extension'),
+						filename: this.filename,
+					 },
 					success: function (response) {
 						this.status = eXe.view.filepicker.FilePicker.returnOk;
 						this.file = JSON.parse(response.responseText);
@@ -181,7 +184,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
         		}
                 break;
         }
-        
+
         Ext.applyIf(me, {
         	width: 800,
             height: eXe.app.getMaxHeight(600),
@@ -238,7 +241,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 			items: [
 				{
 					xtype: "dirtree",
-					region: "west"			
+					region: "west"
 				},{
 					xtype: "filelist",
                     multiSelect: me.type == eXe.view.filepicker.FilePicker.modeOpenMultiple? true : false,
@@ -250,10 +253,10 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 				scope: me.scope
 			}
         });
-        
+
         me.callParent(arguments);
     },
-    
+
     appendFilters: function(filters) {
     	this.filetypes.add(filters);
     }

@@ -188,7 +188,7 @@ class WebsiteExport(object):
 
         if os.path.isdir(self.stylesDir):
             # Copy the style files to the output dir
-            styleFiles = [self.stylesDir/'..'/'popup_bg.gif']
+            styleFiles = [self.config.stylesDir/'popup_bg.gif']
             styleFiles += self.stylesDir.files("*.*")
             self.stylesDir.copylist(styleFiles, outputDir)
 
@@ -206,7 +206,7 @@ class WebsiteExport(object):
             else:
                 resourceFile.copy(outputDir)
 
-        listCSSFiles=getFilesCSSToMinify('website', self.stylesDir)
+        listCSSFiles=getFilesCSSToMinify('website', self.config.stylesDir)
         exportMinFileCSS(listCSSFiles, outputDir)
 
         # copy script files.

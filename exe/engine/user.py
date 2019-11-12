@@ -21,6 +21,7 @@ from exe.engine.idevicestore import IdeviceStore
 from exe.engine.packagestore import PackageStore
 from exe.engine.userconfig import UserConfig
 from twisted.internet import utils
+from exe import globals as G
 
 
 import logging
@@ -78,8 +79,12 @@ class User(object):
         if configPath.exists():
             self.initialConfig = False
         self.config = UserConfig(configPath)
+        self.idevicesPath = configPath / 'idevices'
         self.ideviceStore = IdeviceStore(self.config)
         self.ideviceStore.load()
+        self.stylesPath = configPath / 'styles'
+        if not self.stylesPath.exists():
+            self.stylesPath.mkdir()
         if not self.root.exists():
             self.root.mkdir()
         self.quota = None
@@ -87,3 +92,9 @@ class User(object):
             log.info('Enabling disk quota for user %s' % self.name)
             self.quota = Quota(self.root, self.config.quota)
             self.quota.enable()
+        #add user info to globals
+        G.application.config.userName = self.name
+        G.application.config.userDir = configPath
+        G.application.config.userFsDir = self.root
+        G.application.config.userIdevicesDir = self.idevicesPath
+        G.application.userStylesDir = self.stylesPath

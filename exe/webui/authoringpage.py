@@ -1,5 +1,5 @@
 # ===========================================================================
-# eXe 
+# eXe
 # Copyright 2004-2006, University of Auckland
 # Copyright 2006-2007 eXe Project, New Zealand Tertiary Education Commission
 #
@@ -19,7 +19,7 @@
 # ===========================================================================
 """
 AuthoringPage is responsible for creating the XHTML for the authoring
-area of the eXe web user interface.  
+area of the eXe web user interface.
 """
 import os
 import logging
@@ -43,7 +43,7 @@ log = logging.getLogger(__name__)
 class AuthoringPage(RenderableResource):
     """
     AuthoringPage is responsible for creating the XHTML for the authoring
-    area of the eXe web user interface.  
+    area of the eXe web user interface.
     """
     name = u'authoring'
 
@@ -64,7 +64,7 @@ class AuthoringPage(RenderableResource):
     def _process(self, request):
         """
         Delegates processing of args to blocks
-        """  
+        """
         # Still need to call parent (mainpage.py) process
         # because the idevice pane needs to know that new idevices have been
         # added/edited..
@@ -72,12 +72,12 @@ class AuthoringPage(RenderableResource):
         for block in self.blocks:
             block.process(request)
         # now that each block and corresponding elements have been processed,
-        # it's finally safe to remove any images/etc which made it into 
-        # tinyMCE's previews directory, as they have now had their 
+        # it's finally safe to remove any images/etc which made it into
+        # tinyMCE's previews directory, as they have now had their
         # corresponding resources created:
-        webDir     = Path(G.application.tempWebDir) 
+        webDir     = Path(G.application.tempWebDir)
         previewDir  = webDir.joinpath('previews')
-        for root, dirs, files in os.walk(previewDir, topdown=False): 
+        for root, dirs, files in os.walk(previewDir, topdown=False):
             for name in files:
                 if sys.platform[:3] == "win":
                     for i in range(3):
@@ -169,7 +169,7 @@ class AuthoringPage(RenderableResource):
                 for client in self.parent.clientHandleFactory.clientHandles.values():
                     if request.args['clientHandleId'][0] == client.handleId:
                         activeClient = client
-                        
+
             if not activeClient is None:
                 for resources in block.idevice.userResources:
                     if resources.warningMsg != u'':
@@ -183,10 +183,10 @@ class AuthoringPage(RenderableResource):
 
         html += u'</div>'
         style = G.application.config.styleStore.getStyle(self.package.style)
-        
+
         html += common.renderLicense(self.package.license,"authoring")
         html += common.renderFooter(self.package.footer)
-        
+
         if style.hasValidConfig:
             html += style.get_edition_extra_body()
         html += '<script type="text/javascript">$exeAuthoring.ready()</script>\n'
@@ -201,34 +201,38 @@ class AuthoringPage(RenderableResource):
     def __renderHeader(self):
 		#TinyMCE lang (user preference)
         myPreferencesPage = self.webServer.preferences
-        
+
         """Generates the header for AuthoringPage"""
         html  = common.docType()
         #################################################################################
         #################################################################################
-        
+
         html += u'<html xmlns="http://www.w3.org/1999/xhtml" lang="'+myPreferencesPage.getSelectedLanguage()+'">\n'
         html += u'<head>\n'
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/exe.css\" />"
-        
+
         # Use the Style's base.css file if it exists
-        themePath = Path(G.application.config.stylesDir/self.package.style)
+        style = G.application.config.styleStore.getStyle(self.package.style)
+        if style.hasValidConfig:
+            themePath = style.get_web_path()
+        else:
+            themePath = Path(G.application.config.stylesDir/self.package.style)
         themeBaseCSS = themePath.joinpath("base.css")
         if themeBaseCSS.exists():
-            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/style/%s/base.css\" />" % self.package.style
+            html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"%s/base.css\" />" % themePath
         else:
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/style/base.css\" />"
-            
+
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/css/exe_wikipedia.css\" />"
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/scripts/exe_effects/exe_effects.css\" />"
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/scripts/exe_highlighter/exe_highlighter.css\" />"
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/scripts/exe_games/exe_games.css\" />"
         html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/scripts/tinymce_4/js/tinymce/plugins/abcmusic/export/exe_abcmusic.css\" />" #93 (to do)
-        html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"/style/%s/content.css\" />" % self.package.style
-        if G.application.config.assumeMediaPlugins: 
+        html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"%s/content.css\" />" % themePath
+        if G.application.config.assumeMediaPlugins:
             html += u"<script type=\"text/javascript\">var exe_assume_media_plugins = true;</script>\n"
         #JR: anado una variable con el estilo
-        estilo = u'/style/%s/content.css' % self.package.style
+        estilo = u'%s/content.css' % themePath
         html += common.getJavaScriptStrings()
         # The games require additional strings
         html += common.getGamesJavaScriptStrings()
@@ -240,7 +244,7 @@ class AuthoringPage(RenderableResource):
         html += 'var exe_export_format="'+common.getExportDocType()+'".toLowerCase();'
         html += 'var exe_editor_mode="'+myPreferencesPage.getEditorMode()+'";'
         html += 'var exe_editor_version="'+myPreferencesPage.getEditorVersion()+'";'
-        html += '</script>\n'        
+        html += '</script>\n'
         html += u'<script type="text/javascript" src="../jsui/native.history.js"></script>\n'
         html += u'<script type="text/javascript" src="/scripts/authoring.js"></script>\n'
         html += u'<script type="text/javascript" src="/scripts/exe_jquery.js"></script>\n'
@@ -256,9 +260,8 @@ class AuthoringPage(RenderableResource):
         html += u'<title>"+_("eXe : elearning XHTML editor")+"</title>\n'
         html += u'<meta http-equiv="content-type" content="text/html; '
         html += u' charset=UTF-8" />\n'
-        style = G.application.config.styleStore.getStyle(self.package.style)
         if style.hasValidConfig:
-            html += style.get_edition_extra_head()        
+            html += style.get_edition_extra_head()
         html += common.getExtraHeadContent(self.package)
         html += u'</head>\n'
         return html

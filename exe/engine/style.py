@@ -31,12 +31,12 @@ class Style(Persistable):
     # xml node : [ label , 0=textfield 1=textarea , order into form]
     _attributespre ={
 
-                   'version': ['Version',0,3], 
-                   'compatibility': ['Compatibility',0,2], 
-                   'author': ['Author',1,4], 
-                   'author-url': ['Author URL',0,5], 
-                   'license': ['License',1,6], 
-                   'license-url': ['License URL',0,7], 
+                   'version': ['Version',0,3],
+                   'compatibility': ['Compatibility',0,2],
+                   'author': ['Author',1,4],
+                   'author-url': ['Author URL',0,5],
+                   'license': ['License',1,6],
+                   'license-url': ['License URL',0,7],
                    'description': ['Description',1,1],
                    'extra-head': ['Extra head',1,8],
                    'edition-extra-head': ['Extra head (when editing)',1,8],
@@ -45,15 +45,21 @@ class Style(Persistable):
                    'edition-extra-body': ['Extra body (when editing)',1,9],
                    'name': ['Name',0,0]
                    }
-    
+
     _attributesCode = ['extra-head', 'edition-extra-head', 'extra-body', 'edition-extra-body']
     _attributes= OrderedDict(sorted(_attributespre.items(), key=lambda t: t[1][2]))
 
-    
+
 
     def __init__(self, styleDir):
         """Initialize a new Style"""
         log.debug("Creating Style")
+        self._styleRootDir  = styleDir.dirname()
+        if self._styleRootDir.split("/")[-2] == "webui":
+            self._webRootPath   = "/style/"
+        else:
+            self._webRootPath   = "/style_user/"
+        self._webPath       = self._webRootPath+styleDir.basename()
         self._styleDir      = styleDir
         self._name          = styleDir.basename()
         self._dirname       = styleDir.basename()
@@ -87,7 +93,7 @@ class Style(Persistable):
                         configcharset = chardet.detect(configdata)
                         newconfigdata = configdata.decode(configcharset['encoding'], 'replace')
                     xmldoc = minidom.parseString(newconfigdata)
-                    theme = xmldoc.getElementsByTagName('theme')                    
+                    theme = xmldoc.getElementsByTagName('theme')
                     if (len(theme) > 0):
                         for attribute in self._attributes.keys():
                             rpattribute='_'+attribute.replace('-', '_')
@@ -98,96 +104,95 @@ class Style(Persistable):
                                     attrValue = attr[0].firstChild.nodeValue
                                     if hasattr(self, rpattribute):
                                         setattr(self, rpattribute, attrValue)
-                    
+
                     self._validConfig = True
-                    
+
                     # Check it is compatible with the Style Designer
                     cssFile = self._styleDir/'content.css'
                     if cssFile.exists():
                         cssFileContent = open(cssFile).read()
                         requiredString = "/* eXeLearning Style Designer Compatible Style */";
-                        position = cssFileContent.find(requiredString)                        
+                        position = cssFileContent.find(requiredString)
                         if (position==0):
                             self._isStyleDesignerCompatible = True
-                    
+
         except:
             self._valid=False
-    
+
     def _checkValid(self):
         content = self._styleDir/'content.css'
         if content.exists():
             self._valid = True
         else:
             self._valid = False
-            
+
 
     # Métodos públicos de acceso
     # (Public access methods)
     def isValid(self):
         return self._valid
-    
-    
+
     def hasValidConfig(self):
         return self._validConfig
-        
+
     def isStyleDesignerCompatible(self):
         return self._isStyleDesignerCompatible
-    
-    
+
+    def get_style_root_dir(self):
+        return self._styleRootDir
+
+    def get_web_root_path(self):
+        return self._webRootPath
+
+    def get_web_path(self):
+        return self._webPath
+
     def get_style_dir(self):
         return self._styleDir
-    
-    
+
     def get_name(self):
         return _(self._name)
-    
+
     def get_dirname(self):
         return self._dirname
-
 
     def get_version(self):
         return self._version
 
-
     def get_compatibility(self):
         return self._compatibility
-
 
     def get_author(self):
         return self._author
 
-
     def get_author_url(self):
         return self._author_url
-
 
     def get_license(self):
         return self._license
 
-
     def get_license_url(self):
         return self._license_url
 
-
     def get_description(self):
         return self._description
-    
+
     def get_extra_head(self):
         return self._extra_head
-        
+
     def get_edition_extra_head(self):
         return self._edition_extra_head
-        
+
     def get_jquery(self):
         return self._jquery
-        
+
     def get_extra_body(self):
         return self._extra_body
 
     def get_edition_extra_body(self):
         return self._edition_extra_body
-    
-    
+
+
     def renderPropertiesHTML(self):
         html = ''
         for attribute in self._attributes.keys():
@@ -200,22 +205,24 @@ class Style(Persistable):
         return html
 
     def renderPropertiesJSON(self):
-        properties = []     
+        properties = []
         for attribute in self._attributes.keys():
                 if attribute in self._attributesCode:
                     value = getattr(self, '_'+attribute.replace('-', '_')).replace('"',"'")
                 else:
                     value = getattr(self, '_'+attribute.replace('-', '_'))
-                properties.append({'name': _(self._attributes[attribute][0]), 'value': value,'format':self._attributes[attribute][1],'nxml':attribute})
-        return properties   
-    
+                properties.append({'name': _(self._attributes[attribute][0]),'value':value,'format':self._attributes[attribute][1],'nxml':attribute})
+        #add dirname to properties
+        properties.append({'name':'dirname', 'nxml':'dirname','value':self._dirname,'format':2})
+        return properties
+
     def __str__(self):
         string = ''
         for attribute in self._attributes.keys():
             if hasattr(self, '_'+attribute.replace('-', '_')) and getattr(self, '_'+attribute.replace('-', '_')) != '':
                 string += _(self._attributes[attribute]) + ': ' + getattr(self, '_'+attribute.replace('-', '_')) + '\n'
         return string
-    
+
     def __cmp__(self, other):
         return cmp(self._name, other._name)
 

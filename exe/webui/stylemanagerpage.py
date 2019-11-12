@@ -39,6 +39,7 @@ from exe.webui.livepage        import allSessionClients
 from exe.webui.renderable      import RenderableResource
 from exe.engine.path           import Path
 from exe.engine.style          import Style
+from exe                       import globals as G
 
 
 log = logging.getLogger(__name__)
@@ -182,6 +183,8 @@ class StyleManagerPage(RenderableResource):
         Returns a JSON response with a list of the installed styles
         and its related buttons
         """
+        self.config.loadStyles()
+
         styles = []
         styles_sort = self.config.styleStore.getStyles()
 
@@ -194,24 +197,32 @@ class StyleManagerPage(RenderableResource):
             delete = False
             editButton = False
             properties = False
-            if    style.get_dirname() != 'base' \
-              and style.get_dirname() != "cedec" \
-              and style.get_dirname() != "docs" \
-              and style.get_dirname() != "INTEF" \
-              and style.get_dirname() != "kids" \
-              and style.get_dirname() != "simplepoint":
+            if style.get_style_root_dir() == self.config.stylesDir:
+                userStyle = 0
+            else:
+                userStyle = 1
                 delete = True
+            #if style.get_dirname() != 'base' \
+            #  and style.get_dirname() != "cedec" \
+            #  and style.get_dirname() != "docs" \
+            #  and style.get_dirname() != "INTEF" \
+            #  and style.get_dirname() != "kids" \
+            #  and style.get_dirname() != "standardwhite" \
+            #  and style.get_dirname() != "simplepoint":
+            #    delete = True
             if style.hasValidConfig():
                 properties = True
                 if style.isStyleDesignerCompatible():
                     editButton = True
             styles.append({'style': style.get_dirname(),
+                           'userStyle': userStyle,
                            'name': style.get_name(),
                            'editButton': editButton,
                            'exportButton': export,
                            'deleteButton': delete,
                            'propertiesButton': properties})
         return styles
+
 
     def doImportStyle(self, filename):
         """ Imports an style from a ZIP file
@@ -221,7 +232,11 @@ class StyleManagerPage(RenderableResource):
         and if config.xml file exists, it checks that the style
         name does not exist.
         """
-        styleDir = self.config.stylesDir
+        if hasattr(G.application, "userStylesDir"):
+            styleDir = G.application.userStylesDir
+        else:
+            styleDir = self.config.stylesDir
+
         log.debug("Import style from %s" % filename)
         filename = filename.decode('utf-8')
         BaseFile = os.path.basename(filename)
@@ -320,7 +335,8 @@ class StyleManagerPage(RenderableResource):
                 Path(filename).remove()
             except ImportStyleExistsError, e:
                 # This might retry installation from already downloaded file, do not delete
-                warnLocalStyleExists(e.absolute_style_dir, filename)
+                self.alert(_(u'Error'), _(u'Style already exists. '))
+                #warnLocalStyleExists(e.absolute_style_dir, filename)
 
             except Exception, e:
                 log.error("Error when installing style %s from %s: %s" % (style_name, filename, str(e)))
@@ -441,12 +457,11 @@ class StyleManagerPage(RenderableResource):
             self.action = 'StylesRepository'
 
     def doExportStyle(self, stylename, filename, cfgxml):
-
         if filename != '':
             styleDir = self.config.stylesDir
             style = Style(styleDir / stylename)
             log.debug("dir %s" % style.get_style_dir())
-            self.__exportStyle(style.get_style_dir(), unicode(filename), cfgxml)
+            return self.__exportStyle(style.get_style_dir(), unicode(filename), cfgxml)
 
     def __exportStyle(self, dirstylename, filename, cfgxml):
         """ Exports style to a ZIP file """
@@ -476,6 +491,7 @@ class StyleManagerPage(RenderableResource):
                 zippedFile.close()
                 self.alert(_(u'Correct'),
                            _(u'Style exported correctly: %s') % sfile)
+                return zippedFile
 
         except IOError:
             self.alert(_(u'Error'),
@@ -483,8 +499,13 @@ class StyleManagerPage(RenderableResource):
         self.action = ""
 
     def doDeleteStyle(self, style):
+        styleData = json.loads(style)
         try:
-            styleDir = self.config.stylesDir
+            if styleData["userStyle"]:
+                styleDir = G.application.userStylesDir
+            else:
+                styleDir = self.config.stylesDir
+            style = styleData["name"]
             styleDelete = Style(styleDir / style)
             self.__deleteStyle(styleDelete)
             self.alert(_(u'Correct'), _(u'Style deleted correctly'))
@@ -501,18 +522,28 @@ class StyleManagerPage(RenderableResource):
         log.debug("delete style: %s" % style.get_name())
 
     def doPropertiesStyle(self, style):
-        styleDir = self.config.stylesDir
+        styleData = json.loads(style)
+        if styleData["userStyle"]:
+            styleDir = G.application.userStylesDir
+        else:
+            styleDir = self.config.stylesDir
+        style = styleData["name"]
         styleProperties = Style(styleDir / style)
         self.properties = styleProperties.renderPropertiesJSON()
         self.action = 'Properties'
         self.style = styleProperties.get_name()
 
     def doPreExportStyle(self, style):
-        styleDir = self.config.stylesDir
+        styleData = json.loads(style)
+        if styleData["userStyle"]:
+            styleDir = G.application.userStylesDir
+        else:
+            styleDir = self.config.stylesDir
+        style = styleData["name"]
         styleProperties = Style(styleDir / style)
         self.properties = styleProperties.renderPropertiesJSON()
         self.action = 'PreExport'
-        self.style = style
+        self.style = styleProperties.get_name()
 
     def doList(self):
         self.action = 'List'

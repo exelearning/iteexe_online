@@ -603,7 +603,7 @@ class ScormExport(object):
 
         # Copy the style files to the output dir
 
-        styleFiles = [self.styleDir/'..'/'popup_bg.gif']
+        styleFiles = [self.config.stylesDir/'popup_bg.gif']
         # And with all the files of the style we avoid problems:
         styleFiles += self.styleDir.files("*.*")
         if self.scormType == "commoncartridge":
@@ -612,7 +612,7 @@ class ScormExport(object):
                     styleFiles.remove(sf)
         self.styleDir.copylist(styleFiles, outputDir)
 
-        listCSSFiles=getFilesCSSToMinify('scorm', self.styleDir)
+        listCSSFiles=getFilesCSSToMinify('scorm', self.config.stylesDir)
         exportMinFileCSS(listCSSFiles, outputDir)
 
         # Copy the scripts

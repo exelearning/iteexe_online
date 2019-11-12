@@ -74,11 +74,12 @@ function xmlcreate(items,types) {
 
     return valxml;
 }
-function createButtonEdit(name, style, currentStyle, enable) {
+function createButtonEdit(name, style, currentStyle, enable, userStyle) {
     var disabled = false;
     if (enable==false) disabled = true;
     var txt = _('Edit style: ')+name;
     if (name==currentStyle) txt = _('Edit current Style');
+    sty_val = JSON.stringify({"name":style,"userStyle":userStyle});
     var buttonEdit =
     {
         xtype: 'button',
@@ -88,14 +89,15 @@ function createButtonEdit(name, style, currentStyle, enable) {
         button_class: 'edit_style',
         name: 'edit_style'+style,
         style:"margin-right:4px;",
-        value: style,
+        value: sty_val,
         disabled: disabled
     };
     return buttonEdit;
 }
-function createButtonPreExport(name, style, enable) {
+function createButtonPreExport(name, style, enable, userStyle) {
     var disabled = false;
-    if (enable==false) disabled = true;    
+    if (enable==false) disabled = true;
+    sty_val = JSON.stringify({"name":style,"userStyle":userStyle});
     var buttonExport =
     {
         xtype: 'button',
@@ -105,7 +107,7 @@ function createButtonPreExport(name, style, enable) {
         button_class: 'pre_export_style',
         name: 'export_style'+style,
         style:"margin-right:4px;",
-        value: style,
+        value: sty_val,
         disabled: disabled
     };
     return buttonExport;
@@ -125,9 +127,10 @@ function createButtonExport(name, stylen, xmlitems, lngitems) {
     };
     return buttonExport;
 }
-function createButtonDelete(name, style, enable) {
+function createButtonDelete(name, style, enable, userStyle) {
     var disabled = false;
     if (enable==false) disabled = true;
+    sty_val = JSON.stringify({"name":style,"userStyle":userStyle});
     var buttonDelete =
     {
         xtype: 'button',
@@ -137,15 +140,16 @@ function createButtonDelete(name, style, enable) {
         name: 'delete_style'+style,
         button_class: 'delete_style',
         style:"margin-right:4px;",
-        value: style,
+        value: sty_val,
         disabled: disabled
     };
     return buttonDelete;
 }
 
-function createButtonProperties(name, style, enable) {
+function createButtonProperties(name, style, enable, userStyle) {
     var disabled = false;
-    if (enable==false) disabled = true;    
+    if (enable==false) disabled = true;
+    sty_val = JSON.stringify({"name":style,"userStyle":userStyle});
     var buttonProperties =
     {
         xtype: 'button',
@@ -154,7 +158,7 @@ function createButtonProperties(name, style, enable) {
         itemId: 'properties_style'+style,
         name: 'properties_style'+style,
         button_class: 'properties_style',
-        value: style,
+        value: sty_val,
         disabled: disabled
     };
     return buttonProperties;
@@ -174,11 +178,15 @@ function createPanelStyles(styles) {
     }
     var i;
     var itemsShow = [];
+    var itemsUserShow = [];
     var panel = [];
-    for (i = styles.length-1; i >= 0; i--) {
+    var bEstilo = false;
+    var bEstiloU = false;
+    for (i=0; i<styles.length; i ++) {
         //item = Ext.create('Ext.menu.CheckItem', { text: styles[i].label, itemId: styles[i].style, checked: styles[i].selected });
+        istyle = styles[i];
         var css = "";
-        if (currentStyle==styles[i].name) css += ";font-weight:bold;background:url(/images/arrow-right.gif) no-repeat 0 50%;padding-left:8px";
+        if (currentStyle==istyle.style) css += ";font-weight:bold;background:url(/images/arrow-right.gif) no-repeat 0 50%;padding-left:8px";
         var style=[];
         style[0] =
         {
@@ -186,20 +194,32 @@ function createPanelStyles(styles) {
             width: 298,
             margin: '5 5 5 20',
             style:css,
-            text: styles[i].name
+            text: istyle.name
         };
-        style.push(createButtonEdit(styles[i].name, styles[i].style, currentStyle,styles[i].editButton));
-        style.push(createButtonPreExport(styles[i].name, styles[i].style,styles[i].exportButton));
-        style.push(createButtonDelete(styles[i].name, styles[i].style, styles[i].deleteButton));
-        style.push(createButtonProperties(styles[i].name, styles[i].style,styles[i].propertiesButton));
+        style.push(createButtonEdit(istyle.name, istyle.style, currentStyle, istyle.editButton, istyle.userStyle));
+        if (istyle.deleteButton) {
+            style.push(createButtonDelete(istyle.name, istyle.style, istyle.deleteButton, istyle.userStyle));
+        }
+        style.push(createButtonPreExport(istyle.name, istyle.style, istyle.exportButton, istyle.userStyle));
+        style.push(createButtonProperties(istyle.name, istyle.style, istyle.propertiesButton, istyle.userStyle));
         var estilo = "";
-        if (i%2 == 0) {
-            estilo = 'background:#FFFFFF;padding-top:2px';
+        if (istyle.userStyle) {
+            if (bEstiloU) {
+                estilo = 'background-color:#FAFAFA;padding-top:7px;padding-bottom:5px;border-top:1px solid #B5B8C8;border-bottom:1px solid #B5B8C8;';
+                bEstiloU = false;
+            } else {
+                estilo = 'background:#FFFFFF;padding-top:2px';
+                bEstiloU = true;
+            }
+        } else {
+            if (bEstilo) {
+                estilo = 'background-color:#FAFAFA;padding-top:7px;padding-bottom:5px;border-top:1px solid #B5B8C8;border-bottom:1px solid #B5B8C8;';
+                bEstilo = false;
+            } else {
+                estilo = 'background:#FFFFFF;padding-top:2px';
+                bEstilo = true;
+            }
         }
-        else {
-            estilo = 'background-color:#FAFAFA;padding-top:7px;padding-bottom:5px;border-top:1px solid #B5B8C8;border-bottom:1px solid #B5B8C8;';
-        }
-
         var item =
         {
             xtype: 'container',
@@ -208,7 +228,11 @@ function createPanelStyles(styles) {
             style: estilo,
             items: style
         };
-        itemsShow[i] = item;
+        if (istyle.userStyle) {
+            itemsUserShow.push(item);
+        } else {
+            itemsShow.push(item);
+        }
     }
     var filename =
     {
@@ -217,7 +241,11 @@ function createPanelStyles(styles) {
         itemId: 'filename',
         name: 'filename'
     };
-    itemsShow.push(filename);
+    if (istyle.userStyle) {
+        itemsUserShow.push(filename);
+    } else {
+        itemsShow.push(filename);
+    }
     var style =
     {
         xtype: 'field',
@@ -225,7 +253,11 @@ function createPanelStyles(styles) {
         itemId: 'style',
         name: 'style'
     };
-    itemsShow.push(style);
+    if (istyle.userStyle) {
+        itemsUserShow.push(style);
+    } else {
+        itemsShow.push(style);
+    }
     panel = [
         {
             xtype: 'button',
@@ -236,7 +268,7 @@ function createPanelStyles(styles) {
             text: _('Create new style'),
             style:'float:right;',
             margin: 10
-        },    
+        },
         {
             xtype: 'button',
             tooltip: _('Import style to the system '),
@@ -256,18 +288,26 @@ function createPanelStyles(styles) {
             name: 'styles_repository',
             style:'float:right;',
             margin: 10,
-        },
-        {
-            xtype: 'fieldset',
-            title: _("List of styles in your system"),
-            margin: 10,
-            items: itemsShow
         }
     ];
+    if (itemsUserShow.length > 0) {
+        panel.push({
+            xtype: 'fieldset',
+            title: _("List of User styles"),
+            margin: 10,
+            items: itemsUserShow
+        })
+    }
+    panel.push({
+        xtype: 'fieldset',
+        title: _("List of System styles"),
+        margin: 10,
+        items: itemsShow
+    })
     return panel;
 }
 
-function createPanelProperties(properties, stylen,mode,withbutton) {
+function createPanelProperties(properties, stylen, mode, withbutton) {
     var i;
     var itemsShow = [];
     var xmlitems=[];
@@ -301,8 +341,14 @@ function createPanelProperties(properties, stylen,mode,withbutton) {
                     fieldStyle:txcss,
                     anchor: "100%"
                 };
-            }
-            else {
+            } else if (properties[i].format==2) {
+                valueProperty = {
+                    xtype: 'field',
+                    name: properties[i].nxml,
+                    value: properties[i].value,
+                    hidden: true,
+                };
+            } else {
                 valueProperty = {
                     xtype: 'textfield',
                     fieldLabel: properties[i].name,
@@ -386,7 +432,7 @@ function createPanelProperties(properties, stylen,mode,withbutton) {
         }
     ];
     if (withbutton){
-        panel.push(createButtonExport(name, stylen,xmlitems,lngitems));
+        panel.push(createButtonExport(name, stylen, xmlitems, lngitems));
     }
 
     return panel;
@@ -614,10 +660,10 @@ function createPanel() {
             }
             else if (json.action == 'Properties') {
                 //createPanelProperties(json.properties, json.style,read only,with button export)
-                panel = createPanelProperties(json.properties, json.style,true,false);
+                panel = createPanelProperties(json.properties, json.style, true, false);
             }
             else if (json.action == 'PreExport') {
-                panel = createPanelProperties(json.properties, json.style,true,true);
+                panel = createPanelProperties(json.properties, json.style, true, true);
             }
             else if (json.action == 'StylesRepository') {
                 panel = createPanelRepositoryStyles(json.rep_styles, json.active_style);

@@ -9,11 +9,19 @@ var $designer = {
 		var sd_style = "base";
 		var sd_href= window.location.href;
 		var sd_href_params = this.getUrlVars(sd_href);
-		if (sd_href_params['style']) {
-			sd_style = sd_href_params['style'];	
+		if (sd_href_params['userstyle']=="1") {
+			sd_style = sd_href_params['style'];
+			this.styleId = sd_style;
+			this.styleDir = "/style_user/";
+		} else if (sd_href_params['style']) {
+			sd_style = sd_href_params['style'];
+			this.styleId = sd_style;
+			this.styleDir = "/style/";
+		} else {
+			this.styleId = sd_style;
+			this.styleDir = "/style/";
 		}
-		this.styleId = sd_style;
-		this.styleBasePath = "/style/"+sd_style+"/";
+		this.styleBasePath = this.styleDir+sd_style+"/";
 		this.getConfig();
 	},
 	getUrlVars : function(url) {
@@ -34,22 +42,23 @@ var $designer = {
 		if (n && n<7) return false;
 		return true;
 	},
-	addStylePath : function(c){
-		var p = "/style/"+this.styleId+"/";
+	addStylePath : function(c, style_path){
+		var p = style_path+this.styleId+"/";
 		c = c.replace(/url\(http:/g,'url--http:');
 		c = c.replace(/url\(https:/g,'url--https:');
 		c = c.replace(/url\(/g,'url('+p);
 		c = c.replace(/url--http:/g,'url(http:');
 		c = c.replace(/url--https:/g,'url(https:');
 		return c;
-	},	
-	getStylesContent : function(type){
-		var url = "/style/"+this.styleId+"/"+type+".css";
+	},
+	getStylesContent : function(type,base){
+		var style_path = this.styleBasePath;
+		var url = this.styleBasePath+"/"+type+".css";
 		var tag = document.getElementById("my-"+type+"-css");$.ajax({
 			type: "GET",
 			url: url,
 			success: function(res){
-				res = $designer.addStylePath(res);
+				res = $designer.addStylePath(res, this.styleDir);
 				if (this.isOldBrowser) tag.cssText = res;
 				else tag.innerHTML = res;
 				if (type=="content") $designer.contentCSS = res;
@@ -65,44 +74,44 @@ var $designer = {
 			// Use default name, author and description: 'base' style has some custom
 			// values in author and description, not really suitable as starting template
 			var styleConfig = {};
-			
+
 			styleConfig.styleName = '';
-			
+
 			styleConfig.authorName = 'eXeLearning.net';
 			styleConfig.authorURL = 'http://exelearning.net';
-			
+
 			styleConfig.styleDescription = '';
-			
+
 			styleConfig.styleVersion = '1.0';
 			var version = styleConfig.styleVersion.split('.');
 			styleConfig.styleVersionMajor = version[0];
 			styleConfig.styleVersionMinor = version[1];
-			
+
 			$designer.config = styleConfig;
 		}
 		else {
-			// Load from config.xml 
-			var url = "/style/"+this.styleId+"/config.xml";
+			// Load from config.xml
+			var url = this.styleDir+this.styleId+"/config.xml";
 			$.ajax({
 				type: "GET",
 				url: url,
 				success: function(config){
 					var styleConfig = {};
-					
+
 					var styleName = this.styleId;
 					var name = $(config).find('name');
 					if (name.length==1) styleName = name.eq(0).text()
 					styleConfig.styleName = styleName;
-				
+
 					var authorName = "eXeLearning.net";
 					var author = $(config).find('author');
 					if (author.length==1) authorName = author.eq(0).text()
-					styleConfig.authorName = authorName;	
+					styleConfig.authorName = authorName;
 
 					var authorURL = "http://exelearning.net";
 					var url = $(config).find('author-url');
 					if (url.length==1) authorURL = url.eq(0).text()
-					styleConfig.authorURL = authorURL;	
+					styleConfig.authorURL = authorURL;
 
 					var styleDescription = "";
 					var description = $(config).find('description');
@@ -112,12 +121,12 @@ var $designer = {
 					var styleVersion = "1.0";
 					var version = $(config).find('version');
 					if (version.length>0) styleVersion = version.eq(0).text()
-					styleConfig.styleVersion = styleVersion;				
-					
+					styleConfig.styleVersion = styleVersion;
+
 					version = styleVersion.split('.');
 					styleConfig.styleVersionMajor = version[0];
 					styleConfig.styleVersionMinor = version[1];
-					
+
 					$designer.config = styleConfig;
 				}
 			});
@@ -127,7 +136,7 @@ var $designer = {
 		// Is it IE<9?
 		this.isOldBrowser = false;
 		var ie = this.checkIE;
-		if (ie && ie<9) this.isOldBrowser = true;		
+		if (ie && ie<9) this.isOldBrowser = true;
 		document.write('<link rel="stylesheet" type="text/css" href="/style/base.css" />');
 		// To review: document.write('<link rel="stylesheet" type="text/css" href="/style/'+this.styleId+'/content.css" id="base-content-css" />');
 		document.write('<style type="text/css" id="my-content-css"></style>');
@@ -140,7 +149,7 @@ var $designer = {
 	},
 	printExtraBody : function(){
 		this.disableAllLinks();
-		document.write('<script type="text/javascript" src="/style/'+this.styleId+'/_style_js.js"></script>');
+		document.write('<script type="text/javascript" src="'+this.styleBasePath+'_style_js.js"></script>');
 		if (this.isBrowserCompatible()) this.openDesigner();
 		else alert($i18n.Browser_Incompatible);
 	},

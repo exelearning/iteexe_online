@@ -34,6 +34,7 @@ from exe.export.xliffexport import XliffExport
 from exe.export.epub3export import Epub3Export
 from exe.export.textexport import TextExport
 from exe.export.epub3subexport import Epub3SubExport
+from exe import globals as G
 
 LOG = logging.getLogger(__name__)
 
@@ -71,7 +72,7 @@ class CmdlineExporter(object):
             outputfp = Path(outputf)
             if outputfp.exists() and not self.options["overwrite"]:
                 error = _(u'"%s" already exists.\nPlease try again \
-with a different filename') % outputf
+                        with a different filename') % outputf
                 raise Exception(error.encode(sys.stdout.encoding))
             else:
                 if outputfp.exists() and self.options["overwrite"]:
@@ -86,7 +87,11 @@ with a different filename') % outputf
                 if not pkg:
                     error = _(u"Invalid input package")
                     raise Exception(error.encode(sys.stdout.encoding))
-                self.styles_dir = self.config.stylesDir / pkg.style
+                if hasattr(G.application, "userStylesDir"):
+                    styleDir = G.application.userStylesDir
+                else:
+                    styleDir = self.config.stylesDir
+                self.styles_dir = styleDir / pkg.style
                 LOG.debug("Styles dir: %s" % (self.styles_dir))
                 pkg.exportSource = self.options['editable']
                 getattr(self, 'export_' + self.options["export"])(pkg, outputf)
@@ -158,4 +163,3 @@ with a different filename') % outputf
         textExport =TextExport(outputf)
         textExport.export(pkg)
         textExport.save(outputf)
-

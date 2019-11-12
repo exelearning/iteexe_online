@@ -6,7 +6,7 @@
 
 var $appVars = [
 	//Field, value length or "", starting position (Ej: color:# => 7).
-	
+
 	// General tab
 	// fieldset #1
 	['pageWidth',4,6,'number'],
@@ -19,7 +19,7 @@ var $appVars = [
 	['bodyColor',6,7],
 	['fontSize',3,10,'number'],
 	['aColor',6,7],
-	
+
 	// Page tab
 	// fieldset #1
 	['bodyBGColor',6,18],
@@ -36,7 +36,7 @@ var $appVars = [
 	['searchBarTextColor',6,7],
 	['searchBarButtonBGColor',6,12],
 	['searchBarButtonTextColor',6,7],
-	
+
 	// Header and footer tab
 	// fieldset #1
 	['headerHeight',4,7,'number'],
@@ -60,17 +60,17 @@ var $appVars = [
 	['footerBGColor',6,18],
 	['footerAColor',6,7],
 	['footerFontSize',3,10,'number'],
-	
+
 	// Navigation tag
 	// fieldset #1
 	['hideNavigation','checkbox'],
-	['horizontalNavigation','checkbox'],	
+	['horizontalNavigation','checkbox'],
 	['navBGColor',6,18],
 	['navHoverBGColor',6,18],
 	['navAColor',6,7],
 	['navAHoverColor',6,7],
 	['navBorderColor',6,14],
-	['navFontSize',3,10,'number'],	
+	['navFontSize',3,10,'number'],
 	['navWidth',4,6,'number'],
 	// fieldset #2
 	['useNavigationIcons','checkbox'],
@@ -79,7 +79,7 @@ var $appVars = [
 	['nav2AColor',6,7],
 	['nav2AHoverColor',6,7],
 	['navigationIconsColor','radio'],
-	
+
 	// iDevices tab
 	// fielset #1
 	['emTitleColor',6,7],
@@ -117,17 +117,17 @@ var $app = {
 	advancedMark : "/* eXeLearning Style Designer (custom CSS) */",
 	defaultMark : "/* eXeLearning Style Designer (default CSS) */",
 	init : function() {
-	
+
 		if (!opener || !opener.opener) {
 			this.quit($i18n.No_Opener_Error);
 			return false;
 		}
-		
+
 		if ($(opener).width()<800) {
 			this.quit($i18n.Not_Enough_Resolution);
 			return false;
 		}
-		
+
 		opener.myTheme.toggleMenu = function(){
 			if (opener) {
 				if (typeof(Hide_Show_Menu_Disabled_Warned)=='undefined') {
@@ -136,14 +136,14 @@ var $app = {
 				}
 			}
 		}
-		
+
 		this.i18n();
-		
+
 		// Is it IE<9?
 		this.isOldBrowser = false;
 		var ie = this.checkIE;
 		if (ie && ie<9) this.isOldBrowser = true;
-		
+
 		$("#restore").click(function(){
 			Ext.Msg.show({
 				title: $i18n.Confirm,
@@ -156,7 +156,7 @@ var $app = {
 						$app.loadNewStyle(currentStyle);
 					}
 				}
-			});			
+			});
 		});
 
 		$("#saveAs").click(function(){
@@ -168,7 +168,7 @@ var $app = {
 
 		$("#save").click(function(){
 
-			var currentStyle = $app.getCurrentStyle();	
+			var currentStyle = $app.getCurrentStyle();
 			if (opener && opener.location.href.indexOf("?style=")==-1) {
 				// The user's creating a new Style, so we open the "Save as" dialog:
 				$("#saveAs").trigger("click");
@@ -182,8 +182,8 @@ var $app = {
 			}
 			$app.getPreview("save");
 			var content = $("#my-content-css").val();
-			var nav = $("#my-nav-css").val();			
-			
+			var nav = $("#my-nav-css").val();
+
 			// Send POST request to update current style
 			var data = $app.collectAjaxData(content, nav, 'saveStyle');
 			$app.preloader.show();
@@ -211,22 +211,22 @@ var $app = {
 					Ext.Msg.alert($i18n.Error, response.statusText);
 				}
 			});
-			
-		});		
+
+		});
 
 		$("#finish").click(function(){
-			
+
 			var currentStyle = $app.getCurrentStyle();
 			if ($app.nonEditableStyles.indexOf(currentStyle)!=-1) {
 				// If user is editing a non editable style it must be because style has not been saved yet,
 				// We tell the user to click on "Save as"
 				Ext.Msg.alert($i18n.Information, $i18n.Use_Save_as.replace('%s','"'+$i18n.Save_as+'"'));
 				return;
-			}			
+			}
 			$app.getPreview("save");
 			var content = $app.formatToSave($("#my-content-css").val());
 			var nav = $app.formatToSave($("#my-nav-css").val());
-			
+
 			Ext.Msg.show({
 				title: $i18n.Confirm,
 				msg: $i18n.Finish_confirmation,
@@ -264,7 +264,7 @@ var $app = {
 										            	selected = outlineTreePanel.getSelectionModel().getSelection();
 											        authoring.submitLink("changeNode", selected !== 0? selected[0].data.id : '0');
 										        }
-										    
+
 												opener.window.close();
 												window.close();
 											}
@@ -284,11 +284,11 @@ var $app = {
 				}
 			});
 		});
-		
+
 		this.stylePath = opener.$designer.styleBasePath;
 		this.getCurrentCSS();
 		// Enable the Color Pickers after loading the current values
-		
+
 	},
 	toggleNavWidth : function(hide) {
 		var n = $("#navWidth-wrapper");
@@ -321,9 +321,15 @@ var $app = {
 		var currentStyle = this.getCurrentStyle();
 		var currentURL = opener.window.location.href;
 		var newURL;
-		
+
 		if (currentStyle != 'base') {
 			newURL = currentURL.replace("style="+currentStyle,"style="+newStyle);
+			if (newURL.includes("userstyle=0")) {
+				newURL = newURL.replace("userstyle=0","userstyle=1");
+			} else {
+				newURL += "&userstyle=1"
+			}
+
 		}
 		else {
 			var queryStart = currentURL.search("\\?");
@@ -333,14 +339,18 @@ var $app = {
 			else {
 				currentURL = currentURL + "&";
 			}
-			newURL = currentURL + "style="+newStyle;
+			newURL = currentURL + "style="+newStyle + "&userstyle=1";
 		}
-		
+
 		opener.window.location = newURL;
 	},
 	getCurrentStyle : function() {
 		var currentStyle = this.stylePath;
-		currentStyle = currentStyle.replace("/style/","").replace("/","");
+		if (currentStyle.includes("/style/")) {
+			currentStyle = currentStyle.replace("/style/","").replace("/","");
+		} else {
+			currentStyle = currentStyle.replace("/style_user/","").replace("/","");
+		}
 		return currentStyle;
 	},
 	updateTextFieldFromFile : function(e){
@@ -356,7 +366,7 @@ var $app = {
 		$("#"+id).val(fileName);
 		// Save temporary file URL in hidden input
 		$("#"+id+'TempURL').val(window.URL.createObjectURL(e.files[0]).toString());
-		
+
 		$app.getPreview();
 	},
 	openBrowser : function(id){
@@ -380,17 +390,17 @@ var $app = {
 		}
 	},
 	getCurrentCSS : function(){
-		
+
 		// content.css
 		var contentCSS = opener.$designer.contentCSS.split($app.mark);
 		// To review: $app.baseContentCSS = contentCSS[0].replace(/\s+$/, ''); // Remove the last space
 		$app.baseContentCSS = contentCSS[0];
-		
+
 		var currentStyle = $app.getCurrentStyle();
-		
+
 		// Get the Style's content.css content:
 		jQuery.ajax({
-			url: '/style/'+currentStyle+'/content.css',
+			url: this.stylePath+'/content.css',
 			type: 'POST',
 			success: function(response) {
 				var contentCSS = response.split($app.mark);
@@ -400,7 +410,7 @@ var $app = {
 				Ext.Msg.alert($i18n.Error, response.statusText);
 			}
 		});
-		
+
 		var myContentCSS = "";
 		if (contentCSS.length==2) {
 			myContentCSS = contentCSS[1];
@@ -409,15 +419,15 @@ var $app = {
 		$app.myContentCSS = $app.removeStylePath(myContentCSS);
 		$app.getAllValues("content",$app.myContentCSS);
 		$app.loadConfig();
-		
+
 		// nav.css
 		var navCSS = opener.$designer.navCSS.split($app.mark);
 		// To review: $app.baseNavCSS = navCSS[0].replace(/\s+$/, ''); // Remove the last space
 		$app.baseNavCSS = navCSS[0];
-		
+
 		// Get the Style's nav.css content:
 		jQuery.ajax({
-			url: '/style/'+currentStyle+'/nav.css',
+			url: this.stylePath+'/nav.css',
 			type: 'POST',
 			success: function(response) {
 				var navCSS = response.split($app.mark);
@@ -427,7 +437,7 @@ var $app = {
 				Ext.Msg.alert($i18n.Error, response.statusText);
 			}
 		});
-		
+
 		var myNavCSS = "";
 		if (navCSS.length==2) {
 			myNavCSS = navCSS[1];
@@ -435,7 +445,7 @@ var $app = {
 		}
 		$app.myNavCSS = $app.removeStylePath(myNavCSS);
 		$app.getAllValues("nav",$app.myNavCSS);
-		
+
 	},
 	addStylePath : function(c){
 		c = $app.removeStylePath(c);
@@ -444,7 +454,7 @@ var $app = {
 		c = c.replace(/url\(/g,'url('+$app.stylePath);
 		c = c.replace(/url--http:/g,'url(http:');
 		c = c.replace(/url--https:/g,'url(https:');
-		
+
 		// Replace relative paths to background images with its temporary URLs
 		// (required when file is changed but not yet saved)
 		var bodyBGURL_tempURL = $('#bodyBGURLTempURL').val();
@@ -462,13 +472,13 @@ var $app = {
 			var bodyBGURL_filename = $('#headerBGURL').val();
 			c = $app.replaceBackgroundImage(c, bodyBGURL_filename, bodyBGURL_tempURL);
 		}
-		
+
 		return c;
 	},
 	replaceBackgroundImage : function(content, filename, fullURL) {
 		var relativePath = 'background-image:url(' + $app.stylePath + filename + ')';
 		var replacement = 'background-image:url(' + fullURL + ')';
-		
+
 		return content.replace(relativePath, replacement);
 	},
 	removeStylePath : function(c){
@@ -481,12 +491,12 @@ var $app = {
 			this.value = this.value.replace(/["]+/g, '');
 		});
 		// Hide the name field if it's a new Style
-		if (nameField.val()=="") $("#currentStyleInfo").hide().before($i18n.Save_to_name);		
-		
+		if (nameField.val()=="") $("#currentStyleInfo").hide().before($i18n.Save_to_name);
+
 		jQuery('#authorName').val(opener.$designer.config.authorName);
 		jQuery('#authorURL').val(opener.$designer.config.authorURL);
 		jQuery('#styleDescription').val(opener.$designer.config.styleDescription);
-		
+
 		// If current styleVersion is not available in the default option list,
 		// append it to available options before setting value
 		if (   opener.$designer.config.styleVersionMinor != 0
@@ -500,9 +510,9 @@ var $app = {
 		jQuery('#styleVersion').val(opener.$designer.config.styleVersion);
 	},
 	getAllValues : function(type,content){
-		
+
 		var c = content;
-		
+
 		// Advanced CSS
 		var adv = c.split($app.advancedMark);
 		if (adv.length==2 && adv[1]!="") {
@@ -510,10 +520,10 @@ var $app = {
 			adv = adv.replace("\r\n","");
 			$("#extra-"+type+"-css").val(adv);
 		}
-		
+
 		// c = c.replace("\r\n\r\n","");
 		c = c.replace(/(\r\n|\n|\r)/gm,"");
-		
+
 		// Get CSS onload
 		if (type=="content") {
 			if ($app.returnFullContent==true) $("#my-content-css").val($app.baseContentCSS+"\n"+$app.mark+"\n"+c);
@@ -522,7 +532,7 @@ var $app = {
 			if ($app.returnFullContent==true) $("#my-nav-css").val($app.baseNavCSS+"\n"+$app.mark+"\n"+c);
 			else $("#my-nav-css").val(c);
 		}
-		
+
 		var val;
 		for (var i=0;i<$appVars.length;i++) {
 			var currentValue = $appVars[i];
@@ -546,7 +556,7 @@ var $app = {
 						val = val.split(";");
 						val = val[0];
 						$("#"+currentValue[0]).val(val);
-					}				
+					}
 				} else {
 					if (currentValue[0].indexOf("BGURL")!=-1){
 						var a = c.split(currentValue[0]+'*/background-image:url(')[1];
@@ -603,19 +613,19 @@ var $app = {
 				}
 			}
 		}
-		
+
 		// Enable the Color Pickers
 		this.enableColorPickers();
-		
+
 		// Enable real time preview
 		this.trackChanges();
-		
+
 		// Regenerate the code (format it)
 		this.getPreview();
-		
+
 	},
 	trackChanges : function(){
-		
+
 		var f = document.getElementById("myForm");
 		// INPUT fields
 		var f_inputs = f.getElementsByTagName("INPUT");
@@ -648,7 +658,7 @@ var $app = {
 							n.style.display="none";
 							o.style.display="block";
 						}
-					}				
+					}
 					$app.getPreview();
 				}
 			} else {
@@ -661,12 +671,12 @@ var $app = {
 			f_selects[z].onchange=function(){
 				if (this.id=="pageWidthUnit") $app.setWidth(this);
 				$app.getPreview();
-			}	
+			}
 		}
 		// Advanced tab
 		document.getElementById("extra-content-css").onkeyup=function(){ $app.getPreview(); }
 		document.getElementById("extra-nav-css").onkeyup=function(){ $app.getPreview(); }
-		
+
 	},
 	template : function(templateid,data){
 		return document.getElementById(templateid).innerHTML.replace(/%(\w*)%/g,
@@ -717,9 +727,9 @@ var $app = {
 		css=css.replace(/;\/\*/g,';\n/*');
 		css = css.replace(/\n\n/gm,"\n");
 		css = css.replace(/\s+$/, ''); // Remove the last space
-		
+
 		if (hasCustomCSS) return css+"\n"+$app.advancedMark+adv;
-		return css;	
+		return css;
 	},
 	minify : function(str){
 		return str.replace(/(\r\n|\n|\r)/gm,"").replace("*/","*/\n").replace(/}/g,"}\n");
@@ -746,11 +756,11 @@ var $app = {
 		return path;
 	},
 	composeCSS : function(mode){
-		
+
 		var css = new Array();
 		var contentCSS = "";
 		var navCSS = "";
-		
+
 		if (!mode) mode = "";
 
 		// #content
@@ -763,13 +773,13 @@ var $app = {
 		var wrapperShadowColor = $("#wrapperShadowColor").val();
 		var contentBorderColor = $("#contentBorderColor").val();
 		var contentBorderWidth = $("#contentBorderWidth").val();
-		
+
 		// #content (website) and body (IMS, etc.)
 		var contentBGColor = $("#contentBGColor").val();
 		var contentBGURL = $app.removeLocalPath("contentBGURL",mode);
 		var contentBGPosition = $("#contentBGPosition").val();
 		var contentBGRepeat = $("#contentBGRepeat").val();
-		
+
 		// Search bar
 		var searchBarBGColor = $("#searchBarBGColor").val();
 		var searchBarTextColor = $("#searchBarTextColor").val();
@@ -802,7 +812,7 @@ var $app = {
 		var headerTitleAlign = $("#headerTitleAlign").val();
 		var headerTitleFontSize = $("#headerTitleFontSize").val();
 		var headerTitleTopMargin = $("#headerTitleTopMargin").val();
-		
+
 		// iDevices
 		// With emphasis
 		var emTitleColor = $("#emTitleColor").val();
@@ -822,13 +832,13 @@ var $app = {
 				if (emColor!="") contentCSS += "/*emColor*/color:#"+emColor+";"
 				if (emBGColor!="") contentCSS+="/*emBGColor*/background-color:#"+emBGColor+";";
 				if (emBorderColor!="") contentCSS+="border-color:/*emBorderColor*/#"+emBorderColor+";";
-			contentCSS += "}";			
+			contentCSS += "}";
 		}
 		var emAColor = $("#emAColor").val();
 		if (emAColor!=""){
 			contentCSS += ".iDevice_inner a{";
 				contentCSS += "/*emAColor*/color:#"+emAColor+";"
-			contentCSS += "}";			
+			contentCSS += "}";
 		}
 		var emIconColor = $('input[name=emIconColor]:checked').val();
 		var iconsExtension = "";
@@ -874,13 +884,13 @@ var $app = {
 		if (noEmAColor!=""){
 			contentCSS += ".emphasis0 a{";
 				contentCSS += "/*noEmAColor*/color:#"+noEmAColor+";"
-			contentCSS += "}";	
+			contentCSS += "}";
 		}
 		var noEmIconColor = $('input[name=noEmIconColor]:checked').val();
 		if (noEmIconColor!='') {
 			contentCSS += ".toggle-em0 a{/*noEmIconColor*/background-image:url("+this.stylePath+"_style_icons_"+noEmIconColor+".png);}";
 		}
-		
+
 		// #nav
 		var hideNavigation = $("#hideNavigation").prop("checked");
 		var useNavigationIcons = $("#useNavigationIcons").prop("checked");
@@ -902,17 +912,17 @@ var $app = {
 				if (pageWidth!="") {
 					navCSS+="/*pageWidth*/width:"+pageWidth+pageWidthUnit+";";
 					if (wrapperShadowColor=="") wrapperShadowColor = $app.defaultValues.shadowColor;
-					navCSS+="/*wrapperShadowColor*/box-shadow:0 0 15px 0 #"+wrapperShadowColor+";";					
+					navCSS+="/*wrapperShadowColor*/box-shadow:0 0 15px 0 #"+wrapperShadowColor+";";
 				}
 				if (pageAlign=="left") navCSS+="/*pageAlign*/margin:0;";
 				// if (wrapperShadowColor!="" && pageWidth!="100") navCSS+="/*wrapperShadowColor*/box-shadow:0 0 15px 0 #"+wrapperShadowColor+";";
-				
+
 				if (contentBGColor!='') navCSS+="/*contentBGColor*/background-color:#"+contentBGColor+";";
 				if (contentBGURL!='') {
 					if (contentBGURL.indexOf("http")!=0) contentBGURL = $app.stylePath+contentBGURL;
 					navCSS+="/*contentBGURL*/background-image:url("+contentBGURL+");";
 					navCSS+="/*contentBGRepeat*/background-repeat:"+contentBGRepeat+";";
-					navCSS+="/*contentBGPosition*/background-position:"+contentBGPosition+";";				
+					navCSS+="/*contentBGPosition*/background-position:"+contentBGPosition+";";
 				}
 				if (pageWidth=="100") {
 					//navCSS += "border:0;";
@@ -920,7 +930,7 @@ var $app = {
 				}
 			navCSS+="}";
 		}
-		
+
 		if (searchBarBGColor!="" || searchBarTextColor!="" || searchBarButtonBGColor!="" || searchBarButtonTextColor!="") {
 			if (searchBarBGColor!="" || searchBarTextColor!="" || searchBarButtonBGColor!="") {
 				navCSS+="#exe-client-search-text{";
@@ -936,12 +946,12 @@ var $app = {
 				navCSS+="}"
 			}
 		}
-		
+
 		var nav2BGColor = $("#nav2BGColor").val();
 		var nav2HoverBGColor = $("#nav2HoverBGColor").val();
 		var nav2AColor = $("#nav2AColor").val();
 		var nav2AHoverColor = $("#nav2AHoverColor").val();
-		
+
 		if (useNavigationIcons) {
 			var iconsColor = "";
 			var iconColorComment = "/*defaultNavigationIcons*/";
@@ -989,9 +999,9 @@ var $app = {
 					if (nav2HoverBGColor!="") navCSS+="/*nav2HoverBGColor*/background-color:#"+nav2HoverBGColor+";";
 					if (nav2AHoverColor!="") navCSS+="/*nav2AHoverColor*/color:#"+nav2AHoverColor+";";
 				navCSS+="}";
-			}		
+			}
 		}
-		
+
 		if (fontFamily!='' || bodyColor!='' || fontSize!="" || contentBGColor!='' || contentBGURL!=''){
 			contentCSS+="body{";
 				if (fontFamily!="") contentCSS+="/*fontFamily*/font-family:"+fontFamily+";";
@@ -1003,12 +1013,12 @@ var $app = {
 					if (contentBGURL.indexOf("http")!=0) contentBGURL = $app.stylePath+contentBGURL;
 					contentCSS+="/*contentBGURL*/background-image:url("+contentBGURL+");";
 					contentCSS+="/*contentBGRepeat*/background-repeat:"+contentBGRepeat+";";
-					contentCSS+="/*contentBGPosition*/background-position:"+contentBGPosition+";";				
-				}							
+					contentCSS+="/*contentBGPosition*/background-position:"+contentBGPosition+";";
+				}
 			contentCSS+="}";
 		}
 		if (aColor!='') contentCSS+="a{/*aColor*/color:#"+aColor+";}";
-		
+
 		// BODY and #content
 		if (contentBGColor!='' || contentBGURL!='' || bodyBGColor!='' || (pageAlign=='left'&&pageWidth!="100") || bodyBGURL!='') {
 			navCSS+="body{"
@@ -1018,11 +1028,11 @@ var $app = {
 					if (bodyBGURL.indexOf("http")!=0) bodyBGURL = $app.stylePath+bodyBGURL;
 					navCSS+="/*bodyBGURL*/background-image:url("+bodyBGURL+");";
 					navCSS+="/*bodyBGRepeat*/background-repeat:"+bodyBGRepeat+";";
-					navCSS+="/*bodyBGPosition*/background-position:"+bodyBGPosition+";";				
+					navCSS+="/*bodyBGPosition*/background-position:"+bodyBGPosition+";";
 				}
 			navCSS+="}";
 		}
-		
+
 		// #header
 		if (headerHeight!="" || headerBGColor!="" || headerBGURL!="" || headerBorderColor!="") {
 			contentCSS+="#header,#emptyHeader,#nodeDecoration{";
@@ -1041,7 +1051,7 @@ var $app = {
 				if (headerBorderColor!="") contentCSS+="border:1px solid /*headerBorderColor*/#"+headerBorderColor+";";
 			contentCSS+="}";
 		}
-		
+
 		if (!hideProjectTitle) {
 			if (headerTitleFontFamily==fontFamily) headerTitleFontFamily = "";
 			if (headerTitleTopMargin!="" || headerTitleFontFamily!="" || headerTitleColor!="" || headerTitleTextShadowColor!="" || headerTitleAlign!="" || headerTitleFontSize!="") {
@@ -1052,14 +1062,14 @@ var $app = {
 						contentCSS+="/*headerTitleColor*/color:#"+headerTitleColor+";";
 						navCSS+="#topPagination .page-counter{";
 							navCSS+="color:#"+headerTitleColor+";";
-						navCSS+="}";						
+						navCSS+="}";
 					}
 					if (headerTitleTextShadowColor!="") contentCSS+="/*headerTitleTextShadowColor*/text-shadow:1px 1px 1px #"+headerTitleTextShadowColor+";";
 					if (headerTitleAlign!="") contentCSS+="/*headerTitleAlign*/text-align:"+headerTitleAlign+";";
 					if (headerTitleFontSize!="") contentCSS+="/*headerTitleFontSize*/font-size:"+headerTitleFontSize+"%;";
 				contentCSS+="}";
 				if (headerTitleColor!="") {
-					
+
 				}
 			}
 		} else {
@@ -1067,14 +1077,14 @@ var $app = {
 				contentCSS+="/*hideProjectTitle*/position:absolute!important;clip:rect(1px 1px 1px 1px);clip:rect(1px,1px,1px,1px);";
 			contentCSS+="}";
 		}
-		
-		// #nav		
+
+		// #nav
 		if (hideNavigation) {
 			navCSS+="/*hideNavigation*/";
 			navCSS+="#siteNav,#nav-toggler{display:none;}";
 			navCSS+="#main{padding-left:20px;padding-right:20px}";
 			navCSS+="@media all and (max-width: 1015px){";
-				navCSS+="#main,.no-nav #main{padding-top:20px;}";	
+				navCSS+="#main,.no-nav #main{padding-top:20px;}";
 			navCSS+="}";
 		} else {
 			if (navFontSize!="" && navFontSize!="100") {
@@ -1092,9 +1102,9 @@ var $app = {
 					navCSS+="@media screen and (min-width: 701px) and (max-width: 1015px){";
 						navCSS+='#siteNav,#siteNav ul{';
 							if (navBGColor!="") navCSS+='background-color:#'+navBGColor+';';
-							if (navBorderColor!="") navCSS+='border-color:#'+navBorderColor+';';						
+							if (navBorderColor!="") navCSS+='border-color:#'+navBorderColor+';';
 						navCSS+='}';
-						if (navBGColor!="") navCSS+='#siteNav li{background-color:#'+navBGColor+';}'						
+						if (navBGColor!="") navCSS+='#siteNav li{background-color:#'+navBGColor+';}'
 					navCSS+="}";
 				}
 			}
@@ -1107,10 +1117,10 @@ var $app = {
 					navCSS+="@media screen and (min-width: 701px) and (max-width: 1015px){";
 						navCSS+='#siteNav li:hover,#siteNav li.sfhover{background-color:#'+navHoverBGColor+';}';
 					navCSS+="}";
-				}				
+				}
 			}
 		}
-		
+
 		// Footer
 		var footerBorderColor = $("#footerBorderColor").val();
 		var footerColor = $("#footerColor").val();
@@ -1118,7 +1128,7 @@ var $app = {
 		var footerBGColor = $("#footerBGColor").val();
 		var footerAColor = $("#footerAColor").val();
 		var footerFontSize = $("#footerFontSize").val();
-		
+
 		if (footerBorderColor!="" || footerColor!="" || footerTextAlign!="" || footerBGColor!='' || footerFontSize!='') {
 			contentCSS += "#siteFooter{";
 				if (footerBorderColor!="") {
@@ -1131,30 +1141,30 @@ var $app = {
 					contentCSS += "/*footerColor*/color:#"+footerColor+";"
 					navCSS+="#bottomPagination .page-counter{";
 						navCSS+="color:#"+footerColor+";";
-					navCSS+="}"				
+					navCSS+="}"
 				}
 				if (footerTextAlign!="") contentCSS+="/*footerTextAlign*/text-align:"+footerTextAlign+";";
 				if (footerBGColor!='') contentCSS+="/*footerBGColor*/background-color:#"+footerBGColor+";";
 				if (footerFontSize!="") contentCSS += "/*footerFontSize*/font-size:"+footerFontSize+"%;"
 			contentCSS += "}";
 		}
-		
+
 		if (footerBGColor!='') {
 			navCSS+="#bottomPagination{";
 				navCSS+="background-color:#"+footerBGColor+";";
 			navCSS += "}";
 		}
-		
+
 		if (footerAColor!="") {
 			contentCSS += "#siteFooter a{";
 				contentCSS += "/*footerAColor*/color:#"+footerAColor+";"
 			contentCSS += "}";
 		}
-		
+
 		var navWidth = $("#navWidth").val();
 		var horizontalNavigation = $("#horizontalNavigation").prop("checked");
-		
-		if (!hideNavigation && !horizontalNavigation && navWidth!="") {	
+
+		if (!hideNavigation && !horizontalNavigation && navWidth!="") {
 			navCSS+="#siteNav{/*navWidth*/width:"+navWidth+"px;}";
 			navCSS+="#main{padding-left:"+(parseFloat(navWidth)+40)+"px;*padding-left:0;}";
 			navCSS+="@media all and (max-width: 700px) {";
@@ -1162,29 +1172,29 @@ var $app = {
 				navCSS+="#main,.no-nav #main{padding-left:20px;}";
 			navCSS+="}";
 			navCSS+="* html #siteNav{width:280px;}";
-		}	
-		
+		}
+
 		contentCSS = this.formatCSS(contentCSS);
 		navCSS = this.formatCSS(navCSS);
-		
+
 		if (horizontalNavigation) {
 			if (!hideNavigation) navCSS += this.getHorizontalNavigationCSS();
-		}		
+		}
 		if (typeof(opener.myTheme.setNavHeight)!='undefined') opener.myTheme.setNavHeight();
 
 		// Advanced tab
 		var advContentCSS = $("#extra-content-css").val();
-		if (advContentCSS!="") contentCSS += "\n"+$app.advancedMark+"\n"+advContentCSS;	
+		if (advContentCSS!="") contentCSS += "\n"+$app.advancedMark+"\n"+advContentCSS;
 		var advNavCSS = $("#extra-nav-css").val();
 		if (advNavCSS!="") navCSS += "\n"+$app.advancedMark+"\n"+advNavCSS;
-		
+
 		css.push(contentCSS);
 		css.push(navCSS);
-		
+
 		return css;
 	},
 	enableColorPickers : function(){
-		$.fn.jPicker.defaults.images.clientPath='../color-picker/images/';	
+		$.fn.jPicker.defaults.images.clientPath='../color-picker/images/';
 		$('.color').jPicker(
 			{
 				window:{
@@ -1214,10 +1224,10 @@ var $app = {
 		else tag.innerHTML = css;
 	},
 	getHorizontalNavigationCSS : function(){
-	
+
 		var hNavBGColor = $app.defaultValues.navBGColor;
 		var navBGColor = $("#navBGColor").val();
-		if (navBGColor!="") hNavBGColor = navBGColor;	
+		if (navBGColor!="") hNavBGColor = navBGColor;
 
 		var hNavHoverBGColor = $app.defaultValues.navHoverBGColor;
 		var navHoverBGColor = $("#navHoverBGColor").val();
@@ -1226,11 +1236,11 @@ var $app = {
 		var hNavBorderColor = $app.defaultValues.borderColor;
 		var navBorderColor = $("#navBorderColor").val();
 		if (navBorderColor!="") hNavBorderColor = navBorderColor;
-		
+
 		var hideNavigation = $("#hideNavigation").prop("checked");
 		var padding = "10px 20px 0 20px";
 		if (hideNavigation) padding = "20px 20px 0 20px";
-		
+
 		var css = '\
 /*horizontalNavigation*/\
 @media screen and (min-width:701px){\
@@ -1258,7 +1268,7 @@ var $app = {
 		return css;
 	},
 	getFinalCSS : function(css,type){
-		
+
 		// Remove all default values from the CSS to include in content.css and nav.css
 		/*
 		if (css.indexOf($app.defaultMark)!=-1) {
@@ -1272,25 +1282,25 @@ var $app = {
 			if (horizontalNavigation) {
 				css += this.getHorizontalNavigationCSS();
 			}
-		}		
-		*/		
-		
+		}
+		*/
+
 		css = this.formatCSS(css);
 		if ($app.returnFullContent==true) {
 				if (type=="content") css = $app.baseContentCSS+$app.mark+"\n"+css;
 				else css = $app.baseNavCSS+$app.mark+"\n"+css;
 		}
 		return this.removeStylePath(css); // css is already formatted with formatCSS
-		
+
 	},
 	getPreview : function(mode){
-		
+
 		var w = window.opener;
 		if (!w) {
 			this.quit($i18n.No_Opener_Error);
 			return false;
 		}
-		
+
 		if (!mode) mode = "";
 
 		// content.css
@@ -1301,21 +1311,21 @@ var $app = {
 		contentCSS = $app.baseContentCSS+$app.advancedMark+contentCSS;
 		contentCSS = $app.addStylePath(contentCSS);
 		this.setCSS(contentCSSTag,$app.baseContentCSS+contentCSS);
-		
+
 		// content.css and nav.css TEXTAREAS
 		$("#my-content-css").val(this.getFinalCSS(css[0],"content"));
 		$("#my-nav-css").val(this.getFinalCSS(css[1],"nav"));
 		//((css[1].split($app.defaultMark)[0]);
-		
+
 		// nav.css
 		var navCSSTag = w.document.getElementById("my-nav-css");
-		if (!navCSSTag) return false;		
+		if (!navCSSTag) return false;
 		var navCSS = css[1];
 		// advancedMark
 		navCSS = $app.baseNavCSS+$app.advancedMark+navCSS;
 		navCSS = $app.addStylePath(navCSS);
 		this.setCSS(navCSSTag,navCSS);
-		
+
 		// Menu height
 		if (typeof(w.myTheme.setNavHeight)!='undefined') w.myTheme.setNavHeight();
 	},
@@ -1324,7 +1334,7 @@ var $app = {
 			copyFrom = 'base';
 		}
 		var data = new FormData();
-		
+
 		data.append('contentcss', content);
 		data.append('navcss', nav);
 		if (op == 'saveStyle') {
@@ -1332,7 +1342,7 @@ var $app = {
 			data.append('style_dirname', $app.getCurrentStyle());
 		}
 		data.append('action', op);
-		
+
 		// Get files uploaded to the editor form
 		jQuery.each(jQuery('#bodyBGURLFile')[0].files, function(i, file) {
 			data.append('bodyBGURLFile_'+i, file);
@@ -1349,14 +1359,14 @@ var $app = {
 		if (op == 'createStyle') {
 			data.append('copy_from', copyFrom);
 		}
-		
+
 		// Get style name, author and description
 		data.append('style_name', jQuery('#styleName').val());
 		data.append('author', jQuery('#authorName').val());
 		data.append('author_url', jQuery('#authorURL').val());
 		data.append('description', jQuery('#styleDescription').val());
 		data.append('version', jQuery('#styleVersion').val());
-		
+
 		return data;
 	},
 	createStyle : function(content, nav, copyFrom, closeDesigner){

@@ -601,7 +601,7 @@ class Epub3Export(object):
 
         # Copy the style files to the output dir
         # But not nav.css
-        styleFiles = [self.styleDir /'..'/ 'popup_bg.gif']
+        styleFiles = [self.config.stylesDir/'popup_bg.gif']
         styleFiles += [f for f in self.styleDir.files("*.*") if f.basename() not in ['nav.css']]
 
         # FIXME for now, only copy files referenced in Common Cartridge
@@ -738,7 +738,7 @@ class Epub3Export(object):
 
 
         # Copy and minify CSS files
-        css_files = getFilesCSSToMinify('epub3', self.styleDir)
+        css_files = getFilesCSSToMinify('epub3', self.config.stylesDir)
         exportMinFileCSS(css_files, contentPages)
 
         # Copy and minify JS files

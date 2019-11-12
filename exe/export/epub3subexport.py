@@ -536,7 +536,7 @@ class Epub3SubExport(object):
         filesStyleFiles = [self.styleDir / '..' / 'base.css']
         filesStyleFiles += [f for f in self.styleDir.files("*.*") if f.basename() != "nav.css"]
 
-        filesStyleFiles += [self.styleDir / '..' / 'popup_bg.gif']
+        filesStyleFiles += [self.config.stylesDir/'popup_bg.gif']
 
         # FIXME for now, only copy files referenced in Common Cartridge
         # this really should apply to all exports, but without a manifest
@@ -723,4 +723,3 @@ class Epub3SubExport(object):
         self.pages.append(page)
         for child in node.children:
             self.generatePages(child, depth + 1)
-

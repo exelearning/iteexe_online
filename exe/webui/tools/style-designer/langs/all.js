@@ -67,7 +67,7 @@ var $i18n = {
 	Background_instructions_1 : _('The "Page background" will only be used when exporting as Web Site.'),
 	Background_instructions_2 : _('The "Contents area background" will also be used when exporting as IMS, SCORM or ePub3.'),
 	Background_instructions_3 : _('The "Search bar" will only be seen when exporting as Web Site and enabling that option (Properties → Export).'),
-	// #3	
+	// #3
 	Header_and_Footer : _("Header and Footer"),
 	Header : _("Header"),
 	Footer : _("Footer"),

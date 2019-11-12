@@ -43,6 +43,8 @@ from exe.webui.renderable import Renderable
 from exe.engine import version
 from exe.engine.style import Style
 
+from exe import globals as G
+
 log = logging.getLogger(__name__)
 
 
@@ -81,7 +83,7 @@ class StyleDesigner(Renderable, Resource):
     name = 'styleDesigner'
 
     def __init__(self, parent):
-        """ 
+        """
         Initialize
         """
         parent.putChild(self.name, self)
@@ -91,7 +93,7 @@ class StyleDesigner(Renderable, Resource):
     def styleIdFromName(self, style_name):
         """
         Gets the style ID from the style full name
-        
+
         Replaces ' ', '\t', '\f', '\r' with '_', accented with non accented characters,
         cleans non alphanumeric chars and converts to lower case
         """
@@ -187,7 +189,7 @@ class StyleDesigner(Renderable, Resource):
         configxml_file = open(styleDir / 'config.xml', 'w')
         configxml_file.write(configxml_pretty)
         configxml_file.close()
-        
+
         return styleDir
 
     def createStyle(self, style_dirname, style_data):
@@ -199,13 +201,16 @@ class StyleDesigner(Renderable, Resource):
         if 'copy_from' in style_data:
             copy_from = style_data['copy_from'][0]
 
-        styleDir = self.config.stylesDir / style_dirname
+
+        if hasattr(G.application, "userStylesDir"):
+            styleDir = G.application.userStylesDir / style_dirname
+        else:
+            styleDir = self.config.stylesDir / style_dirname
         if os.path.isdir(styleDir):
             raise CreateStyleExistsError(styleDir, _(u'Style directory %s already exists') % (style_dirname))
         else:
             try:
                 os.mkdir(styleDir)
-
                 # Copy ALL files from the base style
                 baseStyleDir = self.config.stylesDir / copy_from
                 base_files = os.listdir(baseStyleDir)
@@ -238,7 +243,7 @@ class StyleDesigner(Renderable, Resource):
                 # ('base' style contains scripts and parameters needed for responsiveness).
                 # The UI has no fields to modify these attributes, so they will never be in
                 # 'style_data', but since user can edit 'config.xml' any time, the values
-                # present in there must be kept 
+                # present in there must be kept
                 config_base = ET.parse(baseStyleDir / 'config.xml')
                 extra_head = config_base.find('extra-head').text
                 extra_body = config_base.find('extra-body').text
@@ -276,97 +281,98 @@ class StyleDesigner(Renderable, Resource):
         """
         Updates the style with data given from Styles Designer
         """
-        styleDir = self.config.stylesDir / style_dirname
-
+        if hasattr(G.application, "userStylesDir"):
+            styleDir = G.application.userStylesDir / style_dirname
+        else:
+            styleDir = self.config.stylesDir / style_dirname
         # Check that the target dir already exists and update files
         if not os.path.isdir(styleDir):
             raise StyleDesignerError(_('Error saving style, style directory does not exist'))
-        else:
-            try:
-                style = Style(styleDir)
+        try:
+            style = Style(styleDir)
 
-                # Save all uploaded files to style dir
-                self.saveUploadedFiles(styleDir, style_data)
+            # Save all uploaded files to style dir
+            self.saveUploadedFiles(styleDir, style_data)
 
-                # Overwrite content.css, nav.css and config.xml files with the data
-                # from the style designer
-                contentcss = style_data['contentcss'][0]
-                navcss = style_data['navcss'][0]
+            # Overwrite content.css, nav.css and config.xml files with the data
+            # from the style designer
+            contentcss = style_data['contentcss'][0]
+            navcss = style_data['navcss'][0]
 
-                author = 'exeLearning.net'
-                if 'author' in style_data:
-                    author = cgi.escape(style_data['author'][0], True)
+            author = 'exeLearning.net'
+            if 'author' in style_data:
+                author = cgi.escape(style_data['author'][0], True)
 
-                author_url = 'http://exelearning.net'
-                if 'author_url' in style_data:
-                    author_url = cgi.escape(style_data['author_url'][0], True)
+            author_url = 'http://exelearning.net'
+            if 'author_url' in style_data:
+                author_url = cgi.escape(style_data['author_url'][0], True)
 
-                description = ''
-                if 'description' in style_data:
-                    description = cgi.escape(style_data['description'][0], True)
+            description = ''
+            if 'description' in style_data:
+                description = cgi.escape(style_data['description'][0], True)
 
-                new_version = style.get_version()
-                if 'version' in style_data:
-                    new_version = style_data['version'][0]
-                # If user has chosen a new version, use it
-                # otherwise autoincrement minor version
-                if new_version != style.get_version():
-                    next_version = new_version
+            new_version = style.get_version()
+            if 'version' in style_data:
+                new_version = style_data['version'][0]
+            # If user has chosen a new version, use it
+            # otherwise autoincrement minor version
+            if new_version != style.get_version():
+                next_version = new_version
+            else:
+                current_version = tuple(map(int, style.get_version().split('.')));
+                next_version = (current_version[0], current_version[1] + 1);
+                next_version = '.'.join(map(str, next_version))
+
+            # extra-head and extra-body attributes can contain user defined scripts or headers
+            # ('base' style contains scripts and parameters needed for responsiveness).
+            # The UI has no fields to modify these attributes, so they will never be in
+            # 'style_data', but since user can edit 'config.xml' any time, the values
+            # present in there must be kept
+            config_org = ET.parse(styleDir / 'config.xml')
+            extra_head = config_org.find('extra-head').text
+            extra_body = config_org.find('extra-body').text
+            if config_org.find('edition-extra-head'):
+                edition_extra_head = config_org.find('edition-extra-head').text
+            else:
+                # To review
+                # edition-extra-head was not in the previous version of StyleDesigner
+                # edition_extra_head was not found in the Style
+                copy_from = 'base'
+                baseStyleDir = self.config.stylesDir / copy_from
+                config_base = ET.parse(baseStyleDir / 'config.xml')
+                config_extra_head = config_base.find('extra-head').text
+                if config_extra_head == extra_head:
+                    # The user did not change the original 'extra-head', so _style_js.js exists
+                    # We just use Base's 'edition-extra-head'
+                    edition_extra_head = config_base.find('edition-extra-head').text
                 else:
-                    current_version = tuple(map(int, style.get_version().split('.')));
-                    next_version = (current_version[0], current_version[1] + 1);
-                    next_version = '.'.join(map(str, next_version))
+                    # The user changed the original 'extra-head', so _style_js.js might not exist
+                    # edition_extra_head
+                    edition_extra_head = ''
+            configxml = {
+                'name': style_data['style_name'][-1],
+                'version': next_version,
+                'compatibility': version.version,
+                'author': author,
+                'author-url': author_url,
+                'license': 'Creative Commons by-sa',
+                'license-url': 'http://creativecommons.org/licenses/by-sa/4.0/',
+                'description': description,
+                'extra-head': extra_head,
+                'extra-body': extra_body,
+                'edition-extra-head': edition_extra_head
+            }
 
-                # extra-head and extra-body attributes can contain user defined scripts or headers
-                # ('base' style contains scripts and parameters needed for responsiveness).
-                # The UI has no fields to modify these attributes, so they will never be in
-                # 'style_data', but since user can edit 'config.xml' any time, the values
-                # present in there must be kept 
-                config_org = ET.parse(styleDir / 'config.xml')
-                extra_head = config_org.find('extra-head').text
-                extra_body = config_org.find('extra-body').text
-                if config_org.find('edition-extra-head'):
-                    edition_extra_head = config_org.find('edition-extra-head').text
-                else:
-                    # To review
-                    # edition-extra-head was not in the previous version of StyleDesigner
-                    # edition_extra_head was not found in the Style
-                    copy_from = 'base'
-                    baseStyleDir = self.config.stylesDir / copy_from                
-                    config_base = ET.parse(baseStyleDir / 'config.xml')
-                    config_extra_head = config_base.find('extra-head').text
-                    if config_extra_head == extra_head:
-                        # The user did not change the original 'extra-head', so _style_js.js exists
-                        # We just use Base's 'edition-extra-head'
-                        edition_extra_head = config_base.find('edition-extra-head').text
-                    else:
-                        # The user changed the original 'extra-head', so _style_js.js might not exist
-                        # edition_extra_head
-                        edition_extra_head = ''
-                configxml = {
-                    'name': style_data['style_name'][-1],
-                    'version': next_version,
-                    'compatibility': version.version,
-                    'author': author,
-                    'author-url': author_url,
-                    'license': 'Creative Commons by-sa',
-                    'license-url': 'http://creativecommons.org/licenses/by-sa/4.0/',
-                    'description': description,
-                    'extra-head': extra_head,
-                    'extra-body': extra_body,
-                    'edition-extra-head': edition_extra_head
-                }
-                
-                newStyleDir= self.updateStyle(styleDir, contentcss, navcss, configxml)
-                
-                newStyle = Style(newStyleDir)
-                self.config.styleStore.delStyle(style)
-                self.config.styleStore.addStyle(newStyle)
-                
-                return newStyle
+            newStyleDir= self.updateStyle(styleDir, contentcss, navcss, configxml)
 
-            except Exception, e:
-                raise StyleDesignerError(e.message)
+            newStyle = Style(newStyleDir)
+            self.config.styleStore.delStyle(style)
+            self.config.styleStore.addStyle(newStyle)
+
+            return newStyle
+
+        except Exception, e:
+            raise StyleDesignerError(e.message)
 
     def saveUploadedFiles(self, targetDir, uploaded):
         """

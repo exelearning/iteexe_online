@@ -98,8 +98,6 @@ class MainPage(RenderableLivePage):
         self.putChild("resources", File(package.resourceDir))
         self.tempDir = TempDirPath()
         self.putChild("temp", Download(self.tempDir, 'application/octet-stream', ('*')))
-        # styles directory
-        # self.putChild("stylecss", File(self.config.stylesDir)
 
         mainjs = Path(self.config.jsDir).joinpath('templates', 'mainpage.html')
         self.docFactory = loaders.htmlfile(mainjs)
@@ -188,7 +186,8 @@ class MainPage(RenderableLivePage):
 
     def child_preview(self, ctx):
         if not self.package.previewDir:
-            stylesDir = self.config.stylesDir / self.package.style
+            style = G.application.config.styleStore.getStyle(self.package.style)
+            stylesDir = style.get_style_dir()
             self.package.previewDir = TempDirPath()
             self.exportWebSite(None, self.package.previewDir, stylesDir)
             self.previewPage = File(self.package.previewDir / self.package.name)
@@ -196,7 +195,8 @@ class MainPage(RenderableLivePage):
 
     def child_print(self, ctx):
         if not self.package.printDir:
-            stylesDir = self.config.stylesDir / self.package.style
+            style = G.application.config.styleStore.getStyle(self.package.style)
+            stylesDir = style.get_style_dir()
             self.package.printDir = TempDirPath()
             self.exportSinglePage(None, self.package.printDir, self.config.webDir, stylesDir, True)
             self.printPage = File(self.package.printDir / self.package.name)
@@ -239,7 +239,10 @@ class MainPage(RenderableLivePage):
         if randomFile:
             filename = uuid.uuid4()
         else:
-            filename =  self.package.name
+            if request.args.get('filename') and request.args.get('filename')[0]:
+                filename = request.args.get('filename')[0]
+            else:
+                filename =  self.package.name
         path = self.tempDir / filename + filetype[1:]
         return json.dumps({'success': True, 'path': path, 'name': path.basename()})
 
@@ -336,6 +339,8 @@ class MainPage(RenderableLivePage):
             config['user'] = session.user.name
             config['user_picture'] = session.user.picture
             config['user_root'] = session.user.root
+            # add user styles (/style_user) to webserver path
+            G.application.webServer.root.putChild("style_user", File(G.application.userStylesDir))
 
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
@@ -417,11 +422,15 @@ class MainPage(RenderableLivePage):
             inputFilename += ext
             # If after adding the extension there is a file
             # with the same name, fail and show an error
+            """
             if Path(inputFilename).exists():
                 explanation = _(u'"%s" already exists.\nPlease try again with a different filename') % inputFilename
                 msg = u'%s\n%s' % (msg, explanation)
                 client.alert(msg)
                 raise Exception(msg)
+            """
+            if Path(inputFilename).exists():
+                os.remove(inputFilename)
 
         # When saving a template, we don't check for the filename
         # before this state, so we have to check for duplicates
@@ -1143,7 +1152,8 @@ class MainPage(RenderableLivePage):
             # Update progress for the user
             client.call('Ext.MessageBox.updateProgress', 0.3, '30%', _(u'Exporting package as SCORM 1.2...'))
 
-            stylesDir = self.config.stylesDir / self.package.style
+            style = G.application.config.styleStore.getStyle(self.package.style)
+            stylesDir = style.get_style_dir()
 
             fd, filename = mkstemp('.zip')
             os.close(fd)
@@ -1234,7 +1244,7 @@ class MainPage(RenderableLivePage):
         d = threads.deferToThread(exportScorm)
         d.addCallback(lambda filename: threads.deferToThread(publish, filename))
 
-    def handleExport(self, client, exportType, filename):
+    def handleExport(self, client, exportType, filename, styleNameSelec=None):
         """
         Called by js.
         Exports the current package to one of the above formats
@@ -1244,7 +1254,9 @@ class MainPage(RenderableLivePage):
         """
         webDir = Path(self.config.webDir)
         #stylesDir  = webDir.joinpath('style', self.package.style)
-        stylesDir = self.config.stylesDir / self.package.style
+        style = G.application.config.styleStore.getStyle(self.package.style)
+        stylesDir = style.get_style_dir()
+
         filename = Path(filename, 'utf-8')
         exportDir = Path(filename).dirname()
         if exportDir and not exportDir.exists():
@@ -1278,6 +1290,9 @@ class MainPage(RenderableLivePage):
         elif exportType == 'zipFile':
             filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
             self.exportWebZip(client, filename, stylesDir)
+        elif exportType == 'zipStyle':
+            filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+            self.exportStyleZip(client, filename, styleNameSelec)
         elif exportType == 'textFile':
             self.exportText(client, filename)
         elif exportType == 'scorm1.2':
@@ -1581,6 +1596,25 @@ class MainPage(RenderableLivePage):
             client.filePickerAlert(_(u'Exported to %s') % filename)
         else:
             client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
+
+    def exportStyleZip(self, client, filename, styleName):
+        style = G.application.config.styleStore.getStyle(styleName)
+        stylesDir = style.get_style_dir()
+        if not filename.lower().endswith('.zip'):
+            filename += '.zip'
+        log.debug("Export style %s" % stylesDir)
+        try:
+            zippedFile = zipfile.ZipFile(filename, "w")
+            for contFile in stylesDir.files():
+                zippedFile.write(
+                        unicode(contFile.normpath()),
+                        contFile.basename(),
+                        zipfile.ZIP_DEFLATED)
+            zippedFile.close()
+        except Exception, e:
+            client.alert(_('EXPORT FAILED!\n%s') % str(e))
+            raise
+        client.filePickerAlert(_(u'Exported to %s') % filename)
 
     def exportText(self, client, filename):
         try:

@@ -62,8 +62,8 @@ body .pagination a,body #nav-toggler a{filter:alpha(opacity=100);opacity:1;outli
 	#headerContent{font-size:.7em;white-space:normal}
 	#siteNav{float:none;width:100%;padding:0}
 	#siteNav{line-height:1.5em;margin-bottom:15px}
-	#main-wrapper{width:100%;float:none}    
-	#main,.no-nav #main{padding:10px 20px 0 20px}    
+	#main-wrapper{width:100%;float:none}
+	#main,.no-nav #main{padding:10px 20px 0 20px}
 	#content .exe-col{float:none;width:100%;padding:0}
 	#bottomPagination{text-align:center;height:35px;position:relative}
 	#bottomPagination .prev{position:absolute;left:20px}

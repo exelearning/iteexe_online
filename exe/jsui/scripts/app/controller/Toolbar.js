@@ -67,19 +67,23 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#file_recent_menu': {
         		beforerender: this.recentRender
-        	},
-        	'#styles_button': {
-        		beforerender: this.stylesRender
-        	},
-        	'#styles_button_advanced': {
-        		beforerender: this.stylesRenderAdvanced
-        	},
-        	'#templates_button': {
-        		beforerender: this.templatesRender
-        	},
+            },
         	'#file_recent_menu > menuitem': {
         		click: this.recentClick
-        	},
+            },
+            '#templates_button': {
+        		beforerender: this.templatesRender
+            },
+        	'#styles_button': {
+                beforerender: this.stylesRender,
+                click: { fn: this.stylesRender, async: false }
+            },
+            '#styles_button_advanced_wrapper': {
+                click: { fn: this.stylesRenderAdvanced, async: false }
+            },
+        	'#styles_button_advanced': {
+                beforerender: this.stylesRenderAdvanced
+            },
         	'#styles_menu > menuitem': {
         		click: this.stylesClick
         	},
@@ -88,7 +92,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#templates_menu > menuitem': {
         		click: this.templatesClick
-        	},
+            },
         	'#file_save': {
         		click: this.fileSave
         	},
@@ -1075,7 +1079,7 @@ Ext.define('eXe.controller.Toolbar', {
                     callback: function(fp) {
                         if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
                         	// Show exporting message
-    	                	Ext.Msg.wait(_('Please wait...'));
+                            Ext.Msg.wait(_('Please wait...'));
     	                	nevow_clientToServerEvent('exportPackage', this, '', exportType, fp.file.path)
                         }
                     }
@@ -1174,16 +1178,17 @@ Ext.define('eXe.controller.Toolbar', {
     	return true;
     },
 
-    stylesRender: function(updateFromTheOtherMenu) {
+    stylesRender: function(updateFromTheOtherMenu=false, mouse, a=true) {
         Ext.Ajax.request({
     		url: location.pathname + '/styleMenu',
-    		scope: this,
+            scope: this,
+            async: a.async,
     		success: function(response) {
-				var styles = Ext.JSON.decode(response.responseText), menu, i, item;
-                if (updateFromTheOtherMenu==true) menu = Ext.ComponentQuery.query("#styles_button")[0].menu;
-                else menu = this.getStylesMenu();
-					// JRJ: Primero los borro
-					menu.removeAll();
+                var styles = Ext.JSON.decode(response.responseText), menu, i, item;
+                menu = Ext.ComponentQuery.query("#styles_button")[0].menu;
+                if (updateFromTheOtherMenu) {
+                    menu.removeAll();
+                }
     			for (i = styles.length-1; i >= 0; i--) {
                     item = Ext.create('Ext.menu.CheckItem', { text: styles[i].label, itemId: styles[i].style, checked: styles[i].selected });
     				menu.insert(0, item);
@@ -1193,19 +1198,20 @@ Ext.define('eXe.controller.Toolbar', {
     	return true;
     },
 
-    stylesRenderAdvanced: function(updateFromTheOtherMenu) {
+    stylesRenderAdvanced: function(updateFromTheOtherMenu=false, mouse, a=true) {
         Ext.Ajax.request({
     		url: location.pathname + '/styleMenu',
-    		scope: this,
+            scope: this,
+            async: a.async,
     		success: function(response) {
-				var styles = Ext.JSON.decode(response.responseText), menu, i, item;
-                if (updateFromTheOtherMenu==true) menu = Ext.ComponentQuery.query("#styles_button_advanced")[0].menu;
-                else menu = this.getStylesMenuAdvanced();
-					// JRJ: Primero los borro
-					menu.removeAll();
+                var styles = Ext.JSON.decode(response.responseText), menu, i, item;
+                menu = Ext.ComponentQuery.query("#styles_button_advanced")[0].menu;
+                if (updateFromTheOtherMenu) {
+                    menu.removeAll();
+                }
     			for (i = styles.length-1; i >= 0; i--) {
                     item = Ext.create('Ext.menu.CheckItem', { text: styles[i].label, itemId: styles[i].style, checked: styles[i].selected });
-    				menu.insert(0, item);
+                    menu.insert(0, item);
     			}
     		}
     	})
@@ -1264,7 +1270,7 @@ Ext.define('eXe.controller.Toolbar', {
             authoring.submitLink("ChangeStyle", item.itemId, 1);
 
         // Update the advanced menu
-        eXe.controller.Toolbar.prototype.stylesRenderAdvanced(true);
+        eXe.controller.Toolbar.prototype.stylesRender(true);
     },
 
     executeStylesClickAdvanced: function(item) {
@@ -1281,7 +1287,7 @@ Ext.define('eXe.controller.Toolbar', {
             authoring.submitLink("ChangeStyle", item.itemId, 1);
 
         // Update the Styles menu
-        eXe.controller.Toolbar.prototype.stylesRender(true);
+        eXe.controller.Toolbar.prototype.stylesRenderAdvanced(true);
     },
 
     stylesClick: function(item) {

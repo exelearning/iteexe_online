@@ -42,7 +42,7 @@ function importStyle(){
        { "typename": _("ZIP Style"), "extension": "*.zip", "regex": /.*\.zip$/ },
        { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
     ]);
-    fp.show();		
+    fp.show();
 }
 
 function doExport(styleDirname){
@@ -54,6 +54,7 @@ function doExport(styleDirname){
 		title: _("Export to ZIP Style as"),
 		modal: true,
 		scope: this,
+		remote: true,
 		callback: function(fp) {
 		    if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace)
 		        var path  = document.getElementById('filename');
@@ -92,4 +93,3 @@ function doDelete(styleDirname){
 		}
 	});
 }
-

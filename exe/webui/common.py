@@ -471,6 +471,14 @@ def ideviceHeader(e, style, mode):
         if hasattr(e.idevice.parentNode, 'exportType') and e.idevice.parentNode.exportType == 'singlepage':
             titleTag = "h2"
 
+    if hasattr(G.application, "userStylesDir"):
+        if os.path.isdir(G.application.userStylesDir / style):
+            themePath = G.application.userStylesDir / style
+        else:
+            themePath = Path(G.application.config.stylesDir/style)
+    else:
+        themePath = Path(G.application.config.stylesDir/style)
+
     themePath = Path(G.application.config.stylesDir/style)
     themeXMLFile = themePath.joinpath("config.xml")
     themeHasXML = themeHasConfigXML(style)
@@ -515,7 +523,7 @@ def ideviceHeader(e, style, mode):
             if (k=='ListaIdevice' and i=='question') or (k=='CasestudyIdevice' and i=='casestudy') or (k=='GalleryIdevice' and i=='gallery') or (k=='ClozeIdevice' and i=='question') or (k=='ReflectionIdevice' and i=='reflection') or (k=='QuizTestIdevice' and i=='question') or (k=='TrueFalseIdevice' and i=='question') or (k=='MultiSelectIdevice' and i=='question') or (k=='MultichoiceIdevice' and i=='question'):
                 displayIcon = False
             # /end
-            iconPath = '/style/'+style+'/icon_'+e.idevice.icon+'.gif'
+            iconPath = themePath+'/icon_'+e.idevice.icon+'.gif'
             if mode=="view":
                 iconPath = 'icon_'+e.idevice.icon+'.gif'
             myIcon = themePath.joinpath("icon_" + e.idevice.icon + ".gif")
@@ -525,7 +533,7 @@ def ideviceHeader(e, style, mode):
                 myIcon = themePath.joinpath("icon_" + e.idevice.icon + ".png")
                 if myIcon.exists():
                     iconExists = True
-                    iconPath = '/style/'+style+'/icon_'+e.idevice.icon+'.png'
+                    iconPath = themePath+'/icon_'+e.idevice.icon+'.png'
                     if mode=="view":
                         iconPath = 'icon_'+e.idevice.icon+'.png'
             if iconExists:
@@ -680,7 +688,7 @@ def getGamesJavaScriptStrings(addTag = True):
         s += '\n'
     return s
 
-def header(style=u'default'):
+def header(style=u'default',stylePath=u'style'):
     """Generates the common header XHTML"""
     # NB: Authoring Page has its own header
     return (docType() +
@@ -688,16 +696,15 @@ def header(style=u'default'):
             u'<head>\n'
             u'<style type="text/css">\n'
             u'  @import url(/css/exe.css);\n'
-            u'  @import url(/style/base.css);\n'
-            u'  @import url(/style/%s/content.css);</style>\n'
+            u'  @import url(/%/base.css);\n'
+            u'  @import url(/%/%s/content.css);</style>\n'
             u'<script type="text/javascript" src="/scripts/common.js">'
             u'</script>\n'
             u'<title>%s</title>\n'
             u'<meta http-equiv="content-type" '
             u' content="text/html; charset=UTF-8"></meta>\n'
             u'</head>\n'
-            % (style, c_('eXe : elearning XHTML editor')))
-
+            % (stylePath, stylePath, style, c_('eXe : elearning XHTML editor')))
 
 def footer():
     """Generates the common page footer XHTML"""
@@ -1003,7 +1010,7 @@ def elementInstruc(instruc, imageFile="help.gif", label=None):
         html = u''
     else:
         id_ = newId()
-        html  = u'<a href="javascript:void(o)" '
+        html  = u'<a href="javascript:void(0)" '
         html += u' title="%s" ' % _(u'Click for completion instructions')
         html += u'onclick="showMessageBox(\'%s\');" ' % id_
         html += u'style="cursor:help;margin-left:5px">'
