@@ -92,9 +92,3 @@ class User(object):
             log.info('Enabling disk quota for user %s' % self.name)
             self.quota = Quota(self.root, self.config.quota)
             self.quota.enable()
-        #add user info to globals
-        G.application.config.userName = self.name
-        G.application.config.userDir = configPath
-        G.application.config.userFsDir = self.root
-        G.application.config.userIdevicesDir = self.idevicesPath
-        G.application.userStylesDir = self.stylesPath

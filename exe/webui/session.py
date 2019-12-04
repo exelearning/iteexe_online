@@ -76,6 +76,8 @@ class eXeRequest(appserver.NevowRequest):
                     session.user.config.locales[session.user.config.locale].install(unicode=True)
                 if session.user.ideviceStore:
                     G.application.ideviceStore = session.user.ideviceStore
+                if session.user.stylesPath:
+                    G.application.userStylesDir = session.user.stylesPath
                 package = session.user.packageStore.getPackage(request.prepath[0])
         if package:
             __builtins__['c_'] = lambda s: G.application.config.locales[package.lang].ugettext(s) if s else s

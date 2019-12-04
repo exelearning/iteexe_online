@@ -340,7 +340,7 @@ class MainPage(RenderableLivePage):
             config['user_picture'] = session.user.picture
             config['user_root'] = session.user.root
             # add user styles (/style_user) to webserver path
-            G.application.webServer.root.putChild("style_user", File(G.application.userStylesDir))
+            G.application.webServer.root.putChild("style_user", File(session.user.stylesPath))
 
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
