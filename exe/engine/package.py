@@ -1577,8 +1577,14 @@ class Package(Persistable):
         newPackage.set_isTemplate(isTemplate)
         newPackage.isChanged = False
         nstyle=Path(G.application.config.stylesDir/newPackage.style)
+        if hasattr(G.application, "userStylesDir"):
+            nustyle=Path(G.application.userStylesDir/newPackage.style)
+        else:
+            nustyle = None
+
         if not nstyle.isdir():
-            newPackage.style=G.application.config.defaultStyle
+            if not nustyle or (nustyle and not nustyle.isdir()):
+                newPackage.style=G.application.config.defaultStyle
         newPackage.lang = newPackage._lang
 
         # Reset license to ensure is set for the main package properties and for
