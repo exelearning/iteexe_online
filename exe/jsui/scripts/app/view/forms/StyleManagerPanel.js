@@ -693,7 +693,16 @@ function createPanel() {
         name: 'action',
         value: '',
     };
+    var clientId =
+    {
+        xtype: 'field',
+        hidden: true,
+        itemId: 'clientId',
+        name: 'clientId',
+        value: window.nevow_clientHandleId,
+    }
     panel.push(action);
+    panel.push(clientId);
     return panel;
 };
 
@@ -738,8 +747,16 @@ Ext.define('eXe.view.forms.StyleManagerPanel', {
             name: 'action',
             value: '',
         };
+        var clientId =
+        {
+            xtype: 'field',
+            hidden: true,
+            itemId: 'clientId',
+            name: 'clientId',
+            value: window.nevow_clientHandleId,
+        }
         panel.push(action);
-
+        panel.push(clientId);
         formpanel.removeAll(false);
         formpanel.add(panel);
         me.doLayout();

@@ -23,12 +23,11 @@ StyleMenu provides a list of Styles used in eXe and handle related client events
 """
 
 import logging
-from xml.dom.minidom import parse
+from xml.dom.minidom           import parse
 from exe                       import globals as G
 from exe.engine.path           import Path
-from exe.webui.renderable import Renderable
-from twisted.web.resource import Resource
-from exe.webui.livepage import allSessionClients
+from exe.webui.renderable      import Renderable
+from twisted.web.resource      import Resource
 log = logging.getLogger(__name__)
 import json
 import locale
@@ -102,24 +101,24 @@ class StyleMenu(Renderable, Resource):
         """
         Adds an Style to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()')
         """
         The Styles are now in two different menus
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()')
         """
         We reload the Styles manager panel too
         """
-        self.client.sendScript('Ext.getCmp("stylemanagerwin").down("form").reload("doList")', filter_func=allSessionClients)
+        self.client.sendScript('Ext.getCmp("stylemanagerwin").down("form").reload("doList")')
 
     def delStyle(self, style):
         """
         Delete an Style to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()')
         """
         The Styles are now in two different menus
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()')
 
 # ===========================================================================
