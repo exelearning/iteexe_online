@@ -36,7 +36,7 @@ from exe.engine.idevice        import Idevice
 from exe.engine.genericidevice import GenericIdevice
 from exe.engine.path           import Path
 from exe.engine.translate      import lateTranslate
-from exe                     import globals as G
+from exe                       import globals as G
 
 
 log = logging.getLogger(__name__)
@@ -47,17 +47,17 @@ class EditorPane(object):
     """
     The EditorPane is responsible for creating new idevice
     """
-    def __init__(self, webServer, parent):
+    def __init__(self, parent):
         """
         Initialize
         JR: anado parente para poder acceder a algunos atributos de editorpag, en concreto a showHide
         """
-        self.ideviceStore     = webServer.application.ideviceStore
-        self.webDir           = webServer.application.config.webDir
-        self.styles           = webServer.application.config.styleStore.getStyles()
+        self.ideviceStore     = G.application.ideviceStore
+        self.webDir           = G.application.config.webDir
+        self.styles           = G.application.config.styleStore.getStyles()
         self.elements         = []
         self.idevice          = GenericIdevice("", "", "", "", "")
-        self.idevice.id       = self.ideviceStore.getNewIdeviceId()
+        self.idevice.id       = G.application.ideviceStore.getNewIdeviceId()
         self.originalIdevice  = GenericIdevice("", "", "", "", "")
         self.purpose          = ""
         self.tip              = ""
@@ -158,8 +158,7 @@ class EditorPane(object):
 
         if "addFeedback" in request.args:
             field = FeedbackField(_(u"Enter the label here"),
-                 _(u"""Feedback button will not appear if no
-data is entered into this field."""))
+                 _(u"""Feedback button will not appear if no data is entered into this field."""))
             field.setIDevice(self.idevice)
             self.idevice.addField(field)
             self.idevice.edit = True
@@ -264,12 +263,11 @@ data is entered into this field."""))
 
         html += "<fieldset><legend><b>" + _("Actions") + "</b></legend>"
 
-        if self.idevice.edit:
-            html += common.submitButton("preview", _("Preview"), not self.parent.isGeneric)
-        else:
-            html += common.submitButton("edit", _("Edit"))
-
-        html += "<br/>"
+        #if self.idevice.edit:
+        #    html += common.submitButton("preview", _("Preview"), not self.parent.isGeneric)
+        #else:
+        #    html += common.submitButton("edit", _("Edit"))
+        #html += "<br/>"
         html += common.submitButton("cancel", _("Cancel"))
         #html += "</fieldset>"
 

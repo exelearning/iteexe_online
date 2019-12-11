@@ -26,8 +26,8 @@ import locale
 import json
 from exe.webui.renderable import Renderable
 from twisted.web.resource import Resource
-from exe.webui.livepage import allSessionClients
-from exe.engine.jsidevice import JsIdevice;
+from exe.engine.jsidevice import JsIdevice
+from exe                  import globals as G
 
 log = logging.getLogger(__name__)
 
@@ -86,16 +86,17 @@ class IdevicePane(Renderable, Resource):
                 node = self.package.findNode(request.args["currentNode"][0])
                 node.addIdevice(prototype.clone())
 
-            
+
     def addIdevice(self, idevice):
         """
         Adds an iDevice to the pane
         """
         log.debug("addIdevice id="+idevice.id+", title="+idevice.title)
         if idevice.id in self.prototypes:
-                raise Exception("duplicated device id %s" % idevice.id)
+            raise Exception("duplicated device id %s" % idevice.id)
         self.prototypes[idevice.id] = idevice
-        self.client.sendScript('eXe.app.getController("Idevice").reload()', filter_func=allSessionClients)
+        if self.client:
+            self.client.sendScript('eXe.app.getController("Idevice").reload()')
 
         
     def delIdevice(self, idevice):
@@ -104,7 +105,8 @@ class IdevicePane(Renderable, Resource):
         """
         log.debug("delIdevice id="+idevice.id+", title="+idevice.title)
         self.prototypes.pop(idevice.id)
-        self.client.sendScript('eXe.app.getController("Idevice").reload()', filter_func=allSessionClients)
+        if self.client:
+            self.client.sendScript('eXe.app.getController("Idevice").reload()')
 
     def render_GET(self, request=None):
         """
@@ -135,7 +137,7 @@ class IdevicePane(Renderable, Resource):
             else:
                 lower_title = prototype._title.lower()
                 visible = lower_title not in self.config.hiddeniDevices
-                
+
                 if hasattr(prototype, 'ideviceCategory'):
                     prototypesToRender.append((prototype, prototype.ideviceCategory, visible))
                 else:
@@ -208,6 +210,6 @@ class IdevicePane(Renderable, Resource):
         xml += u"   <visible>" + str(visible).lower() + "</visible>\n"
         xml += u"  </idevice>\n"
         return xml
-        
+
     
 # ===========================================================================

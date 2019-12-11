@@ -36,7 +36,7 @@ if os.name == 'posix' and not ('--standalone' in sys.argv or '--portable' in sys
 # This *must* always be the first import to prevent a warning on Windows
 from exe.webui.webserver     import WebServer
 
-from exe.engine.userstore import UserStore
+from exe.engine.userstore   import UserStore
 from getopt                  import getopt, GetoptError
 from twisted.internet        import reactor
 from twisted.web.static      import File
@@ -173,7 +173,7 @@ class Application:
             'activity',
             'free text'
         ]
-        for idevice in self.ideviceStore.getIdevices():
+        for idevice in G.application.ideviceStore.getIdevices():
             lower_title = idevice._title.lower()
             if self.config.idevicesCategories.get(lower_title, '') == ['Experimental'] or lower_title in iDevicesToHide:
                 self.config.hiddeniDevices.append(lower_title)

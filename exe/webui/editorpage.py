@@ -32,6 +32,7 @@ from exe.engine.package        import Package
 from exe.engine.path           import Path
 from exe.engine.field          import MultimediaField
 from cgi                       import escape
+from exe                       import globals as G
 
 log = logging.getLogger(__name__)
 
@@ -74,19 +75,21 @@ class EditorPage(RenderableResource):
         log.debug("process " + repr(request.args))
 
         if not self.editorPane:
-            self.editorPane = EditorPane(self.webServer, self)
-        self.editorPane.process(request,"old")
+            self.editorPane = EditorPane(self)
 
         if "action" in request.args:
+
+            self.editorPane.process(request,"old")
+
             if request.args["action"][0] == "changeIdevice":
-                genericIdevices = self.ideviceStore.generic
+                genericIdevices = G.application.ideviceStore.generic
+
+                
                 if not self.isNewIdevice:
                     ideviceId = self.editorPane.idevice.id
                     for idevice in genericIdevices:
                         if idevice.id == ideviceId:
                             break
-                    copyIdevice = self.editorPane.idevice.clone()
-                    self.__saveChanges(idevice, copyIdevice)
                 
                 selected_idevice = request.args["object"][0].decode("utf-8")
 
@@ -94,68 +97,68 @@ class EditorPage(RenderableResource):
                 for idevice in genericIdevices:
                     if idevice.title == selected_idevice:
                         self.isGeneric = True
+                        self.isNewIdevice = False
+                        self.editorPane.setIdevice(idevice)               
+                        self.editorPane.process(request, "new")
                         break
-                self.isNewIdevice = False
-                self.editorPane.setIdevice(idevice)               
-                self.editorPane.process(request, "new")
                 
         
-        if (("action" in request.args and 
-             request.args["action"][0] == "newIdevice")
-            or "new" in request.args):
-            self.__createNewIdevice(request)
+            if request.args["action"][0] == "newIdevice" or "new" in request.args:
+                self.__createNewIdevice(request)
             
 
-        if ("action" in request.args and request.args["action"][0] == "deleteIdevice"):
-            self.ideviceStore.delIdevice(self.editorPane.idevice)
-            #Lo borramos tambien de la lista factoryiDevices
-            idevice = self.editorPane.idevice
-            exist = False
-            for i in self.ideviceStore.getFactoryIdevices():
-                if i.title == idevice.title:
-                    idevice.id = i.id
-                    exist = True
-                    break
-            if exist:
-                self.ideviceStore.factoryiDevices.remove(idevice)
-            self.ideviceStore.save()
-            self.message = _("Done")
-            self.__createNewIdevice(request) 
+            if request.args["action"][0] == "deleteIdevice":
+                G.application.ideviceStore.delIdevice(self.editorPane.idevice)
+                #Lo borramos tambien de la lista factoryiDevices
+                idevice = self.editorPane.idevice
+                exist = False
+                for i in G.application.ideviceStore.getFactoryIdevices():
+                    if i.title == idevice.title:
+                        idevice.id = i.id
+                        exist = True
+                        break
+                if exist:
+                    G.application.ideviceStore.factoryiDevices.remove(idevice)
+                G.application.ideviceStore.save()
+                self.message = _("Done")
+                self.__createNewIdevice(request) 
             
-        if ("action" in request.args and 
-             request.args["action"][0] == "new"):
-            if self.editorPane.idevice.title == "":
-                self.message = _("Please enter an idevice name.")
-            else:
-                newIdevice = self.editorPane.idevice.clone()
-                #TODO could IdeviceStore set the id in addIdevice???
-                newIdevice.id = self.ideviceStore.getNewIdeviceId()
-                self.ideviceStore.addIdevice(newIdevice)
-                self.editorPane.setIdevice(newIdevice)
-                self.ideviceStore.save()
-                self.message = _("Settings Saved")
-                self.isNewIdevice = False
+            if request.args["action"][0] == "new":
+                if self.editorPane.idevice.title == "":
+                    self.message = _("Please enter an idevice name.")
+                else:
+                    newIdevice = self.editorPane.idevice.clone()
+                    #TODO could IdeviceStore set the id in addIdevice???
+                    newIdevice.id = G.application.ideviceStore.getNewIdeviceId()
+                    G.application.ideviceStore.addIdevice(newIdevice)
+                    self.editorPane.setIdevice(newIdevice)
+                    G.application.ideviceStore.save()
+                    self.message = _("Settings Saved")
+                    self.isNewIdevice = False
                 
-        if ("action" in request.args and 
-             request.args["action"][0] == "save"): 
-            genericIdevices = self.ideviceStore.generic
-            for idevice in genericIdevices:
-                if idevice.title == self.editorPane.idevice.title:
-                    break
-            copyIdevice = self.editorPane.idevice.clone()
-            self.__saveChanges(idevice, copyIdevice)
-            self.ideviceStore.save()
-            self.message = _("Settings Saved")
+            if request.args["action"][0] == "save": 
+                genericIdevices = G.application.ideviceStore.generic
+                for idevice in genericIdevices:
+                    if idevice.title == self.editorPane.idevice.title:
+                        break
+                copyIdevice = self.editorPane.idevice.clone()
+                self.__saveChanges(idevice, copyIdevice)
+                G.application.ideviceStore.save()
+                self.message = _("Settings Saved")
             
-        if ("action" in request.args and 
-             request.args["action"][0] == "export"):          
-            filename = request.args["pathpackage"][0]
-            self.__exportIdevice(filename)
+            if request.args["action"][0] == "export":          
+                filename = request.args["pathpackage"][0]
+                self.__exportIdevice(filename)
             
-        if ("action" in request.args and 
-             request.args["action"][0] == "import"):
-            filename = request.args["pathpackage"][0]
-            self.__importIdevice(filename)
+            if request.args["action"][0] == "import":
+                filename = request.args["pathpackage"][0]
+                self.__importIdevice(filename)
+        else:
+            # New iDevice by default
+            self.isNewIdevice = True
+            self.editorPane.setIdevice(GenericIdevice("", "", "", "", ""))
+            self.editorPane.process(request, "old")
+        
 
             
     def __createNewIdevice(self, request):
@@ -164,7 +167,7 @@ class EditorPage(RenderableResource):
         """
         idevice = GenericIdevice("", "", "", "", "")
         idevice.icon = ""
-        idevice.id = self.ideviceStore.getNewIdeviceId()
+        idevice.id = G.application.ideviceStore.getNewIdeviceId()
         self.editorPane.setIdevice(idevice)
         self.editorPane.process(request, "new")      
         self.isNewIdevice = True
@@ -195,12 +198,12 @@ class EditorPage(RenderableResource):
         
         if newPackage:   
             newIdevice = newPackage.idevices[-1].clone()
-            for currentIdevice in self.ideviceStore.generic:
+            for currentIdevice in G.application.ideviceStore.generic:
                 if newIdevice.title == currentIdevice.title:
                     newIdevice.title += "1"
                     break
-            self.ideviceStore.addIdevice(newIdevice) 
-            self.ideviceStore.save()
+            G.application.ideviceStore.addIdevice(newIdevice) 
+            G.application.ideviceStore.save()
         else:
             self.message = _("Sorry, wrong file format.")
         
@@ -295,7 +298,7 @@ class EditorPage(RenderableResource):
         if self.isNewIdevice:
             html += "selected "
         html += ">"+ _("New iDevice") + "</option>"
-        for prototype in self.ideviceStore.generic:
+        for prototype in G.application.ideviceStore.generic:
             html += "<option value=\""+prototype.title+"\" "
             if self.editorPane.idevice.id == prototype.id:
                 html += "selected "
