@@ -22,7 +22,6 @@
 TemplateMenu provides a list of Templates used in eXe and handle related client events
 """
 
-from exe.webui.livepage import allSessionClients
 from exe.webui.renderable import Renderable
 from twisted.web.resource import Resource
 import json
@@ -73,12 +72,12 @@ class TemplateMenu(Renderable, Resource):
         """
         Adds an Template to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").templatesRender()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").templatesRender()')
 
     def delTemplate(self, template):
         """
         Delete an Template to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").templatesRender()', filter_func=allSessionClients)
+        self.client.sendScript('eXe.app.getController("Toolbar").templatesRender()')
 
 # ===========================================================================

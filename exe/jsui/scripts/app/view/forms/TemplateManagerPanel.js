@@ -312,7 +312,15 @@ function createPanelTemplate() {
         name: 'action',
         value: '',
     };
+    var clientId = {
+        xtype: 'field',
+        hidden: true,
+        itemId: 'clientId',
+        name: 'clientId',
+        value: window.nevow_clientHandleId,
+    };
     panel.push(action);
+    panel.push(clientId);
     return panel;
 };
 

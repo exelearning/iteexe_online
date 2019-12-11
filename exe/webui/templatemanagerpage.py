@@ -26,15 +26,15 @@ The TemplateManagerPage is responsible for managing templates
 import json
 import logging
 import os
-from zipfile                   import ZipFile
+import nevow
 
-from exe.engine.path import Path
-from exe.engine.template      import Template
-from exe.webui.livepage        import allSessionClients
-from exe.webui.renderable      import RenderableResource
-from exe                         import globals as G
-from exe.engine.package import Package
-from exe.export.pages            import forbiddenPageNames
+from zipfile                    import ZipFile
+from exe.engine.path            import Path
+from exe.engine.template        import Template
+from exe.webui.renderable       import RenderableResource
+from exe                        import globals as G
+from exe.engine.package         import Package
+from exe.export.pages           import forbiddenPageNames
 
 
 log = logging.getLogger(__name__)
@@ -112,6 +112,13 @@ class TemplateManagerPage(RenderableResource):
         the function to be executed in the server side.
         The self.action attribute will be sent back to the client (see render_GET)
         """
+
+        if 'clientId' in request.args:
+            clientId = request.args['clientId'][0]
+            clientsDict = nevow.livepage.clientHandleFactory.clientHandles
+            if clientId in clientsDict:
+                self.client = clientsDict[clientId]
+
         self.reloadPanel(request.args['action'][0])
 
         if request.args['action'][0] == 'doExport':
@@ -141,14 +148,10 @@ class TemplateManagerPage(RenderableResource):
         return ''
 
     def reloadPanel(self, action):
-
-        self.client.sendScript('Ext.getCmp("templatemanagerwin").down("form").reload("%s")' % (action),
-                               filter_func=allSessionClients)
+        self.client.sendScript('Ext.getCmp("templatemanagerwin").down("form").reload("%s")' % (action))
 
     def alert(self, title, mesg):
-
-        self.client.sendScript('Ext.Msg.alert("%s","%s")' % (title, mesg),
-                               filter_func=allSessionClients)
+        self.client.sendScript('Ext.Msg.alert("%s","%s")' % (title, mesg))
 
     def renderListTemplates(self):
         """
@@ -295,4 +298,3 @@ class TemplateManagerPage(RenderableResource):
                           templateEdit.name).encode('utf8'))
         except:
             self.alert(_(u'Error'), _(u'An unexpected error has occurred'))
-
