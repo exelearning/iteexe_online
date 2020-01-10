@@ -62,20 +62,21 @@ from exe.engine.template         import Template
 from exe                         import globals as G
 from tempfile                    import mkdtemp, mkstemp
 from exe.engine.mimetex          import compile
-from urllib                      import unquote, urlretrieve
+from urllib                      import unquote, urlretrieve, urlencode, urlopen
 from exe.engine.locationbuttons  import LocationButtons
 from exe.export.epub3export      import Epub3Export
 from exe.export.xmlexport        import XMLExport
-from requests_oauthlib           import OAuth2Session
-from exe.webui.oauthpage         import ProcomunOauth
+#from requests_oauthlib           import OAuth2Session
+#from exe.webui.oauthpage         import ProcomunOauth
 from suds.client                 import Client
 from exe.export.pages            import forbiddenPageNames
+from exe.engine.configparser     import ConfigParser
 
 from exe.engine.lom import lomsubs
 from exe.engine.lom.lomclassification import Classification
 import zipfile
 log = logging.getLogger(__name__)
-PROCOMUN_WSDL = ProcomunOauth.BASE_URL + '/oauth_services?wsdl'
+#PROCOMUN_WSDL = ProcomunOauth.BASE_URL + '/oauth_services?wsdl'
 
 
 
@@ -341,7 +342,7 @@ class MainPage(RenderableLivePage):
             config['user_root'] = session.user.root
             # add user styles (/style_user) to webserver path
             G.application.webServer.root.putChild("style_user", File(session.user.stylesPath))
-
+            
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
         if G.application.config.locale.split('_')[0] == 'zh':
@@ -1128,6 +1129,7 @@ class MainPage(RenderableLivePage):
         Resources.cancelImport()
 
     def handleExportProcomun(self, client):
+        """
         if not client.session.oauthToken.get('procomun'):
             verify = False
             if hasattr(sys, 'frozen'):
@@ -1142,6 +1144,7 @@ class MainPage(RenderableLivePage):
             client.call('eXe.app.getController("Toolbar").getProcomunAuthToken', authorization_url)
 
             return
+        """
 
         def exportScorm():
             """
@@ -1163,40 +1166,113 @@ class MainPage(RenderableLivePage):
 
             return filename
 
-        def publish(filename):
+        def publish(filename, publish_config):
             """
             Upload the exported package to Procomún.
 
             :param filename: Full path to the exported ZIP.
             """
+
             # Update progress for the user
-            client.call('Ext.MessageBox.updateProgress', 0.7, '70%', _(u'Uploading package to Procomún...'))
+            client.call('Ext.MessageBox.updateProgress', 0.6, '60%', _(u'Uploading package to Procomún...'))
+
+            procomun_home_url = publish_config["url"]["home"]
+            procomun_ode_url = publish_config["url"]["new_ode"]
+
+            def new_json_ode(ode_id='',filename='',file='',uri=''):
+                ode = {
+                'ode_id':ode_id,
+                'ode_filename':filename,
+                'ode_file':file,
+                'ode_uri':uri
+                }
+                return json.dumps(ode)
 
             # Get OAuth Acess Token and add it to the request headers
+            """
             token = client.session.oauthToken['procomun']
             headers = {
                 'Authorization': 'Bearer %s' % str(token['access_token']),
                 'Connection': 'close'
             }
+            """
 
             # Create the WSDL client
+            """
             procomun = Client(PROCOMUN_WSDL, headers=headers)
+            """
 
             # Create and configure the ODE object
+            """
             ode = procomun.factory.create('xsd:anyType')
-            ode.file = base64.b64encode(open(filename, 'rb').read())
-            ode.file_name = self.package.name
+            ode.id = ''
+            ode.ode_filename = self.package.name
+            ode.ode_file = base64.b64encode(open(filename, 'rb').read())
+            ode.ode_uri = ''
+            """
+
+            ode = new_json_ode(
+                filename=self.package.name,
+                file=base64.b64encode(open(filename, 'rb').read())
+                )
+
+            params = urlencode({'ode_data':ode})
+
+            client.call('Ext.MessageBox.updateProgress', 0.7, '70%', _(u'Uploading package to Procomún...'))
 
             # Try to upload the ODE to Procomún
             try:
-                result = procomun.service.odes_soap_create(ode)
+                #result = procomun.service.odes_soap_create(ode)
+                request = urlopen(procomun_ode_url,params)
+                client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
+                json_response = request.read()
+                dict_response = json.loads(json_response)
+
+                #client.call('Ext.MessageBox.hide')
+                if dict_response['status'] == '0':
+                    client.sendScript("console.log('{}')".format(json_response))
+                    if self.package.title:
+                        elp_title = self.package.title
+                    else:
+                        elp_title = self.package.name
+                    client.alert(
+                        js(
+                            '\''
+                            + _(u'Package exported to <a href="%s" target="_blank" title="Click to download the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
+                            + u'<br />'
+                            + u'<br />'
+                            + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % procomun_home_url
+                            + '\''
+                        ),
+                        title=_(u'Publishing document to Procomún')
+                )
+                else:
+                    client.alert(
+                        js(
+                            '\''
+                            + _('An error has ocurred while trying to publish a package to Procomún. <br />'
+                            +  'The error message is: %s') % dict_response['description']
+                            + '\''
+                        ),
+                        title=_(u'Publishing document to Procomún'))
+
             except Exception as e:
                 # If there is an exception, log it and show a generic error message to the user
                 log.error('An error has ocurred while trying to publish a package to Procomún. The error message is: %s', str(e))
                 client.call('Ext.MessageBox.hide')
-                client.alert(_(u'Unknown error when trying to upload package to Procomún.'), title=_(u'Publishing document to Procomún'))
+                error_args = e.args
+                if error_args and len(error_args[0]) == 2:
+                    client.alert(u'Error {}:{} '.format(*error_args[0])+_(u'when trying to upload package to Procomún.'),
+                                title=_(u'Publishing document to Procomún'))
+                else:
+                    client.alert(u'Error {}'.format(e), title=_(u'Publishing document to Procomún'))
+                    """
+                    client.alert(_(u'Unknown error when trying to upload package to Procomún.'),
+                                title=_(u'Publishing document to Procomún'))
+                    """
                 return
 
+            """
             # Parse the result received from Procomún
             parsedResult = {}
             for item in result.item:
@@ -1240,9 +1316,15 @@ class MainPage(RenderableLivePage):
                     ),
                     title=_(u'Publishing document to Procomún')
                 )
+            """
+
+        exe_path = self.config.exePath.basename()
+        publish_config_path = exe_path / 'publish.conf'
+        client.sendScript('console.log("{}")'.format(publish_config_path))
+        publish_config = self.ConfigDict(client, publish_config_path)
 
         d = threads.deferToThread(exportScorm)
-        d.addCallback(lambda filename: threads.deferToThread(publish, filename))
+        d.addCallback(lambda filename: threads.deferToThread(publish, filename, publish_config))
 
     def handleExport(self, client, exportType, filename, styleNameSelec=None):
         """
@@ -1807,3 +1889,22 @@ class MainPage(RenderableLivePage):
             log.error(u'Traceback:\n%s' % traceback.format_exc())
             raise
         return package
+
+    def ConfigDict(self, client, filepath):
+        client.sendScript("console.log('ConfigDict')")
+        f = open(filepath,'r')
+        fdata = f.read()
+        lines = fdata.split('\n')
+        config_dict = {}
+        for line in lines:
+            line = line.strip()
+            if line[0] == '[' and line[-1] == ']':
+                key = line.strip('[]')
+                config_dict[key] = {}
+            elif key and '=' in line:
+                line_split = line.split('=')
+                if len(line_split) == 2:
+                    sub_key = line_split[0].strip()
+                    sub_value = line_split[1].strip().strip("'")
+                    config_dict[key][sub_key] = sub_value
+        return config_dict
