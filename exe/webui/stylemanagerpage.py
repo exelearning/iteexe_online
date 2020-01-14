@@ -237,8 +237,8 @@ class StyleManagerPage(RenderableResource):
         and if config.xml file exists, it checks that the style
         name does not exist.
         """
-        if hasattr(G.application, "userStylesDir"):
-            styleDir = G.application.userStylesDir
+        if hasattr(G.application.config, "userStylesDir"):
+            styleDir = G.application.config.userStylesDir
         else:
             styleDir = self.config.stylesDir
 
@@ -509,7 +509,7 @@ class StyleManagerPage(RenderableResource):
         styleData = json.loads(style)
         try:
             if styleData["userStyle"]:
-                styleDir = G.application.userStylesDir
+                styleDir = G.application.config.userStylesDir
             else:
                 styleDir = self.config.stylesDir
             style = styleData["name"]
@@ -531,7 +531,7 @@ class StyleManagerPage(RenderableResource):
     def doPropertiesStyle(self, style):
         styleData = json.loads(style)
         if styleData["userStyle"]:
-            styleDir = G.application.userStylesDir
+            styleDir = G.application.config.userStylesDir
         else:
             styleDir = self.config.stylesDir
         style = styleData["name"]
@@ -543,7 +543,7 @@ class StyleManagerPage(RenderableResource):
     def doPreExportStyle(self, style):
         styleData = json.loads(style)
         if styleData["userStyle"]:
-            styleDir = G.application.userStylesDir
+            styleDir = G.application.config.userStylesDir
         else:
             styleDir = self.config.stylesDir
         style = styleData["name"]

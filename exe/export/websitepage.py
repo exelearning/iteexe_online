@@ -125,9 +125,9 @@ class WebsitePage(Page):
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->'+lb
         style = G.application.config.styleStore.getStyle(self.node.package.style)
-
+        
         # jQuery
-        if style.hasValidConfig:
+        if style.hasValidConfig():
             if style.get_jquery()==True:
                 html += u'<script type="text/javascript" src="exe_jquery.js"></script>'+lb
             else:
@@ -151,7 +151,7 @@ class WebsitePage(Page):
         if common.hasMagnifier(self.node):
             html += u'<script type="text/javascript" src="mojomagnify.js"></script>'+lb
         # Some styles might have their own JavaScript files (see their config.xml file)
-        if style.hasValidConfig:
+        if style.hasValidConfig():
             html += style.get_extra_head()
         html += common.getExtraHeadContent(self.node.package)
         html += u"</head>"+lb
@@ -229,19 +229,19 @@ class WebsitePage(Page):
         # writes the footer for each page
         html += self.renderLicense()
         if not themeHasXML:
-        #if not style.hasValidConfig:
+        #if not style.hasValidConfig():
             html += self.renderFooter()
         html += u"</"+sectionTag+">"+lb # /main
         html += u"</div>"+lb # /main-wrapper
         if themeHasXML:
-        #if style.hasValidConfig:
+        #if style.hasValidConfig():
             html += "<div id='bottomPagination'>"+lb
             html += self.getNavigationLink(prevPage, nextPage, pages)
             html += "</div>"+lb
             html += self.renderFooter()
         html += u"</div>"+lb # /content
         if themeHasXML:
-        #if style.hasValidConfig:
+        #if style.hasValidConfig():
             html += style.get_extra_body()
         html += u'</body></html>'
         html = html.encode('utf8')
@@ -386,4 +386,3 @@ class WebsitePage(Page):
         using the fully exported (and unique) file names for each node.
         """
         return common.renderInternalLinkNodeFilenames(package, html)
-

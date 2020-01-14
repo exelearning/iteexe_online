@@ -187,7 +187,7 @@ class AuthoringPage(RenderableResource):
         html += common.renderLicense(self.package.license,"authoring")
         html += common.renderFooter(self.package.footer)
 
-        if style.hasValidConfig:
+        if style.hasValidConfig():
             html += style.get_edition_extra_body()
         html += '<script type="text/javascript">$exeAuthoring.ready()</script>\n'
         html += common.footer()
@@ -213,7 +213,7 @@ class AuthoringPage(RenderableResource):
 
         # Use the Style's base.css file if it exists
         style = G.application.config.styleStore.getStyle(self.package.style)
-        if style.hasValidConfig:
+        if style.hasValidConfig():
             themePath = style.get_web_path()
         else:
             themePath = Path(G.application.config.stylesDir/self.package.style)
@@ -260,7 +260,7 @@ class AuthoringPage(RenderableResource):
         html += u'<title>"+_("eXe : elearning XHTML editor")+"</title>\n'
         html += u'<meta http-equiv="content-type" content="text/html; '
         html += u' charset=UTF-8" />\n'
-        if style.hasValidConfig:
+        if style.hasValidConfig():
             html += style.get_edition_extra_head()
         html += common.getExtraHeadContent(self.package)
         html += u'</head>\n'

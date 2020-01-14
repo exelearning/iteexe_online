@@ -349,7 +349,13 @@ var $app = {
 		if (currentStyle.includes("/style/")) {
 			currentStyle = currentStyle.replace("/style/","").replace("/","");
 		} else {
-			currentStyle = currentStyle.replace("/style_user/","").replace("/","");
+			if (window.opener && window.opener.config) {
+				currentStyle = currentStyle.replace(opener.config["user_style"],"").replace("/","");
+			} else if (window.opener && window.opener.opener && window.opener.opener.config) {
+				currentStyle = currentStyle.replace(opener.opener.config["user_style"],"").replace("/","");
+			} else {
+				currentStyle = "base";
+			}
 		}
 		return currentStyle;
 	},
@@ -1422,7 +1428,7 @@ var $app = {
 									$i18n.Error,
 									result.message,
 									function(btn, txt) {
-										createStyleWin.close();
+										//createStyleWin.close();
 									}
 								);
 							}
@@ -1432,7 +1438,7 @@ var $app = {
 							Ext.Msg.alert(
 								$i18n.Error,
 								function(btn, txt) {
-									createStyleWin.close();
+									//createStyleWin.close();
 								}
 							);
 						}

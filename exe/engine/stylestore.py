@@ -94,8 +94,8 @@ class StyleStore:
             else:
                 log.debug(" style %s is not valid" % style.get_name())
 
-        if hasattr(G.application, "userStylesDir"):
-            styleUserDir = G.application.userStylesDir
+        if hasattr(G.application.config, "userStylesDir"):
+            styleUserDir = G.application.config.userStylesDir
             log.debug("loadStyles from %s" % styleUserDir)
             for subDir in styleUserDir.dirs():
                 style = Style(subDir)

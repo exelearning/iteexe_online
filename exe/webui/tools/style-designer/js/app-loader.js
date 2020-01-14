@@ -12,7 +12,7 @@ var $designer = {
 		if (sd_href_params['userstyle']=="1") {
 			sd_style = sd_href_params['style'];
 			this.styleId = sd_style;
-			this.styleDir = "/style_user/";
+			this.styleDir = "/"+opener.config["user_style"]+"/"
 		} else if (sd_href_params['style']) {
 			sd_style = sd_href_params['style'];
 			this.styleId = sd_style;
@@ -43,7 +43,7 @@ var $designer = {
 		return true;
 	},
 	addStylePath : function(c, style_path){
-		var p = style_path+this.styleId+"/";
+		var p = style_path+$designer.styleId+"/";
 		c = c.replace(/url\(http:/g,'url--http:');
 		c = c.replace(/url\(https:/g,'url--https:');
 		c = c.replace(/url\(/g,'url('+p);
@@ -52,13 +52,13 @@ var $designer = {
 		return c;
 	},
 	getStylesContent : function(type,base){
-		var style_path = this.styleBasePath;
-		var url = this.styleBasePath+"/"+type+".css";
+		var style_path = $designer.styleBasePath;
+		var url = $designer.styleBasePath+"/"+type+".css";
 		var tag = document.getElementById("my-"+type+"-css");$.ajax({
 			type: "GET",
 			url: url,
 			success: function(res){
-				res = $designer.addStylePath(res, this.styleDir);
+				res = $designer.addStylePath(res, $designer.styleDir);
 				if (this.isOldBrowser) tag.cssText = res;
 				else tag.innerHTML = res;
 				if (type=="content") $designer.contentCSS = res;
@@ -149,7 +149,7 @@ var $designer = {
 	},
 	printExtraBody : function(){
 		this.disableAllLinks();
-		document.write('<script type="text/javascript" src="'+this.styleBasePath+'_style_js.js"></script>');
+		document.write('<script type="text/javascript" src="'+$designer.styleBasePath+'_style_js.js"></script>');
 		if (this.isBrowserCompatible()) this.openDesigner();
 		else alert($i18n.Browser_Incompatible);
 	},

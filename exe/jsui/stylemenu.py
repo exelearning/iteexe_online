@@ -90,7 +90,7 @@ class StyleMenu(Renderable, Resource):
         locale.setlocale(locale.LC_ALL, "")
         #printableStyles.sort(sortfunc)
         for s in printableStyles:
-            if s[2] == G.application.userStylesDir:
+            if s[2] == G.application.config.userStylesDir:
                 userStyle = 1
             else:
                 userStyle = 0

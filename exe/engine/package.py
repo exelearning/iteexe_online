@@ -354,8 +354,8 @@ class Package(Persistable):
 
         self.root          = Node(self, None, _(u"Home"))
         self.currentNode   = self.root
-#        self.style         = u"default"
-        #self.styledefault=u"INTEF"
+        #self.style         = u"default"
+        #self.styledefault  = u"INTEF"
         self.style         = G.application.config.defaultStyle
         self._isChanged    = False
         self.previewDir    = None
@@ -1577,8 +1577,8 @@ class Package(Persistable):
         newPackage.set_isTemplate(isTemplate)
         newPackage.isChanged = False
         nstyle=Path(G.application.config.stylesDir/newPackage.style)
-        if hasattr(G.application, "userStylesDir"):
-            nustyle=Path(G.application.userStylesDir/newPackage.style)
+        if hasattr(G.application.config, "userStylesDir"):
+            nustyle=Path(G.application.config.userStylesDir/newPackage.style)
         else:
             nustyle = None
 
@@ -2108,7 +2108,6 @@ class Package(Persistable):
             self._addSearchBox = False
         if not hasattr(self, '_exportElp'):
             self._exportElp = False
-
         if not hasattr(self, 'release'):
             self.release = release
 # ===========================================================================

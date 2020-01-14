@@ -115,7 +115,7 @@ class WebsiteExport(object):
 
     def appendPageReport(self, page, package):
         ext = 'html'
-        if G.application.config.cutFileName == "1":
+        if self.config.cutFileName == "1":
             ext = 'htm'
         if not page.node.idevices:self.report += u'"%s","%s",%d,"%s",,,,,,,\n' % (package.filename,page.node.title, page.depth, page.name + '.' + ext)
         for idevice in page.node.idevices:
@@ -237,7 +237,7 @@ class WebsiteExport(object):
             jsFile.copyfile(outputDir/'exe_html5.js')
 
         # Incluide eXe's icon if the Style doesn't have one
-        themePath = Path(G.application.config.stylesDir/package.style)
+        themePath = Path(self.config.stylesDir/package.style)
         themeFavicon = themePath.joinpath("favicon.ico")
         if not themeFavicon.exists():
             faviconFile = (self.imagesDir/'favicon.ico')
@@ -355,11 +355,11 @@ class WebsiteExport(object):
             exe_tooltips.copyfiles(outputDir)
 
         if hasattr(package, 'exportSource') and package.exportSource:
-            (G.application.config.webDir/'templates'/'content.xsd').copyfile(outputDir/'content.xsd')
+            (self.config.webDir/'templates'/'content.xsd').copyfile(outputDir/'content.xsd')
             (outputDir/'content.data').write_bytes(encodeObject(package))
             (outputDir/'contentv3.xml').write_bytes(encodeObjectToXML(package))
         ext = 'html'
-        if G.application.config.cutFileName == "1":
+        if self.config.cutFileName == "1":
             ext = 'htm'
         if package.license == "license GFDL":
             # include a copy of the GNU Free Documentation Licence

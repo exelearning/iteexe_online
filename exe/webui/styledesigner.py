@@ -42,6 +42,7 @@ from twisted.web.resource import Resource
 from exe.webui.renderable import Renderable
 from exe.engine import version
 from exe.engine.style import Style
+from exe.engine.path import Path
 
 from exe import globals as G
 
@@ -202,23 +203,24 @@ class StyleDesigner(Renderable, Resource):
             copy_from = style_data['copy_from'][0]
 
 
-        if hasattr(G.application, "userStylesDir"):
-            styleDir = G.application.userStylesDir / style_dirname
+        if hasattr(G.application.config, "userStylesDir"):
+            styleDir = Path(G.application.config.userStylesDir) / style_dirname
         else:
-            styleDir = self.config.stylesDir / style_dirname
+            styleDir = Path(self.config.stylesDir) / style_dirname
         if os.path.isdir(styleDir):
             raise CreateStyleExistsError(styleDir, _(u'Style directory %s already exists') % (style_dirname))
         else:
             try:
                 os.mkdir(styleDir)
                 # Copy ALL files from the base style
-                baseStyleDir = self.config.stylesDir / copy_from
+                baseStyleDir = Path(self.config.stylesDir) / copy_from.strip("/")
+                if not baseStyleDir.exists():
+                    baseStyleDir = Path(G.application.config.userStylesDir) / copy_from.strip("/")
                 base_files = os.listdir(baseStyleDir)
                 for file_name in base_files:
                     full_file_name = os.path.join(baseStyleDir, file_name)
                     if (os.path.isfile(full_file_name)):
                         shutil.copy(full_file_name, styleDir)
-
                 # Save all uploaded files to style dir
                 self.saveUploadedFiles(styleDir, style_data)
 
@@ -281,10 +283,10 @@ class StyleDesigner(Renderable, Resource):
         """
         Updates the style with data given from Styles Designer
         """
-        if hasattr(G.application, "userStylesDir"):
-            styleDir = G.application.userStylesDir / style_dirname
+        if hasattr(G.application.config, "userStylesDir"):
+            styleDir = Path(G.application.config.userStylesDir) / style_dirname.strip("/")
         else:
-            styleDir = self.config.stylesDir / style_dirname
+            styleDir = Path(self.config.stylesDir) / style_dirname.strip("/")
         # Check that the target dir already exists and update files
         if not os.path.isdir(styleDir):
             raise StyleDesignerError(_('Error saving style, style directory does not exist'))
@@ -338,7 +340,7 @@ class StyleDesigner(Renderable, Resource):
                 # edition-extra-head was not in the previous version of StyleDesigner
                 # edition_extra_head was not found in the Style
                 copy_from = 'base'
-                baseStyleDir = self.config.stylesDir / copy_from
+                baseStyleDir = Path(self.config.stylesDir) / copy_from
                 config_base = ET.parse(baseStyleDir / 'config.xml')
                 config_extra_head = config_base.find('extra-head').text
                 if config_extra_head == extra_head:

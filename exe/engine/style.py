@@ -10,6 +10,7 @@ JRJ: Representación de un estilo
 import logging
 from exe.engine.persist   import Persistable
 from xml.dom              import minidom
+from exe                  import globals as G
 import collections
 import chardet
 if hasattr(collections, 'OrderedDict'):
@@ -58,7 +59,7 @@ class Style(Persistable):
         if self._styleRootDir.split("/")[-2] == "webui":
             self._webRootPath   = "/style/"
         else:
-            self._webRootPath   = "/style_user/"
+            self._webRootPath   = "/style_user_{}/".format(G.application.config.username)
         self._webPath       = self._webRootPath+styleDir.basename()
         self._styleDir      = styleDir
         self._name          = styleDir.basename()

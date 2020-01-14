@@ -187,7 +187,8 @@ class MainPage(RenderableLivePage):
 
     def child_preview(self, ctx):
         if not self.package.previewDir:
-            style = G.application.config.styleStore.getStyle(self.package.style)
+            G.application.config = self.config
+            style = self.config.styleStore.getStyle(self.package.style)
             stylesDir = style.get_style_dir()
             self.package.previewDir = TempDirPath()
             self.exportWebSite(None, self.package.previewDir, stylesDir)
@@ -196,7 +197,8 @@ class MainPage(RenderableLivePage):
 
     def child_print(self, ctx):
         if not self.package.printDir:
-            style = G.application.config.styleStore.getStyle(self.package.style)
+            G.application.config = self.config
+            style = self.config.styleStore.getStyle(self.package.style)
             stylesDir = style.get_style_dir()
             self.package.printDir = TempDirPath()
             self.exportSinglePage(None, self.package.printDir, self.config.webDir, stylesDir, True)
@@ -340,8 +342,9 @@ class MainPage(RenderableLivePage):
             config['user'] = session.user.name
             config['user_picture'] = session.user.picture
             config['user_root'] = session.user.root
+            config['user_style'] = "style_user_{}".format(config['user'])
             # add user styles (/style_user) to webserver path
-            G.application.webServer.root.putChild("style_user", File(session.user.stylesPath))
+            self.webServer.root.putChild("style_user_{}".format(config['user']), File(session.user.stylesPath))
             
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
@@ -1335,9 +1338,10 @@ class MainPage(RenderableLivePage):
         'filename' is a file for scorm pages, and a directory for websites
         """
         webDir = Path(self.config.webDir)
-        #stylesDir  = webDir.joinpath('style', self.package.style)
-        style = G.application.config.styleStore.getStyle(self.package.style)
+        style = self.config.styleStore.getStyle(self.package.style)
         stylesDir = style.get_style_dir()
+
+        G.application.config = self.config
 
         filename = Path(filename, 'utf-8')
         exportDir = Path(filename).dirname()
@@ -1680,7 +1684,7 @@ class MainPage(RenderableLivePage):
             client.filePickerAlert(_(u'Exported to %s.\nThere were some resources that couldn\'t be renamed to be compatible with ISO9660.') % filename)
 
     def exportStyleZip(self, client, filename, styleName):
-        style = G.application.config.styleStore.getStyle(styleName)
+        style = self.config.styleStore.getStyle(styleName)
         stylesDir = style.get_style_dir()
         if not filename.lower().endswith('.zip'):
             filename += '.zip'

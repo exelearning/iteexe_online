@@ -87,8 +87,8 @@ class CmdlineExporter(object):
                 if not pkg:
                     error = _(u"Invalid input package")
                     raise Exception(error.encode(sys.stdout.encoding))
-                if hasattr(G.application, "userStylesDir"):
-                    styleDir = G.application.userStylesDir
+                if hasattr(G.application.config, "userStylesDir"):
+                    styleDir = G.application.config.userStylesDir
                 else:
                     styleDir = self.config.stylesDir
                 self.styles_dir = styleDir / pkg.style

@@ -60,9 +60,14 @@ Ext.define('eXe.controller.StyleManager', {
                 click:  function (element) {
                     // eXe.app.getController('Toolbar').styleDesigner.editStyle(element.value);
                     // We check if the Style is compatible with the tool
+                    console.log("StyleManager", window)
                     data_value = Ext.JSON.decode(element.value);
                     if (data_value["userStyle"]) {
-                        content_url = "/style_user/"+data_value["name"]+"/content.css";
+                        if (config && config["user_style"]) {
+                            content_url = config["user_style"]+"/"+data_value["name"]+"/content.css";
+                        } else if (opener.config && opener.config["user_style"]) {
+                            content_url = opener.config["user_style"]+"/"+data_value["name"]+"/content.css";
+                        }
                     } else {
                         content_url = "/style/"+data_value["name"]+"/content.css";
                     }
