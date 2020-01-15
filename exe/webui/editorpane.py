@@ -131,7 +131,6 @@ class EditorPane(object):
             if "title" in request.args:
                 self.idevice.title = unicode(request.args["title"][0], 'utf8')
 
-
             if "tip" in request.args:
                 self.idevice.tip = unicode(request.args["tip"][0], 'utf8')
 
@@ -263,11 +262,18 @@ class EditorPane(object):
 
         html += "<fieldset><legend><b>" + _("Actions") + "</b></legend>"
 
-        #if self.idevice.edit:
-        #    html += common.submitButton("preview", _("Preview"), not self.parent.isGeneric)
-        #else:
-        #    html += common.submitButton("edit", _("Edit"))
-        #html += "<br/>"
+        if self.idevice.edit:
+            show_preview = True
+            for idevice in G.application.ideviceStore.generic:
+                if idevice.title == self.idevice.title:
+                    for e in self.elements:
+                        if not hasattr(e.field,"content"):
+                            show_preview = False
+                            break
+            html += common.submitButton("preview", _("Preview"), show_preview)
+        else:
+            html += common.submitButton("edit", _("Edit"))
+        html += "<br/>"
         html += common.submitButton("cancel", _("Cancel"))
         #html += "</fieldset>"
 
@@ -387,7 +393,8 @@ class EditorPane(object):
         else:
             html += "<b>" + self.idevice.title + "</b><br/><br/>"
             for element in self.elements:
-                html += element.renderPreview()
+                if hasattr(element.field,"content"):
+                    html += element.renderPreview()
             if self.idevice.purpose != "" or self.idevice.tip != "":
                 html += "<a title=\""+_("Pedagogical Help")+"\" "
                 html += "onclick=\"showMessageBox('phelp');\" "

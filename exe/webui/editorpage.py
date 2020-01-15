@@ -50,7 +50,7 @@ class EditorPage(RenderableResource):
         Initialize
         """
         RenderableResource.__init__(self, parent)
-        self.editorPane   = None
+        self.editorPane   = {}
         self.url          = ""
         self.elements     = []
         self.isNewIdevice = True
@@ -74,19 +74,19 @@ class EditorPage(RenderableResource):
         """
         log.debug("process " + repr(request.args))
 
-        if not self.editorPane:
-            self.editorPane = EditorPane(self)
+        if not G.application.config.username in self.editorPane:
+            self.editorPane[G.application.config.username] = EditorPane(self)
 
         if "action" in request.args:
 
-            self.editorPane.process(request,"old")
+            self.editorPane[G.application.config.username].process(request,"old")
 
             if request.args["action"][0] == "changeIdevice":
                 genericIdevices = G.application.ideviceStore.generic
 
                 
                 if not self.isNewIdevice:
-                    ideviceId = self.editorPane.idevice.id
+                    ideviceId = self.editorPane[G.application.config.username].idevice.id
                     for idevice in genericIdevices:
                         if idevice.id == ideviceId:
                             break
@@ -98,8 +98,8 @@ class EditorPage(RenderableResource):
                     if idevice.title == selected_idevice:
                         self.isGeneric = True
                         self.isNewIdevice = False
-                        self.editorPane.setIdevice(idevice)               
-                        self.editorPane.process(request, "new")
+                        self.editorPane[G.application.config.username].setIdevice(idevice)               
+                        self.editorPane[G.application.config.username].process(request, "new")
                         break
                 
         
@@ -108,9 +108,9 @@ class EditorPage(RenderableResource):
             
 
             if request.args["action"][0] == "deleteIdevice":
-                G.application.ideviceStore.delIdevice(self.editorPane.idevice)
+                G.application.ideviceStore.delIdevice(self.editorPane[G.application.config.username].idevice)
                 #Lo borramos tambien de la lista factoryiDevices
-                idevice = self.editorPane.idevice
+                idevice = self.editorPane[G.application.config.username].idevice
                 exist = False
                 for i in G.application.ideviceStore.getFactoryIdevices():
                     if i.title == idevice.title:
@@ -124,14 +124,14 @@ class EditorPage(RenderableResource):
                 self.__createNewIdevice(request) 
             
             if request.args["action"][0] == "new":
-                if self.editorPane.idevice.title == "":
+                if self.editorPane[G.application.config.username].idevice.title == "":
                     self.message = _("Please enter an idevice name.")
                 else:
-                    newIdevice = self.editorPane.idevice.clone()
+                    newIdevice = self.editorPane[G.application.config.username].idevice.clone()
                     #TODO could IdeviceStore set the id in addIdevice???
                     newIdevice.id = G.application.ideviceStore.getNewIdeviceId()
                     G.application.ideviceStore.addIdevice(newIdevice)
-                    self.editorPane.setIdevice(newIdevice)
+                    self.editorPane[G.application.config.username].setIdevice(newIdevice)
                     G.application.ideviceStore.save()
                     self.message = _("Settings Saved")
                     self.isNewIdevice = False
@@ -139,9 +139,9 @@ class EditorPage(RenderableResource):
             if request.args["action"][0] == "save": 
                 genericIdevices = G.application.ideviceStore.generic
                 for idevice in genericIdevices:
-                    if idevice.title == self.editorPane.idevice.title:
+                    if idevice.title == self.editorPane[G.application.config.username].idevice.title:
                         break
-                copyIdevice = self.editorPane.idevice.clone()
+                copyIdevice = self.editorPane[G.application.config.username].idevice.clone()
                 self.__saveChanges(idevice, copyIdevice)
                 G.application.ideviceStore.save()
                 self.message = _("Settings Saved")
@@ -156,8 +156,8 @@ class EditorPage(RenderableResource):
         else:
             # New iDevice by default
             self.isNewIdevice = True
-            self.editorPane.setIdevice(GenericIdevice("", "", "", "", ""))
-            self.editorPane.process(request, "old")
+            self.editorPane[G.application.config.username].setIdevice(GenericIdevice("", "", "", "", ""))
+            self.editorPane[G.application.config.username].process(request, "old")
         
 
             
@@ -168,8 +168,8 @@ class EditorPage(RenderableResource):
         idevice = GenericIdevice("", "", "", "", "")
         idevice.icon = ""
         idevice.id = G.application.ideviceStore.getNewIdeviceId()
-        self.editorPane.setIdevice(idevice)
-        self.editorPane.process(request, "new")      
+        self.editorPane[G.application.config.username].setIdevice(idevice)
+        self.editorPane[G.application.config.username].process(request, "new")      
         self.isNewIdevice = True
           
     def __saveChanges(self, idevice, copyIdevice):
@@ -215,7 +215,7 @@ class EditorPage(RenderableResource):
             filename = filename + '.idp'
         name = Path(filename).namebase
         package = Package(name)
-        package.idevices.append(self.editorPane.idevice.clone())
+        package.idevices.append(self.editorPane[G.application.config.username].idevice.clone())
         package.save(filename)
         
         
@@ -255,7 +255,7 @@ class EditorPage(RenderableResource):
             html += "<script>Ext.Msg.alert('"+_('Info')+"', '"+self.message+"');</script>"
         html += "<div id=\"editorButtons\"> \n"     
         html += self.renderList()
-        html += self.editorPane.renderButtons(request)
+        html += self.editorPane[G.application.config.username].renderButtons(request)
         if self.isNewIdevice:
             html += "<br/>" + common.submitButton("delete", _("Delete"), 
                                                         False)
@@ -263,8 +263,8 @@ class EditorPage(RenderableResource):
             html += '<br /><input type="button" class="button" onclick="deleteIdevice()" value="'+_("Delete")+'" />'
         html += '<br/><input class="button" type="button" name="save" '
         title = "none"
-        if self.editorPane.idevice.edit == False:
-            title = self.editorPane.idevice.title
+        if self.editorPane[G.application.config.username].idevice.edit == False:
+            title = self.editorPane[G.application.config.username].idevice.title
             title = title.replace(" ", "+")
         html += 'onclick=saveIdevice("%s") value="%s"/>' % (escape(title), _("Save"))
         html += u'<br/><input class="button" type="button" name="import" ' 
@@ -279,7 +279,7 @@ class EditorPage(RenderableResource):
         html += common.hiddenField("pathpackage")
         html += "</fieldset>"
         html += "</div>\n"
-        html += self.editorPane.renderIdevice(request)
+        html += self.editorPane[G.application.config.username].renderIdevice(request)
         html += "</div>\n"
         html += "<br/></form>\n"
         html += "</body>\n"
@@ -300,7 +300,7 @@ class EditorPage(RenderableResource):
         html += ">"+ _("New iDevice") + "</option>"
         for prototype in G.application.ideviceStore.generic:
             html += "<option value=\""+prototype.title+"\" "
-            if self.editorPane.idevice.id == prototype.id:
+            if self.editorPane[G.application.config.username].idevice.id == prototype.id:
                 html += "selected "
             title = prototype.title
             if len(title) > 16:
