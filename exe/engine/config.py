@@ -484,7 +484,8 @@ class Config(object):
             recentProjectsItems = recentProjectsSection.items()
             recentProjectsItems.sort()
             for key, path in recentProjectsItems:
-                self.recentProjects.append(path)
+                if Path(path).exists():
+                    self.recentProjects.append(path)
 
         # Load the list of "hidden" iDevices
         self.hiddeniDevices = []

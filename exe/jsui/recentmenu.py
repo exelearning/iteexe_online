@@ -21,6 +21,7 @@
 RecentMenu provides a list of Recent Projects used in eXe and handle related client events
 """
 
+import os
 import logging
 from exe.webui.renderable import Renderable
 from twisted.web.resource import Resource
@@ -69,7 +70,8 @@ class RecentMenu(Renderable, Resource):
 
         l = []
         for num, path in enumerate(self.parent.config.recentProjects):
-            l.append({'num': num + 1, 'path': escape(path)})
+            if os.path.exists(path):
+                l.append({'num': num + 1, 'path': escape(os.path.basename(path))})
         return json.dumps(l).encode('utf-8')
 
 # ===========================================================================
