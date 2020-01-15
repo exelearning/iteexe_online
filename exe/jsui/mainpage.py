@@ -491,20 +491,21 @@ class MainPage(RenderableLivePage):
 
 
         if export_type_name == None:
+            basename = Path(filename).basename()
+            save_msx = _(u'Package %s saved. Do not forget to download the package on your system') % basename
             # Tell the user and continue
             if onDone:
-                client.filePickerAlert(_(u'Package saved to: %s') % filename, onDone)
+                client.filePickerAlert(save_msx, onDone)
             elif self.package.name != oldName:
                 # Redirect the client if the package name has changed
                 self.webServer.root.putChild(self.package.name, self)
                 log.info('Package saved, redirecting client to /%s' % self.package.name)
-                client.filePickerAlert(_(u'Package saved to: %s') % filename, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'), \
+                client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'), \
                             filter_func=otherSessionPackageClients)
             else:
                 #client.filePickerAlert(_(u'Package saved to: %s') % filename, filter_func=otherSessionPackageClients)
 				# A nice notification instead of an alert
-                filename = _('Package saved to: %s') % filename.replace("\\","\\/")
-                client.sendScript(u'eXe.app.notifications.savedPackage("%s")' % filename)
+                client.sendScript(u'eXe.app.notifications.savedPackage("%s")' % save_msx)
 
     def handleSaveTemplate(self, client, templatename=None, onDone=None, edit=False):
         '''Save template'''
