@@ -213,10 +213,10 @@ class AuthoringPage(RenderableResource):
 
         # Use the Style's base.css file if it exists
         style = G.application.config.styleStore.getStyle(self.package.style)
-        if style.hasValidConfig():
+        if style.isValid():
             themePath = style.get_web_path()
         else:
-            themePath = Path(G.application.config.stylesDir/self.package.style)
+            themePath = Path("/style/base")
         themeBaseCSS = themePath.joinpath("base.css")
         if themeBaseCSS.exists():
             html += u"<link rel=\"stylesheet\" type=\"text/css\" href=\"%s/base.css\" />" % themePath
