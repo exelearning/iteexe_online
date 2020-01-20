@@ -79,13 +79,13 @@ class eXeClientHandle(ClientHandle):
         self._exec(what, 'eXe.app.alert', onDone, filter_func, title)
 
     def notifyStatus(self, title, msg):
-        self.sendScript("eXe.controller.eXeViewport.prototype.eXeNotificationStatus('%s', '%s');" % (jquote(title), jquote(msg)), filter_func=allSessionClients)
+        self.sendScript("eXe.controller.eXeViewport.prototype.eXeNotificationStatus('%s', '%s');" % (jquote(title), jquote(msg)))
 
     def hideStatus(self):
-        self.sendScript('Ext.ComponentQuery.query("#eXeNotification")[0].hide();', filter_func=allSessionClients)
+        self.sendScript('Ext.ComponentQuery.query("#eXeNotification")[0].hide();')
 
     def notifyNotice(self, title, msg, type):
-        self.sendScript("eXe.controller.eXeViewport.prototype.eXeNotificationNotice('%s','%s', '%s');" % (jquote(title), jquote(msg), jquote(type)), filter_func=allSessionClients)
+        self.sendScript("eXe.controller.eXeViewport.prototype.eXeNotificationNotice('%s','%s', '%s');" % (jquote(title), jquote(msg), jquote(type)))
 
 
 class eXeClientHandleFactory(DefaultClientHandleFactory):

@@ -64,7 +64,10 @@ Ext.define('eXe.controller.Toolbar', {
             },
         	'#file_open': {
         		click: this.fileOpen
-        	},
+            },
+            '#elp_import': {
+                click: this.importOpenPackage
+            },
         	'#file_recent_menu': {
         		beforerender: this.recentRender
             },
@@ -196,6 +199,9 @@ Ext.define('eXe.controller.Toolbar', {
             },
             '#tools_preview_button': {
                 click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
+            },
+            '#logout_user_buttom': {
+                click: this.doLogout
             },
             '#tools_refresh': {
                 click: this.toolsRefresh
@@ -607,10 +613,23 @@ Ext.define('eXe.controller.Toolbar', {
         Ext.get('loading').show();
     },
 
+    doLogout: function() {
+        Ext.util.Cookies.clear();
+        eXe.app.quitWarningEnabled = false;
+        ///// htpasswd logout
+        url = window.origin.split("//");
+        ventana = window.open(url[0]+"//logout@"+url[1]);
+        ventana.close();
+        nevow_clientToServerEvent('logout', this, '');
+        window.location.href = window.origin;
+        /////
+    },
+
     insertPackage: function() {
         var f = Ext.create("eXe.view.filepicker.FilePicker", {
             type: eXe.view.filepicker.FilePicker.modeOpen,
             title: _("Select package to insert"),
+            remote: true,
             modal: true,
             scope: this,
             callback: function(fp) {
@@ -626,7 +645,32 @@ Ext.define('eXe.controller.Toolbar', {
             ]
         );
         f.show();
-	},
+    },
+    
+    importOpenPackage: function() {
+        var fp = Ext.create("eXe.view.filepicker.FilePicker", {
+            type: eXe.view.filepicker.FilePicker.modeOpen,
+            title: _("Select package to import and Open"),
+            remote: true,
+            modal: true,
+            scope: this,
+            callback: function(fp) {
+                if (fp.status == eXe.view.filepicker.FilePicker.returnOk) {
+                    if (!fp.file.loaded)
+                    {
+                        fp.file.loaded = true;
+                        Ext.Msg.wait(new Ext.Template(_('Loading package: {filename}')).apply({filename: fp.file.name}));
+                        nevow_clientToServerEvent('loadPackage', this, '', fp.file.path);
+                    }
+                }
+            }
+        });
+        fp.appendFilters([
+            { "typename": _("eXe Package Files"), "extension": "*.elp", "regex": /.*\.elp$/ },
+            { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
+        ]);
+        fp.show();
+    },
 
 	extractPackage: function(menu, item, e) {
         var f = Ext.create("eXe.view.filepicker.FilePicker", {
@@ -1164,7 +1208,7 @@ Ext.define('eXe.controller.Toolbar', {
 					menu = this.getRecentMenu(), text, item, previtem;
     			for (i in rm) {
     				text = rm[i].num + ". " + rm[i].path
-    				previtem = menu.items.getAt(rm[i].num - 1);
+                    previtem = menu.items.getAt(rm[i].num - 1);
     				if (previtem && previtem.text[1] == ".") {
     					previtem.text = text
     				}
@@ -1429,7 +1473,7 @@ Ext.define('eXe.controller.Toolbar', {
 	        // Just save it over the old file
 
 	        if (export_type_name === "") {
-                Ext.Msg.wait(new Ext.Template(_('Saving package to: {filename}')).apply({filename: filename}));
+                Ext.Msg.wait(new Ext.Template(_('Saving package...')).apply());
                 if (onDone){
                     nevow_clientToServerEvent('savePackage', this, '', '', onDone);
                 }else{
@@ -1484,6 +1528,7 @@ Ext.define('eXe.controller.Toolbar', {
 			modal: true,
 			scope: this,
 			callback: function(fp) {
+                // No debe mostrar el filepicker cuando guardamos un paquete
 			    if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
 			        this.saveWorkInProgress();
                     Ext.Msg.wait(_('Saving package...'));

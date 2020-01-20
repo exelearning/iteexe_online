@@ -57,7 +57,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 					params: {
 						filetype: this.filetypes.getAt(0).get('extension'),
 						filename: this.filename,
-					 },
+					},
 					success: function (response) {
 						this.status = eXe.view.filepicker.FilePicker.returnOk;
 						this.file = JSON.parse(response.responseText);
@@ -101,9 +101,9 @@ Ext.define('eXe.view.filepicker.FilePicker', {
     initComponent: function() {
         var me = this,
             ft = Ext.create("Ext.data.Store",{ fields: ['typename', 'extension', 'regex'] }),
-            top_buttons = eXe.app.config.locationButtons.concat([
+			top_buttons = eXe.app.config.locationButtons.concat([
                 { xtype: 'component', flex: 1 }
-	        ]),
+			]),
     		buttons = [
 	    		{ xtype: 'component', flex: 1 },
 				{ xtype: 'button', text: _('Cancel'), itemId: 'filepicker_cancel' },
@@ -120,7 +120,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
                     fieldLabel: _('Type'),
                     labelAlign: 'right',
 	            	valueField: 'regex',
-                    dock: 'bottom',
+					dock: 'bottom',
                     ui: 'footer',
 	            	forceSelection: true,
                     allowBlank: false,
@@ -137,12 +137,14 @@ Ext.define('eXe.view.filepicker.FilePicker', {
         switch (me.type) {
         	case eXe.view.filepicker.FilePicker.modeSave:
         		buttons[2] = { xtype: 'button', text: _('Save'), itemId: 'filepicker_save' };
-                top_buttons[eXe.app.config.locationButtons.length + 1] = { xtype: 'button', text: _('Create Directory'), itemId: 'filepicker_createdir' };
+				/*
+				top_buttons[eXe.app.config.locationButtons.length + 1] = { xtype: 'button', text: _('Create Directory'), itemId: 'filepicker_createdir' };
 		        top_buttons.unshift({
 		            xtype: 'text',
 		            text: _('Save in:'),
 		            padding: '2px 15px 0px 0px'
-		        });
+				});
+				*/
         		break;
         	case eXe.view.filepicker.FilePicker.modeGetFolder:
         		filter = [];
@@ -180,81 +182,142 @@ Ext.define('eXe.view.filepicker.FilePicker', {
                                 itemId: "upload_currentdir"
                             }
                         ]
-        			};
+					};
         		}
                 break;
         }
-
-        Ext.applyIf(me, {
-        	width: 800,
-            height: eXe.app.getMaxHeight(600),
-            layout:'border',
-			filetypes: ft,
-			dockedItems: [
-                {
-	                xtype: 'container',
-	                layout: 'hbox',
-	                dock: 'top',
-	                items: top_buttons,
-                    padding: '0px 0px 5px 0px'
-                },{
-	                xtype: 'container',
-	                layout: 'hbox',
-	                dock: 'bottom',
-	                ui: 'footer',
-	                items: buttons
-				},  filter
-                ,{
-	        		xtype: 'combo',
-	        		name: 'name',
-                    hideTrigger:true,
-                    store: Ext.create('eXe.store.filepicker.File'),
-                    displayField: "name",
-                    valueField: "realname",
-                    typeAhead: true,
-                    typeAheadDelay: 100,
-                    minChars: 2,
-                    queryMode: 'remote',
-                    queryDelay: 200,
-	                fieldLabel: fieldlabel,
-                    labelAlign: 'right',
-	                dock: 'bottom',
-                    ui: 'footer',
-	        		itemId: 'file_place_field',
-                    padding: '5px 0px 5px 0px',
-                    listeners: {
-                    	beforequery: function(qe) {
-                    		if (qe.query.length < qe.combo.minChars) {
-                    			delete qe.combo.prevqe;
-                    			return false;
-                    		}
-                    		if (qe.combo.prevqe) {
-                    			qe.cancel = true;
-                    		}
-                    		qe.combo.prevqe = qe;
-                    	}
-                    }
-                }
-			],
-            fbar: [
-			],
-			items: [
-				{
-					xtype: "dirtree",
-					region: "west"
-				},{
-					xtype: "filelist",
-                    multiSelect: me.type == eXe.view.filepicker.FilePicker.modeOpenMultiple? true : false,
-					region: "center"
+		if (me.type != eXe.view.filepicker.FilePicker.modeSave) {
+			Ext.applyIf(me, {
+				width: 800,
+				height: eXe.app.getMaxHeight(600),
+				layout:'border',
+				filetypes: ft,
+				dockedItems: [
+					{
+						xtype: 'container',
+						layout: 'hbox',
+						dock: 'top',
+						items: top_buttons,
+						padding: '0px 0px 5px 0px'
+					},{
+						xtype: 'container',
+						layout: 'hbox',
+						dock: 'bottom',
+						ui: 'footer',
+						items: buttons
+					},  filter
+					,{
+						xtype: 'combo',
+						name: 'name',
+						hideTrigger:true,
+						store: Ext.create('eXe.store.filepicker.File'),
+						displayField: "name",
+						valueField: "realname",
+						typeAhead: true,
+						typeAheadDelay: 100,
+						minChars: 2,
+						queryMode: 'remote',
+						queryDelay: 200,
+						fieldLabel: fieldlabel,
+						labelAlign: 'right',
+						dock: 'bottom',
+						ui: 'footer',
+						itemId: 'file_place_field',
+						padding: '5px 0px 5px 0px',
+						listeners: {
+							beforequery: function(qe) {
+								if (qe.query.length < qe.combo.minChars) {
+									delete qe.combo.prevqe;
+									return false;
+								}
+								if (qe.combo.prevqe) {
+									qe.cancel = true;
+								}
+								qe.combo.prevqe = qe;
+							}
+						}
+					}
+				],
+				fbar: [
+				],
+				items: [
+					{
+						xtype: "dirtree",
+						region: "west"
+					},{
+						xtype: "filelist",
+						multiSelect: me.type == eXe.view.filepicker.FilePicker.modeOpenMultiple? true : false,
+						region: "center"
+					}
+				],
+				listeners: {
+					destroy: me.callback,
+					scope: me.scope
 				}
-			],
-			listeners: {
-				destroy: me.callback,
-				scope: me.scope
-			}
-        });
+			});
 
-        me.callParent(arguments);
+			me.callParent(arguments);
+		} else {
+			Ext.applyIf(me, {
+				width: 400,
+				height: eXe.app.getMaxHeight(120),
+				layout:'fit',
+				filetypes: ft,
+				dockedItems: [
+					{
+						xtype: 'container',
+						layout: 'hbox',
+						dock: 'bottom',
+						ui: 'footer',
+						items: buttons
+					},
+				],
+				fbar: [
+				],
+				items: [
+					{
+						xtype: 'label',
+						forId: 'labelname',
+						text: _('Name:'),
+						margin: '10 0 0 10'
+					},
+					{
+						xtype: 'combo',
+						name: 'name',
+						hideTrigger:true,
+						store: Ext.create('eXe.store.filepicker.File'),
+						displayField: "name",
+						valueField: "realname",
+						typeAhead: true,
+						typeAheadDelay: 100,
+						minChars: 2,
+						queryMode: 'remote',
+						queryDelay: 200,
+						labelAlign: 'left',
+						itemId: 'file_place_field',
+						padding: '5px 5px 5px 5px',
+						listeners: {
+							beforequery: function(qe) {
+								if (qe.query.length < qe.combo.minChars) {
+									delete qe.combo.prevqe;
+									return false;
+								}
+								if (qe.combo.prevqe) {
+									qe.cancel = true;
+								}
+								qe.combo.prevqe = qe;
+							}
+						}
+					}
+				],
+				listeners: {
+					destroy: me.callback,
+					scope: me.scope
+				}
+			});
+
+			me.callParent(arguments);
+		}
     },
 
     appendFilters: function(filters) {

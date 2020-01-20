@@ -140,12 +140,76 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                     ]
                                 }
                             },
+                            /*
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Open'),
                                 accesskey: 'o',
                                 tooltip: 'Ctrl+O',
                                 itemId: 'file_open'
+                            },
+                            */
+                            {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Import') + getSRhelp(),
+                                accesskey: 'i',
+                                menu: {
+                                    xtype: 'menu',
+                                    items: [
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'elp_import',
+                                            accesskey: 'e',
+                                            text: _('Package (.elp)')
+                                        },
+                                        {
+                                            cls: 'exe-advanced',
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_insert',
+                                            accesskey: 'i',
+                                            text: _('Insert elp in the current page')
+                                        },
+                                        /*
+                                        {
+                                            cls: 'exe-advanced',
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_import_html',
+                                            accesskey: 'h',
+                                            text: _('HTML Files')
+                                        },
+                                        */
+                                        {
+                                            cls: 'exe-advanced',
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_import_xliff',
+                                            accesskey: 'x',
+                                            text: _('XLIFF File')
+                                        },
+                                        {
+                                            cls: 'exe-advanced',
+                                            xtype: 'accesskey_menuitem',
+			                                text: _('Metadata') + getSRhelp(),
+			                                accesskey: 'm',
+                                            menu: {
+                                                xtype: 'menu',
+                                                items: [
+			                                        {
+			                                            xtype: 'accesskey_menuitem',
+			                                            itemId: 'file_import_lom',
+			                                            accesskey: 'l',
+			                                            text: _('LOM')
+			                                        },
+                                                    {
+                                                        xtype: 'accesskey_menuitem',
+                                                        itemId: 'file_import_lomes',
+                                                        accesskey: 'e',
+                                                        text: _('LOM-ES')
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
                             },
                             {
                                 xtype: 'accesskey_menuitem',
@@ -176,18 +240,14 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 tooltip: 'Ctrl+S',
                                 itemId: 'file_save'
                             },
+                            /*
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Save As...'),
                                 accesskey: 'a',
                                 itemId: 'file_save_as'
                             },
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Download'),
-                                accesskey: 'd',
-                                itemId: 'file_extract_all'
-                            },
+                            */
                             {
 								xtype: 'menuseparator'
                             },
@@ -213,6 +273,12 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             },
                             {
 								xtype: 'menuseparator'
+                            },
+                            {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Download'),
+                                accesskey: 'd',
+                                itemId: 'file_extract_all'
                             },
                             {
                                 xtype: 'accesskey_menuitem',
@@ -347,57 +413,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
-                                text: _('Import') + getSRhelp(),
-                                accesskey: 'i',
-                                menu: {
-                                    xtype: 'menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_insert',
-                                            accesskey: 'i',
-                                            text: _('Insert elp in the current page')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_import_html',
-                                            accesskey: 'h',
-                                            text: _('HTML Files')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_import_xliff',
-                                            accesskey: 'x',
-                                            text: _('XLIFF File')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-			                                text: _('Metadata') + getSRhelp(),
-			                                accesskey: 'm',
-                                            menu: {
-                                                xtype: 'menu',
-                                                items: [
-			                                        {
-			                                            xtype: 'accesskey_menuitem',
-			                                            itemId: 'file_import_lom',
-			                                            accesskey: 'l',
-			                                            text: _('LOM')
-			                                        },
-                                                    {
-                                                        xtype: 'accesskey_menuitem',
-                                                        itemId: 'file_import_lomes',
-                                                        accesskey: 'e',
-                                                        text: _('LOM-ES')
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                cls: 'exe-advanced',
-                                xtype: 'accesskey_menuitem',
                                 text: _('Publish') + getSRhelp(),
                                 itemId: 'publish',
                                 accesskey: 'l',
@@ -428,6 +443,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'menuseparator'
                             },
+                            /*
                             {
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'file_quit',
@@ -435,6 +451,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 tooltip: 'Ctrl+Q',
                                 text: _('Quit')
                             }
+                            */
                         ]
                     }
                 },
@@ -720,7 +737,21 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 				{
                     xtype: 'accesskey_button',
                     text: eXe.app.config.user,
-                    icon: eXe.app.config.user_picture
+                    icon: eXe.app.config.user_picture,
+                    padding: '2 10 2 10',
+                    margin: '0 10 0 0',
+                    menu: 
+                    {
+                        xtype: 'menu',
+                        items: 
+                        [
+                            {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Logout'),
+                                itemId: 'logout_user_buttom'
+                            }
+                        ]
+                    }
                 }
             ]
         });

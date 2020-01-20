@@ -45,38 +45,40 @@ Ext.define('eXe.controller.filepicker.Directory', {
 		});
 	},
 	loadDirectory: function(selection, clear) {
-        var dirtree = this.getDirTree(),
-            sep = '_RRR_', path, root,
-            rootNode = dirtree.getRootNode();
+        if (this.getDirTree()) {
+            var dirtree = this.getDirTree(),
+                sep = '_RRR_', path, root,
+                rootNode = dirtree.getRootNode();
 
-        if (eXe.app.config.server) {
-            rootNode.set('text', eXe.app.config.user);
-            rootNode.commit();
+            if (eXe.app.config.server) {
+                rootNode.set('text', eXe.app.config.user);
+                rootNode.commit();
 
-            root = eXe.app.config.user_root;
-            if (selection == root) {
-                selection = '/';
-            } else {
-                selection = selection.replace(root, '');
+                root = eXe.app.config.user_root;
+                if (selection == root) {
+                    selection = '/';
+                } else {
+                    selection = selection.replace(root, '');
+                }
             }
-        }
 
-        if (clear === true)
-            this.getPlaceField().setValue("");
-        this.getPlaceField().focus();
-        if (selection[0] == "/")
-	        path = sep + '/' + selection.replace(/\//g, sep);
-	    else {
-        	path = sep + '/' + sep + selection.replace(/\\/g, sep);
-			path = path.replace(/_RRR_$/, '');	    	
-	    }
-        dirtree.expandPath(path, "realtext", sep, function() {
-            if (selection == "/")
-                dirtree.getSelectionModel().select(rootNode);
+            if (clear === true)
+                this.getPlaceField().setValue("");
+            this.getPlaceField().focus();
+            if (selection[0] == "/")
+                path = sep + '/' + selection.replace(/\//g, sep);
             else {
-                dirtree.selectPath(path, "realtext", sep);
+                path = sep + '/' + sep + selection.replace(/\\/g, sep);
+                path = path.replace(/_RRR_$/, '');	    	
             }
-        }, this);
+            dirtree.expandPath(path, "realtext", sep, function() {
+                if (selection == "/")
+                    dirtree.getSelectionModel().select(rootNode);
+                else {
+                    dirtree.selectPath(path, "realtext", sep);
+                }
+            }, this);
+        }
 	},
 	
 	onDirSelect: function( selModel, selection ) {

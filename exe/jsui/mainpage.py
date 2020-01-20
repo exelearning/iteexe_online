@@ -276,6 +276,7 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleExportProcomun, 'exportProcomun')
         setUpHandler(self.handleXliffExport, 'exportXliffPackage')
         setUpHandler(self.handleQuit, 'quit')
+        setUpHandler(self.handleLogout, 'logout')
         setUpHandler(self.handleBrowseURL, 'browseURL')
         setUpHandler(self.handleMergeXliffPackage, 'mergeXliffPackage')
         setUpHandler(self.handleInsertPackage, 'insertPackage')
@@ -500,8 +501,7 @@ class MainPage(RenderableLivePage):
                 # Redirect the client if the package name has changed
                 self.webServer.root.putChild(self.package.name, self)
                 log.info('Package saved, redirecting client to /%s' % self.package.name)
-                client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'), \
-                            filter_func=otherSessionPackageClients)
+                client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
             else:
                 #client.filePickerAlert(_(u'Package saved to: %s') % filename, filter_func=otherSessionPackageClients)
 				# A nice notification instead of an alert
@@ -549,14 +549,14 @@ class MainPage(RenderableLivePage):
         self.session.packageStore.addPackage(package)
         self.webServer.root.bindNewPackage(package, self.session)
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                        package.name).encode('utf8'), filter_func=filter_func)
+                        package.name).encode('utf8'))
 
     def handleLoadTemplate(self, client, filename):
         """Load the template named 'filename'"""
         # By transforming it into a Path, we ensure that it is using the correct directory separator
         template = self._loadPackage(client, Path(filename), newLoad=True, isTemplate=True)
         self.webServer.root.bindNewPackage(template, self.session)
-        client.sendScript((u'eXe.app.gotoUrl("/%s")' % template.name).encode('utf8'), filter_func=allSessionPackageClients)
+        client.sendScript((u'eXe.app.gotoUrl("/%s")' % template.name).encode('utf8'))
 
     def handleMetadataWarning(self, client, export_type):
         """
@@ -650,7 +650,7 @@ class MainPage(RenderableLivePage):
 
     def handleReload(self, client):
         self.location_buttons.updateText()
-        client.sendScript('eXe.app.gotoUrl()', filter_func=allSessionClients)
+        client.sendScript('eXe.app.gotoUrl()')
 
     def handleRemoveTempDir(self, client, tempdir, rm_top_dir):
         """
@@ -1121,12 +1121,12 @@ class MainPage(RenderableLivePage):
 
     def handleImportErrback(self, failure, client):
         client.alert(_(u'Error importing HTML:\n') + unicode(failure.getBriefTraceback()), \
-                     (u'eXe.app.gotoUrl("/%s")' % self.package.name).encode('utf8'), filter_func=otherSessionPackageClients)
+                     (u'eXe.app.gotoUrl("/%s")' % self.package.name).encode('utf8'))
 
     def handleImportCallback(self, resources, client):
         client.call('eXe.app.getController("Toolbar").closeImportProgressWindow')
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                      self.package.name).encode('utf8'), filter_func=allSessionPackageClients)
+                      self.package.name).encode('utf8'))
 
     def handleCancelImport(self, client):
         log.info('Cancel import')
@@ -1230,7 +1230,11 @@ class MainPage(RenderableLivePage):
                 request = urlopen(procomun_ode_url,params)
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
                 json_response = request.read()
-                dict_response = json.loads(json_response)
+                if json_response:
+                    dict_response = json.loads(json_response)
+                else:
+                    client.alert(u'No response from Procomún', title=_(u'Publishing document to Procomún'))
+                    return
 
                 #client.call('Ext.MessageBox.hide')
                 if dict_response['status'] == '0':
@@ -1424,6 +1428,25 @@ class MainPage(RenderableLivePage):
             else:
                 log.debug("Not quiting. %d clients alive." % len(self.clientHandleFactory.clientHandles))
 
+    def handleLogout(self, client):
+        try:
+            for file in self.session.user.root.listdir():
+                if file.isfile():
+                    file.remove()
+        except:
+            log.debug("Error deleting user's files")
+        try:
+            self.authoringPages.pop(client.handleId)
+            self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
+            del self.webServer.root.mainpages[self.session.uid]
+            del G.application.userStore.loaded[self.session.user.name]
+            self.session.user = None
+            self.package = None
+            self.name = None
+        except:
+            log.debug("Logout error")
+
+
     def handleBrowseURL(self, client, url):
         """
         visit the specified URL using the system browser
@@ -1451,10 +1474,10 @@ class MainPage(RenderableLivePage):
             importer = XliffImport(self.package, unquote(filename).encode(encoding))
             importer.parseAndImport(from_source)
             client.alert(_(u'Correct XLIFF import'), (u'eXe.app.gotoUrl("/%s")' % \
-                           self.package.name).encode('utf8'), filter_func=otherSessionPackageClients)
+                           self.package.name).encode('utf8'))
         except Exception, e:
             client.alert(_(u'Error importing XLIFF: %s') % e, (u'eXe.app.gotoUrl("/%s")' % \
-                           self.package.name).encode('utf8'), filter_func=otherSessionPackageClients)
+                           self.package.name).encode('utf8'))
 
     def handleInsertPackage(self, client, filename):
         """
@@ -1479,7 +1502,7 @@ class MainPage(RenderableLivePage):
         except:
             pass
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                          self.package.name).encode('utf8'), filter_func=allSessionPackageClients)
+                          self.package.name).encode('utf8'))
 
     def handleExtractPackage(self, client, filename, existOk, allPackage=False):
         """
@@ -1892,6 +1915,12 @@ class MainPage(RenderableLivePage):
                 client.alert(_(u'Sorry, wrong file format'))
             log.error(u'Error loading package "%s": %s' % (filename2, unicode(exc)))
             log.error(u'Traceback:\n%s' % traceback.format_exc())
+            f = Path(filename2)
+            if f.exists():
+                try:
+                    f.remove()
+                except:
+                    pass
             raise
         return package
 

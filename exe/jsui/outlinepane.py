@@ -74,7 +74,7 @@ class OutlinePane(Renderable, Resource):
             self.package.currentNode = node.createChild()
             client.currentNodeId = self.package.currentNode.id
             log.debug('Updating clients Outlines')
-            client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+            client.sendScript('eXe.app.getController("Outline").reload()')
             client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def handleDelNode(self, client, nodeId):
@@ -89,7 +89,7 @@ class OutlinePane(Renderable, Resource):
                 self.package.currentNode = node.parent
                 client.currentNodeId = self.package.currentNode.id
             node.delete()
-            client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+            client.sendScript('eXe.app.getController("Outline").reload()')
             client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
         else:
             log.error("deleteNode cannot locate " + nodeId)
@@ -106,7 +106,7 @@ class OutlinePane(Renderable, Resource):
         # and those of ALL of its children nodes, as well:
         node.RenamedNodePath()
 
-        client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+        client.sendScript('eXe.app.getController("Outline").reload()')
         client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def handleSetTreeSelection(self, client):
@@ -124,28 +124,28 @@ class OutlinePane(Renderable, Resource):
         """Promotes a node"""
         node = self.package.findNode(sourceNodeId)
         node.promote()
-        client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+        client.sendScript('eXe.app.getController("Outline").reload()')
         client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def handleDemote(self, client, sourceNodeId):
         """Demotes a node"""
         node = self.package.findNode(sourceNodeId)
         node.demote()
-        client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+        client.sendScript('eXe.app.getController("Outline").reload()')
         client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def handleUp(self, client, sourceNodeId):
         """Moves a node up its list of siblings"""
         node = self.package.findNode(sourceNodeId)
         node.up()
-        client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+        client.sendScript('eXe.app.getController("Outline").reload()')
         client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def handleDown(self, client, sourceNodeId):
         """Moves a node down its list of siblings"""
         node = self.package.findNode(sourceNodeId)
         node.down()
-        client.sendScript('eXe.app.getController("Outline").reload()', filter_func=allSessionPackageClients)
+        client.sendScript('eXe.app.getController("Outline").reload()')
         client.call('eXe.app.getController("Outline").loadNodeOnAuthoringPage', client.currentNodeId)
 
     def render(self, request=None):
