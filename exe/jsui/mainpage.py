@@ -1453,9 +1453,7 @@ class MainPage(RenderableLivePage):
                 self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
                 del self.webServer.root.mainpages[self.session.uid]
                 del G.application.userStore.loaded[self.session.user.name]
-                self.session.user = None
-                self.package = None
-                self.name = None
+                self.session.expire()
         except:
             log.debug("Logout error")
 

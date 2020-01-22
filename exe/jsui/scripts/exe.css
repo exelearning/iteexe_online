@@ -132,7 +132,7 @@ body.exe-advanced .exe-simplified,
 /* User Session*/
 .user_picture
 {
-  background-color: lightgray;
+  background-color: gray;
   background-size:cover;
   border-radius: 50%;
 }
