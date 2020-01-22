@@ -753,7 +753,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 {
                                     'border-color':'#DCDCDC',
                                     'background-color':'#DCDCDC !important',
-                                    'text-align':'right',
+                                    'text-align':'center',
                                     'font-size': '.9em',
                                     'padding': '8px'
                                 },
