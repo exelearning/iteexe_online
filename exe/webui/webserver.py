@@ -38,6 +38,7 @@ from exe.webui.styledesigner import StyleDesigner
 # jrf - legal notes
 from exe.webui.legalpage import LegalPage
 from exe.webui.quitpage            import QuitPage
+from exe.webui.loginpage           import LoginPage
 from exe.webui.iecmwarning         import IECMWarningPage
 from exe.webui.renderable          import File
 from exe.webui.xliffimportpreferencespage import XliffImportPreferencesPage
@@ -84,7 +85,8 @@ class WebServer:
         self.openpackage = OpenPackagePage(self.root)
         self.monitoring = False
         self.invalidPackageName = []
-        self.templatemanager = TemplateManagerPage(self.root)               
+        self.templatemanager = TemplateManagerPage(self.root)     
+        self.login = LoginPage(self.root, self.config.configDir)          
 
     def find_port(self):
         """

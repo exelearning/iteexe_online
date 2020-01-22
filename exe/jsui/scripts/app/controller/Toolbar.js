@@ -616,13 +616,27 @@ Ext.define('eXe.controller.Toolbar', {
     doLogout: function() {
         Ext.util.Cookies.clear();
         eXe.app.quitWarningEnabled = false;
-        ///// htpasswd logout
-        url = window.origin.split("//");
-        ventana = window.open(url[0]+"//logout@"+url[1]);
-        ventana.close();
-        nevow_clientToServerEvent('logout', this, '');
-        window.location.href = window.origin;
-        /////
+        if (window.config.saml == 1) {
+            // saml (google) logout
+            nevow_clientToServerEvent('logout', this, '');
+            /*
+            var google_logout_url = "https://www.google.com/accounts/Logout";
+            gw = window.open(google_logout_url);
+            */
+            /*
+            var google_logout_url = "https://www.google.com/accounts/Logout";
+            var google_appengine_url = "https://appengine.google.com/_ah/logout";
+            var continue_get = "?continue=";
+            window.location.href = google_logout_url+continue_get+google_appengine_url+continue_get+window.origin+"/quit"
+            */
+        } else {
+            // htpasswd logout
+            url = window.origin.split("//");
+            ventana = window.open(url[0]+"//logout@"+url[1]);
+            ventana.close();
+            nevow_clientToServerEvent('logout', this, '');
+            window.location.href = window.origin;
+        }
     },
 
     insertPackage: function() {

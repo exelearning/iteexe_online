@@ -62,7 +62,10 @@ class PackageRedirectPage(RenderableResource):
         """
         session = request.getSession()
         if self.webServer.application.server and not session.user and not request.getUser():
-            return self.webServer.saml
+            if 'login' in request.args and request.args['login'][0] == 'saml':
+                return self.webServer.saml
+            else:
+                return self.webServer.login
         if name == '':
             return self
         else:
@@ -122,4 +125,3 @@ class PackageRedirectPage(RenderableResource):
         # Tell the web browser to show it
         request.redirect(package.name.encode('utf8'))
         return ''
-

@@ -736,18 +736,34 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 				'->', // Name logged user
 				{
                     xtype: 'accesskey_button',
-                    text: eXe.app.config.user,
                     icon: eXe.app.config.user_picture,
+                    iconCls: 'user_picture',
                     padding: '2 10 2 10',
                     margin: '0 10 0 0',
-                    menu: 
+                    menu:
                     {
                         xtype: 'menu',
                         items: 
                         [
                             {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Logout'),
+                                xtype: 'label',
+                                text:   eXe.app.config.user,
+                                itemId: 'user_email',
+                                style:
+                                {
+                                    'border-color':'#DCDCDC',
+                                    'background-color':'#DCDCDC !important',
+                                    'text-align':'right',
+                                    'font-size': '.9em',
+                                    'padding': '8px'
+                                },
+                            },
+                            {
+                                xtype: 'menuseparator'
+                            },
+                            {
+                                xtype: 'menuitem',
+                                text: _('Sign off'),
                                 itemId: 'logout_user_buttom'
                             }
                         ]

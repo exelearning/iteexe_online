@@ -344,6 +344,10 @@ class MainPage(RenderableLivePage):
             config['user_picture'] = session.user.picture
             config['user_root'] = session.user.root
             config['user_style'] = "style_user_{}".format(config['user'])
+            if hasattr(session, 'samlNameId') and session.samlNameId:
+                config['saml'] = 1
+            else:
+                config['saml'] = 0
             # add user styles (/style_user) to webserver path
             self.webServer.root.putChild("style_user_{}".format(config['user']), File(session.user.stylesPath))
             
@@ -1436,13 +1440,22 @@ class MainPage(RenderableLivePage):
         except:
             log.debug("Error deleting user's files")
         try:
-            self.authoringPages.pop(client.handleId)
-            self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
-            del self.webServer.root.mainpages[self.session.uid]
-            del G.application.userStore.loaded[self.session.user.name]
-            self.session.user = None
-            self.package = None
-            self.name = None
+            if hasattr(self.session, 'samlNameId') and self.session.samlNameId:
+                #saml logout
+                self.authoringPages.pop(client.handleId)
+                self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
+                del self.webServer.root.mainpages[self.session.uid]
+                del G.application.userStore.loaded[self.session.user.name]
+                self.handleQuit(client)
+            else:
+                #htpasswd logout
+                self.authoringPages.pop(client.handleId)
+                self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
+                del self.webServer.root.mainpages[self.session.uid]
+                del G.application.userStore.loaded[self.session.user.name]
+                self.session.user = None
+                self.package = None
+                self.name = None
         except:
             log.debug("Logout error")
 
