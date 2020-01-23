@@ -59,6 +59,7 @@ from exe.importers.scanresources import Resources
 from exe.engine.path             import Path, toUnicode, TempDirPath
 from exe.engine.package          import Package
 from exe.engine.template         import Template
+from exe.engine.integration      import Integration
 from exe                         import globals as G
 from tempfile                    import mkdtemp, mkstemp
 from exe.engine.mimetex          import compile
@@ -1174,75 +1175,40 @@ class MainPage(RenderableLivePage):
 
             return filename
 
-        def publish(filename, publish_config):
+        def publish(filename):
             """
-            Upload the exported package to Procomún.
-
-            :param filename: Full path to the exported ZIP.
+            Upload the exported package to elp Repository.
             """
 
             # Update progress for the user
+            client.call('Ext.MessageBox.updateProgress', 0.6, '50%', _(u'Uploading package to Procomún...'))
+
+            integration = Integration()
+
             client.call('Ext.MessageBox.updateProgress', 0.6, '60%', _(u'Uploading package to Procomún...'))
-
-            procomun_home_url = publish_config["url"]["home"]
-            procomun_ode_url = publish_config["url"]["new_ode"]
-
-            def new_json_ode(ode_id='',filename='',file='',uri=''):
-                ode = {
-                'ode_id':ode_id,
-                'ode_filename':filename,
-                'ode_file':file,
-                'ode_uri':uri
-                }
-                return json.dumps(ode)
-
-            # Get OAuth Acess Token and add it to the request headers
-            """
-            token = client.session.oauthToken['procomun']
-            headers = {
-                'Authorization': 'Bearer %s' % str(token['access_token']),
-                'Connection': 'close'
-            }
-            """
-
-            # Create the WSDL client
-            """
-            procomun = Client(PROCOMUN_WSDL, headers=headers)
-            """
-
-            # Create and configure the ODE object
-            """
-            ode = procomun.factory.create('xsd:anyType')
-            ode.id = ''
-            ode.ode_filename = self.package.name
-            ode.ode_file = base64.b64encode(open(filename, 'rb').read())
-            ode.ode_uri = ''
-            """
-
-            ode = new_json_ode(
-                filename=self.package.name,
-                file=base64.b64encode(open(filename, 'rb').read())
-                )
-
-            params = urlencode({'ode_data':ode})
+            
+            package_name = self.package.name
+            package_file = base64.b64encode(open(filename, 'rb').read())
 
             client.call('Ext.MessageBox.updateProgress', 0.7, '70%', _(u'Uploading package to Procomún...'))
 
             # Try to upload the ODE to Procomún
             try:
-                #result = procomun.service.odes_soap_create(ode)
-                request = urlopen(procomun_ode_url,params)
+
+                response = integration.set_ode(package_name, package_file)
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
-                json_response = request.read()
-                if json_response:
-                    dict_response = json.loads(json_response)
+
+                if response and response[0]:
+                    dict_response = response[1]
+                elif response and not response[0]:
+                    client.alert(u'Error in response: %s' % str(response[1]), title=_(u'Publishing document to Procomún'))
+                    return
                 else:
-                    client.alert(u'No response from Procomún', title=_(u'Publishing document to Procomún'))
+                    client.alert(u'No response', title=_(u'Publishing document to Procomún'))
                     return
 
                 #client.call('Ext.MessageBox.hide')
                 if dict_response['status'] == '0':
-                    client.sendScript("console.log('{}')".format(json_response))
                     if self.package.title:
                         elp_title = self.package.title
                     else:
@@ -1253,7 +1219,7 @@ class MainPage(RenderableLivePage):
                             + _(u'Package exported to <a href="%s" target="_blank" title="Click to download the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
                             + u'<br />'
                             + u'<br />'
-                            + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % procomun_home_url
+                            + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % integration.repo_home_url
                             + '\''
                         ),
                         title=_(u'Publishing document to Procomún')
@@ -1284,59 +1250,9 @@ class MainPage(RenderableLivePage):
                     """
                 return
 
-            """
-            # Parse the result received from Procomún
-            parsedResult = {}
-            for item in result.item:
-                parsedResult[item.key] = item.value
-                if str(item.key) == 'data':
-                    parsedResult[item.key] = {}
-                    if item.value:
-                        parsedResult[item.key][item.value.item.key] = item.value.item.value
-
-            # Show a message to the user based on the result
-            client.call('Ext.MessageBox.hide')
-            if parsedResult['status'] == 'true':
-                link_url = ProcomunOauth.BASE_URL + '/ode/view/%s' % parsedResult['data']['documentId']
-                client.alert(
-                    js(
-                        '\''
-                        + _(u'Package exported to <a href="%s" target="_blank" title="Click to view the exported package">%s</a>.') % (link_url, self.package.title)
-                        + u'<br />'
-                        + u'<br />'
-                        + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % ProcomunOauth.BASE_URL
-                        + '\''
-                    ),
-                    title=_(u'Publishing document to Procomún')
-                )
-            else:
-                client.alert(
-                    js(
-                        '\'<h3>'
-                        + _(u'Error exporting package "%s" to Procomún.') % self.package.name
-                        + u'</h3><br />'
-                        + _(u'The most common reasons for this are:')
-                        + u'<br />'
-                        + _(u'1. Package metadata is not properly filled.')
-                        + u'<br />'
-                        + _(u'2. There is a problem with you connection (or with Procomún servers), so you should just try again later.')
-                        + u'<br /><br />'
-                        + _(u'If you have problems publishing you can close this dialogue, export as SCORM 2004 and upload the generated zip file manually to Procomún.')
-                        + u'<br /><br />'
-                        + _(u'The reported error we got from Procomún was: <pre>%s</pre>') % parsedResult['message']
-                        + '\''
-                    ),
-                    title=_(u'Publishing document to Procomún')
-                )
-            """
-
-        exe_path = self.config.exePath.basename()
-        publish_config_path = exe_path / 'publish.conf'
-        client.sendScript('console.log("{}")'.format(publish_config_path))
-        publish_config = self.ConfigDict(client, publish_config_path)
-
         d = threads.deferToThread(exportScorm)
-        d.addCallback(lambda filename: threads.deferToThread(publish, filename, publish_config))
+        d.addCallback(lambda filename: threads.deferToThread(publish, filename))
+            
 
     def handleExport(self, client, exportType, filename, styleNameSelec=None):
         """
