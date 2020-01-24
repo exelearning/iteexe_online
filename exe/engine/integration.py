@@ -46,7 +46,8 @@ class Integration:
 
 		if self.config:
 			self.repo_home_url = self.config["url"]["home"]
-			self.repo_new_ode_url = self.config["url"]["new_ode"]
+			self.repo_set_ode_url = self.config["url"]["set_ode"]
+			self.repo_get_ode_url = self.config["url"]["get_ode"]
 	
 
 	def new_json_ode(self, ode_id='',filename='',file='',uri=''):
@@ -54,11 +55,26 @@ class Integration:
 		return json.dumps(ode)
 
 
-	def set_ode(self, package_name, package_file):
-		ode = self.new_json_ode(filename=package_name,file=package_file)
+	def set_ode(self,package_name,package_file,ode_id=''):
+		ode = self.new_json_ode(ode_id=ode_id,filename=package_name,file=package_file)
 		params = urlencode({self.post_ode:ode})
 		try:
-			request = urlopen(self.repo_new_ode_url,params)
+			request = urlopen(self.repo_set_ode_url,params)
+			json_response = request.read()
+			if json_response:
+				dict_response = json.loads(json_response)
+				return (True,dict_response)
+			else:
+				return (False,'No response from Repository')
+		except Exception as e:
+			return (False,e)
+
+
+	def get_ode(self,id):
+		ode = self.new_json_ode(ode_id=id)
+		params = urlencode({self.post_ode:ode})
+		try:
+			request = urlopen(self.repo_get_ode_url,params)
 			json_response = request.read()
 			if json_response:
 				dict_response = json.loads(json_response)

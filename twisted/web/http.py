@@ -725,6 +725,13 @@ class Request:
         """
         self.setResponseCode(FOUND)
         self.setHeader("location", url)
+
+    def refresh(self, url, time=0):
+        """Utility function that does a refresh.
+
+        The request should have finish() called after this.
+        """
+        self.setHeader("Refresh", "{};url={}".format(time,url))
     
     def setLastModified(self, when):
         """Set the X{Last-Modified} time for the response to this request.

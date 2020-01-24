@@ -1194,8 +1194,13 @@ class MainPage(RenderableLivePage):
 
             # Try to upload the ODE to Procomún
             try:
+                
+                # Check if the package has a ode_ide from repository
+                if hasattr(self.package,"ode_id") and self.package.ode_id:
+                    response = integration.set_ode(package_name, package_file, ode_id=self.package.ode_id)
+                else:
+                    response = integration.set_ode(package_name, package_file)
 
-                response = integration.set_ode(package_name, package_file)
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
 
                 if response and response[0]:

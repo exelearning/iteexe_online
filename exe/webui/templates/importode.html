@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:nevow="http://nevow.com/ns/nevow/0.1">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title nevow:render="title">eXe</title>
+<link rel="shortcut icon" href="images/eXe_icon.ico" type="image/x-icon" />
+<style type="text/css">
+body{font:12px/1.5 Tahoma,Arial,Verdana,Helvetica,sans-serif;color:#555;background:#fff;text-align:center;font-weight:bold}
+p{margin:0}
+#exe{
+	text-align:center;
+	height:350px;
+	position: absolute;
+  	top: 45%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+#importode{
+	width:400px;
+	height:350px;
+	text-align:center;
+	margin:auto;
+}
+.a
+{
+	margin-bottom:30px;
+	background:url(../images/exe_logo.png) no-repeat 50% 20%;
+	padding-top:120px;
+	padding-bottom: 10px;
+}
+.b
+{
+	padding-top:5px;
+	padding-bottom: 5px;
+}
+#spinner {
+	margin:auto;
+	margin-top: 25px;
+	width: 80px;
+	height: 80px;
+	border: 5px solid #d4d4d4;
+	border-top: 5px solid #40a145;
+	border-radius: 100%;
+
+	animation: spin 2s linear infinite;
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+</style>
+</head>
+<body>
+	<div id="exe">
+	  <div id="importode">
+        <p class="a" nevow:render="msg1"></p>
+		<p class="b" nevow:render="msg2"></p>
+		<div class="c" id="spinner"></div>
+	  </div>
+	</div>    
+</body>
+</html>

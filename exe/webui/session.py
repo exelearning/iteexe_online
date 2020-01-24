@@ -72,6 +72,7 @@ class eXeRequest(appserver.NevowRequest):
                 if session.user.config:
                     G.application.config = session.user.config
                     G.application.config.username = session.user.name
+                    G.application.config.userResourcesDir = session.user.root
                     session.site.server.application.config = session.user.config
                     session.site.server.preferences.config = session.user.config
                     session.user.config.locales[session.user.config.locale].install(unicode=True)
