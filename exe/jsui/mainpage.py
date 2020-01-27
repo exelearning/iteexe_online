@@ -1139,26 +1139,13 @@ class MainPage(RenderableLivePage):
 
     def handleExportProcomun(self, client):
         """
-        if not client.session.oauthToken.get('procomun'):
-            verify = False
-            if hasattr(sys, 'frozen'):
-                verify = 'cacerts.txt'
-            oauth2Session = OAuth2Session(ProcomunOauth.CLIENT_ID, redirect_uri=ProcomunOauth.REDIRECT_URI)
-            oauth2Session.verify = verify
-
-            authorization_url, state = oauth2Session.authorization_url(ProcomunOauth.AUTHORIZATION_BASE_URL)
-            self.webServer.oauth.procomun.saveState(state, oauth2Session, client)
-
-            # Call the script to start the Procomún authentication process
-            client.call('eXe.app.getController("Toolbar").getProcomunAuthToken', authorization_url)
-
-            return
+        Export the current package to SCORM 1.2 and upload it to Procomún.
+        < set_ode >
         """
 
         def exportScorm():
             """
             Exports the package we are about to upload to Procomún to SCORM 1.2.
-
             :returns: Full path to the exported ZIP.
             """
             # Update progress for the user
@@ -1195,11 +1182,17 @@ class MainPage(RenderableLivePage):
             # Try to upload the ODE to Procomún
             try:
                 
+                # Add the zip (SCORM) extension to the filename
+                if package_name[-4:] == '.zip':
+                    scorm_filename = package_name
+                else:
+                    scorm_filename = package_name+'.zip'
+
                 # Check if the package has a ode_ide from repository
                 if hasattr(self.package,"ode_id") and self.package.ode_id:
-                    response = integration.set_ode(package_name, package_file, ode_id=self.package.ode_id)
+                    response = integration.set_ode(scorm_filename, package_file, ode_id=self.package.ode_id)
                 else:
-                    response = integration.set_ode(package_name, package_file)
+                    response = integration.set_ode(scorm_filename, package_file)
 
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
 
@@ -1212,7 +1205,6 @@ class MainPage(RenderableLivePage):
                     client.alert(u'No response', title=_(u'Publishing document to Procomún'))
                     return
 
-                #client.call('Ext.MessageBox.hide')
                 if dict_response['status'] == '0':
                     if self.package.title:
                         elp_title = self.package.title
@@ -1221,10 +1213,13 @@ class MainPage(RenderableLivePage):
                     client.alert(
                         js(
                             '\''
-                            + _(u'Package exported to <a href="%s" target="_blank" title="Click to download the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
+                            + _(u'Package exported to <a href="%s" target="_blank" title="Click to download ' \
+                                u'the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
                             + u'<br />'
                             + u'<br />'
-                            + _(u'<small>You can view and manage the uploaded package using <a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.</small>').replace('>',' style="font-size:1em">') % integration.repo_home_url
+                            + _(u'<small>You can view and manage the uploaded package using '  \
+                                u'<a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.' \
+                                    u'</small>').replace('>',' style="font-size:1em">') % integration.repo_home_url
                             + '\''
                         ),
                         title=_(u'Publishing document to Procomún')

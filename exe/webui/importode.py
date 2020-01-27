@@ -32,12 +32,13 @@ class ImportOdePage(Renderable, rend.Page):
     _templateFileName = 'importode.html'
     name = 'importode'
 
-    def __init__(self, parent, repository_url, ode_id):
+    def __init__(self, parent, repository_url, ode_id, error=None):
         """
         Initialize
         """
         self.repository_url = repository_url
         self.ode_id = ode_id
+        self.error = error
         parent.putChild(self.name, self)
         Renderable.__init__(self, parent)
         rend.Page.__init__(self)
@@ -51,14 +52,31 @@ class ImportOdePage(Renderable, rend.Page):
     def render_title(ctx, data):
         ctx.tag.clear()
         return ctx.tag()[_("eXe")]
+        
+    def render_style1(self, ctx, data):
+        ctx.tag.clear()
+        if self.error:
+            return ctx.tag()[('.b{color: red; background-color: lightgray}')]
+        else:
+            return ctx.tag()['']
 
-    @staticmethod
+    def render_script1(self, ctx, data):
+        ctx.tag.clear()
+        if self.error:
+            return ctx.tag()[('document.getElementById("spinner").hidden = true')]
+        else:
+            return ctx.tag()['']
+
     def render_msg1(self, ctx, data):
         ctx.tag.clear()
-        return ctx.tag()[_("Important package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
+        if self.error:
+            return ctx.tag()[_("Error importing package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
+        else:
+            return ctx.tag()[_("Important package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
 
     def render_msg2(self, ctx, data):
-        if self.webServer.application.server:
-            ctx.tag.clear()
-            return ctx.tag()[[_("This may take a bit...")]]
-        return ctx.tag()
+        ctx.tag.clear()
+        if self.error:
+            return ctx.tag()[self.error]
+        else:
+            return ctx.tag()[_("This may take a bit...")]

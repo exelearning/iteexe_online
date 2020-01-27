@@ -41,7 +41,6 @@ p{margin:0}
 	border: 5px solid #d4d4d4;
 	border-top: 5px solid #40a145;
 	border-radius: 100%;
-
 	animation: spin 2s linear infinite;
 }
 @keyframes spin {
@@ -49,13 +48,16 @@ p{margin:0}
 	100% { transform: rotate(360deg); }
 }
 </style>
+<style nevow:render="style1"></style>
 </head>
 <body>
 	<div id="exe">
 	  <div id="importode">
         <p class="a" nevow:render="msg1"></p>
-		<p class="b" nevow:render="msg2"></p>
-		<div class="c" id="spinner"></div>
+		<div class="b" nevow:render="msg2"></div>
+		<div class="c" id="spinner">
+			<script nevow:render="script1"></script>
+		</div>
 	  </div>
 	</div>    
 </body>

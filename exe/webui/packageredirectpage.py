@@ -92,6 +92,15 @@ class PackageRedirectPage(RenderableResource):
         # Importing and redirection
         if name == 'import' and 'ode_id' in request.args:
             edit_ode_id = request.args['ode_id'][0]
+            # Integration (in case the user accesses this url directly)
+            if not self.integration:
+	            self.integration = Integration()
+            # Repository URL
+            if self.integration:
+                repository = self.integration.repo_home_url
+            else:
+                repository = "Unknown"
+            # Check if ode_id is empty
             if edit_ode_id:
                 import_ode_response = self.importOde(session, edit_ode_id)
                 if import_ode_response and import_ode_response[0]:
@@ -104,14 +113,13 @@ class PackageRedirectPage(RenderableResource):
                         errormsx =  import_ode_response[1]
                     else:
                         errormsx = "Unknown"
-                    # Repository URL
-                    if self.integration:
-                        repository = self.integration.repo_home_url
-                    else:
-                        repository = "Unknown"
 
-                    return "<h4>Error importing package with id ( {} ) from repository ( {} ).</h4><p>{}</p>".format(
-                                edit_ode_id, repository, errormsx)
+                    self.webServer.importode = ImportOdePage(self.webServer.root, repository, edit_ode_id, error=errormsx)
+                    return self.webServer.importode
+            else:
+                errormsx = "The ode_id field is empty"
+                self.webServer.importode = ImportOdePage(self.webServer.root, repository, "None", error=errormsx)
+                return self.webServer.importode
 
         # New package
         if name == '' or name == 'new_ode':
@@ -156,6 +164,7 @@ class PackageRedirectPage(RenderableResource):
         """
         Import Package from Repository
         """
+
         response = self.integration.get_ode(ode_id)
 
         # Manage Response
@@ -168,30 +177,44 @@ class PackageRedirectPage(RenderableResource):
 
         # Import package from Repository
         if dict_response['status'] == '0':
+            filename = dict_response['ode_filename']
+            if '.zip' in filename:
+                filename = ''.join(filename.split('.')[:-1])+'.elp'
             package_data = base64.decodestring(dict_response['ode_file'])
-            package_file_path = G.application.config.userResourcesDir / dict_response['ode_filename']
+            package_file_path = G.application.config.userResourcesDir / filename
 
             # Save package in User ResourcesDir
-            package_file = open(package_file_path, "wb")
-            package_file.write(package_data)
-            package_file.close()
+            with open(package_file_path, 'wb') as package_file:
+                # Write package
+                try:
+                    package_file.write(package_data)
+                    write_error = False
+                except:
+                    write_error = True
 
             self.packagePath = package_file_path
-                    
-            # Load Package
-            self.package = Package.load(self.packagePath)
-            self.package.ode_id = ode_id
-            self.package.ode_repository_uri = dict_response['ode_uri']
 
-            if session.packageStore:
-                session.packageStore.addPackage(self.package)
+            if self.packagePath.exists() and not write_error:
+
+                # Load Package and add ode_id and repository_url
+                self.package = Package.load(self.packagePath)
+                self.package.ode_id = ode_id
+                self.package.ode_repository_uri = self.integration.repo_home_url
+
+                # Add package to packageStore session
+                if session.packageStore:
+                    session.packageStore.addPackage(self.package)
+                else:
+                    session.packageStore = PackageStore()
+                    session.packageStore.addPackage(self.package)
+
+                self.bindNewPackage(self.package, session)
+                
+                return (True, self.package.name)
+
             else:
-                session.packageStore = PackageStore()
-                session.packageStore.addPackage(self.package)
+                return (False, 'Error saving package to user directory')
 
-            self.bindNewPackage(self.package, session)
-            
-            return (True, self.package.name)
 
         # Repository Error
         else:
