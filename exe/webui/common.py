@@ -733,7 +733,7 @@ def textInput(name, value=u"", size=40, disabled=u"", **kwargs):
     return html
 
 
-def textArea(name, value="", disabled="", cols="80", rows="8", cssClass=""):
+def textArea(name, value="", disabled="", cols="80", rows="8", cssClass="", package=None):
     """Adds a text area to a form"""
     log.debug(u"textArea %s" % value)
     html  = u'<textarea name="%s" ' % name
@@ -742,9 +742,56 @@ def textArea(name, value="", disabled="", cols="80", rows="8", cssClass=""):
         html += u'disabled="disabled" '
     html += u'style=\"width:100%"'
     html += u'cols="%s" rows="%s" class="%s">' %(cols, rows, cssClass)
+    # to counter TinyMCE's ampersand-processing:
+    safe_value = value.replace('&','&amp;')
+    if (cssClass=="jsContentEditor"):
+        if safe_value != value:
+            value = safe_value
+            log.debug(u"jsContentEditor pre-processed value to: %s" % value)    
     html += value
     html += u'</textarea>'
-    return html
+    html_js = ''
+    # There's probably an editor in the JavaScript iDevice, so we add the nodes list (tinymce_anchors)
+    if (cssClass=="jsContentEditor"):
+        html_js = '<script type="text/javascript">if (typeof(tinymce_anchors)=="undefined") var tinymce_anchors = [];'    
+        ########
+        # add exe_tmp_anchor tags
+        # for ALL anchors available in the entire doc!
+        # (otherwise TinyMCE will only see those anchors within this field)
+        if package is not None and hasattr(package, 'anchor_fields') \
+        and package.anchor_fields is not None \
+        and G.application.config.internalAnchors!="disable_all" :
+            # only add internal anchors for
+            # config.internalAnchors = "enable_all" or "disable_autotop"
+            log.debug(u"textArea adding exe_tmp_anchor tags for user anchors.")
+            for anchor_field in package.anchor_fields:
+                anchor_field_path = anchor_field.GetFullNodePath()
+                for anchor_name in anchor_field.anchor_names:
+                    full_anchor_name = anchor_field_path + "#" + anchor_name
+                    html_js += u'tinymce_anchors'
+                    html_js += u'.push("%s");' % full_anchor_name
+        # and below the user-defined anchors, also show "auto_top" anchors for ALL:
+        if package is not None and package.root is not None \
+        and G.application.config.internalAnchors=="enable_all" :
+            # only add auto_top anchors for
+            # config.internalAnchors = "enable_all"
+            # log.debug(u"textArea adding exe_tmp_anchor auto_top for ALL nodes.")
+            node_anchors = True
+            if node_anchors:
+                root_node = package.root
+                anchor_node_path = root_node.GetFullNodePath() + "#auto_top"
+                html_js += u'tinymce_anchors'
+                html_js += u'.push("%s");' % anchor_node_path
+                for this_node in root_node.walkDescendants():
+                    anchor_node_path = this_node.GetFullNodePath() + "#auto_top"
+                    html_js += u'tinymce_anchors'
+                    html_js += u'.push("%s");' % anchor_node_path
+        # these exe_tmp_anchor tags will be removed when processed by
+        # FieldWithResources' ProcessPreviewed()
+        ########
+        html_js  += '</script>'
+
+    return html + html_js
 
 
 def richTextArea(name, value="", width="100%", height=100, cssClass='mceEditor', package=None):
@@ -1031,7 +1078,7 @@ def formField(type_, package, caption, action, object_='', instruction='', \
     """
     tag = 'p'
     css = 'exe-text-field'
-    id = action+object_
+    idvalue = action+object_
 
     if type_ == 'select':
         css = 'exe-select-field'
@@ -1045,10 +1092,10 @@ def formField(type_, package, caption, action, object_='', instruction='', \
         css = 'exe-checkbox-field'
 
     html  = '<'+tag+' class="'+css+'">'
-    if caption!="" and type!='checkbox':
-        html += '<label for="'+id+'"'
+    if caption!="" and type_!='checkbox':
+        html += '<label for="'+idvalue+'"'
         if type_ == 'richTextArea':
-            html += ' id="'+id+'-editor-label"' # ID to create the Show/Hide Editor Link
+            html += ' id="'+idvalue+'-editor-label"' # ID to create the Show/Hide Editor Link
         html += '>%s</label>' % caption
     if instruction:
         html += elementInstruc(instruction)
@@ -1062,7 +1109,7 @@ def formField(type_, package, caption, action, object_='', instruction='', \
         html += textInput(action+object_, *args, **kwargs)
     elif type_ == 'checkbox':
         if caption!="":
-            html += '<label for="'+args+'">'
+            html += '<label for="'+idvalue+'">'
         html += checkbox(*args, **kwargs)
         if caption!="":
             html += caption

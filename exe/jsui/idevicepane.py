@@ -56,6 +56,38 @@ class IdevicePane(Renderable, Resource):
             if prototype.id in self.prototypes:
                 raise Exception("duplicated device id %s" % prototype.id)
             self.prototypes[prototype.id] = prototype
+        self.hiddenExperimentalAndOldIdevices()
+
+    def hiddenExperimentalAndOldIdevices(self):
+        """
+        Hidden Experimental iDevices:
+        add iDevices with the category 'Experimental' to 'hiddeniDevices'
+        """
+        iDevicesTooOld = [
+            'reflection',
+            'case study',
+            'image magnifier',
+            'wiki article',
+            'external web site',
+            'rss',
+            'java applet',
+            'reading activity',
+            'objectives',
+            'preknowledge',
+            'activity',
+            'free text'
+        ]
+        prototypes = self.prototypes.values()
+        for prototype in prototypes:
+            lower_title =  prototype._title.lower()
+            if lower_title not in self.config.hiddeniDevices:
+                if ((hasattr(prototype, 'ideviceCategory') and prototype.ideviceCategory == 'Experimental')
+                or lower_title in iDevicesTooOld):
+                    idevices_conf = self.config.configParser.idevices.items()
+                    idevice_conf = [idv[1] for idv in idevices_conf if idv[0] == lower_title]
+                    if not idevice_conf:
+                        self.config.hiddeniDevices.append(lower_title)
+                        self.config.configParser.set('idevices', lower_title, '0')
 
     def translateOldHidingIdevicesMechanism(self):
         idevices = self.ideviceStore.getIdevices()
@@ -65,9 +97,16 @@ class IdevicePane(Renderable, Resource):
             if idevice not in idevices:
                 modified = True
                 lower_title = idevice._title.lower()
-                self.config.hiddeniDevices.append(lower_title)
-                self.config.configParser.set('idevices', lower_title, '0')
                 self.ideviceStore.addIdevice(idevice)
+                if hasattr(self.config.configParser,"idevices"):
+                    idevices_conf = self.config.configParser.idevices.items()
+                    idevice_conf = [idv[1] for idv in idevices_conf if idv[0] == lower_title]
+                    if not idevice_conf:
+                        self.config.hiddeniDevices.append(lower_title)
+                        self.config.configParser.set('idevices', lower_title, '0')
+                else:
+                    self.config.hiddeniDevices.append(lower_title)
+                    self.config.configParser.set('idevices', lower_title, '0')
         if modified:
             self.ideviceStore.save()
 
@@ -185,9 +224,14 @@ class IdevicePane(Renderable, Resource):
             prototype = self.prototypes[idevice['id']]
             visible = idevice['visible']
             lower_title = prototype._title.lower()
+            if 'category' in idevice.keys():
+                category = idevice['category']
+            else:
+                category = None
             try:
                 self.config.hiddeniDevices.remove(lower_title)
                 self.config.configParser.delete('idevices', lower_title)
+                self.config.configParser.set('idevices', lower_title, '1')
             except:
                 pass
             if not visible:

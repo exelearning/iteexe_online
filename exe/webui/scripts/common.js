@@ -69,7 +69,9 @@ var $exe = {
 		// No inline JavaScript (see issue #258)
 		// Common feedback
 		$('.feedbackbutton.feedback-toggler').click(function(){
-			$exe.toggleFeedback(this,false);
+			var changeText = false;
+			if (this.value==$exe_i18n.showFeedback || this.value==$exe_i18n.hideFeedback) changeText = true;
+			$exe.toggleFeedback(this,changeText);
 		});
 		// Text and Tasks
 		$(".textIdevice,.pblIdevice").each(function(i){
@@ -257,6 +259,19 @@ var $exe = {
 		},
 		
 		strip : function(html) {
+			html = html.trim();
+			var splitter = "~exe-activity-results~: ";
+			// Check if it's an activity with results (#468)
+			if (html.indexOf('<div class="adivina-IDevice')==0 || html.indexOf('<div class="quext-IDevice')==0 || html.indexOf('<div class="rosco-IDevice')==0 ||html.indexOf('<div class="vquext-IDevice')==0) {
+				html = html.replace('{',splitter+'{');
+			} else if (html.indexOf('<div class="exe-interactive-video')==0) {
+				html = splitter + html;
+			} else if (html.indexOf('<div class="exe-sortableList')==0) {
+				html = html.replace('<ul',splitter+'<ul');
+			} else if (html.indexOf('<u>')!=-1) {
+				// Dropdown activity, etc.
+				html = html.replace('<u>','...'+splitter+'<u>');
+			}
 			var regex = /(<([^>]+)>)/ig
 			html = html.replace(regex, "");
 			html = html.replace(/</g, "&lt;");
@@ -276,7 +291,7 @@ var $exe = {
 			
 			// Remove the nested nodes (children nodes)
 			$("instance",div).each(function(){
-				if ($(this).attr("class")=="exe.engine.node.Node") {
+				if ($(this).attr("class")=="exe.engine.node.Node" || $(this).attr("class")=="exe.engine.notaidevice.NotaIdevice") {
 					$(this).remove();
 				}
 			});
@@ -292,9 +307,15 @@ var $exe = {
 					if (typeof currHTML=='string') currHTML = $exe.clientSearch.strip(currHTML);
 					if (currTit.indexOf(query)!=-1 || currHTML.toLowerCase().indexOf(query)!=-1) {
 						var a = as.eq(nodeNo);
+						a_by_title = $("#siteNav a:contains('"+sTitle+"')")
+						if (a.html() != sTitle && a_by_title) {
+							a = a_by_title;
+						}
 						if (a.length==1) {
 							if (currHTML=="") currHTML = "...";
-							else res += '<li><strong><a href="'+a.attr("href")+'" class="exe-client-search-result-link">'+sTitle+'</a> &rarr; </strong><span class="exe-client-search-result-detail">'+currHTML+"</span></li>";
+							else res += '<li><strong><a href="'+a.attr("href")+'" \
+							class="exe-client-search-result-link">'+sTitle+'</a> &rarr; </strong>\
+							<span class="exe-client-search-result-detail">'+currHTML+"</span></li>";
 						}					
 					}
 				}
@@ -1022,12 +1043,12 @@ var $exe = {
         if (n) {
             if (n.className == "feedback js-feedback js-hidden") {
                 n.className = "feedback js-feedback";
-                if (b) e.value = $exe_i18n.hideFeedback;
-                else if (d) e.value = r[1]
+                if (d) e.value = r[1];
+                else if (b) e.value = $exe_i18n.hideFeedback;
             } else {
                 n.className = "feedback js-feedback js-hidden";
-                if (b) e.value = $exe_i18n.showFeedback;
-                else if (d) e.value = r[0]
+                if (d) e.value = r[0];
+                else if (b) e.value = $exe_i18n.showFeedback;
             }
         }
     },

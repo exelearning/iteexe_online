@@ -37,7 +37,6 @@ class _Resource(Persistable):
     """
     Encapsulates a resource file which belongs to some package.
     saves the user from having to know if it is renamed.
-
     This is a user resource, a copy of the file is made and kept with the package.
     Once all resources refering to the file have died, the copy is deleted.
     """
@@ -64,9 +63,28 @@ class _Resource(Persistable):
         self._storageName = self._fn2ascii(resourceFile)
         # self._userName is the basename name originally given by the user
 
-        self._userName = resourceFile.encode('utf-8')
+        self._storageName = self._fn2ascii(resourceFile)
+
+        # Check if filename is too long
+        if len(self._storageName) > 100:
+            self._storageName = self._storageName[-100:]
+            reduce_filename = 1
+        else:
+            reduce_filename = 0
+
+        # self._userName is the basename name originally given by the user
+        if reduce_filename:
+            _userName = resourceFile.dirname() / self._storageName
+            self._userName = _userName.encode('utf-8')
+        else:
+            self._userName = resourceFile.encode('utf-8')
 
         self._originalFile = resourceFile
+
+        if reduce_filename:
+            self._originalFile.copy(self._userName)
+            self._originalFile = Path(self._userName)
+            
         try:
             self.checksum = resourceFile.md5
             from exe.engine.idevice   import Idevice 
@@ -257,8 +275,7 @@ class _Resource(Persistable):
                 self._storageName = str(Path(storageName).basename())
 
                 oldPath.copyfile(self.path)
-        if not self._package.resources.get(self.checksum, []) or self._package.isLoading:
-            # prevent doubling-up (as might occur when cleaning corrupt files)
+        if self.checksum or self._package.isLoading:
             siblings.append(self)
             
     #Create unique path for the images     
@@ -745,13 +762,12 @@ class Resource(_Resource):
         testing a possible post-load confirmation that this resource 
         is indeed attached to something.  
         to be called from twisted/persist/styles.py upon load of a Resource.
-
         to accomodate random loading issues, in which, for example, two
         resource objects pointing to the same file are loaded, and one is
         a zombie to be deleted - we want to ensure that the valid one has
         been found and properly re-attach all non-zombies before actually 
         deleting any resources and inadvertently deleting the resource file!
-
+        
         With a new deleteZombie parameter, this supports a first-pass call
         which merely tries to re-attach any potential zombie resources.
         If STILL a zombie, then the launched 2nd-pass test can delete it.

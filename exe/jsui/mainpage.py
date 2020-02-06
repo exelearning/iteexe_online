@@ -152,8 +152,9 @@ class MainPage(RenderableLivePage):
             # Copy the nodes and update the root and current ones
             # Be carefull not to use copy.copy when assigning root and currentNode as this will create entirely new nodes
             self.package._nodeIdDict = copy.copy(template._nodeIdDict)
-            self.package.root = self.package._nodeIdDict['0']
-            self.package.currentNode = self.package._nodeIdDict['0']
+            rootkey = [k for k,v in self.package._nodeIdDict.items() if not v.parent][0]
+            self.package.root = self.package._nodeIdDict[rootkey]
+            self.package.currentNode = self.package._nodeIdDict[rootkey]
 
             # Delete the template as we don't need it in memory anymore
             del template
@@ -429,7 +430,10 @@ class MainPage(RenderableLivePage):
         'msg' will be shown if the filename already exists
         """
         if not inputFilename.lower().endswith(ext):
-            inputFilename += ext
+            if ext == '.elp' and inputFilename.lower().endswith('.zip'):
+                inputFilename = Path(inputFilename[:-4]+ext)
+            else:
+                inputFilename += ext
             # If after adding the extension there is a file
             # with the same name, fail and show an error
             """
@@ -1365,7 +1369,7 @@ class MainPage(RenderableLivePage):
                 self.handleQuit(client)
             else:
                 #htpasswd logout
-                self.authoringPages.pop(client.handleId)
+                #self.authoringPages.pop(client.handleId)
                 self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
                 del self.webServer.root.mainpages[self.session.uid]
                 del G.application.userStore.loaded[self.session.user.name]
@@ -1836,7 +1840,7 @@ class MainPage(RenderableLivePage):
             if package is None:
                 raise Exception(_("Couldn't load file, please email file to bugs@exelearning.org"))
         except Exception, exc:
-            if log.getEffectiveLevel() == logging.DEBUG:
+            if True or log.getEffectiveLevel() == logging.DEBUG:
                 client.alert(_(u'Sorry, wrong file format:\n%s') % unicode(exc))
             else:
                 client.alert(_(u'Sorry, wrong file format'))

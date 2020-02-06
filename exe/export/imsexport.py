@@ -262,7 +262,7 @@ class Manifest(object):
             resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'exe_games').files()]
         if common.hasABCMusic(page.node):
             resources = resources + [f.basename() for f in (self.config.webDir/"scripts"/'tinymce_4'/'js'/'tinymce'/'plugins'/'abcmusic'/'export').files()]
-        if my_style.hasValidConfig:
+        if my_style.hasValidConfig():
             if my_style.get_jquery() == True:
                 self.resStr += '    <file href="exe_jquery.js"/>\n'
         else:
@@ -546,7 +546,7 @@ class IMSExport(object):
 
         # jQuery
         my_style = G.application.config.styleStore.getStyle(page.node.package.style)
-        if my_style.hasValidConfig:
+        if my_style.hasValidConfig():
             if my_style.get_jquery() == True:
                 jsFile = (self.scriptsDir/'exe_jquery.js')
                 jsFile.copyfile(outputDir/'exe_jquery.js')
@@ -625,7 +625,7 @@ class IMSExport(object):
                 if not hasABCMusic:
                     hasABCMusic = common.ideviceHasABCMusic(idevice)
                 if hasattr(idevice, "_iDeviceDir"):
-                    listIdevicesFiles.append((Path(idevice._iDeviceDir)/'export'))
+                    listIdevicesFiles.append((idevice.get_jsidevice_dir()/'export'))
 
             common.exportJavaScriptIdevicesFiles(page.node.idevices, outputDir);
 

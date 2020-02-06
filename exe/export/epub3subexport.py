@@ -646,7 +646,7 @@ class Epub3SubExport(object):
             pluginScripts.copyfiles(contentPages)
 
         my_style = G.application.config.styleStore.getStyle(package.style)
-        if my_style.hasValidConfig:
+        if my_style.hasValidConfig():
             if my_style.get_jquery() == True:
                 jsFile = (self.scriptsDir / 'exe_jquery.js')
                 jsFile.copyfile(contentPages / 'exe_jquery.js')

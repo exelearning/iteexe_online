@@ -24,7 +24,6 @@
 // action and object fields so they can be used by submitLink
 
 // An array of js strings to evaluate on document load
-// $exeAuthoring.countBase64 and $exeAuthoring.compareBase64 will not be used if exe_editor_version == 4
 var Ext = parent.Ext;
 var eXe = parent.eXe;
 var onLoadHandlers = [clearHidden, setWmodeToFlash, loadAuthoringPluginObjects, 
@@ -60,19 +59,14 @@ function runFuncArray(handlers) {
 
 // Asks the user for an image, returns the path or an empty string
 function askUserForImage(multiple, fn, filter) {
-    var fp, mode, remote;
-    if (multiple) {
+    var fp, mode;
+    if (multiple)
         mode = parent.eXe.view.filepicker.FilePicker.modeOpenMultiple;
-        remote = false;
-    } else {
+    else
         mode = parent.eXe.view.filepicker.FilePicker.modeOpen;
-        remote = eXe.app.config.server;
-    }
-
     fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: mode,
         title: multiple? parent._("Select one or more images") : parent._("Select an image"),
-        remote: remote,
         modal: true,
         scope: this,
         callback: function(fp) {
@@ -109,15 +103,11 @@ function askUserForMedia(fn,win) {
     var fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: parent.eXe.view.filepicker.FilePicker.modeOpen,
         title: parent._("Select a file"),
-        remote: eXe.app.config.server,
         modal: true,
         scope: this,
         callback: function(fp) {
 			if (fp.status == parent.eXe.view.filepicker.FilePicker.returnOk) {
 				fn(fp.file.path);
-				if (typeof(win)!="undefined") {
-					if (exe_editor_version==3) win.document.forms[0].elements['href'].onchange();
-				}
 			} else {
 				fn("");
 			}
@@ -396,7 +386,6 @@ function addFile(blockId, title, filter) {
     var fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: parent.eXe.view.filepicker.FilePicker.modeOpen,
         title: title? title : parent._("Select a package"),
-        remote: eXe.app.config.server,
         modal: true,
         scope: this,
         callback: function(fp) {
@@ -590,19 +579,33 @@ function loadKeymap() {
 
 // Common settings
 // Default editor
+
+/*
+    TinyMCE version
+    TinyMCE 3 was removed after eXe 2.4.2 was released
+    There's only one option now: TinyMCE 4
+    This code will let the user choose a different TinyMCE version:
+*/
+/*
 if (typeof(exe_editor_version)=='undefined') exe_editor_version=4;
 var eXeLearning_settings = {
 	wysiwyg_version : false, // Set to true to allow other versions
 	wysiwyg_path : "/scripts/tinymce_4/js/tinymce/tinymce.min.js",
 	wysiwyg_settings_path : "/scripts/tinymce_4_settings.js"
 }
-if (eXeLearning_settings.wysiwyg_version && exe_editor_version==3) {
+if (eXeLearning_settings.wysiwyg_version && exe_editor_version==X) {
 	eXeLearning_settings = {
-		wysiwyg_path : "/scripts/tinymce_3.5.11/jscripts/tiny_mce/tiny_mce.js",
-		wysiwyg_settings_path : "/scripts/tinymce_3.5.11_settings.js"
+		wysiwyg_path : "...",
+		wysiwyg_settings_path : "..."
 	}
 }
 if (eXeLearning_settings.wysiwyg_version == false) exe_editor_version = 4;
+*/
+exe_editor_version=4;
+var eXeLearning_settings = {
+	wysiwyg_path : "/scripts/tinymce_4/js/tinymce/tinymce.min.js",
+	wysiwyg_settings_path : "/scripts/tinymce_4_settings.js"
+}
 
 // browse the specified URL in system browser
 function browseURL(e,elm) {
@@ -759,30 +762,25 @@ var exe_tinymce = {
 
                 // PreviewImage is only available for images:
                 if (type == "image") {					
-					if (exe_editor_version==3) {
-						if (typeof(win.ImageDialog)!='undefined') win.ImageDialog.showPreviewImage(full_previewImage_url);
-					} else {
-						formField.value = full_previewImage_url;
-						// Set the image dimensions
-						var img = new Image() ;
-						img.src = full_previewImage_url;
-						img.onload = function() {
-							// We know field_name, but not the IDs of the fields to set the dimensions 
-							var fieldOrder = field_name;
-							fieldOrder = fieldOrder.split("-")[0];
-							fieldOrder = fieldOrder.split("_");
-							if (fieldOrder.length==2) {
-								fieldOrder = Number(fieldOrder[1]);
-								$("#mceu_"+(fieldOrder+3)).val(img.width);
-								$("#mceu_"+(fieldOrder+5)).val(img.height);
-								exe_tinymce.current_image_size = [ img.width, img.height ];
-							}
-						}
-					}
+					formField.value = full_previewImage_url;
+                    // Set the image dimensions
+                    var img = new Image() ;
+                    img.src = full_previewImage_url;
+                    img.onload = function() {
+                        // We know field_name, but not the IDs of the fields to set the dimensions 
+                        var fieldOrder = field_name;
+                        fieldOrder = fieldOrder.split("-")[0];
+                        fieldOrder = fieldOrder.split("_");
+                        if (fieldOrder.length==2) {
+                            fieldOrder = Number(fieldOrder[1]);
+                            $("#mceu_"+(fieldOrder+3)).val(img.width);
+                            $("#mceu_"+(fieldOrder+5)).val(img.height);
+                            exe_tinymce.current_image_size = [ img.width, img.height ];
+                        }
+                    }
                 }
                 else if (type == "media") {
-					if (exe_editor_version==3) win.window.Media.preview();
-					else formField.value = full_previewImage_url;
+					formField.value = full_previewImage_url;
                 }
 
                 // this onchange works, but it's dirty because it is hardcoding the
@@ -790,22 +788,12 @@ var exe_tinymce = {
                 // in tinyMCE, then this would be out of sync.
 
                 // and finally, be sure to update the tinyMCE window's image data:
-                if (exe_editor_version==3) {
-					if (win.getImageData) {
-						win.getImageData();
-					} else {
-						if (window.tinyMCE.getImageData) {
-							window.tinyMCE.getImageData();
-						}
-					}
-                } else {
-                    // See exeimage/plugin.min.js
-                    if (type == "image" && typeof(exeImageDialog)!="undefined") {
-                        try {
-                            exeImageDialog.updateImageDimensions(full_previewImage_url);
-                        } catch(e) {
-                            
-                        }
+                // See exeimage/plugin.min.js
+                if (type == "image" && typeof(exeImageDialog)!="undefined") {
+                    try {
+                        exeImageDialog.updateImageDimensions(full_previewImage_url);
+                    } catch(e) {
+                        
                     }
                 }
 
@@ -847,43 +835,25 @@ var exe_tinymce = {
 	
 }
 
+c_ = function(str) {
+    var a = _(str);
+    var b = a;
+    if (typeof(translations)!='undefined') {
+        if (typeof(exe_elp_lang)!='undefined' && exe_elp_lang=="en") b = str;
+        else b = translations[str] || a;
+    }
+    return [
+        a,
+        b
+    ]
+}
+
 var $exeAuthoring = {
-	countBase64 : function(ed){
-		var c = ed.getBody();
-		var n = 0;
-		var imgs = c.getElementsByTagName("IMG");
-		for (x=0;x<imgs.length;x++) {
-			if (imgs[x].src.indexOf("data:")==0) {
-				n += 1;
-			}
-		}
-		if (typeof(ed.base64originalImages)=='undefined') {
-			ed.base64originalImages = n;
-			ed.base64Warning = false; // To avoid too many alerts (no new alerts for 2 seconds)
-		}
-		return n;
-	},
-	compareBase64 : function(ed) {
-		setTimeout(function(){
-			var oN = ed.base64originalImages; // Original base64 images
-			var nN = $exeAuthoring.countBase64(ed);	
-			if (nN>oN) {
-				if (ed.base64Warning==false) {
-					ed.base64Warning = true;
-					setTimeout(function(){
-						ed.base64Warning = false;
-					},2000);
-					alert(_("Embed images shouldn't be pasted directly into the editor. Please use Insert/Edit Image.")+"\n\n"+_("This change will be undone."));
-				}
-				ed.undoManager.undo();
-			}
-		},500);
-	},
-    errorHandler : function(origin){
+	errorHandler : function(origin){
         
         // Could not transform LaTeX to image
         if (origin=="handleTinyMCEmath") {
-            if (exe_editor_version == 4) PasteMathDialog.preloader.hide();
+            PasteMathDialog.preloader.hide();
         }
         
         // Could not transform MathML to image
@@ -945,11 +915,23 @@ var $exeAuthoring = {
             if (tinymce.majorVersion==4) $exeTinyMCE.init("multiple-visible",".exe-html-editor");
             else if (tinymce.majorVersion==3) $exeTinyMCE.init("specific_textareas","exe-html-editor");
 			
-			// Enable the FIELDSETs Toggler
-			$(".exe-fieldset legend a").click(function(){
-				$(this).parent().parent().toggleClass("exe-fieldset-closed");
-				return false;
-			});
+            // Enable the FIELDSETs Toggler
+            $(".exe-fieldset legend a").click(function(){
+                $(this).parent().parent().toggleClass("exe-fieldset-closed");
+                return false;
+            });
+            
+            // Enable the iDevice instructions
+            $(".exe-idevice-info").each(function(){
+                var e = $(this);
+                e.html('<p class="exe-block-info exe-block-dismissible">'+e.html()+' <a href="#" class="exe-block-close" title="'+_("Hide")+'"><span class="sr-av">'+_("Hide")+' </span>×</a></p>');
+            });
+            
+            // Dismissible messages
+            $(".exe-block-dismissible .exe-block-close").click(function(){
+                $(this).parent().fadeOut();
+                return false;
+            });
 
             // Enable color pickers (provisional solution)
             // To review: 100 ms delay because the color picker won't work when combined with $exeTinyMCE.init
@@ -961,6 +943,290 @@ var $exeAuthoring = {
             $exeAuthoring.iDevice.filePicker.init();
             
         },
+        // Gamification
+        gamification : {
+            common : {
+                getFieldsets : function(){
+                    return "";
+                },
+                getLanguageTab : function(fields){
+                    var html = "";
+                    var field, label, txt;
+                    for (var i in fields) {
+                        field =  fields[i]
+                        if (typeof field == "string") {
+                            label = field
+                            txt = field
+                        } else {
+                            if (field.length == 2) {
+                                label = field[0]
+                                txt = field[1]
+                            } else {
+                                label = field[0]
+                                txt = field[0]
+                            }
+                        }
+                        html += '<p class="ci18n"><label for="ci18n_' + i + '">' + label + '</label> <input type="text" name="ci18n_' + i + '" id="ci18n_' + i + '" value="' + txt + '" /></p>'
+                    }
+                    return '\
+                    <div class="exe-form-tab" title="' + _('Language settings') + '">\
+                        <p>' + _("Custom texts (or use the default ones):") + '</p>\
+                        ' + html + '\
+                    </div>'
+                },
+                setLanguageTabValues : function(obj) {
+                    if (typeof obj=="object") {
+                        for (var i in obj) {
+                            var v = obj[i];
+                            if (v!="") $("#ci18n_"+i).val(v);
+                        }
+                    }
+                },                
+                getGamificationTab : function(){
+                    return '\
+                    ' + $exeAuthoring.iDevice.gamification.itinerary.getItineraryTab() + '\
+                    ' + $exeAuthoring.iDevice.gamification.scorm.getScormTab()+ '\
+                    ' + $exeAuthoring.iDevice.gamification.share.getShareTab();
+                }
+            },
+            instructions : {
+                getFieldset : function(str){
+					return '<fieldset class="exe-fieldset exe-fieldset-closed">\
+						<legend><a href="#">' + _("Instructions") + '</a></legend>\
+						<div>\
+							<p>\
+								<label for="eXeGameInstructions" class="sr-av">' + _("Instructions") + ': </label>\
+								<textarea id="eXeGameInstructions" class="exe-html-editor"\>' + str + ' </textarea>\
+							</p>\
+						</div>\
+					</fieldset>';
+                }
+            },
+            itinerary : {
+                getTab : function(){
+                    return '\
+                             <div class="exe-form-tab" title="' + _('Itinerary') + '">\
+                                <div class="exe-idevice-info">'+_("You might create an itinerary of challenges where players won't be able to access a new game or challenge until they get a key in a previous activity. For this purpose, you might establish an access code as well as a message that may be displayed to players when they get a fixed percentage of hits, and be used as a password to a new challenge or a following activity.")+'</div>\
+                                <p align="left">\
+                                    <label for="eXeGameShowCodeAccess"><input type="checkbox" id="eXeGameShowCodeAccess" >' +_("Access code is required")+'</label>\
+                                </p>\
+                                <p style="margin-left:1.4em;margin-bottom:1.5em" >\
+                                    <label for="eXeGameCodeAccess" id="labelCodeAccess">'+_("Access code")+':</label>\
+                                    <input type="text" name="eXeGameCodeAccess" id="eXeGameCodeAccess"  maxlength="40" disabled />\
+                                    <label for="eXeGameMessageCodeAccess" id="labelMessageAccess">'+_("Question")+':</label>\
+                                    <input type="text" name="eXeGameMessageCodeAccess" id="eXeGameMessageCodeAccess" maxlength="200"/ disabled> \
+                                </p>\
+                                <p>\
+                                    <label for="eXeGameShowClue"><input type="checkbox" id="eXeGameShowClue" >'+_("Show a message or password")+'</label>\
+                                </p>\
+                                <div style="margin-left:1.4em;margin-bottom:1.5em">\
+                                    <p>\
+                                        <label for="eXeGameClue">'+_("Message")+':</label>\
+                                        <input type="text" name="eXeGameClue" id="eXeGameClue"  maxlength="50" disabled>\
+                                    </p>\
+                                    <p>\
+                                        <label for="eXeGamePercentajeClue" id="labelPercentajeClue">'+_("Percentage of hits needed to display the message")+':</label>\
+                                        <select id="eXeGamePercentajeClue" disabled>\
+                                            <option value="10">10%</option>\
+                                            <option value="20">20%</option>\
+                                            <option value="30">30%</option>\
+                                            <option value="40" selected>40%</option>\
+                                            <option value="50">50%</option>\
+                                            <option value="60">60%</option>\
+                                            <option value="70">70%</option>\
+                                            <option value="80">80%</option>\
+                                            <option value="90">90%</option>\
+                                            <option value="100">100%</option>\
+                                        </select>\
+                                    </p>\
+                                </div>\
+                            </div>';
+                },
+                getValues : function(){
+                    var showClue = $('#eXeGameShowClue').is(':checked'),
+                        clueGame = $.trim($('#eXeGameClue').val()),
+                        percentageClue = parseInt($('#eXeGamePercentajeClue').children("option:selected").val()),
+                        showCodeAccess = $('#eXeGameShowCodeAccess').is(':checked'),
+                        codeAccess = $.trim($('#eXeGameCodeAccess').val()),
+                        messageCodeAccess = $.trim($('#eXeGameMessageCodeAccess').val());
+
+                    if (showClue && clueGame.length == 0) {
+                        eXe.app.alert(_("You must write a clue"));
+                        return false;
+                    }
+                    if (showCodeAccess && codeAccess.length == 0) {
+                        eXe.app.alert( _("You must provide the code to play this game"));
+                        return false;
+                    }
+                    if (showCodeAccess && messageCodeAccess.length == 0) {
+                        eXe.app.alert(_("Please explain how to obtain the code to play this game"));
+                        return false;
+                    }
+                    var a={
+                        'showClue': showClue,
+                        'clueGame': clueGame,
+                        'percentageClue':percentageClue,
+                        'showCodeAccess':showCodeAccess,
+                        'codeAccess':codeAccess,
+                        'messageCodeAccess' :messageCodeAccess
+                    }
+                   return a;
+                },
+                setValues : function(a){
+                    $('#eXeGameShowClue').prop('checked', a.showClue);
+                    $('#eXeGameClue').val(a.clueGame);
+                    $('#eXeGamePercentajeClue').val(a.percentageClue);
+                    $('#eXeGameShowCodeAccess').prop('checked', a.showCodeAccess);
+                    $('#eXeGameCodeAccess').val(a.codeAccess);
+                    $('#eXeGameMessageCodeAccess').val(a.messageCodeAccess);
+                    $('#eXeGameClue').prop('disabled', !a.showClue);
+                    $('#eXeGamePercentajeClue').prop('disabled', !a.showClue);
+                    $('#eXeGameCodeAccess').prop('disabled', !a.showCodeAccess);
+                    $('#eXeGameMessageCodeAccess').prop('disabled', !a.showCodeAccess);
+                },
+                addEvents:function(){
+                    $('#eXeGameShowClue').on('change', function () {
+                        var mark = $(this).is(':checked');
+                        $('#eXeGameClue').prop('disabled', !mark);
+                        $('#eXeGamePercentajeClue').prop('disabled', !mark);
+                    });
+                    $('#eXeGameShowCodeAccess').on('change', function () {
+                        var mark = $(this).is(':checked');
+                        $('#eXeGameCodeAccess').prop('disabled', !mark);
+                        $('#eXeGameMessageCodeAccess').prop('disabled', !mark);
+                    });
+                }
+            },
+            scorm : {
+                init: function(){
+                    $exeAuthoring.iDevice.gamification.scorm.setValues(0,_("Save score"),false)
+                    $exeAuthoring.iDevice.gamification.scorm.addEvents();
+                },
+                getTab : function(){
+                    return '\
+                                <div class="exe-form-tab" title="' + _('SCORM') + '">\
+                                    <p id="eXeGameSCORMNoSave">\
+                                        <label for="eXeGameSCORMNoSave"><input type="radio" name="eXeGameSCORM" id="eXeGameSCORMNoSave"  value="0"  checked /> ' + _("Do not save the score") + '</label>\
+                                    </p>\
+                                    <p id="eXeGameSCORMAutomatically">\
+                                        <label for="eXeGameSCORMAutoSave"><input type="radio" name="eXeGameSCORM" id="eXeGameSCORMAutoSave" value="1"  /> ' + _("Automatically save the score") + '</label>\
+                                        <span id="eXeGameSCORMoptionsAuto">\
+                                            <label for="eXeGameSCORMRepeatActivityAuto"><input type="checkbox" id="eXeGameSCORMRepeatActivityAuto" checked /> ' + _("Repeat activity") + '</label>\
+                                        </span>\
+                                    </p>\
+                                    <p id="eXeGameSCORMblock">\
+                                    <label for="eXeGameSCORMButtonSave"><input type="radio" name="eXeGameSCORM" id="eXeGameSCORMButtonSave" value="2" /> ' + _("Show a button to save the score") + '</label>\
+                                    <span id="eXeGameSCORMoptions">\
+                                        <label for="eXeGameSCORMbuttonText">' + _("Button text") + ': </label>\
+                                        <input type="text" max="100" name="eXeGameSCORMbuttonText" id="eXeGameSCORMbuttonText" value="' + _("Save score") + '" /> \
+                                        <label for="eXeGameSCORMRepeatActivity"><input type="checkbox" id="eXeGameSCORMRepeatActivity" checked /> ' + _("Repeat activity") + '</label>\
+                                    </span>\
+                                    </p>\
+                                    <div id="eXeGameSCORMinstructionsAuto">\
+                                        <ul>\
+                                            <li>' + _("This will only work when exporting as SCORM and while editing in eXeLearning.") + '</li>\
+                                            <li>' + _("The score will be automatically saved after answering each question and at the end of the game.") + '</li>\
+                                            <li>' + _("Include only one game with score in the page (or it won't work).") + '</li>\
+                                            <li>' + _('Do not include a "SCORM Quiz" iDevice in the same page.') + '</li>\
+                                        </ul>\
+                                    </div>\
+                                    <div id="eXeGameSCORMinstructionsButton">\
+                                        <ul>\
+                                            <li>' + _("The button will only be displayed when exporting as SCORM and while editing in eXeLearning.") + '</li>\
+                                            <li>' + _('Include only one activity with a "Save score" button in the page.') + '</li>\
+                                            <li>' + _("Include only one game with score in the page (or it won't work).") + '</li>\
+                                            <li>' + _('Do not include a "SCORM Quiz" iDevice in the same page.') + '</li>\
+                                        </ul>\
+                                    </div>\
+                               </div>'
+                },
+                setValues: function(isScorm,textButtonScorm,repeatActivity,){
+                    $("#eXeGameSCORMoptions").css("visibility", "hidden");
+                    $("#eXeGameSCORMoptionsAuto").css("visibility", "hidden");
+                    $("#eXeGameSCORMinstructionsButton").hide();
+                    $("#eXeGameSCORMinstructionsAuto").hide();
+                    if (isScorm == 0) {
+                        $('#eXeGameSCORMNoSave').prop('checked', true);
+                    } else if (isScorm == 1) {
+                        $('#eXeGameSCORMAutoSave').prop('checked', true);
+                        $('#eXeGameSCORMoptionsAuto').css("visibility", "visible");
+                        $('#eXeGameSCORMRepeatActivityAuto').prop("checked", repeatActivity);
+                        $('#eXeGameSCORMinstructionsAuto').show();
+                    }else if (isScorm == 2) {
+                        $('#eXeGameSCORMButtonSave').prop('checked', true);
+                        $('#eXeGameSCORMbuttonText').val(textButtonScorm);
+                        $('#eXeGameSCORMoptions').css("visibility", "visible");
+                        $('#eXeGameSCORMinstructionsButton').show();
+                        $('#eXeGameSCORMRepeatActivity').prop("checked", repeatActivity);
+                    }
+                },
+                getValues: function(){
+                    var isScorm = parseInt($("input[type=radio][name='eXeGameSCORM']:checked").val()),
+                    textButtonScorm=$("#eXeGameSCORMbuttonText").val(),
+                    repeatActivity=false;
+                    if (isScorm == 1) {
+                        repeatActivity=$('#eXeGameSCORMRepeatActivityAuto').is(':checked');
+                    }else if (isScorm == 2) {
+                        repeatActivity=$('#eXeGameSCORMRepeatActivity').is(':checked');
+                    }
+                    var a={
+                        'isScorm': isScorm,
+                        'textButtonScorm': textButtonScorm,
+                        'repeatActivity':repeatActivity
+                        }
+                   return a;
+                },
+                addEvents: function(){
+                    $('input[type=radio][name="eXeGameSCORM"]').on('change', function () {
+                        $("#eXeGameSCORMoptions,#eXeGameSCORMoptionsAuto, #eXeGameSCORMinstructionsButton,#eXeGameSCORMinstructionsAuto").hide();
+                        switch ($(this).val()) {
+                            case '0':
+                                break;
+                            case '1':
+                                $("#eXeGameSCORMoptionsAuto,#eXeGameSCORMinstructionsAuto").hide().css({
+                                    opacity: 0,
+                                    visibility: "visible"
+                                }).show().animate({
+                                    opacity: 1
+                                }, 500);
+                                break;
+                            case '2':
+                                $("#eXeGameSCORMoptions,#eXeGameSCORMinstructionsButton").hide().css({
+                                    opacity: 0,
+                                    visibility: "visible"
+                                }).show().animate({
+                                    opacity: 1
+                                }, 500);
+                                break;
+                        }
+                    });
+                }
+            },
+            share : {
+                getTab : function(){
+                    var msg = _("You can export this game so you can later use it in another iDevice of the same type. You can also use it in %s and you can import games from %s and use them here.");
+                        msg = msg.replace(/%s/g, '<a href="https://quext.educarex.es/" target="_blank" rel="noopener noreferrer">QuExt</a>');
+                    var html = '\
+                            <div class="exe-form-tab" title="' + _('Share') + '">\
+                                <div class="exe-idevice-info">' + msg + '</div>\
+                                <div id="eXeGameExportImport">\
+                                    <p>\
+                                        <form method="POST">\
+                                            <label for="eXeGameImportGame">' + _("Import") + ': </label>\
+                                            <input type="file" name="eXeGameImportGame" id="eXeGameImportGame" accept=".json" />\
+                                            <span class="exe-field-instructions">' + _("Supported formats") + ': JSON</span>\
+                                        </form>\
+                                    </p>\
+                                    <p>\
+                                        <input type="button" name="eXeGameExportGame" id="eXeGameExportGame" value="' + _("Export") + '" />\
+                                    </p>\
+                                </div>\
+                            </div>'
+                    return html;
+                }
+            }
+        },
+        // / Gamification
         filePicker : {
             init : function(){
                 $(".exe-file-picker,.exe-image-picker").each(
@@ -991,7 +1257,45 @@ var $exeAuthoring = {
                 // Trigger the click event so the form is submitted
                 $("#exe-submitButton a").trigger("click");
             }
-        },		
+        },
+        // iDevice tabs
+        tabs : {
+            init : function(id){
+                var tabs = $("#" + id + " .exe-form-tab");
+                var list = '';
+                var tabId;
+                var e;
+                var txt;
+                tabs.each(function (i) {
+                    var klass = "exe-form-active-tab";
+                    tabId = id + "Tab" + i;
+                    e = $(this);
+                    e.attr("id", tabId);
+                    txt = e.attr("title");
+                    if (txt == '') txt = (i + 1);
+                    if (i > 0) {
+                        e.hide();
+                        klass = "";
+                    }
+                    list += '<li><a href="#' + tabId + '" class="' + klass + '">' + txt + '</a></li>';
+                });
+                if (list != "") {
+                    list = '<ul id="' + id + 'Tabs" class="exe-form-tabs exe-advanced">' + list + '</ul>';
+                    tabs.eq(0).before(list);
+                    var as = $("#" + id + "Tabs a");
+                    as.click(function () {
+                        as.attr("class", "");
+                        $(this).addClass("exe-form-active-tab");
+                        tabs.hide();
+                        $($(this).attr("href")).show();
+                        return false;
+                    });
+                }                
+            },
+            restart : function(){
+                $("#activeIdevice .exe-form-tabs a").eq(0).trigger("click");
+            }
+        },
         colorPicker : {
             init : function(){
                 var colorFields = $(".exe-color-picker");
@@ -1046,8 +1350,7 @@ var $exeAuthoring = {
     },
     // Some iDevices (like Cloze Activity) have a button to select (underline) words
     toggleWordInEditor : function(id){
-        if (exe_editor_version==3) tinyMCE.execInstanceCommand(id, 'Underline', false);
-        else tinyMCE.activeEditor.getDoc().execCommand('Underline', false, false);
+        tinyMCE.activeEditor.getDoc().execCommand('Underline', false, false);
     },    
     changeFlowPlayerPathInIE : function(){
         var objs = document.getElementsByTagName("OBJECT");

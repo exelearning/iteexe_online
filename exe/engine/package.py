@@ -1390,10 +1390,14 @@ class Package(Persistable):
                 else:
                     datainfo = zippedFile.getinfo(u"content.data")
                     if xmlinfo.date_time >= datainfo.date_time:
-                        newPackage, validxml = decodeObjectFromXML(xml)
+                        if False: #for now we will use decodeObjectRaw, it is much faster
+                            newPackage, validxml = decodeObjectFromXML(xml)
             if not validxml:
                 toDecode   = zippedFile.read(u"content.data")
                 newPackage = decodeObjectRaw(toDecode)
+                #In case decodeObjectRaw fails:
+                if not newPackage:
+                    newPackage, validxml = decodeObjectFromXML(xml)
             try:
                 lomdata = zippedFile.read(u'imslrm.xml')
                 if 'LOM-ES' in lomdata:
@@ -1499,6 +1503,10 @@ class Package(Persistable):
         if G.application.config.forceEditableExport == "1":
             newPackage.exportSource = True
 
+        # Update de eXe release when importing the package
+        # If the current version can import the package successfully the release should be changed to the current one
+        newPackage.release = release
+
         checker = Checker(newPackage)
         inconsistencies = checker.check()
         for inconsistency in inconsistencies:
@@ -1576,15 +1584,18 @@ class Package(Persistable):
 
         newPackage.set_isTemplate(isTemplate)
         newPackage.isChanged = False
-        nstyle=Path(G.application.config.stylesDir/newPackage.style)
-        if hasattr(G.application.config, "userStylesDir"):
-            nustyle=Path(G.application.config.userStylesDir/newPackage.style)
-        else:
-            nustyle = None
+        style = G.application.config.styleStore.getStyle(newPackage.style)
+        nstyle = None
+        nustyle = None
+        if not style:
+            if hasattr(G.application.config, "userStylesDir"):
+                nustyle = Path(G.application.config.userStylesDir/newPackage.style)
+            else:
+                nstyle = Path(G.application.config.stylesDir/newPackage.style)
+                
+        if not style and (not nstyle or not nstyle.isdir()) and (not nustyle or not nustyle.isdir()):
+            newPackage.style=G.application.config.defaultStyle
 
-        if not nstyle.isdir():
-            if not nustyle or (nustyle and not nustyle.isdir()):
-                newPackage.style=G.application.config.defaultStyle
         newPackage.lang = newPackage._lang
 
         # Reset license to ensure is set for the main package properties and for

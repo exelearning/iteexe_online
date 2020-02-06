@@ -47,6 +47,9 @@ var $exeDevice = {
 	
 	// Create the form to insert HTML in the TEXTAREA
 	createForm : function(){
+		// i18n
+		var str1 = c_("Save score");
+			str1 = str1[1];
 		var html = '\
 			<div id="eXeAutoGeogebraForm">\
 				<p class="exe-idevice-description">'+_("Insert a GeoGebra activity from www.geogebra.org. It requires an Internet connection.").replace(' www.geogebra.org',' <a href="https://www.geogebra.org/" target="_blank" rel="noopener noreferrer">www.geogebra.org</a>')+'</p>\
@@ -64,9 +67,9 @@ var $exeDevice = {
 							<label for="geogebraActivityURL">'+_("URL")+': </label><input type="text" name="geogebraActivityURL" id="geogebraActivityURL" /> \
 							<label for="geogebraActivityURLexample">'+_("Example")+': </label><input type="text" id="geogebraActivityURLexample" name="geogebraActivityURLexample" readonly="readonly" value="'+this.activityURLbase+'VgHhQXCC" />\
 						</p>\
-						<p>\
-							<label for="geogebraActivityWidth">'+_("Width")+': </label><input type="text" max="1500" name="geogebraActivityWidth" id="geogebraActivityWidth" /> px\
-							<label for="geogebraActivityHeight">'+_("Height")+': </label><input type="text" max="1500" name="geogebraActivityHeight" id="geogebraActivityHeight" /> px\
+						<p id="geogebraActivitySize">\
+							<label for="geogebraActivityWidth">'+_("Width")+': </label><input type="text" max="1500" name="geogebraActivityWidth" id="geogebraActivityWidth" /><span> px</span>\
+							<label for="geogebraActivityHeight">'+_("Height")+': </label><input type="text" max="1500" name="geogebraActivityHeight" id="geogebraActivityHeight" /><span> px</span>\
 						</p>\
 					</div>\
 				</fieldset>\
@@ -82,7 +85,7 @@ var $exeDevice = {
 							<label for="geogebraActivitySCORM"><input type="checkbox" name="geogebraActivitySCORM" id="geogebraActivitySCORM" /> '+_("Save score button")+'</label>\
 							<span id="geogebraActivitySCORMoptions">\
 								<label for="geogebraActivitySCORMbuttonText">'+_("Button text")+': </label>\
-								<input type="text" max="100" name="geogebraActivitySCORMbuttonText" id="geogebraActivitySCORMbuttonText" value="'+_("Save score")+'" /> \
+								<input type="text" max="100" name="geogebraActivitySCORMbuttonText" id="geogebraActivitySCORMbuttonText" value="'+str1+'" /> \
 							</span>\
 						</p>\
 						<div id="geogebraActivitySCORMinstructions">\
@@ -104,6 +107,46 @@ var $exeDevice = {
 		
         $("#geogebraActivityURLexample").focus(function(){
 			this.select();
+		});
+		
+		// Try to get width and height
+		$("#geogebraActivityURL").change(function(){
+			var urlBase = $exeDevice.activityURLbase;
+			if (this.value.indexOf(urlBase)!=0) return;
+			var id = this.value.replace(urlBase,"");
+				id = id.split("/");
+				id = id[0];
+			if (id=="") return;
+			// Remove all spaces
+			id = id.replace(/ /g,"");
+			var data={request:{"-api":"1.0.0",task:{"-type":"fetch",fields:{field:[{"-name":"width"},{"-name":"height"}]},filters:{field:[{"-name":"id","#text":id}]},order:{"-by":"timestamp","-type":"desc"},limit:{"-num":"1"}}}};
+			$("#geogebraActivitySize").addClass("loading");
+			$.ajax({
+				type: "POST",
+				url: "https://www.geogebra.org/api/json.php",
+				data: JSON.stringify(data),
+				success: function(res){
+					if (res && res.responses && res.responses.response && res.responses.response.item) {
+						res = res.responses.response.item;
+						var w = "";
+						var h = "";
+						if (res.width) w = res.width;
+						if (res.height) h = res.height;
+						if (w!="" && h!="") {
+							$("#geogebraActivitySize").removeClass("loading");
+							$("#geogebraActivityWidth").val(w);
+							$("#geogebraActivityHeight").val(h);
+						} else {
+							$("#geogebraActivitySize").removeClass("loading");
+						}
+					} else {
+						$("#geogebraActivitySize").removeClass("loading");
+					}
+				},
+				error: function(){
+					$("#geogebraActivitySize").removeClass("loading");
+				}
+			});
 		});
         
         $("#geogebraActivityWidth,#geogebraActivityHeight").keyup(function(){

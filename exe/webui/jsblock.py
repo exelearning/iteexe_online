@@ -90,18 +90,18 @@ class JsBlock(Block):
         icon = self.idevice.icon
         icon_exists = False
         if icon != '':
-            idevice_icon = Path(style.get_style_dir() / 'icon_' + self.idevice.icon + '.gif')
+            idevice_icon = Path(style.get_style_dir()) / 'icon_'+self.idevice.icon+'.gif'
             if idevice_icon.exists():
                 icon_exists = True
             else:
-                idevice_icon = Path(style.get_style_dir() / "icon_" + self.idevice.icon + ".png")
+                idevice_icon = Path(style.get_style_dir()) / 'icon_'+self.idevice.icon+'.png'
                 if idevice_icon.exists():
                     icon_exists = True
 
         # Icon HTML element
         html += u'<img class="js-idevide-icon-preview" name="iconiDevice%s" id="iconiDevice"' % (self.id)
         if icon_exists:
-            html += u' src="/icon_%s%s"' % (style.get_web_path(), icon, idevice_icon.ext)
+            html += u' src="%s/icon_%s%s"' % (style.get_web_path(), icon, idevice_icon.ext)
         else:
             html += u' src="/images/empty.gif"'
         html += u'/>'

@@ -486,12 +486,15 @@ class IdeviceStore:
         
         self.factoryiDevices = self.__getFactoryExtendediDevices()
 
-        if extendedPath.exists():
+        # Temporarily (or not) we will make extended.data be rebuilt every time the application starts
+        rebuilt_extended = True
+
+        # Check if path exist and and if necessary delete config/extended.data
+        if extendedPath.exists() and not rebuilt_extended:
             self.extended = persist.decodeObject(extendedPath.bytes())
             self.__upgradeExtended()
         else:
             self.extended = copy.deepcopy(self.factoryiDevices)
-            #self.extended = self.factoryiDevices
             for idevice in self.__getIdevicesFPD():
                 self.delIdevice(idevice)
 
@@ -571,7 +574,7 @@ class IdeviceStore:
             for ideviceDir in os.listdir(iDevicesDir):
                 if os.path.isdir(iDevicesDir/ideviceDir):
                     try:
-                        idevice = JsIdevice(iDevicesDir/ideviceDir)
+                        idevice = JsIdevice(ideviceDir)
                         if (idevice.title!='Example iDevice' and idevice.isValid()):
                             self.jsIdevices.append(idevice)
                     except InvalidConfigJsIdevice as invalidconfigexception:

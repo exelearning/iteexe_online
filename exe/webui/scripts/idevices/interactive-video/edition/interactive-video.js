@@ -26,64 +26,29 @@ var $exeDevice = {
 	},
 	
 	ci18n : {
-		"start" : _("Start"),
-		"results" : _("Results"),
-		"slide" : _("Slide (frame)"),
-		"score" : _("Score"),
-		"seen" : _("Seen"),
-		"total" : _("Total"),
-		"seeAll" : _("see all the slides and answer all the questions"),
-		"noSlides" : _("This video has no interactive slides."),
-		"goOn" : _("Continue"),
-		"error" : _("Error"),
-		"dataError" : _("Incompatible code"),
-		"onlyOne" : _("Only one interactive video per page."),
-		"cover" : _("Cover"),
-		"fsWarning" : _("Exit the fullscreen mode (Esc) to see the current slide"),
-		"right" : _("Right!"),
-		"wrong" : _("Wrong"),
-		"sortableListInstructions" : _("Drag and drop or use the arrows."),
-		"up" : _("Move up"),
-		"down" : _("Move down"),
-		"rightAnswer" : _("Right answer:"),
-		"notAnswered" : _("Please finish the activity"),
-		"check" : _("Check"),
-		"newWindow" : _("New Window")
-	},
-	
-	enableTabs : function(id){
-		
-		var tabs = $("#"+id+" .exe-form-tab");
-		var list = '';
-		var tabId;
-		var e;
-		var txt;
-		tabs.each(function(i){
-			var klass = "exe-form-active-tab";
-			tabId = id+"Tab"+i;
-			e = $(this);
-			e.attr("id",tabId);
-			txt = e.attr("title");
-			if (txt=='') txt = (i+1);
-			if (i>0) {
-				e.hide();
-				klass = "";
-			}
-			list += '<li><a href="#'+tabId+'" class="'+klass+'">'+txt+'</a></li>';
-		});
-		if (list!="") {
-			list = '<ul id="'+id+'Tabs" class="exe-form-tabs">'+list+'</ul>';
-			tabs.eq(0).before(list);
-			var as = $("#"+id+"Tabs a");
-			as.click(function(){
-				as.attr("class","");
-				$(this).addClass("exe-form-active-tab");
-				tabs.hide();
-				$($(this).attr("href")).show();
-				return false;
-			});
-		}
-		
+		"start" : c_("Start"),
+		"results" : c_("Results"),
+		"slide" : c_("Slide (frame)"),
+		"score" : c_("Score"),
+		"seen" : c_("Seen"),
+		"total" : c_("Total"),
+		"seeAll" : c_("see all the slides and answer all the questions"),
+		"noSlides" : c_("This video has no interactive slides."),
+		"goOn" : c_("Continue"),
+		"error" : c_("Error"),
+		"dataError" : c_("Incompatible code"),
+		"onlyOne" : c_("Only one interactive video per page."),
+		"cover" : c_("Cover"),
+		"fsWarning" : c_("Exit the fullscreen mode (Esc) to see the current slide"),
+		"right" : c_("Right!"),
+		"wrong" : c_("Wrong"),
+		"sortableListInstructions" : c_("Drag and drop or use the arrows."),
+		"up" : c_("Move up"),
+		"down" : c_("Move down"),
+		"rightAnswer" : c_("Right answer:"),
+		"notAnswered" : c_("Please finish the activity"),
+		"check" : c_("Check"),
+		"newWindow" : c_("New Window")
 	},
 	
 	testIfVideoExists : function(url,type) {
@@ -97,15 +62,7 @@ var $exeDevice = {
 		}
 
 	},
-	// Custom text fields
-	getLanguageFields : function(){
-		var html = "";
-		var fields = this.ci18n;
-		for (var i in fields) {
-			html += '<p class="ci18n"><label for="ci18n_'+i+'">'+fields[i]+'</label> <input type="text" name="ci18n_'+i+'" id="ci18n_'+i+'" value="'+fields[i]+'" /></p>'
-		}
-		return html;
-	},
+
 	// Create the form to insert HTML in the TEXTAREA
 	createForm : function(){
 		
@@ -151,10 +108,7 @@ var $exeDevice = {
 						<p class="exe-block-success">'+_("Open the editor and start adding interaction...")+' <input type="button" id="interactiveVideoOpenEditor" onclick="$exeDevice.editor.start()" value="'+_("Editor")+'" /></p>\
 					</div>\
 				</div>\
-				<div class="exe-form-tab" title="'+_('Language settings')+'">\
-					<p>'+_("Custom texts (or use the default ones):")+'</p>\
-					'+this.getLanguageFields()+'\
-				</div>\
+                ' + $exeAuthoring.iDevice.gamification.common.getLanguageTab(this.ci18n) + '\
 			</div>\
 		';
 		
@@ -162,7 +116,7 @@ var $exeDevice = {
 		
 		field.before(html);
 		
-		this.enableTabs("interactiveVideoIdeviceForm");
+		$exeAuthoring.iDevice.tabs.init("interactiveVideoIdeviceForm");
 		
 		$("input[name=interactiveVideoType]").change(function(){
 			$exeDevice.toggleType(this.value);
@@ -273,12 +227,8 @@ var $exeDevice = {
 			// Get the data
 			if (typeof(InteractiveVideo)=='object' && typeof(InteractiveVideo.slides)=='object') {
 				top.interactiveVideoEditor.activityToSave = InteractiveVideo;
-				if (typeof(InteractiveVideo.i18n)=='object') {
-					for (var i in InteractiveVideo.i18n) {
-						var v = InteractiveVideo.i18n[i];
-						if (v!="") $("#ci18n_"+i).val(v);
-					}
-				}
+				// i18n
+                $exeAuthoring.iDevice.gamification.common.setLanguageTabValues(InteractiveVideo.i18n);
 			}
 			// Save the list of images and remove the wrapper
 			top.interactiveVideoEditor.imageList = $(".exe-interactive-video-img img",wrapper);
@@ -448,6 +398,7 @@ var $exeDevice = {
 			for (var i in fields) {
 				var fVal = $("#ci18n_"+i).val();
 				if (fVal!="") i18n[i] = fVal;
+				else i18n[i] = fields[1];
 			}
 
 			top.interactiveVideoEditor.activityToSave.i18n = i18n;

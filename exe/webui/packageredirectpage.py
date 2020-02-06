@@ -179,7 +179,7 @@ class PackageRedirectPage(RenderableResource):
         if dict_response['status'] == '0':
             filename = dict_response['ode_filename']
             if '.zip' in filename:
-                filename = ''.join(filename.split('.')[:-1])+'.elp'
+                filename = filename[:-4]+'.elp'
             package_data = base64.decodestring(dict_response['ode_file'])
             package_file_path = G.application.config.userResourcesDir / filename
 
@@ -229,6 +229,9 @@ class PackageRedirectPage(RenderableResource):
         # Create new package
         session = request.getSession()
         template_base = self.config.templatesDir / (self.config.defaultContentTemplate + '.elt')
+
+        if not session.packageStore:
+            session.packageStore = PackageStore()
         
         if os.path.exists(template_base):
             package = session.packageStore.createPackageFromTemplate(template_base)
