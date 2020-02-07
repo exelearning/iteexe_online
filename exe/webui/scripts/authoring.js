@@ -59,33 +59,23 @@ function runFuncArray(handlers) {
 
 // Asks the user for an image, returns the path or an empty string
 function askUserForImage(multiple, fn, filter) {
-    var fp, mode;
-    if (multiple)
-        mode = parent.eXe.view.filepicker.FilePicker.modeOpenMultiple;
-    else
-        mode = parent.eXe.view.filepicker.FilePicker.modeOpen;
-    fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
-        type: mode,
-        title: multiple? parent._("Select one or more images") : parent._("Select an image"),
+    var fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
+        type: parent.eXe.view.filepicker.FilePicker.modeOpen,
+        title: parent._("Select an image"),
+        remote: true,
         modal: true,
         scope: this,
         callback: function(fp) {
-            if (fp.status == parent.eXe.view.filepicker.FilePicker.returnOk) {
-                if (multiple) {
-		            var result = new String("");
-                    for (f in fp.files) {
-		                if (result != "") {
-		                    result += "&";
-		                }
-		                result += escape(fp.files[f].path);
-		            }
-		            fn(result);
-		        } else {
+            if (fp.status == window.parent.eXe.view.filepicker.FilePicker.returnOk) {
+                if (!fp.file.loaded) {
+                    fp.file.loaded = true;
                     fn(fp.file.path);
                 }
+
             }
-            else
+            else {
                 fn("");
+            }
         }
     });
     fp.appendFilters([
@@ -103,10 +93,11 @@ function askUserForMedia(fn,win) {
     var fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: parent.eXe.view.filepicker.FilePicker.modeOpen,
         title: parent._("Select a file"),
+        remote: true,
         modal: true,
         scope: this,
         callback: function(fp) {
-			if (fp.status == parent.eXe.view.filepicker.FilePicker.returnOk) {
+			if (fp.status == window.parent.eXe.view.filepicker.FilePicker.returnOk) {
 				fn(fp.file.path);
 			} else {
 				fn("");
@@ -386,10 +377,11 @@ function addFile(blockId, title, filter) {
     var fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: parent.eXe.view.filepicker.FilePicker.modeOpen,
         title: title? title : parent._("Select a package"),
+        remote: true,
         modal: true,
         scope: this,
         callback: function(fp) {
-            if (fp.status == parent.eXe.view.filepicker.FilePicker.returnOk) {
+            if (fp.status == window.parent.eXe.view.filepicker.FilePicker.returnOk) {
 		        var path  = document.getElementById('path'+blockId);
                 path.type  = 'text';
 		        path.value = fp.file.path;
