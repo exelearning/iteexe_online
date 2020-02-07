@@ -471,15 +471,14 @@ def ideviceHeader(e, style, mode):
         if hasattr(e.idevice.parentNode, 'exportType') and e.idevice.parentNode.exportType == 'singlepage':
             titleTag = "h2"
 
-    if hasattr(G.application.config, "userStylesDir"):
-        if os.path.isdir(G.application.config.userStylesDir / style):
-            themePath = G.application.config.userStylesDir / style
-        else:
-            themePath = Path(G.application.config.stylesDir/style)
-    else:
-        themePath = Path(G.application.config.stylesDir/style)
+    style_object = G.application.config.styleStore.getStyle(style)
 
-    themePath = Path(G.application.config.stylesDir/style)
+    if not style_object:
+        style = G.application.config.defaultStyle
+        style_object = G.application.config.styleStore.getStyle(style)
+
+    themePath = style_object.get_web_path()
+
     themeXMLFile = themePath.joinpath("config.xml")
     themeHasXML = themeHasConfigXML(style)
 
