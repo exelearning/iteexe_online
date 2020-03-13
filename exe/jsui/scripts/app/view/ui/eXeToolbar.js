@@ -422,7 +422,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                     [
                                         {
                                             xtype: 'accesskey_menuitem',
-                                            text: _('Procomún'),
+                                            text: config['publishLabel'],
                                             accesskey: 'P',
                                             itemId: 'file_export_procomun'
                                         },

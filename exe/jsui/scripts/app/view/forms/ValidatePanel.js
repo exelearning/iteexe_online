@@ -149,7 +149,8 @@ Ext.define('eXe.view.forms.ValidatePanel', {
         if (this.exportType == 'procomun'){
             this.items.push({
                 xtype: 'label',
-                text:  _('If you have problems publishing or you want to complete your cataloguing later, close this dialogue, export as SCORM 2004 and upload the generated zip file to Procomún.'),
+                text:  _('If you have problems publishing or you want to complete your cataloguing later, '
+                        + 'close this dialogue, export as SCORM 2004 and upload the generated zip file to ')+config['publishLabel']+'.',
                 anchor: '100%',
                 style: 'padding:5px 0 0;display:block'
             });
