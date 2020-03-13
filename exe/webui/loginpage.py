@@ -59,5 +59,5 @@ class LoginPage(Renderable, rend.Page):
     def render_msg2(self, ctx, data):
         if self.webServer.application.server:
             ctx.tag.clear()
-            return ctx.tag()[[_("Login with Google")]]
+            return ctx.tag()[[_("Login")]]
         return ctx.tag()

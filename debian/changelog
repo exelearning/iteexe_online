@@ -83,7 +83,7 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Other] System paths deleted in project save message.
     - [Other] Changes in the extjs menu.
     - [Other] Added session Logout and Login index.
-    - [Other] Publish option (Integration with Procomún).
+    - [Other] Publish option (Integration with Educational Resource Platform).
 
  -- eXeLearning <admin@exelearning.net>  Tue, 06 Feb 2020 14:00:00 +0200
 

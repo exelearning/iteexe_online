@@ -126,6 +126,9 @@ class MainPage(RenderableLivePage):
         # Save package temporarily
         self.tempPackage = None
 
+        # Integration
+        self.integration = Integration()
+
     def renderHTTP(self, ctx):
         """
         Called when rendering the MainPage.
@@ -339,7 +342,9 @@ class MainPage(RenderableLivePage):
             'pathSep': os.path.sep,
             'server': G.application.server,
             'user_root': '/',
-			'autosaveTime': float(G.application.config.autosaveTime)
+			'autosaveTime': float(G.application.config.autosaveTime),
+            'publishLabel': self.integration.repo_name,
+            'publishHomeURL': self.integration.repo_home_url
         }
         if session.user:
             config['user'] = session.user.name
@@ -1143,13 +1148,13 @@ class MainPage(RenderableLivePage):
 
     def handleExportProcomun(self, client):
         """
-        Export the current package to SCORM 1.2 and upload it to Procomún.
+        Export the current package to SCORM 1.2 and upload it to Educational Resource Platform.
         < set_ode >
         """
 
         def exportScorm():
             """
-            Exports the package we are about to upload to Procomún to SCORM 1.2.
+            Exports the package we are about to upload to Educational Resource Platform to SCORM 1.2.
             :returns: Full path to the exported ZIP.
             """
             # Update progress for the user
@@ -1171,19 +1176,22 @@ class MainPage(RenderableLivePage):
             Upload the exported package to elp Repository.
             """
 
+            uploading_package_message = _(u'Uploading package to {}...'.format(self.integration.repo_name))
+
             # Update progress for the user
-            client.call('Ext.MessageBox.updateProgress', 0.6, '50%', _(u'Uploading package to Procomún...'))
+            client.call('Ext.MessageBox.updateProgress', 0.6, '50%', uploading_package_message)
 
-            integration = Integration()
+            # Update integration
+            self.integration = Integration()
 
-            client.call('Ext.MessageBox.updateProgress', 0.6, '60%', _(u'Uploading package to Procomún...'))
+            client.call('Ext.MessageBox.updateProgress', 0.6, '60%', uploading_package_message)
             
             package_name = self.package.name
             package_file = base64.b64encode(open(filename, 'rb').read())
 
-            client.call('Ext.MessageBox.updateProgress', 0.7, '70%', _(u'Uploading package to Procomún...'))
+            client.call('Ext.MessageBox.updateProgress', 0.7, '70%', uploading_package_message)
 
-            # Try to upload the ODE to Procomún
+            # Try to upload the ODE to Educational Resource Platform
             try:
                 
                 # Add the zip (SCORM) extension to the filename
@@ -1194,22 +1202,25 @@ class MainPage(RenderableLivePage):
 
                 # Check if the package has a ode_ide from repository
                 if hasattr(self.package,"ode_id") and self.package.ode_id:
-                    response = integration.set_ode(scorm_filename, package_file, ode_id=self.package.ode_id)
+                    response = self.integration.set_ode(scorm_filename, package_file, ode_id=self.package.ode_id)
                 else:
-                    response = integration.set_ode(scorm_filename, package_file)
+                    response = self.integration.set_ode(scorm_filename, package_file)
 
-                client.call('Ext.MessageBox.updateProgress', 1, '100%', _(u'Uploading package to Procomún...'))
+                client.call('Ext.MessageBox.updateProgress', 1, '100%', uploading_package_message)
 
                 if response and response[0]:
                     dict_response = response[1]
                 elif response and not response[0]:
-                    client.alert(u'Error in response: %s' % str(response[1]), title=_(u'Publishing document to Procomún'))
+                    client.alert(u'Error in response: %s' % str(response[1]), 
+                                    title=uploading_package_message)
                     return
                 else:
-                    client.alert(u'No response', title=_(u'Publishing document to Procomún'))
+                    client.alert(u'No response', 
+                                    title=uploading_package_message)
                     return
 
                 if dict_response['status'] == '0':
+                    publish_document_message = _(u'Publishing document to {}'.format(self.integration.repo_name))
                     if self.package.title:
                         elp_title = self.package.title
                     else:
@@ -1222,36 +1233,32 @@ class MainPage(RenderableLivePage):
                             + u'<br />'
                             + u'<br />'
                             + _(u'<small>You can view and manage the uploaded package using '  \
-                                u'<a href="%s" target="_blank" title="Procomún Home">Procomún</a>\\\'s web page.' \
-                                    u'</small>').replace('>',' style="font-size:1em">') % integration.repo_home_url
+                                u'<a href="%s" target="_blank" title="Educational Resource Platform Home">%s</a>\\\'s web page.' \
+                                    u'</small>').replace('>',' style="font-size:1em">') \
+                                    % (self.integration.repo_home_url, self.integration.repo_name)
                             + '\''
                         ),
-                        title=_(u'Publishing document to Procomún')
-                )
+                        title=publish_document_message)
                 else:
                     client.alert(
                         js(
                             '\''
-                            + _('An error has ocurred while trying to publish a package to Procomún. <br />'
-                            +  'The error message is: %s') % dict_response['description']
+                            + _('An error has ocurred while trying to publish a package to %s. <br />'
+                            +  'The error message is: %s') % (self.integration.repo_name, dict_response['description'])
                             + '\''
                         ),
-                        title=_(u'Publishing document to Procomún'))
+                        title=publish_document_message)
 
             except Exception as e:
                 # If there is an exception, log it and show a generic error message to the user
-                log.error('An error has ocurred while trying to publish a package to Procomún. The error message is: %s', str(e))
+                log.error('An error has ocurred while trying to publish a package to %s. The error message is: %s' % (self.integration.repo_name, str(e)))
                 client.call('Ext.MessageBox.hide')
                 error_args = e.args
                 if error_args and len(error_args[0]) == 2:
-                    client.alert(u'Error {}:{} '.format(*error_args[0])+_(u'when trying to upload package to Procomún.'),
-                                title=_(u'Publishing document to Procomún'))
+                    client.alert(u'Error {}:{} '.format(*error_args[0])+_(u'when trying to upload package to {}.'.format(self.integration.repo_name)),
+                                title=publish_document_message)
                 else:
-                    client.alert(u'Error {}'.format(e), title=_(u'Publishing document to Procomún'))
-                    """
-                    client.alert(_(u'Unknown error when trying to upload package to Procomún.'),
-                                title=_(u'Publishing document to Procomún'))
-                    """
+                    client.alert(u'Error {}'.format(e), title=publish_document_message)
                 return
 
         d = threads.deferToThread(exportScorm)
@@ -1854,22 +1861,3 @@ class MainPage(RenderableLivePage):
                     pass
             raise
         return package
-
-    def ConfigDict(self, client, filepath):
-        client.sendScript("console.log('ConfigDict')")
-        f = open(filepath,'r')
-        fdata = f.read()
-        lines = fdata.split('\n')
-        config_dict = {}
-        for line in lines:
-            line = line.strip()
-            if line[0] == '[' and line[-1] == ']':
-                key = line.strip('[]')
-                config_dict[key] = {}
-            elif key and '=' in line:
-                line_split = line.split('=')
-                if len(line_split) == 2:
-                    sub_key = line_split[0].strip()
-                    sub_value = line_split[1].strip().strip("'")
-                    config_dict[key][sub_key] = sub_value
-        return config_dict

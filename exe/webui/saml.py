@@ -95,7 +95,10 @@ class ACSPage(rend.Page):
             session = request.getSession()
             session.samlNameId = auth.get_nameid()
             session.samlSessionIndex = auth.get_session_index()
-            session.setUser(attributes['email'][0], attributes.get('picture', [None])[0])
+            if 'email' in attributes:
+                session.setUser(attributes['email'][0], attributes.get('picture', [None])[0])
+            elif 'cn' in attributes:
+                session.setUser(attributes['cn'][0], attributes.get('picture', [None])[0])
             return url.URL.fromString(req['post_data']['RelayState'])
         request.setResponseCode(http.INTERNAL_SERVER_ERROR)
         return auth.get_last_error_reason()

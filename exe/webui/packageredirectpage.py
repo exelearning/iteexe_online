@@ -69,6 +69,11 @@ class PackageRedirectPage(RenderableResource):
         """
         session = request.getSession()
 
+        # Provisional - TO TEST
+        # Login and import ode passing the parameter user
+        if 'user' in request.args and request.args['user'][0]:
+            session.setUser(request.args['user'][0])
+            
         # No session
         if self.webServer.application.server and not session.user and not request.getUser():
             if 'login' in request.args and request.args['login'][0] == 'saml':

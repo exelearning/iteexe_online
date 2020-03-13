@@ -47,9 +47,12 @@ class QuitPage(Renderable, rend.Page):
         if session.samlNameId:
             req = prepare_nevow_request(request)
             auth = init_saml_auth(req, self.configDir)
-            logout_url = auth.logout(name_id=session.samlNameId, session_index=session.samlSessionIndex)
+            samlNameId = session.samlNameId
+            samlSessionIndex = session.samlSessionIndex
             session.samlNameId = None
             session.samlSessionIndex = None
+            session.expire()
+            logout_url = auth.logout(name_id=samlNameId, session_index=samlSessionIndex)
             return url.URL.fromString(logout_url)
         session.expire()
         return rend.Page.renderHTTP(self, ctx)
@@ -67,5 +70,5 @@ class QuitPage(Renderable, rend.Page):
     def render_msg2(self, ctx, data):
         if self.webServer.application.server:
             ctx.tag.clear()
-            return ctx.tag()[[_("Login with Google")]]
+            return ctx.tag()[[_("Login")]]
         return ctx.tag()

@@ -45,6 +45,7 @@ class Integration:
 		self.load_config_dict()
 
 		if self.config:
+			self.repo_name = self.config["info"]["name"]
 			self.repo_home_url = self.config["url"]["home"]
 			self.repo_set_ode_url = self.config["url"]["set_ode"]
 			self.repo_get_ode_url = self.config["url"]["get_ode"]
@@ -52,13 +53,25 @@ class Integration:
 			raise Exception('Error loading configuration file')
 	
 
-	def new_json_ode(self, ode_id='',filename='',file='',uri=''):
-		ode = {'ode_id': ode_id,'ode_filename': filename,'ode_file': file,'ode_uri': uri}
+	def new_json_ode(self, ode_id='',filename='',filedata='',uri=''):
+		ode = {
+			'ode_id': ode_id,
+			'ode_filename': filename,
+			'ode_file': filedata,
+			'ode_uri': uri,
+			# Provisional - TO TEST
+			'ode_user': G.application.config.username
+		}
+			
 		return json.dumps(ode)
 
 
 	def set_ode(self,package_name,package_file,ode_id=''):
-		ode = self.new_json_ode(ode_id=ode_id,filename=package_name,file=package_file)
+		ode = self.new_json_ode(
+			ode_id=ode_id,
+			filename=package_name,
+			filedata=package_file
+		)
 		params = urlencode({self.post_ode:ode})
 		try:
 			request = urlopen(self.repo_set_ode_url,params)
@@ -72,8 +85,10 @@ class Integration:
 			return (False,e)
 
 
-	def get_ode(self,id):
-		ode = self.new_json_ode(ode_id=id)
+	def get_ode(self,odeid):
+		ode = self.new_json_ode(
+			ode_id=odeid
+		)
 		params = urlencode({self.post_ode:ode})
 		try:
 			request = urlopen(self.repo_get_ode_url,params)
