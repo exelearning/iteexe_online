@@ -110,15 +110,16 @@ class Integration:
 				config_dict = {}
 				for line in lines:
 					line = line.strip()
-					if line[0] == '[' and line[-1] == ']':
-						key = line.strip('[]')
-						config_dict[key] = {}
-					elif key and '=' in line:
-						line_split = line.split('=')
-						if len(line_split) == 2:
-							sub_key = line_split[0].strip()
-							sub_value = line_split[1].strip().strip("'")
-							config_dict[key][sub_key] = sub_value
+					if line:
+						if line[0] == '[' and line[-1] == ']':
+							key = line.strip('[]')
+							config_dict[key] = {}
+						elif key and '=' in line:
+							line_split = line.split('=')
+							if len(line_split) == 2:
+								sub_key = line_split[0].strip()
+								sub_value = line_split[1].strip().strip("'")
+								config_dict[key][sub_key] = sub_value
 				self.config = config_dict
 		else:
 			msx = ('The configuration file {} does not exist or cannot be accessed.').format(self.publish_config_path)
