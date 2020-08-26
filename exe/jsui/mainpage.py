@@ -357,7 +357,7 @@ class MainPage(RenderableLivePage):
                 config['saml'] = 0
             # add user styles (/style_user) to webserver path
             self.webServer.root.putChild("style_user_{}".format(config['user']), File(session.user.stylesPath))
-            
+
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
         if G.application.config.locale.split('_')[0] == 'zh':
@@ -1185,7 +1185,7 @@ class MainPage(RenderableLivePage):
             self.integration = Integration()
 
             client.call('Ext.MessageBox.updateProgress', 0.6, '60%', uploading_package_message)
-            
+
             package_name = self.package.name
             package_file = base64.b64encode(open(filename, 'rb').read())
 
@@ -1193,7 +1193,7 @@ class MainPage(RenderableLivePage):
 
             # Try to upload the ODE to Educational Resource Platform
             try:
-                
+
                 # Add the zip (SCORM) extension to the filename
                 if package_name[-4:] == '.zip':
                     scorm_filename = package_name
@@ -1211,16 +1211,18 @@ class MainPage(RenderableLivePage):
                 if response and response[0]:
                     dict_response = response[1]
                 elif response and not response[0]:
-                    client.alert(u'Error in response: %s' % str(response[1]), 
+                    client.alert(u'Error in response: %s' % str(response[1]),
                                     title=uploading_package_message)
                     return
                 else:
-                    client.alert(u'No response', 
+                    client.alert(u'No response',
                                     title=uploading_package_message)
                     return
 
                 if dict_response['status'] == '0':
                     publish_document_message = _(u'Publishing document to {}'.format(self.integration.repo_name))
+                    if dict_response['ode_id']:
+                        self.package.ode_id = dict_response['ode_id']
                     if self.package.title:
                         elp_title = self.package.title
                     else:
@@ -1263,7 +1265,7 @@ class MainPage(RenderableLivePage):
 
         d = threads.deferToThread(exportScorm)
         d.addCallback(lambda filename: threads.deferToThread(publish, filename))
-            
+
 
     def handleExport(self, client, exportType, filename, styleNameSelec=None):
         """
