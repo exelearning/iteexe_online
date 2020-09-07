@@ -1584,17 +1584,22 @@ class Package(Persistable):
 
         newPackage.set_isTemplate(isTemplate)
         newPackage.isChanged = False
-        style = G.application.config.styleStore.getStyle(newPackage.style)
-        nstyle = None
-        nustyle = None
-        if not style:
-            if hasattr(G.application.config, "userStylesDir"):
-                nustyle = Path(G.application.config.userStylesDir/newPackage.style)
-            else:
-                nstyle = Path(G.application.config.stylesDir/newPackage.style)
-                
-        if not style and (not nstyle or not nstyle.isdir()) and (not nustyle or not nustyle.isdir()):
-            newPackage.style=G.application.config.defaultStyle
+
+        # set style to package
+        if newPackage.isTemplate:
+            newPackage.style = G.application.config.defaultStyle
+        else:
+            style = G.application.config.styleStore.getStyle(newPackage.style)
+            nstyle = None
+            nustyle = None
+            if not style:
+                if hasattr(G.application.config, "userStylesDir"):
+                    nustyle = Path(G.application.config.userStylesDir/newPackage.style)
+                else:
+                    nstyle = Path(G.application.config.stylesDir/newPackage.style)
+
+            if not style and (not nstyle or not nstyle.isdir()) and (not nustyle or not nustyle.isdir()):
+                newPackage.style=G.application.config.defaultStyle
 
         newPackage.lang = newPackage._lang
 
