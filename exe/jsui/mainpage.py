@@ -1221,26 +1221,36 @@ class MainPage(RenderableLivePage):
 
                 if dict_response['status'] == '0':
                     publish_document_message = _(u'Publishing document to {}'.format(self.integration.repo_name))
+
                     if dict_response['ode_id']:
                         self.package.ode_id = dict_response['ode_id']
+
                     if self.package.title:
                         elp_title = self.package.title
                     else:
                         elp_title = self.package.name
-                    client.alert(
-                        js(
-                            '\''
-                            + _(u'Package exported to <a href="%s" target="_blank" title="Click to download ' \
-                                u'the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
-                            + u'<br />'
-                            + u'<br />'
-                            + _(u'<small>You can view and manage the uploaded package using '  \
-                                u'<a href="%s" target="_blank" title="Educational Resource Platform Home">%s</a>\\\'s web page.' \
-                                    u'</small>').replace('>',' style="font-size:1em">') \
-                                    % (self.integration.repo_home_url, self.integration.repo_name)
-                            + '\''
-                        ),
-                        title=publish_document_message)
+
+                    if self.integration.publish_redirect_enabled == '1':
+                        client.call('Ext.MessageBox.hide')
+                        if self.integration.publish_redirect_blank == '1':
+                            client.call('window.open', dict_response['ode_uri'], '_blank')
+                        else:
+                            client.call('window.location.replace', dict_response['ode_uri'])
+                    else:
+                        client.alert(
+                            js(
+                                '\''
+                                + _(u'Package exported to <a href="%s" target="_blank" title="Click to download ' \
+                                    u'the exported package">%s</a>.') % (dict_response['ode_uri'], elp_title)
+                                + u'<br />'
+                                + u'<br />'
+                                + _(u'<small>You can view and manage the uploaded package using '  \
+                                    u'<a href="%s" target="_blank" title="Educational Resource Platform Home">%s</a>\\\'s web page.' \
+                                        u'</small>').replace('>',' style="font-size:1em">') \
+                                        % (self.integration.repo_home_url, self.integration.repo_name)
+                                + '\''
+                            ),
+                            title=publish_document_message)
                 else:
                     client.alert(
                         js(
