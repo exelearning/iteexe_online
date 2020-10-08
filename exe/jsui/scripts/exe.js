@@ -32,7 +32,7 @@ Ext.Loader.setConfig({
 var conf = {
     onRender: function() {
         var me = this;
-        
+
         me.callParent(arguments);
         if (me.tooltip) {
             Ext.tip.QuickTipManager.register(Ext.apply({
@@ -140,7 +140,7 @@ Ext.application({
     models: [
     	'filepicker.File'
     ],
-    
+
     controllers: [
         'eXeViewport',
     	'Idevice',
@@ -152,7 +152,7 @@ Ext.application({
     	'filepicker.Directory',
     	'filepicker.File'
     ],
-    
+
     getMaxHeight: function(height) {
         var vheight = Ext.ComponentQuery.query('#eXeViewport')[0].getHeight();
 
@@ -221,7 +221,7 @@ browser restrictions, you must click in the url: {0}'),
         for(var i in messages)
             messages[i].close();
     },
-    
+
     notifications: {
         savedPackage : function(filePath) {
             Ext.Msg.close();
@@ -231,7 +231,7 @@ browser restrictions, you must click in the url: {0}'),
             },3000);
         }
     },
-    
+
     showLoadError: function() {
     	if (eXe.app.config.loadErrors.length > 0) {
     		Ext.Msg.alert(_('Load Error'), eXe.app.config.loadErrors.pop(), eXe.app.showLoadError);
@@ -239,27 +239,27 @@ browser restrictions, you must click in the url: {0}'),
     	else
     		eXe.app.afterShowLoadErrors();
     },
-    
+
     showNewVersionWarning: function(){
         // Show a warning message if a new version is available
         // Not need in eXe Online?
         /*if (navigator.onLine && eXe.app.config.showNewVersionWarning && typeof(eXe.app.config.release)=='string') {
             function openNewVersionWarning(no){
-                
+
                 var latest = no;
                 var current = eXe.app.config.release;
-                
+
                 if (current=="" || latest==current) return; // No release number for testing packages
-                
+
                 latest = latest.replace(/\./g,"");
                 current = current.replace(/\./g,"");
 
                 while (latest.length>current.length) current += '0';
-                while (current.length>latest.length) latest += '0';                
-                
+                while (current.length>latest.length) latest += '0';
+
                 current = parseFloat(current);
                 latest = parseFloat(latest);
-                
+
                 if (latest>current) {
                     var msg = _('A new version of eXeLearning (%) is available. Would you like to download it now?');
                     msg = msg.replace("%",no);
@@ -275,7 +275,7 @@ browser restrictions, you must click in the url: {0}'),
                             }
                         }
                     });
-                }                
+                }
             }
             Ext.data.JsonP.request({
                 url: 'https://api.github.com/repos/exelearning/iteexe/releases/latest',
@@ -311,18 +311,20 @@ browser restrictions, you must click in the url: {0}'),
             console.log('Local Storage not supported');
             Ext.state.Manager.setProvider(new Ext.state.CookieProvider({expires: null}));
         }
-        
+
         eXe.app = this;
-        
+
         eXe.app.config = config;
-        
+
         Ext.state.Manager.set('filepicker-currentDir', eXe.app.config.lastDir);
 
-        window.onbeforeunload = function() {
+        /* Remove the alert before close window
+        window.onbeforeunloaad = function() {
             if (eXe.app.quitWarningEnabled)
                 return _("If you leave this page eXe application continues to run." +
                         " Please use the menu File->Quit if you really want to exit the application.");
         };
+        */
 		/*
 		window.onunload = function() {
             nevow_clientToServerEvent('quit', '', '');
@@ -349,7 +351,7 @@ browser restrictions, you must click in the url: {0}'),
         if (!eXe.app.config.showIdevicesGrouped) {
         	var panel = Ext.ComponentQuery.query('#idevice_panel')[0],
         		button = panel.down('button');
-        	
+
         	panel.view.features[0].disable();
         	button.setText(_('Group iDevices'));
         }
@@ -361,7 +363,7 @@ browser restrictions, you must click in the url: {0}'),
 
         eXe.app.showLoadError();
     },
-    
+
     createLeftPanelToggler : function(isLoadEvent){
         if (isLoadEvent) {
             var a = document.getElementById("hide_exe_leftpanel");
@@ -394,7 +396,7 @@ browser restrictions, you must click in the url: {0}'),
             }
         }
     },
-    
+
     createEmptyPageInstructions : function(){
         var a = document.getElementById("hide_exe_leftpanel");
         if (a && a.offsetParent != null) { // The left panel is visible
@@ -402,7 +404,7 @@ browser restrictions, you must click in the url: {0}'),
                 var iframe = document.getElementsByTagName('iframe');
                 if (iframe.length==1) {
                     var iframe = iframe[0];
-                    var doc = iframe.contentWindow.document;                    
+                    var doc = iframe.contentWindow.document;
                     if (doc && doc.getElementsByClassName) {
                         var iDevices = doc.getElementsByClassName("iDevice");
                         if (iDevices.length==0 && !doc.getElementById("activeIdevice")) {
@@ -426,15 +428,15 @@ browser restrictions, you must click in the url: {0}'),
                     }
                 }
             }
-        }        
+        }
     },
-	
+
 	// Add a class to the empty non-emphasized iDevices so the user can see the buttons to edit them
 	checkIdevicesVisibility : function(){
 		var iframe = document.getElementsByTagName('iframe');
 		if (iframe.length==1) {
 			var iframe = iframe[0];
-			var doc = iframe.contentWindow.document;                    
+			var doc = iframe.contentWindow.document;
 			if (doc && doc.getElementsByClassName) {
 				var iDevices = doc.getElementsByClassName("iDevice");
 				if (iDevices.length>0) {
@@ -459,4 +461,3 @@ browser restrictions, you must click in the url: {0}'),
     appFolder: "jsui/app"
 
 });
-
