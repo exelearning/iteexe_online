@@ -77,17 +77,32 @@ class AuthoringPage(RenderableResource):
         # corresponding resources created:
         webDir     = Path(G.application.tempWebDir)
         previewDir  = webDir.joinpath('previews')
-        for root, dirs, files in os.walk(previewDir, topdown=False):
-            for name in files:
-                if sys.platform[:3] == "win":
-                    for i in range(3):
+        # To prevent deletion of images when there are multiple users
+        if self.blocks:
+            for resource in self.blocks[0].idevice.userResources:
+                if resource.userName and resource.storageName:
+                    resource_name = resource.storageName
+                    resource_path = Path(resource.userName)
+                    if resource_path.exists():
                         try:
-                            os.remove(os.path.join(root, name))
-                            break
-                        except exceptions.WindowsError:
-                            time.sleep(0.3)
-                else:
-                    os.remove(os.path.join(root, name))
+                            resource_path.remove()
+                        except:
+                            pass
+                    fs_file_name = G.application.config.userResourcesDir.replace('/','_') + '_' + resource_name
+                    fs_file_info_name = fs_file_name + '.exe_info'
+                    fs_file_path = Path(previewDir / fs_file_name)
+                    fs_file_info_path = Path(previewDir / fs_file_info_name)
+                    if (fs_file_path.exists()):
+                        try:
+                            fs_file_path.remove()
+                        except:
+                            pass
+                    if (fs_file_info_path.exists()):
+                        try:
+                            fs_file_info_path.remove()
+                        except:
+                            pass
+        #
         topNode = self.package.currentNode
         if "action" in request.args:
             if request.args["action"][0] == u"changeNode":
