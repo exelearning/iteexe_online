@@ -1202,9 +1202,18 @@ class MainPage(RenderableLivePage):
 
                 # Check if the package has a ode_ide from repository
                 if hasattr(self.package,"ode_id") and self.package.ode_id:
-                    response = self.integration.set_ode(scorm_filename, package_file, ode_id=self.package.ode_id)
+                    response = self.integration.set_ode(
+                        scorm_filename,
+                        package_file,
+                        ode_id=self.package.ode_id,
+                        ode_user=self.session.user.name
+                    )
                 else:
-                    response = self.integration.set_ode(scorm_filename, package_file)
+                    response = self.integration.set_ode(
+                        scorm_filename,
+                        package_file,
+                        ode_user=self.session.user.name
+                    )
 
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', uploading_package_message)
 
@@ -1235,7 +1244,12 @@ class MainPage(RenderableLivePage):
                         if self.integration.publish_redirect_blank == '1':
                             client.call('window.open', dict_response['ode_uri'], '_blank')
                         else:
-                            client.call('window.location.replace', dict_response['ode_uri'])
+                            #client.call('window.location.replace', dict_response['ode_uri'])
+                            client.call('window.open', self.integration.repo_home_url, '_blank')
+                            # TODO: CERRAR SESIÓN
+                            import time
+                            time.sleep(10)
+                            self.handleLogout(client)
                     else:
                         client.alert(
                             js(

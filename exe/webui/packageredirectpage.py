@@ -41,10 +41,10 @@ log = logging.getLogger(__name__)
 class PackageRedirectPage(RenderableResource):
     """
     PackageRedirectPage is the first screen the user loads.  It doesn't show
-    anything it just redirects the user to a new package or loads an existing 
+    anything it just redirects the user to a new package or loads an existing
     package.
     """
-    
+
     name = '/'
 
     def __init__(self, webServer, packagePath=None):
@@ -73,7 +73,7 @@ class PackageRedirectPage(RenderableResource):
         # Login and import ode passing the parameter user
         if 'user' in request.args and request.args['user'][0]:
             session.setUser(request.args['user'][0])
-            
+
         # No session
         if self.webServer.application.server and not session.user and not request.getUser():
             if 'login' in request.args and request.args['login'][0] == 'saml':
@@ -170,7 +170,7 @@ class PackageRedirectPage(RenderableResource):
         Import Package from Repository
         """
 
-        response = self.integration.get_ode(ode_id)
+        response = self.integration.get_ode(ode_id,ode_user=session.user.name)
 
         # Manage Response
         if response and response[0]:
@@ -214,7 +214,7 @@ class PackageRedirectPage(RenderableResource):
                     session.packageStore.addPackage(self.package)
 
                 self.bindNewPackage(self.package, session)
-                
+
                 return (True, self.package.name)
 
             else:
@@ -237,7 +237,7 @@ class PackageRedirectPage(RenderableResource):
 
         if not session.packageStore:
             session.packageStore = PackageStore()
-        
+
         if os.path.exists(template_base):
             package = session.packageStore.createPackageFromTemplate(template_base)
         else:

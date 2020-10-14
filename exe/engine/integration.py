@@ -65,24 +65,26 @@ class Integration:
             raise Exception('Error loading configuration file')
 
 
-    def new_json_ode(self, ode_id='',filename='',filedata='',uri=''):
+    def new_json_ode(self, ode_id='',filename='',filedata='',uri='',ode_user=False):
         ode = {
             'ode_id': ode_id,
             'ode_filename': filename,
             'ode_file': filedata,
-            'ode_uri': uri,
-            # Provisional - TO TEST
-            'ode_user': G.application.config.username
+            'ode_uri': uri
         }
+        # Provisional
+        if ode_user:
+            ode['ode_user'] = ode_user
 
         return json.dumps(ode)
 
 
-    def set_ode(self,package_name,package_file,ode_id=''):
+    def set_ode(self,package_name,package_file,ode_id='',ode_user=False):
         ode = self.new_json_ode(
             ode_id=ode_id,
             filename=package_name,
-            filedata=package_file
+            filedata=package_file,
+            ode_user=ode_user
         )
         params = urlencode({self.post_ode:ode})
         try:
@@ -97,9 +99,10 @@ class Integration:
             return (False,e)
 
 
-    def get_ode(self,odeid):
+    def get_ode(self,ode_id,ode_user=False):
         ode = self.new_json_ode(
-            ode_id=odeid
+            ode_id=ode_id,
+            ode_user=ode_user
         )
         params = urlencode({self.post_ode:ode})
         try:
