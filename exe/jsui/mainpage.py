@@ -1247,9 +1247,7 @@ class MainPage(RenderableLivePage):
                             #client.call('window.location.replace', dict_response['ode_uri'])
                             client.call('window.open', self.integration.repo_home_url, '_blank')
                             # TODO: CERRAR SESIÓN
-                            import time
-                            time.sleep(10)
-                            self.handleLogout(client)
+                            #self.handleLogout(client)
                     else:
                         client.alert(
                             js(
