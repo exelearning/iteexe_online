@@ -1244,8 +1244,7 @@ class MainPage(RenderableLivePage):
                         if self.integration.publish_redirect_blank == '1':
                             client.call('window.open', dict_response['ode_uri'], '_blank')
                         else:
-                            #client.call('window.location.replace', dict_response['ode_uri'])
-                            client.call('window.open', self.integration.repo_home_url, '_blank')
+                            client.call('window.location.replace', dict_response['ode_uri'])
                             # TODO: CERRAR SESIÓN
                             #self.handleLogout(client)
                     else:
