@@ -77,29 +77,43 @@ class AuthoringPage(RenderableResource):
         # corresponding resources created:
         webDir     = Path(G.application.tempWebDir)
         previewDir  = webDir.joinpath('previews')
+
+        previewsFiles = []
+        if previewDir.exists():
+            previewsFiles = previewDir.listdir()
+
         # To prevent deletion of images when there are multiple users
         if self.blocks:
             for resource in self.blocks[0].idevice.userResources:
                 if resource.userName and resource.storageName:
+
                     resource_name = resource.storageName
                     resource_path = Path(resource.userName)
-                    if resource_path.exists():
+                    if resource_path.exists() and resource_path in previewsFiles:
                         try:
                             resource_path.remove()
                         except:
                             pass
+
                     fs_file_name = G.application.config.userResourcesDir.replace('/','_') + '_' + resource_name
-                    fs_file_info_name = fs_file_name + '.exe_info'
                     fs_file_path = Path(previewDir / fs_file_name)
+                    fs_file_info_name = fs_file_name + '.exe_info'
                     fs_file_info_path = Path(previewDir / fs_file_info_name)
-                    if (fs_file_path.exists()):
+                    if fs_file_path.exists():
                         try:
                             fs_file_path.remove()
                         except:
                             pass
-                    if (fs_file_info_path.exists()):
+                    if fs_file_info_path.exists():
                         try:
                             fs_file_info_path.remove()
+                        except:
+                            pass
+
+                    allyourbase_file = Path(previewDir / 'allyourbase' / resource_name)
+                    if allyourbase_file.exists():
+                        try:
+                            allyourbase_file.remove()
                         except:
                             pass
         #
