@@ -69,7 +69,8 @@ class PackageRedirectPage(RenderableResource):
         """
         session = request.getSession()
 
-        # Provisional - TO TEST
+        # Provisional - TEST
+        # Must be eliminated in the future
         # Login and import ode passing the parameter user
         if 'user' in request.args and request.args['user'][0]:
             session.setUser(request.args['user'][0])
@@ -169,9 +170,7 @@ class PackageRedirectPage(RenderableResource):
         """
         Import Package from Repository
         """
-
         response = self.integration.get_ode(ode_id,ode_user=session.user.name)
-
         # Manage Response
         if response and response[0]:
             dict_response = response[1]
@@ -186,7 +185,7 @@ class PackageRedirectPage(RenderableResource):
             if '.zip' in filename:
                 filename = filename[:-4]+'.elp'
             package_data = base64.decodestring(dict_response['ode_file'])
-            package_file_path = G.application.config.userResourcesDir / filename
+            package_file_path = session.user.root / filename
 
             # Save package in User ResourcesDir
             with open(package_file_path, 'wb') as package_file:
@@ -207,13 +206,30 @@ class PackageRedirectPage(RenderableResource):
                 self.package.ode_repository_uri = self.integration.repo_home_url
 
                 # Add package to packageStore session
-                if session.packageStore:
-                    session.packageStore.addPackage(self.package)
-                else:
+                if not session.packageStore:
                     session.packageStore = PackageStore()
-                    session.packageStore.addPackage(self.package)
+
+                session.packageStore.addPackage(self.package)
 
                 self.bindNewPackage(self.package, session)
+
+                # TODO: ode_user in response to check session
+
+                log_add_package_params = {
+                    'session_user': session.user.name,
+                    'package_ode_id': self.package.ode_id,
+                    'package_ode_filename': self.package.name,
+                    'ode_ide': dict_response['ode_id'],
+                    'ode_uri': dict_response['ode_uri'],
+                    'ode_filename': dict_response['ode_filename']
+                }
+
+                self.integration.log_info_integration(info='add_package_to_session:INFO',params=log_add_package_params)
+
+                if (self.package.ode_id != dict_response['ode_id']
+                or self.package.ode_id != dict_response['ode_filename']):
+                    self.integration.log_info_integration(
+                        error=True,info='add_package_to_session:ERROR',params=log_add_package_params)
 
                 return (True, self.package.name)
 

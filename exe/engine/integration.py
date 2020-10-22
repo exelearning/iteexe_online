@@ -20,12 +20,14 @@
 elp repository integration
 """
 
+import logging
 import json
 from urllib                 import urlencode, urlopen
 
 from exe.engine.path        import Path
 from exe                    import globals as G
 
+log = logging.getLogger(__name__)
 
 class Integration:
     """
@@ -72,7 +74,8 @@ class Integration:
             'ode_file': filedata,
             'ode_uri': uri
         }
-        # Provisional
+        # Provisional - TEST
+        # Must be eliminated in the future
         if ode_user:
             ode['ode_user'] = ode_user
 
@@ -86,15 +89,18 @@ class Integration:
             filedata=package_file,
             ode_user=ode_user
         )
+        self.log_info_integration(info='set_ode:send',params=json.loads(ode))
         params = urlencode({self.post_ode:ode})
         try:
             request = urlopen(self.repo_set_ode_url,params)
             json_response = request.read()
             if json_response:
                 dict_response = json.loads(json_response)
+                self.log_info_integration(info='set_ode:response',params=dict_response)
                 return (True,dict_response)
             else:
-                return (False,'No response from Repository')
+                self.log_info_integration(error=True,info='set_ode:no_response')
+                return (False,u'No response from Repository')
         except Exception as e:
             return (False,e)
 
@@ -104,14 +110,17 @@ class Integration:
             ode_id=ode_id,
             ode_user=ode_user
         )
+        self.log_info_integration(info='get_ode:send',params=json.loads(ode))
         params = urlencode({self.post_ode:ode})
         try:
             request = urlopen(self.repo_get_ode_url,params)
             json_response = request.read()
             if json_response:
                 dict_response = json.loads(json_response)
+                self.log_info_integration(info='get_ode:response',params=dict_response)
                 return (True,dict_response)
             else:
+                self.log_info_integration(error=True,info='get_ode:no_response')
                 return (False,'No response from Repository')
         except Exception as e:
             return (False,e)
@@ -139,3 +148,19 @@ class Integration:
         else:
             msx = ('The configuration file {} does not exist or cannot be accessed.').format(self.publish_config_path)
             raise Exception(msx)
+
+    def log_info_integration(self, error=False, info='', params={}):
+        log_txt = u'[INTEGRATION_SERVICE]'
+        if info:
+            log_txt += '['+info+']'
+        if self.repo_set_ode_url:
+            log_txt += ' serviceURL:'
+            log_txt += self.repo_set_ode_url
+        if params:
+            for param in params.keys():
+                if param != 'ode_file':
+                    log_txt += ' %s:%s ' % (param, params[param])
+        if error:
+            log.error(log_txt)
+        else:
+            log.info(log_txt)
