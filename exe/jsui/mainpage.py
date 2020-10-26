@@ -513,7 +513,8 @@ class MainPage(RenderableLivePage):
                 client.filePickerAlert(save_msx, onDone)
             elif self.package.name != oldName:
                 # Redirect the client if the package name has changed
-                self.webServer.root.putChild(self.package.name, self)
+                self.session.packageStore.addPackage(self.package)
+                self.webServer.root.bindNewPackage(self.package, self.session)
                 log.info('Package saved, redirecting client to /%s' % self.package.name)
                 client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
             else:
@@ -1192,6 +1193,7 @@ class MainPage(RenderableLivePage):
             client.call('Ext.MessageBox.updateProgress', 0.7, '70%', uploading_package_message)
 
             # Try to upload the ODE to Educational Resource Platform
+            publish_document_message = _(u'No response status')
             try:
 
                 # Add the zip (SCORM) extension to the filename

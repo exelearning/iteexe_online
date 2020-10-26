@@ -205,15 +205,6 @@ class PackageRedirectPage(RenderableResource):
                 self.package.ode_id = ode_id
                 self.package.ode_repository_uri = self.integration.repo_home_url
 
-                # Add package to packageStore session
-                if not session.packageStore:
-                    session.packageStore = PackageStore()
-
-                session.packageStore.addPackage(self.package)
-
-                self.bindNewPackage(self.package, session)
-
-                # TODO: ode_user in response to check session
 
                 log_add_package_params = {
                     'session_user': session.user.name,
