@@ -139,7 +139,7 @@ class Integration:
                 config_dict = {}
                 for line in lines:
                     line = line.strip()
-                    if line:
+                    if line and line[0]!='#':
                         if line[0] == '[' and line[-1] == ']':
                             key = line.strip('[]')
                             config_dict[key] = {}
