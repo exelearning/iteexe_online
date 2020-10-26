@@ -63,6 +63,11 @@ class Integration:
             else:
                 self.publish_redirect_blank = '1'
 
+            if 'config' in self.config and 'enabled_logs' in self.config['config']:
+                self.enabled_logs = self.config['config']['enabled_logs']
+            else:
+                self.enabled_logs = '0'
+
         else:
             raise Exception('Error loading configuration file')
 
@@ -150,17 +155,18 @@ class Integration:
             raise Exception(msx)
 
     def log_info_integration(self, error=False, info='', params={}):
-        log_txt = u'[INTEGRATION_SERVICE]'
-        if info:
-            log_txt += '['+info+']'
-        if self.repo_set_ode_url:
-            log_txt += ' serviceURL:'
-            log_txt += self.repo_set_ode_url
-        if params:
-            for param in params.keys():
-                if param != 'ode_file':
-                    log_txt += ' %s:%s ' % (param, params[param])
-        if error:
-            log.error(log_txt)
-        else:
-            log.info(log_txt)
+        if self.enabled_logs == '1':
+            log_txt = u'[INTEGRATION_SERVICE]'
+            if info:
+                log_txt += '['+info+']'
+            if self.repo_set_ode_url:
+                log_txt += ' serviceURL:'
+                log_txt += self.repo_set_ode_url
+            if params:
+                for param in params.keys():
+                    if param != 'ode_file':
+                        log_txt += ' %s:%s ' % (param, params[param])
+            if error:
+                log.error(log_txt)
+            else:
+                log.info(log_txt)
