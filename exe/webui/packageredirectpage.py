@@ -53,8 +53,6 @@ class PackageRedirectPage(RenderableResource):
         """
         RenderableResource.__init__(self, None, None, webServer)
         self.webServer = webServer
-        self.packagePath = packagePath
-        self.package_name = ''
         # See if all out main pages are not showing
         # This is a twisted timer
         self.stopping = None
@@ -120,11 +118,13 @@ class PackageRedirectPage(RenderableResource):
                     else:
                         errormsx = "Unknown"
 
-                    self.webServer.importode = ImportOdePage(self.webServer.root, repository, edit_ode_id, error=errormsx)
+                    self.webServer.importode = ImportOdePage(
+                        self.webServer.root, repository, edit_ode_id, error=errormsx)
                     return self.webServer.importode
             else:
                 errormsx = "The ode_id field is empty"
-                self.webServer.importode = ImportOdePage(self.webServer.root, repository, "None", error=errormsx)
+                self.webServer.importode = ImportOdePage(
+                    self.webServer.root, repository, "None", error=errormsx)
                 return self.webServer.importode
 
         # New package
@@ -138,10 +138,6 @@ class PackageRedirectPage(RenderableResource):
             if result is not None:
                 return result
             else:
-                if self.packagePath:
-                    session.packageStore.addPackage(self.package)
-                    self.bindNewPackage(self.package, session)
-                    self.packagePath = None
                 if session.uid in self.mainpages.keys():
                     if name in self.mainpages[session.uid].keys():
                         return self.mainpages[session.uid][name]
@@ -196,33 +192,29 @@ class PackageRedirectPage(RenderableResource):
                 except:
                     write_error = True
 
-            self.packagePath = package_file_path
-
-            if self.packagePath.exists() and not write_error:
+            if package_file_path.exists() and not write_error:
 
                 # Load Package and add ode_id and repository_url
-                self.package = Package.load(self.packagePath)
-                self.package.ode_id = ode_id
-                self.package.ode_repository_uri = self.integration.repo_home_url
+                package = Package.load(package_file_path)
+                package.ode_id = ode_id
+                package.ode_repository_uri = self.integration.repo_home_url
 
+                session.packageStore.addPackage(package)
+                self.bindNewPackage(package, session)
 
                 log_add_package_params = {
                     'session_user': session.user.name,
-                    'package_ode_id': self.package.ode_id,
-                    'package_ode_filename': self.package.name,
+                    'package_ode_id':package.ode_id,
+                    'package_ode_filename': package.name,
+                    'package_path': package_file_path,
                     'ode_ide': dict_response['ode_id'],
                     'ode_uri': dict_response['ode_uri'],
-                    'ode_filename': dict_response['ode_filename']
+                    'ode_filename': dict_response['ode_filename'],
                 }
+                self.integration.log_info_integration(
+                    info='add_package_to_session:Package.load()',params=log_add_package_params)
 
-                self.integration.log_info_integration(info='add_package_to_session:INFO',params=log_add_package_params)
-
-                if (self.package.ode_id != dict_response['ode_id']
-                or self.package.ode_id != dict_response['ode_filename']):
-                    self.integration.log_info_integration(
-                        error=True,info='add_package_to_session:ERROR',params=log_add_package_params)
-
-                return (True, self.package.name)
+                return (True, package.name)
 
             else:
                 return (False, 'Error saving package to user directory')
