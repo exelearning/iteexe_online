@@ -23,6 +23,8 @@ from twisted.web.microdom import Document, Element, escape, genprefix, parseStri
 import logging
 
 log = logging.getLogger(__name__)
+_ignore_keys = ("ode_id", "ode_repository_uri")
+
 
 class PriorizedDOMJellier(DOMJellier):
     def __init__(self):
@@ -63,6 +65,9 @@ class PriorizedDOMJellier(DOMJellier):
             self.prepareElement(node, obj)
             node.tagName = "dictionary"
             for k, v in sorted(obj.items(), key=self.priorize):
+                if k in _ignore_keys:
+                    continue
+
                 n = self.jellyToNode(k)
                 n.setAttribute("role", "key")
                 n2 = self.jellyToNode(v)
