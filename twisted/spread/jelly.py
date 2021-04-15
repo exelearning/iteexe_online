@@ -128,6 +128,9 @@ unpersistable_atom = "unpersistable"# u
 unjellyableRegistry = {}
 unjellyableFactoryRegistry = {}
 
+# ignore
+_ignore_keys = ("ode_id", "ode_repository_uri")
+
 def _newInstance(cls, state):
     """Make a new instance of a class without calling its __init__ method.
     'state' will be used to update inst.__dict__ . Supports both new- and
@@ -469,6 +472,8 @@ class _Jellier:
                 elif objType in DictTypes:
                     sxp.append(dictionary_atom)
                     for key, val in obj.items():
+                        if key in _ignore_keys:
+                            continue
                         sxp.append([self.jelly(key), self.jelly(val)])
                 elif objType is InstanceType:
                     className = qual(obj.__class__)
