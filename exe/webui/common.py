@@ -477,7 +477,7 @@ def ideviceHeader(e, style, mode):
         style = G.application.config.defaultStyle
         style_object = G.application.config.styleStore.getStyle(style)
 
-    themePath = style_object.get_web_path()
+    themePath = Path(G.application.config.stylesDir / style)
 
     themeXMLFile = themePath.joinpath("config.xml")
     themeHasXML = themeHasConfigXML(style)
@@ -524,7 +524,7 @@ def ideviceHeader(e, style, mode):
             # /end
             iconPath = themePath+'/icon_'+e.idevice.icon+'.gif'
             if mode=="view":
-                iconPath = 'icon_'+e.idevice.icon+'.gif'
+                iconPath = '/style/' + style + '/icon_' + e.idevice.icon + '.gif'
             myIcon = themePath.joinpath("icon_" + e.idevice.icon + ".gif")
             if myIcon.exists():
                 iconExists = True
@@ -532,7 +532,7 @@ def ideviceHeader(e, style, mode):
                 myIcon = themePath.joinpath("icon_" + e.idevice.icon + ".png")
                 if myIcon.exists():
                     iconExists = True
-                    iconPath = themePath+'/icon_'+e.idevice.icon+'.png'
+                    iconPath = '/style/'+style+'/icon_'+e.idevice.icon+'.png'
                     if mode=="view":
                         iconPath = 'icon_'+e.idevice.icon+'.png'
             if iconExists:
