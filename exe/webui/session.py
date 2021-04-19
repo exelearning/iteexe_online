@@ -75,14 +75,20 @@ class eXeRequest(appserver.NevowRequest):
                     G.application.config.userResourcesDir = session.user.root
                     session.site.server.application.config = session.user.config
                     session.site.server.preferences.config = session.user.config
-                    session.user.config.locales[session.user.config.locale].install(unicode=True)
+                    conf_locale = session.user.config.locale
+                    if conf_locale not in session.user.config.locales:
+                        conf_locale = 'en'
+                    session.user.config.locales[conf_locale].install(unicode=True)
                 if session.user.ideviceStore:
                     G.application.ideviceStore = session.user.ideviceStore
                 if session.user.stylesPath:
                     G.application.config.userStylesDir = session.user.stylesPath
                 package = session.user.packageStore.getPackage(request.prepath[0])
         if package:
-            __builtins__['c_'] = lambda s: G.application.config.locales[package.lang].ugettext(s) if s else s
+            package_lang = package.lang
+            if package_lang not in G.application.config.locales:
+                package_lang = 'en'
+            __builtins__['c_'] = lambda s: G.application.config.locales[package_lang].ugettext(s) if s else s
         appserver.NevowRequest.gotPageContext(self, pageContext)
 
     def getSession(self, sessionInterface = None):
