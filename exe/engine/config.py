@@ -734,10 +734,11 @@ class Config(object):
                     gettext.translation('exe',
                                         self.localeDir,
                                         languages=[str(subDir.basename())])
-        if self.locale not in self.locales:
-            self.locale = 'en'
-        log.debug("loading locale %s" % self.locale)
-        self.locales[self.locale].install(unicode=True)
-        __builtins__['c_'] = lambda s: self.locales[self.locale].ugettext(s) if s else s
+        self_locale = self.locale
+        if self_locale not in self.locales:
+            self_locale = 'en'
+        log.debug("loading locale %s" % self_locale)
+        self.locales[self_locale].install(unicode=True)
+        __builtins__['c_'] = lambda s: self.locales[self_locale].ugettext(s) if s else s
 
 # ===========================================================================
