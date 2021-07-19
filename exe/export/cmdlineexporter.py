@@ -37,6 +37,8 @@ from exe.export.epub3subexport import Epub3SubExport
 
 LOG = logging.getLogger(__name__)
 
+ENCODING = sys.stdout.encoding or "UTF-8"
+
 
 class CmdlineExporter(object):
     extensions = {'xml': '.xml',
@@ -70,9 +72,8 @@ class CmdlineExporter(object):
                     outputf = inputf + self.extensions[self.options["export"]]
             outputfp = Path(outputf)
             if outputfp.exists() and not self.options["overwrite"]:
-                error = _(u'"%s" already exists.\nPlease try again \
-                        with a different filename') % outputf
-                raise Exception(error.encode(sys.stdout.encoding))
+                error = _(u'"%s" already exists.\nPlease try again with a different filename') % outputf
+                raise Exception(error.encode(ENCODING))
             else:
                 if outputfp.exists() and self.options["overwrite"]:
                     if outputfp.isdir():
@@ -85,15 +86,14 @@ class CmdlineExporter(object):
                 LOG.debug("Package %s loaded" % (inputf))
                 if not pkg:
                     error = _(u"Invalid input package")
-                    raise Exception(error.encode(sys.stdout.encoding))
+                    raise Exception(error.encode(ENCODING))
                 self.styles_dir = self.config.stylesDir / pkg.style
                 LOG.debug("Styles dir: %s" % (self.styles_dir))
                 pkg.exportSource = self.options['editable']
                 getattr(self, 'export_' + self.options["export"])(pkg, outputf)
                 return outputf
         else:
-            raise Exception(_(u"Export format not implemented")\
-.encode(sys.stdout.encoding))
+            raise Exception(_(u"Export format not implemented").encode(ENCODING))
 
 
     def export_xml(self, pkg, outputf):

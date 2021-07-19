@@ -74,6 +74,7 @@ function xmlcreate(items,types) {
 
     return valxml;
 }
+
 function createButtonEdit(name, style, currentStyle, enable, userStyle) {
     var disabled = false;
     if (enable==false) disabled = true;
@@ -94,6 +95,7 @@ function createButtonEdit(name, style, currentStyle, enable, userStyle) {
     };
     return buttonEdit;
 }
+
 function createButtonPreExport(name, style, enable, userStyle) {
     var disabled = false;
     if (enable==false) disabled = true;
@@ -127,6 +129,7 @@ function createButtonExport(name, stylen, xmlitems, lngitems) {
     };
     return buttonExport;
 }
+
 function createButtonDelete(name, style, enable, userStyle) {
     var disabled = false;
     if (enable==false) disabled = true;
@@ -220,6 +223,7 @@ function createPanelStyles(styles) {
                 bEstilo = true;
             }
         }
+
         var item =
         {
             xtype: 'container',
@@ -353,7 +357,7 @@ function createPanelProperties(properties, stylen, mode, withbutton) {
                     xtype: 'textfield',
                     fieldLabel: properties[i].name,
                     name: properties[i].nxml,
-                    value: properties[i].value,
+                    value: properties[i].value==true ? '' : properties[i].value,
                     grow : true,
                     width: 420,
                     readOnly: mode,

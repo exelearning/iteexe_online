@@ -394,4 +394,5 @@ class JsIdevice(Idevice):
             properties.append({'name': _(name), 'value': value})
 
         return properties
+
 # ===========================================================================

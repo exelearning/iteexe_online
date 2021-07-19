@@ -27,6 +27,8 @@ import logging
 import os
 import shutil
 import nevow
+import ssl
+from sys                       import platform
 from zipfile                   import ZipFile, ZIP_DEFLATED
 import json
 from tempfile                  import gettempdir
@@ -202,6 +204,7 @@ class StyleManagerPage(RenderableResource):
             delete = False
             editButton = False
             properties = False
+
             if style.get_style_root_dir() == self.config.stylesDir:
                 userStyle = 0
             else:
@@ -268,9 +271,33 @@ class StyleManagerPage(RenderableResource):
                     absoluteTargetDir.rmtree()
                     raise ImportStyleExistsError(style, absoluteTargetDir, _('The style name already exists'))
             else:
+                # Check missing files
+                cssFile = style.get_style_dir()/'content.css'
+                files_to_check = ['content.css']
+                missing_files = []
+                for f in files_to_check:
+                    if not (style.get_style_dir()/f).exists():
+                        missing_files.append(f)
+                if missing_files:
+                    # Missing files error
+                    missing_files_text = ', '.join(missing_files)
+                    if len(missing_files) > 1:
+                        style_error =  ImportStyleError(_('Files %s does not exist or are not readable.') % missing_files_text)
+                    else:
+                        style_error =  ImportStyleError(_('File %s does not exist or is not readable.') % missing_files_text)
+                else:
+                    configStyle = style.get_style_dir()/'config.xml'
+                    if configStyle.exists():
+                        # We consider that if no file is missing the error is due to the format of config.xml
+                        style_error = ImportStyleError(_('Wrong config.xml file format.'))
+                    else:
+                        # Generic error
+                        style_error = ImportStyleError(_('An unknown error occurred while importing the style.'))
+                # Remove the style
                 absoluteTargetDir.rmtree()
-                # content.css is missing
-                raise ImportStyleError(_('File %s does not exist or is not readable.') % 'content.css')
+                # Raise error
+                raise style_error
+                
 
         # If not error was thrown, style was successfully imported
         # Let the calling function inform the user as appropriate
@@ -426,6 +453,12 @@ class StyleManagerPage(RenderableResource):
             temp_path = gettempdir()
             filename_path = os.path.join(temp_path, filename)
             log.debug("Downloading style %s from %s into %s" % (style_name, url, filename_path))
+            # Disable the verification of ssl certificates on MacOs
+            #  to prevent CERTIFICATE_VERIFY_FAILED
+            if platform == "darwin":
+                context = ssl._create_unverified_context()
+            else:
+                context = None
             d = threads.deferToThread(
                                       urlretrieve, url, filename_path,
                                       lambda n, b, f: self.progressDownload(n, b, f, self.client))

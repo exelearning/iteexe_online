@@ -91,16 +91,16 @@ li{list-style-position:outside}
 #wikipedia-content ul li{list-style-image:none;margin-bottom:auto}
 /* Form buttons */
 .iDevice_inner input[type=submit],.feedbackbutton{background:#007691;border:0;padding:4px 10px;color:#fff;margin-bottom:1em}
-.iDevice_inner input[type=submit]:hover,.feedbackbutton:hover{background:#3a4749}
+.iDevice_inner input[type=submit]:hover,.feedbackbutton:hover,.iDevice_inner input[type=submit]:focus,.feedbackbutton:focus{background:#3a4749}
 /* Hide/Show iDevice */
 .toggle-idevice{text-align:right;display:block;margin-right:13px}
 .iDevice_header .toggle-idevice{position:absolute;right:13px;bottom:13px;margin:0}
 .toggle-idevice a{display:inline-block;width:20px;height:20px;background:url(_intef_icons.png) no-repeat 0 -20px}
 .toggle-idevice .show-idevice{background-position:0 0}
 .toggle-idevice span,#printNode a span{
-	position:absolute; 
+	position:absolute;
 	clip:rect(1px 1px 1px 1px);/* IE6, IE7 */
-	clip:rect(1px, 1px, 1px, 1px);	
+	clip:rect(1px, 1px, 1px, 1px);
 }
 /* eXe < 2.1 */
 .iDevice a,#siteFooter a,#packageLicense a,.toggle-idevice a{text-decoration:underline}
@@ -113,9 +113,10 @@ li{list-style-position:outside}
 #packageLicense.cc{padding:0 20px 0 110px;background:#526668 url(_intef_licenses.gif) no-repeat 20px 5px}
 #packageLicense.cc-by-sa{background-position:20px -95px}
 #packageLicense.cc-by-nd{background-position:20px -195px}
-#packageLicense.cc-by-nc-sa{background-position:20px -295px}
-#packageLicense.cc-by-nc-nd{background-position:20px -395px}
-#packageLicense.cc-0{background-position:20px -495px}
+#packageLicense.cc-by-nc{background-position:20px -295px}
+#packageLicense.cc-by-nc-sa{background-position:20px -395px}
+#packageLicense.cc-by-nc-nd{background-position:20px -495px}
+#packageLicense.cc-0{background-position:20px -595px}
 
 /* eXe Figures */
 .exe-figure{margin:2.5em 0}
@@ -133,7 +134,14 @@ li{list-style-position:outside}
 	#nodeDecoration,#header,#emptyHeader{color:#000;text-shadow:none;background:none;border:none;border-bottom:1px solid #E2E2E2;padding:20px 0}
 	#packageLicense,#packageLicense.cc{background:none;padding:0;border:none;box-shadow:none;text-align:center}
 	#packageLicense,#packageLicense a,#nodeTitle,.nodeTitle{color:#000}
+	.hidden-idevice .iDevice_header{box-shadow:none}
+	.iDevice_inner{box-shadow:none;padding:10px 0}
 	.iDevice_header{padding:5px 0}
+	.toggle-idevice{display:none}
+	/* Uncomment this to print URL after links:
+	a[href^=http]{font-weight:bold;text-decoration:none!important}
+	a[href^=http]:after{content:" <" attr(href) "> "}
+	*/
 }
 
 /* Accordion */

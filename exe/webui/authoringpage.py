@@ -39,6 +39,7 @@ import re
 
 log = logging.getLogger(__name__)
 
+
 # ===========================================================================
 class AuthoringPage(RenderableResource):
     """
@@ -59,7 +60,6 @@ class AuthoringPage(RenderableResource):
             return self
         else:
             return Resource.getChild(self, name, request)
-
 
     def _process(self, request):
         """
@@ -226,9 +226,8 @@ class AuthoringPage(RenderableResource):
 
     render_POST = render_GET
 
-
     def __renderHeader(self):
-		#TinyMCE lang (user preference)
+        #TinyMCE lang (user preference)
         myPreferencesPage = self.webServer.preferences
 
         """Generates the header for AuthoringPage"""
@@ -289,6 +288,7 @@ class AuthoringPage(RenderableResource):
         html += u'<script type="text/javascript" src="/scripts/exe_effects/exe_effects.js"></script>\n'
         html += u'<script type="text/javascript" src="/scripts/exe_highlighter/exe_highlighter.js"></script>\n'
         html += u'<script type="text/javascript" src="/scripts/exe_games/exe_games.js"></script>\n'
+        html += u'<script type="text/javascript" src="/scripts/fix_webm_duration/fix_webm_duration.js"></script>\n'
         html += u'<script type="text/javascript" src="/scripts/tinymce_4/js/tinymce/plugins/abcmusic/export/exe_abcmusic.js"></script>\n' #93 (to do)
         html += u'<script type="text/javascript" src="/scripts/common.js"></script>\n'
         html += '<script type="text/javascript">document.write(unescape("%3Cscript src=\'" + eXeLearning_settings.wysiwyg_path + "\' type=\'text/javascript\'%3E%3C/script%3E"));</script>';
@@ -297,6 +297,7 @@ class AuthoringPage(RenderableResource):
         html += u'<title>"+_("eXe : elearning XHTML editor")+"</title>\n'
         html += u'<meta http-equiv="content-type" content="text/html; '
         html += u' charset=UTF-8" />\n'
+
         if style.hasValidConfig():
             html += style.get_edition_extra_head()
         html += common.getExtraHeadContent(self.package)

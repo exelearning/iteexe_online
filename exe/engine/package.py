@@ -354,8 +354,10 @@ class Package(Persistable):
 
         self.root          = Node(self, None, _(u"Home"))
         self.currentNode   = self.root
+
         #self.style         = u"default"
         #self.styledefault  = u"INTEF"
+
         self.style         = G.application.config.defaultStyle
         self._isChanged    = False
         self.previewDir    = None
@@ -1172,6 +1174,7 @@ class Package(Persistable):
     exportElp = property(get_exportElp, set_exportElp)
     isTemplate = property(get_isTemplate, set_isTemplate)
     templateFile = property(get_templateFile, set_templateFile)
+    load_message = ""
 
     def findNode(self, nodeId):
         """
@@ -1201,8 +1204,10 @@ class Package(Persistable):
         Save package to disk
         pass an optional filename
         """
+        # Delete attribute thats check compatibility with old versions
         if hasattr(self, 'compatibleWithVersion9'):
             delattr(self, 'compatibleWithVersion9')
+
         self.tempFile = tempFile
         self.set_isTemplate(isTemplate)
         # Get the filename
@@ -1316,8 +1321,10 @@ class Package(Persistable):
         self.currentNode.copyToPackage(newPackage)
         return newPackage
 
+
     @staticmethod
-    def load(filename, newLoad=True, destinationPackage=None, fromxml=None, isTemplate=False, preventUpdateRecent=False):
+    def load(filename, newLoad=True, destinationPackage=None, fromxml=None, isTemplate=False, preventUpdateRecent=False,
+             is_new_package=False):
         """
         Load package from disk, returns a package.
         """
@@ -1331,7 +1338,10 @@ class Package(Persistable):
         try:
             xml = zippedFile.read(u"contentv3.xml")
         except:
-            pass
+            try:
+                xml = zippedFile.read(u"contentv2.xml")
+            except:
+                pass
 
         if not xml:
             try:
@@ -1361,6 +1371,8 @@ class Package(Persistable):
             u'config.xml'
         ]
 
+        load_message = ""
+
         # Extract resource files from package to temporary directory
         for fn in zippedFile.namelist():
             if unicode(fn, 'utf8') not in excluded_files:
@@ -1384,14 +1396,22 @@ class Package(Persistable):
             if fromxml:
                 newPackage, validxml = decodeObjectFromXML(fromxml)
             elif xml:
-                xmlinfo = zippedFile.getinfo(u"contentv3.xml")
+                try:
+                    xmlinfo = zippedFile.getinfo(u"contentv3.xml")
+                except:
+                    xmlinfo = zippedFile.getinfo(u"contentv2.xml")
                 if u"content.data" not in zippedFile.NameToInfo:
                     newPackage, validxml = decodeObjectFromXML(xml)
                 else:
                     datainfo = zippedFile.getinfo(u"content.data")
                     if xmlinfo.date_time >= datainfo.date_time:
-                        if False: #for now we will use decodeObjectRaw, it is much faster
+                        try:
                             newPackage, validxml = decodeObjectFromXML(xml)
+                        except:
+                            load_message = _(u"Can't read the .xml file. eXe will try to recover the content from the .data file instead.")
+
+                            log.warn("Error decode xml. Incorrect contentv3.xml")
+
             if not validxml:
                 toDecode   = zippedFile.read(u"content.data")
                 newPackage = decodeObjectRaw(toDecode)
@@ -1599,16 +1619,20 @@ class Package(Persistable):
                     nstyle = Path(G.application.config.stylesDir/newPackage.style)
 
             if not style and (not nstyle or not nstyle.isdir()) and (not nustyle or not nustyle.isdir()):
-                newPackage.style=G.application.config.defaultStyle
+                newPackage.style = G.application.config.defaultStyle
 
         newPackage.lang = newPackage._lang
 
         # Reset license to ensure is set for the main package properties and for
-        # both Lom and LomES
-        newPackage.set_license(newPackage.license)
+        # both Lom and
+        if is_new_package:
+            newPackage.set_license(G.application.config.defaultLicense)
+        else:
+            newPackage.set_license(newPackage.license)
 
         newPackage.isLoading = False
-
+        if load_message:
+            newPackage.load_message = load_message
         return newPackage
 
     def getUserResourcesFiles(self, node):

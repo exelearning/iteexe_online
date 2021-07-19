@@ -92,9 +92,9 @@ class ListaIdevice(Idevice):
                              "beginners."
                              "    </p>"
                              "    <p>"
-                             "Choose words in the text that"
-                             "are key to understanding the concepts. These"
-                             "will probably be verbs, nouns, and key adverbs."
+                             "Choose words in the text that "
+                             "are key to understanding the concepts. These "
+                             "will probably be verbs, nouns, and key adverbs. "
                              "Choose alternatives with one clear answer."
                              "    </p>"
                              "  </dd>"
@@ -347,8 +347,11 @@ class ListaField(FieldWithResources):
         self.rawContent = ''
         self._setVersion2Attributes()
         self.otras = ''
-        self.otrasInstruc = \
-            x_(u"<p>Optional: Write other words to complete the dropdown activity.</br>Use | (vertical bar ) to separate words.</br>This field can be left blank. </p>")
+        # self.otrasInstruc should have no HTML tags (#574)
+        otrasInstruc = \
+            _(u"<p>Optional: Write other words to complete the Dropdown activity.<br/> Use | (the vertical bar) to separate words.<br/> This field can be left blank. </p>")
+        cleanr = re.compile('<.*?>')
+        self.otrasInstruc = re.sub(cleanr, '', otrasInstruc)
      
 
     def _setVersion2Attributes(self):

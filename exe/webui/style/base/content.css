@@ -85,9 +85,10 @@ input,select{font-size:1em;font-family:inherit}
 #packageLicense.cc{padding-left:95px;background:url(_style_licenses.png) no-repeat 0 0}
 #packageLicense.cc-by-sa{background-position:0 -100px}
 #packageLicense.cc-by-nd{background-position:0 -200px}
-#packageLicense.cc-by-nc-sa{background-position:0 -300px}
-#packageLicense.cc-by-nc-nd{background-position:0 -400px}
-#packageLicense.cc-0{background-position:0 -500px}
+#packageLicense.cc-by-nc{background-position:0 -300px}
+#packageLicense.cc-by-nc-sa{background-position:0 -400px}
+#packageLicense.cc-by-nc-nd{background-position:0 -500px}
+#packageLicense.cc-0{background-position:0 -600px}
 #siteFooter{padding:20px}
 
 /* Download package iDevice */
@@ -106,16 +107,18 @@ background:#ededed;
 
 @media print {
     div.node{page-break-after:auto} /* base.css */
-    #main{margin-left:0} /* base.css */
     .iDevice{margin-bottom:20px}
 	html body{background:#fff;color:#000;font-size:11pt}
-	@page{margin:2cm}
+	@page{margin:1.5cm}
 	/* Uncomment this to print URL after links:
 	a{font-weight:bolder;text-decoration:none!important}
 	a[href^=http]:after{content:" <" attr(href) "> "}
 	*/
 	#main .iDeviceTitle{background:none;padding-left:0}
 	body #header,body #emptyHeader,body #nodeDecoration{height:auto!important;min-height:0;border:none;padding:0}
+	body #headerContent{padding-top:40px}
+	#packageLicense.cc{padding-left:0;text-align:center}
+	.toggle-idevice{display:none}
 }
 
 /* eXeLearning Style Designer */

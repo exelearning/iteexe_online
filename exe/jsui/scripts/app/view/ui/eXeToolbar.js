@@ -108,6 +108,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('New') + getSRhelp(),
+                                hideOnClick: false,
                                 accesskey: 'n',
                                 menu: {
                                     xtype: 'menu',
@@ -131,6 +132,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                         {
                                             xtype: 'accesskey_menuitem',
                                             text: _('Templates') + getSRhelp(),
+                                            hideOnClick: false,
                                             itemId: 'templates_button',
                                             menu: {
                                                 xtype: 'menu',
@@ -152,6 +154,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Import') + getSRhelp(),
+                                hideOnClick: false,
                                 accesskey: 'i',
                                 menu: {
                                     xtype: 'menu',
@@ -189,6 +192,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             cls: 'exe-advanced',
                                             xtype: 'accesskey_menuitem',
 			                                text: _('Metadata') + getSRhelp(),
+			                                hideOnClick: false,
 			                                accesskey: 'm',
                                             menu: {
                                                 xtype: 'menu',
@@ -214,6 +218,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Recent Projects...') + getSRhelp(),
+                                hideOnClick: false,
                                 accesskey: 'r',
                                 menu: {
                                     xtype: 'menu',
@@ -254,6 +259,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Templates') + getSRhelp(),
+                                hideOnClick: false,
                                 menu: {
                                     xtype: 'menu',
 	                                itemId: 'templates_options_menu',
@@ -283,6 +289,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Export') + getSRhelp(),
+                                hideOnClick: false,
                                 accesskey: 'e',
                                 menu: {
                                     xtype: 'menu',
@@ -291,6 +298,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 	    xtype: 'accesskey_menuitem',
                                             cls: 'exe-advanced',
                                             text: _('Educational Standard') + getSRhelp(),
+                                            hideOnClick: false,
                                             accesskey: 'e',
                                             menu: {
                                                 xtype: 'menu',
@@ -326,6 +334,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             cls: 'exe-advanced',
                                             xtype: 'accesskey_menuitem',
                                             text: _('Web Site') + getSRhelp(),
+                                            hideOnClick: false,
                                             accesskey: 'w',
                                             menu: {
                                                 xtype: 'menu',
@@ -396,7 +405,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                         {
                                             cls: 'exe-simplified',
                                             xtype: 'accesskey_menuitem',
-                                            text: _('SCORM'),
+                                            text: _('SCORM1.2'),
                                             accesskey: 't',
                                             itemId: 'file_export_scorm'
                                         },
@@ -414,6 +423,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
                                 text: _('Publish') + getSRhelp(),
+                                hideOnClick: false,
                                 itemId: 'publish',
                                 accesskey: 'l',
                                 menu: {
@@ -743,7 +753,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     menu:
                     {
                         xtype: 'menu',
-                        items: 
+                        items:
                         [
                             {
                                 xtype: 'label',

@@ -65,6 +65,10 @@ class SinglePageExport(object):
         self.templatesDir   = Path(templatesDir)
         self.page           = None
 
+        # Create the output dir if it doesn't already exist
+        # if not self.outputDir.exists():
+        #     self.outputDir.mkdir()
+
     def export(self, package, for_print=0):
         """
         Export web site

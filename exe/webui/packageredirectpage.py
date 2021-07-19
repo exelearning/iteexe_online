@@ -98,7 +98,7 @@ class PackageRedirectPage(RenderableResource):
             edit_ode_id = request.args['ode_id'][0]
             # Integration (in case the user accesses this url directly)
             if not self.integration:
-	            self.integration = Integration()
+                self.integration = Integration()
             # Repository URL
             if self.integration:
                 repository = self.integration.repo_home_url
@@ -224,7 +224,6 @@ class PackageRedirectPage(RenderableResource):
         else:
             return (False, 'Repository Error: {}'.format(dict_response['description']))
 
-
     def render_GET(self, request):
         """
         Create a new package and redirect the webrowser to the URL for it
@@ -238,7 +237,7 @@ class PackageRedirectPage(RenderableResource):
             session.packageStore = PackageStore()
 
         if os.path.exists(template_base):
-            package = session.packageStore.createPackageFromTemplate(template_base)
+            package = session.packageStore.createPackageFromTemplate(template_base, is_new_package=True)
         else:
             package = session.packageStore.createPackage()
 

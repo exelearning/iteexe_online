@@ -51,6 +51,7 @@ langNames = {
    'cs': 'Čeština, český jazyk',       # \xc4\x8cesky, Czech
    'da': 'Dansk',
    'de': 'Deutsch',                    # German
+   'dz': 'རྫོང་ཁ་',			# Dzongkha, or Bhutanese
    'ee': 'Eʋegbe',                     # Ewe
    'el': 'Ελληνικά',                    # \xce\x95\xce\xbb\xce\xbb\xce\xb7\xce\xbd\xce\xb9\xce\xba\xce\xac, Greek
    'en': 'English',
@@ -218,6 +219,13 @@ class PreferencesPage(RenderableResource):
         try:
             locale = request.args['locale'][0]
             self.config.locale = locale
+            # Change package lang too
+            # session = request.getSession()
+            # packagename = request.getPackageName()
+            # for name,package in session.packageStore.loaded.items():
+            #     if name == packagename:
+            #         package.set_lang(locale)
+            #
             self.config.locales[locale].install(unicode=True)
             self.config.configParser.set('user', 'locale', locale)
 

@@ -143,9 +143,16 @@ color: #000000;
 /* exe_lightbox.css */
 /* The New eXeLearning */
 .exeImageGallery{margin:1em 0 0 15px;padding:0;overflow:auto}
-.exeImageGallery li{margin:0;padding:15px 15px 15px 0;display:block;float:left;list-style:none}
+.exeImageGallery li{margin:0;padding:5px 15px 25px 15px;display:block;float:left;list-style:none}
+.exeImageGallery a{display:inline-block;width:128px;height:128px;background:#FFF;box-shadow:0 8px 6px -6px rgba(0,0,0,0.6);transition: all 0.5s cubic-bezier(.25,.8,.25,1)}
+.exeImageGallery a:hover{box-shadow:0 10px 7px -6px rgba(0,0,0,0.8)}
 .exeImageGallery a img{border:none}
 .exeImageGallery .tit{display:none}
+#activeIdevice .exeImageGallery a{display:inline;width:auto;height:auto;box-shadow:none!important}
+#activeIdevice .exeImageGallery{margin:0}
+#activeIdevice .exeImageGallery-thumbnail{border:none;width:128px;height:128px}
+#activeIdevice .exeImageGallery img.submit{margin-right:4px}
+#activeIdevice .exeImageGallery span input{width:95%;margin:2px 0 4px 0}
 /* prettyPhoto - Lightbox clone for jQuery - Author: Stephane Caron (http://www.no-margin-for-errors.com) - Version: 3.1.6 */
 div.pp_default .pp_top,div.pp_default .pp_top .pp_middle,div.pp_default .pp_top .pp_left,div.pp_default .pp_top .pp_right,div.pp_default .pp_bottom,div.pp_default .pp_bottom .pp_left,div.pp_default .pp_bottom .pp_middle,div.pp_default .pp_bottom .pp_right{height:13px}
 div.pp_default .pp_top .pp_left{background:url(../scripts/exe_lightbox/exe_lightbox_sprite.png) -78px -93px no-repeat}
@@ -248,6 +255,13 @@ body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:au
 .mce-floatpanel{max-height:100%;overflow:auto}
 .mce-fullscreen .idevice-edition-buttons,.mce-fullscreen .toggle-idevice{display:none}
 
+/* Save iDevice with fullscreen */
+.mce-fullscreen #activeIdevice .exe-editButtons{z-index:10000;position:absolute;left:8px;bottom:37px;margin:0}
+.mce-fullscreen #activeIdevice .exe-editButtons select,.mce-fullscreen #activeIdevice .exe-editButtons img,.mce-fullscreen #activeIdevice .exe-editButtons a{display:none}
+.mce-fullscreen #activeIdevice .exe-editButtons a img{display:inline}
+.mce-fullscreen #activeIdevice .exe-editButtons a:nth-of-type(0),
+.mce-fullscreen #activeIdevice .exe-editButtons a:nth-of-type(1){display:inline}
+
 /* iDevice edition */
 .exe-authoring-page #activeIdevice{padding-top:1.5em;border:0;box-shadow:none}
 .exe-authoring-page .iDevice_wrapper{position:relative}
@@ -262,10 +276,9 @@ body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:au
 
 /* JavaScript iDevices */
 #activeIdevice textarea.jsContentEditor{display:none}
-
 /* iDevice title and icon selection styles */
 .js-show-icon-panel-button{margin:0 5px;font-size:.9em}
-.js-idevide-icon-preview{vertical-align:middle;max-width:60px;height:auto}
+.js-idevide-icon-preview{vertical-align:middle;max-width:60px;height:auto;max-height:60px}
 .js-delete-icon{margin:0 5px}
 .js-icon-panel-container{display:none;z-index:99}
 
@@ -287,15 +300,16 @@ body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:au
 #activeIdevice .exe-checkbox-field input{margin-right:5px}
 #activeIdevice .exe-fieldset{padding:0 20px 5px 20px;border:1px solid #C0C0C0;margin:1.5em 0}
 #activeIdevice .exe-fieldset legend{font-weight:bold;padding:0 10px}
-#activeIdevice .exe-fieldset-closed legend a{text-decoration:underline}
-#activeIdevice .exe-fieldset-closed legend a:hover{text-decoration:none}
-#activeIdevice .exe-fieldset-closed{border:none;padding:0}
+#activeIdevice .exe-fieldset-closed legend a{text-decoration:underline;margin-right:10px;text-decoration:none}
+#activeIdevice .exe-fieldset-closed legend a:hover{text-decoration:underline}
+#activeIdevice .exe-fieldset-closed legend a:before{content:"↕";display:block;float:left;font-family:Verdana,sans-serif;color:#555;font-size:.85em;margin:1px .5em 0 10px}
+#activeIdevice .exe-fieldset-closed{border-width:1px 0 0 0}
 #activeIdevice .exe-fieldset-closed legend{padding:0;margin-bottom:0}
 #activeIdevice .exe-fieldset-closed div{display:none}
 #activeIdevice .exe-field-instructions{display:block;font-size:.9em;margin-top:.4em}
 
 /* Tabs */
-#activeIdevice .exe-form-tabs{margin:0 0 1.5em 0;padding:0;list-style:none}
+#activeIdevice .exe-form-tabs{margin:1em 0 1.5em 0;padding:0;list-style:none}
 #activeIdevice .exe-form-tabs li{margin:0;padding:0;list-style:none;list-style-image:none;display:inline}
 #activeIdevice .exe-form-tabs li:first-child a{border-top-left-radius:4px;border-bottom-left-radius:4px}
 #activeIdevice .exe-form-tabs li:last-child a{border-top-right-radius:4px;border-bottom-right-radius:4px}
@@ -303,10 +317,20 @@ body .exe-hidden-accessible{position:static;overflow:visible;clip:auto;height:au
 #activeIdevice .exe-form-tabs li:not(:last-child) a{border-right:none}
 #activeIdevice .exe-form-tabs .exe-form-active-tab{color:#000;background:#FFF;font-weight:bold}
 
+/* Dismissable messages (to be used with exe-block-info) */
+.exe-idevice-info .exe-block-dismissible{position:relative;padding-right:30px}
+.exe-block-dismissible .exe-block-close{position:absolute;right:13px;top:7px;font-size:18px;font-family:Verdana,sans-serif;color:#86A9BB;text-shadow:0 1px 0 #fff;font-weight:bold}
+.exe-block-dismissible .exe-block-close:hover,.exe-block-dismissible .exe-block-close:focus{color:#063853;text-decoration:none}
+
 /* Empty page instructions */
 #emptyPageInstructions{margin-top:2em;position:relative;padding-right:30px}
 #emptyPageInstructions a{position:absolute;right:13px;top:7px;font-size:18px;font-family:Verdana,sans-serif;color:#86A9BB;text-shadow:0 1px 0 #fff;font-weight:bold}
 #emptyPageInstructions a:hover,#emptyPageInstructions a:focus{color:#063853;text-decoration:none}
+
+/* Advanced user */
+.exe-advanced{display:none}
+body.exe-advanced{display:block}
+body.exe-advanced .exe-advanced{display:block}
 
 /* Provisional code to review */
 .exe-editor-toggler{margin:0 5px}

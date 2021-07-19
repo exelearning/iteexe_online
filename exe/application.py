@@ -46,6 +46,7 @@ from exe.engine              import version
 from twisted.scripts.twistd  import daemonize, checkPID
 from exe.engine.idevicestore import IdeviceStore
 from exe.engine.package      import Package
+from exe.engine.translate    import installSafeTranslate
 from exe.webui.browser       import launchBrowser
 
 log = logging.getLogger(__name__)
@@ -90,12 +91,15 @@ class Application:
         """
         self.config = None
         self.defaultConfig = None
+        self.ideviceStore = None
         self.userStore = None
         self.packagePath = None
         self.webServer = None
         self.exeAppUri = None
         self.standalone = False  # Used for the ready to run exe
+        self.snap = False  # Used for the Snap package
         self.portable = False  # FM: portable mode
+        self.persistNonPersistants = False
         self.server = False
         self.interface = None
         self.persistNonPersistants = False
@@ -114,6 +118,7 @@ class Application:
         """
         self.processArgs()
         self.loadConfiguration()
+        installSafeTranslate()
         self.preLaunch()
         # preLaunch() has called find_port() to set config.port (the IP port #)
         self.exeAppUri = 'http://localhost:%d' % self.config.port
@@ -338,3 +343,4 @@ in Documents and Settings/<user name>/Application Data/exe on Windows XP or
 Users/<user name>/AppData/Roaming/exe on Windows 7""") % os.path.basename(sys.argv[0])
 
 # ===========================================================================
+

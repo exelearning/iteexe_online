@@ -71,6 +71,21 @@ Ext.define('eXe.controller.Toolbar', {
         	'#file_recent_menu': {
         		beforerender: this.recentRender
             },
+            '#advanced_toggler':{
+                render : this.eXeUIversionCheck
+            },
+        	'#file_recent_menu': {
+        		beforerender: this.recentRender
+        	},
+        	'#styles_button': {
+        		beforerender: this.stylesRender
+        	},
+        	'#styles_button_advanced': {
+        		beforerender: this.stylesRenderAdvanced
+        	},
+        	'#templates_button': {
+        		beforerender: this.templatesRender
+        	},
         	'#file_recent_menu > menuitem': {
         		click: this.recentClick
             },
@@ -95,7 +110,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#templates_menu > menuitem': {
         		click: this.templatesClick
-            },
+        	},
         	'#file_save': {
         		click: this.fileSave
         	},
@@ -104,7 +119,7 @@ Ext.define('eXe.controller.Toolbar', {
         	},
         	'#template_save': {
         		click: this.templateSave
-            },
+        	},
             '#file_print': {
                 click: this.filePrint
             },
@@ -128,7 +143,7 @@ Ext.define('eXe.controller.Toolbar', {
             },
             // Advanced user
             '#file_export_scorm': {
-                click: { fn: this.processExportEvent, exportType: "scorm2004" }
+                click: { fn: this.processExportEvent, exportType: "scorm1.2" }
             },
             '#file_export_website_b': {
                 click: { fn: this.processExportEvent, exportType: "zipFile" }
@@ -206,15 +221,14 @@ Ext.define('eXe.controller.Toolbar', {
             '#tools_refresh': {
                 click: this.toolsRefresh
             },
-            // Task 1080. jrf
-            // '#help_tutorial': {
-            //    click: this.fileOpenTutorial
-            // },
-            // '#help_manual': {
-            //    click: { fn: this.processBrowseEvent, url: 'file://%s/docs/manual/Online_manual.html' }
-            // },
             '#help_tutorial': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/html_manual/exe20_en/') }
+                click: { fn: this.processBrowseEvent, url: 'https://exelearning.net/en/ayuda/' }
+            },
+            '#help_assistant': {
+                click: this.assistantPage
+            },
+            '#help_assistant_simplified': {
+                click: this.assistantPage
             },
             '#help_assistant': {
                 click: this.assistantPage
@@ -225,21 +239,17 @@ Ext.define('eXe.controller.Toolbar', {
             '#help_notes': {
                 click: { fn: this.releaseNotesPage }
             },
-	    // jrf - legal notes
             '#help_legal': {
                 click: this.legalPage
             },
             '#help_website': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/?lang=en') }
+                click: { fn: this.processBrowseEvent, url: 'https://exelearning.net/en/' }
             },
             '#help_issue': {
                 click: { fn: this.processBrowseEvent, url: 'https://github.com/exelearning/iteexe/issues' }
             },
             '#help_forums': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/forums/') }
-            },
-            '#help_last': {
-                click: { fn: this.processBrowseEvent, url: _('http://exelearning.net/downloads/') }
+                click: { fn: this.processBrowseEvent, url: 'https://exelearning.net/en/forums/' }
             },
             '#help_about': {
                 click: this.aboutPage
@@ -353,6 +363,68 @@ Ext.define('eXe.controller.Toolbar', {
         var keymap = new Ext.util.KeyMap(Ext.getBody(), this.keymap_config);
     },
 
+    eXeUIversionCheck : function(){
+        nevow_clientToServerEvent('eXeUIVersionCheck',this)
+    },
+    exeUIsetInitialStatus : function(value){
+        advancedModePreferenceValue = value;
+    },
+    exeUIalert : function(){
+        Ext.Msg.alert(
+            _('Info'),
+            _('Checking this option will show more elements in the menus (File, Tools...) and the Properties tab.')
+        );
+
+    },
+    eXeUIversionSetStatus : function(newValue){
+        advancedModePreferenceValue = newValue;
+        let descriptionLabel = Ext.DomQuery.select("label[for=pp_description]");
+        let contentPanel = false; // The main content. It should always exist.
+        let iframe = document.getElementsByTagName('iframe');
+        if (iframe.length==1) {
+            iframe = iframe[0];
+            let doc = iframe.contentWindow.document;
+            if (doc.body && typeof(doc.body.className)=="string" && doc.body.className!="") {
+                contentPanel = doc.body;
+            }
+        }
+
+        if (newValue == 0) {
+            Ext.select("BODY").removeCls('exe-advanced');
+            Ext.select("BODY").addCls('exe-simplified');
+            // Remove the advanced CSS class from the content panel
+            if (contentPanel!=false) {
+                contentPanel.className = contentPanel.className.replace(" exe-advanced","");
+                // If the current iDevice is a JavaScript one and has tabs, show the first one:
+                if (typeof(iframe.contentWindow["$exeAuthoring"])!='undefined')  iframe.contentWindow.$exeAuthoring.iDevice.tabs.restart();
+            }
+            // Change some strings:
+            if (descriptionLabel && descriptionLabel.length==1) descriptionLabel[0].innerHTML = _("General description") + ":";
+            // Show Properties - Package
+            let e1 = document.getElementById("eXePropertiesTab");
+            if (e1) {
+                let e2 = e1.getElementsByTagName("button");
+                for (let i=0;i<e2.length;i++){
+                    if (e2[i].className=="x-tab-center") {
+                        let span = e2[i].getElementsByTagName("span");
+                        if (span.length==2 && span[0].innerHTML==_("Package")) e2[i].click();
+                    }
+                }
+            }
+        } else {
+            // Ext.util.Cookies.set('eXeUIversion', 'advanced');
+            Ext.select("BODY").removeCls('exe-simplified');
+            Ext.select("BODY").addCls('exe-advanced');
+            // Add the advanced CSS class to the content panel
+            if (contentPanel!=false && contentPanel.className.indexOf(' exe-advanced')==-1) contentPanel.className += ' exe-advanced';
+            // Change some strings:
+            if (descriptionLabel && descriptionLabel.length==1) descriptionLabel[0].innerHTML = _("General") + ":";
+        }
+        // Refresh some components
+        try {
+            Ext.getCmp("exe-viewport").doLayout();
+        } catch(e) {}
+    },
     focusMenu: function(button) {
         button.menu.focus();
     },
@@ -363,7 +435,42 @@ Ext.define('eXe.controller.Toolbar', {
     },
 
     fileNewWindow: function() {
-        window.open(location.href);
+        window.open("/");
+    },
+
+    assistantPage: function() {
+        if (typeof(eXeAssistantPageIsOpen)!='undefined' && eXeAssistantPageIsOpen==true) {
+            eXeAssistantPage.close(true);
+            return;
+        }
+        eXeAssistantPage = new Ext.Window ({
+            height: eXe.app.getMaxHeight(700),
+            width: 650,
+            height: 500,
+            modal: false,
+            minimizable: true,
+            id: 'assistantwin',
+            title: _("Assistant"),
+            items: {
+                xtype: 'uxiframe',
+                src: '/tools/assistant',
+                height: '100%'
+            },
+            listeners: {
+                minimize: function(win,obj) {
+                    var cls = document.body.className;
+                    var elm = Ext.select("BODY");
+                    if (cls.indexOf("exe-window-minified")==-1) elm.addCls('exe-window-minified');
+                    else elm.removeCls('exe-window-minified');
+                    Ext.getCmp("assistantwin").doLayout();
+                },
+                'close': function(){
+                    eXeAssistantPageIsOpen = false;
+                }
+            }
+        });
+        eXeAssistantPageIsOpen = true;
+        eXeAssistantPage.show();
     },
 
     assistantPage: function() {
@@ -459,17 +566,31 @@ Ext.define('eXe.controller.Toolbar', {
 
     processBrowseEvent: function(menu, item, e, eOpts) {
         // this.browseURL(e.url)
+        var html = document.getElementsByTagName("HTML");
+            html = html[0];
+        if (typeof(html.lang)=='string') {
+            // Open eXeLearning.net in the right language
+            var websiteTranslations = [
+                'es',
+                'ca',
+                'eu',
+                'gl'
+            ];
+            if (websiteTranslations.indexOf(html.lang)!=-1) {
+                var helpLinks = [
+					'https://exelearning.net/en/ayuda/',
+					'https://exelearning.net/en/',
+					'https://exelearning.net/en/forums/'
+                ];
+                if (helpLinks.indexOf(e.url)!=-1) {
+                    var url = e.url;
+                    url = url.replace("/en/","/"+html.lang+"/");
+                    e.url = url;
+                }
+            }
+        }
         window.open(e.url)
     },
-
-    // Not used - Task 1080, jrf
-    // fileOpenTutorial: function() {
-    //    this.askDirty("eXe.app.getController('Toolbar').fileOpenTutorial2()");
-    // },
-
-    // fileOpenTutorial2: function() {
-    //     nevow_clientToServerEvent('loadTutorial', this, '');
-    // },
 
     toolsRefresh: function() {
         eXe.app.reload();
@@ -1328,6 +1449,23 @@ Ext.define('eXe.controller.Toolbar', {
             authoring.submitLink("ChangeStyle", item.itemId, 1);
 
         // Update the advanced menu
+        eXe.controller.Toolbar.prototype.stylesRenderAdvanced(true);
+    },
+
+    executeStylesClickAdvanced: function(item) {
+		for (var i = item.parentMenu.items.length-1; i >= 0; i--) {
+			if (item.parentMenu.items.getAt(i) != item)
+				item.parentMenu.items.getAt(i).setChecked(false);
+		}
+		item.setChecked(true);
+		item.parentMenu.hide();
+		item.parentMenu.parentMenu.hide();
+
+        var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
+        if (authoring)
+            authoring.submitLink("ChangeStyle", item.itemId, 1);
+
+        // Update the advanced menu
         eXe.controller.Toolbar.prototype.stylesRender(true);
     },
 
@@ -1480,7 +1618,8 @@ Ext.define('eXe.controller.Toolbar', {
 
 	},
 
-	fileSave2: function(filename, onDone,export_type_name) {
+	fileSave2: function(filename, onDone, export_type_name) {
+
 	    if (filename) {
 	        this.saveWorkInProgress();
 	        // If the package has been previously saved/loaded
@@ -1498,7 +1637,7 @@ Ext.define('eXe.controller.Toolbar', {
 	        }
 	    } else {
 	        // If the package is new (never saved/loaded) show a
-	        // fileSaveAs dialog
+            // fileSaveAs dialog
 	        this.fileSaveAs(onDone)
 	    }
 	},

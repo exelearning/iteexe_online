@@ -33,17 +33,14 @@ from twisted.persisted.styles import requireUpgrade
 from exe                  import globals as G
 from exe.engine.field     import TextField
 from exe.engine.idevice   import Idevice
-from exe.engine.field     import TextField
 from exe.engine.path      import Path, TempDirPath, toUnicode
 from exe.engine.persist   import Persistable
 from exe.engine.resource  import Resource
 from exe.engine.translate import lateTranslate
 from exe.webui.common     import docType
-from exe    import globals as G
-import os
-import codecs
 
 log = logging.getLogger(__name__)
+
 
 class _ShowsResources(Persistable):
     """
@@ -83,10 +80,9 @@ class GalleryImage(_ShowsResources):
     _parent       = None
     _caption       = None
     _id           = None
-    thumbnailSize = (128, 128)
+    thumbnailSize = (175, 175)
     size          = thumbnailSize
     bgColour      = 0x808080
-
 
     def __init__(self, parent, caption, originalImagePath, mkThumbnail=True):
         """
@@ -368,6 +364,7 @@ class GalleryImage(_ShowsResources):
         Adds new makeThumnail, to support non-image media
         """
         self.makeThumbnail = True
+
 
 # ===========================================================================
 class GalleryImages(Persistable, list):

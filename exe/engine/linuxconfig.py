@@ -52,6 +52,11 @@ class LinuxConfig(Config):
             self.localeDir = Path("/usr/share/locale")
 
             self.mediaProfilePath = Path("/usr/share/exe/mediaprofiles")
+        # In you don't have the application installed
+        elif Path("exe").isdir():
+            self.webDir     = Path("exe")
+        elif Path("../exe").isdir():
+            self.webDir     = Path("../exe")
 
         self.dataDir      = Path(os.environ['HOME'])
         self.configDir    = Path(self.dataDir)/'.exe'
@@ -67,6 +72,7 @@ class LinuxConfig(Config):
         self.audioMediaConverter_wav = "/usr/bin/sox %(infile)s %(outfile)s"
         self.audioMediaConverter_mp3 = "/usr/bin/sox %(infile)s -t wav - | /usr/bin/lame -b 32 - %(outfile)s"
         self.ffmpegPath = "/usr/bin/ffmpeg"
+        self.eXeUIversion = 0
 
         self.quota = 0
 

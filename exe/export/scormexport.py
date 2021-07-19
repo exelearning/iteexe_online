@@ -379,6 +379,14 @@ xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc/imscp_v1p1 imscp_v1p1.xsd
             else:
                 xmlStr += """    <file href="exe_jquery.js"/>\n"""
 
+            # SCORM 1.2 and SCORM 2004:
+            # So that certain platforms do not delete the necessary files so that the resources can be editable
+            if page.node.package.exportSource:
+                xmlStr += """    <file href="content.xsd"/>\n"""
+                xmlStr += """    <file href="content.data"/>\n"""
+                xmlStr += """    <file href="contentv3.xml"/>\n"""
+                xmlStr += """    <file href="imslrm.xml"/>\n"""
+
             xmlStr += "  </resource>\n"
 
         # no more resources:
@@ -430,7 +438,9 @@ xsi:schemaLocation="http://www.imsglobal.org/xsd/imscc/imscp_v1p1 imscp_v1p1.xsd
     <file href="exe_jquery.js"/>
     <file href="common_i18n.js"/>
     <file href="common.js"/>\n""" % (filename, filename)
-            my_style = G.application.config.styleStore.getStyle(page.node.package.style)
+
+            my_style = G.application.config.styleStore.getStyle(page.node.package.style)   
+
             for x in my_style.get_style_dir().files('*.*'):
                 fileStr += """    <file href="%s"/>\n""" % x.basename()
                 self.dependencies[x.basename()] = True    
@@ -607,6 +617,7 @@ class ScormExport(object):
         # Copy the style files to the output dir
 
         styleFiles = [self.config.stylesDir/'popup_bg.gif']
+
         # And with all the files of the style we avoid problems:
         styleFiles += self.styleDir.files("*.*")
         if self.scormType == "commoncartridge":
@@ -616,6 +627,7 @@ class ScormExport(object):
         self.styleDir.copylist(styleFiles, outputDir)
 
         listCSSFiles=getFilesCSSToMinify('scorm', self.config.stylesDir)
+
         exportMinFileCSS(listCSSFiles, outputDir)
 
         # Copy the scripts
@@ -859,8 +871,12 @@ class ScormExport(object):
         outputlen = len(outputDir) + 1
         for base, dirs, files in os.walk(outputDir):
             for file in files:
-                fn = os.path.join(base, file)
-                zipped.write(fn, fn[outputlen:].encode('utf8'), ZIP_DEFLATED)
+                fn = Path(os.path.join(base, file))
+                if fn[:4] == '\\\\?\\': # device_namespace_prefix in windows
+                    filename = fn[5:][outputlen].encode('utf8')
+                else:
+                    filename = fn[outputlen:].encode('utf8')
+                zipped.write(fn, filename, ZIP_DEFLATED)
         #
         zipped.close()
 

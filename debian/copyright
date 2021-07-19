@@ -20,6 +20,10 @@ License: GPL-3
  This version of Ext JS is licensed under the terms of the Open Source GPL 3.0 license.
  Commercial and OEM Licenses are available for an alternate download of Ext JS.
 
+Files: exe/scripts/fix_webm_duration/*
+Copyright: 2018 Yury Sitnikov
+License: MIT
+
 Files: /usr/share/exe/scripts/tinymce_3.5.11/*
 Copyright: Moxiecode Systems AB
 License: LGPL-2.1
@@ -97,9 +101,33 @@ File: /usr/share/exe/webui/scripts/exe_html5.js (HTML5 Shiv)
 Copyright: Alexander Farkas
 License: MIT | GPL-2
 
+Files: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/cropper.js and jquery-cropper.js (and the required CSS)
+Copyright: Chen Fengyuan
+License: MIT
+
+Files: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/jquery.min.js
+Copyright: John Resig
+License: MIT
+
+Files: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/FileSaver.min.js
+Copyright: Eli Grey
+License: MIT
+
 Files: exe/webui/tools/fMath/*
 Copyright: Ionel Alexandru
 License: Apache License 2.0
+
+Files: exe/webui/tools/image-compressor/js/compressor.min.js
+Copyright: Fengyuan Chen
+License: MIT
+
+Files: exe/webui/tools/image-compressor/js/vue.min.js
+Copyright: Evan You
+License: MIT
+
+Files: exe/webui/tools/mindmaps/*
+Copyright: David Richard
+License: AGPL V3 (included in eXeLearning with the developer's consent)
 
 File: exe/webui/tools/style-designer/js/jpicker-1.1.6.min.js
 Copyright: Christopher T. Tillman

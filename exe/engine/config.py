@@ -82,6 +82,7 @@ class Config(object):
             'showPreferencesOnStart',
             'showNewVersionWarningOnStart',
             'defaultStyle',
+            'eXeUIversion',
             'showIdevicesGrouped',
             'docType',
             'editorMode',
@@ -313,7 +314,7 @@ class Config(object):
         of directories where the configDir should be in order of preference.
         If no config files can be found in these dirs, it will
         force creation of the config file in the top dir
-        """
+        """ 
         # If there's an EXECONF environment variable, use it
         self.configPath = None
         configFileOptions = map(Path, self._getConfigPathOptions())
@@ -576,6 +577,7 @@ class Config(object):
             except OSError:
                 # ignore the error we get if the log file is logged
                 hdlr = logging.FileHandler(self.configDir/'exe.log')
+
 
         format = "%(asctime)s %(name)s %(levelname)s %(message)s"
         log    = logging.getLogger()

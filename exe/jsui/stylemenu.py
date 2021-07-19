@@ -28,6 +28,7 @@ from exe                       import globals as G
 from exe.engine.path           import Path
 from exe.webui.renderable      import Renderable
 from twisted.web.resource      import Resource
+from exe.webui.livepage import allSessionClients
 log = logging.getLogger(__name__)
 import json
 import locale
@@ -101,24 +102,24 @@ class StyleMenu(Renderable, Resource):
         """
         Adds an Style to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()')
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()', filter_func=allSessionClients)
         """
         The Styles are now in two different menus
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()')
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)        
         """
         We reload the Styles manager panel too
         """
-        self.client.sendScript('Ext.getCmp("stylemanagerwin").down("form").reload("doList")')
+        self.client.sendScript('Ext.getCmp("stylemanagerwin").down("form").reload("doList")', filter_func=allSessionClients)
 
     def delStyle(self, style):
         """
         Delete an Style to the list
         """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()')
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRender()', filter_func=allSessionClients)
         """
         The Styles are now in two different menus
-        """
-        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()')
+        """        
+        self.client.sendScript('eXe.app.getController("Toolbar").stylesRenderAdvanced()', filter_func=allSessionClients)
 
 # ===========================================================================

@@ -221,6 +221,10 @@ browser restrictions, you must click in the url: {0}'),
         for(var i in messages)
             messages[i].close();
     },
+    
+    alert: function(msg){
+        Ext.Msg.alert(_("Warning"), msg);
+    },
 
     notifications: {
         savedPackage : function(filePath) {
@@ -239,24 +243,33 @@ browser restrictions, you must click in the url: {0}'),
     	else
     		eXe.app.afterShowLoadErrors();
     },
-
+    
     showNewVersionWarning: function(){
         // Show a warning message if a new version is available
-        // Not need in eXe Online?
-        /*if (navigator.onLine && eXe.app.config.showNewVersionWarning && typeof(eXe.app.config.release)=='string') {
+        if (navigator.onLine && eXe.app.config.showNewVersionWarning && typeof(eXe.app.config.release)=='string') {
             function openNewVersionWarning(no){
-
+                
                 var latest = no;
                 var current = eXe.app.config.release;
+                
+                // Remove ~alfa or ~beta
+				current = current.split("~");
+				current = current[0];
+				// Remove b (Example: 2.6b2)
+				current = current.split("b");
+				current = current[0];
+                // Remove pp... (launchpad.net ppa version)
+				current = current.split("pp");
+				current = current[0];
 
-                if (current=="" || latest==current) return; // No release number for testing packages
+                if (current=="" || latest==current) return; // No release number for dev packages
 
                 latest = latest.replace(/\./g,"");
                 current = current.replace(/\./g,"");
 
                 while (latest.length>current.length) current += '0';
-                while (current.length>latest.length) latest += '0';
-
+                while (current.length>latest.length) latest += '0';                
+                
                 current = parseFloat(current);
                 latest = parseFloat(latest);
 
@@ -290,7 +303,7 @@ browser restrictions, you must click in the url: {0}'),
                     }
                 }
             });
-        }*/
+        }
     },
 
     alert: function(title, message, func) {
@@ -363,7 +376,6 @@ browser restrictions, you must click in the url: {0}'),
 
         eXe.app.showLoadError();
     },
-
     createLeftPanelToggler : function(isLoadEvent){
         if (isLoadEvent) {
             var a = document.getElementById("hide_exe_leftpanel");
@@ -456,6 +468,14 @@ browser restrictions, you must click in the url: {0}'),
 				}
 			}
 		}
+	},
+
+	// Check if the advanced mode is on or not
+	checkAdvancedModePreference : function(){
+		if (typeof(advancedModePreferenceValue)=='undefined') advancedModePreferenceValue = 0;
+		if (advancedModePreferenceValue==1) Ext.getCmp("advanced_toggler").setValue(true);
+		else Ext.getCmp("advanced_toggler").setValue(false);
+		eXe.app.getController("Toolbar").eXeUIversionSetStatus(advancedModePreferenceValue);
 	},
 
     appFolder: "jsui/app"

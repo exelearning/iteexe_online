@@ -113,10 +113,10 @@ class Style(Persistable):
                     if cssFile.exists():
                         cssFileContent = open(cssFile).read()
                         requiredString = "/* eXeLearning Style Designer Compatible Style */";
-                        position = cssFileContent.find(requiredString)
+
+                        position = cssFileContent.find(requiredString)                        
                         if (position==0):
                             self._isStyleDesignerCompatible = True
-
         except:
             self._valid=False
 

@@ -1,3 +1,159 @@
+<<<<<<< HEAD
+=======
+intef-exe (3:2.6) lucid; urgency=medium
+
+  * Ignacio Gros
+    - TinyMCE: New image optimizer.
+    - TinyMCE: New mind maps editor plugin (mindmaps, by David Richard).
+    - TinyMCE: Paste as text by default. (#541)
+    - TinyMCE: GNU Free Documentation License added to the available licenses list.
+    - TinyMCE: The "Insert HTML code as text" plugin remembers the user's preferences.
+    - You can save an iDevice with the editor in full screen mode.
+    - New UDL Content iDevice and new UDL Style.
+      Junta de Andalucía - Consejería de Educación y Deporte
+      https://www.juntadeandalucia.es/organismos/educacionydeporte
+      Cofinanced with the European Union FEDER funds.
+    - Interactive Video iDevice: You can use a youtu.be URL.
+    - The About eXe page shows the application type instead of the revision number.
+    - iDevices revision (usability, HTML, presentation, strings).
+    - Presentation Style: New Next/Previous top links.
+    - Add a Show/Hide title to the time line links to improve accessibility.
+    - Contents with effects: Print version revision.
+    - Allow Mediateca (https://mediateca.educa.madrid.org/) contents in prettyPhoto/Lightbox.
+    - Allow H5P embedded content in tabs, carousels and accordions.
+    - Windows Ready To Run version: New splash image.
+    - Fixed: The CSS class that depends on the selected iDevice icon was missing when exporting. (#558)
+    - Fixed: Could not see the selected icon in Styles with SVG icons.
+    - Fixed: MediaElement Player download file problem. (#555)
+    - Fixed: Presentation Style: Prevent link default behaviour (usability problem).
+    - Fixed: Invalid XML in the JavaScript iDevices configuration files.
+    - Fixed: "New version available" message always displayed in the PPA version. (#540)
+    - Fixed: Add/Rename/Move page and add iDevice disabled when editing an iDevice. (#550)
+    - Fixed: Dropdown Activity instructions. (#574)
+    - Fixed: Note iDevice missing instructions. (#575)
+    - Fixed: TinyMCE - Paragraphs disappeared when updating/deleting a FIGURE. (#576)
+    - Fixed: TinyMCE - Image title changed when selecting  an image. (#577)
+    - Fixed: exe_do exported a different HTML with missing elements. (#536)
+    - Fixed: Package license. CC BY-NC wrong icon. (#583)
+    - Fixed: The feedback was not working when using an old style. (#587)
+    - Fixed: Invalid HTML in the "Download source file" iDevice (and links to the elp file) (#588)
+    - Fixed: Geogebra iDevice - Lightbox did not work in the instructions. (#590)
+
+  * Manuel Narváez
+    - New iDevice category (Games):
+      New iDevices: Lock, Challenge, Multiple Choice Quiz.
+      New functionalities and bug fixes in: A-Z Quiz Game, QuExt, VideoQuExt, Word Guessing.
+    - GeoGebra iDevice: 
+      It works with ID, not only URL.
+      Optional content after the activity.
+      SCORM revision (not only 0 to 10 scores).
+      New zoom option for big applets.
+      New authorship option.
+      The activity size is no longer required.
+
+  * SDWeb
+    - TinyMCE: New audio recorder plugin.
+      Centro Integrado de Aprendizajes Virtuales y Digitalizados (BirtLH).
+    - The "Advanced mode" is now a preference. It's saved in exe.conf instead of using a cookie. (#489)
+    - Fixed: Available iDevices were not saved. (#530)
+    - Fixed: Backward compatibility. Open an elp file reading its contentv2.xml file. (#206)
+
+  * APSL
+    - Package building.
+    - Fixed: The default package license was not respected. (#547)
+    - Fixed: Open elp with an incorrect contentv3.xml file (use the content.data file instead). (#545)
+    - Fixed: Strange characters in the iDevice editor. (#535)
+    - Fixed: Strange characters when adding a header background image. (#562)
+    - Fixed: Package language changed when changing eXe's language. (#564)
+    - Fixed: Set the default Style using the config.py file.
+
+  * Juan Rafael Fernández
+    - String extraction process revision.
+    - Translations coordination.
+
+  * eXeLearning.net Translation Team
+    - New complete Spanish translation, by Juan Rafael Fernández.
+    - New complete Basque translation, by Joxemi Andonegi.
+    - New complete Catalan translation, by Carles Ferrando Garcia.
+    - New complete Galician translation, by Pablo Nimo.
+    - New complete French translation, by Jesús Miguel Domínguez.
+    - New complete Italian translation, by Andrea Primiani.
+    - New complete Greek translation, by Yannis Kaskamanidis.
+    - New complete Simplified Chinese translation, by Chenggui Duan.
+    - New complete Russian translation, by Dmytro Abaydullin.
+    - New Traditional Chinese translation, by Franklin Weng.
+    - New translation to Dzongkha, by Tandin Penjor.
+
+ -- eXeLearning <admin@exelearning.net>  Fri, 28 Mar 2021 11:15:00 +0200
+
+intef-exe (3:2.5.1) lucid; urgency=medium
+
+  * Ignacio Gros
+    - [UI] SCORM 1.2 is now the default SCORM export.
+    - [UI] Tools - New - Window will open a new project instead of the current one.
+    - [UI] About eXe and Legal notes revision.
+    - [UI] Fixed: Prevent tutorial link 404 error in some languages. (#491)
+    - [iDevices] Allow SVG iDevice icons.
+    - [iDevices] Scrambled List. You can add up to 15 items now.
+    - [iDevices] Fixed: Wikipedia iDevice. Default article language. (#478)
+    - [iDevices] Wikipedia iDevice. Basic CSS revision.
+    - [iDevices] Rubric iDevice. Help video tutorial (in Spanish).
+    - [iDevices] Image gallery. Bigger thumbnails and presentation revision.
+    - [Styles] Print CSS revision.
+    - [TinyMCE] New inline format: Highlighted text (<mark>).
+    - [TinyMCE] New content templates: Floated images, tables, images and videos.
+    - [TinyMCE] Fixed: Drag and drop image. Add the ALT text to the right image. (#479)
+    - [TinyMCE] Fixed: "Add a paragraph at the end" plugin with more than one editor.
+    - [Other] Search results: Use MARK instead of SPAN.
+    - [Other] Predefined table design revision (better presentation of TBODY > TH).
+    - [Other] Fixed: Handle "Permission denied" JavaScript error in SCORM. (#472)
+    - [Other] Fixed: MediaElement player. No fullscreen button in G. Chrome. (#481)
+    - [Other] Fixed: MediaElement could not get the right content height.
+    - [Other] Fixed: MathJax formulas respect the text alignment. (#322)
+
+  * SDWeb
+    - [Export] Fixed: Missing references in the imsmanifest.xml file. (#473)
+    - [Export] Fixed: Windows problem. Could not export nodes with very long titles. (#503)
+    - [UI] Fixed: Custom error messages when importing a Style. (#475)
+    - [UI] Fixed: Strange characters when executing eXe for the first time. (#525)
+    - [Other] New Python3 translation tools.
+    - [Other] Requirements to generate a Snap package.
+    - [Other] Fixed: Missing files when the iDevice was submitted twice. (#485)
+    - [Other] Fixed: Change default elp language when changing eXe's language. (#495)
+    - [Other] Fixed: Error when importing a Style (zip with a space in its name). (#511)
+    - [Other] Fixed: Do not use Git to get the revision. (#515)
+    - [Other] Fixed: exelearning -h returned old information. (#517)
+    - [Other] Fixed: Save the iDevice before moving it. (#520)
+    - [Other] Fixed: Avoid data loss when saving from the save warning message. (#521)
+    - [Other] Fixed: iDevice broken when the icon was empty. (#522)
+    - [Other] Fixed: JavaScript error in SCORM 1.2 (invalid 1.2 property). (#509)
+    - [Other] Fixed: Moodle + SCORM navigation problem. (#505)
+    - [Other] Fixed: FPD Available iDevices were not saved (#530)
+
+  * Fran Macías
+    - Fixed: Portable version (Linux) export problem. (#531)
+
+  * Juan Rafael Fernández
+    - String extraction process revision (pybabel tests). (#524)
+    - Breton (brezhoneg) added to the list of supported languages.
+    - Translations coordination.
+
+  * eXeLearning.net Translation Team
+    - New full Spanish translation, by Juan Rafael Fernández.
+    - New full Catalan translation, by Carles Ferrando Garcia.
+    - New full Galician translation, by Pablo Nimo.
+    - New full Valencian translation, by Ricardo Nutz.
+    - New full Basque translation, by Joxemi Andonegi.
+    - New full Portuguese translation, by Dionisio Martínez.
+    - New full Italian translation, by Andrea Primiani.
+    - New full French translation, by Jesús Miguel Domínguez.
+    - Revised full Simplified Chinese (zh_CN) translation, by Chenggui Duan. 
+    - New German translation, by Jan Joscha Finger.
+    - New Greek translation, by Yannis Kaskamanidis.
+
+ -- eXeLearning <admin@exelearning.net>  Fri, 30 Oct 2020 11:15:00 +0200
+
+>>>>>>> master
 intef-exe (3:2.5) lucid; urgency=medium
 
   * Ignacio Gros
@@ -55,6 +211,7 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Styles] New icons for Kids and CEDEC.
 
   * SDWeb
+<<<<<<< HEAD
     - [Export] Fixed: Export Error fixed. (#449)
     - [Export] Fixed: Now export with package name. (#451)
     - [Export] Fixed: Error on exe_do export. (#458)
@@ -73,10 +230,18 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Other] Fixed: Change uploaded file names. (#453)
     - [Other] Fixed: Add Download button. (#450)
     - [Other] Fixed: Error in Templates Manager.
+=======
+    - [iDevices] Fixed: All the iDevices in the Experimental category are hidden by default. (#457)
+    - [iDevices] Fixed: File Attachments iDevice problem when deleting files.
+    - [iDevices] JavaScript iDevices: Strings in the elp language. With Ignacio Gros.(#420)
+    - [Export] Fixed: Error on exe_do export. (#458)
+    - [Import] Fixed: XLIFF import was not working. (#442)
+>>>>>>> master
     - [Other] Fixed: Client search with nested pages problems. (#429)
     - [Other] Fixed: The extended.data file is generated when opening eXe so no new strings are missing. (#441)
     - [Other] Fixed: Prevent errors when getting the version.
     - [Other] Fixed: Some packages do not open correctly.
+<<<<<<< HEAD
     - [Other] Fixed: Bug fixes in resource management. (#396)
     - [Other] Fixed: Fixed bug with too long resource filenames.
     - [Other] Deleted system paths in recent projects.
@@ -86,6 +251,17 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Other] Publish option (Integration with Educational Resource Platform).
 
  -- eXeLearning <admin@exelearning.net>  Tue, 06 Feb 2020 14:00:00 +0200
+=======
+    - [iDevices] Fixed: Check JavaScript iDevice files.
+    - [Other] Fixed: Bug fixes in resource management. (#396)
+    - [Other] Fixed: Fixed bug with too long resource filenames.
+    - [iDevices] Fixed: File Attachments iDevice. Could not edit elp when a file was missing.
+    - [Other] Fixed: Error when opening some templates.
+    - [Other] Fixed: SCORM 2004 does not register activity. (#465)
+    - [Other] Fixed: Avoid SSL error on Mac when downloading styles from repository.
+
+ -- eXeLearning <admin@exelearning.net>  Tue, 04 Feb 2020 09:00:00 +0200
+>>>>>>> master
 
 intef-exe (3:2.4.2) lucid; urgency=medium
 
@@ -96,13 +272,21 @@ intef-exe (3:2.4.2) lucid; urgency=medium
   * SDWeb
     - [Other]  Fixed error when saving licence (#426).
 
+<<<<<<< HEAD
  -- eXeLearning <admin@exelearning.net>  Wed, 6 Nov 2019 16:00:00 +0200
+=======
+ -- eXeLearning <admin@exelearning.net>  Tue, 20 Aug 2019 09:01:15 +0200
+>>>>>>> master
 
 intef-exe (3:2.4.1) lucid; urgency=medium
 
   * SDWeb
     - [Export] Fix error when preview page (#418).
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
  -- eXeLearning <admin@exelearning.net>  Mon, 24 Jun 2019 10:01:15 +0200
 
 intef-exe (3:2.4) lucid; urgency=medium

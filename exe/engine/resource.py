@@ -84,7 +84,7 @@ class _Resource(Persistable):
         if reduce_filename:
             self._originalFile.copy(self._userName)
             self._originalFile = Path(self._userName)
-            
+
         try:
             self.checksum = resourceFile.md5
             from exe.engine.idevice   import Idevice 

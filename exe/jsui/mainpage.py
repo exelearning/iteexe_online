@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 # ===========================================================================
@@ -266,6 +267,10 @@ class MainPage(RenderableLivePage):
             kwargs['identifier'] = name
             hndlr = handler(func, *args, **kwargs)
             hndlr(ctx, client)     # Stores it
+
+        setUpHandler(self.handleSaveEXeUIversion, 'saveEXeUIversion')
+        setUpHandler(self.handleIsExeUIAdvanced, 'eXeUIVersionCheck')
+
         setUpHandler(self.handleIsPackageDirty, 'isPackageDirty')
         setUpHandler(self.handleIsPackageTemplate, 'isPackageTemplate')
         setUpHandler(self.handlePackageFileName, 'getPackageFileName')
@@ -295,6 +300,7 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleTestPrintMsg, 'testPrintMessage')
         setUpHandler(self.handleReload, 'reload')
         setUpHandler(self.handleSourcesDownload, 'sourcesDownload')
+        setUpHandler(self.handleUploadFileToResources, 'uploadFileToResources')
         # PRINT handler
         setUpHandler(self.handleClearAndMakeTempPrintDir, 'makeTempPrintDir')
 
@@ -471,17 +477,22 @@ class MainPage(RenderableLivePage):
         (This is used where the user goes file|open when their
         package is changed and needs saving)
         """
-        filename = Path(filename, 'utf-8')
-        saveDir = filename.dirname()
-        if saveDir and not saveDir.isdir():
-            client.alert(_(u'Cannot access directory named ') + unicode(saveDir) + _(u'. Please use ASCII names.'))
-            return
-        oldName = self.package.name
+        try:
+            filename = Path(filename, 'utf-8')
+        except:
+            filename = None
+
         # If the script is not passing a filename to us,
         # Then use the last filename that the package was loaded from/saved to
         if not filename:
             filename = self.package.filename
             assert filename, 'Somehow save was called without a filename on a package that has no default filename.'
+
+        saveDir = filename.dirname()
+        if saveDir and not saveDir.isdir():
+            client.alert(_(u'Cannot access directory named ') + unicode(saveDir) + _(u'. Please use ASCII names.'))
+            return
+        oldName = self.package.name
 
         extension = filename.splitext()[1]
         if extension == '.elt':
@@ -505,7 +516,7 @@ class MainPage(RenderableLivePage):
             self.package._name = self.package._name + '_1'
 
 
-        if export_type_name == None:
+        if not export_type_name:
             basename = Path(filename).basename()
             save_msx = _(u'Package %s saved. Do not forget to download the package on your system') % basename
             # Tell the user and continue
@@ -563,8 +574,12 @@ class MainPage(RenderableLivePage):
         package = self._loadPackage(client, filename, newLoad=True)
         self.session.packageStore.addPackage(package)
         self.webServer.root.bindNewPackage(package, self.session)
-        client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                        package.name).encode('utf8'))
+        if package.load_message:
+            client.alert(package.load_message,
+                         onDone=(u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'),
+                         filter_func=filter_func)
+        else:
+            client.sendScript((u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'), filter_func=filter_func)
 
     def handleLoadTemplate(self, client, filename):
         """Load the template named 'filename'"""
@@ -899,6 +914,68 @@ class MainPage(RenderableLivePage):
                     + "file to server prevew, error = " + str(e))
             raise
 
+    def handleUploadFileToResources(self, client, local_file, preview_filename):
+
+        server_filename = ""
+        errors = 0
+
+        webDir = Path(G.application.tempWebDir)
+        previewDir = webDir.joinpath('previews')
+
+        if not previewDir.exists():
+            log.debug("files previews directory does not yet exist; " \
+                    + "creating as %s " % previewDir)
+            previewDir.makedirs()
+        elif not previewDir.isdir():
+            client.alert(\
+                _(u'Preview directory %s is a file, cannot replace it') \
+                % previewDir)
+            log.error("Couldn't preview file: " +
+                      "Preview dir %s is a file, cannot replace it" \
+                      % previewDir)
+            errors += 1
+        # else:
+            # This will remove the directory content, but we might want to record more than one file before saving
+            # shutil.rmtree(previewDir)
+            # previewDir.makedirs()
+
+        if errors == 0:
+            log.debug('originally, local_file='
+                    + local_file)
+            log.debug('in unicode, local_file='
+                    + local_file)
+
+            localFilePath = Path(local_file)
+            log.debug('after Path, localImagePath= '
+                    + localFilePath)
+
+        try:
+            log.debug('URIencoded preview filename=' + preview_filename)
+
+            server_filename = previewDir.joinpath(preview_filename)
+
+            server_file = open(server_filename, 'wb')
+
+            local_file = local_file.split(";base64,",1)
+            local_file = local_file[1]
+            server_file.write(base64.b64decode(local_file))
+            server_file.flush()
+            server_file.close()
+
+            sf = str(server_filename)
+
+            # convert webm to mp3
+            # webm_version = AudioSegment.from_file(sf,"webm")
+            # webm_version.export(server_filename.replace(".webm",".mp3"), format="mp3")
+
+            client.sendScript('eXe.app.fireEvent("uploadFileToResourcesDone")')
+
+        except Exception, e:
+            client.alert(_('SAVE FAILED!\n%s') % str(e))
+            log.error("Unable to save file "
+                    + "file to server prevew, error = " + str(e))
+            raise
+
     def handleTinyMCEimageDragDrop(self, client, tinyMCEwin, tinyMCEwin_name, \
                               local_filename, preview_filename):
         server_filename = ""
@@ -949,7 +1026,7 @@ class MainPage(RenderableLivePage):
             descrip_file.flush()
             descrip_file.close()
 
-            client.sendScript('eXe.app.fireEvent("previewTinyMCEDragDropImageDone")')
+            client.sendScript('eXe.app.fireEvent("previewTinyMCEDragDropImageDone","'+preview_filename+'")')
 
         except Exception, e:
             client.alert(_('SAVE FAILED!\n%s') % str(e))
@@ -1409,6 +1486,17 @@ class MainPage(RenderableLivePage):
         except:
             log.debug("Logout error")
 
+
+    def handleSaveEXeUIversion(self,client,status):
+        initial=G.application.config.configParser.get('user', 'eXeUIversion')
+        if initial == '2':
+            client.call(u'eXe.app.getController("Toolbar").exeUIalert')
+        G.application.config.configParser.set('user', 'eXeUIversion', status)
+        client.call(u'eXe.app.getController("Toolbar").eXeUIversionSetStatus', status)
+
+    def handleIsExeUIAdvanced(self,client):
+        status=G.application.config.configParser.get('user', 'eXeUIversion')
+        client.call(u'eXe.app.getController("Toolbar").exeUIsetInitialStatus', status)
 
     def handleBrowseURL(self, client, url):
         """

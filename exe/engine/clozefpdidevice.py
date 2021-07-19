@@ -31,7 +31,6 @@ from PIL import Image
 from exe.engine.field   import ClozeField, TextAreaField
 from exe.engine.idevice import Idevice
 from exe.engine.path    import Path
-from exe.engine.field   import ClozeField, TextAreaField
 from exe.engine.persist import Persistable
 
 log = logging.getLogger(__name__)

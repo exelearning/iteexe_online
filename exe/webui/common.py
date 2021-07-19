@@ -488,17 +488,22 @@ def ideviceHeader(e, style, mode):
     w2 = ''
     eEm = ''
 
-    if ((e.idevice.emphasis > 0) and (G.application.ideviceStore.isJs(e.idevice) == False)) or (
-        ((e.idevice.title != "") or (e.idevice.icon != "")) and (G.application.ideviceStore.isJs(e.idevice) == True)) :
+    if (e.idevice.emphasis > 0 and ((e.idevice.icon and e.idevice.icon!="") or (e.idevice.title and e.idevice.title!=""))):
 
         w2 = '<div class="iDevice_inner">'+lb
         w2 += '<div class="iDevice_content_wrapper">'+lb
         eEm = ' em_iDevice'
-        if e.idevice.icon != "":
-            eEm += ' em_iDevice_'+e.idevice.icon
 
-    if mode=="preview" and themeHasXML:
-        w += '<'+articleTag+' class="iDevice_wrapper '+e.idevice.klass+eEm+'" id="id'+e.id+'">'+lb
+        if e.idevice.icon and e.idevice.icon != "":
+            _iconNameToClass = re.sub('[^A-Za-z0-9_-]+', '', e.idevice.icon) # Allowed CSS classNames only
+            if _iconNameToClass!="":        
+                eEm += ' em_iDevice_'+_iconNameToClass
+
+    if mode=="preview":
+        if themeHasXML:
+            w += '<'+articleTag+' class="iDevice_wrapper '+e.idevice.klass+eEm+'" id="id'+e.id+'">'+lb
+        else:
+            w += '<'+articleTag+' class="'+e.idevice.klass+'">'+lb
 
     w += u"<div class=\"iDevice emphasis"+unicode(e.idevice.emphasis)+"\" "
     if mode=="preview":
@@ -535,6 +540,13 @@ def ideviceHeader(e, style, mode):
                     iconPath = '/style/'+style+'/icon_'+e.idevice.icon+'.png'
                     if mode=="view":
                         iconPath = 'icon_'+e.idevice.icon+'.png'
+                else:
+                    myIcon = themePath.joinpath("icon_" + e.idevice.icon + ".svg")
+                    if myIcon.exists():
+                        iconExists = True
+                        iconPath = '/style/'+style+'/icon_'+e.idevice.icon+'.svg'
+                        if mode=="view":
+                            iconPath = 'icon_'+e.idevice.icon+'.svg'
             if iconExists:
                 o += u'<img alt="" class="iDevice_icon" src="'+iconPath+'" />'
             if (e.idevice.icon+"Idevice") != e.idevice.klass:
@@ -571,16 +583,14 @@ def ideviceFooter(e, style, mode):
     themeHasXML = themeHasConfigXML(style)
     h = ''
 
-    if ((e.idevice.emphasis > 0) and (G.application.ideviceStore.isJs(e.idevice) == False)) or (
-        ((e.idevice.title != "") or (e.idevice.icon != "")) and (G.application.ideviceStore.isJs(e.idevice) == True)) :
+    if (e.idevice.emphasis > 0 and ((e.idevice.icon and e.idevice.icon!="") or (e.idevice.title and e.idevice.title!=""))):
 
         h = "</div>"+lb # Close iDevice_content_wrapper
         h += "</div>"+lb # Close iDevice_inner
 
     h += "</div>"+lb # Close iDevice
-    if mode=="preview":
-        h += e.renderViewButtons()
     if mode=="preview" and themeHasXML:
+        h += e.renderViewButtons()
         h += "</"+articleTag+">"+lb # Close iDevice_wrapper
     return h
 
@@ -752,7 +762,7 @@ def textArea(name, value="", disabled="", cols="80", rows="8", cssClass="", pack
     html_js = ''
     # There's probably an editor in the JavaScript iDevice, so we add the nodes list (tinymce_anchors)
     if (cssClass=="jsContentEditor"):
-        html_js = '<script type="text/javascript">if (typeof(tinymce_anchors)=="undefined") var tinymce_anchors = [];'    
+        html_js = '<script type="text/javascript">if (typeof(tinymce_anchors)=="undefined") var tinymce_anchors = [];'
         ########
         # add exe_tmp_anchor tags
         # for ALL anchors available in the entire doc!
@@ -791,7 +801,6 @@ def textArea(name, value="", disabled="", cols="80", rows="8", cssClass="", pack
         html_js  += '</script>'
 
     return html + html_js
-
 
 def richTextArea(name, value="", width="100%", height=100, cssClass='mceEditor', package=None):
     """Adds a editor to a form"""
@@ -1330,7 +1339,7 @@ def enableLinksToElp(package, html):
     Replace exe-package:elp with the elp name
     Use # instead of the elp name if the package's not been saved (no name...)
     '''
-    soup = BeautifulSoup(html, features = "lxml")
+    soup = BeautifulSoup(html, features = "html.parser")
     hasElp = False
     for link in soup.findAll('a'):
         if (link.get('href')=='exe-package:elp') and hasattr(package, 'name'):

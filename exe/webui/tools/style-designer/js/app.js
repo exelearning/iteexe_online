@@ -36,7 +36,6 @@ var $appVars = [
 	['searchBarTextColor',6,7],
 	['searchBarButtonBGColor',6,12],
 	['searchBarButtonTextColor',6,7],
-
 	// Header and footer tab
 	// fieldset #1
 	['headerHeight',4,7,'number'],
@@ -211,11 +210,9 @@ var $app = {
 					Ext.Msg.alert($i18n.Error, response.statusText);
 				}
 			});
-
 		});
 
 		$("#finish").click(function(){
-
 			var currentStyle = $app.getCurrentStyle();
 			if ($app.nonEditableStyles.indexOf(currentStyle)!=-1) {
 				// If user is editing a non editable style it must be because style has not been saved yet,
@@ -401,7 +398,6 @@ var $app = {
 		var contentCSS = opener.$designer.contentCSS.split($app.mark);
 		// To review: $app.baseContentCSS = contentCSS[0].replace(/\s+$/, ''); // Remove the last space
 		$app.baseContentCSS = contentCSS[0];
-
 		var currentStyle = $app.getCurrentStyle();
 
 		// Get the Style's content.css content:
@@ -785,6 +781,12 @@ var $app = {
 		var contentBGURL = $app.removeLocalPath("contentBGURL",mode);
 		var contentBGPosition = $("#contentBGPosition").val();
 		var contentBGRepeat = $("#contentBGRepeat").val();
+		
+		// Search bar
+		var searchBarBGColor = $("#searchBarBGColor").val();
+		var searchBarTextColor = $("#searchBarTextColor").val();
+		var searchBarButtonBGColor = $("#searchBarButtonBGColor").val();
+		var searchBarButtonTextColor = $("#searchBarButtonTextColor").val();
 
 		// Search bar
 		var searchBarBGColor = $("#searchBarBGColor").val();
@@ -1075,7 +1077,6 @@ var $app = {
 					if (headerTitleFontSize!="") contentCSS+="/*headerTitleFontSize*/font-size:"+headerTitleFontSize+"%;";
 				contentCSS+="}";
 				if (headerTitleColor!="") {
-
 				}
 			}
 		} else {

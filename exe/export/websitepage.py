@@ -167,7 +167,7 @@ class WebsitePage(Page):
 
             if self.node.package.backgroundImg:
                 html += u" style=\"background-image: url("
-                html += quote(self.node.package.backgroundImg.basename())
+                html += quote(str(self.node.package.backgroundImg.basename()))
                 html += u"); "
 
                 if self.node.package.backgroundImgTile:
@@ -208,6 +208,10 @@ class WebsitePage(Page):
         for idevice in self.node.idevices:
             if idevice.klass != 'NotaIdevice':
                 e=" em_iDevice"
+                if idevice.icon and idevice.icon != "":
+                    _iconNameToClass = re.sub('[^A-Za-z0-9_-]+', '', idevice.icon) # Allowed CSS classNames only
+                    if _iconNameToClass!="":
+                        e += ' em_iDevice_'+_iconNameToClass
                 if unicode(idevice.emphasis)=='0':
                     e=""
                 html += u'<'+articleTag+' class="iDevice_wrapper %s%s" id="id%s">%s' %  (idevice.klass, e, idevice.id, lb)
@@ -247,16 +251,17 @@ class WebsitePage(Page):
         html = html.encode('utf8')
         # JR: Eliminamos los atributos de las ecuaciones
         aux = re.compile("exe_math_latex=\"[^\"]*\"")
-	html = aux.sub("", html)
-	aux = re.compile("exe_math_size=\"[^\"]*\"")
-	html = aux.sub("", html)
-	#JR: Cambio el & en los enlaces del glosario
-	html = html.replace("&concept", "&amp;concept")
-    # Remove "resources/" from data="resources/ and the url param
-	html = html.replace("video/quicktime\" data=\"resources/", "video/quicktime\" data=\"")
-	html = html.replace("application/x-mplayer2\" data=\"resources/", "application/x-mplayer2\" data=\"")
-	html = html.replace("audio/x-pn-realaudio-plugin\" data=\"resources/", "audio/x-pn-realaudio-plugin\" data=\"")
-	html = html.replace("<param name=\"url\" value=\"resources/", "<param name=\"url\" value=\"")
+
+        html = aux.sub("", html)
+        aux = re.compile("exe_math_size=\"[^\"]*\"")
+        html = aux.sub("", html)
+        #JR: Cambio el & en los enlaces del glosario
+        html = html.replace("&concept", "&amp;concept")
+        # Remove "resources/" from data="resources/ and the url param
+        html = html.replace("video/quicktime\" data=\"resources/", "video/quicktime\" data=\"")
+        html = html.replace("application/x-mplayer2\" data=\"resources/", "application/x-mplayer2\" data=\"")
+        html = html.replace("audio/x-pn-realaudio-plugin\" data=\"resources/", "audio/x-pn-realaudio-plugin\" data=\"")
+        html = html.replace("<param name=\"url\" value=\"resources/", "<param name=\"url\" value=\"")
         return html
 
     def indent(self,level):

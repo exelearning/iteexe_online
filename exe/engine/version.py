@@ -25,59 +25,62 @@ import os
 Version Information
 """
 
+import os
+from path import Path
+
 # Result initialization
 project = "exe"
 pkg_version = None
 release = None
 
 # Try to read the version from the version file
-if os.path.isfile('version'):
-    pkg_version = open('version').readline()
-    release = pkg_version[0:-42]
-elif os.path.isfile('debian/changelog'):
-# If it doesn't exist, we try to get it from debian/changelog
-    line = open('debian/changelog').readline()
-    release = line.split(':')[1].split(')')[0]
-
-if not release or not pkg_version:
-# If the changelog doesn't exist either, we try to use pkg_resources to get the version
+try:
+    if os.path.isfile('version'):
+        pkg_version = open('version').readline()
+        release = pkg_version[0:].strip()
+except:
+    # If it doesn't exist, we try to get it from debian/changelog
     try:
-        import pkg_resources
-        pkg_version = pkg_resources.require(project)[0].version
-        if not release:
-            release = pkg_version[0:-42]
+        line = open('debian/changelog').readline()
+        release = line.split(':')[1].split(')')[0]
     except:
-        # If everything else fails, it may be Windows fault
-        import sys
-        if sys.platform[:3] == "win":
-            pkg_version = open(sys.prefix + '/version').readline()
-            if not release:
-                release = pkg_version[0:-42]
-        else:
-            # Or we try to get it from Resources
-            try:
-                pkg_version = open('../Resources/exe/version').readline()
-                if not release:
-                    release = pkg_version[0:-42]
-            except:
-                if not release:
+        # If the changelog doesn't exist either, we try to use pkg_resources to get the version
+        try:
+            import pkg_resources
+            pkg_version = pkg_resources.require(project)[0].version
+            release = pkg_version[0:].strip()
+        except:
+            # If everything else fails, it may be Windows fault
+            import sys
+            if sys.platform[:3] == "win":
+                pkg_version = open(sys.prefix + '/version').readline()
+                release = pkg_version[0:].strip()
+            else:
+                # Or we try to get it from Resources
+                try:
+                    pkg_version = open('../Resources/exe/version').readline()
+                    release = pkg_version[0:].strip()
+                except:
                     release = "unknown"
 
-# Try to get the Git information
-try:
-    import git
-    repo = git.Repo()
-    revision = repo.head.commit.hexsha
-except:
-    # If there isn't a Git repo, we try to get the revision from
-    # the version file (if it exists)
-    if pkg_version:
-        revision = pkg_version[-40:]
-    else:
-        revision = release
+# We try to get the revision from the version file (if it exists)
+revision = pkg_version[-40:] if pkg_version else ''
 
 # Compose version string
 version = release + "-r" + revision if revision else release
+
+# SNAP version and release
+snap_environ = os.environ.get('SNAP')
+if snap_environ:
+    try:
+        snap_base_path = Path(snap_environ)
+        changelog_path = snap_base_path / 'lib'/ 'python2.7' / 'site-packages' / 'usr' / 'share' / 'exe' / 'ChangeLog'
+        line = open(changelog_path).readline()
+        release = line.split(':')[1].split(')')[0]
+        version = release
+        revision = release
+    except:
+        pass
 
 # If this file is executed directly, we print the project and version info
 if __name__ == '__main__':

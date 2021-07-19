@@ -67,7 +67,6 @@ class EditorPage(RenderableResource):
         else:
             return Resource.getChild(self, name, request)
 
-
     def process(self, request):
         """
         Process current package 
@@ -105,7 +104,6 @@ class EditorPage(RenderableResource):
         
             if request.args["action"][0] == "newIdevice" or "new" in request.args:
                 self.__createNewIdevice(request)
-            
 
             if request.args["action"][0] == "deleteIdevice":
                 G.application.ideviceStore.delIdevice(self.editorPane[G.application.config.username].idevice)
@@ -158,8 +156,6 @@ class EditorPage(RenderableResource):
             self.isNewIdevice = True
             self.editorPane[G.application.config.username].setIdevice(GenericIdevice("", "", "", "", ""))
             self.editorPane[G.application.config.username].process(request, "old")
-        
-
             
     def __createNewIdevice(self, request):
         """
@@ -217,8 +213,7 @@ class EditorPage(RenderableResource):
         package = Package(name)
         package.idevices.append(self.editorPane[G.application.config.username].idevice.clone())
         package.save(filename)
-        
-        
+
     def render_GET(self, request):
         """Called for all requests to this object"""
         
@@ -286,7 +281,6 @@ class EditorPage(RenderableResource):
         html += "</html>\n"
         return html.encode('utf8')
     render_POST = render_GET
-
 
     def renderList(self):
         """

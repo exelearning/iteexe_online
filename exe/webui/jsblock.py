@@ -43,6 +43,7 @@ class JsBlock(Block):
         self.elements = []
         for field in self.idevice:
             self.elements.append(g_elementFactory.createElement(field))
+
         if not hasattr(self.idevice,'undo'):
             self.idevice.undo = True
 
@@ -90,6 +91,7 @@ class JsBlock(Block):
         icon = self.idevice.icon
         icon_exists = False
         if icon != '':
+
             idevice_icon = Path(style.get_style_dir()) / 'icon_'+self.idevice.icon+'.gif'
             if idevice_icon.exists():
                 icon_exists = True
@@ -97,11 +99,16 @@ class JsBlock(Block):
                 idevice_icon = Path(style.get_style_dir()) / 'icon_'+self.idevice.icon+'.png'
                 if idevice_icon.exists():
                     icon_exists = True
+                else:
+                    idevice_icon = Path(style.get_style_dir()) / "icon_" + self.idevice.icon + ".svg"
+                    if idevice_icon.exists():
+                        icon_exists = True
 
         # Icon HTML element
         html += u'<img class="js-idevide-icon-preview" name="iconiDevice%s" id="iconiDevice"' % (self.id)
         if icon_exists:
             html += u' src="%s/icon_%s%s"' % (style.get_web_path(), icon, idevice_icon.ext)
+
         else:
             html += u' src="/images/empty.gif"'
         html += u'/>'
@@ -114,7 +121,6 @@ class JsBlock(Block):
         html += u'>'
         html += u'<img class="js-delete-icon" alt="%s" src="%s"/>' % (_('Delete'), '/images/stock-delete.png')
         html += u'</a>'
-
         html += common.textInput("title" + self.id, self.idevice.title)
 
         html += u'<div class="js-icon-panel-container">'
@@ -122,7 +128,6 @@ class JsBlock(Block):
         html += u'<div id="iconpanelcontent">'
         html += self.__renderIcons(style)
         html += u'</div>'
-
         html += u"</div>"
 
         for element in self.elements:
@@ -159,6 +164,13 @@ class JsBlock(Block):
                     iconExtension = "png"
                     iconValue = icon+'.'+iconExtension
                     iconSrc = '%s/icon_%s' % (style.get_web_path(), iconValue)
+                else:
+                    myIcon = Path(iconpath/iconname + ".svg")
+                    if myIcon.exists():
+                        iconExists = True
+                        iconExtension = "svg"
+                        iconValue = icon+'.'+iconExtension
+                        iconSrc = '%s/icon_%s' % (style.get_web_path(), iconValue)
 
             if iconExists:
                 filename = "%s/%s.%s" % (style.get_web_path(), iconname, iconExtension)
@@ -190,7 +202,6 @@ class JsBlock(Block):
         if len(self.elements) > 0:
             return self.elements[0].renderXML(None, "idevice", self.idevice.id, title=aTitle, icon=aIcon)
         return xml
-
 
     def renderView(self, style):
         """

@@ -376,6 +376,10 @@ class EditorPane(object):
                         myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/"icon_" + self.idevice.icon + ".png")
                         if myIcon.exists():
                             iconExists = True
+                        else:
+                            myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/"icon_" + self.idevice.icon + ".svg")
+                            if myIcon.exists():
+                                iconExists = True
                     if iconExists:
                         html += '<img style="vertical-align:middle;max-width:60px;height:auto" '
                         html += 'src="%s/icon_%s' % (self.style.get_web_path(), icon)
@@ -427,7 +431,7 @@ class EditorPane(object):
             if self.style.get_name() == style.get_name():
                 html += "selected "
                 isSelected = True
-            html += ">" + style.get_name() + "~" + style.get_dirname() + "</option>\n"
+            html += ">" + style.get_name() + "~" + str(style.get_dirname()) + "</option>\n"
             idx = idx + 1
         html += "</select> \n"
         # Auto-select the current style
@@ -476,6 +480,11 @@ class EditorPane(object):
                 if myIcon.exists():
                     iconExists = True
                     iconExtension = "png"
+                else:
+                    myIcon = Path(G.application.config.stylesDir/self.style.get_dirname()/iconname + ".svg")
+                    if myIcon.exists():
+                        iconExists = True 
+                        iconExtension = "svg"               
 
             if iconExists:
                 filename = "%s/%s.%s" % (self.style.get_web_path(), iconname, iconExtension)
@@ -484,7 +493,7 @@ class EditorPane(object):
                 html += u'<img src="%s" \n' % filename
                 # html += u' alt="%s" ' % _("Submit")
                 # window[1] because we use Ext.MessageBox instead of libot_drag.js
-                html += u"style=\"border:1px solid #E8E8E8;padding:5px;cursor:pointer;max-width:60px;height:auto\" onclick=\"window[1].selectStyleIcon('%s',this)\" title=\"%s.%s\">\n" % (icon, icon, iconExtension)
+                html += u"style=\"border:1px solid #E8E8E8;padding:5px;cursor:pointer;max-width:60px;max-height:60px;height:auto\" onclick=\"window[1].selectStyleIcon('%s',this)\" title=\"%s.%s\">\n" % (icon, icon, iconExtension)
                 # html += u"style=\"cursor:pointer\" onclick=\"window[1].submitLink('selectIcon','%s',1)\">\n" % icon
                 html += u'<br /><span style="display:inline-block;width:100px;overflow:hidden;text-overflow:ellipsis">%s.%s</span></div>\n' % (icon, iconExtension)
 

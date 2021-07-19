@@ -26,8 +26,10 @@ import locale
 import json
 from exe.webui.renderable import Renderable
 from twisted.web.resource import Resource
-from exe.engine.jsidevice import JsIdevice
 from exe                  import globals as G
+from exe.webui.livepage import allSessionClients
+from exe.engine.jsidevice import JsIdevice
+from cgi import escape
 
 log = logging.getLogger(__name__)
 
@@ -39,9 +41,9 @@ class IdevicePane(Renderable, Resource):
     name = 'idevicePane'
 
     def __init__(self, parent):
-        """ 
+        """
         Initialize
-        """ 
+        """
         Renderable.__init__(self, parent)
         if parent:
             self.parent.putChild(self.name, self)
@@ -56,7 +58,9 @@ class IdevicePane(Renderable, Resource):
             if prototype.id in self.prototypes:
                 raise Exception("duplicated device id %s" % prototype.id)
             self.prototypes[prototype.id] = prototype
+
         self.hiddenExperimentalAndOldIdevices()
+        #self.hiddenExperimentalIdevices()
 
     def hiddenExperimentalAndOldIdevices(self):
         """
@@ -97,26 +101,54 @@ class IdevicePane(Renderable, Resource):
             if idevice not in idevices:
                 modified = True
                 lower_title = idevice._title.lower()
-                self.ideviceStore.addIdevice(idevice)
-                if hasattr(self.config.configParser,"idevices"):
-                    idevices_conf = self.config.configParser.idevices.items()
-                    idevice_conf = [idv[1] for idv in idevices_conf if idv[0] == lower_title]
-                    if not idevice_conf:
+                try:
+                    visibility_config=self.config.configParser.get('idevices',lower_title)
+                except:
+                    visibility_config=None
+                tohide=False if visibility_config == '1' else True
+                if tohide:
+                    if lower_title not in self.config.hiddeniDevices:
                         self.config.hiddeniDevices.append(lower_title)
-                        self.config.configParser.set('idevices', lower_title, '0')
-                else:
-                    self.config.hiddeniDevices.append(lower_title)
                     self.config.configParser.set('idevices', lower_title, '0')
+
+                self.ideviceStore.addIdevice(idevice)
+                # TODO merge master into ws
+                # if hasattr(self.config.configParser,"idevices"):
+                #     idevices_conf = self.config.configParser.idevices.items()
+                #     idevice_conf = [idv[1] for idv in idevices_conf if idv[0] == lower_title]
+                #     if not idevice_conf:
+                #         self.config.hiddeniDevices.append(lower_title)
+                #         self.config.configParser.set('idevices', lower_title, '0')
+                # else:
+                #     self.config.hiddeniDevices.append(lower_title)
+                #     self.config.configParser.set('idevices', lower_title, '0')
         if modified:
             self.ideviceStore.save()
 
+    def hiddenExperimentalIdevices(self):
+        """
+        Hidden Experimental iDevices:
+        add iDevices with the category 'Experimental' to 'hiddeniDevices'
+        """
+        prototypes = self.prototypes.values()
+        for prototype in prototypes:
+            lower_title =  prototype._title.lower()
+            if (hasattr(prototype, 'ideviceCategory')
+            and prototype.ideviceCategory == 'Experimental'
+            and lower_title not in self.config.hiddeniDevices):
+                idevices_conf = self.config.configParser.idevices.items()
+                idevice_conf = [idv[1] for idv in idevices_conf if idv[0] == lower_title]
+                if not idevice_conf:
+                    self.config.hiddeniDevices.append(lower_title)
+                    self.config.configParser.set('idevices', lower_title, '0')
+
     def process(self, request):
-        """ 
-        Process the request arguments to see if we're supposed to 
+        """
+        Process the request arguments to see if we're supposed to
         add an iDevice
         """
         log.debug("Process" + repr(request.args))
-        if ("action" in request.args and 
+        if ("action" in request.args and
             request.args["action"][0] == "AddIdevice"):
 
             self.package.isChanged = True
@@ -137,7 +169,7 @@ class IdevicePane(Renderable, Resource):
         if self.client:
             self.client.sendScript('eXe.app.getController("Idevice").reload()')
 
-        
+
     def delIdevice(self, idevice):
         """
         Delete an iDevice from the pane
@@ -207,10 +239,16 @@ class IdevicePane(Renderable, Resource):
             if (category=='Text and Tasks'):
                 if (prototype._title!='Text'):
                     xml += self.__renderPrototype(prototype, category, visible)
-        # Other categories
-        experimentalCategoryName = _('Experimental') # Keep this string here so the tranlation is not lost even when there are no iDevices in this category
+        # Interactive Activities should be in the second place
         for prototype, category, visible in prototypesToRender:
-            if (category!='Text and Tasks' and category!='Hidden'):
+            if (category == 'Interactive Activities'):
+                xml += self.__renderPrototype(prototype, category, visible)
+        # Other categories
+        # Keep these category names here so the tranlations are not lost even when there are no iDevices in those categories
+        experimentalCategoryName = _('Experimental')
+        gamificationCategoryName = _('Gamification')
+        for prototype, category, visible in prototypesToRender:
+            if (category!='Text and Tasks' and category!='Hidden' and category!='Interactive Activities'):
                 xml += self.__renderPrototype(prototype, category, visible)
         xml += u"</idevices>\n"
         xml += u"<!-- IDevice Pane End -->\n"
@@ -231,7 +269,10 @@ class IdevicePane(Renderable, Resource):
             try:
                 self.config.hiddeniDevices.remove(lower_title)
                 self.config.configParser.delete('idevices', lower_title)
-                self.config.configParser.set('idevices', lower_title, '1')
+                if category == 'Experimental':
+                    self.config.configParser.set('idevices', lower_title, '1')
+                if category == 'FPD':
+                    self.config.configParser.set('idevices', lower_title, '1')
             except:
                 pass
             if not visible:
@@ -248,12 +289,11 @@ class IdevicePane(Renderable, Resource):
         log.debug("of type "+repr(type(prototype.title)))
         log.debug(prototype._title.lower())
         xml  = u"  <idevice>\n"
-        xml += u"   <label>" + prototype.rawTitle + "</label>\n"
+        xml += u"   <label>" + escape(prototype.rawTitle) + "</label>\n"
         xml += u"   <id>" + prototype.id + "</id>\n"
         xml += u"   <category>" + _(category) + "</category>\n"
         xml += u"   <visible>" + str(visible).lower() + "</visible>\n"
         xml += u"  </idevice>\n"
         return xml
 
-    
 # ===========================================================================
