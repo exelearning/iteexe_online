@@ -38,6 +38,10 @@ try:
     if os.path.isfile('version'):
         pkg_version = open('version').readline()
         release = pkg_version[0:].strip()
+    elif os.path.isfile('debian/changelog'):
+        # If it doesn't exist, we try to get it from debian/changelog
+        line = open('debian/changelog').readline()
+        release = line.split(':')[1].split(')')[0]
 except:
     # If it doesn't exist, we try to get it from debian/changelog
     try:

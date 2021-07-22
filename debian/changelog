@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 intef-exe (3:2.6) lucid; urgency=medium
 
   * Ignacio Gros
@@ -43,7 +41,7 @@ intef-exe (3:2.6) lucid; urgency=medium
     - New iDevice category (Games):
       New iDevices: Lock, Challenge, Multiple Choice Quiz.
       New functionalities and bug fixes in: A-Z Quiz Game, QuExt, VideoQuExt, Word Guessing.
-    - GeoGebra iDevice: 
+    - GeoGebra iDevice:
       It works with ID, not only URL.
       Optional content after the activity.
       SCORM revision (not only 0 to 10 scores).
@@ -147,14 +145,12 @@ intef-exe (3:2.5.1) lucid; urgency=medium
     - New full Portuguese translation, by Dionisio Martínez.
     - New full Italian translation, by Andrea Primiani.
     - New full French translation, by Jesús Miguel Domínguez.
-    - Revised full Simplified Chinese (zh_CN) translation, by Chenggui Duan. 
+    - Revised full Simplified Chinese (zh_CN) translation, by Chenggui Duan.
     - New German translation, by Jan Joscha Finger.
     - New Greek translation, by Yannis Kaskamanidis.
-    - New translation to Dzongkha, by Tandin Penjor.
 
  -- eXeLearning <admin@exelearning.net>  Fri, 30 Oct 2020 11:15:00 +0200
 
->>>>>>> master
 intef-exe (3:2.5) lucid; urgency=medium
 
   * Ignacio Gros
@@ -212,7 +208,6 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Styles] New icons for Kids and CEDEC.
 
   * SDWeb
-<<<<<<< HEAD
     - [Export] Fixed: Export Error fixed. (#449)
     - [Export] Fixed: Now export with package name. (#451)
     - [Export] Fixed: Error on exe_do export. (#458)
@@ -231,18 +226,10 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Other] Fixed: Change uploaded file names. (#453)
     - [Other] Fixed: Add Download button. (#450)
     - [Other] Fixed: Error in Templates Manager.
-=======
-    - [iDevices] Fixed: All the iDevices in the Experimental category are hidden by default. (#457)
-    - [iDevices] Fixed: File Attachments iDevice problem when deleting files.
-    - [iDevices] JavaScript iDevices: Strings in the elp language. With Ignacio Gros.(#420)
-    - [Export] Fixed: Error on exe_do export. (#458)
-    - [Import] Fixed: XLIFF import was not working. (#442)
->>>>>>> master
     - [Other] Fixed: Client search with nested pages problems. (#429)
     - [Other] Fixed: The extended.data file is generated when opening eXe so no new strings are missing. (#441)
     - [Other] Fixed: Prevent errors when getting the version.
     - [Other] Fixed: Some packages do not open correctly.
-<<<<<<< HEAD
     - [Other] Fixed: Bug fixes in resource management. (#396)
     - [Other] Fixed: Fixed bug with too long resource filenames.
     - [Other] Deleted system paths in recent projects.
@@ -252,17 +239,6 @@ intef-exe (3:2.5) lucid; urgency=medium
     - [Other] Publish option (Integration with Educational Resource Platform).
 
  -- eXeLearning <admin@exelearning.net>  Tue, 06 Feb 2020 14:00:00 +0200
-=======
-    - [iDevices] Fixed: Check JavaScript iDevice files.
-    - [Other] Fixed: Bug fixes in resource management. (#396)
-    - [Other] Fixed: Fixed bug with too long resource filenames.
-    - [iDevices] Fixed: File Attachments iDevice. Could not edit elp when a file was missing.
-    - [Other] Fixed: Error when opening some templates.
-    - [Other] Fixed: SCORM 2004 does not register activity. (#465)
-    - [Other] Fixed: Avoid SSL error on Mac when downloading styles from repository.
-
- -- eXeLearning <admin@exelearning.net>  Tue, 04 Feb 2020 09:00:00 +0200
->>>>>>> master
 
 intef-exe (3:2.4.2) lucid; urgency=medium
 
@@ -273,21 +249,13 @@ intef-exe (3:2.4.2) lucid; urgency=medium
   * SDWeb
     - [Other]  Fixed error when saving licence (#426).
 
-<<<<<<< HEAD
  -- eXeLearning <admin@exelearning.net>  Wed, 6 Nov 2019 16:00:00 +0200
-=======
- -- eXeLearning <admin@exelearning.net>  Tue, 20 Aug 2019 09:01:15 +0200
->>>>>>> master
 
 intef-exe (3:2.4.1) lucid; urgency=medium
 
   * SDWeb
     - [Export] Fix error when preview page (#418).
 
-<<<<<<< HEAD
-=======
-
->>>>>>> master
  -- eXeLearning <admin@exelearning.net>  Mon, 24 Jun 2019 10:01:15 +0200
 
 intef-exe (3:2.4) lucid; urgency=medium
@@ -359,10 +327,10 @@ intef-exe (3:2.4) lucid; urgency=medium
     - New full Valencian translation, by Pilar Embid Giner.
     - New full Catalan translation, by Carles Ferrando García.
     - New full Russian translation, by Alexey Loginov.
+    - New full Italian translation, by Andrea Primiani.
     - New Polish translation, by Waldemar Stoczkowski (with the help of Andrey Loginov).
     - New full Portuguese translation, by Dionisio Martínez Soler.
     - New full Galician translation, by Pablo Nimo.
-    - New full Italian translation, by Andrea Primiani.
     - New Traditional Chinese translation, by Franklin Weng.
 
   * SDWeb
