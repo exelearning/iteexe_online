@@ -91,7 +91,7 @@ class Application:
         """
         self.config = None
         self.defaultConfig = None
-        self.ideviceStore = None
+        #self.ideviceStore = None
         self.userStore = None
         self.packagePath = None
         self.webServer = None
