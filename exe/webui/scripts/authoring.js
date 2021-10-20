@@ -115,6 +115,7 @@ function askUserForImage(multiple, fn, filter, targetWindow) {
         mode = parent.eXe.view.filepicker.FilePicker.modeOpen;
     fp = parent.Ext.create("eXe.view.filepicker.FilePicker", {
         type: mode,
+        remote: true,
         title: multiple? parent._("Select one or more images") : parent._("Select an image"),
         modal: true,
         scope: this,
