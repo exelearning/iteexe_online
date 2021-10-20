@@ -769,8 +769,11 @@ Ext.define('eXe.controller.Toolbar', {
             scope: this,
             callback: function(fp) {
                 if (fp.status == eXe.view.filepicker.FilePicker.returnOk) {
-                    Ext.Msg.wait(new Ext.Template(_('Inserting package: {filename}')).apply({filename: fp.file.path}));
-                    nevow_clientToServerEvent('insertPackage', this, '', fp.file.path);
+                    if (!fp.file.loaded)  {
+                        fp.file.loaded = true;
+                        Ext.Msg.wait(new Ext.Template(_('Inserting package: {filename}')).apply({filename: fp.file.path}));
+                        nevow_clientToServerEvent('insertPackage', this, '', fp.file.path);
+                    }
                 }
             }
         });
