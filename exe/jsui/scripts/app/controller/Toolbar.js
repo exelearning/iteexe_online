@@ -230,13 +230,7 @@ Ext.define('eXe.controller.Toolbar', {
             '#help_assistant_simplified': {
                 click: this.assistantPage
             },
-            '#help_assistant': {
-                click: this.assistantPage
-            },
-            '#help_assistant_simplified': {
-                click: this.assistantPage
-            },
-            '#help_notes': {
+             '#help_notes': {
                 click: { fn: this.releaseNotesPage }
             },
             '#help_legal': {
@@ -436,41 +430,6 @@ Ext.define('eXe.controller.Toolbar', {
 
     fileNewWindow: function() {
         window.open("/");
-    },
-
-    assistantPage: function() {
-        if (typeof(eXeAssistantPageIsOpen)!='undefined' && eXeAssistantPageIsOpen==true) {
-            eXeAssistantPage.close(true);
-            return;
-        }
-        eXeAssistantPage = new Ext.Window ({
-            height: eXe.app.getMaxHeight(700),
-            width: 650,
-            height: 500,
-            modal: false,
-            minimizable: true,
-            id: 'assistantwin',
-            title: _("Assistant"),
-            items: {
-                xtype: 'uxiframe',
-                src: '/tools/assistant',
-                height: '100%'
-            },
-            listeners: {
-                minimize: function(win,obj) {
-                    var cls = document.body.className;
-                    var elm = Ext.select("BODY");
-                    if (cls.indexOf("exe-window-minified")==-1) elm.addCls('exe-window-minified');
-                    else elm.removeCls('exe-window-minified');
-                    Ext.getCmp("assistantwin").doLayout();
-                },
-                'close': function(){
-                    eXeAssistantPageIsOpen = false;
-                }
-            }
-        });
-        eXeAssistantPageIsOpen = true;
-        eXeAssistantPage.show();
     },
 
     assistantPage: function() {
