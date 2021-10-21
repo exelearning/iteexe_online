@@ -273,7 +273,7 @@ Ext.define('eXe.view.forms.PackagePanel', {
                             help: _('Select a license or write your own one.')
                         },
                         {
-                            cls: 'exe-advanced',
+                            //cls: 'exe-advanced',
                             xtype: 'helpcontainer',
                             margin: '0 0 10 0',
                             item: {
