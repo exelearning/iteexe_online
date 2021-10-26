@@ -174,7 +174,8 @@ function addGalleryImage(galleryId) {
 	        submitLink("gallery.addImage."+imagePath, galleryId, true);
 	    }
     }
-    askUserForImage(true, fn);
+    //FilePicker shouldn`t be a multiple selector, that's why the parameter is changed to false
+    askUserForImage(false, fn);
 }
 
 // Called by the user to change an existing gallery image
