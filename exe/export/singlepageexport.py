@@ -131,6 +131,8 @@ class SinglePageExport(object):
         # But not nav.css
         if os.path.isdir(self.stylesDir):
             styleFiles = [G.application.config.stylesDir/'popup_bg.gif']
+            if package.get_addExeLink():
+                styleFiles += [self.stylesDir/'..'/'exe_powered_logo.png']
             styleFiles += self.stylesDir.files("*.*")
             if "nav.css" in styleFiles:
                 styleFiles.remove("nav.css")
