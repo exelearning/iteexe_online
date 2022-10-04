@@ -423,7 +423,7 @@ browser restrictions, you must click in the url: {0}'),
                             var div = doc.getElementById("main");
                             if (div) {
                                 div.style.minHeight = "400px";
-                                var msg = _('Click on the elements of the left panel to add content.');
+                                var msg = _('Use the left panel to create pages and add content.');
                                     msg += ' ' + '<a href="#" id="emptyPageInstructionsLink"><span class="sr-av">' + _("Don't show this warning again") + ' </span>×</a>';
                                 div.innerHTML += '<p class="exe-block-info" id="emptyPageInstructions">'+msg+'</p>';
                                 var a = doc.getElementById("emptyPageInstructionsLink");
