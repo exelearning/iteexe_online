@@ -191,6 +191,9 @@ Ext.define('eXe.controller.Toolbar', {
             '#file_extract_all': {
                 click: {fn: this.extractPackage, all: 1 }
             },
+            '#file_extract_SCORM': {
+                click: this.extractSCORM 
+            },
             '#file_quit': {
                 click: this.fileQuit
             },
@@ -805,6 +808,28 @@ Ext.define('eXe.controller.Toolbar', {
         });
         f.appendFilters([
             { "typename": _("eXe Package Files"), "extension": "*.elp", "regex": /.*\.elp$/ },
+            { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
+            ]
+        );
+        f.show();
+	},
+
+    extractSCORM: function() {
+        var f = Ext.create("eXe.view.filepicker.FilePicker", {
+            type: eXe.view.filepicker.FilePicker.modeSave,
+            title: _("Save extracted SCORM package as"),
+            remote: true,
+            modal: true,
+            scope: this,
+            callback: function(fp) {
+                if (fp.status == eXe.view.filepicker.FilePicker.returnOk || fp.status == eXe.view.filepicker.FilePicker.returnReplace) {
+                    Ext.Msg.wait(new Ext.Template(_('Extracting package: {filename}')).apply({filename: fp.file.path}));
+                        nevow_clientToServerEvent('extractSCORM', this, '', fp.file.path, fp.status == eXe.view.filepicker.FilePicker.returnReplace)
+               }   
+            }
+        });
+        f.appendFilters([
+            { "typename": _("SCORM Files"), "extension": "*.zip", "regex": /.*\.zip$/ },
             { "typename": _("All Files"), "extension": "*.*", "regex": /.*$/ }
             ]
         );
