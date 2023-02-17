@@ -19,6 +19,14 @@ parts:
     plugin: python
     python-version: python2
     requirements: [requirements.txt]
+    build-packages: [mimetex]
+    stage-packages: [mimetex]
+
+plugs:
+  dot-exe:
+     interface: personal-files
+     write: 
+       - "$HOME/.exe"
 
 apps:
   exelearning:
