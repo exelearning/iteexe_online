@@ -19,7 +19,7 @@
 """
 elp repository integration
 """
-
+import jwt
 import logging
 import json
 from urllib                 import urlencode, urlopen
@@ -67,12 +67,18 @@ class Integration:
                 self.enabled_logs = self.config['config']['enabled_logs']
             else:
                 self.enabled_logs = '0'
+            if 'config' in self.config and 'enabled_jwt' in self.config['config']:
+                self.enabled_jwt = '1'
+                self.jwt_secret_key = self.config['config']['jwt_secret_key']
+                self.jwt_secret_hash = self.config['config']['jwt_secret_hash']
+            else:
+                self.enabled_jwt = '0'
 
         else:
             raise Exception('Error loading configuration file')
 
 
-    def new_json_ode(self, ode_id='',filename='',filedata='',uri='',ode_user=False):
+    def new_json_ode(self, ode_id='',filename='',filedata='',uri='',ode_user=False,jwt_token=False):
         ode = {
             'ode_id': ode_id,
             'ode_filename': filename,
@@ -84,15 +90,25 @@ class Integration:
         if ode_user:
             ode['ode_user'] = ode_user
 
+        if self.enabled_jwt:
+            if not jwt_token:
+                raise Exception('jwt_token not found')
+            try:
+                jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)
+            except Exception as e:
+                raise Exception('Error in the secret key. No match')
+            ode["jwt_token"] = jwt_token
+
         return json.dumps(ode)
 
 
-    def set_ode(self,package_name,package_file,ode_id='',ode_user=False):
+    def set_ode(self,package_name,package_file,ode_id='',ode_user=False,jwt_token=False):
         ode = self.new_json_ode(
             ode_id=ode_id,
             filename=package_name,
             filedata=package_file,
-            ode_user=ode_user
+            ode_user=ode_user,
+            jwt_token=jwt_token
         )
         self.log_info_integration(info='set_ode:send',params=json.loads(ode))
         params = urlencode({self.post_ode:ode})
@@ -110,10 +126,11 @@ class Integration:
             return (False,e)
 
 
-    def get_ode(self,ode_id,ode_user=False):
+    def get_ode(self,ode_id,ode_user=False,jwt_token=False):
         ode = self.new_json_ode(
             ode_id=ode_id,
-            ode_user=ode_user
+            ode_user=ode_user,
+            jwt_token=jwt_token
         )
         self.log_info_integration(info='get_ode:send',params=json.loads(ode))
         params = urlencode({self.post_ode:ode})

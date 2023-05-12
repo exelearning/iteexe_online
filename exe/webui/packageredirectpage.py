@@ -22,6 +22,7 @@ PackageRedirectPage is the first screen the user loads.  It doesn't show
 anything it just redirects the user to a new package.
 """
 
+import jwt
 import logging
 import os
 import base64
@@ -58,6 +59,7 @@ class PackageRedirectPage(RenderableResource):
         self.stopping = None
         self.integration = None
         self.mainpages = {}
+        self.jwt_token=False
 
     def getChild(self, name, request):
         """
@@ -66,13 +68,25 @@ class PackageRedirectPage(RenderableResource):
         This is probably because the url is in unicode
         """
         session = request.getSession()
-
         # Provisional - TEST
         # Must be eliminated in the future
         # Login and import ode passing the parameter user
         if 'user' in request.args and request.args['user'][0]:
             session.setUser(request.args['user'][0])
 
+        #TEST Moodle-eXe Integration
+        self.integration = Integration()
+        if self.integration.enabled_jwt:
+            if 'jwt_token' in request.args and request.args['jwt_token'][0]:
+                self.jwt_token=request.args['jwt_token'][0]
+            else:
+                if not self.jwt_token:
+                    raise Exception('jwt_token not found')
+            try:
+                jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)
+            except Exception as e:
+                return error.ForbiddenResource("JWT not valid")
+        
         # No session
         if self.webServer.application.server and not session.user and not request.getUser():
             if 'login' in request.args and request.args['login'][0] == 'saml':
@@ -84,7 +98,8 @@ class PackageRedirectPage(RenderableResource):
         # Importing... page
         if (name == '' or name == 'edit_ode') and 'ode_id' in request.args:
             edit_ode_id = request.args['ode_id'][0]
-            self.integration = Integration()
+            if not self.integration:
+                self.integration = Integration()
             if self.integration.repo_home_url:
                 repository = self.integration.repo_home_url
             else:
@@ -106,7 +121,7 @@ class PackageRedirectPage(RenderableResource):
                 repository = "Unknown"
             # Check if ode_id is empty
             if edit_ode_id:
-                import_ode_response = self.importOde(session, edit_ode_id)
+                import_ode_response = self.importOde(session, edit_ode_id,self.jwt_token)
                 if import_ode_response and import_ode_response[0]:
                     imported_package = import_ode_response[1]
                     request.redirect(imported_package.encode('utf8'))
@@ -129,7 +144,15 @@ class PackageRedirectPage(RenderableResource):
 
         # New package
         if name == '' or name == 'new_ode':
-            return self
+            if not self.integration:
+                self.integration = Integration()
+            if self.integration.enabled_jwt:
+                if name == '' or (name == 'new_ode' and not 'jwt_token' in request.args):            
+                    return error.ForbiddenResource("New package not allowed")
+                else:
+                    return self
+            else:
+                return self
 
         # Existing package
         else:
@@ -140,33 +163,40 @@ class PackageRedirectPage(RenderableResource):
             else:
                 if session.uid in self.mainpages.keys():
                     if name in self.mainpages[session.uid].keys():
+                        if self.jwt_token:
+                            if not self.mainpages[session.uid][name].jwt_token:
+                                self.mainpages[session.uid][name].jwt_token=self.jwt_token
                         return self.mainpages[session.uid][name]
                 # This will just raise an error
                 log.error("child %s not found. uri: %s" % (name, request.uri))
                 log.error("Session uid: %s, Mainpages: %s" % (session.uid, self.mainpages))
-                return error.NoResource("No such child resource %(resource)s. Try again clicking %(link)s" % {
+                if not self.integration:
+                    return error.NoResource("No such child resource %(resource)s. Try again clicking %(link)s" % {
                                         "resource": name.encode('utf-8'),
                                         "link": "<a href='%s' target='_top'>%s</a>" % ('/', 'eXe')})
+                else:
+                    return error.ForbiddenResource()
 
-    def bindNewPackage(self, package, session):
+    def bindNewPackage(self, package, session,jwt_token=False):
         """
         Binds 'package' to the appropriate url
         and creates a MainPage instance for it
         and a directory for the resource files
         """
         log.debug("Mainpages: %s" % self.mainpages)
+
         session_mainpages = self.mainpages.get(session.uid)
         if session_mainpages:
-            session_mainpages[package.name] = MainPage(None, package, session, self.webServer)
+            session_mainpages[package.name] = MainPage(None, package, session, self.webServer,jwt_token)
         else:
-            self.mainpages[session.uid] = {package.name: MainPage(None, package, session, self.webServer)}
+            self.mainpages[session.uid] = {package.name: MainPage(None, package, session, self.webServer,jwt_token)}
         log.debug("Mainpages: %s" % self.mainpages)
 
-    def importOde(self, session, ode_id):
+    def importOde(self, session, ode_id,jwt_token=False):
         """
         Import Package from Repository
         """
-        response = self.integration.get_ode(ode_id,ode_user=session.user.name)
+        response = self.integration.get_ode(ode_id,ode_user=session.user.name,jwt_token=jwt_token)
         # Manage Response
         if response and response[0]:
             dict_response = response[1]
@@ -193,14 +223,18 @@ class PackageRedirectPage(RenderableResource):
                     write_error = True
 
             if package_file_path.exists() and not write_error:
-
+                tmppackage = Package.load(package_file_path)
+                newfile = session.user.root / tmppackage.name + ".elp"
+                tmppackage.save(newfile)
+                package_file_path = newfile
+                tmppackage = None
                 # Load Package and add ode_id and repository_url
                 package = Package.load(package_file_path)
                 package.ode_id = ode_id
                 package.ode_repository_uri = self.integration.repo_home_url
 
                 session.packageStore.addPackage(package)
-                self.bindNewPackage(package, session)
+                self.bindNewPackage(package, session,jwt_token)
 
                 log_add_package_params = {
                     'session_user': session.user.name,
@@ -228,6 +262,7 @@ class PackageRedirectPage(RenderableResource):
         """
         Create a new package and redirect the webrowser to the URL for it
         """
+
         log.debug("render_GET" + repr(request.args))
         # Create new package
         session = request.getSession()
@@ -244,8 +279,20 @@ class PackageRedirectPage(RenderableResource):
         if self.webServer.application.server and not session.user:
             request.setResponseCode(http.FORBIDDEN)
             return ''
+        if not self.integration:
+            self.integration = Integration()
+        if self.integration.enabled_jwt:
+            if 'jwt_token' in request.args and request.args['jwt_token'][0]:
+                self.jwt_token=request.args['jwt_token'][0]
+            else:
+                if not self.jwt_token:
+                    raise Exception('jwt_token not found')
+            try:
+                jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)
+            except Exception as e:
+                raise Exception('Error in the secret key. No match')
 
-        self.bindNewPackage(package, session)
+        self.bindNewPackage(package, session,self.jwt_token)
         log.info("Created a new package name=" + package.name)
         # Tell the web browser to show it
         request.redirect(package.name.encode('utf8'))

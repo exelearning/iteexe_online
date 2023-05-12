@@ -74,6 +74,7 @@ from exe.export.xmlexport        import XMLExport
 from suds.client                 import Client
 from exe.export.pages            import forbiddenPageNames
 from exe.engine.configparser     import ConfigParser
+from exe.engine.resource         import Resource
 
 from exe.engine.lom import lomsubs
 from exe.engine.lom.lomclassification import Classification
@@ -92,11 +93,13 @@ class MainPage(RenderableLivePage):
     _templateFileName = 'mainpage.html'
     name = 'to_be_defined'
 
-    def __init__(self, parent, package, session, config):
+    def __init__(self, parent, package, session, config,jwt_token=False):
         """
         Initialize a new Javascript page
         'package' is the package that we look after
         """
+
+        self.jwt_token=jwt_token
         self.name = package.name
         self.session = session
         RenderableLivePage.__init__(self, parent, package, config)
@@ -574,15 +577,33 @@ class MainPage(RenderableLivePage):
 
     def handleLoadPackage(self, client, filename, filter_func=None):
         """Load the package named 'filename'"""
-        package = self._loadPackage(client, filename, newLoad=True)
-        self.session.packageStore.addPackage(package)
-        self.webServer.root.bindNewPackage(package, self.session)
-        if package.load_message:
-            client.alert(package.load_message,
-                         onDone=(u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'),
-                         filter_func=filter_func)
+        if not self.integration.enabled_jwt:
+            package = self._loadPackage(client, filename, newLoad=True)
+            self.session.packageStore.addPackage(package)
+            self.webServer.root.bindNewPackage(package, self.session)
+            if package.load_message:
+                client.alert(package.load_message,
+                            onDone=(u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'),
+                            filter_func=filter_func)
+            else:
+                client.sendScript((u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'), filter_func=filter_func)
+
         else:
-            client.sendScript((u'eXe.app.gotoUrl("/%s")' % package.name).encode('utf8'), filter_func=filter_func)
+            if not self.package.isChanged and self.package.isTemplate:
+                self.package.isChanged = True
+            
+            package = self._loadPackage(client, filename, newLoad=True, preventUpdateRecent=False)
+            tmpfile = Path(tempfile.mktemp())
+            package.save(tmpfile, preventUpdateRecent=False)
+            loadedPackage = self._loadPackage(client, tmpfile, newLoad=False, destinationPackage=self.package, preventUpdateRecent=False)
+            loadedPackage.ode_id=self.package.ode_id
+            self.package=loadedPackage
+            self.session.packageStore.addPackage(loadedPackage)
+            self.webServer.root.bindNewPackage(loadedPackage, self.session)
+            url=self.package.name+"?jwt_token="+str(self.jwt_token)+"&ode_id="+str( loadedPackage.ode_id)+"&user_id="+str(self.session.user.name)  
+            client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
+                            url).encode('utf8'))
+
 
     def handleLoadTemplate(self, client, filename):
         """Load the template named 'filename'"""
@@ -1325,13 +1346,15 @@ class MainPage(RenderableLivePage):
                         scorm_filename,
                         package_file,
                         ode_id=self.package.ode_id,
-                        ode_user=self.session.user.name
+                        ode_user=self.session.user.name,
+                        jwt_token=self.jwt_token
                     )
                 else:
                     response = self.integration.set_ode(
                         scorm_filename,
                         package_file,
-                        ode_user=self.session.user.name
+                        ode_user=self.session.user.name,
+                        jwt_token=self.jwt_token
                     )
 
                 client.call('Ext.MessageBox.updateProgress', 1, '100%', uploading_package_message)
@@ -1654,53 +1677,7 @@ class MainPage(RenderableLivePage):
             filename += '.zip'
 
         if Path(filename).exists() and existOk != 'true':
-            msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-            client.alert(_(u'EXTRACT FAILED!\n%s') % msg)
-            return
-
-        try:
-            if int(allPackage):
-                self.package.save(filename)
-            else:
-                # Create a new package for the extracted nodes
-                newPackage = self.package.extractNode()
-
-                # trigger a rename of all of the internal nodes and links,
-                # and to remove any old anchors from the dest package,
-                # and remove any zombie links via isExtract:
-                newNode = newPackage.root
-                if newNode:
-                    newNode.RenamedNodePath(isExtract=True)
-                # Save the new packages
-                newPackage.save(filename)
-        except Exception, e:
-            client.alert(_('EXTRACT FAILED!\n%s') % str(e))
-            raise
-        client.filePickerAlert(_(u'Package extracted to: %s') % filename)
-
-    def handleExtractSCORM(self, client, filename, existOk):
-        """
-        Create a new package consisting of the current node and export to SCORM
-        'existOk' means the user has been informed of existance and ok'd it
-        """
-        style = G.application.config.styleStore.getStyle(self.package.style)
-        stylesDir = style.get_style_dir()
-
-        filename = Path(filename, 'utf-8')
-        saveDir = filename.dirname()
-        if saveDir and not saveDir.exists():
-            client.alert(_(u'Cannot access directory named ') + unicode(saveDir) + _(u'. Please use ASCII names.'))
-            return
-
-        # Add the extension if its not already there
-        if not filename.lower().endswith('.zip'):
-            filename += '.zip'
-
-        if Path(filename).exists() and existOk != 'true':
-            msg = _(u'"%s" already exists.\nPlease try again with a different filename') % filename
-            client.alert(_(u'EXTRACT FAILED!\n%s') % msg)
-            return
-
+            os.remove(filename)
         try:
             # Create a new package for the extracted nodes
             newPackage = self.package.extractNode()
