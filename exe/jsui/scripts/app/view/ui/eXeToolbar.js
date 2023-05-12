@@ -105,7 +105,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     menu: {
                         xtype: 'menu',
                         items: [
-                            {
+                           /* {
                                 xtype: 'accesskey_menuitem',
                                 text: _('New') + getSRhelp(),
                                 hideOnClick: false,
@@ -258,6 +258,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             },
                             {
                                 xtype: 'accesskey_menuitem',
+                                cls: 'exe-advanced',
                                 text: _('Templates') + getSRhelp(),
                                 hideOnClick: false,
                                 menu: {
