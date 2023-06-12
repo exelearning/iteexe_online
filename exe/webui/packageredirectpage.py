@@ -76,7 +76,7 @@ class PackageRedirectPage(RenderableResource):
 
         #TEST Moodle-eXe Integration
         self.integration = Integration()
-        if self.integration.enabled_jwt:
+        if self.integration.enabled_jwt == "1":
             if 'jwt_token' in request.args and request.args['jwt_token'][0]:
                 self.jwt_token=request.args['jwt_token'][0]
             else:
@@ -146,7 +146,7 @@ class PackageRedirectPage(RenderableResource):
         if name == '' or name == 'new_ode':
             if not self.integration:
                 self.integration = Integration()
-            if self.integration.enabled_jwt:
+            if self.integration.enabled_jwt == "1":
                 if name == '' or (name == 'new_ode' and not 'jwt_token' in request.args):            
                     return error.ForbiddenResource("New package not allowed")
                 else:
@@ -281,7 +281,7 @@ class PackageRedirectPage(RenderableResource):
             return ''
         if not self.integration:
             self.integration = Integration()
-        if self.integration.enabled_jwt:
+        if self.integration.enabled_jwt == "1":
             if 'jwt_token' in request.args and request.args['jwt_token'][0]:
                 self.jwt_token=request.args['jwt_token'][0]
             else:

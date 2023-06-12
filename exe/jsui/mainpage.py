@@ -580,7 +580,7 @@ class MainPage(RenderableLivePage):
 
     def handleLoadPackage(self, client, filename, filter_func=None):
         """Load the package named 'filename'"""
-        if not self.integration.enabled_jwt:
+        if self.integration.enabled_jwt == "0":
             package = self._loadPackage(client, filename, newLoad=True)
             self.session.packageStore.addPackage(package)
             self.webServer.root.bindNewPackage(package, self.session)

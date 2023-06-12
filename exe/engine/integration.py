@@ -68,7 +68,7 @@ class Integration:
             else:
                 self.enabled_logs = '0'
             if 'config' in self.config and 'enabled_jwt' in self.config['config']:
-                self.enabled_jwt = '1'
+                self.enabled_jwt = self.config['config']['enabled_jwt']
                 self.jwt_secret_key = self.config['config']['jwt_secret_key']
                 self.jwt_secret_hash = self.config['config']['jwt_secret_hash']
             else:
@@ -90,7 +90,7 @@ class Integration:
         if ode_user:
             ode['ode_user'] = ode_user
 
-        if self.enabled_jwt:
+        if self.enabled_jwt == "1":
             if not jwt_token:
                 raise Exception('jwt_token not found')
             try:
