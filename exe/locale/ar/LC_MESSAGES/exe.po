@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-06-13 12:51+0200\n"
+"POT-Creation-Date: 2023-06-13 13:57+0200\n"
 "PO-Revision-Date: 2018-12-02 17:16+0100\n"
 "Last-Translator: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
@@ -3181,8 +3181,8 @@ msgstr ""
 msgid "Page %s of %s"
 msgstr ""
 
-#: exe/export/epub3export.py:771 exe/export/epub3subexport.py:689
-#: exe/export/imsexport.py:739 exe/export/scormexport.py:860
+#: exe/export/epub3export.py:773 exe/export/epub3subexport.py:689
+#: exe/export/imsexport.py:741 exe/export/scormexport.py:862
 #: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
 #, python-format
 msgid ""
@@ -3977,7 +3977,8 @@ msgid "Template Manager"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:756
-msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#, python-format
+msgid "Exit without saving changes and go back to %s (home page)?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:814
@@ -8812,10 +8813,6 @@ msgstr ""
 #: exe/webui/listablock.py:180
 msgid "Other words"
 msgstr "كلمات أخرى"
-
-#: exe/webui/loginpage.py:52
-msgid "eXe"
-msgstr ""
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
@@ -16883,5 +16880,11 @@ msgstr ""
 #~ msgstr "يمكنك إغلاقه بأمان."
 
 #~ msgid "Passwords"
+#~ msgstr ""
+
+#~ msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#~ msgstr ""
+
+#~ msgid "eXe"
 #~ msgstr ""
 

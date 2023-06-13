@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: eXe Translations <translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-06-13 12:51+0200\n"
+"POT-Creation-Date: 2023-06-13 13:57+0200\n"
 "PO-Revision-Date: 2021-05-31 20:32+0200\n"
 "Last-Translator: Tandin Penjor <tpenjor.sce@rub.edu.bt>\n"
 "Language: dz\n"
@@ -3382,8 +3382,8 @@ msgstr "ཕྱིར་འདྲེན་འབད་ནི་རྩ་སྒྲ
 msgid "Page %s of %s"
 msgstr "ཤོག་ལེབ་ %s་ལས་ %s"
 
-#: exe/export/epub3export.py:771 exe/export/epub3subexport.py:689
-#: exe/export/imsexport.py:739 exe/export/scormexport.py:860
+#: exe/export/epub3export.py:773 exe/export/epub3subexport.py:689
+#: exe/export/imsexport.py:741 exe/export/scormexport.py:862
 #: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
 #, python-format
 msgid ""
@@ -4183,7 +4183,8 @@ msgid "Template Manager"
 msgstr "དཔེ་གཞི་འཛིན་སྐྱོང་པ"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:756
-msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#, python-format
+msgid "Exit without saving changes and go back to %s (home page)?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:814
@@ -8998,10 +8999,6 @@ msgstr ""
 #: exe/webui/listablock.py:180
 msgid "Other words"
 msgstr "ཚིག་གཞན་ཚུ"
-
-#: exe/webui/loginpage.py:52
-msgid "eXe"
-msgstr ""
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
@@ -17008,4 +17005,10 @@ msgstr ""
 
 #~ msgid "Passwords"
 #~ msgstr "མཆོག་ཡིག"
+
+#~ msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#~ msgstr ""
+
+#~ msgid "eXe"
+#~ msgstr ""
 

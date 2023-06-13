@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-06-13 12:51+0200\n"
+"POT-Creation-Date: 2023-06-13 13:57+0200\n"
 "PO-Revision-Date: 2022-12-07 19:46+0100\n"
 "Last-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\n"
 "Language: eu\n"
@@ -3749,8 +3749,8 @@ msgstr "Esportazio formatua ez dago inplementatua"
 msgid "Page %s of %s"
 msgstr "Orria: %s / %s"
 
-#: exe/export/epub3export.py:771 exe/export/epub3subexport.py:689
-#: exe/export/imsexport.py:739 exe/export/scormexport.py:860
+#: exe/export/epub3export.py:773 exe/export/epub3subexport.py:689
+#: exe/export/imsexport.py:741 exe/export/scormexport.py:862
 #: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
 #, python-format
 msgid ""
@@ -4567,7 +4567,8 @@ msgid "Template Manager"
 msgstr "Txantiloi-kudeatzailea"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:756
-msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#, python-format
+msgid "Exit without saving changes and go back to %s (home page)?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:814
@@ -9517,10 +9518,6 @@ msgstr ""
 #: exe/webui/listablock.py:180
 msgid "Other words"
 msgstr "Beste hitzak"
-
-#: exe/webui/loginpage.py:52
-msgid "eXe"
-msgstr ""
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
@@ -17638,4 +17635,10 @@ msgstr ""
 
 #~ msgid "Passwords"
 #~ msgstr "Pasahitza"
+
+#~ msgid "Exit without saving changes and go back to publishLabel (home page)?"
+#~ msgstr ""
+
+#~ msgid "eXe"
+#~ msgstr ""
 
