@@ -1674,6 +1674,7 @@ def getQuizTestPassRate(node):
 def getFilesJSToMinify(type, scriptsDir):
     # Read about these files format (comments) in exportMinFileJS (helper.py)
     listJSFiles=[]
+    return listJSFiles # To review (online version fails due to encoding problems in common.js)
     if(type =='ims'):
         listJSFiles+=[{'path':scriptsDir/'common.js','basename':'common.js'}]
     elif(type=='epub3'):
