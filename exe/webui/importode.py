@@ -51,7 +51,7 @@ class ImportOdePage(Renderable, rend.Page):
     @staticmethod
     def render_title(ctx, data):
         ctx.tag.clear()
-        return ctx.tag()[_("eXe")]
+        return ctx.tag()["eXe"]
         
     def render_style1(self, ctx, data):
         ctx.tag.clear()
@@ -72,7 +72,7 @@ class ImportOdePage(Renderable, rend.Page):
         if self.error:
             return ctx.tag()[_("Error importing package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
         else:
-            return ctx.tag()[_("Important package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
+            return ctx.tag()[_("Importing package with id ( {} ) from {}".format(self.ode_id,self.repository_url))]
 
     def render_msg2(self, ctx, data):
         ctx.tag.clear()

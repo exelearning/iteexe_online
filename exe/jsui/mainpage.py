@@ -1472,7 +1472,7 @@ class MainPage(RenderableLivePage):
                 filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
             exported_dir = self.exportSinglePage(client, filename, webDir, stylesDir, printit)
             if exported_dir is None:
-                client.alert(_(u"EXPORTED DIR ERROR"))
+                client.alert(_(u'Cannot access directory named ')+'""')
 
         elif exportType == 'webSite':
             self.exportWebSite(client, filename, stylesDir)

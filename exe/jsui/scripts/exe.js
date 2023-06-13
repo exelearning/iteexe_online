@@ -181,8 +181,8 @@ Ext.application({
             Ext.Msg.alert(
                 title,
                 Ext.String.format(
-                    _('The requested url is not secure but eXe is hosted in a secure site. To prevent \
-browser restrictions, you must click in the url: {0}'),
+                    _('The requested URL is not secure, but eXe is hosted in a secure site. To prevent \
+browser restrictions, you must click on the URL: {0}'),
                     '<a href="' + url + '" target="_blank" onclick="eXe.app.closeMessages()">' + url + '</a>')
             );
         } else {
@@ -254,6 +254,11 @@ browser restrictions, you must click in the url: {0}'),
                 
                 // Remove ~alfa or ~beta
 				current = current.split("~");
+				current = current[0];
+				// Remove -alfa or -beta
+				current = current.split("-alfa");
+				current = current[0];
+				current = current.split("-beta");
 				current = current[0];
 				// Remove b (Example: 2.6b2)
 				current = current.split("b");

@@ -218,6 +218,9 @@ Ext.define('eXe.controller.Toolbar', {
             '#tools_preview_button': {
                 click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
             },
+            '#file_export_procomun_b': {
+                click: { fn: this.processExportEvent, exportType: "procomun" }
+            },            
             '#logout_user_buttom': {
                 click: this.doLogout
             },
@@ -632,6 +635,9 @@ Ext.define('eXe.controller.Toolbar', {
 
     // Launch the iDevice Editor Window
 	toolsIdeviceEditor: function() {
+		// To review
+		return false;
+		// / To review
         var editor = new Ext.Window ({
           height: eXe.app.getMaxHeight(700),
           width: 800,
@@ -700,8 +706,23 @@ Ext.define('eXe.controller.Toolbar', {
 	},
 
     fileQuit: function() {
-	    this.saveWorkInProgress();
-	    this.askDirty("eXe.app.getController('Toolbar').doQuit()", "quit");
+		Ext.Msg.show( {
+			title: _('Confirm'),
+			msg: _('Exit without saving changes and go back to '+config['publishLabel']+' (home page)?'),
+			//scope: this,
+			//modal: true,
+			buttons: Ext.Msg.YESNO,
+			fn: function(button) {
+				if (button === 'yes') {
+					eXe.app.getController('Toolbar').saveWorkInProgress()
+					Ext.util.Cookies.clear('eXeSaveReminderPreference');
+					eXe.app.quitWarningEnabled = false;
+					Ext.get('loading-mask').fadeIn();
+					Ext.get('loading').show();
+					window.location.href = config['publishHomeURL'];
+				}
+			}
+		});
 	},
 
     doQuit: function() {
@@ -1079,6 +1100,26 @@ Ext.define('eXe.controller.Toolbar', {
         if (e.exportType=="csvReport") {
             this.exportPackage(e.exportType, "");
             return;
+        } else if (e.exportType=="procomun") {
+            if (config['publishLabel']=='Procomún') {
+                nevow_clientToServerEvent('showMetadataWarning', this, '', 'procomun');
+            } else {
+                procomunProcessExportEvent = this; // To review (this is global...)
+                Ext.Msg.show( {
+                    title: _('Confirm'),
+                    msg: _('Publish on %s?').replace("%s",config['publishLabel'] + '<br /><br />' + _('Please check the Properties tab contents (title, authorship, license...).'),
+                    //scope: this,
+                    //modal: true,
+                    buttons: Ext.Msg.YESNO,
+                    fn: function(button) {
+                        if (button === 'yes') {
+                            // nevow_clientToServerEvent('validatePackageProperties', procomunProcessExportEvent, '', 'procomun');
+                            procomunProcessExportEvent.exportProcomun();
+                        }
+                    }
+                });
+            }
+            return;
         }
 
         // Check if we need to show a warning if the package has metadata
@@ -1137,7 +1178,7 @@ Ext.define('eXe.controller.Toolbar', {
         this.saveWorkInProgress();
         Ext.Msg.show({
             title: _('Publishing document to ')+config['publishLabel'],
-            msg: _('Initializing')+' '+config['publishLabel']+' '+_('export process...'),
+            msg: config['publishLabel']+' '+_('export process...'),
             width: 300,
             progress: true,
             progressText: '0%',

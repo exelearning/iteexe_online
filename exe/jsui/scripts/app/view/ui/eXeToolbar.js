@@ -105,139 +105,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     menu: {
                         xtype: 'menu',
                         items: [
-                           /* {
-                                xtype: 'accesskey_menuitem',
-                                text: _('New') + getSRhelp(),
-                                hideOnClick: false,
-                                accesskey: 'n',
-                                menu: {
-                                    xtype: 'menu',
-	                                itemId: 'file_new_menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            text: _('Project'),
-                                            accesskey: 'd',
-                                            tooltip: 'Ctrl+Alt+D',
-                                            itemId: 'file_new'
-                                        },
-                                        {
-                                            cls: 'exe-advanced',
-                                            xtype: 'accesskey_menuitem',
-                                            text: _('Window'),
-                                            accesskey: 'w',
-                                            tooltip: 'Ctrl+Alt+W',
-                                            itemId: 'file_new_window'
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            text: _('Templates') + getSRhelp(),
-                                            hideOnClick: false,
-                                            itemId: 'templates_button',
-                                            menu: {
-                                                xtype: 'menu',
-                                                itemId: 'templates_menu'
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            /*
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Open'),
-                                accesskey: 'o',
-                                tooltip: 'Ctrl+O',
-                                itemId: 'file_open'
-                            },
-                            */
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Import') + getSRhelp(),
-                                hideOnClick: false,
-                                accesskey: 'i',
-                                menu: {
-                                    xtype: 'menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'elp_import',
-                                            accesskey: 'e',
-                                            text: _('Package (.elp)')
-                                        },
-                                        {
-                                            cls: 'exe-advanced',
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_insert',
-                                            accesskey: 'i',
-                                            text: _('Insert elp in the current page')
-                                        },
-                                        /*
-                                        {
-                                            cls: 'exe-advanced',
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_import_html',
-                                            accesskey: 'h',
-                                            text: _('HTML Files')
-                                        },
-                                        */
-                                        {
-                                            cls: 'exe-advanced',
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_import_xliff',
-                                            accesskey: 'x',
-                                            text: _('XLIFF File')
-                                        },
-                                        {
-                                            cls: 'exe-advanced',
-                                            xtype: 'accesskey_menuitem',
-			                                text: _('Metadata') + getSRhelp(),
-			                                hideOnClick: false,
-			                                accesskey: 'm',
-                                            menu: {
-                                                xtype: 'menu',
-                                                items: [
-			                                        {
-			                                            xtype: 'accesskey_menuitem',
-			                                            itemId: 'file_import_lom',
-			                                            accesskey: 'l',
-			                                            text: _('LOM')
-			                                        },
-                                                    {
-                                                        xtype: 'accesskey_menuitem',
-                                                        itemId: 'file_import_lomes',
-                                                        accesskey: 'e',
-                                                        text: _('LOM-ES')
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Recent Projects...') + getSRhelp(),
-                                hideOnClick: false,
-                                accesskey: 'r',
-                                menu: {
-                                    xtype: 'menu',
-	                                itemId: 'file_recent_menu',
-                                    items: [
-                                        {
-                                            xtype: 'menuseparator'
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_clear_recent',
-                                            text: _('Clear Recent Projects List')
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                xtype: 'menuseparator'
-                            },
                             {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Save'),
@@ -245,47 +112,8 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 tooltip: 'Ctrl+S',
                                 itemId: 'file_save'
                             },
-                            /*
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Save As...'),
-                                accesskey: 'a',
-                                itemId: 'file_save_as'
-                            },
-                            */
                             {
 								xtype: 'menuseparator'
-                            },
-                            {
-                                xtype: 'accesskey_menuitem',
-                                cls: 'exe-advanced',
-                                text: _('Templates') + getSRhelp(),
-                                hideOnClick: false,
-                                menu: {
-                                    xtype: 'menu',
-	                                itemId: 'templates_options_menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            text: _('Save as template'),
-                                            itemId: 'template_save'
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'tools_templatemanager',
-                                            text: _('Manage')
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-								xtype: 'menuseparator'
-                            },
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Download'),
-                                accesskey: 'd',
-                                itemId: 'file_extract_all'
                             },
                             {
                                 xtype: 'accesskey_menuitem',
@@ -340,13 +168,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                             menu: {
                                                 xtype: 'menu',
                                                 items: [
-                                                    //it makes no sense to download an uncompressed folder
-                                                    /*{
-                                                        xtype: 'accesskey_menuitem',
-                                                        text: _('Self-contained Folder'),
-                                                        accesskey: 'f',
-                                                        itemId: 'file_export_website'
-                                                    },*/
                                                     {
                                                         xtype: 'accesskey_menuitem',
                                                         text: _('Zip File'),
@@ -430,6 +251,53 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
+                                text: _('Import') + getSRhelp(),
+                                hideOnClick: false,
+                                accesskey: 'i',
+                                menu: {
+                                    xtype: 'menu',
+                                    items: [
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_insert',
+                                            accesskey: 'i',
+                                            text: _('Insert elp in the current page')
+                                        },
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_import_xliff',
+                                            accesskey: 'x',
+                                            text: _('XLIFF File')
+                                        },
+                                        {
+                                            xtype: 'accesskey_menuitem',
+			                                text: _('Metadata') + getSRhelp(),
+			                                hideOnClick: false,
+			                                accesskey: 'm',
+                                            menu: {
+                                                xtype: 'menu',
+                                                items: [
+			                                        {
+			                                            xtype: 'accesskey_menuitem',
+			                                            itemId: 'file_import_lom',
+			                                            accesskey: 'l',
+			                                            text: _('LOM')
+			                                        },
+                                                    {
+                                                        xtype: 'accesskey_menuitem',
+                                                        itemId: 'file_import_lomes',
+                                                        accesskey: 'e',
+                                                        text: _('LOM-ES')
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                cls: 'exe-advanced',
+                                xtype: 'accesskey_menuitem',
                                 text: _('Publish') + getSRhelp(),
                                 hideOnClick: false,
                                 itemId: 'publish',
@@ -461,7 +329,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 xtype: 'menuseparator'
                             },
-                            /*
                             {
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'file_quit',
@@ -469,7 +336,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 tooltip: 'Ctrl+Q',
                                 text: _('Quit')
                             }
-                            */
                         ]
                     }
                 },
@@ -492,48 +358,15 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 itemId: 'tools_preview',
                                 accesskey: 'v',
                                 text: _('Preview')
-                            },
-                            /*
-                            {
-                                cls: 'exe-advanced',
-                                xtype: 'menuseparator'
-                            },
-                            {
-                            	cls: 'exe-advanced',
-                                xtype: 'accesskey_menuitem',
-                                itemId: 'tools_stylemanager',
-                                accesskey: 's',
-                                text: _('Style Manager')
-                            },
-                            {
-                                cls: 'exe-advanced',
-                                xtype: 'accesskey_menuitem',
-                                text: _('Style Designer') + getSRhelp(),
-                                menu: {
-                                    xtype: 'menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'style_designer_new_style',
-                                            accesskey: 'i',
-                                            text: _('Create new Style')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'style_designer_edit_style',
-                                            text: _('Edit current Style')
-                                        }
-                                    ]
-                                }
-                            },
-                            */
-                            {
+                            },                            
+                            /*{ To review
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'tools_idevice',
                                 accesskey: 'i',
                                 text: _('iDevice Editor')
                             },
+							*/
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
@@ -551,7 +384,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     }
                 },
                 {
-                    cls: 'exe-simplified',
                     xtype: 'accesskey_button',
                     text: _('Styles'),
                     accesskey: 's',
@@ -559,32 +391,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     menu: {
                         xtype: 'menu',
 	                    itemId: 'styles_menu'
-                    }
-                },
-                {
-                    cls: 'exe-advanced',
-                    xtype: 'accesskey_button',
-                    text: _('Styles'),
-                    accesskey: 's',
-                    itemId: 'styles_button_advanced_wrapper',
-                    menu: {
-                        xtype: 'menu',
-	                    items: [
-                            {
-                            	xtype: 'accesskey_menuitem',
-                                itemId: 'tools_stylemanager',
-                                text: _('Style Manager')
-                            },
-                            {
-                                xtype: 'accesskey_menuitem',
-                                text: _('Styles'),
-                                itemId: 'styles_button_advanced',
-                                menu: {
-                                    xtype: 'menu',
-                                    itemId: 'styles_menu_advanced'
-                                }
-                            }
-                        ]
                     }
                 },
                 {
@@ -619,13 +425,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 't',
                                 text: _('eXe Tutorial')
                             },
-                            // Task 1080, item 1, jrf
-                            // {
-                            //    xtype: 'accesskey_menuitem',
-                            //    itemId: 'help_manual',
-                            //    accesskey: 'm',
-                            //    text: _('eXe Manual')
-                            // },
                             {
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'help_notes',
@@ -633,7 +432,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 'n',
                                 text: _('Release Notes')
                             },
-                            // jrf - legal notes
                             {
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'help_legal',
@@ -658,13 +456,15 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 'r',
                                 text: _('Report an Issue')
                             },
-                            {
+                            /* To review:
+							{
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'help_forums',
                                 id: 'help_forums_link',
                                 accesskey: 'f',
                                 text: _('eXe Forums')
                             },
+							*/
                             {
                                 xtype: 'menuseparator'
                             },
@@ -696,42 +496,9 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 							listeners : {
                                 change: function(e, newValue) {
 
-									var descriptionLabel = Ext.DomQuery.select("label[for=pp_description]");
-
-									if (newValue==true) {
-										if (!Ext.util.Cookies.get('eXeUIversion')) {
-											Ext.Msg.alert(
-												_('Info'),
-												_('Checking this option will show more elements in the menus (File, Tools...) and the Properties tab.')
-											);
-										}
-										Ext.util.Cookies.set('eXeUIversion', 'advanced');
-										Ext.select("BODY").removeCls('exe-simplified');
-										Ext.select("BODY").addCls('exe-advanced');
-										// Change some strings:
-										if (descriptionLabel && descriptionLabel.length==1) descriptionLabel[0].innerHTML = _("General") + ":";
-                                    } else {
-										Ext.util.Cookies.set('eXeUIversion', 'simplified');
-                                        Ext.select("BODY").removeCls('exe-advanced');
-										Ext.select("BODY").addCls('exe-simplified');
-										// Change some strings:
-										if (descriptionLabel && descriptionLabel.length==1) descriptionLabel[0].innerHTML = _("General description") + ":";
-										// Show Properties - Package
-										var e1 = document.getElementById("eXePropertiesTab");
-										if (e1) {
-											var e2 = e1.getElementsByTagName("button");
-											for (var i=0;i<e2.length;i++){
-												if (e2[i].className=="x-tab-center") {
-													var span = e2[i].getElementsByTagName("span");
-													if (span.length==2 && span[0].innerHTML==_("Package")) e2[i].click();
-												}
-											}
-										}
-                                    }
-									// Refresh some components
-									try {
-										Ext.getCmp("exe-viewport").doLayout();
-									} catch(e) {}
+                                    let status=null
+                                    newValue ? status=1 : status = 0
+                                    nevow_clientToServerEvent('saveEXeUIversion',this,'',status)
                                 }
                             }
                         }
@@ -750,58 +517,36 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         }
                     ]
                 },
-                // / Advanced user
-				'->', // Name logged user
-				{
-                    xtype: 'accesskey_button',
-                    icon: eXe.app.config.user_picture,
-                    iconCls: 'user_picture',
-                    padding: '2 10 2 10',
-                    margin: '0 10 0 0',
-                    menu:
-                    {
-                        xtype: 'menu',
-                        items:
-                        [
-                            {
-                                xtype: 'label',
-                                text:   eXe.app.config.user,
-                                itemId: 'user_email',
-                                style:
-                                {
-                                    'border-color':'#DCDCDC',
-                                    'background-color':'#DCDCDC !important',
-                                    'text-align':'center',
-                                    'font-size': '.9em',
-                                    'padding': '8px'
-                                },
-                            },
-                            {
-                                xtype: 'menuseparator'
-                            },
-                            {
-                                xtype: 'menuitem',
-                                text: _('Sign off'),
-                                itemId: 'logout_user_buttom'
-                            }
-                        ]
-                    }
+                // Preview button
+                {
+					xtype: 'fieldcontainer',
+					defaultType: 'button',
+					margin: '0 10 0 0',
+                    items: [
+                        {
+                            xtype: 'button',
+                            text: _('Finish'),
+                            itemId: 'file_export_procomun_b'
+                        }
+                    ]
                 }
             ]
         });
 
         me.callParent(arguments);
 
-		// Advanced user
+        // Advanced user
 		// Get the cookie or set the default value (simplified)
-		var eXeUIversion = Ext.util.Cookies.get('eXeUIversion');
-		if (!eXeUIversion) eXeUIversion = 'simplified';
+		// var eXeUIversion = Ext.util.Cookies.get('eXeUIversion');
+		// if (!eXeUIversion) eXeUIversion = 'simplified';
 		// Check the Advanced option or add the simplified class to the BODY tag
-		if (eXeUIversion=='advanced') {
-			Ext.getCmp("advanced_toggler").setValue(true);
+        /*
+        if (eXeUIversion=='advanced') {
+		Ext.getCmp("advanced_toggler").setValue(true);
 		} else {
 			Ext.select("BODY").addCls('exe-simplified');
-		}
+        }
+        */
 		// / Advanced user
     }
 });
