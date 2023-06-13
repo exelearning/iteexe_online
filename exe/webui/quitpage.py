@@ -60,7 +60,7 @@ class QuitPage(Renderable, rend.Page):
     @staticmethod
     def render_title(ctx, data):
         ctx.tag.clear()
-        return ctx.tag()[_("eXe")]
+        return ctx.tag()["eXe"]
 
     @staticmethod
     def render_msg1(ctx, data):
