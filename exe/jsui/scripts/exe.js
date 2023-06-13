@@ -245,6 +245,7 @@ browser restrictions, you must click on the URL: {0}'),
     },
     
     showNewVersionWarning: function(){
+        return false; // Make sure there's no new version available message in the online version
         // Show a warning message if a new version is available
         if (navigator.onLine && eXe.app.config.showNewVersionWarning && typeof(eXe.app.config.release)=='string') {
             function openNewVersionWarning(no){
