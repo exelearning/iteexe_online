@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2008-01-28 00:15+1300\nLast-Translator: Pekka Henttonen <pekka.henttonen@uta.fi>\nLanguage: fi\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2008-01-28 00:15+1300\nLast-Translator: Pekka Henttonen <pekka.henttonen@uta.fi>\nLanguage: fi\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Click for completion instructions": "Klikkaa saadaksesi t\u00e4ydennysohjeita", 
  "Click \non the picture below or the \"Add Image\" button to select an image file to be \nmagnified.": "Klikkaa \nallaolevaa kuvaa tai \"Lis\u00e4\u00e4 kuva\" -painiketta valitaksesi \nsuurennettavan kuvan.", 
  "Emphasis": "Korostus", 
@@ -25,7 +25,6 @@ translations = {
  "Add a text entry box to an iDevice. Used for entering larger amounts of textual content.": "Lis\u00e4\u00e4 laatikko suuren tekstim\u00e4\u00e4r\u00e4n kirjoittamista varten.", 
  "Article": "Artikkeli", 
  "Delete Image": "Poista kuva", 
- "Clear Recent Projects List": "Tyhjenn\u00e4 lista viimeaikaisista projekteista", 
  "EXPORT FAILED!\n%s": "VIENTI EP\u00c4ONNISTUI!\n%s", 
  "ERROR: Block.renderViewContent called directly": "VIRHE: Block.renderViewContent called directly", 
  "Add another Option": "Lis\u00e4\u00e4 uusi vaihtoehto", 

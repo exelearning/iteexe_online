@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2007-12-04 01:11+1300\nLast-Translator: Toha Mustofa <toha.mustofa@gmail.com>\nLanguage: id\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2007-12-04 01:11+1300\nLast-Translator: Toha Mustofa <toha.mustofa@gmail.com>\nLanguage: id\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": "<p>Guru - guru sebaiknya tetap mengikuti langkah - langkah berikat ketika menggunakan \"iDevice\" ini: <\/p><ol><li>Pikirkan tentang jumlah aktivitas yang direncanakan untuk sumber daya anda yang akan ditampilkan secara visual sebagai isinya. Hindari menggunakan berbagai macam jenis atau klasifikasi dari aktivitas kalau tidak siswa akan menjadi bingung. Biasanya 3 atau 4 jenis yang berbeda sudah lebih dari cukup untuk sebuah sumber daya pengajaran.<\/li><li>Dari perspektiv desain visual, hindari 2 \"iDevices\" berurutan tanpa teks apapun diantaranya. Jka tidak bisa dihindari, lebih baik menggabungkan 2 pertanyaan atau kegiatan ke dalam satu \"iDevice\". <\/li><li>Pikirkan tentang aktivitas dimana keuntungan yang diperoleh akan lebih besar dari waktu dan usaha yang dikeluarkan untuk aktivitas tersebut. <\/li><\/ol>", 
  "Title": "Judul", 
  "Text Line": "Baris Teks", 
@@ -11,12 +11,13 @@ translations = {
  "Portugese Wikipedia Article": "Artikel Wikipedia Portugis", 
  "Add another option": "Tambahkan opsi yang lain", 
  "Yiddish (formerly ji) ": "Bahasa Yiddi", 
- "Enter the available choices here. \nYou can add options by clicking the \"Add another option\" button. Delete options by \nclicking the red X next to the option.": "Masukan pilihan yang tersedia di sini. \nAnda dapat menambah pilihan dengan cara klik  tombol \"Tambahkan pilihan lain\". Hapus pilihan dengan cara \nklik X merah di sebelah pilihan.", 
+ "The majority of a learning resource will be \nestablishing context, delivering instructions and providing general information.\nThis provides the framework within which the learning activities are built and \ndelivered.": "Kebanyakan dari sumber daya pelajaran akan berupa \nmembentuk konteks, menyampaikan instruksi dan menyediakan informasi umum.\nHal ini menyediakan bingkai kerja dimana aktivitas pembelajaran dibangun dan \ndisampaikan.", 
  "Although more often used in formal testing \nsituations MCQs can be used as a testing tool to stimulate thought and  \ndiscussion on topics students may feel a little reticent in responding to. \n\nWhen designing a MCQ test consider the following:\n<ul>\n<li> What learning outcomes are the questions testing<\/li>\n<li>    What intellectual skills are being tested<\/li>\n<li> What are the language skills of the audience<\/li>\n<li> Gender and cultural issues<\/li>\n<li> Avoid grammar language and question structures that might provide \n     clues<\/li>\n<\/ul>\n ": "Walaupun lebih banyak digunakan dalam sebuah situasi pengujian \nformal MCQs dapat digunakan sebagai alat pengujian untuk merangsang pemikiran dan \ndiskusi pada topik - topik dimana siswa merasa sedikit segan untuk menanggapi. \n\nKetika merancang tes MCQ test pertimbangkan hal - hal berikut ini:\n<ul>\n<li> Hasil pembelajaran apa yang ditujukan dari pengujian pertanyaan<\/li>\n<li> Keahlian intelektual apa yang diujikan<\/li>\n<li> Keahlian bahasa apa yang dimiliki oleh peserta<\/li>\n<li> Permasalahan jenis kelamin dan kebudayaan<\/li>\n<li> Hindari tata bahawa dan struktur pertanyaan yang mungkin malah menyediakan \njawaban<\/li>\n<\/ul>\n ", 
  "Move Up": "Pindah Ke atas", 
  "Enter a hint here. If you do not want to provide a hint, leave this field blank.": "Masukkan sebuah petunjuk di sini. Jika anda tidak ingin menyediakan sebuah petunjuk, kosongkan area ini.", 
  "Multi-select": "Pilihan Jamak", 
  "Check Caps?": "Periksa tombol Caps?", 
+ "Enter the available choices here. \nYou can add options by clicking the \"Add another option\" button. Delete options by \nclicking the red X next to the option.": "Masukan pilihan yang tersedia di sini. \nAnda dapat menambah pilihan dengan cara klik  tombol \"Tambahkan pilihan lain\". Hapus pilihan dengan cara \nklik X merah di sebelah pilihan.", 
  "False": "Salah", 
  "Wikibooks Article": "Artikel Wikibooks", 
  "The MP3 iDevice allows you to attach an MP3 media file to your content along with relevant textuallearning instructions.": "\"iDevice\" MP3 mengizinkan anda untuk menyisipkan berkas MP3 pada isi bersamaan dengan instruksi teks pelajaran yang relevan.", 
@@ -107,7 +108,6 @@ translations = {
  "Hide": "Sembunyikan", 
  "Some emphasis": "Beberapa penekanan", 
  "Kannada ": "Kanada", 
- "The majority of a learning resource will be \nestablishing context, delivering instructions and providing general information.\nThis provides the framework within which the learning activities are built and \ndelivered.": "Kebanyakan dari sumber daya pelajaran akan berupa \nmembentuk konteks, menyampaikan instruksi dan menyediakan informasi umum.\nHal ini menyediakan bingkai kerja dimana aktivitas pembelajaran dibangun dan \ndisampaikan.", 
  "Select a file": "Pilih berkas", 
  "Set the initial level of zoom \nwhen the IDevice loads, as a percentage of the original image size": "Tentukan tingkat awal pembesaran \nketika \"IDevice\" dipanggil, sebagai persentasi ukuran gambar", 
  "Icons": "Ikon", 
@@ -288,7 +288,6 @@ translations = {
  "Kirghiz ": "Kirgiztan", 
  "Package is old. Please upgrade it (using File..Open followed by File..Save As) before attempting to insert it into another package!": "Paket sudah usang. Tolong perbaharui (menggunakan Berkas..Buka diikuti oleh Berkas..Simpan Sebagai) sebelum menggabungkannya pada paket yang lain!", 
  "Select the appropriate language version \nof Wikipedia to search and enter search term.": "Pilih versi bahasa Wikipedia yang cocok  \nuntuk mencari dan memasukan kata pencarian.", 
- "Feedback button will not appear if no \ndata is entered into this field.": "Tombol umpan balik tidak akan muncul jika tidak \nada data yang dimasukan ke dalam area isian ini.", 
  "Enter \nthe text you wish to associate with the file.": "Masukkan \nteks yang anda inginkan untuk diasosiasikan dengan berkas tersebut.", 
  "Irish ": "Irlandia", 
  "Describe the prerequisite knowledge learners should have to effectively\ncomplete this learning.": "Gambarkan prasyarat pengetahuan yang sebaiknya dimiliki oleh siswa untuk secara efektiv\nmenyelesaikan pelajaran ini.", 
@@ -332,7 +331,6 @@ translations = {
  "Maths": "Matematika", 
  "Description:": "Gambaran:", 
  "Question:": "Pertanyaan:", 
- "Clear Recent Projects List": "Bersihkan Daftar Proyek Terbaru", 
  "The RSS iDevice is used \nto provide new content to an individual users machine. Using this\niDevice you can provide links from a feed you select for learners to view.": "RSS \"iDevice\" digunakan \nuntuk menyediakan materi baru untuk komputer pengguna. Dengan menggunakan\n\"iDevice\" anda dapat menyediakan tautan dari sebuah umpan (feed) yang anda pilihkan untuk siswa lihat.", 
  "The purpose dialogue allows you to describe your intended purpose of the iDevice to other potential users.": "Dialog tujuan mengizinkan anda untuk menggambarkan maksud tujuan anda pada pengguna yang potensial.", 
  "Describe how learners will assess how \nthey have done in the exercise. (Rubrics are useful devices for providing \nreflective feedback.)": "Gambarkan bagaimana siswa akan menguji akan apa yang \nmereka telah lakukan dalam latihan. (Rubrik adalah alat yang berguna untuk menyediakan \numpanbalik reflektiv.)", 
@@ -398,6 +396,5 @@ translations = {
  "Select an image": "Pilih gambar", 
  "Site": "Situs", 
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "<p>Dimana anda memiliki sejumlah gambar yang berhubungan \nsatu sama lain atau pada sebuah latihan yang khusus yang ingin anda tampilkan \npada sebuah konteks galeri daripada secara satu per satu.<\/p>", 
- "Kashmiri ": "Kasmir", 
- "Package saved to: %s": "Paket disimpan ke: %s"
+ "Kashmiri ": "Kasmir"
 };

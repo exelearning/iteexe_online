@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2007-12-07 17:53+1300\nLast-Translator: Jim Tittsler <jim@exelearning.org>\nLanguage: hu\nLanguage-Team: CONSEDU <info@consedu.hu>\nPlural-Forms: nplurals=1; plural=0\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2007-12-07 17:53+1300\nLast-Translator: Jim Tittsler <jim@exelearning.org>\nLanguage: hu\nLanguage-Team: CONSEDU <info@consedu.hu>\nPlural-Forms: nplurals=1; plural=0\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": "A tan\u00e1roknak \u00e9szben kellene tartaniuk a k\u00f6vetkez\u0151t mikor haszn\u00e1lja ezt az iDevice modult:  <ol><li>Gondoljon arra a tananyagegys\u00e9g tev\u00e9kenys\u00e9geinek tervez\u00e9sekor, hogy vizu\u00e1lisan is jel\u00f6lje a tartalmat. Ker\u00fclje a t\u00fal sok k\u00fcl\u00f6nb\u00f6z\u0151 t\u00edpus\u00fa vagy besorol\u00e1s\u00fa tev\u00e9kenys\u00e9g haszn\u00e1lat\u00e1t, mert a tanul\u00f3kat megzavarhatja. \u00c1ltal\u00e1ban h\u00e1rom n\u00e9gy k\u00fcl\u00f6nb\u00f6z\u0151 t\u00edpus t\u00f6bb, mint megfelel\u0151 egy tananyagegys\u00e9gen bel\u00fcl .<\/li><li>A vizu\u00e1lis megjelen\u00e9s tervez\u00e9se sor\u00e1n ker\u00fclje, hogy k\u00f6zvetlen\u00fcl egym\u00e1s ut\u00e1n k\u00e9t iDevice k\u00f6vesse egym\u00e1st sz\u00f6veges elv\u00e1laszt\u00e1s n\u00e9lk\u00fcl. Ha ez m\u00e9gis el\u0151fordul, fontolja meg, hogan lehet egyetlen iDevice modullal megoldani ugyanazt! <\/li><li>Gondolja v\u00e9gig, hogy a k\u00fcl\u00f6nb\u00f6z\u0151 esetekben melyik modul lehet hat\u00e9konyabb, melyik milyen el\u0151nyoket k\u00edn\u00e1l, melyik ny\u00fajt t\u00f6bbet. <\/li><\/ol>", 
  "Title": "C\u00edm", 
  "Text Line": "Sz\u00f6vegsor", 
@@ -178,7 +178,6 @@ translations = {
  "Rename": "\u00c1tnevez\u00e9s", 
  "Choose an MP3 file": "V\u00e1lasszon egy MP3-as \u00e1llom\u00e1nyt", 
  "Slovenian ": "Szlov\u00e9n", 
- "Feedback button will not appear if no \ndata is entered into this field.": "A Visszajelz\u00e9s gomb nem fog meg\u00f3jelenni, \nha nem \u00edrnak adatokat ebbe a mez\u0151be.", 
  "Wolof ": "Wolof", 
  "Objectives describe the expected outcomes of the learning and should\ndefine what the learners will be able to do when they have completed the\nlearning tasks.": "Az oktat\u00e1si c\u00e9lok \u00edrj\u00e1k le a tanul\u00f3 sz\u00e1m\u00e1ra, hogy milyen tud\u00e1ssal fognak rendelkezni \na tananyagegys\u00e9g elsaj\u00e1t\u00edt\u00e1sa ut\u00e1n. Mire lesznek k\u00e9pesek, milyen k\u00e9szs\u00e9geket fejleszt \na tananyag", 
  "Exported to %s": "Export\u00e1lva %s", 
@@ -258,7 +257,6 @@ translations = {
  "Moldavian ": "Mold\u00e1v", 
  "Enter the text you wish to \nassociate with the file.": "Adjon meg egy sz\u00f6veget, \namely az \u00e1llom\u00e1nnyal kapcsolatos.", 
  "Afar ": "Afar", 
- "Self-contained Folder": "K\u00f6nyvt\u00e1rba rendezve", 
  "Polish Wikipedia Article": "Lengyel nyelv\u0171 Wikip\u00e9dia sz\u00f3cikk", 
  "ERROR Element.renderView called directly with %s class": "HIBA Az Element.renderView k\u00f6zvetlen\u00fcl h\u00edvta a %s oszt\u00e1lyt", 
  "Geogebra": "GeoGebra", 
@@ -501,6 +499,5 @@ translations = {
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "<p>Ahol t\u00f6bb egym\u00e1ssal kapcsolatos k\u00e9pet kell bemutatnia \nbizonyos tanul\u00e1si feladatokhoz, ott haszn\u00e1lja a \"K\u00e9pgal\u00e9ri\u00e1t\"! \nA gal\u00e9ria k\u00e9peit azt\u00e1n egyenk\u00e9nt is meg lehet tekinteni.<\/p>", 
  "Kashmiri ": "Kasm\u00edri", 
  "Bengali; Bangla ": "Beng\u00e1li", 
- "Pali ": "Pali", 
- "Package saved to: %s": "A csomag el lett mentve a k\u00f6vetkez\u0151 helyre: %s"
+ "Pali ": "Pali"
 };

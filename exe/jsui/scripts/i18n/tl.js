@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2006-12-06 20:36+1300\nLast-Translator: Roel Cantada <matangdilis@yahoo.com>\nLanguage: fil_PH\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2006-12-06 20:36+1300\nLast-Translator: Roel Cantada <matangdilis@yahoo.com>\nLanguage: fil_PH\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": "<p>Dapat isaisip ng mga guro ang sumusunod kapag gumagamit ng iDevice na ito: <\/p><ol><li>Pag-isipan ninyo ang dami ng magkakaibang uri ng aktibidad na binabalak para sa rekurso, na ihahandog ng biswal sa nilalaman.  Iwasan ang paggamit ng napakaraming magkakaibang uri o klasipikasyon ng aktibidad, baka malito ang mag-aaral.  Kadalasan ay sapat na ang tatlo o apat na magkakaibang uri para sa isang rekursong panturo.<\/li><li>Sa pananaw ng pagdidisenyong biswal, iwasan ang magkadikit na iDevice na walang teksto sa pagitan.  Kung kailangan ito, pag-isahin na lamang ang dalawang tanong o pangyayari sa isang iDevice. <\/li><li>Mag-isip kayo ng mga aktibidad na ang inaasahang benepisyo sa paggawa ng aktibidad ay higit sa hirap at oras na gugugulin sa pagtapos ng aktibidad.  <\/li><\/ol>", 
  "Title": "Pamagat", 
  "Text Line": "Linya ng Teksto", 
@@ -157,7 +157,6 @@ translations = {
  "Rename": "Palitan", 
  "Choose an MP3 file": "Pumili ng sakong MP3", 
  "Slovenian ": "Slovenian ", 
- "Feedback button will not appear if no \ndata is entered into this field.": "Hindi lilitaw ang buton ng puna kung \nwalang datos na ipinasok sa pitak na ito.", 
  "Wolof ": "Wolof ", 
  "Objectives describe the expected outcomes of the learning and should\ndefine what the learners will be able to do when they have completed the\nlearning tasks.": "Inilalarawan ng mga layunin ang inaasahang resulta ng pag-aaral at dapat\nitakda ang dapat magawa ng mag-aaral kapag nakumpleto na nila ang \naralin.", 
  "Exported to %s": "Iniluwas sa %s", 
@@ -227,7 +226,6 @@ translations = {
  "Moldavian ": "Moldavian ", 
  "Enter the text you wish to \nassociate with the file.": "Ipasok ang teksto na nais mong\u00b7\niugnay sa sako.", 
  "Afar ": "Afar ", 
- "Self-contained Folder": "Folder na nagsasarili", 
  "Polish Wikipedia Article": "Polish na Artikulong Wikipedia", 
  "ERROR Element.renderView called directly with %s class": "ERROR direktang tinawag ang Element.renderView ng %s class", 
  "Type the learning objectives for this resource.": "Iteklado ang layunin ng aralin para sa rekursong ito.", 
@@ -453,6 +451,5 @@ translations = {
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "<p>Dito ka maglalagay ng ilang larawan na magkakaugnay\nsa isa't-isa o sa isang partikular na pagsasanay, na mas ibig mong\nipakita sa anyong galeriya sa halip na paisa-isa.<\/p>", 
  "Kashmiri ": "Kashmiri ", 
  "Bengali; Bangla ": "Bengali; Bangla ", 
- "Pali ": "Pali ", 
- "Package saved to: %s": "Isinilid ang pakete sa: %s"
+ "Pali ": "Pali "
 };

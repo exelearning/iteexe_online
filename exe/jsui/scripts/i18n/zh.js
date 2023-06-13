@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2007-08-08 10:27+1200\nLast-Translator: Jenny Lin <jenny.lin.nz@yahoo.com>\nLanguage: zh\nLanguage-Team: eXe <info@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2007-08-08 10:27+1200\nLast-Translator: Jenny Lin <jenny.lin.nz@yahoo.com>\nLanguage: zh\nLanguage-Team: eXe <info@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": " ", 
  "Title": "\u6807\u9898", 
  "Text Line": "\u5355\u884c\u6587\u5b57", 
@@ -182,7 +182,6 @@ translations = {
  "Rename": "\u91cd\u547d\u540d", 
  "Choose an MP3 file": "\u9009\u62e9MP3\u6587\u6863", 
  "Slovenian ": "\u65af\u6d1b\u6587\u5c3c\u4e9a\u8bed", 
- "Feedback button will not appear if no \ndata is entered into this field.": "\u5982\u679c\u6b64\u680f\u7a7a\u767d, \u8bc4\u8bed\u6309\u94ae\u5c06\u4e0d\u663e\u793a.", 
  "Wolof ": "\u6c83\u6d1b\u592b\u8bed", 
  "Objectives describe the expected outcomes of the learning and should\ndefine what the learners will be able to do when they have completed the\nlearning tasks.": "\u7528\u4e8e\u63cf\u8ff0\u5b66\u4e60\u6b64\u8bfe\u7684\u76ee\u7684\u53ca\u5c06\u8981\u8fbe\u5230\u7684\u7ed3\u679c.", 
  "Exported to %s": "\u5bfc\u51fa\u81f3 %s", 
@@ -264,7 +263,6 @@ translations = {
  "Moldavian ": "\u6469\u5c14\u591a\u74e6\u8bed", 
  "Enter the text you wish to \nassociate with the file.": "\u8f93\u5165\u6709\u5173\u6587\u6863\u7684\u63cf\u8ff0.", 
  "Afar ": "\u963f\u6cd5\u5c14 \u8bed", 
- "Self-contained Folder": "\u72ec\u7acb\u7684\u6587\u4ef6\u5939", 
  "Polish Wikipedia Article": "\u6ce2\u5170\u6587Wikipedia \u6587\u7ae0", 
  "ERROR Element.renderView called directly with %s class": "ERROR Element.renderView called directly with %s class", 
  "Geogebra": "Geogebra", 
@@ -430,7 +428,6 @@ translations = {
  "Rundi; Kirundi ": "\u9686\u8fea\u8bed", 
  "Description:": "\u63cf\u8ff0:", 
  "Question:": "\u95ee\u9898:", 
- "Clear Recent Projects List": "\u6e05\u9664\u5f53\u524d\u9879\u76ee\u5217", 
  "EXPORT FAILED!\n%s": "\u5bfc\u51fa\u5931\u8d25!\n%s", 
  "The RSS iDevice is used \nto provide new content to an individual users machine. Using this\niDevice you can provide links from a feed you select for learners to view.": " ", 
  "Tamil ": "\u6cf0\u7c73\u5c14\u8bed", 
@@ -519,6 +516,5 @@ translations = {
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "\u5f53\u6709\u4e00\u7ec4\u76f8\u5173\u7684\u56fe\u7247\u8981\u5c55\u793a\u65f6\u6216\u5bf9\u4e00\u4e2a\u7279\u5b9a\u7684\u7ec3\u4e60,\u8981\u663e\u793a\u51e0\u5f20\u56fe\u7247.", 
  "Kashmiri ": "\u514b\u4ec0\u7c73\u5c14\u8bed", 
  "Bengali; Bangla ": "\u5b5f\u52a0\u62c9\u8bed", 
- "Pali ": "\u5df4\u5229\u8bed", 
- "Package saved to: %s": "\u8bfe\u4ef6\u5b58\u81f3: %s"
+ "Pali ": "\u5df4\u5229\u8bed"
 };

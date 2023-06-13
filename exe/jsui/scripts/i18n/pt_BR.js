@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2007-12-07 18:03+1300\nLast-Translator: Jim Tittsler <jim@exelearning.org>\nLanguage: pt_BR\nLanguage-Team: eXe Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n > 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2007-12-07 18:03+1300\nLast-Translator: Jim Tittsler <jim@exelearning.org>\nLanguage: pt_BR\nLanguage-Team: eXe Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n > 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": "<p>Os professores devem lembrar-se do seguinte quando usam iDevice: <\/p><ol><li>Pensar acerca dos diferentes tipos de actividades planeadas para  o seu recurso que v\u00e3o ser visualizadas. Evitar um grande n\u00famero de diferentes actividades que deixem o aluno confundido. Normalmente tr\u00eas ou quatro tipos de actividades s\u00e3o mais do que adquadas para um recurso de ensino.<\/li><li> Do ponto de vista visual evitar ter dois iDevices seguidos um do outro sem ter texto entre eles. Para isto \u00e9 necess\u00e1rio unir duas quest\u00f5es ou eventos num iDevice. <\/li><li> Pense em actividades em que o benef\u00edcio de realizar a actividade vence o tempo e o esfor\u00e7o do aluno em realizar a actividade. <\/li><\/ol>", 
  "Title": "T\u00edtulo", 
  "Text Line": "Linha de texto", 
@@ -161,7 +161,6 @@ translations = {
  "Delete": "Eliminar", 
  "Rename": "Alterar o nome", 
  "Slovenian ": "Slovenia", 
- "Feedback button will not appear if no \ndata is entered into this field.": "O bot\u00e3o de resposta n\u00e3o vai aparecer se \nn\u00e3o entrarem dados no campo. ", 
  "Wolof ": "Wolof ", 
  "Objectives describe the expected outcomes of the learning and should\ndefine what the learners will be able to do when they have completed the\nlearning tasks.": "Objectivos descrevem o que o aluno estar\u00e1 apto a desempenhar \nquando terminar as tarefas de aprendizagem. ", 
  "Exported to %s": "Exportado para %s", 
@@ -234,7 +233,6 @@ translations = {
  "Moldavian ": "Mod\u00e1vio", 
  "Enter the text you wish to \nassociate with the file.": "Digitar o texto que deseja \nassociar ao ficheiro.", 
  "Afar ": "Afar ", 
- "Self-contained Folder": "Pasta de conte\u00fado", 
  "Polish Wikipedia Article": "Artigo Wikipedia Polaco", 
  "ERROR Element.renderView called directly with %s class": "ERRO Element.renderView chamado directamente com %s classe", 
  "Geogebra": "Geogebra", 
@@ -466,6 +464,5 @@ translations = {
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "<p>Quer tenha um n\u00famero de imagens relacionadas  \nde qualquer exerc\u00edcio de aprendizagem ou outro, em particular, e pretende apresenta-los \nem conte\u00fado de galeria em vez de individualmente.<\/p>", 
  "Kashmiri ": "Kashmiri ", 
  "Bengali; Bangla ": "Bengala; Bangla ", 
- "Pali ": "Pali ", 
- "Package saved to: %s": "M\u00f3dulo guardado para: %s"
+ "Pali ": "Pali "
 };

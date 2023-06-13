@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-05-19 10:01+0200\nPO-Revision-Date: 2008-09-15 16:08+0100\nLast-Translator: Dino Brun Pedersen <dbp@sensus.dk>\nLanguage: da\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2023-06-13 13:57+0200\nPO-Revision-Date: 2008-09-15 16:08+0100\nLast-Translator: Dino Brun Pedersen <dbp@sensus.dk>\nLanguage: da\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "<p>Teachers should keep the following in mind when using this iDevice: <\/p><ol><li>Think about the number of different types of activity planned for your resource that will be visually signalled in the content. Avoid using too many different types or classification of activities otherwise learner may become confused. Usually three or four different types are more than adequate for a teaching resource.<\/li><li>From a visual design perspective, avoid having two iDevices immediately following each other without any text in between. If this is required, rather collapse two questions or events into one iDevice. <\/li><li>Think about activities where the perceived benefit of doing the activity outweighs the time and effort it will take to complete the activity. <\/li><\/ol>": "<p>Undervisere skal v\u00e6re opm\u00e6rksomme p\u00e5 f\u00f8lgende, n\u00e5r iDevice anvendes: <\/p><ol><li>T\u00e6nk over antallet af forskellige typer af aktiviteter planlagt som vil blive vist visuelt  i indholdet. Undg\u00e5 at bruge for mange forskellige typer eller klassifikationer af aktiviteter, ellers vil den studerende blive forvirret. S\u00e6dvanligvis er tre eller fire forskellige typer mere end tilstr\u00e6kkelig for en undervisningsresurse<\/li><li>Fra et visuelt design perspektiv, undg\u00e5 at have to iDevices umiddelbart efter hinanden uden nogen tekst imellem. Hvis det er n\u00f8dvendigt, sammenl\u00e6g to sp\u00f8rgsm\u00e5l eller begivenheder i en iDevice. <\/li><li>Overvej aktiviteter, hvor man opfatter fordelen ved at udf\u00f8re aktiviteten  opvejer tiden og indsatsen, som det tager at fuldf\u00f8re aktiviteten. <\/li><\/ol>", 
  "Title": "Titel", 
  "Text Line": "Tekstlinje", 
@@ -192,7 +192,6 @@ translations = {
  "Rename": "Omd\u00f8b", 
  "Choose an MP3 file": "V\u00e6lg en MP3 fil", 
  "Slovenian ": "Slovensk", 
- "Feedback button will not appear if no \ndata is entered into this field.": "Feedback knappen vil ikke komme til syne, hvis der ikke er \nindtastet data i dette felt.", 
  "Wolof ": "Wolof ", 
  "Objectives describe the expected outcomes of the learning and should\ndefine what the learners will be able to do when they have completed the\nlearning tasks.": "M\u00e5lene beskriver det forventede udbytte af l\u00e6ringen og skal\nbeskrive, hvad den studerende vil v\u00e6re i stand til, n\u00e5r de har udf\u00f8rt\nopgaverne.", 
  "Exported to %s": "Eksporteret til %s", 
@@ -280,7 +279,6 @@ translations = {
  "Moldavian ": "Moldavisk", 
  "Enter the text you wish to \nassociate with the file.": "Indtast teksten som du \u00f8nsker at \ntilknytte til filen.", 
  "Afar ": "Afar", 
- "Self-contained Folder": "En selvst\u00e6ndig mappe", 
  "Polish Wikipedia Article": "Polsk Wikipedia artikel", 
  "ERROR Element.renderView called directly with %s class": "FEJL Element.renderView kaldt direkte med %s class", 
  "Geogebra": "Geogebra", 
@@ -457,7 +455,6 @@ translations = {
  "Rundi; Kirundi ": "Rundi; Kirundi ", 
  "Description:": "Beskrivelse:", 
  "Question:": "Sp\u00f8rgsm\u00e5l:", 
- "Clear Recent Projects List": "Ryd seneste Projekt Liste", 
  "EXPORT FAILED!\n%s": "EKSPORTEN FEJLEDE!\n%s", 
  "The RSS iDevice is used \nto provide new content to an individual users machine. Using this\niDevice you can provide links from a feed you select for learners to view.": "RSS iDevicen anvendes til at \ntilf\u00f8re nyt indhold til en brugers maskine. Ved at anvende\ndenne iDevice kan du tilf\u00f8je henvisninger fra en kilde, som du \u00f8nsker, at den studerende skal se p\u00e5.", 
  "Tamil ": "Tamilsk", 
@@ -549,6 +546,5 @@ translations = {
  "<p>Where you have a number of images that relate \nto each other or to a particular learning exercise you may wish to display \nthese in a gallery context rather then individually.<\/p>": "<p>N\u00e5r du har et antal billeder, som relaterer sig \ntil hinanden, eller til en specifik \u00f8velse, er det muligt at vise \ndisse i et gallerisammenh\u00e6ng.<\/p>", 
  "Kashmiri ": "Kashmiri ", 
  "Bengali; Bangla ": "Bengalsk; Bangla ", 
- "Pali ": "Pali ", 
- "Package saved to: %s": "Pakken gemt: %s"
+ "Pali ": "Pali "
 };
