@@ -38,7 +38,6 @@ msgstr ""
 " de seguridad en %s"
 
 #: exe/application.py:335
-#, fuzzy, python-format
 msgid ""
 "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
 "   Usage: %s [OPTION] [PACKAGE]\n"
@@ -2561,9 +2560,8 @@ msgid "Documents"
 msgstr "Documentos"
 
 #: exe/engine/locationbuttons.py:59
-#, fuzzy
 msgid "original_text"
-msgstr "Lugar de utilización"
+msgstr "original_text"
 
 #: exe/engine/mathidevice.py:41 exe/engine/mathidevice.py:54
 msgid "Maths"
@@ -4040,7 +4038,7 @@ msgstr ""
 #: exe/jsui/mainpage.py:530
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
-msgstr ""
+msgstr "Paquete %s guardado. No olvide descargarlo en su equipo."
 
 #: exe/jsui/mainpage.py:558
 #, python-format
@@ -4114,38 +4112,34 @@ msgid "Exporting package as SCORM 1.2..."
 msgstr "Exportando el paquete como SCORM 1.2..."
 
 #: exe/jsui/mainpage.py:1322
-#, fuzzy
 msgid "Uploading package to {}..."
-msgstr "Subiendo el paquete a Procomún..."
+msgstr "Subiendo el paquete a {}..."
 
 #: exe/jsui/mainpage.py:1338
 msgid "No response status"
-msgstr ""
+msgstr "No se ha obtenido respuesta"
 
 #: exe/jsui/mainpage.py:1378
-#, fuzzy
 msgid "Publishing document to {}"
-msgstr "Publicando el documento en Procomún"
+msgstr "Publicando el documento en {}"
 
 #: exe/jsui/mainpage.py:1400
-#, fuzzy, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
 "download the exported package\">%s</a>."
 msgstr ""
-"Paquete exportado a  <a href=\"%s\" target=\"_blank\" title=\"Pulse para "
+"Paquete exportado a <a href=\"%s\" target=\"_blank\" title=\"Pulse para "
 "ver el paquete exportado\">%s</a>."
 
 #: exe/jsui/mainpage.py:1404
-#, fuzzy, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
 "target=\"_blank\" title=\"Educational Resource Platform Home\">%s</a>\\'s"
 " web page.</small>"
 msgstr ""
-"<small>Puede ver y gestionar el paquete subido usando la página web de  "
-"<a href=\"%s\" target=\"_blank\" title=\"sitio web de "
-"Procomún\">Procomún</a>.</small>"
+"<small>Puede ver y gestionar el paquete subido usando la página web de "
+"<a href=\"%s\" target=\"_blank\" title=\"Página de "
+"inicio\">%s</a>.</small>"
 
 #: exe/jsui/mainpage.py:1415
 #, python-format
@@ -4153,11 +4147,11 @@ msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
+"Error al publicar el contenido en %s. <br />El mensaje de error es: %s"
 
 #: exe/jsui/mainpage.py:1427
-#, fuzzy
 msgid "when trying to upload package to {}."
-msgstr "Error desconocido al intentar subir el paquete a Procomún."
+msgstr "al intentar subir el paquete a {}."
 
 #: exe/jsui/mainpage.py:1461 exe/jsui/mainpage.py:1919
 #, python-format
@@ -4694,7 +4688,7 @@ msgstr "Gestor de plantillas"
 #: exe/jsui/scripts/app/controller/Toolbar.js:756
 #, python-format
 msgid "Exit without saving changes and go back to %s (home page)?"
-msgstr ""
+msgstr "¿Salir sin guardar cambios y volver a %s (página de inicio)?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:814
 msgid "Select package to insert"
@@ -4713,7 +4707,6 @@ msgid "eXe Package Files"
 msgstr "Ficheros de paquete eXe"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:839
-#, fuzzy
 msgid "Select package to import and Open"
 msgstr "Seleccione qué paquete insertar"
 
@@ -4849,13 +4842,13 @@ msgid "XLIFF Export Preferences"
 msgstr "Preferencias de exportación a XLIFF"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1161
-#, fuzzy, python-format
 msgid "Publish on %s?"
-msgstr "editor de publicación"
+msgstr "¿Publicar en %s?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1161
 msgid "Please check the Properties tab contents (title, authorship, license...)."
-msgstr ""
+msgstr "Compruebe los contenidos de la pestaña Propiedades (título, "
+"autoría, licencia...)."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1198
 msgid ""
@@ -4871,14 +4864,12 @@ msgid "Do you want to export the package with the current metadata?"
 msgstr "¿Desea exportar el paquete con los metadatos actuales?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1238
-#, fuzzy
 msgid "Publishing document to "
-msgstr "Publicando el documento en Procomún"
+msgstr "Publicando el documento en "
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1239
-#, fuzzy
 msgid "export process..."
-msgstr "Progreso de la espera..."
+msgstr "exportando..."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1251
 msgid ""
@@ -4953,9 +4944,8 @@ msgid "Export Website package as"
 msgstr "Exportar paquete de sitio web como"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1390
-#, fuzzy
 msgid "Export Single Page package as"
-msgstr "Exportar paquete de sitio web como"
+msgstr "Exportar página como"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1392
 msgid "Export Common Cartridge as"
@@ -5028,9 +5018,8 @@ msgid "You do not have the permissions to  save into folder"
 msgstr "No tiene permisos para guardar en la carpeta"
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:425
-#, fuzzy
 msgid "Uploading File..."
-msgstr "Descargando..."
+msgstr "Subiendo el fichero..."
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:457
 msgid "Create Folder"
@@ -5140,14 +5129,12 @@ msgid "Create Directory"
 msgstr "Crear carpeta"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:190
-#, fuzzy
 msgid "Upload File"
-msgstr "Fichero local"
+msgstr "Subir fichero"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:299
-#, fuzzy
 msgid "Name:"
-msgstr "Renombrar"
+msgstr "Nombre:"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:53
 msgid "Dublin Core Metadata"
@@ -6417,9 +6404,8 @@ msgid "Search and download new styles from the styles repository"
 msgstr "Buscar y descargar nuevos estilos del banco de estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
-#, fuzzy
 msgid "Your styles"
-msgstr "Importar estilo"
+msgstr "Tus estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
 msgid "List of styles in your system"
@@ -6562,7 +6548,6 @@ msgstr ""
 "de los valores siguientes:"
 
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
-#, fuzzy
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
@@ -6570,7 +6555,7 @@ msgid ""
 msgstr ""
 "Si tiene problemas al hacer la publicación o si desea completar la "
 "catalogación más adelante, cierre este diálogo, exporte como SCORM 2004 y"
-" suba el fichero zip generado a Procomún."
+" suba el fichero zip generado a "
 
 #: exe/jsui/scripts/app/view/ui/LeftPanel.js:72
 #: exe/webui/tools/assistant/langs/all.js:42
@@ -6751,9 +6736,8 @@ msgid "XLIFF File"
 msgstr "Archivo XLIFF"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:320
-#, fuzzy
 msgid "Publish"
-msgstr "editor de publicación"
+msgstr "Publicar"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:343 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
@@ -6874,6 +6858,9 @@ msgid ""
 "prevent \r\n"
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
+"La URL no es segura, pero eXe está alojado en un servidor seguro. Para "
+"evitar \r\n"
+"restricciones del navegador, haz clic en la URL: {0}"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1197
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
@@ -9245,7 +9232,6 @@ msgid "Enter the instructions for completion here"
 msgstr "Introduzca aquí las instrucciones para la realización de la actividad"
 
 #: exe/webui/editorpane.py:160
-#, fuzzy
 msgid "Feedback button will not appear if no data is entered into this field."
 msgstr ""
 "El botón de retroalimentación no aparecerá si no \n"
@@ -9645,15 +9631,15 @@ msgstr "Tamaño de la lupa: "
 
 #: exe/webui/importode.py:73
 msgid "Error importing package with id ( {} ) from {}"
-msgstr ""
+msgstr "Error al importar el contenido con identificador ( {} ) desde {}"
 
 #: exe/webui/importode.py:75
 msgid "Importing package with id ( {} ) from {}"
-msgstr ""
+msgstr "Importando el contenido con identificador ( {} ) desde {}"
 
 #: exe/webui/importode.py:82
 msgid "This may take a bit..."
-msgstr ""
+msgstr "Puede que tarde un poco..."
 
 #: exe/webui/jsblock.py:85
 msgid ""
@@ -9669,12 +9655,11 @@ msgstr "Otras palabras"
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
-msgstr ""
+msgstr "No existe la sesión de usuario requerida"
 
 #: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
-#, fuzzy
 msgid "Login"
-msgstr "Catalogación"
+msgstr "Acceder"
 
 #: exe/webui/memorymatchblock.py:83
 msgid "Number of rows x Number of cols must be an even number<br/>"
@@ -9771,7 +9756,7 @@ msgstr "Error al guardar las preferencias"
 
 #: exe/webui/quitpage.py:68
 msgid "User session has been closed"
-msgstr ""
+msgstr "Se ha cerrado la sesión"
 
 #: exe/webui/quiztestblock.py:113
 msgid "Select pass rate: "
@@ -9960,14 +9945,12 @@ msgid "Percentage of hits needed to display the message"
 msgstr "Porcentaje de aciertos necesario para mostrar el mensaje"
 
 #: exe/webui/scripts/authoring.js:1347
-#, fuzzy
 msgid "Itinerary"
-msgstr "Wikcionario"
+msgstr "Itinerario"
 
 #: exe/webui/scripts/authoring.js:1359
-#, fuzzy
 msgid "Show a message or password"
-msgstr "Mostrar una clave o mensaje al alcanzar el objetivo marcado"
+msgstr "Mostrar una clave o mensaje al alcanzar el objetivo"
 
 #: exe/webui/scripts/authoring.js:1393
 msgid "You must write a clue"
