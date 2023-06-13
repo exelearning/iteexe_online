@@ -624,7 +624,7 @@ class ScormExport(object):
         # Copy the style files to the output dir
 
         styleFiles = [self.config.stylesDir/'popup_bg.gif']
-         if package.get_addExeLink():
+        if package.get_addExeLink():
             styleFiles += [self.styleDir/'..'/'exe_powered_logo.png']
         # And with all the files of the style we avoid problems:
         styleFiles += self.styleDir.files("*.*")
