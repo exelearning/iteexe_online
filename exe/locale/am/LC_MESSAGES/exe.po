@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-05-19 10:01+0200\n"
+"POT-Creation-Date: 2023-06-13 10:27+0200\n"
 "PO-Revision-Date: 2018-12-02 17:15+0100\n"
 "Last-Translator: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
@@ -22,19 +22,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: exe/application.py:239
+#: exe/application.py:259
 #, python-format
 msgid "An error has occurred when loading your config. A backup is saved at %s"
 msgstr ""
 
-#: exe/application.py:257
+#: exe/application.py:274
 #, python-format
 msgid ""
 "An error has occurred when loading your Idevice Store. A backup is saved "
 "at %s"
 msgstr ""
 
-#: exe/application.py:308
+#: exe/application.py:335
 #, python-format
 msgid ""
 "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
@@ -46,7 +46,7 @@ msgid ""
 "Settings are read from exe.conf in $HOME/.exe on Linux/Unix/Mac OS or\n"
 "in Documents and Settings/<user name>/Application Data/exe on Windows XP "
 "or\n"
-"Users/<user name>/AppData/Roaming/exe on Windows 7/8/10"
+"Users/<user name>/AppData/Roaming/exe on Windows 7"
 msgstr ""
 
 #: exe/engine/appletidevice.py:67
@@ -60,10 +60,10 @@ msgstr ""
 #: exe/engine/eleccionmultiplefpdidevice.py:62
 #: exe/engine/externalurlidevice.py:39 exe/engine/flashmovieidevice.py:40
 #: exe/engine/flashwithtextidevice.py:44 exe/engine/freetextfpdidevice.py:40
-#: exe/engine/freetextidevice.py:39 exe/engine/idevicestore.py:643
-#: exe/engine/idevicestore.py:701 exe/engine/idevicestore.py:729
-#: exe/engine/idevicestore.py:752 exe/engine/idevicestore.py:808
-#: exe/engine/idevicestore.py:836 exe/engine/imagemagnifieridevice.py:42
+#: exe/engine/freetextidevice.py:39 exe/engine/idevicestore.py:645
+#: exe/engine/idevicestore.py:703 exe/engine/idevicestore.py:731
+#: exe/engine/idevicestore.py:754 exe/engine/idevicestore.py:810
+#: exe/engine/idevicestore.py:838 exe/engine/imagemagnifieridevice.py:42
 #: exe/engine/imagewithtextidevice.py:44 exe/engine/mathidevice.py:42
 #: exe/engine/multichoiceidevice.py:61 exe/engine/multiselectidevice.py:46
 #: exe/engine/quiztestidevice.py:245 exe/engine/reflectionfpdidevice.py:48
@@ -379,7 +379,8 @@ msgstr "በፍንጭ ካርታው መሰረት በቅደም ተከተል ጠቅ 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:62
 #: exe/jsui/scripts/app/view/forms/LomSections.js:66
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:185
-#: exe/webui/galleryblock.py:216 exe/webui/jsblock.py:82
+#: exe/webui/content_template/strings.py:496 exe/webui/galleryblock.py:216
+#: exe/webui/jsblock.py:84
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:299
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:301
 #: exe/webui/scripts/idevices/download-package/edition/download-package.js:164
@@ -641,8 +642,8 @@ msgstr ""
 #: exe/engine/sortidevice.py:53 exe/engine/truefalseidevice.py:164
 #: exe/engine/truefalseidevice.py:391
 #: exe/engine/verdaderofalsofpdidevice.py:166
-#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1065
-#: exe/webui/scripts/authoring.js:1273 exe/webui/scripts/authoring.js:1276
+#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1070
+#: exe/webui/scripts/authoring.js:1296 exe/webui/scripts/authoring.js:1299
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:33
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:57
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:84
@@ -691,14 +692,14 @@ msgstr ""
 #: exe/engine/clozeidevice.py:132 exe/engine/clozeidevice.py:282
 #: exe/engine/clozelangfpdidevice.py:132 exe/engine/clozelangfpdidevice.py:287
 #: exe/engine/field.py:3731 exe/engine/field.py:3779
-#: exe/engine/genericidevice.py:294 exe/engine/idevicestore.py:692
-#: exe/engine/idevicestore.py:801 exe/engine/listaidevice.py:140
+#: exe/engine/genericidevice.py:294 exe/engine/idevicestore.py:694
+#: exe/engine/idevicestore.py:803 exe/engine/listaidevice.py:140
 #: exe/engine/listaidevice.py:295 exe/engine/truefalseidevice.py:50
 #: exe/engine/truefalseidevice.py:125 exe/engine/verdaderofalsofpdidevice.py:51
 #: exe/engine/verdaderofalsofpdidevice.py:126 exe/webui/clozeblock.py:182
 #: exe/webui/clozefpdblock.py:209 exe/webui/clozelangfpdblock.py:221
-#: exe/webui/common.py:972 exe/webui/common.py:982
-#: exe/webui/editorelement.py:148 exe/webui/editorpane.py:255
+#: exe/webui/common.py:977 exe/webui/common.py:987
+#: exe/webui/editorelement.py:148 exe/webui/editorpane.py:253
 #: exe/webui/element.py:2484 exe/webui/element.py:2619
 #: exe/webui/element.py:2734 exe/webui/element.py:2935
 #: exe/webui/listablock.py:461 exe/webui/questionelement.py:114
@@ -770,35 +771,35 @@ msgstr ""
 msgid "Clozelang"
 msgstr ""
 
-#: exe/engine/config.py:99 exe/engine/config.py:100 exe/engine/config.py:104
-#: exe/engine/config.py:105 exe/engine/config.py:127 exe/engine/config.py:131
-#: exe/engine/config.py:135 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
+#: exe/engine/config.py:100 exe/engine/config.py:101 exe/engine/config.py:105
+#: exe/engine/config.py:106 exe/engine/config.py:128 exe/engine/config.py:132
+#: exe/engine/config.py:136 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
 msgid "Text and Tasks"
 msgstr ""
 
-#: exe/engine/config.py:101 exe/engine/config.py:102 exe/engine/config.py:106
-#: exe/engine/config.py:128 exe/engine/config.py:129 exe/engine/config.py:130
-#: exe/engine/config.py:132 exe/engine/config.py:138
+#: exe/engine/config.py:102 exe/engine/config.py:103 exe/engine/config.py:107
+#: exe/engine/config.py:129 exe/engine/config.py:130 exe/engine/config.py:131
+#: exe/engine/config.py:133 exe/engine/config.py:139
 msgid "Interactive Activities"
 msgstr "መስተጋብራዊ እንቅስቃሴዎች"
 
-#: exe/engine/config.py:103 exe/engine/config.py:124 exe/engine/config.py:125
-#: exe/engine/config.py:126 exe/engine/config.py:133 exe/engine/config.py:134
-#: exe/engine/config.py:140
+#: exe/engine/config.py:104 exe/engine/config.py:125 exe/engine/config.py:126
+#: exe/engine/config.py:127 exe/engine/config.py:134 exe/engine/config.py:135
+#: exe/engine/config.py:141
 msgid "Other Contents"
 msgstr ""
 
-#: exe/engine/config.py:107 exe/engine/config.py:108 exe/engine/config.py:109
-#: exe/engine/config.py:110 exe/engine/config.py:111 exe/engine/config.py:112
-#: exe/engine/config.py:113 exe/engine/config.py:114 exe/engine/config.py:115
-#: exe/engine/config.py:116 exe/engine/config.py:117 exe/engine/config.py:118
-#: exe/engine/config.py:119 exe/engine/config.py:120 exe/engine/config.py:121
-#: exe/engine/config.py:122 exe/engine/config.py:123
+#: exe/engine/config.py:108 exe/engine/config.py:109 exe/engine/config.py:110
+#: exe/engine/config.py:111 exe/engine/config.py:112 exe/engine/config.py:113
+#: exe/engine/config.py:114 exe/engine/config.py:115 exe/engine/config.py:116
+#: exe/engine/config.py:117 exe/engine/config.py:118 exe/engine/config.py:119
+#: exe/engine/config.py:120 exe/engine/config.py:121 exe/engine/config.py:122
+#: exe/engine/config.py:123 exe/engine/config.py:124
 msgid "FPD"
 msgstr ""
 
-#: exe/engine/config.py:136 exe/engine/config.py:137 exe/engine/config.py:139
-#: exe/engine/config.py:141
+#: exe/engine/config.py:137 exe/engine/config.py:138 exe/engine/config.py:140
+#: exe/engine/config.py:142
 msgid "Hidden"
 msgstr "ደብቅ"
 
@@ -954,7 +955,8 @@ msgstr ""
 #: exe/engine/multiselectidevice.py:82
 #: exe/engine/seleccionmultiplefpdidevice.py:84 exe/webui/element.py:2459
 #: exe/webui/element.py:2463 exe/webui/element.py:2912
-#: exe/webui/element.py:2916 exe/webui/scripts/authoring.js:1293
+#: exe/webui/element.py:2916 exe/webui/scripts/authoring.js:1316
+#: exe/webui/scripts/authoring.js:1355
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:77
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:56
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:52
@@ -1245,7 +1247,7 @@ msgstr "አማራጭ"
 #: exe/engine/field.py:3805 exe/engine/field.py:3871
 #: exe/engine/truefalseidevice.py:53 exe/engine/truefalseidevice.py:128
 #: exe/engine/verdaderofalsofpdidevice.py:54
-#: exe/engine/verdaderofalsofpdidevice.py:129 exe/webui/common.py:610
+#: exe/engine/verdaderofalsofpdidevice.py:129 exe/webui/common.py:618
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:53
 msgid "Hint"
 msgstr "ፍንጭ"
@@ -1330,7 +1332,7 @@ msgstr "የፋይል አባሪዎች Idevice።"
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:274
-#: exe/webui/common.py:674
+#: exe/webui/common.py:682
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:89
 #: exe/webui/tools/style-designer/langs/all.js:66
 msgid "No"
@@ -1339,7 +1341,7 @@ msgstr "አይ"
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:275
-#: exe/webui/common.py:673
+#: exe/webui/common.py:681
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:88
 #: exe/webui/tools/style-designer/langs/all.js:65
 msgid "Yes"
@@ -1450,7 +1452,9 @@ msgid ""
 msgstr ""
 
 #: exe/engine/freetextfpdidevice.py:46 exe/engine/freetextidevice.py:38
-#: exe/engine/freetextidevice.py:45
+#: exe/engine/freetextidevice.py:45 exe/webui/content_template/strings.py:21
+#: exe/webui/content_template/strings.py:38
+#: exe/webui/content_template/strings.py:513
 msgid "Free Text"
 msgstr "ነጻ ጽሁፍ"
 
@@ -1478,15 +1482,15 @@ msgstr ""
 msgid "No Thumbnail Available. Could not shrink image."
 msgstr ""
 
-#: exe/engine/galleryidevice.py:455
+#: exe/engine/galleryidevice.py:456
 msgid "Image Gallery"
 msgstr "የምስል ማከማቻ"
 
-#: exe/engine/galleryidevice.py:456
+#: exe/engine/galleryidevice.py:457
 msgid "eXe Project"
 msgstr "eXe Project"
 
-#: exe/engine/galleryidevice.py:457
+#: exe/engine/galleryidevice.py:458
 msgid ""
 "<p>Where you have a number of images that relate \n"
 "to each other or to a particular learning exercise you may wish to "
@@ -1494,31 +1498,31 @@ msgid ""
 "these in a gallery context rather then individually.</p>"
 msgstr ""
 
-#: exe/engine/galleryidevice.py:460
+#: exe/engine/galleryidevice.py:461
 msgid "Use this Idevice if you have a lot of images to show."
 msgstr "የሚያሳዩት ምስል ካለ ይህንን Idevice ይጠቀሙ።"
 
-#: exe/engine/galleryidevice.py:469
+#: exe/engine/galleryidevice.py:470
 msgid "Enter a title for the gallery"
 msgstr "ለማከማቻው ርዕስ ያስገቡ"
 
-#: exe/engine/galleryidevice.py:470
+#: exe/engine/galleryidevice.py:471
 msgid ""
 "Click on the Add images button to select an image file. The image will "
 "appear below where you will be able to label it. It's always good "
 "practice to put the file size in the label."
 msgstr ""
 
-#: exe/engine/genericidevice.py:302 exe/engine/idevicestore.py:750
+#: exe/engine/genericidevice.py:302 exe/engine/idevicestore.py:752
 msgid "Reading Activity 0.11"
 msgstr "የማንበቢያ እንቅስቃሴ"
 
-#: exe/engine/genericidevice.py:304 exe/engine/idevicestore.py:597
-#: exe/engine/idevicestore.py:641
+#: exe/engine/genericidevice.py:304 exe/engine/idevicestore.py:599
+#: exe/engine/idevicestore.py:643
 msgid "Reading Activity"
 msgstr "የማንበቢያ እንቅስቃሴ"
 
-#: exe/engine/hangmanidevice.py:51 exe/webui/common.py:671
+#: exe/engine/hangmanidevice.py:51 exe/webui/common.py:679
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:174
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:463
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:470
@@ -1548,7 +1552,7 @@ msgstr "ለተጫዋቾች የሚታዩ ፊደሎች"
 msgid "Alphabet to Select From"
 msgstr "ከመካከላቸው የሚመረጥ ፊደሎች"
 
-#: exe/engine/hangmanidevice.py:77 exe/webui/common.py:691
+#: exe/engine/hangmanidevice.py:77 exe/webui/common.py:699
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:84
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:78
 msgid "abcdefghijklmnopqrstuvwxyz"
@@ -1602,7 +1606,7 @@ msgstr ""
 msgid "Text for reset button"
 msgstr "የምልክት ማድረጊያ አዝራር ጽሁፍ"
 
-#: exe/engine/hangmanidevice.py:101 exe/webui/common.py:683
+#: exe/engine/hangmanidevice.py:101 exe/webui/common.py:691
 #: exe/webui/element.py:1557 exe/webui/element.py:1811
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:65
 msgid "Restart"
@@ -1669,7 +1673,7 @@ msgstr "ለተጠቃው የሚታይ ፍንጭ"
 msgid "Hint for Word"
 msgstr "የቃላት ፍንጭ"
 
-#: exe/engine/idevicestore.py:644
+#: exe/engine/idevicestore.py:646
 msgid ""
 "<p>The Reading Activity will primarily\n"
 "be used to check a learner's comprehension of a given text. This can be "
@@ -1681,7 +1685,7 @@ msgid ""
 "based on the reading.</p>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:649
+#: exe/engine/idevicestore.py:651
 msgid ""
 "<p>Teachers should keep the following in mind when using this iDevice: "
 "</p><ol><li>Think about the number of different types of activity planned"
@@ -1696,20 +1700,20 @@ msgid ""
 "effort it will take to complete the activity. </li></ol>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:684 exe/engine/idevicestore.py:793
+#: exe/engine/idevicestore.py:686 exe/engine/idevicestore.py:795
 msgid "What to read"
 msgstr "የሚነበበው ነገር"
 
-#: exe/engine/idevicestore.py:685 exe/engine/idevicestore.py:794
+#: exe/engine/idevicestore.py:687 exe/engine/idevicestore.py:796
 msgid ""
 "Enter the details of the reading including reference details. The\n"
 "referencing style used will depend on the preference of your faculty or\n"
 "department."
 msgstr ""
 
-#: exe/engine/idevicestore.py:688 exe/engine/idevicestore.py:727
-#: exe/engine/idevicestore.py:735 exe/engine/idevicestore.py:797
-#: exe/engine/idevicestore.py:834 exe/engine/idevicestore.py:842
+#: exe/engine/idevicestore.py:690 exe/engine/idevicestore.py:729
+#: exe/engine/idevicestore.py:737 exe/engine/idevicestore.py:799
+#: exe/engine/idevicestore.py:836 exe/engine/idevicestore.py:844
 #: exe/webui/questionelement.py:110
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:1306
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:21
@@ -1717,13 +1721,13 @@ msgstr ""
 msgid "Activity"
 msgstr "እንቅስቃሴ"
 
-#: exe/engine/idevicestore.py:689 exe/engine/idevicestore.py:798
+#: exe/engine/idevicestore.py:691 exe/engine/idevicestore.py:800
 msgid ""
 "Describe the tasks related to the reading learners should undertake.\n"
 "This helps demonstrate relevance for learners."
 msgstr ""
 
-#: exe/engine/idevicestore.py:693 exe/engine/idevicestore.py:802
+#: exe/engine/idevicestore.py:695 exe/engine/idevicestore.py:804
 msgid ""
 "Use feedback to provide a summary of the points covered in the reading,\n"
 "or as a starting point for further analysis of the reading by posing a "
@@ -1731,33 +1735,33 @@ msgid ""
 "or providing a statement to begin a debate."
 msgstr ""
 
-#: exe/engine/idevicestore.py:699 exe/engine/idevicestore.py:708
-#: exe/engine/idevicestore.py:806 exe/engine/idevicestore.py:815
-#: exe/engine/package.py:722 exe/engine/package.py:733
+#: exe/engine/idevicestore.py:701 exe/engine/idevicestore.py:710
+#: exe/engine/idevicestore.py:808 exe/engine/idevicestore.py:817
+#: exe/engine/package.py:726 exe/engine/package.py:737
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:236
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:84
 msgid "Objectives"
 msgstr "አላማ"
 
-#: exe/engine/idevicestore.py:702 exe/engine/idevicestore.py:809
+#: exe/engine/idevicestore.py:704 exe/engine/idevicestore.py:811
 msgid ""
 "Objectives describe the expected outcomes of the learning and should\n"
 "define what the learners will be able to do when they have completed the\n"
 "learning tasks."
 msgstr ""
 
-#: exe/engine/idevicestore.py:709 exe/engine/idevicestore.py:816
+#: exe/engine/idevicestore.py:711 exe/engine/idevicestore.py:818
 msgid "Type the learning objectives for this resource."
 msgstr "ለዚህ ክፍል የትምህርቱን አላማ ይተይቡ።"
 
-#: exe/engine/idevicestore.py:712 exe/engine/idevicestore.py:722
-#: exe/engine/idevicestore.py:819 exe/engine/idevicestore.py:829
-#: exe/engine/package.py:752 exe/engine/package.py:763
+#: exe/engine/idevicestore.py:714 exe/engine/idevicestore.py:724
+#: exe/engine/idevicestore.py:821 exe/engine/idevicestore.py:831
+#: exe/engine/package.py:756 exe/engine/package.py:767
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:251
 msgid "Preknowledge"
 msgstr "ቅድመ እውቀት"
 
-#: exe/engine/idevicestore.py:715 exe/engine/idevicestore.py:822
+#: exe/engine/idevicestore.py:717 exe/engine/idevicestore.py:824
 msgid ""
 "Prerequisite knowledge refers to the knowledge learners should already\n"
 "have in order to be able to effectively complete the learning. Examples "
@@ -1768,13 +1772,13 @@ msgid ""
 "</li></ul>\n"
 msgstr ""
 
-#: exe/engine/idevicestore.py:723 exe/engine/idevicestore.py:830
+#: exe/engine/idevicestore.py:725 exe/engine/idevicestore.py:832
 msgid ""
 "Describe the prerequisite knowledge learners should have to effectively\n"
 "complete this learning."
 msgstr ""
 
-#: exe/engine/idevicestore.py:730 exe/engine/idevicestore.py:837
+#: exe/engine/idevicestore.py:732 exe/engine/idevicestore.py:839
 msgid ""
 "An activity can be defined as a task or set of tasks a learner must\n"
 "complete. Provide a clear statement of the task and consider any "
@@ -1782,11 +1786,11 @@ msgid ""
 "that may help or hinder the learner in the performance of the task."
 msgstr ""
 
-#: exe/engine/idevicestore.py:736 exe/engine/idevicestore.py:843
+#: exe/engine/idevicestore.py:738 exe/engine/idevicestore.py:845
 msgid "Describe the tasks the learners should complete."
 msgstr ""
 
-#: exe/engine/idevicestore.py:753
+#: exe/engine/idevicestore.py:755
 msgid ""
 "<p>The reading activity, as the name\n"
 "suggests, should ask the learner to perform some form of activity. This "
@@ -1798,7 +1802,7 @@ msgid ""
 "reflective guidance.</p>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:758
+#: exe/engine/idevicestore.py:760
 msgid ""
 "Teachers should keep the following in mind when using this iDevice: "
 "<ol><li>Think about the number of different types of activity planned for"
@@ -1833,13 +1837,13 @@ msgid ""
 "magnified."
 msgstr ""
 
-#: exe/engine/imagemagnifieridevice.py:49 exe/webui/jsblock.py:86
+#: exe/engine/imagemagnifieridevice.py:49 exe/webui/jsblock.py:88
 msgid "Choose an Image"
 msgstr "ምስል ይምረጡ"
 
 #: exe/engine/imagemagnifieridevice.py:54 exe/engine/imagewithtextidevice.py:65
 #: exe/engine/multimediaidevice.py:64 exe/webui/listablock.py:169
-#: exe/webui/scripts/authoring.js:1950
+#: exe/webui/scripts/authoring.js:2004
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:202
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:174
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:177
@@ -2055,6 +2059,11 @@ msgstr "የመነሻ አቃፊ"
 #: exe/engine/locationbuttons.py:35 exe/engine/locationbuttons.py:39
 msgid "Documents"
 msgstr "ሰነዶች"
+
+#: exe/engine/locationbuttons.py:59
+#, fuzzy
+msgid "original_text"
+msgstr "አገባብ"
 
 #: exe/engine/mathidevice.py:41 exe/engine/mathidevice.py:54
 msgid "Maths"
@@ -2365,55 +2374,58 @@ msgstr ""
 msgid "Guidelines Teacher Text:"
 msgstr ""
 
-#: exe/engine/package.py:330 exe/webui/content_template/strings.py:7
+#: exe/engine/package.py:331 exe/webui/content_template/strings.py:8
+#: exe/webui/content_template/strings.py:559
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:802
 msgid "Topic"
 msgstr "ርዕስ"
 
-#: exe/engine/package.py:330 exe/webui/content_template/strings.py:8
+#: exe/engine/package.py:331 exe/webui/content_template/strings.py:9
+#: exe/webui/content_template/strings.py:560
 msgid "Section"
 msgstr "ክፍል"
 
-#: exe/engine/package.py:330 exe/webui/content_template/strings.py:9
+#: exe/engine/package.py:331 exe/webui/content_template/strings.py:10
+#: exe/webui/content_template/strings.py:561
 msgid "Unit"
 msgstr "ምዕራፍ"
 
-#: exe/engine/package.py:354 exe/webui/content_template/strings.py:12
+#: exe/engine/package.py:355 exe/webui/content_template/strings.py:564
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:114
 msgid "Home"
 msgstr "መነሻ"
 
-#: exe/engine/package.py:572
+#: exe/engine/package.py:576
 msgid "Metadata creation date"
 msgstr "የዲበ ውሂብ የተፈጠረበት ቀን"
 
-#: exe/engine/package.py:1235
+#: exe/engine/package.py:1243
 msgid "?????"
 msgstr ""
 
-#: exe/engine/package.py:1279 exe/engine/package.py:1286
+#: exe/engine/package.py:1286 exe/engine/package.py:1293
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "Last succesful save is %s."
 msgstr "ማስቀመጥ አልተሳካም! ለመጨረሻ ጊዜ የተሳካው ማስቀመጥ %s ነው።"
 
-#: exe/engine/package.py:1448
+#: exe/engine/package.py:1455
 msgid ""
 "Can't read the .xml file. eXe will try to recover the content from the "
 ".data file instead."
 msgstr ""
 
-#: exe/engine/package.py:1727 exe/jsui/scripts/app/controller/Toolbar.js:654
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:528
+#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:679
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:555
 msgid "iDevice Editor"
 msgstr "iDevice አርታኢ"
 
-#: exe/engine/package.py:1920
+#: exe/engine/package.py:1945
 msgid "My Catalog"
 msgstr "የእኔ ካታሎግ"
 
-#: exe/engine/package.py:1927
+#: exe/engine/package.py:1952
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:292
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:993
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1001
@@ -2684,12 +2696,12 @@ msgid ""
 "reflective feedback)."
 msgstr ""
 
-#: exe/engine/resource.py:414
+#: exe/engine/resource.py:413
 #, python-format
 msgid "Unknown extension %s of file %s%s can't be transformed to ISO 9660."
 msgstr ""
 
-#: exe/engine/resource.py:686
+#: exe/engine/resource.py:685
 msgid ""
 "renamed a Resource for an Applet Idevice, and it should not have even "
 "made it this far!"
@@ -3049,7 +3061,7 @@ msgstr ""
 msgid "Don't copy source in target"
 msgstr "በኢላማው ውስጥም ያለን መገኛ ቅዳ"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:977
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1067
 msgid "Wrap fields in CDATA"
 msgstr ""
 
@@ -3119,7 +3131,7 @@ msgstr ""
 msgid "exe_do: error: Unable to append elp"
 msgstr ""
 
-#: exe/exe_do:238 exe/export/cmdlineexporter.py:89
+#: exe/exe_do:238 exe/export/cmdlineexporter.py:88
 msgid "Invalid input package"
 msgstr ""
 
@@ -3154,29 +3166,28 @@ msgid ""
 "The     error was:"
 msgstr ""
 
-#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:406
-#: exe/jsui/mainpage.py:415 exe/jsui/mainpage.py:1528 exe/jsui/mainpage.py:1569
-#: exe/jsui/mainpage.py:1757 exe/jsui/mainpage.py:1803
-#: exe/jsui/mainpage.py:1848 exe/jsui/mainpage.py:1869
+#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:473
+#: exe/jsui/mainpage.py:1894 exe/jsui/mainpage.py:1940
+#: exe/jsui/mainpage.py:1985 exe/jsui/mainpage.py:2006
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
 "Please try again with a different filename"
 msgstr ""
 
-#: exe/export/cmdlineexporter.py:97
+#: exe/export/cmdlineexporter.py:96
 msgid "Export format not implemented"
 msgstr ""
 
-#: exe/export/epub3export.py:476 exe/export/imsexport.py:441
-#: exe/export/scormpage.py:191 exe/export/websitepage.py:375
+#: exe/export/epub3export.py:476 exe/export/imsexport.py:478
+#: exe/export/scormpage.py:191 exe/export/websitepage.py:376
 #, python-format
 msgid "Page %s of %s"
 msgstr ""
 
 #: exe/export/epub3export.py:771 exe/export/epub3subexport.py:689
-#: exe/export/imsexport.py:702 exe/export/scormexport.py:857
-#: exe/export/websiteexport.py:103
+#: exe/export/imsexport.py:739 exe/export/scormexport.py:860
+#: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3203,7 +3214,7 @@ msgstr "ፈቃድ በሚከተለው ስር"
 msgid "Skip navigation"
 msgstr "አሰሳን ይዝለሉ"
 
-#: exe/export/websitepage.py:370 exe/webui/common.py:634
+#: exe/export/websitepage.py:371 exe/webui/common.py:642
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:60
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:80
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:78
@@ -3213,7 +3224,7 @@ msgstr "አሰሳን ይዝለሉ"
 msgid "Previous"
 msgstr "ያለፈው"
 
-#: exe/export/websitepage.py:381 exe/webui/common.py:635
+#: exe/export/websitepage.py:382 exe/webui/common.py:643
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:61
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:81
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:79
@@ -3288,272 +3299,244 @@ msgstr ""
 msgid "Inserting %s"
 msgstr ""
 
-#: exe/jsui/idevicepane.py:161
+#: exe/jsui/idevicepane.py:207
 msgid "My iDevices"
 msgstr "My iDevices"
 
-#: exe/jsui/idevicepane.py:169
+#: exe/jsui/idevicepane.py:215
 msgid "JS iDevices"
 msgstr ""
 
-#: exe/jsui/idevicepane.py:202
+#: exe/jsui/idevicepane.py:248
 msgid "Experimental"
 msgstr ""
 
-#: exe/jsui/idevicepane.py:203
+#: exe/jsui/idevicepane.py:249
 msgid "Gamification"
 msgstr ""
 
-#: exe/jsui/mainpage.py:445 exe/jsui/mainpage.py:1365 exe/jsui/mainpage.py:1520
-#: exe/jsui/mainpage.py:1561
+#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1454 exe/jsui/mainpage.py:1634
+#: exe/jsui/mainpage.py:1676
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "የሚከተለው ስም ያለውን ማውጫ መድረስ አይቻልም"
 
-#: exe/jsui/mainpage.py:445 exe/jsui/mainpage.py:1367 exe/jsui/mainpage.py:1520
-#: exe/jsui/mainpage.py:1561
+#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1456 exe/jsui/mainpage.py:1634
+#: exe/jsui/mainpage.py:1676
 msgid ". Please use ASCII names."
 msgstr ". እባክዎ ASCII ስሞችን ይጠቀሙ።"
 
-#: exe/jsui/mainpage.py:453 exe/jsui/mainpage.py:496
+#: exe/jsui/mainpage.py:510 exe/jsui/mainpage.py:554
 msgid "SAVE FAILED!"
 msgstr "ማስቀመጥ አልተሳካም!"
 
-#: exe/jsui/mainpage.py:457
+#: exe/jsui/mainpage.py:514
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "\"%s\" is not a valid name for a package"
 msgstr ""
 
-#: exe/jsui/mainpage.py:463 exe/jsui/mainpage.py:515 exe/jsui/mainpage.py:919
-#: exe/jsui/mainpage.py:981 exe/jsui/mainpage.py:1039 exe/jsui/mainpage.py:1662
+#: exe/jsui/mainpage.py:520 exe/jsui/mainpage.py:573 exe/jsui/mainpage.py:973
+#: exe/jsui/mainpage.py:1035 exe/jsui/mainpage.py:1093
+#: exe/jsui/mainpage.py:1781
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "%s"
 msgstr "ማስቀመጥ አልተሳካም! %s"
 
-#: exe/jsui/mainpage.py:474 exe/jsui/mainpage.py:479 exe/jsui/mainpage.py:484
+#: exe/jsui/mainpage.py:530
 #, python-format
-msgid "Package saved to: %s"
-msgstr "ጥቅል ወደሚከተለው ተቀምጧል: %s"
+msgid "Package %s saved. Do not forget to download the package on your system"
+msgstr ""
 
-#: exe/jsui/mainpage.py:500
+#: exe/jsui/mainpage.py:558
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "\"%s\" is not a valid name for a template"
 msgstr ""
 
-#: exe/jsui/mainpage.py:521
+#: exe/jsui/mainpage.py:579
 #, python-format
 msgid "Template saved: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:598 exe/webui/stylemanagerpage.py:427
+#: exe/jsui/mainpage.py:674 exe/webui/stylemanagerpage.py:445
 msgid "Downloading..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:624 exe/jsui/mainpage.py:628 exe/jsui/mainpage.py:636
-msgid "Sources Download"
-msgstr ""
-
-#: exe/jsui/mainpage.py:624
-#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:104
-#: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:78
-#: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:352
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1321
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1375
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1442
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:131
-#: exe/webui/stylemanagerpage.py:239
-#: exe/webui/tools/mindmaps/src/js/MainViewController.js:123
-#: exe/webui/tools/mindmaps/src/js/OpenDocument.js:160
-msgid "Could not retrieve data (Core error)"
-msgstr ""
-
-#: exe/jsui/mainpage.py:628
+#: exe/jsui/mainpage.py:700
 msgid "Connecting to classification sources repository..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:636
+#: exe/jsui/mainpage.py:700 exe/jsui/mainpage.py:706
+msgid "Sources Download"
+msgstr ""
+
+#: exe/jsui/mainpage.py:706
 msgid ""
 "There has been an error while trying to download classification sources. "
 "Please try again later."
 msgstr ""
 
-#: exe/jsui/mainpage.py:842 exe/jsui/mainpage.py:938 exe/jsui/mainpage.py:1003
-#: exe/jsui/mainpage.py:1066 exe/jsui/mainpage.py:1147
+#: exe/jsui/mainpage.py:896 exe/jsui/mainpage.py:992 exe/jsui/mainpage.py:1057
+#: exe/jsui/mainpage.py:1120 exe/jsui/mainpage.py:1201
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr "የፋይል ስም %s ፋይል ነው፣ ሊተካው አይችልም"
 
-#: exe/jsui/mainpage.py:861
+#: exe/jsui/mainpage.py:915
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr "የፋይል ስም %s ፋይል ነው፣ ሊተካው አይችልም"
 
-#: exe/jsui/mainpage.py:1106 exe/jsui/mainpage.py:1132
-#: exe/jsui/mainpage.py:1175
+#: exe/jsui/mainpage.py:1160 exe/jsui/mainpage.py:1186
+#: exe/jsui/mainpage.py:1229
 msgid "Could not create the image"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1213
+#: exe/jsui/mainpage.py:1267
 msgid "Importing HTML..."
 msgstr "HTML በማስመጣት ላይ…"
 
-#: exe/jsui/mainpage.py:1219
+#: exe/jsui/mainpage.py:1273
 #, python-format
 msgid ""
 "LOM Metadata import FAILED!\n"
 "%s"
 msgstr "LOM የዲበ ውሂብ ማስመጣት አልተሳካም! %s"
 
-#: exe/jsui/mainpage.py:1222
+#: exe/jsui/mainpage.py:1276
 msgid "Error importing HTML:\n"
 msgstr "HTML በማስመጣት ላይ ስህተት አለ:\n"
 
-#: exe/jsui/mainpage.py:1258
+#: exe/jsui/mainpage.py:1304
 msgid "Exporting package as SCORM 1.2..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1277
-msgid "Uploading package to Procomún..."
+#: exe/jsui/mainpage.py:1322
+#, fuzzy
+msgid "Uploading package to {}..."
+msgstr "ጥቅልን በመጫን ላይ..."
+
+#: exe/jsui/mainpage.py:1338
+msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1301
-msgid "Unknown error when trying to upload package to Procomún."
+#: exe/jsui/mainpage.py:1378
+msgid "Publishing document to {}"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1301 exe/jsui/mainpage.py:1326
-#: exe/jsui/mainpage.py:1345 exe/jsui/scripts/app/controller/Toolbar.js:1099
-msgid "Publishing document to Procomún"
-msgstr ""
-
-#: exe/jsui/mainpage.py:1320
+#: exe/jsui/mainpage.py:1400
 #, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
-"view the exported package\">%s</a>."
+"download the exported package\">%s</a>."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1323
+#: exe/jsui/mainpage.py:1404
 #, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
-"target=\"_blank\" title=\"Procomún Home\">Procomún</a>\\'s web "
-"page.</small>"
+"target=\"_blank\" title=\"Educational Resource Platform Home\">%s</a>\\'s"
+" web page.</small>"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1332 exe/jsui/scripts/app/controller/Toolbar.js:1140
+#: exe/jsui/mainpage.py:1415
 #, python-format
-msgid "Error exporting package \"%s\" to Procomún."
-msgstr ""
-
-#: exe/jsui/mainpage.py:1334
-msgid "The most common reasons for this are:"
-msgstr ""
-
-#: exe/jsui/mainpage.py:1336
-msgid "1. Package metadata is not properly filled."
-msgstr ""
-
-#: exe/jsui/mainpage.py:1338
 msgid ""
-"2. There is a problem with you connection (or with Procomún servers), so "
-"you should just try again later."
+"An error has ocurred while trying to publish a package to %s. <br />The "
+"error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1340
-msgid ""
-"If you have problems publishing you can close this dialogue, export as "
-"SCORM 2004 and upload the generated zip file manually to Procomún."
+#: exe/jsui/mainpage.py:1427
+msgid "when trying to upload package to {}."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1342
-#, python-format
-msgid "The reported error we got from Procomún was: <pre>%s</pre>"
-msgstr ""
-
-#: exe/jsui/mainpage.py:1372 exe/jsui/mainpage.py:1782
+#: exe/jsui/mainpage.py:1461 exe/jsui/mainpage.py:1919
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "\"%s\" is not a valid name for the file"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1393 exe/jsui/mainpage.py:1398
-#: exe/jsui/mainpage.py:1401 exe/jsui/mainpage.py:1404
-#: exe/jsui/mainpage.py:1407 exe/jsui/mainpage.py:1410
-#: exe/jsui/mainpage.py:1415 exe/jsui/mainpage.py:1732
-#: exe/jsui/mainpage.py:1829
+#: exe/jsui/mainpage.py:1472 exe/jsui/mainpage.py:1482
+#: exe/jsui/mainpage.py:1485 exe/jsui/mainpage.py:1490
+#: exe/jsui/mainpage.py:1493 exe/jsui/mainpage.py:1496
+#: exe/jsui/mainpage.py:1499 exe/jsui/mainpage.py:1502
+#: exe/jsui/mainpage.py:1507 exe/jsui/mainpage.py:1851
+#: exe/jsui/mainpage.py:1966
 msgid "EXPORT FAILED!"
 msgstr "ወደውጪ መላክ አልተሳካም!"
 
-#: exe/jsui/mainpage.py:1481
+#: exe/jsui/mainpage.py:1475
+msgid "EXPORTED DIR ERROR"
+msgstr ""
+
+#: exe/jsui/mainpage.py:1594
 msgid "Correct XLIFF import"
 msgstr "ትክክለኛ XLIFF ማስመጣት"
 
-#: exe/jsui/mainpage.py:1484
+#: exe/jsui/mainpage.py:1597
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "XLIFF በማስመጣት ላይ ስህተት አለ: %s"
 
-#: exe/jsui/mainpage.py:1529 exe/jsui/mainpage.py:1546
-#: exe/jsui/mainpage.py:1570 exe/jsui/mainpage.py:1588
+#: exe/jsui/mainpage.py:1661 exe/jsui/mainpage.py:1700
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
 "%s"
 msgstr "ማውጣት አልተሳካም! %s"
 
-#: exe/jsui/mainpage.py:1548 exe/jsui/mainpage.py:1590
+#: exe/jsui/mainpage.py:1663 exe/jsui/mainpage.py:1702
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "ጥቅሉ ወደሚከተለው ወጥቷል: %s"
 
-#: exe/jsui/mainpage.py:1602 exe/webui/stylemanagerpage.py:242
+#: exe/jsui/mainpage.py:1714 exe/webui/stylemanagerpage.py:259
 msgid "Directory exists"
 msgstr "ማውጫ አለ"
 
-#: exe/jsui/mainpage.py:1616 exe/jsui/mainpage.py:1717
-#: exe/jsui/mainpage.py:1740 exe/jsui/mainpage.py:1758
-#: exe/jsui/mainpage.py:1764 exe/jsui/mainpage.py:1788
-#: exe/jsui/mainpage.py:1804 exe/jsui/mainpage.py:1814
-#: exe/jsui/mainpage.py:1834 exe/jsui/mainpage.py:1849
-#: exe/jsui/mainpage.py:1855 exe/jsui/mainpage.py:1870
-#: exe/jsui/mainpage.py:1880
+#: exe/jsui/mainpage.py:1728 exe/jsui/mainpage.py:1836
+#: exe/jsui/mainpage.py:1859 exe/jsui/mainpage.py:1882
+#: exe/jsui/mainpage.py:1895 exe/jsui/mainpage.py:1901
+#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:1941
+#: exe/jsui/mainpage.py:1951 exe/jsui/mainpage.py:1971
+#: exe/jsui/mainpage.py:1986 exe/jsui/mainpage.py:1992
+#: exe/jsui/mainpage.py:2007 exe/jsui/mainpage.py:2017
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
 "%s"
 msgstr "ወደ ውጪ መላክ አልተሳካም! %s"
 
-#: exe/jsui/mainpage.py:1644 exe/jsui/mainpage.py:1698
+#: exe/jsui/mainpage.py:1758 exe/jsui/mainpage.py:1817
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "የፋይል ስም %s ፋይል ነው፣ ሊተካው አይችልም"
 
-#: exe/jsui/mainpage.py:1650 exe/jsui/mainpage.py:1705
+#: exe/jsui/mainpage.py:1765 exe/jsui/mainpage.py:1824
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
 "existing one then try again."
 msgstr "የአቃፊ ስም %s አስቀድሞ ይገኛል። እባክዎ ሌላ ይምረጡ ወይም አሁን ካሉት ውስጥ አንዱን ይሰርዙና እንደገና ይሞከሩ።"
 
-#: exe/jsui/mainpage.py:1669 exe/jsui/mainpage.py:1721
-#: exe/jsui/mainpage.py:1744 exe/jsui/mainpage.py:1766
-#: exe/jsui/mainpage.py:1790 exe/jsui/mainpage.py:1820
-#: exe/jsui/mainpage.py:1836 exe/jsui/mainpage.py:1857
-#: exe/jsui/mainpage.py:1884
+#: exe/jsui/mainpage.py:1788 exe/jsui/mainpage.py:1840
+#: exe/jsui/mainpage.py:1863 exe/jsui/mainpage.py:1884
+#: exe/jsui/mainpage.py:1903 exe/jsui/mainpage.py:1927
+#: exe/jsui/mainpage.py:1957 exe/jsui/mainpage.py:1973
+#: exe/jsui/mainpage.py:1994 exe/jsui/mainpage.py:2021
 #, python-format
 msgid "Exported to %s"
 msgstr "ወደ %s ወደውጪ ተልኳል"
 
-#: exe/jsui/mainpage.py:1671 exe/jsui/mainpage.py:1723
-#: exe/jsui/mainpage.py:1746 exe/jsui/mainpage.py:1822
-#: exe/jsui/mainpage.py:1886
+#: exe/jsui/mainpage.py:1790 exe/jsui/mainpage.py:1842
+#: exe/jsui/mainpage.py:1865 exe/jsui/mainpage.py:1959
+#: exe/jsui/mainpage.py:2023
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -3561,28 +3544,28 @@ msgid ""
 "ISO9660."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1817
+#: exe/jsui/mainpage.py:1954
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1922 exe/webui/stylemanagerpage.py:267
+#: exe/jsui/mainpage.py:2060 exe/webui/stylemanagerpage.py:284
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "ፋይል %s የለም ወይም አይነበብም።"
 
-#: exe/jsui/mainpage.py:1929
+#: exe/jsui/mainpage.py:2067
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1932
+#: exe/jsui/mainpage.py:2070
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
 "%s"
 msgstr "ይቅርታ፣ የተሳሳተ የፋይል ቅርጸት ነው %s"
 
-#: exe/jsui/mainpage.py:1934
+#: exe/jsui/mainpage.py:2072
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -3599,25 +3582,26 @@ msgstr "ባህሪያትን ማስቀመጥ አልተሳካም"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:59
 #: exe/jsui/scripts/app/controller/Outline.js:222
-#: exe/jsui/scripts/app/controller/Toolbar.js:366 exe/webui/editorpage.py:250
-#: exe/webui/editorpane.py:401 exe/webui/scripts/authoring.js:609
-#: exe/webui/scripts/authoring.js:653
+#: exe/jsui/scripts/app/controller/Toolbar.js:391
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:735 exe/webui/editorpage.py:250
+#: exe/webui/editorpane.py:406 exe/webui/scripts/authoring.js:614
+#: exe/webui/scripts/authoring.js:658
 #: exe/webui/tools/mindmaps/src/js/Notification.js:191
 msgid "Info"
 msgstr "መረጃ"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:60
 #: exe/jsui/scripts/app/controller/Outline.js:223
-#: exe/webui/scripts/authoring.js:610 exe/webui/scripts/authoring.js:654
+#: exe/webui/scripts/authoring.js:615 exe/webui/scripts/authoring.js:659
 msgid ""
 "Please save your iDevice first. The changes you made will be lost if you "
 "navigate away from this page."
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/MainTab.js:238
-#: exe/jsui/scripts/app/controller/MainTab.js:296
-#: exe/jsui/scripts/app/controller/MainTab.js:388
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:537
+#: exe/jsui/scripts/app/controller/MainTab.js:297
+#: exe/jsui/scripts/app/controller/MainTab.js:389
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:538
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:223
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:282
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:441
@@ -3626,75 +3610,76 @@ msgid "Show Image"
 msgstr "ምስል አሳይ"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:249 exe/webui/element.py:786
-#: exe/webui/element.py:1200 exe/webui/scripts/authoring.js:154
+#: exe/webui/element.py:1200 exe/webui/scripts/authoring.js:155
 msgid "Select an image"
 msgstr "ምስል ምረጥ"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:266
-#: exe/jsui/scripts/app/controller/MainTab.js:300
-#: exe/jsui/scripts/app/controller/MainTab.js:436
+#: exe/jsui/scripts/app/controller/MainTab.js:267
+#: exe/jsui/scripts/app/controller/MainTab.js:301
+#: exe/jsui/scripts/app/controller/MainTab.js:437
 msgid "Hide Image"
 msgstr "ምስል ደብቅ"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:275
+#: exe/jsui/scripts/app/controller/MainTab.js:276
 msgid "Image Files"
 msgstr "የምስል ፋይሎች"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:276
-#: exe/jsui/scripts/app/controller/StyleManager.js:228
-#: exe/jsui/scripts/app/controller/StyleManager.js:278
+#: exe/jsui/scripts/app/controller/MainTab.js:277
+#: exe/jsui/scripts/app/controller/StyleManager.js:246
+#: exe/jsui/scripts/app/controller/StyleManager.js:294
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
-#: exe/jsui/scripts/app/controller/Toolbar.js:748
-#: exe/jsui/scripts/app/controller/Toolbar.js:769
-#: exe/jsui/scripts/app/controller/Toolbar.js:791
-#: exe/jsui/scripts/app/controller/Toolbar.js:826
-#: exe/jsui/scripts/app/controller/Toolbar.js:845
-#: exe/jsui/scripts/app/controller/Toolbar.js:914
-#: exe/jsui/scripts/app/controller/Toolbar.js:1025
-#: exe/jsui/scripts/app/controller/Toolbar.js:1190
-#: exe/jsui/scripts/app/controller/Toolbar.js:1211
-#: exe/jsui/scripts/app/controller/Toolbar.js:1232
-#: exe/jsui/scripts/app/controller/Toolbar.js:1267
-#: exe/jsui/scripts/app/controller/Toolbar.js:1498
-#: exe/jsui/scripts/app/controller/Toolbar.js:1647
+#: exe/jsui/scripts/app/controller/Toolbar.js:805
+#: exe/jsui/scripts/app/controller/Toolbar.js:831
+#: exe/jsui/scripts/app/controller/Toolbar.js:856
+#: exe/jsui/scripts/app/controller/Toolbar.js:878
+#: exe/jsui/scripts/app/controller/Toolbar.js:913
+#: exe/jsui/scripts/app/controller/Toolbar.js:933
+#: exe/jsui/scripts/app/controller/Toolbar.js:1003
+#: exe/jsui/scripts/app/controller/Toolbar.js:1115
+#: exe/jsui/scripts/app/controller/Toolbar.js:1282
+#: exe/jsui/scripts/app/controller/Toolbar.js:1304
+#: exe/jsui/scripts/app/controller/Toolbar.js:1326
+#: exe/jsui/scripts/app/controller/Toolbar.js:1364
+#: exe/jsui/scripts/app/controller/Toolbar.js:1622
+#: exe/jsui/scripts/app/controller/Toolbar.js:1781
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
-#: exe/webui/scripts/authoring.js:180 exe/webui/scripts/authoring.js:203
-#: exe/webui/scripts/authoring.js:504 exe/webui/scripts/authoring.js:514
-#: exe/webui/scripts/authoring.js:522 exe/webui/scripts/authoring.js:545
-#: exe/webui/scripts/editor.js:110 exe/webui/scripts/editor.js:137
-#: exe/webui/scripts/stylemanager.js:42 exe/webui/scripts/stylemanager.js:66
+#: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
+#: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
+#: exe/webui/scripts/authoring.js:526 exe/webui/scripts/authoring.js:550
+#: exe/webui/scripts/editor.js:111 exe/webui/scripts/editor.js:138
+#: exe/webui/scripts/stylemanager.js:43 exe/webui/scripts/stylemanager.js:68
 msgid "All Files"
 msgstr "ሁሉም ፋይሎች"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:320
-#: exe/jsui/scripts/app/controller/Toolbar.js:1161
-#: exe/jsui/scripts/app/controller/Toolbar.js:1183
-#: exe/jsui/scripts/app/controller/Toolbar.js:1204
-#: exe/jsui/scripts/app/controller/Toolbar.js:1225
-#: exe/jsui/scripts/app/controller/Toolbar.js:1260
-#: exe/webui/stylemanagerpage.py:314 exe/webui/stylemanagerpage.py:427
-#: exe/webui/stylemanagerpage.py:568
+#: exe/jsui/scripts/app/controller/MainTab.js:321
+#: exe/jsui/scripts/app/controller/StyleManager.js:288
+#: exe/jsui/scripts/app/controller/Toolbar.js:1251
+#: exe/jsui/scripts/app/controller/Toolbar.js:1275
+#: exe/jsui/scripts/app/controller/Toolbar.js:1297
+#: exe/jsui/scripts/app/controller/Toolbar.js:1319
+#: exe/jsui/scripts/app/controller/Toolbar.js:1357
+#: exe/webui/stylemanagerpage.py:331 exe/webui/stylemanagerpage.py:445
+#: exe/webui/stylemanagerpage.py:601
 msgid "Please wait..."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/MainTab.js:326 exe/webui/editorpage.py:134
-#: exe/webui/editorpage.py:146
+#: exe/jsui/scripts/app/controller/MainTab.js:327 exe/webui/editorpage.py:134
+#: exe/webui/editorpage.py:145
 msgid "Settings Saved"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/MainTab.js:345
-#: exe/jsui/scripts/app/controller/MainTab.js:395
-#: exe/jsui/scripts/app/controller/MainTab.js:452
-#: exe/jsui/scripts/app/controller/MainTab.js:606
-#: exe/jsui/scripts/app/controller/MainTab.js:668
-#: exe/jsui/scripts/app/controller/StyleManager.js:98
-#: exe/jsui/scripts/app/controller/StyleManager.js:161
-#: exe/jsui/scripts/app/controller/StyleManager.js:189
-#: exe/jsui/scripts/app/controller/StyleManager.js:218
-#: exe/jsui/scripts/app/controller/StyleManager.js:271
-#: exe/jsui/scripts/app/controller/StyleManager.js:316
-#: exe/jsui/scripts/app/controller/StyleManager.js:347
+#: exe/jsui/scripts/app/controller/MainTab.js:346
+#: exe/jsui/scripts/app/controller/MainTab.js:396
+#: exe/jsui/scripts/app/controller/MainTab.js:453
+#: exe/jsui/scripts/app/controller/MainTab.js:607
+#: exe/jsui/scripts/app/controller/MainTab.js:669
+#: exe/jsui/scripts/app/controller/StyleManager.js:112
+#: exe/jsui/scripts/app/controller/StyleManager.js:175
+#: exe/jsui/scripts/app/controller/StyleManager.js:203
+#: exe/jsui/scripts/app/controller/StyleManager.js:235
+#: exe/jsui/scripts/app/controller/StyleManager.js:333
+#: exe/jsui/scripts/app/controller/StyleManager.js:364
 #: exe/jsui/scripts/app/controller/TemplateManager.js:100
 #: exe/jsui/scripts/app/controller/TemplateManager.js:149
 #: exe/jsui/scripts/app/controller/TemplateManager.js:186
@@ -3702,11 +3687,11 @@ msgstr ""
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1139
+#: exe/jsui/scripts/app/controller/Toolbar.js:1229
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:375
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:406
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:661
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:711
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:280
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:106
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:296
@@ -3716,24 +3701,24 @@ msgstr ""
 #: exe/webui/scripts/idevices/quext-activity/edition/quext-activity.js:1031
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1241
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:810
-#: exe/webui/stylemanagerpage.py:159 exe/webui/stylemanagerpage.py:306
-#: exe/webui/stylemanagerpage.py:334 exe/webui/stylemanagerpage.py:358
-#: exe/webui/stylemanagerpage.py:401 exe/webui/stylemanagerpage.py:412
-#: exe/webui/stylemanagerpage.py:423 exe/webui/stylemanagerpage.py:472
-#: exe/webui/stylemanagerpage.py:479 exe/webui/stylemanagerpage.py:522
-#: exe/webui/stylemanagerpage.py:534 exe/webui/templatemanagerpage.py:130
-#: exe/webui/templatemanagerpage.py:229 exe/webui/templatemanagerpage.py:241
-#: exe/webui/templatemanagerpage.py:256 exe/webui/templatemanagerpage.py:263
-#: exe/webui/templatemanagerpage.py:297
+#: exe/webui/stylemanagerpage.py:167 exe/webui/stylemanagerpage.py:323
+#: exe/webui/stylemanagerpage.py:351 exe/webui/stylemanagerpage.py:369
+#: exe/webui/stylemanagerpage.py:376 exe/webui/stylemanagerpage.py:419
+#: exe/webui/stylemanagerpage.py:430 exe/webui/stylemanagerpage.py:441
+#: exe/webui/stylemanagerpage.py:490 exe/webui/stylemanagerpage.py:497
+#: exe/webui/stylemanagerpage.py:540 exe/webui/stylemanagerpage.py:557
+#: exe/webui/templatemanagerpage.py:138 exe/webui/templatemanagerpage.py:235
+#: exe/webui/templatemanagerpage.py:247 exe/webui/templatemanagerpage.py:262
+#: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
 #: exe/webui/tools/mindmaps/src/js/SaveDocument.js:131
 #: exe/webui/tools/style-designer/langs/all.js:141
 msgid "Error"
 msgstr "ስህተት"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:353
-#: exe/jsui/scripts/app/controller/MainTab.js:406
+#: exe/jsui/scripts/app/controller/MainTab.js:354
+#: exe/jsui/scripts/app/controller/MainTab.js:407
 #: exe/jsui/scripts/app/controller/Outline.js:261
-#: exe/jsui/scripts/app/controller/Toolbar.js:663
+#: exe/jsui/scripts/app/controller/Toolbar.js:688
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -3741,19 +3726,19 @@ msgstr "ስህተት"
 msgid "Confirm"
 msgstr "አረጋግጥ"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:354
+#: exe/jsui/scripts/app/controller/MainTab.js:355
 msgid "Are you sure you want clear all form fields?"
 msgstr "እርግጠኛ ነዎት ሁሉንም የቅጽ መስኮች ማጽዳት ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:407
+#: exe/jsui/scripts/app/controller/MainTab.js:408
 msgid "Are you sure you want reset all form fields?"
 msgstr "እርግጠኛ ነዎት ሁሉንም የቅጽ መስኮች ዳግም ማቀናበር ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:606
+#: exe/jsui/scripts/app/controller/MainTab.js:607
 msgid "The form contains invalid fields. Please check back."
 msgstr "ቅጹ ትክክል ያልሆኑ መስኮችን አካቷል። እባክዎ መልሰው ይፈትሹ።"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:619
+#: exe/jsui/scripts/app/controller/MainTab.js:620
 msgid "LOM Metadata import success!"
 msgstr "LOM ዲበ ውሂብ ማስመጣት ተሳክቷል!"
 
@@ -3769,8 +3754,8 @@ msgstr "ገጽ አክል"
 #: exe/webui/editorelement.py:196 exe/webui/editorelement.py:249
 #: exe/webui/editorelement.py:289 exe/webui/editorelement.py:332
 #: exe/webui/editorpage.py:255 exe/webui/editorpage.py:258
-#: exe/webui/galleryblock.py:299 exe/webui/jsblock.py:113
-#: exe/webui/jsblock.py:118 exe/webui/scripts/editor.js:22
+#: exe/webui/galleryblock.py:299 exe/webui/jsblock.py:117
+#: exe/webui/jsblock.py:122 exe/webui/scripts/editor.js:22
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:3
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:909
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:944
@@ -3810,20 +3795,20 @@ msgstr "\"{node}\" nodeን ዳግም ይሰይሙ"
 msgid "Enter the new name:"
 msgstr "አዲሱን ስም ያስገቡ:"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:90
+#: exe/jsui/scripts/app/controller/StyleManager.js:102
 msgid "Cannot edit the Style. It is not compatible with the Style Designer."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:98
+#: exe/jsui/scripts/app/controller/StyleManager.js:112
 #, fuzzy
 msgid "An unknown error occurred."
 msgstr "ያልተጠበቀ ስህተት ተከስቷል"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:122
+#: exe/jsui/scripts/app/controller/StyleManager.js:136
 msgid "Cannot delete the current style."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:122
+#: exe/jsui/scripts/app/controller/StyleManager.js:136
 #: exe/jsui/scripts/app/view/forms/HelpContainer.js:61 exe/webui/block.py:270
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:81
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:60
@@ -3845,32 +3830,32 @@ msgstr ""
 msgid "Information"
 msgstr "መረጃ"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:206
+#: exe/jsui/scripts/app/controller/StyleManager.js:220
 #: exe/webui/scripts/stylemanager.js:28
 msgid "Select ZIP Style file to import."
 msgstr "ለማስመጣት የ ZIP ቅጥ ይምረጡ።"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:227
-#: exe/webui/scripts/stylemanager.js:41
+#: exe/jsui/scripts/app/controller/StyleManager.js:245
+#: exe/webui/scripts/stylemanager.js:42
 msgid "ZIP Style"
 msgstr "ZIP ቅጥ"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:258
-#: exe/webui/scripts/stylemanager.js:53
+#: exe/jsui/scripts/app/controller/StyleManager.js:281
+#: exe/webui/scripts/stylemanager.js:54
 msgid "Export to ZIP Style as"
 msgstr "እንደሚከተለው ወደ ZIP ቅጥ ይላኩ"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:277
-#: exe/webui/scripts/stylemanager.js:65
+#: exe/jsui/scripts/app/controller/StyleManager.js:293
+#: exe/webui/scripts/stylemanager.js:67
 msgid "ZipFile"
 msgstr "ZipFile"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:303
-#: exe/webui/scripts/stylemanager.js:77
+#: exe/jsui/scripts/app/controller/StyleManager.js:320
+#: exe/webui/scripts/stylemanager.js:79
 msgid "Delete style?"
 msgstr "ቅጥን ሰረዝ?"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:304
+#: exe/jsui/scripts/app/controller/StyleManager.js:321
 msgid "Do you want to delete this style?"
 msgstr "ይህንን ቅጥ መሰረዝ ይፈልጋሉ?"
 
@@ -3895,26 +3880,30 @@ msgstr ""
 msgid "Do you want to delete this template?"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:367
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:695
+#: exe/jsui/scripts/app/controller/Toolbar.js:392
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:721
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:736
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:398
+#: exe/jsui/scripts/app/controller/Toolbar.js:423
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:221
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:751
 msgid "General description"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:407
+#: exe/jsui/scripts/app/controller/Toolbar.js:432
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:73
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:760
 msgid "Package"
 msgstr "ጥቅል"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:421
+#: exe/jsui/scripts/app/controller/Toolbar.js:446
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:240
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:280
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:744
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:91
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeeffects/plugin.min.js:54
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:68
@@ -3926,48 +3915,48 @@ msgstr "ጥቅል"
 msgid "General"
 msgstr "አጠቃላይ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:454
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:604
+#: exe/jsui/scripts/app/controller/Toolbar.js:479
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:630
 #: exe/webui/tools/assistant/js/assistant.js:58
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:484
+#: exe/jsui/scripts/app/controller/Toolbar.js:509
 msgid "About"
 msgstr "ስለ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:501
+#: exe/jsui/scripts/app/controller/Toolbar.js:526
 #, fuzzy
 msgid "Release notes"
 msgstr "የመልቀቂያ ማስታወሻዎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:520
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:644
+#: exe/jsui/scripts/app/controller/Toolbar.js:545
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:670
 #: exe/webui/tools/assistant/langs/all.js:79
 #, fuzzy
 msgid "Legal Notes"
 msgstr "የመልቀቂያ ማስታወሻዎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:599
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:481
+#: exe/jsui/scripts/app/controller/Toolbar.js:624
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:508
 msgid "Preferences"
 msgstr "ምርጫዎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:620
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:137
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:143
+#: exe/jsui/scripts/app/controller/Toolbar.js:645
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:141
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:147
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:60
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:102
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:236
-#: exe/webui/scripts/authoring.js:1515
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:311
+#: exe/webui/scripts/authoring.js:1571
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:373
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/langs/all.js:13
 msgid "Export"
 msgstr "ወደ ውጪ አስወጣ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:664
+#: exe/jsui/scripts/app/controller/Toolbar.js:689
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:357
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:79
 #: exe/webui/tools/mindmaps/src/js/MindMaps.js:110
@@ -3976,112 +3965,122 @@ msgid ""
 "you really want to quit?"
 msgstr "ለውጦችን ያደረጉና ያላስቀመጧቻ ከሆነ ይጠፋሉ። እርግጠኛ ነዎት ማቋረጥ ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:693
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:569
+#: exe/jsui/scripts/app/controller/Toolbar.js:718
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:596
 msgid "Style Manager"
 msgstr "የቅጥ አስተዳዳሪ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:711
+#: exe/jsui/scripts/app/controller/Toolbar.js:736
 msgid "Template Manager"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:736
+#: exe/jsui/scripts/app/controller/Toolbar.js:789
 msgid "Select package to insert"
 msgstr "ለማስገባት ጥቅል ይምረጡ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:741
+#: exe/jsui/scripts/app/controller/Toolbar.js:797
 msgid "Inserting package: {filename}"
 msgstr "ጥቅል በማስገባት ላይ: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:747
-#: exe/jsui/scripts/app/controller/Toolbar.js:768
-#: exe/jsui/scripts/app/controller/Toolbar.js:1497
-#: exe/jsui/scripts/app/controller/Toolbar.js:1646
+#: exe/jsui/scripts/app/controller/Toolbar.js:804
+#: exe/jsui/scripts/app/controller/Toolbar.js:830
+#: exe/jsui/scripts/app/controller/Toolbar.js:855
+#: exe/jsui/scripts/app/controller/Toolbar.js:1621
+#: exe/jsui/scripts/app/controller/Toolbar.js:1780
 msgid "eXe Package Files"
 msgstr "eXe ጥቅል ፋይሎ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:757
+#: exe/jsui/scripts/app/controller/Toolbar.js:814
+#, fuzzy
+msgid "Select package to import and Open"
+msgstr "ለማስገባት ጥቅል ይምረጡ"
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:823
+#: exe/jsui/scripts/app/controller/Toolbar.js:1615
+msgid "Loading package: {filename}"
+msgstr "ጥቅልን በመጫን ላይ: {filename}"
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:839
 msgid "Save extracted package as"
 msgstr "የወጣውን ጥቅል እንደሚከተለው አስቀምጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:762
-#: exe/jsui/scripts/app/controller/Toolbar.js:784
+#: exe/jsui/scripts/app/controller/Toolbar.js:845
+#: exe/jsui/scripts/app/controller/Toolbar.js:871
 msgid "Extracting package: {filename}"
 msgstr "ጥቅልን በማውጣት ላይ: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:778
+#: exe/jsui/scripts/app/controller/Toolbar.js:865
 #, fuzzy
 msgid "Save extracted SCORM package as"
 msgstr "የወጣውን ጥቅል እንደሚከተለው አስቀምጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:790
+#: exe/jsui/scripts/app/controller/Toolbar.js:877
 #, fuzzy
 msgid "SCORM Files"
 msgstr "ፋይል አስቀምጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:800
+#: exe/jsui/scripts/app/controller/Toolbar.js:887
 msgid "Select the parent folder for import."
 msgstr "ለማስመጣት ወላጅ አቃፊውን ይምረጡ።"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:815
+#: exe/jsui/scripts/app/controller/Toolbar.js:902
 msgid "Select the entry point for import."
 msgstr "ለማስመጣት የመግቢያ ነጥቡን ይምረጡ።"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:825
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:392
+#: exe/jsui/scripts/app/controller/Toolbar.js:912
 msgid "HTML Files"
 msgstr "HTML ፋይሎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:834
+#: exe/jsui/scripts/app/controller/Toolbar.js:921
 msgid "Select LOM Metadata file to import."
 msgstr "ለማስመጣት የ LOM ዲበ ውሂብ ፋይልን ይምረጡ።"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:844
+#: exe/jsui/scripts/app/controller/Toolbar.js:932
 msgid "XML Files"
 msgstr "XML ፋይሎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:859
+#: exe/jsui/scripts/app/controller/Toolbar.js:947
 msgid "Waiting progress..."
 msgstr "መሻሻልን በመጠበቅ ላይ..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:867
+#: exe/jsui/scripts/app/controller/Toolbar.js:955
 msgid "Cancel Import?"
 msgstr "ማስመጣት ይሰረዝ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:868
+#: exe/jsui/scripts/app/controller/Toolbar.js:956
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "እየተካሄደ ያለ ማስመጣት አለ። መሰረዝ ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:891
+#: exe/jsui/scripts/app/controller/Toolbar.js:979
 msgid "Select Xliff file to import"
 msgstr "ለማስመጣት Xliff ፋይል ይምረጡ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:901
+#: exe/jsui/scripts/app/controller/Toolbar.js:990
 msgid "XLIFF Import Preferences"
 msgstr "XLIFF የማስመጣት ምርጫዎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:913
-#: exe/jsui/scripts/app/controller/Toolbar.js:1024
+#: exe/jsui/scripts/app/controller/Toolbar.js:1002
+#: exe/jsui/scripts/app/controller/Toolbar.js:1114
 msgid "XLIFF Files"
 msgstr "XLIFF ፋይሎች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:923
+#: exe/jsui/scripts/app/controller/Toolbar.js:1012
 msgid "Export to Xliff as"
 msgstr "ወደ Xliff እንደሚከተለው ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:943
+#: exe/jsui/scripts/app/controller/Toolbar.js:1033
 msgid "Select source language"
 msgstr "የመገኛ ቋንቋ ምረጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:954
+#: exe/jsui/scripts/app/controller/Toolbar.js:1044
 msgid "Select target language"
 msgstr "የኢላማ ቋንቋ ምረጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:965
+#: exe/jsui/scripts/app/controller/Toolbar.js:1055
 msgid "Copy source also in target"
 msgstr "በኢላማው ውስጥም ያለን መገኛ ቅዳ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:968
+#: exe/jsui/scripts/app/controller/Toolbar.js:1058
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4089,7 +4088,7 @@ msgid ""
 "to pre-fill the target field with a copy of the source field."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:979
+#: exe/jsui/scripts/app/controller/Toolbar.js:1069
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4097,10 +4096,10 @@ msgid ""
 "using the Computer Aided Translation software."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:988
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:69
+#: exe/jsui/scripts/app/controller/Toolbar.js:1078
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
-#: exe/webui/editorpane.py:273
+#: exe/webui/editorpane.py:277
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:103
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:48
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/codemagic/plugin.min.js:32
@@ -4111,196 +4110,212 @@ msgstr ""
 msgid "Cancel"
 msgstr "ተወው"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:994
+#: exe/jsui/scripts/app/controller/Toolbar.js:1084
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "እሺ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1017
+#: exe/jsui/scripts/app/controller/Toolbar.js:1107
 msgid "XLIFF Export Preferences"
 msgstr "XLIFF ወደ ውጪ የመላክ አማራጮች"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1059
+#: exe/jsui/scripts/app/controller/Toolbar.js:1149
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1061
+#: exe/jsui/scripts/app/controller/Toolbar.js:1151
 msgid "Do you want to export the package with the current metadata?"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1100
-msgid "Initializing Procomún export process..."
+#: exe/jsui/scripts/app/controller/Toolbar.js:1189
+msgid "Publishing document to "
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1112
+#: exe/jsui/scripts/app/controller/Toolbar.js:1190
+msgid "Initializing"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1190
+#, fuzzy
+msgid "export process..."
+msgstr "መሻሻልን በመጠበቅ ላይ..."
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1202
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1113
+#: exe/jsui/scripts/app/controller/Toolbar.js:1203
 #, fuzzy
 msgid "Are you sure you want to start authorization process?"
 msgstr "እርግጠኛ ነዎት ሁሉንም የቅጽ መስኮች ዳግም ማቀናበር ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1124
+#: exe/jsui/scripts/app/controller/Toolbar.js:1214
 msgid "Procomún OAuth"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1142
-#: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
+#: exe/jsui/scripts/app/controller/Toolbar.js:1230
+#, python-format
+msgid "Error exporting package \"%s\" to Procomún."
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1232
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
 " zip file to Procomún."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1154
+#: exe/jsui/scripts/app/controller/Toolbar.js:1244
 msgid "Select the parent folder for export."
 msgstr "ወደ ውጪ ለመላክ ወላጅ አቃፊውን ምረጥ።"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1176
+#: exe/jsui/scripts/app/controller/Toolbar.js:1267
 msgid "Export text package as"
 msgstr "የጽሁፍ ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1189
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:311
+#: exe/jsui/scripts/app/controller/Toolbar.js:1281
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:388
 msgid "Text File"
 msgstr "የጽሁፍ ፋይል"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1197
+#: exe/jsui/scripts/app/controller/Toolbar.js:1289
 msgid "Save package resources report as"
 msgstr "የጥቅል ሀብቶችን ሪፖርት እንደሚከተለው አስቀምጥ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1210
+#: exe/jsui/scripts/app/controller/Toolbar.js:1303
 msgid "CSV File"
 msgstr "CSV ፋይል"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1218
+#: exe/jsui/scripts/app/controller/Toolbar.js:1311
 msgid "Export EPUB3 package as"
 msgstr "EPUB3 ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1231
+#: exe/jsui/scripts/app/controller/Toolbar.js:1325
 msgid "EPUB3 File"
 msgstr "EPUB3 ፋይል"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1241
+#: exe/jsui/scripts/app/controller/Toolbar.js:1335
 msgid "Export SCORM package as"
 msgstr "SCORM ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1243
+#: exe/jsui/scripts/app/controller/Toolbar.js:1337
 msgid "Export IMS package as"
 msgstr "IMS ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1245
+#: exe/jsui/scripts/app/controller/Toolbar.js:1339
 msgid "Export Website package as"
 msgstr "የድር ጣቢያ ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1247
+#: exe/jsui/scripts/app/controller/Toolbar.js:1341
+#, fuzzy
+msgid "Export Single Page package as"
+msgstr "የድር ጣቢያ ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1343
 msgid "Export Common Cartridge as"
 msgstr "የጋራ ካርትሪጅን ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1249
+#: exe/jsui/scripts/app/controller/Toolbar.js:1345
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "ልክ ያልሆነ እሴት ወደ ውጪ የሚላክ ጥቅል ተላልፏል"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1266
+#: exe/jsui/scripts/app/controller/Toolbar.js:1363
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM/IMS/ZipFile"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1369
+#: exe/jsui/scripts/app/controller/Toolbar.js:1475
 msgid "No templates available"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1593
 msgid "Loading package..."
 msgstr "ጥቅልን በመጫን ላይ..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1486
+#: exe/jsui/scripts/app/controller/Toolbar.js:1610
 msgid "Open File"
 msgstr "ፋይል ክፈት"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1491
-msgid "Loading package: {filename}"
-msgstr "ጥቅልን በመጫን ላይ: {filename}"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1510
+#: exe/jsui/scripts/app/controller/Toolbar.js:1634
 msgid "Save Package first?"
 msgstr "መጀመሪያ ጥቅል ይቀመጥ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1511
+#: exe/jsui/scripts/app/controller/Toolbar.js:1635
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
 msgstr "የአሁኑ ጥቅል ተስተካክሏል ነገር ግን እስካሁን ድረስ አልተቀመጠም። ማስቀመጥ ይፈልጋሉ?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1580
-msgid "Saving package to: {filename}"
-msgstr "ጥቅልን ወደሚከተለው በማስቀመጥ ላይ: {filename}"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1603
-msgid "Title for template:"
-msgstr ""
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1604
-msgid "Enter the new name for template:"
-msgstr ""
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1626
-msgid "Save file"
-msgstr "ፋይል አስቀምጥ"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1632
+#: exe/jsui/scripts/app/controller/Toolbar.js:1704
+#: exe/jsui/scripts/app/controller/Toolbar.js:1766
 msgid "Saving package..."
 msgstr "ጥቅልን በማስቀመጥ ላይ..."
 
-#: exe/jsui/scripts/app/controller/filepicker/Directory.js:93
-#: exe/jsui/scripts/app/controller/filepicker/File.js:186
+#: exe/jsui/scripts/app/controller/Toolbar.js:1735
+msgid "Title for template:"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1736
+msgid "Enter the new name for template:"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1758
+msgid "Save file"
+msgstr "ፋይል አስቀምጥ"
+
+#: exe/jsui/scripts/app/controller/filepicker/Directory.js:110
+#: exe/jsui/scripts/app/controller/filepicker/File.js:235
 msgid "You do not have the permissions to open folder"
 msgstr "ይህንን አቃፊ የመክፈት ፈቃድ የልዎትም"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:178
+#: exe/jsui/scripts/app/controller/filepicker/File.js:227
 msgid "You do not have the permissions to write into folder"
 msgstr "እዚህ አቃፊ ውስጥ የመጻፍ ፈቃድ የልዎትም"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:188
+#: exe/jsui/scripts/app/controller/filepicker/File.js:237
 msgid "You do not have the permissions to open the file"
 msgstr "ይህንን ፋይል የመክፈት ፈቃድ የልዎትም"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:357
+#: exe/jsui/scripts/app/controller/filepicker/File.js:406
 msgid "You do not have the permissions to  save into folder"
 msgstr "እዚህ ፋይል ውስጥ የማስቀመጥ ፈቃድ የልዎትም"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:369
+#: exe/jsui/scripts/app/controller/filepicker/File.js:425
+#, fuzzy
+msgid "Uploading File..."
+msgstr "ጥቅልን በመጫን ላይ..."
+
+#: exe/jsui/scripts/app/controller/filepicker/File.js:457
 msgid "Create Folder"
 msgstr "አቃፊ ፍጠር"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:370
+#: exe/jsui/scripts/app/controller/filepicker/File.js:458
 msgid "Enter the new folder name:"
 msgstr "አዲሱን የአቃፊ ስም ያስገቡ:"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:384
+#: exe/jsui/scripts/app/controller/filepicker/File.js:472
 msgid "You do not have the permissions to create a folder in folder"
 msgstr "በአቃፊ ውስጥ አቃፊ የመፍጠር ፈቃድ የልዎትም"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:390
+#: exe/jsui/scripts/app/controller/filepicker/File.js:478
 #: exe/webui/scripts/editor.js:35
 msgid "Confirm?"
 msgstr "አረጋገጥ?"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:391
+#: exe/jsui/scripts/app/controller/filepicker/File.js:479
 msgid "The file already exists. Do you want to replace it?"
 msgstr "ፋይሉ አስቀድሞም አለ። ሊተኩት ይፈልጋሉ?"
 
 #: exe/jsui/scripts/app/view/filepicker/FileList.js:66
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:72
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:130
 #: exe/jsui/scripts/app/view/forms/LomSections.js:82
 #: exe/jsui/scripts/app/view/forms/LomSections.js:105
 #: exe/jsui/scripts/app/view/forms/LomSections.js:121
 #: exe/jsui/scripts/app/view/forms/LomSections.js:171
-#: exe/webui/editorpane.py:335
+#: exe/webui/editorpane.py:339
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:22
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:64
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/easyattributes/plugin.min.js:205
@@ -4309,7 +4324,7 @@ msgid "Name"
 msgstr "ስም"
 
 #: exe/jsui/scripts/app/view/filepicker/FileList.js:113
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:80
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:138
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:129
 #: exe/jsui/scripts/app/view/forms/LomSections.js:120
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:122
@@ -4332,21 +4347,27 @@ msgstr "ዓይነት"
 msgid "Modified"
 msgstr "የተስተካከለ"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:70
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:166
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:94
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:305 exe/webui/common.py:651
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
+msgid "Download"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:128
 #: exe/webui/tools/mindmaps/src/js/Command.js:279
 #: exe/webui/tools/mindmaps/src/js/Command.js:282
 msgid "Open"
 msgstr "ክፈት"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:95
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:157
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:201
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:192
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:251
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:679
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:366
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:196 exe/webui/editorpage.py:264
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:262 exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -4361,22 +4382,28 @@ msgstr "ክፈት"
 msgid "Save"
 msgstr "አስቀምጥ"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:96
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:107
-msgid "Create Directory"
-msgstr "ማውጫ ፍጠር"
-
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:99
-msgid "Save in:"
-msgstr "በሚከተለው ውስጥ አስቀምት:"
-
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:105
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:169
 msgid "Folder"
 msgstr "አቃፊ"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:106
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:170
 msgid "Select Folder"
 msgstr "አቃፊ ፍጠር"
+
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:171
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:175
+msgid "Create Directory"
+msgstr "ማውጫ ፍጠር"
+
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:190
+#, fuzzy
+msgid "Upload File"
+msgstr "ፋይል አስቀምጥ"
+
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:299
+#, fuzzy
+msgid "Name:"
+msgstr "ዳግም ሰይም"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:53
 msgid "Dublin Core Metadata"
@@ -4397,6 +4424,7 @@ msgid "An entity primarily responsible for making the content of the resource."
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:78
+#: exe/webui/content_template/strings.py:497
 msgid "Subject"
 msgstr "ርዕስ/ጉዳይ"
 
@@ -4473,7 +4501,7 @@ msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:139
 #: exe/jsui/scripts/app/view/forms/LomSections.js:113
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:581
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:582
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:163
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:230
 msgid "Format"
@@ -4567,7 +4595,7 @@ msgstr ""
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:198
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:256
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:296
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:685
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:686
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/all_dlg.js:1
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/en_dlg.js:1
 msgid "Clear"
@@ -4577,7 +4605,7 @@ msgstr "አጽዳ"
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:204
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:261
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:301
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:691
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:692
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:26
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:615
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:174
@@ -4808,7 +4836,7 @@ msgstr ""
 msgid "Version"
 msgstr "ስሪት"
 
-#: exe/jsui/scripts/app/view/forms/LomSections.js:76 exe/webui/common.py:678
+#: exe/jsui/scripts/app/view/forms/LomSections.js:76 exe/webui/common.py:686
 msgid "Status"
 msgstr "ሁኔታ"
 
@@ -4873,9 +4901,9 @@ msgid "Interactivity Type"
 msgstr "የመስተጋብር ዓይነት"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:132
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:301
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:304
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:311
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:302
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:305
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:312
 msgid "Learning Resource Type"
 msgstr "የመማሪያ ሃብት ዓይነት"
 
@@ -4892,9 +4920,9 @@ msgid "Intended End User Role"
 msgstr "የታቀደ የመጨረሻ ተጠቃሚ ሚና"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:136
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:419
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:421
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:443
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:420
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:422
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:444
 msgid "Context"
 msgstr "አገባብ"
 
@@ -4932,7 +4960,7 @@ msgid "Entity"
 msgstr "ተቋም"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:180 exe/webui/block.py:275
-#: exe/webui/editorpane.py:405
+#: exe/webui/editorpane.py:410
 msgid "Purpose"
 msgstr "አላማ"
 
@@ -4974,7 +5002,7 @@ msgid "Required"
 msgstr "መስፈርት"
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:50
-#: exe/webui/scripts/authoring.js:1213
+#: exe/webui/scripts/authoring.js:1236
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:288
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:329
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:627
@@ -5151,8 +5179,8 @@ msgid "Preknowledge."
 msgstr "ቅድመ እውቀት።"
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:267
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:457
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:461
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:507
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:511
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:83
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:257
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:62
@@ -5195,7 +5223,7 @@ msgid "Primary author of the resource."
 msgstr "የሃብቱ ተቀዳሚ ጸሃፊ።"
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:281
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:466
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:516
 #: exe/webui/scripts/idevices/download-package/edition/download-package.js:170
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:634
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:390
@@ -5220,7 +5248,7 @@ msgid "Select a license or write your own one."
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:291 exe/webui/common.py:451
-#: exe/webui/common.py:655 exe/webui/fileattachblock.py:159
+#: exe/webui/common.py:663 exe/webui/fileattachblock.py:158
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:460
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:54
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:29
@@ -5237,92 +5265,92 @@ msgstr "አዲስ መስኮት"
 msgid "Creative Commons licenses information page"
 msgstr "creative commons: attribution 4.0"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:316
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:317
 msgid "Usage"
 msgstr "ጠቀሜታ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:326
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:328
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:357
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:327
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:329
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:358
 msgid "Intended End User"
 msgstr "የታቀደ የመጨረሻ ተጠቃሚ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:333
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:334
 msgid "Ordinary Learner"
 msgstr "መደበኛ ተማሪ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:341
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:342
 msgid "Special Needs Learner"
 msgstr "ልዩ ፍላጎት ያለው ተማሪ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:348
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:349
 msgid "Gifted Learner"
 msgstr "ልዩ ተሰጥኦ ያለው ተማሪ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:364
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:366
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:383
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:365
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:367
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:384
 msgid "For Group Work"
 msgstr "ለቡድን ስራ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:390
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:392
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:409
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:391
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:393
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:410
 msgid "For Individual Tuition"
 msgstr "ለግለሰብ ትምህርት"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:426
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:427
 msgid "Classroom"
 msgstr "ክፍል"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:434
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:435
 msgid "Real Environment"
 msgstr "እውነተኛ አካባቢ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:453
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:455
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:484
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:454
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:456
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:485
 msgid "Modality"
 msgstr "የአሰጣጥ መንገድ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:460
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:461
 msgid "Face to Face"
 msgstr "ፊት ለፊት"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:468
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:469
 msgid "Blended"
 msgstr "የተቀላቀለ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:475
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:476
 msgid "Distance"
 msgstr "የርቀት"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:493
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:494
 msgid "Project Properties"
 msgstr "የፕሮጀክት ባህሪያት"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:508
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:509
 msgid "Header Background"
 msgstr "የርዕስ ዳራ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:512
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:513
 msgid "Background image for a header (an image 100px high is recommended)."
 msgstr "የርዕስ የዳራ ምስል (100 ፒክስል ትልቀት ያለው ምስል ይመከራል)።"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:530
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:531
 msgid "Load Image"
 msgstr "ምስል ጫን"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:543
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:544
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:740
 msgid "Clear Image"
 msgstr "ምስል አጽዳ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:550
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:551
 msgid "Tile background image?"
 msgstr "የዳራ ምስልን ሰድር?"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:568
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:569
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:304
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:462
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:493
@@ -5331,67 +5359,67 @@ msgstr "የዳራ ምስልን ሰድር?"
 msgid "Footer"
 msgstr "ግርጌ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:569
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:570
 msgid "Web pages footer."
 msgstr "የድር ገጾች ግርጌ።"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:590
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:596
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:591
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:597
 msgid "Doctype"
 msgstr "የሰነድ ዓይነት"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:606
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
 msgid "Save the changes of your iDevice before changing the DOCTYPE"
 msgstr "DOCTYPE ከመቀየርዎ በፊት iDevice ላይ ያደረጓቸውን ለውጦች ያስቀምጡ።"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:613
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:614
 msgid ""
 "This overrides for this Package the \"Default format for the new "
 "documents\" set in Tools - Preferences"
 msgstr "ይህ በመሳሪያዎች ውስጥ ያለውን \"የአዲስ ሰነዶች ነባሪ ቅርጸት\" ለዚህ ጥቅል ይጥሳል - ምርጫዎች"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:620
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:621
 msgid "Taxonomy"
 msgstr "ታክሶኖሚ"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:629
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:630
 msgid "Level 1"
 msgstr "ደረጃ 1"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:630
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:631
 msgid "Default name for level 1 nodes"
 msgstr "የደረጃ 1 አንጓዎች ነባሪ ስም"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:636
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:637
 msgid "Level 2"
 msgstr "ደረጃ 2"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:637
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:638
 msgid "Default name for level 2 nodes"
 msgstr "የደረጃ 2 አንጓዎች ነባሪ ስም"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:643
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:644
 msgid "Level 3"
 msgstr "ደረጃ 3"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:644
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:645
 msgid "Default name for level 3 nodes"
 msgstr "የደረጃ 3 አንጓዎች ነባሪ ስም"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:649
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:650
 msgid "Update Tree"
 msgstr "ዛፍ አዘምን"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:657
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:658
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:83
 msgid "Advanced Options"
 msgstr "የላቁ አማራጮች"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:669
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:670
 msgid "Custom HEAD"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:670
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:671
 msgid ""
 "Any code you enter here (STYLE, META, SCRIPT...) will be added in the "
 "HEAD section to every page."
@@ -5524,88 +5552,92 @@ msgstr "አዲሱ የሰነዶች ቅርጸጽ በባህሪያት ትር ውስ�
 msgid "Show this window on eXe start"
 msgstr "ይህንነ በ eXe መጀመሪያ ላይ አሳይ"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:100
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:101
 msgid "Edit style: "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:101
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:102
 msgid "Edit current Style"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:122
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:126
 msgid "Export style: "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:154
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:160
 msgid "Delete style: "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:172
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:179
 msgid "Show properties of style: "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:254
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:290
 #: exe/webui/tools/style-designer/langs/all.js:10
 #, fuzzy
 msgid "Style Designer"
 msgstr "ስሪት"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:258
-#: exe/webui/tools/style-designer/js/app.js:1475
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:294
+#: exe/webui/tools/style-designer/js/app.js:1493
 #, fuzzy
 msgid "Create new style"
 msgstr "ቅጥን ሰረዝ?"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:264
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:300
 msgid "Import style to the system "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:268
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:494
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:304
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:544
 msgid "Import style"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:274
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:310
 msgid "Styles repository"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:275
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:311
 msgid "Search and download new styles from the styles repository"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:284
-msgid "List of styles in your system"
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
+msgid "List of User styles"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:298
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
+msgid "List of System styles"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:342
 msgid "Properties of style: "
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:386
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:605
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:436
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:655
 msgid "Return to style manager"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:394
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:604
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:444
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:654
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:268
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:115
 msgid "Return"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:489
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:539
 msgid "Read more"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:495
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:545
 msgid "Download style from repository and import into system."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:528
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:578
 msgid "Import style from custom URL"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:543
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:593
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:238
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:240
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:265
@@ -5628,25 +5660,25 @@ msgstr ""
 msgid "URL"
 msgstr "URL:"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:544
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:594
 msgid "URL to download the style from."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:549
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:599
 msgid "Import Style from URL"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:550
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:600
 msgid "Download style from URL and import into system."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:579
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:629
 msgid "Check and install styles in the repository"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:661
-#: exe/webui/common.py:645 exe/webui/scripts/authoring.js:1750
-#: exe/webui/scripts/authoring.js:1761
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:711
+#: exe/webui/common.py:653 exe/webui/scripts/authoring.js:1806
+#: exe/webui/scripts/authoring.js:1817
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/easyattributes/plugin.min.js:240
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:216
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:231
@@ -5710,12 +5742,19 @@ msgid ""
 "select one of the values below:"
 msgstr ""
 
+#: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
+msgid ""
+"If you have problems publishing or you want to complete your cataloguing "
+"later, close this dialogue, export as SCORM 2004 and upload the generated"
+" zip file to "
+msgstr ""
+
 #: exe/jsui/scripts/app/view/ui/LeftPanel.js:72
 #: exe/webui/tools/assistant/langs/all.js:42
 msgid "Outline"
 msgstr "ማውጫ"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:636
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:644
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:229
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:117
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:174
@@ -5729,8 +5768,8 @@ msgstr "ማውጫ"
 msgid "Show"
 msgstr "አሳይ"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:637
-#: exe/webui/scripts/authoring.js:1176
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:645
+#: exe/webui/scripts/authoring.js:1200
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:228
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:638
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:799
@@ -5777,17 +5816,17 @@ msgid "Properties"
 msgstr "ባህሪያት"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:77
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:402
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:213
 msgid "Metadata"
 msgstr "ዲበ ውሂብ"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:89
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:412
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:223
 msgid "LOM"
 msgstr "LOM"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:95
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:418
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:229
 msgid "LOM-ES"
 msgstr "LOM-ES"
 
@@ -5819,123 +5858,107 @@ msgstr "አንጓን ወደ ታች ያንቀሳቅሱ"
 msgid "use the right arrow key"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
-#: exe/webui/tools/color-picker/langs/all.js:6
-#: exe/webui/tools/mindmaps/src/js/Command.js:264
-msgid "New"
-msgstr "አዲስ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:138
-msgid "Project"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:146
-msgid "Window"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:153
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:212
-#: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:212
-msgid "Templates"
-msgstr "ተካ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:173
-msgid "Recent Projects..."
-msgstr "የቅርብ ጊዜ ፕሮጀክቶች..."
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:186
-msgid "Clear Recent Projects List"
-msgstr "የቅርብ ጊዜ የፕሮጀክቶች ዝርዝርን አጽዳ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:203
-#: exe/webui/tools/mindmaps/src/js/Command.js:356
-#: exe/webui/tools/mindmaps/src/js/Command.js:358
-msgid "Save As..."
-msgstr "አስቀምጥ እንደ..."
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:220
-msgid "Save as template"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:226
-msgid "Manage"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
-msgid "Educational Standard"
-msgstr "የትምህርት ደረጃ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:253
-msgid "Common Cartridge"
-msgstr "የጋራ ካርትሪጅ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:259
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:359
-msgid "SCORM1.2"
-msgstr "SCORM1.2"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:265
-msgid "SCORM2004"
-msgstr "SCORM2004"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:271
-msgid "IMS Content Package"
-msgstr "IMS የይዘት ጥቅል"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:281
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:325
-msgid "Web Site"
-msgstr "ድር ጣቢያ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:289
-msgid "Self-contained Folder"
-msgstr "ራስ-አካታች አቃፊ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:295
-msgid "Zip File"
-msgstr "Zip ፋይል"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:301
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:332
-msgid "Single Page"
-msgstr "ነጠላ ገጽ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:318
-msgid "XLIFF"
-msgstr "XLIFF"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:338
-msgid "EPUB3"
-msgstr "EPUB3"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:347
-msgid "Export the current page as elp"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:354
-#, fuzzy
-msgid "Export the current page as SCORM"
-msgstr "የጽሁፍ ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:366
-msgid "IMS"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:376
-#: exe/webui/scripts/authoring.js:1509
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:175
+#: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
 msgid "Import"
 msgstr "አስገባ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:386
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:185
+msgid "Package (.elp)"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:192
 msgid "Insert elp in the current page"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:398
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:208
 msgid "XLIFF File"
 msgstr "XLIFF ፋይል"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:451 exe/webui/common.py:649
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:239
+msgid "Recent Projects..."
+msgstr "የቅርብ ጊዜ ፕሮጀክቶች..."
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:252
+msgid "Clear Recent Projects List"
+msgstr "የቅርብ ጊዜ የፕሮጀክቶች ዝርዝርን አጽዳ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:281
+#: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:212
+msgid "Templates"
+msgstr "ተካ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:289
+msgid "Save as template"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:295
+msgid "Manage"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:320
+msgid "Educational Standard"
+msgstr "የትምህርት ደረጃ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:328
+msgid "Common Cartridge"
+msgstr "የጋራ ካርትሪጅ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:436
+msgid "SCORM1.2"
+msgstr "SCORM1.2"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:340
+msgid "SCORM2004"
+msgstr "SCORM2004"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:346
+msgid "IMS Content Package"
+msgstr "IMS የይዘት ጥቅል"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:356
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:402
+msgid "Web Site"
+msgstr "ድር ጣቢያ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:372
+msgid "Zip File"
+msgstr "Zip ፋይል"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:378
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:409
+msgid "Single Page"
+msgstr "ነጠላ ገጽ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:395
+msgid "XLIFF"
+msgstr "XLIFF"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:415
+msgid "EPUB3"
+msgstr "EPUB3"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:424
+msgid "Export the current page as elp"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:431
+#, fuzzy
+msgid "Export the current page as SCORM"
+msgstr "የጽሁፍ ጥቅልን እንደሚከተለው ወደ ውጪ ላክ"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:443
+msgid "IMS"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:453
+#, fuzzy
+msgid "Publish"
+msgstr "አትም"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:476 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
 #: exe/webui/style/INTEF/_intef_js.js:125
@@ -5944,40 +5967,36 @@ msgstr "XLIFF ፋይል"
 msgid "Print"
 msgstr "አትም"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:464 exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "አቋርጥ"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:471
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:498
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:34
 msgid "Tools"
 msgstr "መሳሪያዎች"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:487
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:721 exe/webui/editorpane.py:268
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:514
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:784 exe/webui/editorpane.py:273
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
 msgid "Preview"
 msgstr "ቅድመ እይታ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:535
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:562
 msgid "Resources Report"
 msgstr "የሃብቶች ሪፖርት"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:541
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:568
 msgid "Refresh Display"
 msgstr "ማሳያን አደስ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:549
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:560
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:573
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:576
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:587
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:600
 msgid "Styles"
 msgstr "ቅጦች"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:587
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:594
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:613
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:620
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:151
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:66
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:102
@@ -5996,70 +6015,81 @@ msgstr "ቅጦች"
 msgid "Help"
 msgstr "እገዛ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:614
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:640
 #: exe/webui/tools/assistant/langs/all.js:72
 msgid "eXe Tutorial"
 msgstr "eXe መለማመጃ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:635
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:661
 #: exe/webui/tools/assistant/langs/all.js:78
 msgid "Release Notes"
 msgstr "የመልቀቂያ ማስታወሻዎች"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:654
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:680
 #: exe/webui/tools/assistant/langs/all.js:80
 msgid "eXe Web Site"
 msgstr "eXe ድር ጣቢያ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:661
-#: exe/webui/scripts/authoring.js:1125
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:687
+#: exe/webui/scripts/authoring.js:1150
 #: exe/webui/tools/assistant/langs/all.js:75
 msgid "Report an Issue"
 msgstr "ችግሩን ሪፖርት አድርግ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:668
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:694
 #: exe/webui/tools/assistant/langs/all.js:73
 msgid "eXe Forums"
 msgstr "eXe ፎረሞች"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:678
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:704
 #: exe/webui/tools/assistant/langs/all.js:77
 msgid "About eXe"
 msgstr "ስለ eXe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:694
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:720
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:865
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:822
+msgid "Sign off"
+msgstr ""
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:963
 msgid "You've been working for a long time without saving."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:867
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:965
 msgid "Do you want to save now?"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:869
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:967
 msgid "Hide until the application is closed"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1058
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:606
-#: exe/jsui/scripts/exe.js:213 exe/jsui/scripts/nevow_glue.js:43
+#: exe/jsui/scripts/exe.js:210
+msgid ""
+"The requested url is not secure but eXe is hosted in a secure site. To "
+"prevent \r\n"
+"browser restrictions, you must click in the url: {0}"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1148
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
+#: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
 msgstr "ማስጠንቀቂያ"
 
-#: exe/jsui/scripts/exe.js:219 exe/webui/stylemanagerpage.py:155
-#: exe/webui/stylemanagerpage.py:347 exe/webui/templatemanagerpage.py:126
+#: exe/jsui/scripts/exe.js:258 exe/webui/stylemanagerpage.py:163
+#: exe/webui/stylemanagerpage.py:364 exe/webui/templatemanagerpage.py:134
 msgid "Success"
 msgstr "ስኬት"
 
-#: exe/jsui/scripts/exe.js:228
+#: exe/jsui/scripts/exe.js:267
 msgid "Load Error"
 msgstr "ስህተት ጫን"
 
-#: exe/jsui/scripts/exe.js:275
+#: exe/jsui/scripts/exe.js:308
 msgid ""
 "A new version of eXeLearning (%) is available. Would you like to download"
 " it now?"
@@ -6067,29 +6097,23 @@ msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:864 exe/jsui/scripts/exe.js:278
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:962 exe/jsui/scripts/exe.js:311
 msgid "Warning!"
 msgstr "ማስጠንቀቂያ!"
 
-#: exe/jsui/scripts/exe.js:326
-msgid ""
-"If you leave this page eXe application continues to run. Please use the "
-"menu File->Quit if you really want to exit the application."
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:357
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:400
 msgid "Group iDevices"
 msgstr "ቡድን iDevices"
 
-#: exe/jsui/scripts/exe.js:384 exe/jsui/scripts/exe.js:395
+#: exe/jsui/scripts/exe.js:426 exe/jsui/scripts/exe.js:437
 msgid "Show panel"
 msgstr ""
 
-#: exe/jsui/scripts/exe.js:418
+#: exe/jsui/scripts/exe.js:460
 msgid "Use the left panel to create pages and add content."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1064 exe/jsui/scripts/exe.js:419
+#: exe/jsui/scripts/app/controller/Toolbar.js:1154 exe/jsui/scripts/exe.js:461
 msgid "Don't show this warning again"
 msgstr ""
 
@@ -7699,8 +7723,8 @@ msgid "education expert"
 msgstr ""
 
 #: exe/jsui/scripts/nevow_glue.js:43 exe/jsui/scripts/nevow_glue.js:45
-#: exe/webui/stylemanagerpage.py:334 exe/webui/stylemanagerpage.py:534
-#: exe/webui/templatemanagerpage.py:263 exe/webui/templatemanagerpage.py:297
+#: exe/webui/stylemanagerpage.py:351 exe/webui/stylemanagerpage.py:557
+#: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
 msgid "An unexpected error has occurred"
 msgstr "ያልተጠበቀ ስህተት ተከስቷል"
 
@@ -7781,10 +7805,10 @@ msgid "Filename:"
 msgstr "የፋይል ስም:"
 
 #: exe/webui/attachmentblock.py:104 exe/webui/editorelement.py:351
-#: exe/webui/element.py:1085 exe/webui/scripts/authoring.js:191
-#: exe/webui/scripts/authoring.js:506 exe/webui/scripts/authoring.js:516
-#: exe/webui/scripts/authoring.js:1533 exe/webui/scripts/editor.js:94
-#: exe/webui/scripts/editor.js:121
+#: exe/webui/element.py:1085 exe/webui/scripts/authoring.js:192
+#: exe/webui/scripts/authoring.js:510 exe/webui/scripts/authoring.js:520
+#: exe/webui/scripts/authoring.js:1589 exe/webui/scripts/editor.js:94
+#: exe/webui/scripts/editor.js:122
 msgid "Select a file"
 msgstr "አንድ ፋይል ይምረጡ"
 
@@ -7792,16 +7816,16 @@ msgstr "አንድ ፋይል ይምረጡ"
 msgid "Label:"
 msgstr "መለያ:"
 
-#: exe/webui/authoringpage.py:180
+#: exe/webui/authoringpage.py:209
 #, python-format
 msgid "Warning: %s"
 msgstr ""
 
-#: exe/webui/block.py:184 exe/webui/scripts/authoring.js:1116
+#: exe/webui/block.py:184 exe/webui/scripts/authoring.js:1142
 msgid "IDevice broken"
 msgstr "IDevice ተበላሽቷል"
 
-#: exe/webui/block.py:227 exe/webui/editorpage.py:120
+#: exe/webui/block.py:227 exe/webui/editorpage.py:121
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:160
 msgid "Done"
 msgstr "ተከናውኗል"
@@ -7834,11 +7858,11 @@ msgstr "ወደ ታች አንቀሳቅስ"
 msgid "---Move To---"
 msgstr "---ወደሚከተለው አንቀሳቅስ---"
 
-#: exe/webui/block.py:266 exe/webui/editorpane.py:398
+#: exe/webui/block.py:266 exe/webui/editorpane.py:403
 msgid "Pedagogical Help"
 msgstr "የስነ ትምህርት እገዛ"
 
-#: exe/webui/block.py:279 exe/webui/editorpane.py:408
+#: exe/webui/block.py:279 exe/webui/editorpane.py:413
 msgid "Tip:"
 msgstr "ጥቃሚ ምክር፦"
 
@@ -7846,8 +7870,8 @@ msgstr "ጥቃሚ ምክር፦"
 msgid "ERROR: Block.renderViewContent called directly"
 msgstr ""
 
-#: exe/webui/block.py:333 exe/webui/editorpage.py:290
-#: exe/webui/editorpane.py:270
+#: exe/webui/block.py:333 exe/webui/editorpage.py:289
+#: exe/webui/editorpane.py:275
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:17
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:271
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:274
@@ -8011,31 +8035,31 @@ msgstr "ምስል ለጽሁፍ ጋር"
 msgid "Enable JavaScript"
 msgstr ""
 
-#: exe/webui/common.py:638 exe/webui/common.py:947 exe/webui/element.py:1547
+#: exe/webui/common.py:646 exe/webui/common.py:952 exe/webui/element.py:1547
 #: exe/webui/element.py:2476 exe/webui/listablock.py:274
 #: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:24
 #: exe/webui/scripts/idevices/text/edition/text.js:20
 msgid "Show Feedback"
 msgstr "ግብረ መልስ አሳይ"
 
-#: exe/webui/common.py:639
+#: exe/webui/common.py:647
 msgid "Hide Feedback"
 msgstr "ግብረ መልስ ደብቅ"
 
-#: exe/webui/common.py:640 exe/webui/common.py:675 exe/webui/element.py:2279
+#: exe/webui/common.py:648 exe/webui/common.py:683 exe/webui/element.py:2279
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:94
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:83
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:71
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:103
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:89
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:97
-#: exe/webui/stylemanagerpage.py:332 exe/webui/stylemanagerpage.py:518
-#: exe/webui/stylemanagerpage.py:531 exe/webui/templatemanagerpage.py:238
-#: exe/webui/templatemanagerpage.py:260
+#: exe/webui/stylemanagerpage.py:349 exe/webui/stylemanagerpage.py:535
+#: exe/webui/stylemanagerpage.py:554 exe/webui/templatemanagerpage.py:244
+#: exe/webui/templatemanagerpage.py:266
 msgid "Correct"
 msgstr "ትክክል"
 
-#: exe/webui/common.py:641 exe/webui/element.py:2282
+#: exe/webui/common.py:649 exe/webui/element.py:2282
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:95
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:72
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:104
@@ -8044,29 +8068,23 @@ msgstr "ትክክል"
 msgid "Incorrect"
 msgstr "የተሳሳተ"
 
-#: exe/webui/common.py:642 exe/webui/tools/assistant/langs/all.js:9
+#: exe/webui/common.py:650 exe/webui/tools/assistant/langs/all.js:9
 msgid "Menu"
 msgstr "ምናሌ"
 
-#: exe/webui/common.py:643
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
-msgid "Download"
-msgstr ""
-
-#: exe/webui/common.py:644
+#: exe/webui/common.py:652
 msgid "Your score is "
 msgstr "ምንጭዎ"
 
-#: exe/webui/common.py:646
+#: exe/webui/common.py:654
 msgid "This might not work in this ePub reader."
 msgstr ""
 
-#: exe/webui/common.py:647
+#: exe/webui/common.py:655
 msgid "This activity does not work in ePub."
 msgstr ""
 
-#: exe/webui/common.py:648 exe/webui/element.py:2504 exe/webui/element.py:2947
+#: exe/webui/common.py:656 exe/webui/element.py:2504 exe/webui/element.py:2947
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:74
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:44
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:300
@@ -8102,23 +8120,23 @@ msgstr ""
 msgid "Solution"
 msgstr "መፍትሄ"
 
-#: exe/webui/common.py:650
+#: exe/webui/common.py:658
 msgid "Search in all pages"
 msgstr ""
 
-#: exe/webui/common.py:651
+#: exe/webui/common.py:659
 msgid "No results for %"
 msgstr ""
 
-#: exe/webui/common.py:652
+#: exe/webui/common.py:660
 msgid "Search results for %"
 msgstr ""
 
-#: exe/webui/common.py:653
+#: exe/webui/common.py:661
 msgid "Hide results"
 msgstr ""
 
-#: exe/webui/common.py:654
+#: exe/webui/common.py:662
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:175
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:219
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:409
@@ -8128,16 +8146,16 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: exe/webui/common.py:656
+#: exe/webui/common.py:664
 msgid "Full size"
 msgstr ""
 
-#: exe/webui/common.py:657
+#: exe/webui/common.py:665
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/codemagic/plugin.min.js:30
 msgid "Search"
 msgstr ""
 
-#: exe/webui/common.py:672
+#: exe/webui/common.py:680
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:29
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:102
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:87
@@ -8145,24 +8163,24 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-#: exe/webui/common.py:676 exe/webui/element.py:2715 exe/webui/element.py:2733
+#: exe/webui/common.py:684 exe/webui/element.py:2715 exe/webui/element.py:2733
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:47
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:90
 msgid "Wrong"
 msgstr "የተሳሳተ"
 
-#: exe/webui/common.py:677
+#: exe/webui/common.py:685
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:54
 #, fuzzy
 msgid "Right answer"
 msgstr "አስተላልፍ"
 
-#: exe/webui/common.py:679
+#: exe/webui/common.py:687
 #, fuzzy
 msgid "Selected letters"
 msgstr "አንድ ፋይል ይምረጡ"
 
-#: exe/webui/common.py:680
+#: exe/webui/common.py:688
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:528
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:559
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1075
@@ -8174,14 +8192,14 @@ msgstr "አንድ ፋይል ይምረጡ"
 msgid "Word"
 msgstr "ቁልፍ ቃል"
 
-#: exe/webui/common.py:681
+#: exe/webui/common.py:689
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:143
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:164
 #, fuzzy
 msgid "Words"
 msgstr "ቁልፍ ቃል"
 
-#: exe/webui/common.py:682
+#: exe/webui/common.py:690
 #: exe/webui/scripts/idevices/quext-activity/edition/quext-activity.js:1059
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1051
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:863
@@ -8194,49 +8212,448 @@ msgstr "ቁልፍ ቃል"
 msgid "Play"
 msgstr "ስቀል"
 
-#: exe/webui/common.py:684
+#: exe/webui/common.py:692
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:33
 msgid "Results"
 msgstr ""
 
-#: exe/webui/common.py:685
+#: exe/webui/common.py:693
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:37
 #, fuzzy
 msgid "Total"
 msgstr "eXe መለማመጃ"
 
-#: exe/webui/common.py:686
+#: exe/webui/common.py:694
 #, fuzzy
 msgid "Another word"
 msgstr "ሌሎች ቃላት"
 
-#: exe/webui/common.py:687
+#: exe/webui/common.py:695
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:66
 msgid "Game over."
 msgstr ""
 
-#: exe/webui/common.py:688
+#: exe/webui/common.py:696
 msgid "Reload the game?"
 msgstr ""
 
-#: exe/webui/common.py:689
+#: exe/webui/common.py:697
 msgid "Click on \"Play\" to start a new game."
 msgstr ""
 
-#: exe/webui/common.py:690
+#: exe/webui/common.py:698
 msgid "Click on \"Another word\" to continue."
 msgstr ""
 
-#: exe/webui/common.py:715 exe/webui/editorpage.py:238
+#: exe/webui/common.py:723 exe/webui/editorpage.py:238
 #: exe/webui/xliffimportpreferencespage.py:67
 msgid "eXe : elearning XHTML editor"
 msgstr "eXe : elearning XHTML አርታኢ"
 
-#: exe/webui/common.py:1071 exe/webui/common.py:1074
+#: exe/webui/common.py:1076 exe/webui/common.py:1079
 msgid "Click for completion instructions"
 msgstr "ለማጠናቀቂያ መመሪያዎች ጠቅ ያድርጉ"
 
 #: exe/webui/content_template/strings.py:6
+#, fuzzy
+msgid "EDIA Project - PBL"
+msgstr "eXe Project"
+
+#: exe/webui/content_template/strings.py:7
+msgid ""
+"National Centre for the Development of the Educational Curriculum on Non-"
+"Proprietary Systems (CEDEC)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:11
+#: exe/webui/content_template/strings.py:29
+#: exe/webui/content_template/strings.py:521
+msgid "Project's name"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:12
+msgid "Project's final goal."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:13
+msgid "Point out what students are about to learn."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:14
+msgid ""
+"Students need no preknowledge to complete all these tasks because there "
+"are materials enough to be independent in their accomplishment. Students "
+"also have the help and orientation from their teacher."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:15
+#: exe/webui/content_template/strings.py:31
+#: exe/webui/content_template/strings.py:523
+#, fuzzy
+msgid "Author's name"
+msgstr "ጸሃፊ"
+
+#: exe/webui/content_template/strings.py:18
+#, fuzzy
+msgid "Front page"
+msgstr "የቁምፊ መጠን ምረጥ:"
+
+#: exe/webui/content_template/strings.py:28
+#: exe/webui/content_template/strings.py:520
+#, fuzzy
+msgid "Creative Commons BY-SA"
+msgstr "creative commons: attribution 4.0"
+
+#: exe/webui/content_template/strings.py:53
+msgid "Motivating inspiration."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:54
+msgid "Project / Final Challenge"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:55
+msgid "What to learn and how to learn."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:56
+msgid "Motivation for the project development."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:65
+#: exe/webui/content_template/strings.py:409
+msgid "Breaking the ice"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:68
+#: exe/webui/content_template/strings.py:181
+#, fuzzy
+msgid "Learning Diary"
+msgstr "ባዶ ፕሮጀክት"
+
+#: exe/webui/content_template/strings.py:89
+msgid "First activity. Creation of the learning diary in the suggested format."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:90
+msgid "Creation of the first post heading."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:91
+#: exe/webui/content_template/strings.py:207
+msgid "Writing the diary"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:92
+msgid ""
+"Script for writing the post. It must lead the student to think about and "
+"reflect:"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:93
+msgid "What the final challenge is"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:94
+msgid "What the assessment will be like"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:95
+msgid "What they will learn"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:96
+msgid "How class groups work"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:103
+#, fuzzy
+msgid "Starting Activity"
+msgstr "የማንበቢያ እንቅስቃሴ"
+
+#: exe/webui/content_template/strings.py:124
+msgid "Introductory Activity to the project involving:"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:125
+#, fuzzy
+msgid "Team work"
+msgstr "ሌሎች ቃላት"
+
+#: exe/webui/content_template/strings.py:126
+#, fuzzy
+msgid "Reflection and motivation"
+msgstr "መግለጫና አገናኝ አሳይ"
+
+#: exe/webui/content_template/strings.py:127
+msgid "Expression of feelings."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:128
+msgid "Steps for the suggested activity"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:135
+msgid "Your project: General information"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:162
+msgid "Explanation of the final challenge."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:163
+msgid "Overview of suggested tasks."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:164
+msgid "General information about:"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:165
+#: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:175
+msgid "Assessment"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:166
+msgid "Class team management"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:167
+msgid "Learning diary and personal site."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:168
+msgid "Dissemination of project activities."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:169
+msgid "Starting motivation"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:178
+#, fuzzy
+msgid "Mission 1"
+msgstr "ስሪት"
+
+#: exe/webui/content_template/strings.py:206
+msgid "Guidelines to open a new post."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:208
+msgid "Questions or guidelines for students to revise and reflect:"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:209
+msgid "The task they have done"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:210
+msgid "The resources they have checked"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:211
+msgid "Materials they have created"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:212
+msgid "What they have learnt"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:213
+#, fuzzy
+msgid "Difficulties found."
+msgstr "ክብደት"
+
+#: exe/webui/content_template/strings.py:214
+#, fuzzy
+msgid "Remaining doubts"
+msgstr "ባዶ ፕሮጀክት"
+
+#: exe/webui/content_template/strings.py:215
+msgid "Class team functioning"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:222
+msgid "Task (Mission)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:237
+#, fuzzy
+msgid "General introduction"
+msgstr "ለማጠናቀቂያ መመሪያዎች ጠቅ ያድርጉ"
+
+#: exe/webui/content_template/strings.py:238
+msgid "What the \"final mission\" will be and link to the assessment rubric."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:239
+#, fuzzy
+msgid "What learning objective this mission helps to achieve."
+msgstr "ለዚህ ክፍል የትምህርቱን አላማ ይተይቡ።"
+
+#: exe/webui/content_template/strings.py:240
+msgid "Steps for your mission"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:247
+#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:26
+msgid "Introduction"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:260
+msgid "What the final mission will be."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:261
+msgid "What sudents will learn about."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:262
+#, fuzzy
+msgid "Starting activity"
+msgstr "የማንበቢያ እንቅስቃሴ"
+
+#: exe/webui/content_template/strings.py:271
+msgid "Didactic guidelines"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:274
+msgid "Need any help?"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:281
+msgid "ICT resources/apps/tools"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:288
+msgid "Assessment and curricular references"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:301
+msgid "Link to the final rubric of the project."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:302
+msgid "Assessment recommendations / resources of each task."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:303
+msgid "Assessment criteria and guidance on how to assess."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:304
+msgid "Contents / learning standards and key competences."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:311
+msgid "Learning Pathway and timing"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:404
+msgid "Steps"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:405
+#, fuzzy
+msgid "Main aim"
+msgstr "የHangman ጨዋታ"
+
+#: exe/webui/content_template/strings.py:406
+#: exe/webui/content_template/strings.py:501
+#: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:91
+msgid "Timing"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:407
+msgid "Before you start"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:408
+#: exe/webui/content_template/strings.py:410
+#: exe/webui/content_template/strings.py:412
+#: exe/webui/content_template/strings.py:414
+#: exe/webui/content_template/strings.py:416
+#: exe/webui/content_template/strings.py:418
+msgid "... sessions"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:411
+msgid "(Mission 1)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:413
+msgid "(Mission 2)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:415
+msgid "(Mission 3)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:417
+msgid "(Final Challenge)"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:419
+msgid "Interdisciplinary nature"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:420
+msgid "Recommendations to involve other subjects"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:427
+msgid "Fact sheet"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:498
+msgid "Level / course"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:499
+#, fuzzy
+msgid "Final project"
+msgstr "eXe Project"
+
+#: exe/webui/content_template/strings.py:500
+#, fuzzy
+msgid "Contents"
+msgstr "ይዘት"
+
+#: exe/webui/content_template/strings.py:502
+msgid "General guidelines for teachers"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:503
+msgid "Resource structure"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:504
+msgid "Types of tasks and activities"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:505
+msgid "Methodological approach"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:506
+#, fuzzy
+msgid "Use of the learning diary"
+msgstr "eXe : elearning XHTML አርታኢ"
+
+#: exe/webui/content_template/strings.py:530
+msgid "Rubrics and other documents"
+msgstr ""
+
+#: exe/webui/content_template/strings.py:537
+msgid "You can download all the documents to print, share, reuse..."
+msgstr ""
+
+#: exe/webui/content_template/strings.py:546
+#, fuzzy
+msgid "Example image"
+msgstr "ምስል ምረጥ"
+
+#: exe/webui/content_template/strings.py:558
 #, fuzzy
 msgid "Base"
 msgstr "መለኪያ"
@@ -8245,11 +8662,11 @@ msgstr "መለኪያ"
 msgid "You Should Know"
 msgstr ""
 
-#: exe/webui/editorelement.py:74 exe/webui/editorpane.py:251
+#: exe/webui/editorelement.py:74 exe/webui/editorpane.py:249
 msgid "Text Line"
 msgstr "የጽሁፍ መስመር"
 
-#: exe/webui/editorelement.py:111 exe/webui/editorpane.py:253
+#: exe/webui/editorelement.py:111 exe/webui/editorpane.py:251
 msgid "Text Box"
 msgstr "የጽሁፍ ሳጥን"
 
@@ -8306,7 +8723,7 @@ msgstr "ማብራሪያ ጽሁፍ:"
 msgid "Please enter an idevice name."
 msgstr "እባክዎ <br />የ idevice ስም ያስገቡ።"
 
-#: exe/webui/editorpage.py:191 exe/webui/editorpage.py:203
+#: exe/webui/editorpage.py:192 exe/webui/editorpage.py:204
 msgid "Sorry, wrong file format."
 msgstr "ይቅርታ፣ የተሳሳተ የፋይል ቅርጸት ነው።"
 
@@ -8318,7 +8735,11 @@ msgstr "iDevice አስመጣ"
 msgid "Export iDevice"
 msgstr "iDevice ወደ ውጪ ላክ"
 
-#: exe/webui/editorpage.py:295
+#: exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "አቋርጥ"
+
+#: exe/webui/editorpage.py:294
 msgid "New iDevice"
 msgstr "አዲስ iDevice"
 
@@ -8380,65 +8801,63 @@ msgstr ""
 msgid "Add an attachment file to your iDevice."
 msgstr ""
 
-#: exe/webui/editorpane.py:145 exe/webui/editorpane.py:152
-#: exe/webui/editorpane.py:160 exe/webui/editorpane.py:176
-#: exe/webui/editorpane.py:186
+#: exe/webui/editorpane.py:144 exe/webui/editorpane.py:151
+#: exe/webui/editorpane.py:159 exe/webui/editorpane.py:174
+#: exe/webui/editorpane.py:184
 msgid "Enter the label here"
 msgstr "መለያውን እዚህ ጋር አስገባ"
 
-#: exe/webui/editorpane.py:146
+#: exe/webui/editorpane.py:145
 msgid "Enter instructions for completion here"
 msgstr "የማጠናቀቂያ መመሪያውን እዚህ ጋር አስገባ"
 
-#: exe/webui/editorpane.py:153 exe/webui/editorpane.py:177
-#: exe/webui/editorpane.py:187
+#: exe/webui/editorpane.py:152 exe/webui/editorpane.py:175
+#: exe/webui/editorpane.py:185
 msgid "Enter the instructions for completion here"
 msgstr "የማጠናቀቂያ መመሪያዎችን እዚህ ጋር አስገባ"
 
-#: exe/webui/editorpane.py:161
-msgid ""
-"Feedback button will not appear if no \n"
-"data is entered into this field."
+#: exe/webui/editorpane.py:160
+msgid "Feedback button will not appear if no data is entered into this field."
 msgstr ""
 
-#: exe/webui/editorpane.py:198
+#: exe/webui/editorpane.py:196
 msgid "Please enter<br />an idevice name."
 msgstr "እባክዎ <br />የ idevice ስም ያስገቡ።"
 
-#: exe/webui/editorpane.py:250
+#: exe/webui/editorpane.py:248
 msgid "Add Field"
 msgstr "መስክ አልክ"
 
-#: exe/webui/editorpane.py:265
+#: exe/webui/editorpane.py:263
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:96
 msgid "Actions"
 msgstr "ድርጊቶች"
 
-#: exe/webui/editorpane.py:341
+#: exe/webui/editorpane.py:345
 msgid "Pedagogical Tip"
 msgstr "የስነ ትምህርት ጠቃሚ ምክር"
 
-#: exe/webui/editorpane.py:344 exe/webui/multimediablock.py:103
+#: exe/webui/editorpane.py:348 exe/webui/multimediablock.py:103
 #: exe/webui/rssblock.py:120 exe/webui/wikipediablock.py:185
 msgid "Emphasis"
 msgstr "አትኩሮት"
 
-#: exe/webui/editorpane.py:347 exe/webui/multimediablock.py:100
+#: exe/webui/editorpane.py:351 exe/webui/multimediablock.py:100
 #: exe/webui/rssblock.py:114 exe/webui/wikipediablock.py:182
 msgid "No emphasis"
 msgstr "ምንም አትኩሮት የለም"
 
-#: exe/webui/editorpane.py:348 exe/webui/multimediablock.py:101
+#: exe/webui/editorpane.py:352 exe/webui/multimediablock.py:101
 #: exe/webui/rssblock.py:115 exe/webui/wikipediablock.py:183
 msgid "Some emphasis"
 msgstr "የተወሰነ አትኩሮት"
 
-#: exe/webui/editorpane.py:363 exe/webui/jsblock.py:86
+#: exe/webui/editorpane.py:367 exe/webui/jsblock.py:88
 #, fuzzy
 msgid "Select an icon"
 msgstr "ፈቃድ ይምረጡ።"
 
-#: exe/webui/editorpane.py:385 exe/webui/jsblock.py:124
+#: exe/webui/editorpane.py:389 exe/webui/jsblock.py:127
 msgid "Icons"
 msgstr "አዶዎች"
 
@@ -8447,7 +8866,7 @@ msgid "Translation"
 msgstr "ትርጉም"
 
 #: exe/webui/eleccionmultiplefpdblock.py:98 exe/webui/multichoiceblock.py:95
-#: exe/webui/quiztestblock.py:104
+#: exe/webui/quiztestblock.py:103
 msgid "Please select a correct answer for each question."
 msgstr "እባክዎ ለእያንዳንዱ ጥያቄ ትክክለኛውን መልስ ምረጥ።"
 
@@ -8479,7 +8898,8 @@ msgstr "ምስል አክል"
 msgid "Display as:"
 msgstr "እንደሚከተለው አሳይ:"
 
-#: exe/webui/element.py:796
+#: exe/webui/content_template/strings.py:30
+#: exe/webui/content_template/strings.py:522 exe/webui/element.py:796
 msgid "by"
 msgstr "በ"
 
@@ -8787,7 +9207,23 @@ msgstr "እጅግ በጣም ትልቅ"
 msgid "Size of magnifying glass: "
 msgstr "የማጉሊያ መስታወቶች መጠን:"
 
-#: exe/webui/jsblock.py:83
+#: exe/webui/importode.py:54 exe/webui/loginpage.py:52 exe/webui/quitpage.py:63
+msgid "eXe"
+msgstr ""
+
+#: exe/webui/importode.py:73
+msgid "Error importing package with id ( {} ) from {}"
+msgstr ""
+
+#: exe/webui/importode.py:75
+msgid "Important package with id ( {} ) from {}"
+msgstr ""
+
+#: exe/webui/importode.py:82
+msgid "This may take a bit..."
+msgstr ""
+
+#: exe/webui/jsblock.py:85
 msgid ""
 "The title and the icon are not required. If you leave them empty the "
 "iDevice will have no emphasis."
@@ -8796,6 +9232,15 @@ msgstr ""
 #: exe/webui/listablock.py:180
 msgid "Other words"
 msgstr "ሌሎች ቃላት"
+
+#: exe/webui/loginpage.py:57
+msgid "No user session"
+msgstr ""
+
+#: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
+#, fuzzy
+msgid "Login"
+msgstr "ካታሎግ ማዘጋጀት"
 
 #: exe/webui/memorymatchblock.py:83
 msgid "Number of rows x Number of cols must be an even number<br/>"
@@ -8818,7 +9263,7 @@ msgstr ""
 msgid "Create / Trim Pairs"
 msgstr "ጥምሮችን ፍጠር / ከርክም"
 
-#: exe/webui/multiselectblock.py:91 exe/webui/quiztestblock.py:112
+#: exe/webui/multiselectblock.py:91 exe/webui/quiztestblock.py:110
 #: exe/webui/seleccionmultiplefpdblock.py:100
 msgid "Add another Question"
 msgstr "ሌላ ጥያቄ አክል"
@@ -8867,40 +9312,32 @@ msgstr ""
 msgid "Add Placable Object"
 msgstr ""
 
-#: exe/webui/preferencespage.py:160
+#: exe/webui/preferencespage.py:164
 msgid "Default browser in your system"
 msgstr "በስርዓትዎ ውስጥ ያለ ነባሪ አሳሽ"
 
-#: exe/webui/preferencespage.py:205
+#: exe/webui/preferencespage.py:210
 msgid "Failed to get preferences"
 msgstr "ምርጫዎችን ማግኘት አልተሳካም"
 
-#: exe/webui/preferencespage.py:282
+#: exe/webui/preferencespage.py:288
 msgid "Failed to save preferences"
 msgstr "ምርጫዎችን ማስቀመጥ አልተሳካም"
 
-#: exe/webui/quitpage.py:45
-msgid "eXe Closed"
-msgstr "eXe ተዘግቷል"
+#: exe/webui/quitpage.py:68
+msgid "User session has been closed"
+msgstr ""
 
-#: exe/webui/quitpage.py:49
-msgid "eXe has finished running in this window."
-msgstr "eXe በዚህ መስኮት ውስጥ መሄድ ጨርሷል።"
-
-#: exe/webui/quitpage.py:53
-msgid "You can close it safely."
-msgstr "አስተማማኝ በሆነ መልኩ መዝጋት ይችላሉ።"
-
-#: exe/webui/quiztestblock.py:115
+#: exe/webui/quiztestblock.py:113
 msgid "Select pass rate: "
 msgstr "የማለፊያ መጠንን ይምረጡ:"
 
-#: exe/webui/quiztestblock.py:145 exe/webui/quiztestblock.py:380
+#: exe/webui/quiztestblock.py:143 exe/webui/quiztestblock.py:374
 msgid "SUBMIT ANSWERS"
 msgstr "መልሶችን ያስገቡ"
 
-#: exe/webui/quiztestblock.py:225 exe/webui/quiztestblock.py:323
-#: exe/webui/quiztestblock.py:384
+#: exe/webui/quiztestblock.py:223 exe/webui/quiztestblock.py:320
+#: exe/webui/quiztestblock.py:378
 #, fuzzy, python-format
 msgid "Your score is %d%%"
 msgstr "ምንጭዎ  %d%%"
@@ -8925,54 +9362,54 @@ msgstr "ጫን"
 msgid "Image optimizer"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:154
+#: exe/webui/scripts/authoring.js:155
 #, fuzzy
 msgid "Select one or more images"
 msgstr "ምስል ምረጥ"
 
-#: exe/webui/scripts/authoring.js:179
+#: exe/webui/scripts/authoring.js:180
 msgid "Image Files (.jpg, .jpeg, .png, .gif, .svg)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:204 exe/webui/scripts/authoring.js:503
+#: exe/webui/scripts/authoring.js:206 exe/webui/scripts/authoring.js:507
 msgid "Flash Movie (.flv)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:205 exe/webui/scripts/authoring.js:513
+#: exe/webui/scripts/authoring.js:207 exe/webui/scripts/authoring.js:517
 msgid "Flash Object (.swf)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:206
+#: exe/webui/scripts/authoring.js:208
 msgid "Quicktime Files (.mov, .qt, .mpg, .mp3, .mp4, .mpeg)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:207
+#: exe/webui/scripts/authoring.js:209
 msgid "Windows Media Player Files (.avi, .wmv, .wm, .asf, .asx, .wmx, .wvx)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:208
+#: exe/webui/scripts/authoring.js:210
 msgid "RealMedia Audio Files (.rm, .ra, .ram, .mp3)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:263
+#: exe/webui/scripts/authoring.js:265
 msgid "JPEG Files (.jpg, .jpeg)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:521
+#: exe/webui/scripts/authoring.js:525
 msgid "MP3 Audio (.mp3)"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:524
+#: exe/webui/scripts/authoring.js:528
 #, fuzzy
 msgid "Select an mp3 file"
 msgstr "አንድ ፋይል ይምረጡ"
 
-#: exe/webui/scripts/authoring.js:534
+#: exe/webui/scripts/authoring.js:538
 #, fuzzy
 msgid "Select a package"
 msgstr "ምስል ምረጥ"
 
-#: exe/webui/scripts/authoring.js:877
+#: exe/webui/scripts/authoring.js:882
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:1122
 msgid ""
 "Are you sure you want to continue without including an Image Description?"
@@ -8981,37 +9418,37 @@ msgid ""
 "images turned off."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:884 exe/webui/scripts/authoring.js:902
+#: exe/webui/scripts/authoring.js:889 exe/webui/scripts/authoring.js:907
 msgid "Image description"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:885 exe/webui/scripts/authoring.js:903
+#: exe/webui/scripts/authoring.js:890 exe/webui/scripts/authoring.js:908
 msgid "Please provide an image description (alternative text):"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1206
+#: exe/webui/scripts/authoring.js:1229
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:281
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:322
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:620
 msgid "Content after"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1209
+#: exe/webui/scripts/authoring.js:1232
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:284
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:325
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:623
 msgid "Content before"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1250
+#: exe/webui/scripts/authoring.js:1273
 msgid "Language settings"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1251
+#: exe/webui/scripts/authoring.js:1274
 msgid "Custom texts (or use the default ones):"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1286
+#: exe/webui/scripts/authoring.js:1309 exe/webui/scripts/authoring.js:1348
 msgid ""
 "You might create an itinerary of challenges where players won't be able "
 "to access a new game or challenge until they get a key in a previous "
@@ -9021,11 +9458,11 @@ msgid ""
 "following activity."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1288
+#: exe/webui/scripts/authoring.js:1311 exe/webui/scripts/authoring.js:1350
 msgid "Access code is required"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1291
+#: exe/webui/scripts/authoring.js:1314 exe/webui/scripts/authoring.js:1353
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:48
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:35
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:55
@@ -9044,11 +9481,11 @@ msgstr ""
 msgid "Access code"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1297
+#: exe/webui/scripts/authoring.js:1320
 msgid "Show a message or password when reaching the objective"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1301
+#: exe/webui/scripts/authoring.js:1324 exe/webui/scripts/authoring.js:1363
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:292
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:297
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:396
@@ -9066,55 +9503,60 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1305
+#: exe/webui/scripts/authoring.js:1328 exe/webui/scripts/authoring.js:1367
 msgid "Percentage of hits needed to display the message"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1324
-msgid "Passwords"
+#: exe/webui/scripts/authoring.js:1347
+#, fuzzy
+msgid "Itinerary"
+msgstr "አጽዳ"
+
+#: exe/webui/scripts/authoring.js:1359
+msgid "Show a message or password"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1337
+#: exe/webui/scripts/authoring.js:1393
 msgid "You must write a clue"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1341
+#: exe/webui/scripts/authoring.js:1397
 msgid "You must provide the code to play this game"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1345
+#: exe/webui/scripts/authoring.js:1401
 msgid "Please explain how to obtain the code to play this game"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1396 exe/webui/scripts/authoring.js:1415
+#: exe/webui/scripts/authoring.js:1452 exe/webui/scripts/authoring.js:1471
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:48
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:71
 msgid "Save score"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1401
+#: exe/webui/scripts/authoring.js:1457
 msgid "SCORM"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1403
+#: exe/webui/scripts/authoring.js:1459
 msgid "Do not save the score"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1406
+#: exe/webui/scripts/authoring.js:1462
 msgid "Automatically save the score"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1408 exe/webui/scripts/authoring.js:1416
+#: exe/webui/scripts/authoring.js:1464 exe/webui/scripts/authoring.js:1472
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:60
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:99
 msgid "Repeat activity"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1412
+#: exe/webui/scripts/authoring.js:1468
 msgid "Show a button to save the score"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1414
+#: exe/webui/scripts/authoring.js:1470
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:96
 #: exe/webui/scripts/idevices/scrambled-list/edition/scrambled-list.js:37
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:643
@@ -9123,38 +9565,38 @@ msgstr ""
 msgid "Button text"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1421
+#: exe/webui/scripts/authoring.js:1477
 msgid ""
 "This will only work when exporting as SCORM and while editing in "
 "eXeLearning."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1422
+#: exe/webui/scripts/authoring.js:1478
 msgid ""
 "The score will be automatically saved after answering each question and "
 "at the end of the game."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1423 exe/webui/scripts/authoring.js:1431
+#: exe/webui/scripts/authoring.js:1479 exe/webui/scripts/authoring.js:1487
 msgid "Include only one game with score in the page (or it won't work)."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1424 exe/webui/scripts/authoring.js:1432
+#: exe/webui/scripts/authoring.js:1480 exe/webui/scripts/authoring.js:1488
 msgid "Do not include a \"SCORM Quiz\" iDevice in the same page."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1429
+#: exe/webui/scripts/authoring.js:1485
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:102
 msgid ""
 "The button will only be displayed when exporting as SCORM and while "
 "editing in eXeLearning."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1430
+#: exe/webui/scripts/authoring.js:1486
 msgid "Include only one activity with a \"Save score\" button in the page."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1501
+#: exe/webui/scripts/authoring.js:1557
 #, python-format
 msgid ""
 "You can export this game so you can later use it in another iDevice of "
@@ -9162,11 +9604,11 @@ msgid ""
 " and use them here."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1504
+#: exe/webui/scripts/authoring.js:1560
 msgid "Import/Export"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1511
+#: exe/webui/scripts/authoring.js:1567
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1350
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1366
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1388
@@ -9210,14 +9652,14 @@ msgstr ""
 msgid "Supported formats"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1727
+#: exe/webui/scripts/authoring.js:1783
 #: exe/webui/scripts/idevices/rubrics/export/exe-rubrics.js:50
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/export/exe_abcmusic.js:90
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:14
 msgid "Go to Tools - Preview to see this working"
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1945
+#: exe/webui/scripts/authoring.js:1999
 msgid "Add a Text iDevice"
 msgstr ""
 
@@ -9225,12 +9667,12 @@ msgstr ""
 msgid "Do you want to overwrite the existing idevice {idevice}?"
 msgstr ""
 
-#: exe/webui/scripts/editor.js:109 exe/webui/scripts/editor.js:136
+#: exe/webui/scripts/editor.js:110 exe/webui/scripts/editor.js:137
 #, fuzzy
 msgid "eXe Idevices"
 msgstr "iDevices አስቀምጥ"
 
-#: exe/webui/scripts/editor.js:117
+#: exe/webui/scripts/editor.js:118
 msgid "Please save the idevice first, then try to export it."
 msgstr ""
 
@@ -11487,10 +11929,6 @@ msgstr ""
 msgid "required"
 msgstr ""
 
-#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:26
-msgid "Introduction"
-msgstr ""
-
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:27
 msgid "Save cover"
 msgstr ""
@@ -12043,10 +12481,6 @@ msgstr ""
 
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:167
 msgid "Click on the active areas or image icons."
-msgstr ""
-
-#: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:175
-msgid "Assessment"
 msgstr ""
 
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:177
@@ -13273,10 +13707,6 @@ msgstr ""
 msgid "Assessment rubric"
 msgstr ""
 
-#: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:91
-msgid "Timing"
-msgstr ""
-
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:92
 msgid "Work in group"
 msgstr ""
@@ -13508,7 +13938,7 @@ msgstr ""
 msgid "Preview question"
 msgstr ""
 
-#: exe/webui/scripts/stylemanager.js:78
+#: exe/webui/scripts/stylemanager.js:80
 #, fuzzy
 msgid "Do you want to delete the selected style?"
 msgstr "ይህንን ቅጥ መሰረዝ ይፈልጋሉ?"
@@ -15570,161 +16000,175 @@ msgstr "አመላካች"
 msgid "Add Another Item to be Sorted"
 msgstr ""
 
-#: exe/webui/styledesigner.py:53
+#: exe/webui/styledesigner.py:56
 msgid "Error saving style. "
 msgstr ""
 
-#: exe/webui/styledesigner.py:61
+#: exe/webui/styledesigner.py:64
 msgid "Error creating style. "
 msgstr ""
 
-#: exe/webui/styledesigner.py:70
+#: exe/webui/styledesigner.py:73
 msgid "Error creating style, local style already exists. "
 msgstr ""
 
-#: exe/webui/styledesigner.py:125
+#: exe/webui/styledesigner.py:128
 #, python-format
 msgid "Style %s successfully created!"
 msgstr ""
 
-#: exe/webui/styledesigner.py:138
+#: exe/webui/styledesigner.py:141
 #, python-format
 msgid "Style %s successfully saved!"
 msgstr ""
 
-#: exe/webui/styledesigner.py:210
+#: exe/webui/styledesigner.py:217
 #, fuzzy, python-format
 msgid "Style directory %s already exists"
 msgstr "የቅጥ ማውጫ አስቀድሞም ይገኛል: %s"
 
-#: exe/webui/styledesigner.py:272 exe/webui/stylemanagerpage.py:252
+#: exe/webui/styledesigner.py:279 exe/webui/stylemanagerpage.py:269
 #, fuzzy
 msgid "The style name already exists"
 msgstr "የቅጥ ማውጫ አስቀድሞም ይገኛል: %s"
 
-#: exe/webui/styledesigner.py:289
+#: exe/webui/styledesigner.py:298
 msgid "Error saving style, style directory does not exist"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:60 exe/webui/stylemanagerpage.py:378
+#: exe/webui/stylemanagerpage.py:61 exe/webui/stylemanagerpage.py:369
+#: exe/webui/stylemanagerpage.py:396
 #, fuzzy
 msgid "Style already exists. "
 msgstr "የቅጥ ማውጫ አስቀድሞም ይገኛል: %s"
 
-#: exe/webui/stylemanagerpage.py:156
+#: exe/webui/stylemanagerpage.py:164
 #, fuzzy
 msgid "Successfully imported style"
 msgstr "ቅጥን በተሳካ ሁኔታ አስመጥቷል: %s"
 
-#: exe/webui/stylemanagerpage.py:160
+#: exe/webui/stylemanagerpage.py:168
 #, python-format
 msgid "Error while installing style: %s"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:265
+#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:104
+#: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:78
+#: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:352
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1321
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1375
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1442
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:131
+#: exe/webui/stylemanagerpage.py:256
+#: exe/webui/tools/mindmaps/src/js/MainViewController.js:123
+#: exe/webui/tools/mindmaps/src/js/OpenDocument.js:160
+msgid "Could not retrieve data (Core error)"
+msgstr ""
+
+#: exe/webui/stylemanagerpage.py:282
 #, python-format
 msgid "Files %s does not exist or are not readable."
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:272
+#: exe/webui/stylemanagerpage.py:289
 msgid "Wrong config.xml file format."
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:275
+#: exe/webui/stylemanagerpage.py:292
 msgid "An unknown error occurred while importing the style."
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:307
+#: exe/webui/stylemanagerpage.py:324
 msgid "Error while getting styles list from the repository"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:332
+#: exe/webui/stylemanagerpage.py:349
 msgid "Style updated correctly"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:348
+#: exe/webui/stylemanagerpage.py:365
 msgid "Style successfully downloaded and installed"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:358
+#: exe/webui/stylemanagerpage.py:376
 msgid "Error while installing style"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:376
+#: exe/webui/stylemanagerpage.py:394
 msgid "Overwrite local version of this style?"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:379
+#: exe/webui/stylemanagerpage.py:397
 msgid ""
 "Importing this style will overwrite local style, this action cannot be "
 "undone. "
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:380
+#: exe/webui/stylemanagerpage.py:398
 #, fuzzy
 msgid "Are you sure you want to install remote style?. "
 msgstr "እርግጠኛ ነዎት ሁሉንም የቅጽ መስኮች ማጽዳት ይፈልጋሉ?"
 
-#: exe/webui/stylemanagerpage.py:402
+#: exe/webui/stylemanagerpage.py:420
 msgid "Error when downloading style from repository"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:412 exe/webui/stylemanagerpage.py:423
+#: exe/webui/stylemanagerpage.py:430 exe/webui/stylemanagerpage.py:441
 msgid "URL not valid. "
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:472
+#: exe/webui/stylemanagerpage.py:490
 msgid "Style download URL not found"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:481
+#: exe/webui/stylemanagerpage.py:499
 #, python-format
 msgid "Error when getting style URL from repository styles list: %s"
 msgstr ""
 
-#: exe/webui/stylemanagerpage.py:519
+#: exe/webui/stylemanagerpage.py:536
 #, python-format
 msgid "Style exported correctly: %s"
 msgstr "ቅጥ በተሳካ ሁኔታ ወደ ውጪ ተልኳል: %s"
 
-#: exe/webui/stylemanagerpage.py:523
+#: exe/webui/stylemanagerpage.py:541
 #, python-format
 msgid "Could not export style : %s"
 msgstr "ቅጥን ወደ ውጪ መላክ አይቻልም : %s"
 
-#: exe/webui/stylemanagerpage.py:531
+#: exe/webui/stylemanagerpage.py:554
 msgid "Style deleted correctly"
 msgstr "ቅጥ በተሳካ ሁኔታ ተሰርዟል"
 
-#: exe/webui/templatemanagerpage.py:127
+#: exe/webui/templatemanagerpage.py:135
 msgid "Successfully imported template"
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:131
+#: exe/webui/templatemanagerpage.py:139
 #, python-format
 msgid "Error while installing template: %s"
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:230
+#: exe/webui/templatemanagerpage.py:236
 #, python-format
 msgid "SAVE FAILED! '%s' is not a valid name for a template"
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:239
+#: exe/webui/templatemanagerpage.py:245
 #, python-format
 msgid "Template exported correctly: %s"
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:242
+#: exe/webui/templatemanagerpage.py:248
 #, python-format
 msgid "Could not export template : %s"
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:256
+#: exe/webui/templatemanagerpage.py:262
 msgid "It is not possible to delete an opened template."
 msgstr ""
 
-#: exe/webui/templatemanagerpage.py:260
+#: exe/webui/templatemanagerpage.py:266
 msgid "Template deleted correctly"
 msgstr ""
 
@@ -15977,6 +16421,18 @@ msgid "Further information:"
 msgstr ""
 
 #: exe/webui/tools/assistant/langs/all.js:81
+msgid "http://exelearning.net/html_manual/exe20_en/"
+msgstr ""
+
+#: exe/webui/tools/assistant/langs/all.js:82
+msgid "http://exelearning.net/forums/"
+msgstr ""
+
+#: exe/webui/tools/assistant/langs/all.js:83
+msgid "http://exelearning.net/?lang=en"
+msgstr ""
+
+#: exe/webui/tools/assistant/langs/all.js:84
 msgid "Open Link in a New Window"
 msgstr ""
 
@@ -15987,6 +16443,11 @@ msgstr ""
 #: exe/webui/tools/color-picker/langs/all.js:5
 msgid "Drag markers to pick a color"
 msgstr ""
+
+#: exe/webui/tools/color-picker/langs/all.js:6
+#: exe/webui/tools/mindmaps/src/js/Command.js:264
+msgid "New"
+msgstr "አዲስ"
 
 #: exe/webui/tools/color-picker/langs/all.js:7
 #, fuzzy
@@ -16115,6 +16576,11 @@ msgstr ""
 msgid "Add"
 msgstr ""
 
+#: exe/webui/tools/mindmaps/src/js/Command.js:356
+#: exe/webui/tools/mindmaps/src/js/Command.js:358
+msgid "Save As..."
+msgstr "አስቀምጥ እንደ..."
+
 #: exe/webui/tools/mindmaps/src/js/HelpController.js:52
 msgid "Welcome to mindmaps"
 msgstr ""
@@ -16127,16 +16593,16 @@ msgstr ""
 msgid "Central Idea"
 msgstr ""
 
-#: exe/webui/tools/style-designer/js/app.js:1476
+#: exe/webui/tools/style-designer/js/app.js:1494
 #, fuzzy
 msgid "Name the new style"
 msgstr "ቅጥን ሰረዝ?"
 
-#: exe/webui/tools/style-designer/js/app.js:1501
+#: exe/webui/tools/style-designer/js/app.js:1519
 msgid "Style Designer windows will be closed. "
 msgstr ""
 
-#: exe/webui/tools/style-designer/js/app.js:1504
+#: exe/webui/tools/style-designer/js/app.js:1522
 msgid "Page will be reloaded. "
 msgstr ""
 
@@ -16716,5 +17182,112 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "You should write your name."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
+#~ "   Usage: %s [OPTION] [PACKAGE]\n"
+#~ "  -V, --version    print version information and exit\n"
+#~ "  -h, --help       display this help and exit\n"
+#~ "  --standalone     Run totally from current directory\n"
+#~ "  --portable       Run in portable mode\n"
+#~ "Settings are read from exe.conf in $HOME/.exe on Linux/Unix/Mac OS or\n"
+#~ "in Documents and Settings/<user "
+#~ "name>/Application Data/exe on Windows XP "
+#~ "or\n"
+#~ "Users/<user name>/AppData/Roaming/exe on Windows 7/8/10"
+#~ msgstr ""
+
+#~ msgid "Package saved to: %s"
+#~ msgstr "ጥቅል ወደሚከተለው ተቀምጧል: %s"
+
+#~ msgid "Uploading package to Procomún..."
+#~ msgstr ""
+
+#~ msgid "Unknown error when trying to upload package to Procomún."
+#~ msgstr ""
+
+#~ msgid "Publishing document to Procomún"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Package exported to <a href=\"%s\" "
+#~ "target=\"_blank\" title=\"Click to view the"
+#~ " exported package\">%s</a>."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "<small>You can view and manage the "
+#~ "uploaded package using <a href=\"%s\" "
+#~ "target=\"_blank\" title=\"Procomún Home\">Procomún</a>\\'s"
+#~ " web page.</small>"
+#~ msgstr ""
+
+#~ msgid "The most common reasons for this are:"
+#~ msgstr ""
+
+#~ msgid "1. Package metadata is not properly filled."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "2. There is a problem with you "
+#~ "connection (or with Procomún servers), "
+#~ "so you should just try again "
+#~ "later."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "If you have problems publishing you "
+#~ "can close this dialogue, export as "
+#~ "SCORM 2004 and upload the generated "
+#~ "zip file manually to Procomún."
+#~ msgstr ""
+
+#~ msgid "The reported error we got from Procomún was: <pre>%s</pre>"
+#~ msgstr ""
+
+#~ msgid "Initializing Procomún export process..."
+#~ msgstr ""
+
+#~ msgid "Saving package to: {filename}"
+#~ msgstr "ጥቅልን ወደሚከተለው በማስቀመጥ ላይ: {filename}"
+
+#~ msgid "Save in:"
+#~ msgstr "በሚከተለው ውስጥ አስቀምት:"
+
+#~ msgid "List of styles in your system"
+#~ msgstr ""
+
+#~ msgid "Project"
+#~ msgstr ""
+
+#~ msgid "Window"
+#~ msgstr ""
+
+#~ msgid "Self-contained Folder"
+#~ msgstr "ራስ-አካታች አቃፊ"
+
+#~ msgid ""
+#~ "If you leave this page eXe "
+#~ "application continues to run. Please use"
+#~ " the menu File->Quit if you really"
+#~ " want to exit the application."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Feedback button will not appear if no \n"
+#~ "data is entered into this field."
+#~ msgstr ""
+
+#~ msgid "eXe Closed"
+#~ msgstr "eXe ተዘግቷል"
+
+#~ msgid "eXe has finished running in this window."
+#~ msgstr "eXe በዚህ መስኮት ውስጥ መሄድ ጨርሷል።"
+
+#~ msgid "You can close it safely."
+#~ msgstr "አስተማማኝ በሆነ መልኩ መዝጋት ይችላሉ።"
+
+#~ msgid "Passwords"
 #~ msgstr ""
 
