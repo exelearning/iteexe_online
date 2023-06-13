@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: translations@exelearning.net\n"
-"POT-Creation-Date: 2023-06-13 10:27+0200\n"
+"POT-Creation-Date: 2023-05-19 10:01+0200\n"
 "PO-Revision-Date: 2022-11-25 17:28+0100\n"
 "Last-Translator: Franklin Weng <franklin@goodhorse.idv.tw>\n"
 "Language: zh_Hant_TW\n"
@@ -23,20 +23,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: exe/application.py:259
+#: exe/application.py:239
 #, python-format
 msgid "An error has occurred when loading your config. A backup is saved at %s"
 msgstr "載入設定檔時發生錯誤。備份已儲存到 %s"
 
-#: exe/application.py:274
+#: exe/application.py:257
 #, python-format
 msgid ""
 "An error has occurred when loading your Idevice Store. A backup is saved "
 "at %s"
 msgstr "載入您的 Idevice 商店時發生錯誤。備份已儲存到 %s"
 
-#: exe/application.py:335
-#, fuzzy, python-format
+#: exe/application.py:308
+#, python-format
 msgid ""
 "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
 "   Usage: %s [OPTION] [PACKAGE]\n"
@@ -47,7 +47,7 @@ msgid ""
 "Settings are read from exe.conf in $HOME/.exe on Linux/Unix/Mac OS or\n"
 "in Documents and Settings/<user name>/Application Data/exe on Windows XP "
 "or\n"
-"Users/<user name>/AppData/Roaming/exe on Windows 7"
+"Users/<user name>/AppData/Roaming/exe on Windows 7/8/10"
 msgstr ""
 "eXeLearning, 全名 EXtremely Easy to use eLearning authoring "
 "tool（極易上手線上學習教材建立工具）\n"
@@ -73,10 +73,10 @@ msgstr "Java Applet"
 #: exe/engine/eleccionmultiplefpdidevice.py:62
 #: exe/engine/externalurlidevice.py:39 exe/engine/flashmovieidevice.py:40
 #: exe/engine/flashwithtextidevice.py:44 exe/engine/freetextfpdidevice.py:40
-#: exe/engine/freetextidevice.py:39 exe/engine/idevicestore.py:645
-#: exe/engine/idevicestore.py:703 exe/engine/idevicestore.py:731
-#: exe/engine/idevicestore.py:754 exe/engine/idevicestore.py:810
-#: exe/engine/idevicestore.py:838 exe/engine/imagemagnifieridevice.py:42
+#: exe/engine/freetextidevice.py:39 exe/engine/idevicestore.py:643
+#: exe/engine/idevicestore.py:701 exe/engine/idevicestore.py:729
+#: exe/engine/idevicestore.py:752 exe/engine/idevicestore.py:808
+#: exe/engine/idevicestore.py:836 exe/engine/imagemagnifieridevice.py:42
 #: exe/engine/imagewithtextidevice.py:44 exe/engine/mathidevice.py:42
 #: exe/engine/multichoiceidevice.py:61 exe/engine/multiselectidevice.py:46
 #: exe/engine/quiztestidevice.py:245 exe/engine/reflectionfpdidevice.py:48
@@ -406,8 +406,7 @@ msgstr "按照地圖上的提示依序點擊。"
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:62
 #: exe/jsui/scripts/app/view/forms/LomSections.js:66
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:185
-#: exe/webui/content_template/strings.py:496 exe/webui/galleryblock.py:216
-#: exe/webui/jsblock.py:84
+#: exe/webui/galleryblock.py:216 exe/webui/jsblock.py:82
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:299
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:301
 #: exe/webui/scripts/idevices/download-package/edition/download-package.js:164
@@ -683,8 +682,8 @@ msgstr ""
 #: exe/engine/sortidevice.py:53 exe/engine/truefalseidevice.py:164
 #: exe/engine/truefalseidevice.py:391
 #: exe/engine/verdaderofalsofpdidevice.py:166
-#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1070
-#: exe/webui/scripts/authoring.js:1296 exe/webui/scripts/authoring.js:1299
+#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1065
+#: exe/webui/scripts/authoring.js:1273 exe/webui/scripts/authoring.js:1276
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:33
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:57
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:84
@@ -735,14 +734,14 @@ msgstr ""
 #: exe/engine/clozeidevice.py:132 exe/engine/clozeidevice.py:282
 #: exe/engine/clozelangfpdidevice.py:132 exe/engine/clozelangfpdidevice.py:287
 #: exe/engine/field.py:3731 exe/engine/field.py:3779
-#: exe/engine/genericidevice.py:294 exe/engine/idevicestore.py:694
-#: exe/engine/idevicestore.py:803 exe/engine/listaidevice.py:140
+#: exe/engine/genericidevice.py:294 exe/engine/idevicestore.py:692
+#: exe/engine/idevicestore.py:801 exe/engine/listaidevice.py:140
 #: exe/engine/listaidevice.py:295 exe/engine/truefalseidevice.py:50
 #: exe/engine/truefalseidevice.py:125 exe/engine/verdaderofalsofpdidevice.py:51
 #: exe/engine/verdaderofalsofpdidevice.py:126 exe/webui/clozeblock.py:182
 #: exe/webui/clozefpdblock.py:209 exe/webui/clozelangfpdblock.py:221
-#: exe/webui/common.py:977 exe/webui/common.py:987
-#: exe/webui/editorelement.py:148 exe/webui/editorpane.py:253
+#: exe/webui/common.py:972 exe/webui/common.py:982
+#: exe/webui/editorelement.py:148 exe/webui/editorpane.py:255
 #: exe/webui/element.py:2484 exe/webui/element.py:2619
 #: exe/webui/element.py:2734 exe/webui/element.py:2935
 #: exe/webui/listablock.py:461 exe/webui/questionelement.py:114
@@ -812,35 +811,35 @@ msgstr "FPD - 克漏字練習（已變更）"
 msgid "Clozelang"
 msgstr "克漏字語言"
 
-#: exe/engine/config.py:100 exe/engine/config.py:101 exe/engine/config.py:105
-#: exe/engine/config.py:106 exe/engine/config.py:128 exe/engine/config.py:132
-#: exe/engine/config.py:136 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
+#: exe/engine/config.py:99 exe/engine/config.py:100 exe/engine/config.py:104
+#: exe/engine/config.py:105 exe/engine/config.py:127 exe/engine/config.py:131
+#: exe/engine/config.py:135 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
 msgid "Text and Tasks"
 msgstr "文字與任務"
 
-#: exe/engine/config.py:102 exe/engine/config.py:103 exe/engine/config.py:107
-#: exe/engine/config.py:129 exe/engine/config.py:130 exe/engine/config.py:131
-#: exe/engine/config.py:133 exe/engine/config.py:139
+#: exe/engine/config.py:101 exe/engine/config.py:102 exe/engine/config.py:106
+#: exe/engine/config.py:128 exe/engine/config.py:129 exe/engine/config.py:130
+#: exe/engine/config.py:132 exe/engine/config.py:138
 msgid "Interactive Activities"
 msgstr "互動式活動"
 
-#: exe/engine/config.py:104 exe/engine/config.py:125 exe/engine/config.py:126
-#: exe/engine/config.py:127 exe/engine/config.py:134 exe/engine/config.py:135
-#: exe/engine/config.py:141
+#: exe/engine/config.py:103 exe/engine/config.py:124 exe/engine/config.py:125
+#: exe/engine/config.py:126 exe/engine/config.py:133 exe/engine/config.py:134
+#: exe/engine/config.py:140
 msgid "Other Contents"
 msgstr "其他內容"
 
-#: exe/engine/config.py:108 exe/engine/config.py:109 exe/engine/config.py:110
-#: exe/engine/config.py:111 exe/engine/config.py:112 exe/engine/config.py:113
-#: exe/engine/config.py:114 exe/engine/config.py:115 exe/engine/config.py:116
-#: exe/engine/config.py:117 exe/engine/config.py:118 exe/engine/config.py:119
-#: exe/engine/config.py:120 exe/engine/config.py:121 exe/engine/config.py:122
-#: exe/engine/config.py:123 exe/engine/config.py:124
+#: exe/engine/config.py:107 exe/engine/config.py:108 exe/engine/config.py:109
+#: exe/engine/config.py:110 exe/engine/config.py:111 exe/engine/config.py:112
+#: exe/engine/config.py:113 exe/engine/config.py:114 exe/engine/config.py:115
+#: exe/engine/config.py:116 exe/engine/config.py:117 exe/engine/config.py:118
+#: exe/engine/config.py:119 exe/engine/config.py:120 exe/engine/config.py:121
+#: exe/engine/config.py:122 exe/engine/config.py:123
 msgid "FPD"
 msgstr "FPD"
 
-#: exe/engine/config.py:137 exe/engine/config.py:138 exe/engine/config.py:140
-#: exe/engine/config.py:142
+#: exe/engine/config.py:136 exe/engine/config.py:137 exe/engine/config.py:139
+#: exe/engine/config.py:141
 msgid "Hidden"
 msgstr "隱藏"
 
@@ -1025,8 +1024,7 @@ msgstr "輸入學生選擇特定選項時要看到的回饋意見。如果您未
 #: exe/engine/multiselectidevice.py:82
 #: exe/engine/seleccionmultiplefpdidevice.py:84 exe/webui/element.py:2459
 #: exe/webui/element.py:2463 exe/webui/element.py:2912
-#: exe/webui/element.py:2916 exe/webui/scripts/authoring.js:1316
-#: exe/webui/scripts/authoring.js:1355
+#: exe/webui/element.py:2916 exe/webui/scripts/authoring.js:1293
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:77
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:56
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:52
@@ -1334,7 +1332,7 @@ msgstr "選項"
 #: exe/engine/field.py:3805 exe/engine/field.py:3871
 #: exe/engine/truefalseidevice.py:53 exe/engine/truefalseidevice.py:128
 #: exe/engine/verdaderofalsofpdidevice.py:54
-#: exe/engine/verdaderofalsofpdidevice.py:129 exe/webui/common.py:618
+#: exe/engine/verdaderofalsofpdidevice.py:129 exe/webui/common.py:610
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:53
 msgid "Hint"
 msgstr "提示"
@@ -1423,7 +1421,7 @@ msgstr "檔案附件 idevice。"
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:274
-#: exe/webui/common.py:682
+#: exe/webui/common.py:674
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:89
 #: exe/webui/tools/style-designer/langs/all.js:66
 msgid "No"
@@ -1432,7 +1430,7 @@ msgstr "否"
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:275
-#: exe/webui/common.py:681
+#: exe/webui/common.py:673
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:88
 #: exe/webui/tools/style-designer/langs/all.js:65
 msgid "Yes"
@@ -1552,9 +1550,7 @@ msgstr ""
 "這個 iDevice 提供了一個框架來建立教材並傳授。"
 
 #: exe/engine/freetextfpdidevice.py:46 exe/engine/freetextidevice.py:38
-#: exe/engine/freetextidevice.py:45 exe/webui/content_template/strings.py:21
-#: exe/webui/content_template/strings.py:38
-#: exe/webui/content_template/strings.py:513
+#: exe/engine/freetextidevice.py:45
 msgid "Free Text"
 msgstr "自由文字"
 
@@ -1584,15 +1580,15 @@ msgstr "沒有可用的縮圖。無法縮小原始影像。"
 msgid "No Thumbnail Available. Could not shrink image."
 msgstr "沒有可用的縮圖。無法縮小影像。"
 
-#: exe/engine/galleryidevice.py:456
+#: exe/engine/galleryidevice.py:455
 msgid "Image Gallery"
 msgstr "影像收藏本"
 
-#: exe/engine/galleryidevice.py:457
+#: exe/engine/galleryidevice.py:456
 msgid "eXe Project"
 msgstr "eXe 專案"
 
-#: exe/engine/galleryidevice.py:458
+#: exe/engine/galleryidevice.py:457
 msgid ""
 "<p>Where you have a number of images that relate \n"
 "to each other or to a particular learning exercise you may wish to "
@@ -1600,31 +1596,31 @@ msgid ""
 "these in a gallery context rather then individually.</p>"
 msgstr "<p>在您有一組相關的圖片要展示，或對一個特定的練習要顯示幾張圖片時。</p>"
 
-#: exe/engine/galleryidevice.py:461
+#: exe/engine/galleryidevice.py:460
 msgid "Use this Idevice if you have a lot of images to show."
 msgstr "用此 iDevice 來顯示大量影像。"
 
-#: exe/engine/galleryidevice.py:470
+#: exe/engine/galleryidevice.py:469
 msgid "Enter a title for the gallery"
 msgstr "輸入影像收藏本的標題"
 
-#: exe/engine/galleryidevice.py:471
+#: exe/engine/galleryidevice.py:470
 msgid ""
 "Click on the Add images button to select an image file. The image will "
 "appear below where you will be able to label it. It's always good "
 "practice to put the file size in the label."
 msgstr "點擊 \"新增影像\" 按鈕來選擇影像檔。所選的影像將顯示在下面，您可為其加上標籤。最好在標籤上加上檔案大小等資訊。"
 
-#: exe/engine/genericidevice.py:302 exe/engine/idevicestore.py:752
+#: exe/engine/genericidevice.py:302 exe/engine/idevicestore.py:750
 msgid "Reading Activity 0.11"
 msgstr "閱讀活動 0.11"
 
-#: exe/engine/genericidevice.py:304 exe/engine/idevicestore.py:599
-#: exe/engine/idevicestore.py:643
+#: exe/engine/genericidevice.py:304 exe/engine/idevicestore.py:597
+#: exe/engine/idevicestore.py:641
 msgid "Reading Activity"
 msgstr "閱讀活動"
 
-#: exe/engine/hangmanidevice.py:51 exe/webui/common.py:679
+#: exe/engine/hangmanidevice.py:51 exe/webui/common.py:671
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:174
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:463
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:470
@@ -1654,7 +1650,7 @@ msgstr "顯示玩家的字母"
 msgid "Alphabet to Select From"
 msgstr "選取區的字母"
 
-#: exe/engine/hangmanidevice.py:77 exe/webui/common.py:699
+#: exe/engine/hangmanidevice.py:77 exe/webui/common.py:691
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:84
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:78
 msgid "abcdefghijklmnopqrstuvwxyz"
@@ -1708,7 +1704,7 @@ msgstr "重新開始關卡按鍵文字"
 msgid "Text for reset button"
 msgstr "重置按鍵文字"
 
-#: exe/engine/hangmanidevice.py:101 exe/webui/common.py:691
+#: exe/engine/hangmanidevice.py:101 exe/webui/common.py:683
 #: exe/webui/element.py:1557 exe/webui/element.py:1811
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:65
 msgid "Restart"
@@ -1774,7 +1770,7 @@ msgstr "顯示給使用者看的提示"
 msgid "Hint for Word"
 msgstr "單字的提示"
 
-#: exe/engine/idevicestore.py:646
+#: exe/engine/idevicestore.py:644
 msgid ""
 "<p>The Reading Activity will primarily\n"
 "be used to check a learner's comprehension of a given text. This can be "
@@ -1786,7 +1782,7 @@ msgid ""
 "based on the reading.</p>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:651
+#: exe/engine/idevicestore.py:649
 msgid ""
 "<p>Teachers should keep the following in mind when using this iDevice: "
 "</p><ol><li>Think about the number of different types of activity planned"
@@ -1801,20 +1797,20 @@ msgid ""
 "effort it will take to complete the activity. </li></ol>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:686 exe/engine/idevicestore.py:795
+#: exe/engine/idevicestore.py:684 exe/engine/idevicestore.py:793
 msgid "What to read"
 msgstr "要閱讀的內容"
 
-#: exe/engine/idevicestore.py:687 exe/engine/idevicestore.py:796
+#: exe/engine/idevicestore.py:685 exe/engine/idevicestore.py:794
 msgid ""
 "Enter the details of the reading including reference details. The\n"
 "referencing style used will depend on the preference of your faculty or\n"
 "department."
 msgstr ""
 
-#: exe/engine/idevicestore.py:690 exe/engine/idevicestore.py:729
-#: exe/engine/idevicestore.py:737 exe/engine/idevicestore.py:799
-#: exe/engine/idevicestore.py:836 exe/engine/idevicestore.py:844
+#: exe/engine/idevicestore.py:688 exe/engine/idevicestore.py:727
+#: exe/engine/idevicestore.py:735 exe/engine/idevicestore.py:797
+#: exe/engine/idevicestore.py:834 exe/engine/idevicestore.py:842
 #: exe/webui/questionelement.py:110
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:1306
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:21
@@ -1822,13 +1818,13 @@ msgstr ""
 msgid "Activity"
 msgstr "學習活動"
 
-#: exe/engine/idevicestore.py:691 exe/engine/idevicestore.py:800
+#: exe/engine/idevicestore.py:689 exe/engine/idevicestore.py:798
 msgid ""
 "Describe the tasks related to the reading learners should undertake.\n"
 "This helps demonstrate relevance for learners."
 msgstr ""
 
-#: exe/engine/idevicestore.py:695 exe/engine/idevicestore.py:804
+#: exe/engine/idevicestore.py:693 exe/engine/idevicestore.py:802
 msgid ""
 "Use feedback to provide a summary of the points covered in the reading,\n"
 "or as a starting point for further analysis of the reading by posing a "
@@ -1836,33 +1832,33 @@ msgid ""
 "or providing a statement to begin a debate."
 msgstr ""
 
-#: exe/engine/idevicestore.py:701 exe/engine/idevicestore.py:710
-#: exe/engine/idevicestore.py:808 exe/engine/idevicestore.py:817
-#: exe/engine/package.py:726 exe/engine/package.py:737
+#: exe/engine/idevicestore.py:699 exe/engine/idevicestore.py:708
+#: exe/engine/idevicestore.py:806 exe/engine/idevicestore.py:815
+#: exe/engine/package.py:722 exe/engine/package.py:733
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:236
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:84
 msgid "Objectives"
 msgstr "目的"
 
-#: exe/engine/idevicestore.py:704 exe/engine/idevicestore.py:811
+#: exe/engine/idevicestore.py:702 exe/engine/idevicestore.py:809
 msgid ""
 "Objectives describe the expected outcomes of the learning and should\n"
 "define what the learners will be able to do when they have completed the\n"
 "learning tasks."
 msgstr "「目的」描述這個教材應該學習到什麼，並定義學生在完成學習後應該可以做什麼。"
 
-#: exe/engine/idevicestore.py:711 exe/engine/idevicestore.py:818
+#: exe/engine/idevicestore.py:709 exe/engine/idevicestore.py:816
 msgid "Type the learning objectives for this resource."
 msgstr "輸入學習此教材的目的。"
 
-#: exe/engine/idevicestore.py:714 exe/engine/idevicestore.py:724
-#: exe/engine/idevicestore.py:821 exe/engine/idevicestore.py:831
-#: exe/engine/package.py:756 exe/engine/package.py:767
+#: exe/engine/idevicestore.py:712 exe/engine/idevicestore.py:722
+#: exe/engine/idevicestore.py:819 exe/engine/idevicestore.py:829
+#: exe/engine/package.py:752 exe/engine/package.py:763
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:251
 msgid "Preknowledge"
 msgstr "預備知識"
 
-#: exe/engine/idevicestore.py:717 exe/engine/idevicestore.py:824
+#: exe/engine/idevicestore.py:715 exe/engine/idevicestore.py:822
 msgid ""
 "Prerequisite knowledge refers to the knowledge learners should already\n"
 "have in order to be able to effectively complete the learning. Examples "
@@ -1877,13 +1873,13 @@ msgstr ""
 "<li>學生必須能組合基本的電源工具</li>\n"
 "</ul>\n"
 
-#: exe/engine/idevicestore.py:725 exe/engine/idevicestore.py:832
+#: exe/engine/idevicestore.py:723 exe/engine/idevicestore.py:830
 msgid ""
 "Describe the prerequisite knowledge learners should have to effectively\n"
 "complete this learning."
 msgstr "描述學生要有效率地學習此教材所應具備的知識。"
 
-#: exe/engine/idevicestore.py:732 exe/engine/idevicestore.py:839
+#: exe/engine/idevicestore.py:730 exe/engine/idevicestore.py:837
 msgid ""
 "An activity can be defined as a task or set of tasks a learner must\n"
 "complete. Provide a clear statement of the task and consider any "
@@ -1893,11 +1889,11 @@ msgstr ""
 "學習活動可被定義為學生必須完成的一個或一組任務。\n"
 "請提供清晰明確的任務指示，並考慮任何會協助或阻礙學生完成任務的條件與因素。"
 
-#: exe/engine/idevicestore.py:738 exe/engine/idevicestore.py:845
+#: exe/engine/idevicestore.py:736 exe/engine/idevicestore.py:843
 msgid "Describe the tasks the learners should complete."
 msgstr "描述學生需要完成的學習任務。"
 
-#: exe/engine/idevicestore.py:755
+#: exe/engine/idevicestore.py:753
 msgid ""
 "<p>The reading activity, as the name\n"
 "suggests, should ask the learner to perform some form of activity. This "
@@ -1909,7 +1905,7 @@ msgid ""
 "reflective guidance.</p>"
 msgstr ""
 
-#: exe/engine/idevicestore.py:760
+#: exe/engine/idevicestore.py:758
 msgid ""
 "Teachers should keep the following in mind when using this iDevice: "
 "<ol><li>Think about the number of different types of activity planned for"
@@ -1944,13 +1940,13 @@ msgid ""
 "magnified."
 msgstr "點擊下方的圖片，或是「新增影像」按鈕來選擇所要放大的影像檔。"
 
-#: exe/engine/imagemagnifieridevice.py:49 exe/webui/jsblock.py:88
+#: exe/engine/imagemagnifieridevice.py:49 exe/webui/jsblock.py:86
 msgid "Choose an Image"
 msgstr "選擇影像"
 
 #: exe/engine/imagemagnifieridevice.py:54 exe/engine/imagewithtextidevice.py:65
 #: exe/engine/multimediaidevice.py:64 exe/webui/listablock.py:169
-#: exe/webui/scripts/authoring.js:2004
+#: exe/webui/scripts/authoring.js:1950
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:202
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:174
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:177
@@ -2174,11 +2170,6 @@ msgstr "家目錄"
 #: exe/engine/locationbuttons.py:35 exe/engine/locationbuttons.py:39
 msgid "Documents"
 msgstr "文件"
-
-#: exe/engine/locationbuttons.py:59
-#, fuzzy
-msgid "original_text"
-msgstr "情境"
 
 #: exe/engine/mathidevice.py:41 exe/engine/mathidevice.py:54
 msgid "Maths"
@@ -2498,36 +2489,33 @@ msgstr "「老師指導方針」文字"
 msgid "Guidelines Teacher Text:"
 msgstr "「老師指導方針」文字："
 
-#: exe/engine/package.py:331 exe/webui/content_template/strings.py:8
-#: exe/webui/content_template/strings.py:559
+#: exe/engine/package.py:330 exe/webui/content_template/strings.py:7
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:802
 msgid "Topic"
 msgstr "主題"
 
-#: exe/engine/package.py:331 exe/webui/content_template/strings.py:9
-#: exe/webui/content_template/strings.py:560
+#: exe/engine/package.py:330 exe/webui/content_template/strings.py:8
 msgid "Section"
 msgstr "章節"
 
-#: exe/engine/package.py:331 exe/webui/content_template/strings.py:10
-#: exe/webui/content_template/strings.py:561
+#: exe/engine/package.py:330 exe/webui/content_template/strings.py:9
 msgid "Unit"
 msgstr "單元"
 
-#: exe/engine/package.py:355 exe/webui/content_template/strings.py:564
+#: exe/engine/package.py:354 exe/webui/content_template/strings.py:12
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:114
 msgid "Home"
 msgstr "首頁"
 
-#: exe/engine/package.py:576
+#: exe/engine/package.py:572
 msgid "Metadata creation date"
 msgstr "中繼資料建立日期"
 
-#: exe/engine/package.py:1243
+#: exe/engine/package.py:1235
 msgid "?????"
 msgstr "?????"
 
-#: exe/engine/package.py:1286 exe/engine/package.py:1293
+#: exe/engine/package.py:1279 exe/engine/package.py:1286
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -2536,22 +2524,22 @@ msgstr ""
 "儲存失敗。\n"
 "上次成功儲存於 %s。"
 
-#: exe/engine/package.py:1455
+#: exe/engine/package.py:1448
 msgid ""
 "Can't read the .xml file. eXe will try to recover the content from the "
 ".data file instead."
 msgstr "無法讀取此 xml 檔。eXe 會嘗試從 .data 檔中修復內容。"
 
-#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:679
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:555
+#: exe/engine/package.py:1727 exe/jsui/scripts/app/controller/Toolbar.js:654
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:528
 msgid "iDevice Editor"
 msgstr "iDevice 編輯器"
 
-#: exe/engine/package.py:1945
+#: exe/engine/package.py:1920
 msgid "My Catalog"
 msgstr "我的目錄"
 
-#: exe/engine/package.py:1952
+#: exe/engine/package.py:1927
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:292
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:993
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1001
@@ -2836,12 +2824,12 @@ msgstr ""
 "描述學生應怎樣評估和完成練習。\n"
 "（大標題有助於提供反應回饋。）"
 
-#: exe/engine/resource.py:413
+#: exe/engine/resource.py:414
 #, python-format
 msgid "Unknown extension %s of file %s%s can't be transformed to ISO 9660."
 msgstr "未知的副檔名 %s：檔案 %s%s 無法轉換為 ISO 9660 格式。"
 
-#: exe/engine/resource.py:685
+#: exe/engine/resource.py:686
 msgid ""
 "renamed a Resource for an Applet Idevice, and it should not have even "
 "made it this far!"
@@ -3226,7 +3214,7 @@ msgstr "您用 '-x xliff' 或 '--export xliff' 選擇 XLIFF 後，可以設定�
 msgid "Don't copy source in target"
 msgstr "不要將源碼複製到目標"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1067
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:977
 msgid "Wrap fields in CDATA"
 msgstr "用 CDATA 包裝欄位"
 
@@ -3296,7 +3284,7 @@ msgstr "成功將 '%s' 附加到 '%s'。"
 msgid "exe_do: error: Unable to append elp"
 msgstr "exe_do：錯誤：無法附加 elp"
 
-#: exe/exe_do:238 exe/export/cmdlineexporter.py:88
+#: exe/exe_do:238 exe/export/cmdlineexporter.py:89
 msgid "Invalid input package"
 msgstr "無效的輸入套件"
 
@@ -3337,9 +3325,10 @@ msgstr ""
 "exe_do：錯誤：無法匯入 '%s'。\n"
 "錯誤為："
 
-#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:473
-#: exe/jsui/mainpage.py:1894 exe/jsui/mainpage.py:1940
-#: exe/jsui/mainpage.py:1985 exe/jsui/mainpage.py:2006
+#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:406
+#: exe/jsui/mainpage.py:415 exe/jsui/mainpage.py:1528 exe/jsui/mainpage.py:1569
+#: exe/jsui/mainpage.py:1757 exe/jsui/mainpage.py:1803
+#: exe/jsui/mainpage.py:1848 exe/jsui/mainpage.py:1869
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3348,19 +3337,19 @@ msgstr ""
 "%s 已存在。\n"
 "請使用別的檔案名稱"
 
-#: exe/export/cmdlineexporter.py:96
+#: exe/export/cmdlineexporter.py:97
 msgid "Export format not implemented"
 msgstr "匯出格式未實作"
 
-#: exe/export/epub3export.py:476 exe/export/imsexport.py:478
-#: exe/export/scormpage.py:191 exe/export/websitepage.py:376
+#: exe/export/epub3export.py:476 exe/export/imsexport.py:441
+#: exe/export/scormpage.py:191 exe/export/websitepage.py:375
 #, python-format
 msgid "Page %s of %s"
 msgstr "頁碼 %s/%s"
 
 #: exe/export/epub3export.py:771 exe/export/epub3subexport.py:689
-#: exe/export/imsexport.py:739 exe/export/scormexport.py:860
-#: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
+#: exe/export/imsexport.py:702 exe/export/scormexport.py:857
+#: exe/export/websiteexport.py:103
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3389,7 +3378,7 @@ msgstr "授權條款為"
 msgid "Skip navigation"
 msgstr "跳過導覽"
 
-#: exe/export/websitepage.py:371 exe/webui/common.py:642
+#: exe/export/websitepage.py:370 exe/webui/common.py:634
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:60
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:80
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:78
@@ -3399,7 +3388,7 @@ msgstr "跳過導覽"
 msgid "Previous"
 msgstr "前一頁"
 
-#: exe/export/websitepage.py:382 exe/webui/common.py:643
+#: exe/export/websitepage.py:381 exe/webui/common.py:635
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:61
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:81
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:79
@@ -3474,38 +3463,38 @@ msgstr "計算連結深度中"
 msgid "Inserting %s"
 msgstr "插入 %s 中"
 
-#: exe/jsui/idevicepane.py:207
+#: exe/jsui/idevicepane.py:161
 msgid "My iDevices"
 msgstr "我的 iDevice"
 
-#: exe/jsui/idevicepane.py:215
+#: exe/jsui/idevicepane.py:169
 msgid "JS iDevices"
 msgstr "JS iDevices"
 
-#: exe/jsui/idevicepane.py:248
+#: exe/jsui/idevicepane.py:202
 msgid "Experimental"
 msgstr "實驗性"
 
-#: exe/jsui/idevicepane.py:249
+#: exe/jsui/idevicepane.py:203
 msgid "Gamification"
 msgstr "遊戲化"
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1454 exe/jsui/mainpage.py:1634
-#: exe/jsui/mainpage.py:1676
+#: exe/jsui/mainpage.py:445 exe/jsui/mainpage.py:1365 exe/jsui/mainpage.py:1520
+#: exe/jsui/mainpage.py:1561
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "不能識別路徑名稱 "
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1456 exe/jsui/mainpage.py:1634
-#: exe/jsui/mainpage.py:1676
+#: exe/jsui/mainpage.py:445 exe/jsui/mainpage.py:1367 exe/jsui/mainpage.py:1520
+#: exe/jsui/mainpage.py:1561
 msgid ". Please use ASCII names."
 msgstr "。名稱請使用 ASCII 碼。"
 
-#: exe/jsui/mainpage.py:510 exe/jsui/mainpage.py:554
+#: exe/jsui/mainpage.py:453 exe/jsui/mainpage.py:496
 msgid "SAVE FAILED!"
 msgstr "儲存失敗！"
 
-#: exe/jsui/mainpage.py:514
+#: exe/jsui/mainpage.py:457
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3514,9 +3503,8 @@ msgstr ""
 "儲存失敗！\n"
 "%s 不是套件的正確名稱"
 
-#: exe/jsui/mainpage.py:520 exe/jsui/mainpage.py:573 exe/jsui/mainpage.py:973
-#: exe/jsui/mainpage.py:1035 exe/jsui/mainpage.py:1093
-#: exe/jsui/mainpage.py:1781
+#: exe/jsui/mainpage.py:463 exe/jsui/mainpage.py:515 exe/jsui/mainpage.py:919
+#: exe/jsui/mainpage.py:981 exe/jsui/mainpage.py:1039 exe/jsui/mainpage.py:1662
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3525,12 +3513,12 @@ msgstr ""
 "儲存失敗。\n"
 "%s"
 
-#: exe/jsui/mainpage.py:530
+#: exe/jsui/mainpage.py:474 exe/jsui/mainpage.py:479 exe/jsui/mainpage.py:484
 #, python-format
-msgid "Package %s saved. Do not forget to download the package on your system"
-msgstr ""
+msgid "Package saved to: %s"
+msgstr "套件已儲存至：%s"
 
-#: exe/jsui/mainpage.py:558
+#: exe/jsui/mainpage.py:500
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3539,50 +3527,64 @@ msgstr ""
 "儲存失敗！\n"
 "%s 不是樣本的正確名稱"
 
-#: exe/jsui/mainpage.py:579
+#: exe/jsui/mainpage.py:521
 #, python-format
 msgid "Template saved: %s"
 msgstr "樣本已儲存：%s"
 
-#: exe/jsui/mainpage.py:674 exe/webui/stylemanagerpage.py:445
+#: exe/jsui/mainpage.py:598 exe/webui/stylemanagerpage.py:427
 msgid "Downloading..."
 msgstr "下載中..."
 
-#: exe/jsui/mainpage.py:700
-msgid "Connecting to classification sources repository..."
-msgstr "連線到分類來源主目錄中..."
-
-#: exe/jsui/mainpage.py:700 exe/jsui/mainpage.py:706
+#: exe/jsui/mainpage.py:624 exe/jsui/mainpage.py:628 exe/jsui/mainpage.py:636
 msgid "Sources Download"
 msgstr "來源已下載"
 
-#: exe/jsui/mainpage.py:706
+#: exe/jsui/mainpage.py:624
+#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:104
+#: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:78
+#: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:352
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1321
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1375
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1442
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:131
+#: exe/webui/stylemanagerpage.py:239
+#: exe/webui/tools/mindmaps/src/js/MainViewController.js:123
+#: exe/webui/tools/mindmaps/src/js/OpenDocument.js:160
+msgid "Could not retrieve data (Core error)"
+msgstr "無法取得資料（核心錯誤）"
+
+#: exe/jsui/mainpage.py:628
+msgid "Connecting to classification sources repository..."
+msgstr "連線到分類來源主目錄中..."
+
+#: exe/jsui/mainpage.py:636
 msgid ""
 "There has been an error while trying to download classification sources. "
 "Please try again later."
 msgstr "下載分類來源時發生錯誤。請稍候再試。"
 
-#: exe/jsui/mainpage.py:896 exe/jsui/mainpage.py:992 exe/jsui/mainpage.py:1057
-#: exe/jsui/mainpage.py:1120 exe/jsui/mainpage.py:1201
+#: exe/jsui/mainpage.py:842 exe/jsui/mainpage.py:938 exe/jsui/mainpage.py:1003
+#: exe/jsui/mainpage.py:1066 exe/jsui/mainpage.py:1147
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr "預覽目錄 %s 是個檔案，無法取代"
 
-#: exe/jsui/mainpage.py:915
+#: exe/jsui/mainpage.py:861
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr "找不到本地端檔案 %s，無法預覽"
 
-#: exe/jsui/mainpage.py:1160 exe/jsui/mainpage.py:1186
-#: exe/jsui/mainpage.py:1229
+#: exe/jsui/mainpage.py:1106 exe/jsui/mainpage.py:1132
+#: exe/jsui/mainpage.py:1175
 msgid "Could not create the image"
 msgstr "無法建立影像"
 
-#: exe/jsui/mainpage.py:1267
+#: exe/jsui/mainpage.py:1213
 msgid "Importing HTML..."
 msgstr "匯入 HTML 中..."
 
-#: exe/jsui/mainpage.py:1273
+#: exe/jsui/mainpage.py:1219
 #, python-format
 msgid ""
 "LOM Metadata import FAILED!\n"
@@ -3591,58 +3593,75 @@ msgstr ""
 "LOM 中繼資料匯入失敗。\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1276
+#: exe/jsui/mainpage.py:1222
 msgid "Error importing HTML:\n"
 msgstr "匯入 HTML 時發生錯誤：\n"
 
-#: exe/jsui/mainpage.py:1304
+#: exe/jsui/mainpage.py:1258
 msgid "Exporting package as SCORM 1.2..."
 msgstr "正在將套件匯出為 SCORM 1.2..."
 
-#: exe/jsui/mainpage.py:1322
-#, fuzzy
-msgid "Uploading package to {}..."
+#: exe/jsui/mainpage.py:1277
+msgid "Uploading package to Procomún..."
 msgstr "正在將套件上傳到 Procomún..."
 
-#: exe/jsui/mainpage.py:1338
-msgid "No response status"
-msgstr ""
+#: exe/jsui/mainpage.py:1301
+msgid "Unknown error when trying to upload package to Procomún."
+msgstr "試著將套件上傳到 Procomún 時發生錯誤。"
 
-#: exe/jsui/mainpage.py:1378
-#, fuzzy
-msgid "Publishing document to {}"
+#: exe/jsui/mainpage.py:1301 exe/jsui/mainpage.py:1326
+#: exe/jsui/mainpage.py:1345 exe/jsui/scripts/app/controller/Toolbar.js:1099
+msgid "Publishing document to Procomún"
 msgstr "將文件發布到 Procomún"
 
-#: exe/jsui/mainpage.py:1400
-#, fuzzy, python-format
+#: exe/jsui/mainpage.py:1320
+#, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
-"download the exported package\">%s</a>."
+"view the exported package\">%s</a>."
 msgstr "套件已匯出到 <a href=\"%s\" target=\"_blank\" title=\"點擊以查看匯出套件\">%s</a>。"
 
-#: exe/jsui/mainpage.py:1404
-#, fuzzy, python-format
+#: exe/jsui/mainpage.py:1323
+#, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
-"target=\"_blank\" title=\"Educational Resource Platform Home\">%s</a>\\'s"
-" web page.</small>"
+"target=\"_blank\" title=\"Procomún Home\">Procomún</a>\\'s web "
+"page.</small>"
 msgstr ""
 "<small>您可以到 <a href=\"%s\" target=\"_blank\" title=\"Procomún "
 "Home\">Procomún</a> 的網頁上查看並管理您上傳的套件。</small>"
 
-#: exe/jsui/mainpage.py:1415
+#: exe/jsui/mainpage.py:1332 exe/jsui/scripts/app/controller/Toolbar.js:1140
 #, python-format
+msgid "Error exporting package \"%s\" to Procomún."
+msgstr "匯出套件 %s 到 Procomún 時發生錯誤。"
+
+#: exe/jsui/mainpage.py:1334
+msgid "The most common reasons for this are:"
+msgstr "發生此問題最常見的理由為："
+
+#: exe/jsui/mainpage.py:1336
+msgid "1. Package metadata is not properly filled."
+msgstr "1. 套件的詮釋資料（metadata）並未正確填寫。"
+
+#: exe/jsui/mainpage.py:1338
 msgid ""
-"An error has ocurred while trying to publish a package to %s. <br />The "
-"error message is: %s"
-msgstr ""
+"2. There is a problem with you connection (or with Procomún servers), so "
+"you should just try again later."
+msgstr "2. 您的連線有問題（也有可能是 Procomún 伺服器的關係），所以您可以稍候再試。"
 
-#: exe/jsui/mainpage.py:1427
-#, fuzzy
-msgid "when trying to upload package to {}."
-msgstr "試著將套件上傳到 Procomún 時發生錯誤。"
+#: exe/jsui/mainpage.py:1340
+msgid ""
+"If you have problems publishing you can close this dialogue, export as "
+"SCORM 2004 and upload the generated zip file manually to Procomún."
+msgstr "若您發布時發生問題，您可以關閉此對話框，匯出成 SCORM 2004 再手動將產生的 zip 壓縮檔上傳至 Procomún。"
 
-#: exe/jsui/mainpage.py:1461 exe/jsui/mainpage.py:1919
+#: exe/jsui/mainpage.py:1342
+#, python-format
+msgid "The reported error we got from Procomún was: <pre>%s</pre>"
+msgstr "我們從 Procomún 得到的錯誤回報為：<pre>%s</pre>"
+
+#: exe/jsui/mainpage.py:1372 exe/jsui/mainpage.py:1782
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3651,29 +3670,25 @@ msgstr ""
 "儲存失敗！\n"
 "%s 不是檔案的正確名稱"
 
-#: exe/jsui/mainpage.py:1472 exe/jsui/mainpage.py:1482
-#: exe/jsui/mainpage.py:1485 exe/jsui/mainpage.py:1490
-#: exe/jsui/mainpage.py:1493 exe/jsui/mainpage.py:1496
-#: exe/jsui/mainpage.py:1499 exe/jsui/mainpage.py:1502
-#: exe/jsui/mainpage.py:1507 exe/jsui/mainpage.py:1851
-#: exe/jsui/mainpage.py:1966
+#: exe/jsui/mainpage.py:1393 exe/jsui/mainpage.py:1398
+#: exe/jsui/mainpage.py:1401 exe/jsui/mainpage.py:1404
+#: exe/jsui/mainpage.py:1407 exe/jsui/mainpage.py:1410
+#: exe/jsui/mainpage.py:1415 exe/jsui/mainpage.py:1732
+#: exe/jsui/mainpage.py:1829
 msgid "EXPORT FAILED!"
 msgstr "匯出失敗！"
 
-#: exe/jsui/mainpage.py:1475
-msgid "EXPORTED DIR ERROR"
-msgstr ""
-
-#: exe/jsui/mainpage.py:1594
+#: exe/jsui/mainpage.py:1481
 msgid "Correct XLIFF import"
 msgstr "正確的 XLIFF 匯入"
 
-#: exe/jsui/mainpage.py:1597
+#: exe/jsui/mainpage.py:1484
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "匯入 XLIFF 時發生錯誤：%s"
 
-#: exe/jsui/mainpage.py:1661 exe/jsui/mainpage.py:1700
+#: exe/jsui/mainpage.py:1529 exe/jsui/mainpage.py:1546
+#: exe/jsui/mainpage.py:1570 exe/jsui/mainpage.py:1588
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -3682,22 +3697,22 @@ msgstr ""
 "展開失敗。\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1663 exe/jsui/mainpage.py:1702
+#: exe/jsui/mainpage.py:1548 exe/jsui/mainpage.py:1590
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "套件展開到：%s"
 
-#: exe/jsui/mainpage.py:1714 exe/webui/stylemanagerpage.py:259
+#: exe/jsui/mainpage.py:1602 exe/webui/stylemanagerpage.py:242
 msgid "Directory exists"
 msgstr "目錄已存在"
 
-#: exe/jsui/mainpage.py:1728 exe/jsui/mainpage.py:1836
-#: exe/jsui/mainpage.py:1859 exe/jsui/mainpage.py:1882
-#: exe/jsui/mainpage.py:1895 exe/jsui/mainpage.py:1901
-#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:1941
-#: exe/jsui/mainpage.py:1951 exe/jsui/mainpage.py:1971
-#: exe/jsui/mainpage.py:1986 exe/jsui/mainpage.py:1992
-#: exe/jsui/mainpage.py:2007 exe/jsui/mainpage.py:2017
+#: exe/jsui/mainpage.py:1616 exe/jsui/mainpage.py:1717
+#: exe/jsui/mainpage.py:1740 exe/jsui/mainpage.py:1758
+#: exe/jsui/mainpage.py:1764 exe/jsui/mainpage.py:1788
+#: exe/jsui/mainpage.py:1804 exe/jsui/mainpage.py:1814
+#: exe/jsui/mainpage.py:1834 exe/jsui/mainpage.py:1849
+#: exe/jsui/mainpage.py:1855 exe/jsui/mainpage.py:1870
+#: exe/jsui/mainpage.py:1880
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3706,30 +3721,30 @@ msgstr ""
 "匯出失敗。\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1758 exe/jsui/mainpage.py:1817
+#: exe/jsui/mainpage.py:1644 exe/jsui/mainpage.py:1698
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "檔案 %s 已存在，無法取代它"
 
-#: exe/jsui/mainpage.py:1765 exe/jsui/mainpage.py:1824
+#: exe/jsui/mainpage.py:1650 exe/jsui/mainpage.py:1705
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
 "existing one then try again."
 msgstr "資料夾 %s 已存在。請選擇其他資料夾，或是將現有的刪除然後再試一次。"
 
-#: exe/jsui/mainpage.py:1788 exe/jsui/mainpage.py:1840
-#: exe/jsui/mainpage.py:1863 exe/jsui/mainpage.py:1884
-#: exe/jsui/mainpage.py:1903 exe/jsui/mainpage.py:1927
-#: exe/jsui/mainpage.py:1957 exe/jsui/mainpage.py:1973
-#: exe/jsui/mainpage.py:1994 exe/jsui/mainpage.py:2021
+#: exe/jsui/mainpage.py:1669 exe/jsui/mainpage.py:1721
+#: exe/jsui/mainpage.py:1744 exe/jsui/mainpage.py:1766
+#: exe/jsui/mainpage.py:1790 exe/jsui/mainpage.py:1820
+#: exe/jsui/mainpage.py:1836 exe/jsui/mainpage.py:1857
+#: exe/jsui/mainpage.py:1884
 #, python-format
 msgid "Exported to %s"
 msgstr "匯出至 %s"
 
-#: exe/jsui/mainpage.py:1790 exe/jsui/mainpage.py:1842
-#: exe/jsui/mainpage.py:1865 exe/jsui/mainpage.py:1959
-#: exe/jsui/mainpage.py:2023
+#: exe/jsui/mainpage.py:1671 exe/jsui/mainpage.py:1723
+#: exe/jsui/mainpage.py:1746 exe/jsui/mainpage.py:1822
+#: exe/jsui/mainpage.py:1886
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -3739,21 +3754,21 @@ msgstr ""
 "已匯出至 %s。\n"
 "有一些資源無法重新命名為與 ISO9660 格式相容的檔名。"
 
-#: exe/jsui/mainpage.py:1954
+#: exe/jsui/mainpage.py:1817
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr "以下的欄位已被截斷，以便符合 SCORM 1.2 標準：%s"
 
-#: exe/jsui/mainpage.py:2060 exe/webui/stylemanagerpage.py:284
+#: exe/jsui/mainpage.py:1922 exe/webui/stylemanagerpage.py:267
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "檔案 %s 不存在，或是無法讀取。"
 
-#: exe/jsui/mainpage.py:2067
+#: exe/jsui/mainpage.py:1929
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr "無法載入檔案，請將檔案寄到 bugs@exelearning.org"
 
-#: exe/jsui/mainpage.py:2070
+#: exe/jsui/mainpage.py:1932
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
@@ -3762,7 +3777,7 @@ msgstr ""
 "對不起，檔案格式錯誤:\n"
 "%s"
 
-#: exe/jsui/mainpage.py:2072
+#: exe/jsui/mainpage.py:1934
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -3779,26 +3794,25 @@ msgstr "儲存屬性失敗"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:59
 #: exe/jsui/scripts/app/controller/Outline.js:222
-#: exe/jsui/scripts/app/controller/Toolbar.js:391
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:735 exe/webui/editorpage.py:250
-#: exe/webui/editorpane.py:406 exe/webui/scripts/authoring.js:614
-#: exe/webui/scripts/authoring.js:658
+#: exe/jsui/scripts/app/controller/Toolbar.js:366 exe/webui/editorpage.py:250
+#: exe/webui/editorpane.py:401 exe/webui/scripts/authoring.js:609
+#: exe/webui/scripts/authoring.js:653
 #: exe/webui/tools/mindmaps/src/js/Notification.js:191
 msgid "Info"
 msgstr "資訊"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:60
 #: exe/jsui/scripts/app/controller/Outline.js:223
-#: exe/webui/scripts/authoring.js:615 exe/webui/scripts/authoring.js:659
+#: exe/webui/scripts/authoring.js:610 exe/webui/scripts/authoring.js:654
 msgid ""
 "Please save your iDevice first. The changes you made will be lost if you "
 "navigate away from this page."
 msgstr "請先儲存您的 iDevice。若是離開這個頁面，您所做的變更會遺失。"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:238
-#: exe/jsui/scripts/app/controller/MainTab.js:297
-#: exe/jsui/scripts/app/controller/MainTab.js:389
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:538
+#: exe/jsui/scripts/app/controller/MainTab.js:296
+#: exe/jsui/scripts/app/controller/MainTab.js:388
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:537
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:223
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:282
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:441
@@ -3807,76 +3821,75 @@ msgid "Show Image"
 msgstr "顯示影像"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:249 exe/webui/element.py:786
-#: exe/webui/element.py:1200 exe/webui/scripts/authoring.js:155
+#: exe/webui/element.py:1200 exe/webui/scripts/authoring.js:154
 msgid "Select an image"
 msgstr "選擇影像"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:267
-#: exe/jsui/scripts/app/controller/MainTab.js:301
-#: exe/jsui/scripts/app/controller/MainTab.js:437
+#: exe/jsui/scripts/app/controller/MainTab.js:266
+#: exe/jsui/scripts/app/controller/MainTab.js:300
+#: exe/jsui/scripts/app/controller/MainTab.js:436
 msgid "Hide Image"
 msgstr "隱藏影像"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:276
+#: exe/jsui/scripts/app/controller/MainTab.js:275
 msgid "Image Files"
 msgstr "影像檔"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:277
-#: exe/jsui/scripts/app/controller/StyleManager.js:246
-#: exe/jsui/scripts/app/controller/StyleManager.js:294
+#: exe/jsui/scripts/app/controller/MainTab.js:276
+#: exe/jsui/scripts/app/controller/StyleManager.js:228
+#: exe/jsui/scripts/app/controller/StyleManager.js:278
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
-#: exe/jsui/scripts/app/controller/Toolbar.js:805
-#: exe/jsui/scripts/app/controller/Toolbar.js:831
-#: exe/jsui/scripts/app/controller/Toolbar.js:856
-#: exe/jsui/scripts/app/controller/Toolbar.js:878
-#: exe/jsui/scripts/app/controller/Toolbar.js:913
-#: exe/jsui/scripts/app/controller/Toolbar.js:933
-#: exe/jsui/scripts/app/controller/Toolbar.js:1003
-#: exe/jsui/scripts/app/controller/Toolbar.js:1115
-#: exe/jsui/scripts/app/controller/Toolbar.js:1282
-#: exe/jsui/scripts/app/controller/Toolbar.js:1304
-#: exe/jsui/scripts/app/controller/Toolbar.js:1326
-#: exe/jsui/scripts/app/controller/Toolbar.js:1364
-#: exe/jsui/scripts/app/controller/Toolbar.js:1622
-#: exe/jsui/scripts/app/controller/Toolbar.js:1781
+#: exe/jsui/scripts/app/controller/Toolbar.js:748
+#: exe/jsui/scripts/app/controller/Toolbar.js:769
+#: exe/jsui/scripts/app/controller/Toolbar.js:791
+#: exe/jsui/scripts/app/controller/Toolbar.js:826
+#: exe/jsui/scripts/app/controller/Toolbar.js:845
+#: exe/jsui/scripts/app/controller/Toolbar.js:914
+#: exe/jsui/scripts/app/controller/Toolbar.js:1025
+#: exe/jsui/scripts/app/controller/Toolbar.js:1190
+#: exe/jsui/scripts/app/controller/Toolbar.js:1211
+#: exe/jsui/scripts/app/controller/Toolbar.js:1232
+#: exe/jsui/scripts/app/controller/Toolbar.js:1267
+#: exe/jsui/scripts/app/controller/Toolbar.js:1498
+#: exe/jsui/scripts/app/controller/Toolbar.js:1647
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
-#: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
-#: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
-#: exe/webui/scripts/authoring.js:526 exe/webui/scripts/authoring.js:550
-#: exe/webui/scripts/editor.js:111 exe/webui/scripts/editor.js:138
-#: exe/webui/scripts/stylemanager.js:43 exe/webui/scripts/stylemanager.js:68
+#: exe/webui/scripts/authoring.js:180 exe/webui/scripts/authoring.js:203
+#: exe/webui/scripts/authoring.js:504 exe/webui/scripts/authoring.js:514
+#: exe/webui/scripts/authoring.js:522 exe/webui/scripts/authoring.js:545
+#: exe/webui/scripts/editor.js:110 exe/webui/scripts/editor.js:137
+#: exe/webui/scripts/stylemanager.js:42 exe/webui/scripts/stylemanager.js:66
 msgid "All Files"
 msgstr "所有檔案"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:321
-#: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1251
-#: exe/jsui/scripts/app/controller/Toolbar.js:1275
-#: exe/jsui/scripts/app/controller/Toolbar.js:1297
-#: exe/jsui/scripts/app/controller/Toolbar.js:1319
-#: exe/jsui/scripts/app/controller/Toolbar.js:1357
-#: exe/webui/stylemanagerpage.py:331 exe/webui/stylemanagerpage.py:445
-#: exe/webui/stylemanagerpage.py:601
+#: exe/jsui/scripts/app/controller/MainTab.js:320
+#: exe/jsui/scripts/app/controller/Toolbar.js:1161
+#: exe/jsui/scripts/app/controller/Toolbar.js:1183
+#: exe/jsui/scripts/app/controller/Toolbar.js:1204
+#: exe/jsui/scripts/app/controller/Toolbar.js:1225
+#: exe/jsui/scripts/app/controller/Toolbar.js:1260
+#: exe/webui/stylemanagerpage.py:314 exe/webui/stylemanagerpage.py:427
+#: exe/webui/stylemanagerpage.py:568
 msgid "Please wait..."
 msgstr "請稍候..."
 
-#: exe/jsui/scripts/app/controller/MainTab.js:327 exe/webui/editorpage.py:134
-#: exe/webui/editorpage.py:145
+#: exe/jsui/scripts/app/controller/MainTab.js:326 exe/webui/editorpage.py:134
+#: exe/webui/editorpage.py:146
 msgid "Settings Saved"
 msgstr "設定已儲存"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:346
-#: exe/jsui/scripts/app/controller/MainTab.js:396
-#: exe/jsui/scripts/app/controller/MainTab.js:453
-#: exe/jsui/scripts/app/controller/MainTab.js:607
-#: exe/jsui/scripts/app/controller/MainTab.js:669
-#: exe/jsui/scripts/app/controller/StyleManager.js:112
-#: exe/jsui/scripts/app/controller/StyleManager.js:175
-#: exe/jsui/scripts/app/controller/StyleManager.js:203
-#: exe/jsui/scripts/app/controller/StyleManager.js:235
-#: exe/jsui/scripts/app/controller/StyleManager.js:333
-#: exe/jsui/scripts/app/controller/StyleManager.js:364
+#: exe/jsui/scripts/app/controller/MainTab.js:345
+#: exe/jsui/scripts/app/controller/MainTab.js:395
+#: exe/jsui/scripts/app/controller/MainTab.js:452
+#: exe/jsui/scripts/app/controller/MainTab.js:606
+#: exe/jsui/scripts/app/controller/MainTab.js:668
+#: exe/jsui/scripts/app/controller/StyleManager.js:98
+#: exe/jsui/scripts/app/controller/StyleManager.js:161
+#: exe/jsui/scripts/app/controller/StyleManager.js:189
+#: exe/jsui/scripts/app/controller/StyleManager.js:218
+#: exe/jsui/scripts/app/controller/StyleManager.js:271
+#: exe/jsui/scripts/app/controller/StyleManager.js:316
+#: exe/jsui/scripts/app/controller/StyleManager.js:347
 #: exe/jsui/scripts/app/controller/TemplateManager.js:100
 #: exe/jsui/scripts/app/controller/TemplateManager.js:149
 #: exe/jsui/scripts/app/controller/TemplateManager.js:186
@@ -3884,11 +3897,11 @@ msgstr "設定已儲存"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1229
+#: exe/jsui/scripts/app/controller/Toolbar.js:1139
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:375
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:711
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:406
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:661
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:280
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:106
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:296
@@ -3898,24 +3911,24 @@ msgstr "設定已儲存"
 #: exe/webui/scripts/idevices/quext-activity/edition/quext-activity.js:1031
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1241
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:810
-#: exe/webui/stylemanagerpage.py:167 exe/webui/stylemanagerpage.py:323
-#: exe/webui/stylemanagerpage.py:351 exe/webui/stylemanagerpage.py:369
-#: exe/webui/stylemanagerpage.py:376 exe/webui/stylemanagerpage.py:419
-#: exe/webui/stylemanagerpage.py:430 exe/webui/stylemanagerpage.py:441
-#: exe/webui/stylemanagerpage.py:490 exe/webui/stylemanagerpage.py:497
-#: exe/webui/stylemanagerpage.py:540 exe/webui/stylemanagerpage.py:557
-#: exe/webui/templatemanagerpage.py:138 exe/webui/templatemanagerpage.py:235
-#: exe/webui/templatemanagerpage.py:247 exe/webui/templatemanagerpage.py:262
-#: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
+#: exe/webui/stylemanagerpage.py:159 exe/webui/stylemanagerpage.py:306
+#: exe/webui/stylemanagerpage.py:334 exe/webui/stylemanagerpage.py:358
+#: exe/webui/stylemanagerpage.py:401 exe/webui/stylemanagerpage.py:412
+#: exe/webui/stylemanagerpage.py:423 exe/webui/stylemanagerpage.py:472
+#: exe/webui/stylemanagerpage.py:479 exe/webui/stylemanagerpage.py:522
+#: exe/webui/stylemanagerpage.py:534 exe/webui/templatemanagerpage.py:130
+#: exe/webui/templatemanagerpage.py:229 exe/webui/templatemanagerpage.py:241
+#: exe/webui/templatemanagerpage.py:256 exe/webui/templatemanagerpage.py:263
+#: exe/webui/templatemanagerpage.py:297
 #: exe/webui/tools/mindmaps/src/js/SaveDocument.js:131
 #: exe/webui/tools/style-designer/langs/all.js:141
 msgid "Error"
 msgstr "錯誤"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:354
-#: exe/jsui/scripts/app/controller/MainTab.js:407
+#: exe/jsui/scripts/app/controller/MainTab.js:353
+#: exe/jsui/scripts/app/controller/MainTab.js:406
 #: exe/jsui/scripts/app/controller/Outline.js:261
-#: exe/jsui/scripts/app/controller/Toolbar.js:688
+#: exe/jsui/scripts/app/controller/Toolbar.js:663
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -3923,19 +3936,19 @@ msgstr "錯誤"
 msgid "Confirm"
 msgstr "確認"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:355
+#: exe/jsui/scripts/app/controller/MainTab.js:354
 msgid "Are you sure you want clear all form fields?"
 msgstr "您確定要清除所有表單內容嗎？"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:408
+#: exe/jsui/scripts/app/controller/MainTab.js:407
 msgid "Are you sure you want reset all form fields?"
 msgstr "您確定要重新設定所有表單內容嗎？"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:607
+#: exe/jsui/scripts/app/controller/MainTab.js:606
 msgid "The form contains invalid fields. Please check back."
 msgstr "此表單中包含不合法的欄位。請檢查。"
 
-#: exe/jsui/scripts/app/controller/MainTab.js:620
+#: exe/jsui/scripts/app/controller/MainTab.js:619
 msgid "LOM Metadata import success!"
 msgstr "LOM 中繼資料匯入成功！"
 
@@ -3951,8 +3964,8 @@ msgstr "新增頁面"
 #: exe/webui/editorelement.py:196 exe/webui/editorelement.py:249
 #: exe/webui/editorelement.py:289 exe/webui/editorelement.py:332
 #: exe/webui/editorpage.py:255 exe/webui/editorpage.py:258
-#: exe/webui/galleryblock.py:299 exe/webui/jsblock.py:117
-#: exe/webui/jsblock.py:122 exe/webui/scripts/editor.js:22
+#: exe/webui/galleryblock.py:299 exe/webui/jsblock.py:113
+#: exe/webui/jsblock.py:118 exe/webui/scripts/editor.js:22
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:3
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:909
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:944
@@ -3991,19 +4004,19 @@ msgstr "重新命名節點 \"{node}\""
 msgid "Enter the new name:"
 msgstr "輸入新名稱："
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:102
+#: exe/jsui/scripts/app/controller/StyleManager.js:90
 msgid "Cannot edit the Style. It is not compatible with the Style Designer."
 msgstr "無法編輯樣式。與樣式設計器不相容。"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:112
+#: exe/jsui/scripts/app/controller/StyleManager.js:98
 msgid "An unknown error occurred."
 msgstr "發生未知的錯誤。"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:136
+#: exe/jsui/scripts/app/controller/StyleManager.js:122
 msgid "Cannot delete the current style."
 msgstr "無法刪除目前的樣式。"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:136
+#: exe/jsui/scripts/app/controller/StyleManager.js:122
 #: exe/jsui/scripts/app/view/forms/HelpContainer.js:61 exe/webui/block.py:270
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:81
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:60
@@ -4025,32 +4038,32 @@ msgstr "無法刪除目前的樣式。"
 msgid "Information"
 msgstr "資訊"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:220
+#: exe/jsui/scripts/app/controller/StyleManager.js:206
 #: exe/webui/scripts/stylemanager.js:28
 msgid "Select ZIP Style file to import."
 msgstr "選擇要匯入的 ZIP 樣式檔。"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:245
-#: exe/webui/scripts/stylemanager.js:42
+#: exe/jsui/scripts/app/controller/StyleManager.js:227
+#: exe/webui/scripts/stylemanager.js:41
 msgid "ZIP Style"
 msgstr "ZIP 樣式"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:281
-#: exe/webui/scripts/stylemanager.js:54
+#: exe/jsui/scripts/app/controller/StyleManager.js:258
+#: exe/webui/scripts/stylemanager.js:53
 msgid "Export to ZIP Style as"
 msgstr "匯出 ZIP 樣式為"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:293
-#: exe/webui/scripts/stylemanager.js:67
+#: exe/jsui/scripts/app/controller/StyleManager.js:277
+#: exe/webui/scripts/stylemanager.js:65
 msgid "ZipFile"
 msgstr "Zip 檔"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:320
-#: exe/webui/scripts/stylemanager.js:79
+#: exe/jsui/scripts/app/controller/StyleManager.js:303
+#: exe/webui/scripts/stylemanager.js:77
 msgid "Delete style?"
 msgstr "要刪除樣式嗎？"
 
-#: exe/jsui/scripts/app/controller/StyleManager.js:321
+#: exe/jsui/scripts/app/controller/StyleManager.js:304
 msgid "Do you want to delete this style?"
 msgstr "您要刪除此樣式嗎？"
 
@@ -4075,30 +4088,26 @@ msgstr "要刪除樣本嗎？"
 msgid "Do you want to delete this template?"
 msgstr "您確定要刪除這份樣本嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:392
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:721
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:736
+#: exe/jsui/scripts/app/controller/Toolbar.js:367
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:695
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
 msgstr "勾選此選項，會在選單與屬性分頁中顯示更多的項目。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:423
+#: exe/jsui/scripts/app/controller/Toolbar.js:398
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:221
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:751
 msgid "General description"
 msgstr "一般描述"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:432
+#: exe/jsui/scripts/app/controller/Toolbar.js:407
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:73
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:760
 msgid "Package"
 msgstr "教材"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:446
+#: exe/jsui/scripts/app/controller/Toolbar.js:421
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:240
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:280
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:744
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:91
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeeffects/plugin.min.js:54
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:68
@@ -4110,46 +4119,46 @@ msgstr "教材"
 msgid "General"
 msgstr "一般"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:479
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:630
+#: exe/jsui/scripts/app/controller/Toolbar.js:454
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:604
 #: exe/webui/tools/assistant/js/assistant.js:58
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
 msgstr "小助手"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:509
+#: exe/jsui/scripts/app/controller/Toolbar.js:484
 msgid "About"
 msgstr "關於"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:526
+#: exe/jsui/scripts/app/controller/Toolbar.js:501
 msgid "Release notes"
 msgstr "釋出宣告"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:545
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:670
+#: exe/jsui/scripts/app/controller/Toolbar.js:520
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:644
 #: exe/webui/tools/assistant/langs/all.js:79
 msgid "Legal Notes"
 msgstr "版權宣告"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:624
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:508
+#: exe/jsui/scripts/app/controller/Toolbar.js:599
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:481
 msgid "Preferences"
 msgstr "喜好設定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:645
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:141
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:147
+#: exe/jsui/scripts/app/controller/Toolbar.js:620
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:137
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:143
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:60
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:102
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:311
-#: exe/webui/scripts/authoring.js:1571
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:236
+#: exe/webui/scripts/authoring.js:1515
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:373
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/langs/all.js:13
 msgid "Export"
 msgstr "匯出"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:689
+#: exe/jsui/scripts/app/controller/Toolbar.js:664
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:357
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:79
 #: exe/webui/tools/mindmaps/src/js/MindMaps.js:110
@@ -4158,120 +4167,110 @@ msgid ""
 "you really want to quit?"
 msgstr "若您已做了變更但尚未儲存，變更的部份會遺失。您確定要離開嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:718
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:596
+#: exe/jsui/scripts/app/controller/Toolbar.js:693
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:569
 msgid "Style Manager"
 msgstr "樣式管理員"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:736
+#: exe/jsui/scripts/app/controller/Toolbar.js:711
 msgid "Template Manager"
 msgstr "樣本管理員"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:789
+#: exe/jsui/scripts/app/controller/Toolbar.js:736
 msgid "Select package to insert"
 msgstr "選擇要插入的套件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:797
+#: exe/jsui/scripts/app/controller/Toolbar.js:741
 msgid "Inserting package: {filename}"
 msgstr "插入套件中：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:804
-#: exe/jsui/scripts/app/controller/Toolbar.js:830
-#: exe/jsui/scripts/app/controller/Toolbar.js:855
-#: exe/jsui/scripts/app/controller/Toolbar.js:1621
-#: exe/jsui/scripts/app/controller/Toolbar.js:1780
+#: exe/jsui/scripts/app/controller/Toolbar.js:747
+#: exe/jsui/scripts/app/controller/Toolbar.js:768
+#: exe/jsui/scripts/app/controller/Toolbar.js:1497
+#: exe/jsui/scripts/app/controller/Toolbar.js:1646
 msgid "eXe Package Files"
 msgstr "eXe 套件檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:814
-#, fuzzy
-msgid "Select package to import and Open"
-msgstr "選擇要插入的套件"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:823
-#: exe/jsui/scripts/app/controller/Toolbar.js:1615
-msgid "Loading package: {filename}"
-msgstr "載入套件中：{filename}"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:839
+#: exe/jsui/scripts/app/controller/Toolbar.js:757
 msgid "Save extracted package as"
 msgstr "將展開的套件另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:845
-#: exe/jsui/scripts/app/controller/Toolbar.js:871
+#: exe/jsui/scripts/app/controller/Toolbar.js:762
+#: exe/jsui/scripts/app/controller/Toolbar.js:784
 msgid "Extracting package: {filename}"
 msgstr "展開套件中：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:865
+#: exe/jsui/scripts/app/controller/Toolbar.js:778
 msgid "Save extracted SCORM package as"
 msgstr "將展開的 SCORM 套件另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:877
+#: exe/jsui/scripts/app/controller/Toolbar.js:790
 msgid "SCORM Files"
 msgstr "SCORM 檔案"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:887
+#: exe/jsui/scripts/app/controller/Toolbar.js:800
 msgid "Select the parent folder for import."
 msgstr "選擇要匯入的父目錄。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:902
+#: exe/jsui/scripts/app/controller/Toolbar.js:815
 msgid "Select the entry point for import."
 msgstr "選擇要匯入的進入點。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:825
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:392
 msgid "HTML Files"
 msgstr "HTML 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:921
+#: exe/jsui/scripts/app/controller/Toolbar.js:834
 msgid "Select LOM Metadata file to import."
 msgstr "選擇要匯入的 LOM 中繼資料檔。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:932
+#: exe/jsui/scripts/app/controller/Toolbar.js:844
 msgid "XML Files"
 msgstr "XML 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:947
+#: exe/jsui/scripts/app/controller/Toolbar.js:859
 msgid "Waiting progress..."
 msgstr "等待進度中..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:955
+#: exe/jsui/scripts/app/controller/Toolbar.js:867
 msgid "Cancel Import?"
 msgstr "要取消匯入嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:956
+#: exe/jsui/scripts/app/controller/Toolbar.js:868
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "匯入正在進行中。您要取消嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:979
+#: exe/jsui/scripts/app/controller/Toolbar.js:891
 msgid "Select Xliff file to import"
 msgstr "選擇要匯入的 Xliff 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:990
+#: exe/jsui/scripts/app/controller/Toolbar.js:901
 msgid "XLIFF Import Preferences"
 msgstr "XLIFF 匯入喜好設定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1002
-#: exe/jsui/scripts/app/controller/Toolbar.js:1114
+#: exe/jsui/scripts/app/controller/Toolbar.js:913
+#: exe/jsui/scripts/app/controller/Toolbar.js:1024
 msgid "XLIFF Files"
 msgstr "XLIFF 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1012
+#: exe/jsui/scripts/app/controller/Toolbar.js:923
 msgid "Export to Xliff as"
 msgstr "將 Xliff 匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1033
+#: exe/jsui/scripts/app/controller/Toolbar.js:943
 msgid "Select source language"
 msgstr "選擇來源語言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1044
+#: exe/jsui/scripts/app/controller/Toolbar.js:954
 msgid "Select target language"
 msgstr "選擇目標語言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1055
+#: exe/jsui/scripts/app/controller/Toolbar.js:965
 msgid "Copy source also in target"
 msgstr "在目標也複製來源"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1058
+#: exe/jsui/scripts/app/controller/Toolbar.js:968
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4281,7 +4280,7 @@ msgstr ""
 "如果沒有選擇此選項，則目標欄位預設會空白。不過有些電腦輔助翻譯軟體（如 "
 "OmegaT）只會翻譯在目標欄位的內容。如果您使用的是這類工具，則您必須選擇此選項，將來源內容複製到目標欄位。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1069
+#: exe/jsui/scripts/app/controller/Toolbar.js:979
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4291,10 +4290,10 @@ msgstr ""
 "這個選項會將所有在 CDATA 區段中匯出的欄位折起來。這種區段在 XLIFF "
 "標準中並不建議使用，但若您在使用電腦輔助翻譯軟體前，使用一些預先處理的工具（如 Rainbow）時，CDATA 區段就很有用。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1078
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
+#: exe/jsui/scripts/app/controller/Toolbar.js:988
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:69
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
-#: exe/webui/editorpane.py:277
+#: exe/webui/editorpane.py:273
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:103
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:48
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/codemagic/plugin.min.js:32
@@ -4305,59 +4304,45 @@ msgstr ""
 msgid "Cancel"
 msgstr "取消"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1084
+#: exe/jsui/scripts/app/controller/Toolbar.js:994
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "確定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1107
+#: exe/jsui/scripts/app/controller/Toolbar.js:1017
 msgid "XLIFF Export Preferences"
 msgstr "XLIFF 匯出喜好設定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1149
+#: exe/jsui/scripts/app/controller/Toolbar.js:1059
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
 msgstr "這個套件有詮釋資料。您可能從原作者那匯出了不正確的資訊。請到屬性分頁去編輯。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1151
+#: exe/jsui/scripts/app/controller/Toolbar.js:1061
 msgid "Do you want to export the package with the current metadata?"
 msgstr "您要以目前的詮釋資料來匯出套件嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1189
-#, fuzzy
-msgid "Publishing document to "
-msgstr "將文件發布到 Procomún"
+#: exe/jsui/scripts/app/controller/Toolbar.js:1100
+msgid "Initializing Procomún export process..."
+msgstr "正在初始化 Procomún 的匯出流程..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1190
-msgid "Initializing"
-msgstr ""
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1190
-#, fuzzy
-msgid "export process..."
-msgstr "等待進度中..."
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1202
+#: exe/jsui/scripts/app/controller/Toolbar.js:1112
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
 msgstr "您必須先授權，eXe Learning 才能將內容發布到您的 Procomún 帳號"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1203
+#: exe/jsui/scripts/app/controller/Toolbar.js:1113
 msgid "Are you sure you want to start authorization process?"
 msgstr "您確定要開始授權嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1214
+#: exe/jsui/scripts/app/controller/Toolbar.js:1124
 msgid "Procomún OAuth"
 msgstr "Procomún OAuth"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1230
-#, python-format
-msgid "Error exporting package \"%s\" to Procomún."
-msgstr "匯出套件 %s 到 Procomún 時發生錯誤。"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1232
+#: exe/jsui/scripts/app/controller/Toolbar.js:1142
+#: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
@@ -4366,153 +4351,150 @@ msgstr ""
 "若您發布時發生問題，或是您稍後才要完成您的目錄，您可以關閉此對話框，匯出成 SCORM 2004 再手動將產生的 zip 壓縮檔上傳至 "
 "Procomún。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1244
+#: exe/jsui/scripts/app/controller/Toolbar.js:1154
 msgid "Select the parent folder for export."
 msgstr "選擇要匯出的父資料夾。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1267
+#: exe/jsui/scripts/app/controller/Toolbar.js:1176
 msgid "Export text package as"
 msgstr "將文字套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1281
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:388
+#: exe/jsui/scripts/app/controller/Toolbar.js:1189
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:311
 msgid "Text File"
 msgstr "文字檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1289
+#: exe/jsui/scripts/app/controller/Toolbar.js:1197
 msgid "Save package resources report as"
 msgstr "將套件資源報告另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1303
+#: exe/jsui/scripts/app/controller/Toolbar.js:1210
 msgid "CSV File"
 msgstr "CSV 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1311
+#: exe/jsui/scripts/app/controller/Toolbar.js:1218
 msgid "Export EPUB3 package as"
 msgstr "將 EPUB3 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1325
+#: exe/jsui/scripts/app/controller/Toolbar.js:1231
 msgid "EPUB3 File"
 msgstr "EPUB3 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1335
+#: exe/jsui/scripts/app/controller/Toolbar.js:1241
 msgid "Export SCORM package as"
 msgstr "將 SCORM 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1337
+#: exe/jsui/scripts/app/controller/Toolbar.js:1243
 msgid "Export IMS package as"
 msgstr "將 IMS 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1339
+#: exe/jsui/scripts/app/controller/Toolbar.js:1245
 msgid "Export Website package as"
 msgstr "將網站套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1341
-#, fuzzy
-msgid "Export Single Page package as"
-msgstr "將網站套件匯出為"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1343
+#: exe/jsui/scripts/app/controller/Toolbar.js:1247
 msgid "Export Common Cartridge as"
 msgstr "將共用卡匣匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1345
+#: exe/jsui/scripts/app/controller/Toolbar.js:1249
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "傳給 exportPackage 的值不合法"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1363
+#: exe/jsui/scripts/app/controller/Toolbar.js:1266
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM/IMS/Zip檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1475
+#: exe/jsui/scripts/app/controller/Toolbar.js:1369
 msgid "No templates available"
 msgstr "沒有可用的樣本"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1593
+#: exe/jsui/scripts/app/controller/Toolbar.js:1469
 msgid "Loading package..."
 msgstr "載入套件中..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1610
+#: exe/jsui/scripts/app/controller/Toolbar.js:1486
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1634
+#: exe/jsui/scripts/app/controller/Toolbar.js:1491
+msgid "Loading package: {filename}"
+msgstr "載入套件中：{filename}"
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1510
 msgid "Save Package first?"
 msgstr "要先儲存套件嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1635
+#: exe/jsui/scripts/app/controller/Toolbar.js:1511
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
 msgstr "目前的套件已變更但尚未儲存。您要先儲存嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1704
-#: exe/jsui/scripts/app/controller/Toolbar.js:1766
-msgid "Saving package..."
-msgstr "儲存套件中..."
+#: exe/jsui/scripts/app/controller/Toolbar.js:1580
+msgid "Saving package to: {filename}"
+msgstr "正在儲存套件到：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1735
+#: exe/jsui/scripts/app/controller/Toolbar.js:1603
 msgid "Title for template:"
 msgstr "樣本的標題："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1736
+#: exe/jsui/scripts/app/controller/Toolbar.js:1604
 msgid "Enter the new name for template:"
 msgstr "輸入樣本的新名稱："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1758
+#: exe/jsui/scripts/app/controller/Toolbar.js:1626
 msgid "Save file"
 msgstr "儲存檔案"
 
-#: exe/jsui/scripts/app/controller/filepicker/Directory.js:110
-#: exe/jsui/scripts/app/controller/filepicker/File.js:235
+#: exe/jsui/scripts/app/controller/Toolbar.js:1632
+msgid "Saving package..."
+msgstr "儲存套件中..."
+
+#: exe/jsui/scripts/app/controller/filepicker/Directory.js:93
+#: exe/jsui/scripts/app/controller/filepicker/File.js:186
 msgid "You do not have the permissions to open folder"
 msgstr "您沒有開啟資料夾的權限"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:227
+#: exe/jsui/scripts/app/controller/filepicker/File.js:178
 msgid "You do not have the permissions to write into folder"
 msgstr "您沒有寫入資料夾的權限"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:237
+#: exe/jsui/scripts/app/controller/filepicker/File.js:188
 msgid "You do not have the permissions to open the file"
 msgstr "您沒有開啟檔案的權限"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:406
+#: exe/jsui/scripts/app/controller/filepicker/File.js:357
 msgid "You do not have the permissions to  save into folder"
 msgstr "您沒有儲存資料夾的權限"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:425
-#, fuzzy
-msgid "Uploading File..."
-msgstr "下載中..."
-
-#: exe/jsui/scripts/app/controller/filepicker/File.js:457
+#: exe/jsui/scripts/app/controller/filepicker/File.js:369
 msgid "Create Folder"
 msgstr "建立資料夾"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:458
+#: exe/jsui/scripts/app/controller/filepicker/File.js:370
 msgid "Enter the new folder name:"
 msgstr "輸入新資料夾名稱："
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:472
+#: exe/jsui/scripts/app/controller/filepicker/File.js:384
 msgid "You do not have the permissions to create a folder in folder"
 msgstr "您沒有在資料夾中建立子資料夾的權限"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:478
+#: exe/jsui/scripts/app/controller/filepicker/File.js:390
 #: exe/webui/scripts/editor.js:35
 msgid "Confirm?"
 msgstr "確定嗎？"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:479
+#: exe/jsui/scripts/app/controller/filepicker/File.js:391
 msgid "The file already exists. Do you want to replace it?"
 msgstr "檔案已存在。您要取代它嗎？"
 
 #: exe/jsui/scripts/app/view/filepicker/FileList.js:66
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:130
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:72
 #: exe/jsui/scripts/app/view/forms/LomSections.js:82
 #: exe/jsui/scripts/app/view/forms/LomSections.js:105
 #: exe/jsui/scripts/app/view/forms/LomSections.js:121
 #: exe/jsui/scripts/app/view/forms/LomSections.js:171
-#: exe/webui/editorpane.py:339
+#: exe/webui/editorpane.py:335
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:22
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:64
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/easyattributes/plugin.min.js:205
@@ -4521,7 +4503,7 @@ msgid "Name"
 msgstr "名稱"
 
 #: exe/jsui/scripts/app/view/filepicker/FileList.js:113
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:138
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:80
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:129
 #: exe/jsui/scripts/app/view/forms/LomSections.js:120
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:122
@@ -4544,27 +4526,21 @@ msgstr "型態"
 msgid "Modified"
 msgstr "已變更"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:94
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:305 exe/webui/common.py:651
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
-msgid "Download"
-msgstr "下載"
-
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:128
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:70
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:166
 #: exe/webui/tools/mindmaps/src/js/Command.js:279
 #: exe/webui/tools/mindmaps/src/js/Command.js:282
 msgid "Open"
 msgstr "開啟"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:157
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:95
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:201
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:192
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:251
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:679
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:366
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:262 exe/webui/editorpage.py:264
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:196 exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -4579,28 +4555,22 @@ msgstr "開啟"
 msgid "Save"
 msgstr "儲存"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:169
-msgid "Folder"
-msgstr "資料夾"
-
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:170
-msgid "Select Folder"
-msgstr "選擇資料夾"
-
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:171
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:175
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:96
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:107
 msgid "Create Directory"
 msgstr "建立目錄"
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:190
-#, fuzzy
-msgid "Upload File"
-msgstr "本地檔案"
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:99
+msgid "Save in:"
+msgstr "儲存於："
 
-#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:299
-#, fuzzy
-msgid "Name:"
-msgstr "重新命名"
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:105
+msgid "Folder"
+msgstr "資料夾"
+
+#: exe/jsui/scripts/app/view/filepicker/FilePicker.js:106
+msgid "Select Folder"
+msgstr "選擇資料夾"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:53
 msgid "Dublin Core Metadata"
@@ -4621,7 +4591,6 @@ msgid "An entity primarily responsible for making the content of the resource."
 msgstr "負責建立此資源內容的人。"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:78
-#: exe/webui/content_template/strings.py:497
 msgid "Subject"
 msgstr "主題"
 
@@ -4700,7 +4669,7 @@ msgstr "型態包括內容的一般類別、功能或風格。建議從控制字
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:139
 #: exe/jsui/scripts/app/view/forms/LomSections.js:113
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:582
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:581
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:163
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:230
 msgid "Format"
@@ -4794,7 +4763,7 @@ msgstr "一般而言，權利資訊中會包含此資源的權利宣告，或是
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:198
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:256
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:296
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:686
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:685
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/all_dlg.js:1
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/en_dlg.js:1
 msgid "Clear"
@@ -4804,7 +4773,7 @@ msgstr "清除"
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:204
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:261
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:301
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:692
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:691
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:26
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:615
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:174
@@ -5041,7 +5010,7 @@ msgstr "集合等級"
 msgid "Version"
 msgstr "版本"
 
-#: exe/jsui/scripts/app/view/forms/LomSections.js:76 exe/webui/common.py:686
+#: exe/jsui/scripts/app/view/forms/LomSections.js:76 exe/webui/common.py:678
 msgid "Status"
 msgstr "狀態"
 
@@ -5106,9 +5075,9 @@ msgid "Interactivity Type"
 msgstr "互動型態"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:132
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:302
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:305
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:312
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:301
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:304
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:311
 msgid "Learning Resource Type"
 msgstr "學習資源型態"
 
@@ -5125,9 +5094,9 @@ msgid "Intended End User Role"
 msgstr "特定終端用戶角色"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:136
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:420
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:422
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:444
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:419
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:421
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:443
 msgid "Context"
 msgstr "情境"
 
@@ -5165,7 +5134,7 @@ msgid "Entity"
 msgstr "實體"
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:180 exe/webui/block.py:275
-#: exe/webui/editorpane.py:410
+#: exe/webui/editorpane.py:405
 msgid "Purpose"
 msgstr "用途"
 
@@ -5207,7 +5176,7 @@ msgid "Required"
 msgstr "需要的"
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:50
-#: exe/webui/scripts/authoring.js:1236
+#: exe/webui/scripts/authoring.js:1213
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:288
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:329
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:627
@@ -5384,8 +5353,8 @@ msgid "Preknowledge."
 msgstr "預備知識。"
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:267
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:507
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:511
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:457
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:461
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:83
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:257
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:62
@@ -5427,7 +5396,7 @@ msgid "Primary author of the resource."
 msgstr "資源的主要作者。"
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:281
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:516
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:466
 #: exe/webui/scripts/idevices/download-package/edition/download-package.js:170
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:634
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:390
@@ -5452,7 +5421,7 @@ msgid "Select a license or write your own one."
 msgstr "選擇授權方式，或是自己寫授權方式。"
 
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:291 exe/webui/common.py:451
-#: exe/webui/common.py:663 exe/webui/fileattachblock.py:158
+#: exe/webui/common.py:655 exe/webui/fileattachblock.py:159
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:460
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:54
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:29
@@ -5468,92 +5437,92 @@ msgstr "新視窗"
 msgid "Creative Commons licenses information page"
 msgstr "創用 CC 授權資訊頁面"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:317
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:316
 msgid "Usage"
 msgstr "用法"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:327
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:329
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:358
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:326
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:328
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:357
 msgid "Intended End User"
 msgstr "特定終端用戶"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:334
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:333
 msgid "Ordinary Learner"
 msgstr "一般學生"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:342
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:341
 msgid "Special Needs Learner"
 msgstr "特殊需求學生"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:349
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:348
 msgid "Gifted Learner"
 msgstr "天才學生"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:365
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:367
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:384
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:364
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:366
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:383
 msgid "For Group Work"
 msgstr "團隊工作"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:391
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:393
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:410
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:390
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:392
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:409
 msgid "For Individual Tuition"
 msgstr "個別教學"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:427
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:426
 msgid "Classroom"
 msgstr "教室"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:435
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:434
 msgid "Real Environment"
 msgstr "實際環境"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:454
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:456
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:485
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:453
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:455
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:484
 msgid "Modality"
 msgstr "形式"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:461
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:460
 msgid "Face to Face"
 msgstr "面對面"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:469
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:468
 msgid "Blended"
 msgstr "混合式"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:476
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:475
 msgid "Distance"
 msgstr "距離"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:494
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:493
 msgid "Project Properties"
 msgstr "專案屬性"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:509
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:508
 msgid "Header Background"
 msgstr "標頭背景"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:513
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:512
 msgid "Background image for a header (an image 100px high is recommended)."
 msgstr "標頭的背景影像（建議使用 100 像素高的影像）"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:531
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:530
 msgid "Load Image"
 msgstr "載入影像"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:544
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:543
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:740
 msgid "Clear Image"
 msgstr "清除影像"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:551
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:550
 msgid "Tile background image?"
 msgstr "要鋪排背景影像嗎？"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:569
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:568
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:304
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:462
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:493
@@ -5562,67 +5531,67 @@ msgstr "要鋪排背景影像嗎？"
 msgid "Footer"
 msgstr "註腳"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:570
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:569
 msgid "Web pages footer."
 msgstr "網頁的註腳。"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:591
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:597
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:590
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:596
 msgid "Doctype"
 msgstr "Doctype"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:606
 msgid "Save the changes of your iDevice before changing the DOCTYPE"
 msgstr "改變 DOCTYPE 前，請先儲存您的 iDevice"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:614
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:613
 msgid ""
 "This overrides for this Package the \"Default format for the new "
 "documents\" set in Tools - Preferences"
 msgstr "這會覆寫「工具」--「喜好設定」中的「新文件的預設格式」設定"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:621
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:620
 msgid "Taxonomy"
 msgstr "分類法"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:630
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:629
 msgid "Level 1"
 msgstr "等級 1"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:631
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:630
 msgid "Default name for level 1 nodes"
 msgstr "等級 1 節點的預設名稱"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:637
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:636
 msgid "Level 2"
 msgstr "等級 2"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:638
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:637
 msgid "Default name for level 2 nodes"
 msgstr "等級 2 節點的預設名稱"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:644
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:643
 msgid "Level 3"
 msgstr "等級 3"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:645
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:644
 msgid "Default name for level 3 nodes"
 msgstr "等級 3 節點的預設名稱"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:650
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:649
 msgid "Update Tree"
 msgstr "更新樹狀圖"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:658
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:657
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:83
 msgid "Advanced Options"
 msgstr "進階選項"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:670
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:669
 msgid "Custom HEAD"
 msgstr "自訂 HEAD 標頭"
 
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:671
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:670
 msgid ""
 "Any code you enter here (STYLE, META, SCRIPT...) will be added in the "
 "HEAD section to every page."
@@ -5755,90 +5724,86 @@ msgstr "目前文件的授權方式可以在「屬性」視窗中修改。"
 msgid "Show this window on eXe start"
 msgstr "eXe 啟動時顯示此視窗"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:101
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:100
 msgid "Edit style: "
 msgstr "編輯樣式： "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:102
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:101
 msgid "Edit current Style"
 msgstr "編輯現在這個樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:126
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:122
 msgid "Export style: "
 msgstr "匯出樣式： "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:160
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:154
 msgid "Delete style: "
 msgstr "刪除樣式： "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:179
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:172
 msgid "Show properties of style: "
 msgstr "顯示樣式的屬性： "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:290
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:254
 #: exe/webui/tools/style-designer/langs/all.js:10
 msgid "Style Designer"
 msgstr "樣式設計器"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:294
-#: exe/webui/tools/style-designer/js/app.js:1493
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:258
+#: exe/webui/tools/style-designer/js/app.js:1475
 msgid "Create new style"
 msgstr "建立新的樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:300
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:264
 msgid "Import style to the system "
 msgstr "將樣式匯入系統 "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:304
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:544
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:268
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:494
 msgid "Import style"
 msgstr "匯入樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:310
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:274
 msgid "Styles repository"
 msgstr "樣式主目錄"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:311
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:275
 msgid "Search and download new styles from the styles repository"
 msgstr "從樣式主目錄搜尋並下載新樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
-msgid "List of User styles"
-msgstr ""
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:284
+msgid "List of styles in your system"
+msgstr "您的系統中的樣式清單"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
-msgid "List of System styles"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:342
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:298
 msgid "Properties of style: "
 msgstr "樣式屬性： "
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:436
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:655
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:386
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:605
 msgid "Return to style manager"
 msgstr "回到樣式管理員"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:444
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:654
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:394
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:604
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:268
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:115
 msgid "Return"
 msgstr "返回"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:539
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:489
 msgid "Read more"
 msgstr "閱讀更多"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:545
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:495
 msgid "Download style from repository and import into system."
 msgstr "從主目錄下載樣式並匯入系統。"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:578
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:528
 msgid "Import style from custom URL"
 msgstr "從自定網址匯入樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:593
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:543
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:238
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:240
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:265
@@ -5860,25 +5825,25 @@ msgstr "從自定網址匯入樣式"
 msgid "URL"
 msgstr "網址"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:594
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:544
 msgid "URL to download the style from."
 msgstr "要下載樣式的網址。"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:599
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:549
 msgid "Import Style from URL"
 msgstr "從網址匯入樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:600
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:550
 msgid "Download style from URL and import into system."
 msgstr "從指定網址下載並匯入樣式。"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:629
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:579
 msgid "Check and install styles in the repository"
 msgstr "檢查並安裝主目錄中的樣式"
 
-#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:711
-#: exe/webui/common.py:653 exe/webui/scripts/authoring.js:1806
-#: exe/webui/scripts/authoring.js:1817
+#: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:661
+#: exe/webui/common.py:645 exe/webui/scripts/authoring.js:1750
+#: exe/webui/scripts/authoring.js:1761
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/easyattributes/plugin.min.js:240
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:216
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exegames_hangman/plugin.min.js:231
@@ -5942,22 +5907,12 @@ msgid ""
 "select one of the values below:"
 msgstr "此欄位的值不被 Procomún 接受。請從以下的值選一個："
 
-#: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
-#, fuzzy
-msgid ""
-"If you have problems publishing or you want to complete your cataloguing "
-"later, close this dialogue, export as SCORM 2004 and upload the generated"
-" zip file to "
-msgstr ""
-"若您發布時發生問題，或是您稍後才要完成您的目錄，您可以關閉此對話框，匯出成 SCORM 2004 再手動將產生的 zip 壓縮檔上傳至 "
-"Procomún。"
-
 #: exe/jsui/scripts/app/view/ui/LeftPanel.js:72
 #: exe/webui/tools/assistant/langs/all.js:42
 msgid "Outline"
 msgstr "概述"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:644
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:636
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:229
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:117
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:174
@@ -5971,8 +5926,8 @@ msgstr "概述"
 msgid "Show"
 msgstr "顯示"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:645
-#: exe/webui/scripts/authoring.js:1200
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:99 exe/webui/common.py:637
+#: exe/webui/scripts/authoring.js:1176
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:228
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:638
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:799
@@ -6019,17 +5974,17 @@ msgid "Properties"
 msgstr "屬性"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:77
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:213
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:402
 msgid "Metadata"
 msgstr "中繼資料"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:89
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:223
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:412
 msgid "LOM"
 msgstr "LOM"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:95
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:229
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:418
 msgid "LOM-ES"
 msgstr "LOM-ES"
 
@@ -6061,106 +6016,122 @@ msgstr "將節點下移"
 msgid "use the right arrow key"
 msgstr "使用右鍵"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:175
-#: exe/webui/scripts/authoring.js:1565
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
-msgid "Import"
-msgstr "匯入"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#: exe/webui/tools/color-picker/langs/all.js:6
+#: exe/webui/tools/mindmaps/src/js/Command.js:264
+msgid "New"
+msgstr "新增"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:185
-msgid "Package (.elp)"
-msgstr ""
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:138
+msgid "Project"
+msgstr "專案"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:192
-msgid "Insert elp in the current page"
-msgstr "在目前頁面插入 elp"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:146
+msgid "Window"
+msgstr "視窗"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:208
-msgid "XLIFF File"
-msgstr "XLIFF 檔"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:239
-msgid "Recent Projects..."
-msgstr "最近使用的專案..."
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:252
-msgid "Clear Recent Projects List"
-msgstr "清除最近使用的專案清單"
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:281
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:153
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:212
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:212
 msgid "Templates"
 msgstr "樣本"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:289
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:173
+msgid "Recent Projects..."
+msgstr "最近使用的專案..."
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:186
+msgid "Clear Recent Projects List"
+msgstr "清除最近使用的專案清單"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:203
+#: exe/webui/tools/mindmaps/src/js/Command.js:356
+#: exe/webui/tools/mindmaps/src/js/Command.js:358
+msgid "Save As..."
+msgstr "另存為..."
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:220
 msgid "Save as template"
 msgstr "儲存為樣本"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:295
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:226
 msgid "Manage"
 msgstr "管理"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:320
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
 msgid "Educational Standard"
 msgstr "教育標準"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:328
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:253
 msgid "Common Cartridge"
 msgstr "共用卡匣"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:436
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:259
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:359
 msgid "SCORM1.2"
 msgstr "SCORM1.2"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:340
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:265
 msgid "SCORM2004"
 msgstr "SCORM2004"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:346
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:271
 msgid "IMS Content Package"
 msgstr "IMS ˙內容套件"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:356
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:402
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:281
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:325
 msgid "Web Site"
 msgstr "網站"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:372
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:289
+msgid "Self-contained Folder"
+msgstr "自包含資料夾"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:295
 msgid "Zip File"
 msgstr "Zip 檔"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:378
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:409
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:301
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:332
 msgid "Single Page"
 msgstr "單一頁面"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:395
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:318
 msgid "XLIFF"
 msgstr "XLIFF"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:415
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:338
 msgid "EPUB3"
 msgstr "EPUB3"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:424
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:347
 msgid "Export the current page as elp"
 msgstr "將目前頁面匯出為 elp"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:431
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:354
 msgid "Export the current page as SCORM"
 msgstr "將目前頁面匯出為 SCORM"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:443
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:366
 msgid "IMS"
 msgstr "IMS"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:453
-#, fuzzy
-msgid "Publish"
-msgstr "發布者"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:376
+#: exe/webui/scripts/authoring.js:1509
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
+msgid "Import"
+msgstr "匯入"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:476 exe/webui/common.py:657
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:386
+msgid "Insert elp in the current page"
+msgstr "在目前頁面插入 elp"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:398
+msgid "XLIFF File"
+msgstr "XLIFF 檔"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:451 exe/webui/common.py:649
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
 #: exe/webui/style/INTEF/_intef_js.js:125
@@ -6169,36 +6140,40 @@ msgstr "發布者"
 msgid "Print"
 msgstr "列印"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:498
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:464 exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "離開"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:471
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:34
 msgid "Tools"
 msgstr "工具"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:514
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:784 exe/webui/editorpane.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:487
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:721 exe/webui/editorpane.py:268
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
 msgid "Preview"
 msgstr "預覽"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:562
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:535
 msgid "Resources Report"
 msgstr "資源報告"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:568
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:541
 msgid "Refresh Display"
 msgstr "刷新顯示"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:576
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:587
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:600
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:549
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:560
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:573
 msgid "Styles"
 msgstr "樣式"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:613
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:620
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:587
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:594
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:151
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:66
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:102
@@ -6217,81 +6192,70 @@ msgstr "樣式"
 msgid "Help"
 msgstr "說明"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:640
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:614
 #: exe/webui/tools/assistant/langs/all.js:72
 msgid "eXe Tutorial"
 msgstr "eXe 教學"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:661
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:635
 #: exe/webui/tools/assistant/langs/all.js:78
 msgid "Release Notes"
 msgstr "釋出宣告"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:680
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:654
 #: exe/webui/tools/assistant/langs/all.js:80
 msgid "eXe Web Site"
 msgstr "eXe 網站"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:687
-#: exe/webui/scripts/authoring.js:1150
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:661
+#: exe/webui/scripts/authoring.js:1125
 #: exe/webui/tools/assistant/langs/all.js:75
 msgid "Report an Issue"
 msgstr "回報問題"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:694
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:668
 #: exe/webui/tools/assistant/langs/all.js:73
 msgid "eXe Forums"
 msgstr "eXe 論壇"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:704
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:678
 #: exe/webui/tools/assistant/langs/all.js:77
 msgid "About eXe"
 msgstr "關於 eXe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:720
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:694
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr "進階模式"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:822
-msgid "Sign off"
-msgstr ""
-
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:963
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:865
 msgid "You've been working for a long time without saving."
 msgstr "您已經有一段時間沒存檔囉。"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:965
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:867
 msgid "Do you want to save now?"
 msgstr "您要現在存檔嗎？"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:967
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:869
 msgid "Hide until the application is closed"
 msgstr "隱藏直到應用程式關閉為止"
 
-#: exe/jsui/scripts/exe.js:210
-msgid ""
-"The requested url is not secure but eXe is hosted in a secure site. To "
-"prevent \r\n"
-"browser restrictions, you must click in the url: {0}"
-msgstr ""
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1148
-#: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
-#: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
+#: exe/jsui/scripts/app/controller/Toolbar.js:1058
+#: exe/jsui/scripts/app/view/forms/PackagePanel.js:606
+#: exe/jsui/scripts/exe.js:213 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
 msgstr "警告"
 
-#: exe/jsui/scripts/exe.js:258 exe/webui/stylemanagerpage.py:163
-#: exe/webui/stylemanagerpage.py:364 exe/webui/templatemanagerpage.py:134
+#: exe/jsui/scripts/exe.js:219 exe/webui/stylemanagerpage.py:155
+#: exe/webui/stylemanagerpage.py:347 exe/webui/templatemanagerpage.py:126
 msgid "Success"
 msgstr "成功"
 
-#: exe/jsui/scripts/exe.js:267
+#: exe/jsui/scripts/exe.js:228
 msgid "Load Error"
 msgstr "載入錯誤"
 
-#: exe/jsui/scripts/exe.js:308
+#: exe/jsui/scripts/exe.js:275
 msgid ""
 "A new version of eXeLearning (%) is available. Would you like to download"
 " it now?"
@@ -6299,23 +6263,29 @@ msgstr "新版本的 eXeLearning (%) 已經釋出了。您要現在下載嗎？"
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:962 exe/jsui/scripts/exe.js:311
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:864 exe/jsui/scripts/exe.js:278
 msgid "Warning!"
 msgstr "警告！"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:400
+#: exe/jsui/scripts/exe.js:326
+msgid ""
+"If you leave this page eXe application continues to run. Please use the "
+"menu File->Quit if you really want to exit the application."
+msgstr "即使您離開了這個頁面，eXe 仍然會繼續執行。要離開 eXe 請到選單中選擇「檔案」─「離開」。"
+
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:357
 msgid "Group iDevices"
 msgstr "群組 iDevice"
 
-#: exe/jsui/scripts/exe.js:426 exe/jsui/scripts/exe.js:437
+#: exe/jsui/scripts/exe.js:384 exe/jsui/scripts/exe.js:395
 msgid "Show panel"
 msgstr "顯示面板"
 
-#: exe/jsui/scripts/exe.js:460
+#: exe/jsui/scripts/exe.js:418
 msgid "Use the left panel to create pages and add content."
 msgstr "用左側面板來建立頁面與新增內容。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1154 exe/jsui/scripts/exe.js:461
+#: exe/jsui/scripts/app/controller/Toolbar.js:1064 exe/jsui/scripts/exe.js:419
 msgid "Don't show this warning again"
 msgstr "不要再顯示此警告"
 
@@ -7925,8 +7895,8 @@ msgid "education expert"
 msgstr "教育專家"
 
 #: exe/jsui/scripts/nevow_glue.js:43 exe/jsui/scripts/nevow_glue.js:45
-#: exe/webui/stylemanagerpage.py:351 exe/webui/stylemanagerpage.py:557
-#: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
+#: exe/webui/stylemanagerpage.py:334 exe/webui/stylemanagerpage.py:534
+#: exe/webui/templatemanagerpage.py:263 exe/webui/templatemanagerpage.py:297
 msgid "An unexpected error has occurred"
 msgstr "發生未知的錯誤"
 
@@ -8007,10 +7977,10 @@ msgid "Filename:"
 msgstr "檔案名稱："
 
 #: exe/webui/attachmentblock.py:104 exe/webui/editorelement.py:351
-#: exe/webui/element.py:1085 exe/webui/scripts/authoring.js:192
-#: exe/webui/scripts/authoring.js:510 exe/webui/scripts/authoring.js:520
-#: exe/webui/scripts/authoring.js:1589 exe/webui/scripts/editor.js:94
-#: exe/webui/scripts/editor.js:122
+#: exe/webui/element.py:1085 exe/webui/scripts/authoring.js:191
+#: exe/webui/scripts/authoring.js:506 exe/webui/scripts/authoring.js:516
+#: exe/webui/scripts/authoring.js:1533 exe/webui/scripts/editor.js:94
+#: exe/webui/scripts/editor.js:121
 msgid "Select a file"
 msgstr "選擇檔案"
 
@@ -8018,16 +7988,16 @@ msgstr "選擇檔案"
 msgid "Label:"
 msgstr "標籤："
 
-#: exe/webui/authoringpage.py:209
+#: exe/webui/authoringpage.py:180
 #, python-format
 msgid "Warning: %s"
 msgstr "警告：%s"
 
-#: exe/webui/block.py:184 exe/webui/scripts/authoring.js:1142
+#: exe/webui/block.py:184 exe/webui/scripts/authoring.js:1116
 msgid "IDevice broken"
 msgstr "iDevice 已損壞"
 
-#: exe/webui/block.py:227 exe/webui/editorpage.py:121
+#: exe/webui/block.py:227 exe/webui/editorpage.py:120
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:160
 msgid "Done"
 msgstr "完成"
@@ -8060,11 +8030,11 @@ msgstr "下移"
 msgid "---Move To---"
 msgstr "---移至---"
 
-#: exe/webui/block.py:266 exe/webui/editorpane.py:403
+#: exe/webui/block.py:266 exe/webui/editorpane.py:398
 msgid "Pedagogical Help"
 msgstr "教學輔助"
 
-#: exe/webui/block.py:279 exe/webui/editorpane.py:413
+#: exe/webui/block.py:279 exe/webui/editorpane.py:408
 msgid "Tip:"
 msgstr "提示："
 
@@ -8072,8 +8042,8 @@ msgstr "提示："
 msgid "ERROR: Block.renderViewContent called directly"
 msgstr "錯誤：直接呼叫了 Block.renderViewContent"
 
-#: exe/webui/block.py:333 exe/webui/editorpage.py:289
-#: exe/webui/editorpane.py:275
+#: exe/webui/block.py:333 exe/webui/editorpage.py:290
+#: exe/webui/editorpane.py:270
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:17
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:271
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:274
@@ -8235,31 +8205,31 @@ msgstr "使用 eXeLearning 製作"
 msgid "Enable JavaScript"
 msgstr "啟用 JavaScript"
 
-#: exe/webui/common.py:646 exe/webui/common.py:952 exe/webui/element.py:1547
+#: exe/webui/common.py:638 exe/webui/common.py:947 exe/webui/element.py:1547
 #: exe/webui/element.py:2476 exe/webui/listablock.py:274
 #: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:24
 #: exe/webui/scripts/idevices/text/edition/text.js:20
 msgid "Show Feedback"
 msgstr "顯示意見回饋"
 
-#: exe/webui/common.py:647
+#: exe/webui/common.py:639
 msgid "Hide Feedback"
 msgstr "隱藏意見回饋"
 
-#: exe/webui/common.py:648 exe/webui/common.py:683 exe/webui/element.py:2279
+#: exe/webui/common.py:640 exe/webui/common.py:675 exe/webui/element.py:2279
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:94
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:83
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:71
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:103
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:89
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:97
-#: exe/webui/stylemanagerpage.py:349 exe/webui/stylemanagerpage.py:535
-#: exe/webui/stylemanagerpage.py:554 exe/webui/templatemanagerpage.py:244
-#: exe/webui/templatemanagerpage.py:266
+#: exe/webui/stylemanagerpage.py:332 exe/webui/stylemanagerpage.py:518
+#: exe/webui/stylemanagerpage.py:531 exe/webui/templatemanagerpage.py:238
+#: exe/webui/templatemanagerpage.py:260
 msgid "Correct"
 msgstr "正確"
 
-#: exe/webui/common.py:649 exe/webui/element.py:2282
+#: exe/webui/common.py:641 exe/webui/element.py:2282
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:95
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:72
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:104
@@ -8268,23 +8238,29 @@ msgstr "正確"
 msgid "Incorrect"
 msgstr "不正確"
 
-#: exe/webui/common.py:650 exe/webui/tools/assistant/langs/all.js:9
+#: exe/webui/common.py:642 exe/webui/tools/assistant/langs/all.js:9
 msgid "Menu"
 msgstr "選單"
 
-#: exe/webui/common.py:652
+#: exe/webui/common.py:643
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
+#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
+msgid "Download"
+msgstr "下載"
+
+#: exe/webui/common.py:644
 msgid "Your score is "
 msgstr "您的分數是 "
 
-#: exe/webui/common.py:654
+#: exe/webui/common.py:646
 msgid "This might not work in this ePub reader."
 msgstr "這可能在此 ePub 閱讀器中無法運作。"
 
-#: exe/webui/common.py:655
+#: exe/webui/common.py:647
 msgid "This activity does not work in ePub."
 msgstr "此活動無法在 ePub 中運作。"
 
-#: exe/webui/common.py:656 exe/webui/element.py:2504 exe/webui/element.py:2947
+#: exe/webui/common.py:648 exe/webui/element.py:2504 exe/webui/element.py:2947
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:74
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:44
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:300
@@ -8320,23 +8296,23 @@ msgstr "此活動無法在 ePub 中運作。"
 msgid "Solution"
 msgstr "答案"
 
-#: exe/webui/common.py:658
+#: exe/webui/common.py:650
 msgid "Search in all pages"
 msgstr "在所有頁面搜尋"
 
-#: exe/webui/common.py:659
+#: exe/webui/common.py:651
 msgid "No results for %"
 msgstr "搜尋 % 沒有結果"
 
-#: exe/webui/common.py:660
+#: exe/webui/common.py:652
 msgid "Search results for %"
 msgstr "% 的搜尋結果"
 
-#: exe/webui/common.py:661
+#: exe/webui/common.py:653
 msgid "Hide results"
 msgstr "隱藏結果"
 
-#: exe/webui/common.py:662
+#: exe/webui/common.py:654
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:175
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:219
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:409
@@ -8346,16 +8322,16 @@ msgstr "隱藏結果"
 msgid "More"
 msgstr "更多"
 
-#: exe/webui/common.py:664
+#: exe/webui/common.py:656
 msgid "Full size"
 msgstr ""
 
-#: exe/webui/common.py:665
+#: exe/webui/common.py:657
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/codemagic/plugin.min.js:30
 msgid "Search"
 msgstr "搜尋"
 
-#: exe/webui/common.py:680
+#: exe/webui/common.py:672
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:29
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:102
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:87
@@ -8363,22 +8339,22 @@ msgstr "搜尋"
 msgid "Accept"
 msgstr "接受"
 
-#: exe/webui/common.py:684 exe/webui/element.py:2715 exe/webui/element.py:2733
+#: exe/webui/common.py:676 exe/webui/element.py:2715 exe/webui/element.py:2733
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:47
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:90
 msgid "Wrong"
 msgstr "錯誤"
 
-#: exe/webui/common.py:685
+#: exe/webui/common.py:677
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:54
 msgid "Right answer"
 msgstr "正確答案"
 
-#: exe/webui/common.py:687
+#: exe/webui/common.py:679
 msgid "Selected letters"
 msgstr "已選取字母"
 
-#: exe/webui/common.py:688
+#: exe/webui/common.py:680
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:528
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:559
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1075
@@ -8389,13 +8365,13 @@ msgstr "已選取字母"
 msgid "Word"
 msgstr "單字"
 
-#: exe/webui/common.py:689
+#: exe/webui/common.py:681
 #: exe/webui/scripts/idevices/rosco-activity/edition/rosco-activity.js:143
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:164
 msgid "Words"
 msgstr "單字"
 
-#: exe/webui/common.py:690
+#: exe/webui/common.py:682
 #: exe/webui/scripts/idevices/quext-activity/edition/quext-activity.js:1059
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1051
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:863
@@ -8407,456 +8383,47 @@ msgstr "單字"
 msgid "Play"
 msgstr "遊玩"
 
-#: exe/webui/common.py:692
+#: exe/webui/common.py:684
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:33
 msgid "Results"
 msgstr "結果"
 
-#: exe/webui/common.py:693
+#: exe/webui/common.py:685
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:37
 msgid "Total"
 msgstr "總計"
 
-#: exe/webui/common.py:694
+#: exe/webui/common.py:686
 msgid "Another word"
 msgstr "其他單字"
 
-#: exe/webui/common.py:695
+#: exe/webui/common.py:687
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:66
 msgid "Game over."
 msgstr "遊戲結束。"
 
-#: exe/webui/common.py:696
+#: exe/webui/common.py:688
 msgid "Reload the game?"
 msgstr "要重新載入遊戲嗎？"
 
-#: exe/webui/common.py:697
+#: exe/webui/common.py:689
 msgid "Click on \"Play\" to start a new game."
 msgstr "點擊遊玩以開始遊戲。"
 
-#: exe/webui/common.py:698
+#: exe/webui/common.py:690
 msgid "Click on \"Another word\" to continue."
 msgstr "點擊其他單字以繼續。"
 
-#: exe/webui/common.py:723 exe/webui/editorpage.py:238
+#: exe/webui/common.py:715 exe/webui/editorpage.py:238
 #: exe/webui/xliffimportpreferencespage.py:67
 msgid "eXe : elearning XHTML editor"
 msgstr "eXe:  elearning XHTML 編輯器"
 
-#: exe/webui/common.py:1076 exe/webui/common.py:1079
+#: exe/webui/common.py:1071 exe/webui/common.py:1074
 msgid "Click for completion instructions"
 msgstr "點擊看完成說明"
 
 #: exe/webui/content_template/strings.py:6
-#, fuzzy
-msgid "EDIA Project - PBL"
-msgstr "實際專案"
-
-#: exe/webui/content_template/strings.py:7
-msgid ""
-"National Centre for the Development of the Educational Curriculum on Non-"
-"Proprietary Systems (CEDEC)"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:11
-#: exe/webui/content_template/strings.py:29
-#: exe/webui/content_template/strings.py:521
-msgid "Project's name"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:12
-msgid "Project's final goal."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:13
-msgid "Point out what students are about to learn."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:14
-msgid ""
-"Students need no preknowledge to complete all these tasks because there "
-"are materials enough to be independent in their accomplishment. Students "
-"also have the help and orientation from their teacher."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:15
-#: exe/webui/content_template/strings.py:31
-#: exe/webui/content_template/strings.py:523
-#, fuzzy
-msgid "Author's name"
-msgstr "作者"
-
-#: exe/webui/content_template/strings.py:18
-#, fuzzy
-msgid "Front page"
-msgstr "水平間隔"
-
-#: exe/webui/content_template/strings.py:28
-#: exe/webui/content_template/strings.py:520
-#, fuzzy
-msgid "Creative Commons BY-SA"
-msgstr "創用 CC：Attribution"
-
-#: exe/webui/content_template/strings.py:53
-msgid "Motivating inspiration."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:54
-msgid "Project / Final Challenge"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:55
-msgid "What to learn and how to learn."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:56
-msgid "Motivation for the project development."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:65
-#: exe/webui/content_template/strings.py:409
-#, fuzzy
-msgid "Breaking the ice"
-msgstr "請擲骰子。"
-
-#: exe/webui/content_template/strings.py:68
-#: exe/webui/content_template/strings.py:181
-#, fuzzy
-msgid "Learning Diary"
-msgstr "學習材料"
-
-#: exe/webui/content_template/strings.py:89
-msgid "First activity. Creation of the learning diary in the suggested format."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:90
-msgid "Creation of the first post heading."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:91
-#: exe/webui/content_template/strings.py:207
-msgid "Writing the diary"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:92
-msgid ""
-"Script for writing the post. It must lead the student to think about and "
-"reflect:"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:93
-#, fuzzy
-msgid "What the final challenge is"
-msgstr "請寫下挑戰的標題。"
-
-#: exe/webui/content_template/strings.py:94
-msgid "What the assessment will be like"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:95
-msgid "What they will learn"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:96
-msgid "How class groups work"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:103
-#, fuzzy
-msgid "Starting Activity"
-msgstr "閱讀活動"
-
-#: exe/webui/content_template/strings.py:124
-msgid "Introductory Activity to the project involving:"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:125
-#, fuzzy
-msgid "Team work"
-msgstr "其他單字"
-
-#: exe/webui/content_template/strings.py:126
-#, fuzzy
-msgid "Reflection and motivation"
-msgstr "沒有選擇且無連結"
-
-#: exe/webui/content_template/strings.py:127
-msgid "Expression of feelings."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:128
-msgid "Steps for the suggested activity"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:135
-#, fuzzy
-msgid "Your project: General information"
-msgstr "更多資訊："
-
-#: exe/webui/content_template/strings.py:162
-msgid "Explanation of the final challenge."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:163
-msgid "Overview of suggested tasks."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:164
-#, fuzzy
-msgid "General information about:"
-msgstr "更多資訊："
-
-#: exe/webui/content_template/strings.py:165
-#: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:175
-msgid "Assessment"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:166
-msgid "Class team management"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:167
-msgid "Learning diary and personal site."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:168
-msgid "Dissemination of project activities."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:169
-#, fuzzy
-msgid "Starting motivation"
-msgstr "開始時間"
-
-#: exe/webui/content_template/strings.py:178
-#, fuzzy
-msgid "Mission 1"
-msgstr "為版本"
-
-#: exe/webui/content_template/strings.py:206
-msgid "Guidelines to open a new post."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:208
-msgid "Questions or guidelines for students to revise and reflect:"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:209
-msgid "The task they have done"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:210
-msgid "The resources they have checked"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:211
-msgid "Materials they have created"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:212
-msgid "What they have learnt"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:213
-#, fuzzy
-msgid "Difficulties found."
-msgstr "困難"
-
-#: exe/webui/content_template/strings.py:214
-#, fuzzy
-msgid "Remaining doubts"
-msgstr "學習材料"
-
-#: exe/webui/content_template/strings.py:215
-msgid "Class team functioning"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:222
-msgid "Task (Mission)"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:237
-#, fuzzy
-msgid "General introduction"
-msgstr "一般描述"
-
-#: exe/webui/content_template/strings.py:238
-msgid "What the \"final mission\" will be and link to the assessment rubric."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:239
-#, fuzzy
-msgid "What learning objective this mission helps to achieve."
-msgstr "輸入學習此教材的目的。"
-
-#: exe/webui/content_template/strings.py:240
-msgid "Steps for your mission"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:247
-#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:26
-msgid "Introduction"
-msgstr "介紹"
-
-#: exe/webui/content_template/strings.py:260
-msgid "What the final mission will be."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:261
-msgid "What sudents will learn about."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:262
-#, fuzzy
-msgid "Starting activity"
-msgstr "閱讀活動"
-
-#: exe/webui/content_template/strings.py:271
-#, fuzzy
-msgid "Didactic guidelines"
-msgstr "教學遊戲"
-
-#: exe/webui/content_template/strings.py:274
-msgid "Need any help?"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:281
-msgid "ICT resources/apps/tools"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:288
-msgid "Assessment and curricular references"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:301
-msgid "Link to the final rubric of the project."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:302
-msgid "Assessment recommendations / resources of each task."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:303
-msgid "Assessment criteria and guidance on how to assess."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:304
-msgid "Contents / learning standards and key competences."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:311
-msgid "Learning Pathway and timing"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:404
-#, fuzzy
-msgid "Steps"
-msgstr "嘗試次數"
-
-#: exe/webui/content_template/strings.py:405
-#, fuzzy
-msgid "Main aim"
-msgstr "劊子手（hangman）遊戲"
-
-#: exe/webui/content_template/strings.py:406
-#: exe/webui/content_template/strings.py:501
-#: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:91
-msgid "Timing"
-msgstr "時程"
-
-#: exe/webui/content_template/strings.py:407
-#, fuzzy
-msgid "Before you start"
-msgstr "點擊此處以開始"
-
-#: exe/webui/content_template/strings.py:408
-#: exe/webui/content_template/strings.py:410
-#: exe/webui/content_template/strings.py:412
-#: exe/webui/content_template/strings.py:414
-#: exe/webui/content_template/strings.py:416
-#: exe/webui/content_template/strings.py:418
-msgid "... sessions"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:411
-msgid "(Mission 1)"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:413
-msgid "(Mission 2)"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:415
-msgid "(Mission 3)"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:417
-#, fuzzy
-msgid "(Final Challenge)"
-msgstr "挑戰"
-
-#: exe/webui/content_template/strings.py:419
-msgid "Interdisciplinary nature"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:420
-msgid "Recommendations to involve other subjects"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:427
-msgid "Fact sheet"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:498
-msgid "Level / course"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:499
-#, fuzzy
-msgid "Final project"
-msgstr "實際專案"
-
-#: exe/webui/content_template/strings.py:500
-#, fuzzy
-msgid "Contents"
-msgstr "內容"
-
-#: exe/webui/content_template/strings.py:502
-#, fuzzy
-msgid "General guidelines for teachers"
-msgstr "老師指導方針"
-
-#: exe/webui/content_template/strings.py:503
-msgid "Resource structure"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:504
-msgid "Types of tasks and activities"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:505
-msgid "Methodological approach"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:506
-#, fuzzy
-msgid "Use of the learning diary"
-msgstr "eXe:  elearning XHTML 編輯器"
-
-#: exe/webui/content_template/strings.py:530
-msgid "Rubrics and other documents"
-msgstr ""
-
-#: exe/webui/content_template/strings.py:537
-msgid "You can download all the documents to print, share, reuse..."
-msgstr ""
-
-#: exe/webui/content_template/strings.py:546
-#, fuzzy
-msgid "Example image"
-msgstr "選擇影像"
-
-#: exe/webui/content_template/strings.py:558
 msgid "Base"
 msgstr ""
 
@@ -8864,11 +8431,11 @@ msgstr ""
 msgid "You Should Know"
 msgstr "您應該知道"
 
-#: exe/webui/editorelement.py:74 exe/webui/editorpane.py:249
+#: exe/webui/editorelement.py:74 exe/webui/editorpane.py:251
 msgid "Text Line"
 msgstr "文字行"
 
-#: exe/webui/editorelement.py:111 exe/webui/editorpane.py:251
+#: exe/webui/editorelement.py:111 exe/webui/editorpane.py:253
 msgid "Text Box"
 msgstr "文字盒"
 
@@ -8925,7 +8492,7 @@ msgstr "標題："
 msgid "Please enter an idevice name."
 msgstr "請輸入 iDevice 名稱。"
 
-#: exe/webui/editorpage.py:192 exe/webui/editorpage.py:204
+#: exe/webui/editorpage.py:191 exe/webui/editorpage.py:203
 msgid "Sorry, wrong file format."
 msgstr "對不起，檔案格式錯誤。"
 
@@ -8937,11 +8504,7 @@ msgstr "匯入 iDevice"
 msgid "Export iDevice"
 msgstr "匯出 iDevice"
 
-#: exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "離開"
-
-#: exe/webui/editorpage.py:294
+#: exe/webui/editorpage.py:295
 msgid "New iDevice"
 msgstr "新增 iDevice"
 
@@ -9003,63 +8566,64 @@ msgstr "在您的 iDevice 中新增 mp3 檔。"
 msgid "Add an attachment file to your iDevice."
 msgstr "在您的 iDevice 中新增附加檔。"
 
-#: exe/webui/editorpane.py:144 exe/webui/editorpane.py:151
-#: exe/webui/editorpane.py:159 exe/webui/editorpane.py:174
-#: exe/webui/editorpane.py:184
+#: exe/webui/editorpane.py:145 exe/webui/editorpane.py:152
+#: exe/webui/editorpane.py:160 exe/webui/editorpane.py:176
+#: exe/webui/editorpane.py:186
 msgid "Enter the label here"
 msgstr "在此輸入標籤"
 
-#: exe/webui/editorpane.py:145
+#: exe/webui/editorpane.py:146
 msgid "Enter instructions for completion here"
 msgstr "在此輸入完成說明"
 
-#: exe/webui/editorpane.py:152 exe/webui/editorpane.py:175
-#: exe/webui/editorpane.py:185
+#: exe/webui/editorpane.py:153 exe/webui/editorpane.py:177
+#: exe/webui/editorpane.py:187
 msgid "Enter the instructions for completion here"
 msgstr "在此輸入完成說明"
 
-#: exe/webui/editorpane.py:160
-#, fuzzy
-msgid "Feedback button will not appear if no data is entered into this field."
+#: exe/webui/editorpane.py:161
+msgid ""
+"Feedback button will not appear if no \n"
+"data is entered into this field."
 msgstr "如果此欄空白，則不會顯示回饋按鍵。"
 
-#: exe/webui/editorpane.py:196
+#: exe/webui/editorpane.py:198
 msgid "Please enter<br />an idevice name."
 msgstr "請輸入 iDevice 名稱。"
 
-#: exe/webui/editorpane.py:248
+#: exe/webui/editorpane.py:250
 msgid "Add Field"
 msgstr "新增欄位"
 
-#: exe/webui/editorpane.py:263
+#: exe/webui/editorpane.py:265
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:96
 msgid "Actions"
 msgstr "動作"
 
-#: exe/webui/editorpane.py:345
+#: exe/webui/editorpane.py:341
 msgid "Pedagogical Tip"
 msgstr "教學提示"
 
-#: exe/webui/editorpane.py:348 exe/webui/multimediablock.py:103
+#: exe/webui/editorpane.py:344 exe/webui/multimediablock.py:103
 #: exe/webui/rssblock.py:120 exe/webui/wikipediablock.py:185
 msgid "Emphasis"
 msgstr "強調"
 
-#: exe/webui/editorpane.py:351 exe/webui/multimediablock.py:100
+#: exe/webui/editorpane.py:347 exe/webui/multimediablock.py:100
 #: exe/webui/rssblock.py:114 exe/webui/wikipediablock.py:182
 msgid "No emphasis"
 msgstr "不強調"
 
-#: exe/webui/editorpane.py:352 exe/webui/multimediablock.py:101
+#: exe/webui/editorpane.py:348 exe/webui/multimediablock.py:101
 #: exe/webui/rssblock.py:115 exe/webui/wikipediablock.py:183
 msgid "Some emphasis"
 msgstr "部份強調"
 
-#: exe/webui/editorpane.py:367 exe/webui/jsblock.py:88
+#: exe/webui/editorpane.py:363 exe/webui/jsblock.py:86
 msgid "Select an icon"
 msgstr "選擇一個圖示"
 
-#: exe/webui/editorpane.py:389 exe/webui/jsblock.py:127
+#: exe/webui/editorpane.py:385 exe/webui/jsblock.py:124
 msgid "Icons"
 msgstr "圖示"
 
@@ -9068,7 +8632,7 @@ msgid "Translation"
 msgstr "翻譯"
 
 #: exe/webui/eleccionmultiplefpdblock.py:98 exe/webui/multichoiceblock.py:95
-#: exe/webui/quiztestblock.py:103
+#: exe/webui/quiztestblock.py:104
 msgid "Please select a correct answer for each question."
 msgstr "請為每個問題選擇一個正確的答案。"
 
@@ -9100,8 +8664,7 @@ msgstr "新增影像"
 msgid "Display as:"
 msgstr "顯示為："
 
-#: exe/webui/content_template/strings.py:30
-#: exe/webui/content_template/strings.py:522 exe/webui/element.py:796
+#: exe/webui/element.py:796
 msgid "by"
 msgstr "由"
 
@@ -9408,23 +8971,7 @@ msgstr "特大"
 msgid "Size of magnifying glass: "
 msgstr "放大鏡尺寸： "
 
-#: exe/webui/importode.py:54 exe/webui/loginpage.py:52 exe/webui/quitpage.py:63
-msgid "eXe"
-msgstr ""
-
-#: exe/webui/importode.py:73
-msgid "Error importing package with id ( {} ) from {}"
-msgstr ""
-
-#: exe/webui/importode.py:75
-msgid "Important package with id ( {} ) from {}"
-msgstr ""
-
-#: exe/webui/importode.py:82
-msgid "This may take a bit..."
-msgstr ""
-
-#: exe/webui/jsblock.py:85
+#: exe/webui/jsblock.py:83
 msgid ""
 "The title and the icon are not required. If you leave them empty the "
 "iDevice will have no emphasis."
@@ -9433,15 +8980,6 @@ msgstr "標題與圖示不一定需要。您可以留空，iDevice 不會突顯�
 #: exe/webui/listablock.py:180
 msgid "Other words"
 msgstr "其他單字"
-
-#: exe/webui/loginpage.py:57
-msgid "No user session"
-msgstr ""
-
-#: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
-#, fuzzy
-msgid "Login"
-msgstr "目錄"
 
 #: exe/webui/memorymatchblock.py:83
 msgid "Number of rows x Number of cols must be an even number<br/>"
@@ -9464,7 +9002,7 @@ msgstr ""
 msgid "Create / Trim Pairs"
 msgstr ""
 
-#: exe/webui/multiselectblock.py:91 exe/webui/quiztestblock.py:110
+#: exe/webui/multiselectblock.py:91 exe/webui/quiztestblock.py:112
 #: exe/webui/seleccionmultiplefpdblock.py:100
 msgid "Add another Question"
 msgstr "新增其他問題"
@@ -9513,32 +9051,40 @@ msgstr "在遊戲中顯示計時器"
 msgid "Add Placable Object"
 msgstr "新增可擺放物件"
 
-#: exe/webui/preferencespage.py:164
+#: exe/webui/preferencespage.py:160
 msgid "Default browser in your system"
 msgstr "您系統中的預設瀏覽器"
 
-#: exe/webui/preferencespage.py:210
+#: exe/webui/preferencespage.py:205
 msgid "Failed to get preferences"
 msgstr "取得喜好設定失敗"
 
-#: exe/webui/preferencespage.py:288
+#: exe/webui/preferencespage.py:282
 msgid "Failed to save preferences"
 msgstr "儲存喜好設定失敗"
 
-#: exe/webui/quitpage.py:68
-msgid "User session has been closed"
-msgstr ""
+#: exe/webui/quitpage.py:45
+msgid "eXe Closed"
+msgstr "eXe 已關閉"
 
-#: exe/webui/quiztestblock.py:113
+#: exe/webui/quitpage.py:49
+msgid "eXe has finished running in this window."
+msgstr "eXe 已於此視窗完成執行。"
+
+#: exe/webui/quitpage.py:53
+msgid "You can close it safely."
+msgstr "您可以安全地關閉。"
+
+#: exe/webui/quiztestblock.py:115
 msgid "Select pass rate: "
 msgstr "選擇及格線： "
 
-#: exe/webui/quiztestblock.py:143 exe/webui/quiztestblock.py:374
+#: exe/webui/quiztestblock.py:145 exe/webui/quiztestblock.py:380
 msgid "SUBMIT ANSWERS"
 msgstr "提交答案"
 
-#: exe/webui/quiztestblock.py:223 exe/webui/quiztestblock.py:320
-#: exe/webui/quiztestblock.py:378
+#: exe/webui/quiztestblock.py:225 exe/webui/quiztestblock.py:323
+#: exe/webui/quiztestblock.py:384
 #, python-format
 msgid "Your score is %d%%"
 msgstr "您的分數是 %d%%"
@@ -9563,51 +9109,51 @@ msgstr "載入"
 msgid "Image optimizer"
 msgstr "影像最佳化"
 
-#: exe/webui/scripts/authoring.js:155
+#: exe/webui/scripts/authoring.js:154
 msgid "Select one or more images"
 msgstr "選擇一個或多個圖片"
 
-#: exe/webui/scripts/authoring.js:180
+#: exe/webui/scripts/authoring.js:179
 msgid "Image Files (.jpg, .jpeg, .png, .gif, .svg)"
 msgstr "圖片檔（.jpg, .jpeg, .png, .gif, .svg）"
 
-#: exe/webui/scripts/authoring.js:206 exe/webui/scripts/authoring.js:507
+#: exe/webui/scripts/authoring.js:204 exe/webui/scripts/authoring.js:503
 msgid "Flash Movie (.flv)"
 msgstr "Flash 電影 (.flv)"
 
-#: exe/webui/scripts/authoring.js:207 exe/webui/scripts/authoring.js:517
+#: exe/webui/scripts/authoring.js:205 exe/webui/scripts/authoring.js:513
 msgid "Flash Object (.swf)"
 msgstr "Flash 物件 (.swf)"
 
-#: exe/webui/scripts/authoring.js:208
+#: exe/webui/scripts/authoring.js:206
 msgid "Quicktime Files (.mov, .qt, .mpg, .mp3, .mp4, .mpeg)"
 msgstr "QuickTime 檔案 (.mov, .qt, .mpg, .mp3, .mp4, .mpeg)"
 
-#: exe/webui/scripts/authoring.js:209
+#: exe/webui/scripts/authoring.js:207
 msgid "Windows Media Player Files (.avi, .wmv, .wm, .asf, .asx, .wmx, .wvx)"
 msgstr "Windows Media Player 檔案 (.avi, .wmv, .wm, .asf, .asx, .wmx, .wvx)"
 
-#: exe/webui/scripts/authoring.js:210
+#: exe/webui/scripts/authoring.js:208
 msgid "RealMedia Audio Files (.rm, .ra, .ram, .mp3)"
 msgstr "RealMedia 音樂檔 (.rm, .ra, .ram, .mp3)"
 
-#: exe/webui/scripts/authoring.js:265
+#: exe/webui/scripts/authoring.js:263
 msgid "JPEG Files (.jpg, .jpeg)"
 msgstr "JPEG 圖檔 (.jpg, .jpeg)"
 
-#: exe/webui/scripts/authoring.js:525
+#: exe/webui/scripts/authoring.js:521
 msgid "MP3 Audio (.mp3)"
 msgstr "MP3 音樂檔 (.mp3)"
 
-#: exe/webui/scripts/authoring.js:528
+#: exe/webui/scripts/authoring.js:524
 msgid "Select an mp3 file"
 msgstr "選擇 mp3 檔案"
 
-#: exe/webui/scripts/authoring.js:538
+#: exe/webui/scripts/authoring.js:534
 msgid "Select a package"
 msgstr "選擇套件"
 
-#: exe/webui/scripts/authoring.js:882
+#: exe/webui/scripts/authoring.js:877
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exeimage/plugin.min.js:1122
 msgid ""
 "Are you sure you want to continue without including an Image Description?"
@@ -9616,37 +9162,37 @@ msgid ""
 "images turned off."
 msgstr "您確定不要增加圖片描述嗎? 若沒有圖片描述，圖檔可能無法被身障人士、或是使用文字瀏覽器（關閉圖片功能）的使用者存取。"
 
-#: exe/webui/scripts/authoring.js:889 exe/webui/scripts/authoring.js:907
+#: exe/webui/scripts/authoring.js:884 exe/webui/scripts/authoring.js:902
 msgid "Image description"
 msgstr "圖片描述"
 
-#: exe/webui/scripts/authoring.js:890 exe/webui/scripts/authoring.js:908
+#: exe/webui/scripts/authoring.js:885 exe/webui/scripts/authoring.js:903
 msgid "Please provide an image description (alternative text):"
 msgstr "請提供圖片描述（替代文字）："
 
-#: exe/webui/scripts/authoring.js:1229
+#: exe/webui/scripts/authoring.js:1206
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:281
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:322
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:620
 msgid "Content after"
 msgstr "之後的內容："
 
-#: exe/webui/scripts/authoring.js:1232
+#: exe/webui/scripts/authoring.js:1209
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:284
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:325
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:623
 msgid "Content before"
 msgstr "之前的內容："
 
-#: exe/webui/scripts/authoring.js:1273
+#: exe/webui/scripts/authoring.js:1250
 msgid "Language settings"
 msgstr "語言設定"
 
-#: exe/webui/scripts/authoring.js:1274
+#: exe/webui/scripts/authoring.js:1251
 msgid "Custom texts (or use the default ones):"
 msgstr "自訂文字（或使用預設文字）："
 
-#: exe/webui/scripts/authoring.js:1309 exe/webui/scripts/authoring.js:1348
+#: exe/webui/scripts/authoring.js:1286
 msgid ""
 "You might create an itinerary of challenges where players won't be able "
 "to access a new game or challenge until they get a key in a previous "
@@ -9656,11 +9202,11 @@ msgid ""
 "following activity."
 msgstr ""
 
-#: exe/webui/scripts/authoring.js:1311 exe/webui/scripts/authoring.js:1350
+#: exe/webui/scripts/authoring.js:1288
 msgid "Access code is required"
 msgstr "需要存取代碼"
 
-#: exe/webui/scripts/authoring.js:1314 exe/webui/scripts/authoring.js:1353
+#: exe/webui/scripts/authoring.js:1291
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:48
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:35
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:55
@@ -9679,11 +9225,11 @@ msgstr "需要存取代碼"
 msgid "Access code"
 msgstr "存取代碼"
 
-#: exe/webui/scripts/authoring.js:1320
+#: exe/webui/scripts/authoring.js:1297
 msgid "Show a message or password when reaching the objective"
 msgstr "點擊到目標時要顯示的訊息或密碼"
 
-#: exe/webui/scripts/authoring.js:1324 exe/webui/scripts/authoring.js:1363
+#: exe/webui/scripts/authoring.js:1301
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:292
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:297
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:396
@@ -9701,61 +9247,55 @@ msgstr "點擊到目標時要顯示的訊息或密碼"
 msgid "Message"
 msgstr "訊息"
 
-#: exe/webui/scripts/authoring.js:1328 exe/webui/scripts/authoring.js:1367
+#: exe/webui/scripts/authoring.js:1305
 msgid "Percentage of hits needed to display the message"
 msgstr "顯示此訊息需要答對多少百分比的問題"
 
-#: exe/webui/scripts/authoring.js:1347
-#, fuzzy
-msgid "Itinerary"
-msgstr "Wiktionary"
+#: exe/webui/scripts/authoring.js:1324
+msgid "Passwords"
+msgstr "密碼"
 
-#: exe/webui/scripts/authoring.js:1359
-#, fuzzy
-msgid "Show a message or password"
-msgstr "點擊到目標時要顯示的訊息或密碼"
-
-#: exe/webui/scripts/authoring.js:1393
+#: exe/webui/scripts/authoring.js:1337
 msgid "You must write a clue"
 msgstr "您必須撰寫一個提示"
 
-#: exe/webui/scripts/authoring.js:1397
+#: exe/webui/scripts/authoring.js:1341
 msgid "You must provide the code to play this game"
 msgstr "您必須提供代碼來玩此遊戲"
 
-#: exe/webui/scripts/authoring.js:1401
+#: exe/webui/scripts/authoring.js:1345
 msgid "Please explain how to obtain the code to play this game"
 msgstr "請解釋您如何取得此代碼"
 
-#: exe/webui/scripts/authoring.js:1452 exe/webui/scripts/authoring.js:1471
+#: exe/webui/scripts/authoring.js:1396 exe/webui/scripts/authoring.js:1415
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:48
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:71
 msgid "Save score"
 msgstr "儲存分數"
 
-#: exe/webui/scripts/authoring.js:1457
+#: exe/webui/scripts/authoring.js:1401
 msgid "SCORM"
 msgstr "SCORM"
 
-#: exe/webui/scripts/authoring.js:1459
+#: exe/webui/scripts/authoring.js:1403
 msgid "Do not save the score"
 msgstr "不要儲存分數"
 
-#: exe/webui/scripts/authoring.js:1462
+#: exe/webui/scripts/authoring.js:1406
 msgid "Automatically save the score"
 msgstr "自動儲存分數"
 
-#: exe/webui/scripts/authoring.js:1464 exe/webui/scripts/authoring.js:1472
+#: exe/webui/scripts/authoring.js:1408 exe/webui/scripts/authoring.js:1416
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:60
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:99
 msgid "Repeat activity"
 msgstr "重覆此活動"
 
-#: exe/webui/scripts/authoring.js:1468
+#: exe/webui/scripts/authoring.js:1412
 msgid "Show a button to save the score"
 msgstr "顯示儲存分數的按鍵"
 
-#: exe/webui/scripts/authoring.js:1470
+#: exe/webui/scripts/authoring.js:1414
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:96
 #: exe/webui/scripts/idevices/scrambled-list/edition/scrambled-list.js:37
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:643
@@ -9764,38 +9304,38 @@ msgstr "顯示儲存分數的按鍵"
 msgid "Button text"
 msgstr "按鍵文字"
 
-#: exe/webui/scripts/authoring.js:1477
+#: exe/webui/scripts/authoring.js:1421
 msgid ""
 "This will only work when exporting as SCORM and while editing in "
 "eXeLearning."
 msgstr "這只在 eXeLearning 中編輯並準備匯出為 SCORM 時會有作用。"
 
-#: exe/webui/scripts/authoring.js:1478
+#: exe/webui/scripts/authoring.js:1422
 msgid ""
 "The score will be automatically saved after answering each question and "
 "at the end of the game."
 msgstr "回答完每個問題，還有遊戲結束時會自動儲存分數。"
 
-#: exe/webui/scripts/authoring.js:1479 exe/webui/scripts/authoring.js:1487
+#: exe/webui/scripts/authoring.js:1423 exe/webui/scripts/authoring.js:1431
 msgid "Include only one game with score in the page (or it won't work)."
 msgstr "只在頁面中包含一個有分數的遊戲（不然不起作用）。"
 
-#: exe/webui/scripts/authoring.js:1480 exe/webui/scripts/authoring.js:1488
+#: exe/webui/scripts/authoring.js:1424 exe/webui/scripts/authoring.js:1432
 msgid "Do not include a \"SCORM Quiz\" iDevice in the same page."
 msgstr "不要在同一頁面加入「SCORM 問題」。"
 
-#: exe/webui/scripts/authoring.js:1485
+#: exe/webui/scripts/authoring.js:1429
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:102
 msgid ""
 "The button will only be displayed when exporting as SCORM and while "
 "editing in eXeLearning."
 msgstr "此按鍵只會在 eXeLearning 中編輯並匯出為 SCORM 時顯示。"
 
-#: exe/webui/scripts/authoring.js:1486
+#: exe/webui/scripts/authoring.js:1430
 msgid "Include only one activity with a \"Save score\" button in the page."
 msgstr "只在頁面中包含一個帶有「儲存分數」按鍵的活動。"
 
-#: exe/webui/scripts/authoring.js:1557
+#: exe/webui/scripts/authoring.js:1501
 #, python-format
 msgid ""
 "You can export this game so you can later use it in another iDevice of "
@@ -9803,11 +9343,11 @@ msgid ""
 " and use them here."
 msgstr "您可以將此遊戲匯出，稍後用在另一個同樣型態的 iDevice 中。您也可以在 %s 中使用，以及從 %s 匯出遊戲然後在這裡使用。"
 
-#: exe/webui/scripts/authoring.js:1560
+#: exe/webui/scripts/authoring.js:1504
 msgid "Import/Export"
 msgstr "匯入/匯出"
 
-#: exe/webui/scripts/authoring.js:1567
+#: exe/webui/scripts/authoring.js:1511
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1350
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1366
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:1388
@@ -9851,14 +9391,14 @@ msgstr "匯入/匯出"
 msgid "Supported formats"
 msgstr "支援的格式"
 
-#: exe/webui/scripts/authoring.js:1783
+#: exe/webui/scripts/authoring.js:1727
 #: exe/webui/scripts/idevices/rubrics/export/exe-rubrics.js:50
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/export/exe_abcmusic.js:90
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:14
 msgid "Go to Tools - Preview to see this working"
 msgstr "請到「工具」─「預覽」中查看"
 
-#: exe/webui/scripts/authoring.js:1999
+#: exe/webui/scripts/authoring.js:1945
 msgid "Add a Text iDevice"
 msgstr "新增文字 iDevice"
 
@@ -9866,11 +9406,11 @@ msgstr "新增文字 iDevice"
 msgid "Do you want to overwrite the existing idevice {idevice}?"
 msgstr "您要覆寫已經存在的idevice {idevice}嗎？"
 
-#: exe/webui/scripts/editor.js:110 exe/webui/scripts/editor.js:137
+#: exe/webui/scripts/editor.js:109 exe/webui/scripts/editor.js:136
 msgid "eXe Idevices"
 msgstr "eXe iDevice"
 
-#: exe/webui/scripts/editor.js:118
+#: exe/webui/scripts/editor.js:117
 msgid "Please save the idevice first, then try to export it."
 msgstr "請先儲存idevice，再試著輸出。"
 
@@ -12107,6 +11647,10 @@ msgstr "您的互動式影片封面"
 msgid "required"
 msgstr "必填"
 
+#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:26
+msgid "Introduction"
+msgstr "介紹"
+
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:27
 msgid "Save cover"
 msgstr "儲存封面"
@@ -12657,6 +12201,10 @@ msgstr ""
 
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:167
 msgid "Click on the active areas or image icons."
+msgstr ""
+
+#: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:175
+msgid "Assessment"
 msgstr ""
 
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:177
@@ -13861,6 +13409,10 @@ msgstr "想"
 msgid "Assessment rubric"
 msgstr "測驗評分綱領"
 
+#: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:91
+msgid "Timing"
+msgstr "時程"
+
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:92
 msgid "Work in group"
 msgstr "群組內工作"
@@ -14092,7 +13644,7 @@ msgstr "問題得分"
 msgid "Preview question"
 msgstr "預覽問題"
 
-#: exe/webui/scripts/stylemanager.js:80
+#: exe/webui/scripts/stylemanager.js:78
 msgid "Do you want to delete the selected style?"
 msgstr "您要刪除此選擇的樣式嗎？"
 
@@ -16120,171 +15672,157 @@ msgstr "編輯器"
 msgid "Add Another Item to be Sorted"
 msgstr "新增另一個要排序的項目"
 
-#: exe/webui/styledesigner.py:56
+#: exe/webui/styledesigner.py:53
 msgid "Error saving style. "
 msgstr "儲存樣式時發生錯誤。 "
 
-#: exe/webui/styledesigner.py:64
+#: exe/webui/styledesigner.py:61
 msgid "Error creating style. "
 msgstr "建立樣式時發生錯誤。 "
 
-#: exe/webui/styledesigner.py:73
+#: exe/webui/styledesigner.py:70
 msgid "Error creating style, local style already exists. "
 msgstr "建立樣式時發生錯誤，本地樣式已經存在。 "
 
-#: exe/webui/styledesigner.py:128
+#: exe/webui/styledesigner.py:125
 #, python-format
 msgid "Style %s successfully created!"
 msgstr "樣式 %s 已成功建立！"
 
-#: exe/webui/styledesigner.py:141
+#: exe/webui/styledesigner.py:138
 #, python-format
 msgid "Style %s successfully saved!"
 msgstr "樣式 %s 已成功儲存！"
 
-#: exe/webui/styledesigner.py:217
+#: exe/webui/styledesigner.py:210
 #, python-format
 msgid "Style directory %s already exists"
 msgstr "樣式資料夾 %s 已存在"
 
-#: exe/webui/styledesigner.py:279 exe/webui/stylemanagerpage.py:269
+#: exe/webui/styledesigner.py:272 exe/webui/stylemanagerpage.py:252
 msgid "The style name already exists"
 msgstr "樣式名稱已存在"
 
-#: exe/webui/styledesigner.py:298
+#: exe/webui/styledesigner.py:289
 msgid "Error saving style, style directory does not exist"
 msgstr "儲存樣式時發生錯誤，樣式文件夾不存在"
 
-#: exe/webui/stylemanagerpage.py:61 exe/webui/stylemanagerpage.py:369
-#: exe/webui/stylemanagerpage.py:396
+#: exe/webui/stylemanagerpage.py:60 exe/webui/stylemanagerpage.py:378
 msgid "Style already exists. "
 msgstr "樣式名稱已存在。 "
 
-#: exe/webui/stylemanagerpage.py:164
+#: exe/webui/stylemanagerpage.py:156
 msgid "Successfully imported style"
 msgstr "成功匯入樣式"
 
-#: exe/webui/stylemanagerpage.py:168
+#: exe/webui/stylemanagerpage.py:160
 #, python-format
 msgid "Error while installing style: %s"
 msgstr "安裝樣式時發生錯誤：%s"
 
-#: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:104
-#: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:78
-#: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:352
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1321
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1375
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1442
-#: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:131
-#: exe/webui/stylemanagerpage.py:256
-#: exe/webui/tools/mindmaps/src/js/MainViewController.js:123
-#: exe/webui/tools/mindmaps/src/js/OpenDocument.js:160
-msgid "Could not retrieve data (Core error)"
-msgstr "無法取得資料（核心錯誤）"
-
-#: exe/webui/stylemanagerpage.py:282
+#: exe/webui/stylemanagerpage.py:265
 #, python-format
 msgid "Files %s does not exist or are not readable."
 msgstr "檔案  %s 不存在或是無法讀取。"
 
-#: exe/webui/stylemanagerpage.py:289
+#: exe/webui/stylemanagerpage.py:272
 msgid "Wrong config.xml file format."
 msgstr "config.xml 檔格式錯誤。"
 
-#: exe/webui/stylemanagerpage.py:292
+#: exe/webui/stylemanagerpage.py:275
 msgid "An unknown error occurred while importing the style."
 msgstr "匯入樣式時發生無法判斷的錯誤。"
 
-#: exe/webui/stylemanagerpage.py:324
+#: exe/webui/stylemanagerpage.py:307
 msgid "Error while getting styles list from the repository"
 msgstr "從樣式庫取得樣式列表時發生錯誤"
 
-#: exe/webui/stylemanagerpage.py:349
+#: exe/webui/stylemanagerpage.py:332
 msgid "Style updated correctly"
 msgstr "樣式已成功更新"
 
-#: exe/webui/stylemanagerpage.py:365
+#: exe/webui/stylemanagerpage.py:348
 msgid "Style successfully downloaded and installed"
 msgstr "成功下載、安裝樣式"
 
-#: exe/webui/stylemanagerpage.py:376
+#: exe/webui/stylemanagerpage.py:358
 msgid "Error while installing style"
 msgstr "安裝樣式時發生錯誤"
 
-#: exe/webui/stylemanagerpage.py:394
+#: exe/webui/stylemanagerpage.py:376
 msgid "Overwrite local version of this style?"
 msgstr "覆寫本地版本之樣式？"
 
-#: exe/webui/stylemanagerpage.py:397
+#: exe/webui/stylemanagerpage.py:379
 msgid ""
 "Importing this style will overwrite local style, this action cannot be "
 "undone. "
 msgstr "匯入此樣式會覆寫本機存在的樣式。此動作無法復原。 "
 
-#: exe/webui/stylemanagerpage.py:398
+#: exe/webui/stylemanagerpage.py:380
 msgid "Are you sure you want to install remote style?. "
 msgstr "您確定要安裝遠端樣式嗎？ "
 
-#: exe/webui/stylemanagerpage.py:420
+#: exe/webui/stylemanagerpage.py:402
 msgid "Error when downloading style from repository"
 msgstr "從樣式庫下載樣式時發上錯誤"
 
-#: exe/webui/stylemanagerpage.py:430 exe/webui/stylemanagerpage.py:441
+#: exe/webui/stylemanagerpage.py:412 exe/webui/stylemanagerpage.py:423
 msgid "URL not valid. "
 msgstr "URL連結錯誤。 "
 
-#: exe/webui/stylemanagerpage.py:490
+#: exe/webui/stylemanagerpage.py:472
 msgid "Style download URL not found"
 msgstr "無法找到樣式下載連結"
 
-#: exe/webui/stylemanagerpage.py:499
+#: exe/webui/stylemanagerpage.py:481
 #, python-format
 msgid "Error when getting style URL from repository styles list: %s"
 msgstr "從樣式庫取得樣式 %s 之下載連結時發生錯誤"
 
-#: exe/webui/stylemanagerpage.py:536
+#: exe/webui/stylemanagerpage.py:519
 #, python-format
 msgid "Style exported correctly: %s"
 msgstr "樣式已正確匯出：%s"
 
-#: exe/webui/stylemanagerpage.py:541
+#: exe/webui/stylemanagerpage.py:523
 #, python-format
 msgid "Could not export style : %s"
 msgstr "無法匯出樣式：%s"
 
-#: exe/webui/stylemanagerpage.py:554
+#: exe/webui/stylemanagerpage.py:531
 msgid "Style deleted correctly"
 msgstr "樣式已刪除"
 
-#: exe/webui/templatemanagerpage.py:135
+#: exe/webui/templatemanagerpage.py:127
 msgid "Successfully imported template"
 msgstr "已成功匯入樣本"
 
-#: exe/webui/templatemanagerpage.py:139
+#: exe/webui/templatemanagerpage.py:131
 #, python-format
 msgid "Error while installing template: %s"
 msgstr "安裝樣本時發生錯誤：%s"
 
-#: exe/webui/templatemanagerpage.py:236
+#: exe/webui/templatemanagerpage.py:230
 #, python-format
 msgid "SAVE FAILED! '%s' is not a valid name for a template"
 msgstr "儲存失敗！%s 不是樣本的正確名稱"
 
-#: exe/webui/templatemanagerpage.py:245
+#: exe/webui/templatemanagerpage.py:239
 #, python-format
 msgid "Template exported correctly: %s"
 msgstr "樣本已成功匯出：%s"
 
-#: exe/webui/templatemanagerpage.py:248
+#: exe/webui/templatemanagerpage.py:242
 #, python-format
 msgid "Could not export template : %s"
 msgstr "無法匯出樣本：%s"
 
-#: exe/webui/templatemanagerpage.py:262
+#: exe/webui/templatemanagerpage.py:256
 msgid "It is not possible to delete an opened template."
 msgstr "無法刪除一個已開啟的樣本。"
 
-#: exe/webui/templatemanagerpage.py:266
+#: exe/webui/templatemanagerpage.py:260
 msgid "Template deleted correctly"
 msgstr "樣本已成功刪除"
 
@@ -16537,20 +16075,6 @@ msgid "Further information:"
 msgstr "更多資訊："
 
 #: exe/webui/tools/assistant/langs/all.js:81
-msgid "http://exelearning.net/html_manual/exe20_en/"
-msgstr ""
-
-#: exe/webui/tools/assistant/langs/all.js:82
-#, fuzzy
-msgid "http://exelearning.net/forums/"
-msgstr "exelearning.net"
-
-#: exe/webui/tools/assistant/langs/all.js:83
-#, fuzzy
-msgid "http://exelearning.net/?lang=en"
-msgstr "exelearning.net"
-
-#: exe/webui/tools/assistant/langs/all.js:84
 msgid "Open Link in a New Window"
 msgstr "在新視窗開啟連結"
 
@@ -16561,11 +16085,6 @@ msgstr "顏色挑選器"
 #: exe/webui/tools/color-picker/langs/all.js:5
 msgid "Drag markers to pick a color"
 msgstr "拖曳游標選擇顏色"
-
-#: exe/webui/tools/color-picker/langs/all.js:6
-#: exe/webui/tools/mindmaps/src/js/Command.js:264
-msgid "New"
-msgstr "新增"
 
 #: exe/webui/tools/color-picker/langs/all.js:7
 msgid "Current"
@@ -16693,11 +16212,6 @@ msgstr "覆寫前請$儲存目前的影像$。"
 msgid "Add"
 msgstr "新增"
 
-#: exe/webui/tools/mindmaps/src/js/Command.js:356
-#: exe/webui/tools/mindmaps/src/js/Command.js:358
-msgid "Save As..."
-msgstr "另存為..."
-
 #: exe/webui/tools/mindmaps/src/js/HelpController.js:52
 msgid "Welcome to mindmaps"
 msgstr "歡迎使用心智圖"
@@ -16710,15 +16224,15 @@ msgstr ""
 msgid "Central Idea"
 msgstr "中心主題"
 
-#: exe/webui/tools/style-designer/js/app.js:1494
+#: exe/webui/tools/style-designer/js/app.js:1476
 msgid "Name the new style"
 msgstr "為新的樣式命名"
 
-#: exe/webui/tools/style-designer/js/app.js:1519
+#: exe/webui/tools/style-designer/js/app.js:1501
 msgid "Style Designer windows will be closed. "
 msgstr "樣式設計器視窗會被關閉。 "
 
-#: exe/webui/tools/style-designer/js/app.js:1522
+#: exe/webui/tools/style-designer/js/app.js:1504
 msgid "Page will be reloaded. "
 msgstr "頁面將重新整理。 "
 
@@ -17274,70 +16788,4 @@ msgstr "您的iDevices或是generic.data檔案是由更新版的eXe所建立。�
 
 #~ msgid "You should write your name."
 #~ msgstr "請留下大名供各方瞻仰。"
-
-#~ msgid "Package saved to: %s"
-#~ msgstr "套件已儲存至：%s"
-
-#~ msgid "The most common reasons for this are:"
-#~ msgstr "發生此問題最常見的理由為："
-
-#~ msgid "1. Package metadata is not properly filled."
-#~ msgstr "1. 套件的詮釋資料（metadata）並未正確填寫。"
-
-#~ msgid ""
-#~ "2. There is a problem with you "
-#~ "connection (or with Procomún servers), "
-#~ "so you should just try again "
-#~ "later."
-#~ msgstr "2. 您的連線有問題（也有可能是 Procomún 伺服器的關係），所以您可以稍候再試。"
-
-#~ msgid ""
-#~ "If you have problems publishing you "
-#~ "can close this dialogue, export as "
-#~ "SCORM 2004 and upload the generated "
-#~ "zip file manually to Procomún."
-#~ msgstr "若您發布時發生問題，您可以關閉此對話框，匯出成 SCORM 2004 再手動將產生的 zip 壓縮檔上傳至 Procomún。"
-
-#~ msgid "The reported error we got from Procomún was: <pre>%s</pre>"
-#~ msgstr "我們從 Procomún 得到的錯誤回報為：<pre>%s</pre>"
-
-#~ msgid "Initializing Procomún export process..."
-#~ msgstr "正在初始化 Procomún 的匯出流程..."
-
-#~ msgid "Saving package to: {filename}"
-#~ msgstr "正在儲存套件到：{filename}"
-
-#~ msgid "Save in:"
-#~ msgstr "儲存於："
-
-#~ msgid "List of styles in your system"
-#~ msgstr "您的系統中的樣式清單"
-
-#~ msgid "Project"
-#~ msgstr "專案"
-
-#~ msgid "Window"
-#~ msgstr "視窗"
-
-#~ msgid "Self-contained Folder"
-#~ msgstr "自包含資料夾"
-
-#~ msgid ""
-#~ "If you leave this page eXe "
-#~ "application continues to run. Please use"
-#~ " the menu File->Quit if you really"
-#~ " want to exit the application."
-#~ msgstr "即使您離開了這個頁面，eXe 仍然會繼續執行。要離開 eXe 請到選單中選擇「檔案」─「離開」。"
-
-#~ msgid "eXe Closed"
-#~ msgstr "eXe 已關閉"
-
-#~ msgid "eXe has finished running in this window."
-#~ msgstr "eXe 已於此視窗完成執行。"
-
-#~ msgid "You can close it safely."
-#~ msgstr "您可以安全地關閉。"
-
-#~ msgid "Passwords"
-#~ msgstr "密碼"
 
