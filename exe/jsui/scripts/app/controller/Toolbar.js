@@ -1107,7 +1107,7 @@ Ext.define('eXe.controller.Toolbar', {
                 procomunProcessExportEvent = this; // To review (this is global...)
                 Ext.Msg.show( {
                     title: _('Confirm'),
-                    msg: _('Publish on %s?').replace("%s",config['publishLabel'] + '<br /><br />' + _('Please check the Properties tab contents (title, authorship, license...).'),
+                    msg: _('Publish on %s?').replace("%s",config['publishLabel']) + '<br /><br />' + _('Please check the Properties tab contents (title, authorship, license...).'),
                     //scope: this,
                     //modal: true,
                     buttons: Ext.Msg.YESNO,
