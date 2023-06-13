@@ -56,6 +56,7 @@ Ext.define('eXe.view.forms.ExportPanel', {
                         },{
                             xtype: 'helpcontainer',
                             item: {
+                                hidden: eXe.app.config.server,
                                 xtype: 'checkboxfield',
                                 inputId: 'pp_exportSource',
                                 boxLabel: _('Create editable export?'),

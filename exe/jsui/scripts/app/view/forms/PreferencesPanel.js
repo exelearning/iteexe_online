@@ -155,6 +155,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 						items: [
 							// Document Format
 							{
+								hidden: eXe.app.config.server,
 								xtype: 'helpcontainer',
 								item: {
 									xtype: 'combobox',
@@ -175,6 +176,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 							},
 							// TinyMCE mode
 							{
+								hidden: eXe.app.config.server,
 								xtype: 'helpcontainer',
 								item: {
 									xtype: 'combobox',
@@ -216,6 +218,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 							},
 							// Internal anchors
 							{
+								hidden: eXe.app.config.server,
 								xtype: 'combobox',
 								inputId: 'internalAnchors',
 								dirtyCls: 'property-form-dirty',
@@ -231,6 +234,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 							},
 							// Force editable exports
 							{
+								hidden: eXe.app.config.server,
 								xtype: 'helpcontainer',
 								item: {
 									xtype: 'combobox',
@@ -248,6 +252,7 @@ Ext.define('eXe.view.forms.PreferencesPanel', {
 							},
 							// Compatibility with ISO 9660
 							{
+								hidden: eXe.app.config.server,
 								xtype: 'helpcontainer',
 								item: {
 									xtype: 'combobox',
