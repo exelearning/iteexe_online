@@ -744,7 +744,9 @@ class Epub3Export(object):
 
         # Copy and minify JS files
         js_files = getFilesJSToMinify('epub3', self.scriptsDir)
-        exportMinFileJS(js_files, contentPages)
+        # To review (it fails due to encoding problems in common.js) exportMinFileJS(js_files, contentPages)
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
 
 #         if hasattr(package, 'exportSource') and package.exportSource:
 #             (G.application.config.webDir / 'templates' / 'content.xsd').copyfile(outputDir / 'content.xsd')

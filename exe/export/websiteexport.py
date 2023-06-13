@@ -35,7 +35,7 @@ from exe.webui                import common
 from exe                      import globals as G
 from exe.engine.persist       import encodeObject
 from exe.engine.persistxml    import encodeObjectToXML
-from helper                   import exportMinFileJS
+# from helper                   import exportMinFileJS
 from helper                   import exportMinFileCSS
 from exe.webui.common         import getFilesCSSToMinify
 from exe.webui.common         import getFilesJSToMinify
@@ -227,7 +227,9 @@ class WebsiteExport(object):
 
         # Minify common.js file
         listFiles=getFilesJSToMinify('website', self.scriptsDir)
-        exportMinFileJS(listFiles, outputDir)
+        # To review (it fails due to encoding problems in common.js) exportMinFileJS(listFiles, outputDir)
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
 
         # Create lang file
         langFile = open(outputDir + '/common_i18n.js', "w")

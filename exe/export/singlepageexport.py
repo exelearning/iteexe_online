@@ -174,7 +174,9 @@ class SinglePageExport(object):
 
         # Minify common.js file
         listFiles=getFilesJSToMinify('singlepage', self.scriptsDir)
-        exportMinFileJS(listFiles, self.outputDir)
+        # To review (it fails due to encoding problems in common.js) exportMinFileJS(listFiles, self.outputDir)
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
 
         # Create lang file
         langFile = open(self.outputDir + '/common_i18n.js', "w")

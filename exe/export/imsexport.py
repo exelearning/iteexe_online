@@ -608,7 +608,9 @@ class IMSExport(object):
             jsFile.copyfile(outputDir / 'exe_html5.js')
 
         listFiles = getFilesJSToMinify('ims', self.scriptsDir)
-        exportMinFileJS(listFiles, outputDir)
+        # To review (it fails due to encoding problems in common.js) exportMinFileJS(listFiles, outputDir)
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
 
         self.schemasDir.copylist(('imscp_v1p1.xsd',
                                   'imsmd_v1p2p2.xsd',

@@ -664,7 +664,9 @@ class ScormExport(object):
         if self.scormType == "commoncartridge" or self.scormType == "scorm2004" or self.scormType == "scorm1.2":
             listFiles=getFilesJSToMinify('scorm', self.scriptsDir)
 
-        exportMinFileJS(listFiles, outputDir)
+        # To review (it fails due to encoding problems in common.js) exportMinFileJS(listFiles, outputDir)
+        jsFile = (self.scriptsDir/'common.js')
+        jsFile.copyfile(outputDir/'common.js')
 
         if self.scormType == "scorm2004" or self.scormType == "scorm1.2":
             self.scriptsDir.copylist(('SCORM_API_wrapper.js',
