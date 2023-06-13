@@ -1287,12 +1287,13 @@ class MainPage(RenderableLivePage):
 
     def handleExportProcomun(self, client):
         # If the user hasn't done the OAuth authentication yet, start this process
-        if not client.session.oauthToken.get('procomun'):
-            verify = True
-            if hasattr(sys, 'frozen'):
-                verify = 'cacert.pem'
-            oauth2Session = OAuth2Session(ProcomunOauth.CLIENT_ID, redirect_uri=ProcomunOauth.REDIRECT_URI)
-            oauth2Session.verify = verify
+        if hasattr(client.session,"oauthToken") and client.session.oauthToken:
+            if not client.session.oauthToken.get('procomun'):
+                verify = True
+                if hasattr(sys, 'frozen'):
+                    verify = 'cacert.pem'
+                oauth2Session = OAuth2Session(ProcomunOauth.CLIENT_ID, redirect_uri=ProcomunOauth.REDIRECT_URI)
+                oauth2Session.verify = verify
 
         def exportScorm():
             """

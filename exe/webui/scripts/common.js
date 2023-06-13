@@ -1900,7 +1900,7 @@ $exe.cloze = {
 			var t = document.getElementById("clozelangVar" + e + ".feedbackId");
 			if (t) {
 				var n = t.value;
-				$exe.cloze.toggle(n)
+				$exe.cloze.toggle(n);
 			}
 		}
 	
