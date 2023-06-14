@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-13 13:57+0200\n"
+"POT-Creation-Date: 2023-06-14 12:09+0200\n"
 "PO-Revision-Date: 2021-06-08 10:30+0200\n"
 "Last-Translator: Dmytro Abaydullin <abaidullin11@gmail.com>, 2021\n"
 "Language: ru\n"
@@ -1613,7 +1613,7 @@ msgstr "Прикреплённые файлы Idevice."
 
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:274
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:278
 #: exe/webui/common.py:682
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:89
 #: exe/webui/tools/style-designer/langs/all.js:66
@@ -1622,7 +1622,7 @@ msgstr "Нет"
 
 #: exe/engine/fileattachidevice.py:45 exe/engine/fileattachidevice.py:66
 #: exe/engine/memorymatchidevice.py:59 exe/engine/memorymatchidevice.py:75
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:275
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:279
 #: exe/webui/common.py:681
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:88
 #: exe/webui/tools/style-designer/langs/all.js:65
@@ -2926,7 +2926,7 @@ msgid "My Catalog"
 msgstr "Мой каталог"
 
 #: exe/engine/package.py:1952
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:292
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:297
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:993
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1001
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:56
@@ -3799,9 +3799,9 @@ msgstr ""
 "exe_do: ошибка: Не удаётся импортировать из '%s'.\n"
 "Была ошибка:"
 
-#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:473
-#: exe/jsui/mainpage.py:1894 exe/jsui/mainpage.py:1940
-#: exe/jsui/mainpage.py:1985 exe/jsui/mainpage.py:2006
+#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:468
+#: exe/jsui/mainpage.py:1889 exe/jsui/mainpage.py:1935
+#: exe/jsui/mainpage.py:1980 exe/jsui/mainpage.py:2001
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3954,24 +3954,24 @@ msgstr "Экспериментальный"
 msgid "Gamification"
 msgstr "Геймификация"
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1454 exe/jsui/mainpage.py:1475
-#: exe/jsui/mainpage.py:1634 exe/jsui/mainpage.py:1676
+#: exe/jsui/mainpage.py:497 exe/jsui/mainpage.py:1449 exe/jsui/mainpage.py:1470
+#: exe/jsui/mainpage.py:1629 exe/jsui/mainpage.py:1671
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "Невозможно получить доступ к названному каталогу "
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1456 exe/jsui/mainpage.py:1634
-#: exe/jsui/mainpage.py:1676
+#: exe/jsui/mainpage.py:497 exe/jsui/mainpage.py:1451 exe/jsui/mainpage.py:1629
+#: exe/jsui/mainpage.py:1671
 msgid ". Please use ASCII names."
 msgstr ""
 ". Пожалуйста, используйте имена из символов ASCII (латинские буквы и "
 "цифры)."
 
-#: exe/jsui/mainpage.py:510 exe/jsui/mainpage.py:554
+#: exe/jsui/mainpage.py:505 exe/jsui/mainpage.py:549
 msgid "SAVE FAILED!"
 msgstr "ОШИБКА СОХРАНЕНИЯ!"
 
-#: exe/jsui/mainpage.py:514
+#: exe/jsui/mainpage.py:509
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3980,9 +3980,9 @@ msgstr ""
 "ОШИБКА СОХРАНЕНИЯ!\n"
 "\"%s\" не является корректным именем для пакета"
 
-#: exe/jsui/mainpage.py:520 exe/jsui/mainpage.py:573 exe/jsui/mainpage.py:973
-#: exe/jsui/mainpage.py:1035 exe/jsui/mainpage.py:1093
-#: exe/jsui/mainpage.py:1781
+#: exe/jsui/mainpage.py:515 exe/jsui/mainpage.py:568 exe/jsui/mainpage.py:968
+#: exe/jsui/mainpage.py:1030 exe/jsui/mainpage.py:1088
+#: exe/jsui/mainpage.py:1776
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3991,12 +3991,12 @@ msgstr ""
 "ОШИБКА СОХРАНЕНИЯ!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:530
+#: exe/jsui/mainpage.py:525
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
 msgstr ""
 
-#: exe/jsui/mainpage.py:558
+#: exe/jsui/mainpage.py:553
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -4005,24 +4005,24 @@ msgstr ""
 "ОШИБКА СОХРАНЕНИЯ!\n"
 "\"%s\" не является корректным именем для шаблона"
 
-#: exe/jsui/mainpage.py:579
+#: exe/jsui/mainpage.py:574
 #, python-format
 msgid "Template saved: %s"
 msgstr "Шаблон сохранён в: %s"
 
-#: exe/jsui/mainpage.py:674 exe/webui/stylemanagerpage.py:445
+#: exe/jsui/mainpage.py:669 exe/webui/stylemanagerpage.py:445
 msgid "Downloading..."
 msgstr "Загрузка..."
 
-#: exe/jsui/mainpage.py:700
+#: exe/jsui/mainpage.py:695
 msgid "Connecting to classification sources repository..."
 msgstr "Подключение к хранилищу источников классификации..."
 
-#: exe/jsui/mainpage.py:700 exe/jsui/mainpage.py:706
+#: exe/jsui/mainpage.py:695 exe/jsui/mainpage.py:701
 msgid "Sources Download"
 msgstr "Источники загрузки"
 
-#: exe/jsui/mainpage.py:706
+#: exe/jsui/mainpage.py:701
 msgid ""
 "There has been an error while trying to download classification sources. "
 "Please try again later."
@@ -4030,27 +4030,27 @@ msgstr ""
 "При попытке загрузить источники классификации произошла ошибка. "
 "Пожалуйста, повторите попытку позже."
 
-#: exe/jsui/mainpage.py:896 exe/jsui/mainpage.py:992 exe/jsui/mainpage.py:1057
-#: exe/jsui/mainpage.py:1120 exe/jsui/mainpage.py:1201
+#: exe/jsui/mainpage.py:891 exe/jsui/mainpage.py:987 exe/jsui/mainpage.py:1052
+#: exe/jsui/mainpage.py:1115 exe/jsui/mainpage.py:1196
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr "Предпросмотр каталога  %s - это файл, невозможно заменить его"
 
-#: exe/jsui/mainpage.py:915
+#: exe/jsui/mainpage.py:910
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr "Локальный файл %s не найден, невозможен его предпросмотр"
 
-#: exe/jsui/mainpage.py:1160 exe/jsui/mainpage.py:1186
-#: exe/jsui/mainpage.py:1229
+#: exe/jsui/mainpage.py:1155 exe/jsui/mainpage.py:1181
+#: exe/jsui/mainpage.py:1224
 msgid "Could not create the image"
 msgstr "Не удалось создать изображение"
 
-#: exe/jsui/mainpage.py:1267
+#: exe/jsui/mainpage.py:1262
 msgid "Importing HTML..."
 msgstr "Импортирование HTML..."
 
-#: exe/jsui/mainpage.py:1273
+#: exe/jsui/mainpage.py:1268
 #, python-format
 msgid ""
 "LOM Metadata import FAILED!\n"
@@ -4059,29 +4059,29 @@ msgstr ""
 "Неудача импорта метаданных LOM!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1276
+#: exe/jsui/mainpage.py:1271
 msgid "Error importing HTML:\n"
 msgstr "Ошибка импорта HTML:\n"
 
-#: exe/jsui/mainpage.py:1304
+#: exe/jsui/mainpage.py:1299 exe/jsui/scripts/app/controller/Toolbar.js:1239
 msgid "Exporting package as SCORM 1.2..."
 msgstr "Экспортировать пакет как SCORM 1.2..."
 
-#: exe/jsui/mainpage.py:1322
-#, fuzzy
-msgid "Uploading package to {}..."
+#: exe/jsui/mainpage.py:1317
+#, fuzzy, python-format
+msgid "Uploading package to %s..."
 msgstr "Выгрузка пакета в Procomún..."
 
-#: exe/jsui/mainpage.py:1338
+#: exe/jsui/mainpage.py:1333
 msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1378
-#, fuzzy
-msgid "Publishing document to {}"
+#: exe/jsui/mainpage.py:1373
+#, fuzzy, python-format
+msgid "Sending document to %s"
 msgstr "Публикация документа в Procomún"
 
-#: exe/jsui/mainpage.py:1400
+#: exe/jsui/mainpage.py:1395
 #, fuzzy, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
@@ -4090,7 +4090,7 @@ msgstr ""
 "Пакет, экспортированный в <a href=\"%s\" target=\"_blank\" title=\"Click "
 "to view the exported package\">%s</a>."
 
-#: exe/jsui/mainpage.py:1404
+#: exe/jsui/mainpage.py:1399
 #, fuzzy, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
@@ -4101,19 +4101,14 @@ msgstr ""
 "веб-страницы <a href=\"%s\" target=\"_blank\" title=\"Procomún "
 "Home\">Procomún</a></small>."
 
-#: exe/jsui/mainpage.py:1415
+#: exe/jsui/mainpage.py:1410
 #, python-format
 msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1427
-#, fuzzy
-msgid "when trying to upload package to {}."
-msgstr "Неизвестная ошибка при выгрузке пакета в Procomún."
-
-#: exe/jsui/mainpage.py:1461 exe/jsui/mainpage.py:1919
+#: exe/jsui/mainpage.py:1456 exe/jsui/mainpage.py:1914
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -4122,25 +4117,25 @@ msgstr ""
 "ОШИБКА СОХРАНЕНИЯ!\n"
 "\"%s\" не является корректным именем для файла"
 
-#: exe/jsui/mainpage.py:1472 exe/jsui/mainpage.py:1482
-#: exe/jsui/mainpage.py:1485 exe/jsui/mainpage.py:1490
-#: exe/jsui/mainpage.py:1493 exe/jsui/mainpage.py:1496
-#: exe/jsui/mainpage.py:1499 exe/jsui/mainpage.py:1502
-#: exe/jsui/mainpage.py:1507 exe/jsui/mainpage.py:1851
-#: exe/jsui/mainpage.py:1966
+#: exe/jsui/mainpage.py:1467 exe/jsui/mainpage.py:1477
+#: exe/jsui/mainpage.py:1480 exe/jsui/mainpage.py:1485
+#: exe/jsui/mainpage.py:1488 exe/jsui/mainpage.py:1491
+#: exe/jsui/mainpage.py:1494 exe/jsui/mainpage.py:1497
+#: exe/jsui/mainpage.py:1502 exe/jsui/mainpage.py:1846
+#: exe/jsui/mainpage.py:1961
 msgid "EXPORT FAILED!"
 msgstr "ОШИБКА ЭКСПОРТА!"
 
-#: exe/jsui/mainpage.py:1594
+#: exe/jsui/mainpage.py:1589
 msgid "Correct XLIFF import"
 msgstr "Откорректируйте импорт XLIFF"
 
-#: exe/jsui/mainpage.py:1597
+#: exe/jsui/mainpage.py:1592
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "Ошибка импорта XLIFF: %s"
 
-#: exe/jsui/mainpage.py:1661 exe/jsui/mainpage.py:1700
+#: exe/jsui/mainpage.py:1656 exe/jsui/mainpage.py:1695
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -4149,22 +4144,22 @@ msgstr ""
 "ОШИБКА РАСПАКОВКИ!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1663 exe/jsui/mainpage.py:1702
+#: exe/jsui/mainpage.py:1658 exe/jsui/mainpage.py:1697
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "Пакет распакован в: %s"
 
-#: exe/jsui/mainpage.py:1714 exe/webui/stylemanagerpage.py:259
+#: exe/jsui/mainpage.py:1709 exe/webui/stylemanagerpage.py:259
 msgid "Directory exists"
 msgstr "Директория существует"
 
-#: exe/jsui/mainpage.py:1728 exe/jsui/mainpage.py:1836
-#: exe/jsui/mainpage.py:1859 exe/jsui/mainpage.py:1882
-#: exe/jsui/mainpage.py:1895 exe/jsui/mainpage.py:1901
-#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:1941
-#: exe/jsui/mainpage.py:1951 exe/jsui/mainpage.py:1971
-#: exe/jsui/mainpage.py:1986 exe/jsui/mainpage.py:1992
-#: exe/jsui/mainpage.py:2007 exe/jsui/mainpage.py:2017
+#: exe/jsui/mainpage.py:1723 exe/jsui/mainpage.py:1831
+#: exe/jsui/mainpage.py:1854 exe/jsui/mainpage.py:1877
+#: exe/jsui/mainpage.py:1890 exe/jsui/mainpage.py:1896
+#: exe/jsui/mainpage.py:1920 exe/jsui/mainpage.py:1936
+#: exe/jsui/mainpage.py:1946 exe/jsui/mainpage.py:1966
+#: exe/jsui/mainpage.py:1981 exe/jsui/mainpage.py:1987
+#: exe/jsui/mainpage.py:2002 exe/jsui/mainpage.py:2012
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -4173,12 +4168,12 @@ msgstr ""
 "ОШИБКА ЭКСПОРТА!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1758 exe/jsui/mainpage.py:1817
+#: exe/jsui/mainpage.py:1753 exe/jsui/mainpage.py:1812
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "Имя %s - это файл, невозможно заменить его"
 
-#: exe/jsui/mainpage.py:1765 exe/jsui/mainpage.py:1824
+#: exe/jsui/mainpage.py:1760 exe/jsui/mainpage.py:1819
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
@@ -4187,18 +4182,18 @@ msgstr ""
 "Папка с именем %s уже существует. Выберите другую или удалите "
 "существующую и попробуйте снова."
 
-#: exe/jsui/mainpage.py:1788 exe/jsui/mainpage.py:1840
-#: exe/jsui/mainpage.py:1863 exe/jsui/mainpage.py:1884
-#: exe/jsui/mainpage.py:1903 exe/jsui/mainpage.py:1927
-#: exe/jsui/mainpage.py:1957 exe/jsui/mainpage.py:1973
-#: exe/jsui/mainpage.py:1994 exe/jsui/mainpage.py:2021
+#: exe/jsui/mainpage.py:1783 exe/jsui/mainpage.py:1835
+#: exe/jsui/mainpage.py:1858 exe/jsui/mainpage.py:1879
+#: exe/jsui/mainpage.py:1898 exe/jsui/mainpage.py:1922
+#: exe/jsui/mainpage.py:1952 exe/jsui/mainpage.py:1968
+#: exe/jsui/mainpage.py:1989 exe/jsui/mainpage.py:2016
 #, python-format
 msgid "Exported to %s"
 msgstr "Экспорт в %s"
 
-#: exe/jsui/mainpage.py:1790 exe/jsui/mainpage.py:1842
-#: exe/jsui/mainpage.py:1865 exe/jsui/mainpage.py:1959
-#: exe/jsui/mainpage.py:2023
+#: exe/jsui/mainpage.py:1785 exe/jsui/mainpage.py:1837
+#: exe/jsui/mainpage.py:1860 exe/jsui/mainpage.py:1954
+#: exe/jsui/mainpage.py:2018
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -4209,23 +4204,23 @@ msgstr ""
 "Были некоторые ресурсы, которые нельзя было переименовать для "
 "совместимости с ISO9660."
 
-#: exe/jsui/mainpage.py:1954
+#: exe/jsui/mainpage.py:1949
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr "Следующие поля были разрезаны для соответствия стандарту SCORM 1.2: %s"
 
-#: exe/jsui/mainpage.py:2060 exe/webui/stylemanagerpage.py:284
+#: exe/jsui/mainpage.py:2055 exe/webui/stylemanagerpage.py:284
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "Файл %s не существует или недоступен для чтения."
 
-#: exe/jsui/mainpage.py:2067
+#: exe/jsui/mainpage.py:2062
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 "Невозможно загрузить файл, пожалуйста сообщите об ошибке по электронной "
 "почте (bugs@exelearning.org)"
 
-#: exe/jsui/mainpage.py:2070
+#: exe/jsui/mainpage.py:2065
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
@@ -4234,7 +4229,7 @@ msgstr ""
 "Извините, неправильный формат файла:\n"
 "%s"
 
-#: exe/jsui/mainpage.py:2072
+#: exe/jsui/mainpage.py:2067
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -4358,7 +4353,7 @@ msgstr "Настройки сохранены"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
 #: exe/jsui/scripts/app/controller/Toolbar.js:1278
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:375
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:380
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:711
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:280
@@ -4825,13 +4820,8 @@ msgstr "Вы хотите экспортировать пакет с текущ�
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1238
 #, fuzzy
-msgid "Publishing document to "
-msgstr "Публикация документа в Procomún"
-
-#: exe/jsui/scripts/app/controller/Toolbar.js:1239
-#, fuzzy
-msgid "export process..."
-msgstr "Ожидание прогресса..."
+msgid "Publishing..."
+msgstr "издатель"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1251
 msgid ""
@@ -5057,11 +5047,11 @@ msgstr "Открыть"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:157
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:201
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:192
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:193
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:251
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:366
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:371
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129 exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
@@ -5306,7 +5296,7 @@ msgstr ""
 "этих и других прав в отношении ресурса."
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:207
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:198
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:199
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:256
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:296
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:686
@@ -5316,7 +5306,7 @@ msgid "Clear"
 msgstr "Очистить"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:213
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:204
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:205
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:261
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:301
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:692
@@ -5350,14 +5340,14 @@ msgstr "LOM v1.0"
 msgid "LOM-ES v1.0"
 msgstr "LOM-ES v1.0"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:79
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:109
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:112
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:80
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:110
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:113
 msgid "Create editable export?"
 msgstr "Создать редактируемый экспорт?"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:83
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:86
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:84
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:87
 msgid ""
 "Checking this option, the exported component will be editable with "
 "eXeLearning."
@@ -5365,12 +5355,12 @@ msgstr ""
 "Идёт проверка этой опции, экспортируемый компонент будет редактируемым "
 "через eXeLearning."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:92
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:93
 msgid "Export a copy of the elp"
 msgstr "Экспортировать копию elp"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:96
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:99
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:97
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:100
 msgid ""
 "The exported folder will include a copy of the elp file, even if your "
 "content doesn't have a link to it. If you want anyone to find your elp "
@@ -5382,11 +5372,11 @@ msgstr ""
 "легко нашёл ваш elp, то рассмотрите возможность добавления ссылки на elp "
 "в ваше содержимое вместо использования этой опции."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:105
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:106
 msgid "Add a search bar (editable Web Site export only)"
 msgstr "Добавить панель поиска (только редактируемый экспорт веб-сайта)"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:109
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:110
 msgid ""
 "Checking this option, a search box will be added to every page. The \"%\""
 " option has to be checked too. It will only work if JavaScript is "
@@ -5396,7 +5386,7 @@ msgstr ""
 "\"%\" тоже должна быть отмечена. Он будет работать только в том случае, "
 "если включен JavaScript, и только в современных браузерах."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:112
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:113
 msgid ""
 "Checking this option, a search box will be added to every page. The \"%\""
 " option has to be checked too. It will only work if JavaScript is "
@@ -5406,12 +5396,12 @@ msgstr ""
 "\"%\" тоже должна быть отмечена. Это будет работать только если "
 "JavaScript включен."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:118
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:119
 msgid "Add page counters in the footer and header of the export?"
 msgstr "Добавить счётчики страниц в нижнем колонтитуле и заголовке экспорта?"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:122
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:125
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:123
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:126
 msgid ""
 "Checking this option, a \"Page X of Y.\" text will be added to every page"
 " of the exported content (except ePub's frontpage). This doesn't affect "
@@ -5421,39 +5411,39 @@ msgstr ""
 "страницу экспортируемого содержимого (кроме первой страницы ePub). Это не"
 " влияет на файлы экспорта отдельных страниц и текстовых файлов."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:131
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:132
 msgid "Math content: Load MathJax in pages with LaTeX code."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:135
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:138
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:136
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:139
 msgid ""
 "Checking this option, pages with LaTeX code will automatically load the "
 "MathJax JavaScript file from a content delivery network (CDN). MathJax is"
 " a JavaScript display engine for mathematics."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:144
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:145
 msgid "\"Made with eXeLearning\" link"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:148
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:151
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:149
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:152
 msgid ""
 "Help us spreading eXeLearning. Checking this option, a \"Made with "
 "eXeLearning\" link will be displayed in your pages."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:157
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:158
 msgid "SCORM Options (1.2 and 2004)"
 msgstr "SCORM Опции (1.2 и 2004)"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:165
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:166
 msgid "Include Single Page export file?"
 msgstr "Экспортируемый файл включает простую страницу?"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:169
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:172
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:170
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:173
 msgid ""
 "Checking this option the exported SCORM file will include a file named "
 "\"singlepage_index.html\" containing the result of exporting this eXe "
@@ -5463,12 +5453,12 @@ msgstr ""
 " с именем \"singlepage_index.html\", содержащий результат экспорта этого "
 "eXe пакета в виде одной страницы."
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:178
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:179
 msgid "Include Web Site export files?"
 msgstr "Экспортируемые файлы включают веб-сайт?"
 
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:182
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:185
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:183
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:186
 msgid ""
 "Checking this option the exported SCORM file will include the result of "
 "exporting this eXe package as Web Site. All the html files will have the "
@@ -6189,27 +6179,27 @@ msgstr "Выбрать язык"
 msgid "Advanced"
 msgstr "Дополнительно"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:188
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:189
 msgid "Default format for the new documents"
 msgstr "Формат по умолчанию для новых документов"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:199
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:200
 msgid "The current document format can be modified in the Properties tab"
 msgstr "Текущий формат документа может быть изменён во вкладке Свойства"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:210
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:212
 msgid "Editor mode"
 msgstr "Режим редактора"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:212
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:214
 msgid "Permissive"
 msgstr "Разрешительный"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:213
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:215
 msgid "Strict"
 msgstr "Строгий"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:221
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:223
 msgid ""
 "\"Permissive\" will allow any markup. \"Strict\" will allow only valid "
 "markup: It will remove any invalid code, even HTML5 tags (except VIDEO "
@@ -6219,16 +6209,16 @@ msgstr ""
 " только корректной разметки: Это позволит удалить неверный код, даже "
 "HTML5 теги (кроме VIDEO и AUDIO) при использовании формата XHTML."
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:234
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:236
 msgid "Editor version"
 msgstr "Версия редактора"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:237
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:239
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/pastemath/plugin.min.js:678
 msgid "recommended"
 msgstr "рекомендовано"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:245
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:247
 msgid ""
 "We recommend you to use the latest available version. An old one could be"
 " useful to edit some old contents."
@@ -6236,27 +6226,27 @@ msgstr ""
 "Мы рекомендуем использовать последнюю доступную версию. Старая версия "
 "может быть полезна чтобы изменить некоторое старое содержимое."
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:253
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:256
 msgid "Internal Linking (for Web Site Exports only)"
 msgstr "Внутренние ссылки (для веб-сайта только экспорт)"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:257
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:260
 msgid "Enable All Internal Linking"
 msgstr "Включить все внутренние ссылки"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:258
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:261
 msgid "Disable Auto-Top Internal Linking"
 msgstr "Отключить Auto-Top внутренних ссылок"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:259
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:262
 msgid "Disable All Internal Linking"
 msgstr "Отключить внутреннее связывание"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:272
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:276
 msgid "Always force editable exports on package load"
 msgstr "Всегда принуждать редактируемые экспорты при загрузке пакета"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:279
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:283
 msgid ""
 "This will ignore the package \"Create editable export?\" setting every "
 "time it's loaded. You will be able to disable it before exporting, but it"
@@ -6266,11 +6256,11 @@ msgstr ""
 "каждой загрузке. Вы сможете отключить его перед экспортом, но он будет "
 "сброшен каждый раз, когда вы откроете пакет."
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:290
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:295
 msgid "Naming standard for exported content"
 msgstr "Стандарт именования для экспортируемого содержимого"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:297
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:302
 msgid ""
 "If \"ISO 9660\" is selected, file names will be cut to 8.3 format to be "
 "compliant with ISO 9660. Note: This option only works with SCORM and Web "
@@ -6280,15 +6270,15 @@ msgstr ""
 "8.3, чтобы соответствовать ISO 9660. Примечание: Этот параметр работает "
 "только с типами экспорта SCORM и веб-сайт."
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:308
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:313
 msgid "Time to remind the user about saving (in minutes)"
 msgstr "Время для напоминания пользователю о сохранении (в минутах)"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:310
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:315
 msgid "Never"
 msgstr "Никогда"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:319
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:324
 msgid ""
 "By enabling this, a confirmation dialog will be shown after the selected "
 "amount of time to remind the user that he/she should save his/her work."
@@ -6297,15 +6287,15 @@ msgstr ""
 "подтверждения, чтобы напомнить пользователю, что он/она должны сохранить "
 "свою работу."
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:324
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:329
 msgid "Default license for the new documents"
 msgstr "Лицензия по умолчанию для новых документов"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:351
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:356
 msgid "The current document license can be modified in the Properties tab."
 msgstr "Текущая лицензия документа может быть изменена во вкладке Свойства"
 
-#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:393
+#: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:398
 msgid "Show this window on eXe start"
 msgstr "Показывать это окно при старте eXe"
 
@@ -6358,7 +6348,7 @@ msgstr "Поиск и загрузка новых стилей из репози
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
 #, fuzzy
-msgid "Your styles"
+msgid "My styles"
 msgstr "Импортировать стиль"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
@@ -6831,7 +6821,7 @@ msgstr "Успешно"
 msgid "Load Error"
 msgstr "Ошибка загрузки"
 
-#: exe/jsui/scripts/exe.js:314
+#: exe/jsui/scripts/exe.js:316
 msgid ""
 "A new version of eXeLearning (%) is available. Would you like to download"
 " it now?"
@@ -6839,24 +6829,24 @@ msgstr "Доступна новая версия eXeLearning (%). Хотите �
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:695 exe/jsui/scripts/exe.js:317
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:695 exe/jsui/scripts/exe.js:319
 msgid "Warning!"
 msgstr "Предупреждение!"
 
-#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:406
+#: exe/jsui/scripts/app/view/ui/LeftPanel.js:120 exe/jsui/scripts/exe.js:408
 msgid "Group iDevices"
 msgstr "Сгруппировать iDevice'ы"
 
-#: exe/jsui/scripts/exe.js:432 exe/jsui/scripts/exe.js:443
+#: exe/jsui/scripts/exe.js:434 exe/jsui/scripts/exe.js:445
 msgid "Show panel"
 msgstr "Показать панель"
 
-#: exe/jsui/scripts/exe.js:466
+#: exe/jsui/scripts/exe.js:468
 #, fuzzy
 msgid "Use the left panel to create pages and add content."
 msgstr "После создания страницы вы можете добавить содержимое."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1203 exe/jsui/scripts/exe.js:467
+#: exe/jsui/scripts/app/controller/Toolbar.js:1203 exe/jsui/scripts/exe.js:469
 msgid "Don't show this warning again"
 msgstr "Не показывать это предупреждение снова"
 
@@ -9584,11 +9574,13 @@ msgid "Size of magnifying glass: "
 msgstr "Размер увеличительного стекла: "
 
 #: exe/webui/importode.py:73
-msgid "Error importing package with id ( {} ) from {}"
-msgstr ""
+#, fuzzy, python-format
+msgid "Error importing package with id %s from %s"
+msgstr "Ошибка экспорта пакета \"%s\" в Procomún."
 
 #: exe/webui/importode.py:75
-msgid "Importing package with id ( {} ) from {}"
+#, python-format
+msgid "Importing package with id %s from %s"
 msgstr ""
 
 #: exe/webui/importode.py:82
@@ -17825,5 +17817,20 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "eXe"
+#~ msgstr ""
+
+#~ msgid "Publishing document to {}"
+#~ msgstr "Публикация документа в Procomún"
+
+#~ msgid "when trying to upload package to {}."
+#~ msgstr "Неизвестная ошибка при выгрузке пакета в Procomún."
+
+#~ msgid "export process..."
+#~ msgstr "Ожидание прогресса..."
+
+#~ msgid "Error importing package with id ( {} ) from {}"
+#~ msgstr ""
+
+#~ msgid "Importing package with id ( {} ) from {}"
 #~ msgstr ""
 
