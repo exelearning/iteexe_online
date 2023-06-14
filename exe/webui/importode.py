@@ -70,9 +70,9 @@ class ImportOdePage(Renderable, rend.Page):
     def render_msg1(self, ctx, data):
         ctx.tag.clear()
         if self.error:
-            return ctx.tag()[_("Error importing package with id ( {} ) from {}").format(self.ode_id,self.repository_url)]
+            return ctx.tag()[_("Error importing package with id %s from %s") % (self.ode_id, self.repository_url)]
         else:
-            return ctx.tag()[_("Importing package with id ( {} ) from {}").format(self.ode_id,self.repository_url)]
+            return ctx.tag()[_("Importing package with id %s from %s") % (self.ode_id, self.repository_url)]
 
     def render_msg2(self, ctx, data):
         ctx.tag.clear()

@@ -168,7 +168,7 @@ class Integration:
                                 config_dict[key][sub_key] = sub_value
                 self.config = config_dict
         else:
-            msx = ('The configuration file {} does not exist or cannot be accessed.').format(self.publish_config_path)
+            msx = ('The configuration file %s does not exist or cannot be accessed.') % self.publish_config_path
             raise Exception(msx)
 
     def log_info_integration(self, error=False, info='', params={}):

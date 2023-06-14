@@ -1177,8 +1177,8 @@ Ext.define('eXe.controller.Toolbar', {
     exportProcomun: function() {
         this.saveWorkInProgress();
         Ext.Msg.show({
-            title: _('Publishing document to ')+config['publishLabel'],
-            msg: config['publishLabel']+' '+_('export process...'),
+            title: _('Publishing...'),
+            msg: _('Exporting package as SCORM 1.2...'),
             width: 300,
             progress: true,
             progressText: '0%',

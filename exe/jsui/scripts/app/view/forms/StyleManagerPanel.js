@@ -297,7 +297,7 @@ function createPanelStyles(styles) {
     if (itemsUserShow.length > 0) {
         panel.push({
             xtype: 'fieldset',
-            title: _("Your styles"),
+            title: _("My styles"),
             margin: 10,
             items: itemsUserShow
         })

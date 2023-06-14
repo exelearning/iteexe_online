@@ -1314,7 +1314,7 @@ class MainPage(RenderableLivePage):
             Upload the exported package to elp Repository.
             """
 
-            uploading_package_message = _(u'Uploading package to {}...').format(self.integration.repo_name)
+            uploading_package_message = _(u'Uploading package to %s...')  % self.integration.repo_name
 
             # Update progress for the user
             client.call('Ext.MessageBox.updateProgress', 0.6, '50%', uploading_package_message)
@@ -1370,7 +1370,7 @@ class MainPage(RenderableLivePage):
                     return
 
                 if dict_response['status'] == '0':
-                    publish_document_message = _(u'Publishing document to {}').format(self.integration.repo_name)
+                    publish_document_message = _(u'Publishing document to %s') % self.integration.repo_name
 
                     if dict_response['ode_id']:
                         self.package.ode_id = dict_response['ode_id']
@@ -1419,7 +1419,7 @@ class MainPage(RenderableLivePage):
                 client.call('Ext.MessageBox.hide')
                 error_args = e.args
                 if error_args and len(error_args[0]) == 2:
-                    client.alert(u'Error {}:{} '.format(*error_args[0])+_(u'when trying to upload package to {}.').format(self.integration.repo_name),
+                    client.alert(u'Error {}:{} '.format(*error_args[0]),
                                 title=publish_document_message)
                 else:
                     client.alert(u'Error {}'.format(e), title=publish_document_message)
