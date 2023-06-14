@@ -1370,7 +1370,7 @@ class MainPage(RenderableLivePage):
                     return
 
                 if dict_response['status'] == '0':
-                    publish_document_message = _(u'Publishing document to %s') % self.integration.repo_name
+                    publish_document_message = _(u'Sending document to %s') % self.integration.repo_name
 
                     if dict_response['ode_id']:
                         self.package.ode_id = dict_response['ode_id']
