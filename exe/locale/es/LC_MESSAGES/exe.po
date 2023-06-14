@@ -4113,18 +4113,16 @@ msgid "Exporting package as SCORM 1.2..."
 msgstr "Exportando el paquete como SCORM 1.2..."
 
 #: exe/jsui/mainpage.py:1317
-#, fuzzy, python-format
 msgid "Uploading package to %s..."
-msgstr "Subiendo el paquete a {}..."
+msgstr "Subiendo el paquete a %s..."
 
 #: exe/jsui/mainpage.py:1333
 msgid "No response status"
 msgstr "No se ha obtenido respuesta"
 
 #: exe/jsui/mainpage.py:1373
-#, fuzzy, python-format
 msgid "Sending document to %s"
-msgstr "Publicando el documento en "
+msgstr "Enviando el documento a %s"
 
 #: exe/jsui/mainpage.py:1395
 #, python-format
@@ -4865,9 +4863,8 @@ msgid "Do you want to export the package with the current metadata?"
 msgstr "¿Desea exportar el paquete con los metadatos actuales?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1238
-#, fuzzy
 msgid "Publishing..."
-msgstr "editor de publicación"
+msgstr "Publicando"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1251
 msgid ""
@@ -6402,9 +6399,8 @@ msgid "Search and download new styles from the styles repository"
 msgstr "Buscar y descargar nuevos estilos del banco de estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
-#, fuzzy
 msgid "My styles"
-msgstr "Tus estilos"
+msgstr "Mis estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
 msgid "List of styles in your system"
@@ -9629,14 +9625,12 @@ msgid "Size of magnifying glass: "
 msgstr "Tamaño de la lupa: "
 
 #: exe/webui/importode.py:73
-#, fuzzy, python-format
 msgid "Error importing package with id %s from %s"
-msgstr "Error al importar el contenido con identificador ( {} ) desde {}"
+msgstr "Error al importar el contenido con identificador %s desde %s"
 
 #: exe/webui/importode.py:75
-#, fuzzy, python-format
 msgid "Importing package with id %s from %s"
-msgstr "Importando el contenido con identificador ( {} ) desde {}"
+msgstr "Importando el contenido con identificador %s desde %s"
 
 #: exe/webui/importode.py:82
 msgid "This may take a bit..."
