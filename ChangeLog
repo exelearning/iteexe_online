@@ -76,6 +76,7 @@ intef-exe (3:2.8) lucid; urgency=medium
     - Show the iDevice type name when editing, so you can know how to create similar contents. New added iDevices only. (#644)
     - Old "Add Previous/Next links within SCOs" export option removed. (#658)
     - Package building: Linux (AppImage deb package).
+    - Added JWT token-based authentication to the online version.
     
   * APSL
     - Mac problems fixed: Install styles from repository. (#656) + Download Classification Sources. (#569)
