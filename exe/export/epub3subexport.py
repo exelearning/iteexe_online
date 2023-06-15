@@ -546,7 +546,11 @@ class Epub3SubExport(object):
 
         filesStyleFiles += [self.config.stylesDir/'popup_bg.gif']
         if package.get_addExeLink():
-            filesStyleFiles += [self.styleDir/'..'/'exe_powered_logo.png']  
+            # filesStyleFiles += [self.styleDir/'..'/'exe_powered_logo.png']  To review
+            try:
+                filesStyleFiles += [self.config.stylesDir/'exe_powered_logo.png']
+            except:
+                filesStyleFiles += [self.styleDir/'..'/'exe_powered_logo.png']
 
         # FIXME for now, only copy files referenced in Common Cartridge
         # this really should apply to all exports, but without a manifest

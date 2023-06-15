@@ -207,6 +207,11 @@ class StyleManagerPage(RenderableResource):
             editButton = False
             properties = False
             
+            if style.get_style_root_dir() == self.config.stylesDir:
+                userStyle = 0
+            else:
+                userStyle = 1
+                delete = True
             #if style.get_dirname() != 'base' \
             #  and style.get_dirname() != "cedec" \
             #  and style.get_dirname() != "docs" \

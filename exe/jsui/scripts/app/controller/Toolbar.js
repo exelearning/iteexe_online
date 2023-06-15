@@ -415,7 +415,7 @@ Ext.define('eXe.controller.Toolbar', {
             var projectSize = parseInt(t);
             if (isNaN(projectSize)) return;
             var projectMaxSize = parseInt(Ext.getCmp("project_max_size").html.replace(/[^0-9]/g,''));
-            if (projectSize >= projectMaxSize){
+            if ((t.length>1&&t[1]=="MB") && projectSize >= projectMaxSize){
                 Ext.getCmp("project_size_label").addCls("max-size-exceeded");
                 Ext.getCmp("project_size").addCls("max-size-exceeded");
                 // Ext.getCmp("project_max_size").addCls("max-size-exceeded");
@@ -503,7 +503,7 @@ Ext.define('eXe.controller.Toolbar', {
             title: _("Assistant"),
             items: {
                 xtype: 'uxiframe',
-                src: '/tools/assistant',
+                src: '/tools/assistant/',
                 height: '100%'
             },
             listeners: {
@@ -685,10 +685,7 @@ Ext.define('eXe.controller.Toolbar', {
 
     // Launch the iDevice Editor Window
 	toolsIdeviceEditor: function() {
-		// To review
-		return false;
-		// / To review
-        var editor = new Ext.Window ({
+		var editor = new Ext.Window ({
           height: eXe.app.getMaxHeight(700),
           width: 800,
           modal: true,

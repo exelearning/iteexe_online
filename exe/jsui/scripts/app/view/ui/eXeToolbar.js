@@ -116,6 +116,59 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 								xtype: 'menuseparator'
                             },
                             {
+                                cls: 'exe-advanced',
+                                xtype: 'accesskey_menuitem',
+                                text: _('Import') + getSRhelp(),
+                                hideOnClick: false,
+                                accesskey: 'i',
+                                menu: {
+                                    xtype: 'menu',
+                                    items: [
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'elp_import',
+                                            accesskey: 'e',
+                                            text: _('Project (.elp)')
+                                        },
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_insert',
+                                            accesskey: 'i',
+                                            text: _('Insert elp in the current page')
+                                        },
+                                        {
+                                            xtype: 'accesskey_menuitem',
+                                            itemId: 'file_import_xliff',
+                                            accesskey: 'x',
+                                            text: _('XLIFF File')
+                                        },
+                                        {
+                                            xtype: 'accesskey_menuitem',
+			                                text: _('Metadata') + getSRhelp(),
+			                                hideOnClick: false,
+			                                accesskey: 'm',
+                                            menu: {
+                                                xtype: 'menu',
+                                                items: [
+			                                        {
+			                                            xtype: 'accesskey_menuitem',
+			                                            itemId: 'file_import_lom',
+			                                            accesskey: 'l',
+			                                            text: _('LOM')
+			                                        },
+                                                    {
+                                                        xtype: 'accesskey_menuitem',
+                                                        itemId: 'file_import_lomes',
+                                                        accesskey: 'e',
+                                                        text: _('LOM-ES')
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
                                 xtype: 'accesskey_menuitem',
                                 text: _('Export') + getSRhelp(),
                                 hideOnClick: false,
@@ -251,53 +304,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
-                                text: _('Import') + getSRhelp(),
-                                hideOnClick: false,
-                                accesskey: 'i',
-                                menu: {
-                                    xtype: 'menu',
-                                    items: [
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_insert',
-                                            accesskey: 'i',
-                                            text: _('Insert elp in the current page')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-                                            itemId: 'file_import_xliff',
-                                            accesskey: 'x',
-                                            text: _('XLIFF File')
-                                        },
-                                        {
-                                            xtype: 'accesskey_menuitem',
-			                                text: _('Metadata') + getSRhelp(),
-			                                hideOnClick: false,
-			                                accesskey: 'm',
-                                            menu: {
-                                                xtype: 'menu',
-                                                items: [
-			                                        {
-			                                            xtype: 'accesskey_menuitem',
-			                                            itemId: 'file_import_lom',
-			                                            accesskey: 'l',
-			                                            text: _('LOM')
-			                                        },
-                                                    {
-                                                        xtype: 'accesskey_menuitem',
-                                                        itemId: 'file_import_lomes',
-                                                        accesskey: 'e',
-                                                        text: _('LOM-ES')
-                                                    }
-                                                ]
-                                            }
-                                        }
-                                    ]
-                                }
-                            },
-                            {
-                                cls: 'exe-advanced',
-                                xtype: 'accesskey_menuitem',
                                 text: _('Publish') + getSRhelp(),
                                 hideOnClick: false,
                                 itemId: 'publish',
@@ -359,14 +365,13 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 'v',
                                 text: _('Preview')
                             },                            
-                            /*{ To review
+                            {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
                                 itemId: 'tools_idevice',
                                 accesskey: 'i',
                                 text: _('iDevice Editor')
                             },
-							*/
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
@@ -384,6 +389,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     }
                 },
                 {
+                    cls: 'exe-simplified',
                     xtype: 'accesskey_button',
                     text: _('Styles'),
                     accesskey: 's',
@@ -391,6 +397,32 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     menu: {
                         xtype: 'menu',
 	                    itemId: 'styles_menu'
+                    }
+                },
+                {
+                    cls: 'exe-advanced',
+                    xtype: 'accesskey_button',
+                    text: _('Styles'),
+                    accesskey: 's',
+                    itemId: 'styles_button_advanced_wrapper',
+                    menu: {
+                        xtype: 'menu',
+	                    items: [
+                            {
+                            	xtype: 'accesskey_menuitem',
+                                itemId: 'tools_stylemanager',
+                                text: _('Style Manager')
+                            },
+                            {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Styles'),
+                                itemId: 'styles_button_advanced',
+                                menu: {
+                                    xtype: 'menu',
+                                    itemId: 'styles_menu_advanced'
+                                }
+                            }
+                        ]
                     }
                 },
                 {

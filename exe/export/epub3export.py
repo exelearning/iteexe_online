@@ -602,7 +602,11 @@ class Epub3Export(object):
         # But not nav.css
         styleFiles = [self.config.stylesDir/'popup_bg.gif']
         if package.get_addExeLink():
-            styleFiles += [self.styleDir/'..'/'exe_powered_logo.png']
+            # styleFiles += [self.styleDir/'..'/'exe_powered_logo.png'] To review
+            try:
+                styleFiles += [self.config.stylesDir/'exe_powered_logo.png']
+            except:
+                styleFiles += [self.styleDir/'..'/'exe_powered_logo.png']
         styleFiles += [f for f in self.styleDir.files("*.*") if f.basename() not in ['nav.css']]
 
         # FIXME for now, only copy files referenced in Common Cartridge
@@ -613,7 +617,11 @@ class Epub3Export(object):
         if Path(self.styleDir/'fallback.xhtml').exists():
             styleFiles += [self.styleDir /'fallback.xhtml']
         else:
-            styleFiles += [self.styleDir/'..'/'fallback.xhtml']
+            # styleFiles += [self.styleDir/'..'/'fallback.xhtml'] To review
+            try:
+                styleFiles += [self.config.stylesDir/'fallback.xhtml']
+            except:
+                styleFiles += [self.styleDir/'..'/'fallback.xhtml']            
 
         # copy the package's resource files
         for resourceFile in package.resourceDir.walkfiles():
