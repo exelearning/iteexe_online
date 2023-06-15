@@ -16,6 +16,7 @@ intef-exe (3:2.8.1) lucid; urgency=medium
     - AppImage source files for Debian package creation. Helped by Esteban Navas (@algodelinux)
     - Package building: Linux (deb, AppImage deb package). Helped by Esteban Navas (@algodelinux)
     - Fixed: Linux application name and icon. (#670)
+    - Added JWT token-based authentication to the online version.
 
   * APSL
     - Package building: Linux (rmp), Windows (ready2run, installer), macOS (dmg).
@@ -76,7 +77,6 @@ intef-exe (3:2.8) lucid; urgency=medium
     - Show the iDevice type name when editing, so you can know how to create similar contents. New added iDevices only. (#644)
     - Old "Add Previous/Next links within SCOs" export option removed. (#658)
     - Package building: Linux (AppImage deb package).
-    - Added JWT token-based authentication to the online version.
     
   * APSL
     - Mac problems fixed: Install styles from repository. (#656) + Download Classification Sources. (#569)
