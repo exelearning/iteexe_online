@@ -482,6 +482,7 @@ browser restrictions, you must click on the URL: {0}'),
 		if (advancedModePreferenceValue==1) Ext.getCmp("advanced_toggler").setValue(true);
 		else Ext.getCmp("advanced_toggler").setValue(false);
 		eXe.app.getController("Toolbar").eXeUIversionSetStatus(advancedModePreferenceValue);
+        eXe.app.getController("Toolbar").eXeUIGetSizeProject();
 	},
 
     appFolder: "jsui/app"

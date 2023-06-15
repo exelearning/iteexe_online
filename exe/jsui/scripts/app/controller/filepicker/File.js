@@ -399,6 +399,21 @@ Ext.define('eXe.controller.filepicker.File', {
 
 		var filename = value.replace(/C:\\fakepath\\/g, '');
 
+    	var fileList = filefield.fileInputEl.dom.files;
+		for (var i = 0; i < fileList.length; i++) {
+			var file = fileList[i];
+			var fname = file.name;
+			var extFile = fname.slice((fname.lastIndexOf(".") - 1 >>> 0) + 2);
+			var limitB = eXe.app.config.maxUploadSizeTinyEditorMCE;
+			if (extFile === 'elp' || extFile === 'zip'){
+				limitB =  eXe.app.config.maxSizeImportElp;
+			}
+			if (file.size > limitB){
+				msg = _('Error: The maximum upload size is') + ' ' + String(limitB / Math.pow(1024,2)) + " MB";
+                this.application.fireEvent('error', msg);
+				return;
+			}
+		  }
 		//remove the accent marks to avoid problems with the file upload.
 		newfilename = filename.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 		form.down('#upload_filename').setValue(newfilename);

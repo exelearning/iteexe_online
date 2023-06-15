@@ -478,6 +478,34 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         ]
                     }
                 },
+                '->',
+                // Size of Project
+                {
+                    xtype: 'fieldcontainer',
+                    defaultType: 'label',
+                    margin: '0 30 0 0',
+                    items: [
+                        {
+                            xtype: 'label',
+                            html: '<b>Project size: </b>',
+                            itemId: 'project_size_label',
+                            id: 'project_size_label'
+                        },
+                        {
+                            xtype: 'label',
+                            html: 'placeholder',
+                            itemId: 'project_size',
+                            id: 'project_size'
+                        },
+                        {
+                            xtype: 'label',
+                            html: 'maxsize',
+                            itemId: 'project_max_size',
+                            id: 'project_max_size'
+                        },
+                        
+                    ]
+                }, 
                 // Advanced user and Preview button
                 '->',
                 // Advanced user
@@ -499,6 +527,12 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                     let status=null
                                     newValue ? status=1 : status = 0
                                     nevow_clientToServerEvent('saveEXeUIversion',this,'',status)
+                                    									// Refresh some components
+                                    // Refresh some components
+									eXe.app.getController("Toolbar").eXeUIversionSetStatus(Ext.getCmp("advanced_toggler").getValue());
+									try {
+										Ext.getCmp("exe-viewport").doLayout();
+									} catch(e) {}
                                 }
                             }
                         }
@@ -682,3 +716,10 @@ Ext.define('eXeSaveReminder', {
 });
 // When ready, initialize the save reminder
 Ext.onReady(eXeSaveReminder.init, eXeSaveReminder);
+
+// Initialize the text in project_size label
+Ext.onReady(function () {
+    // DOM and Framework are ready...
+    eXe.app.getController("Toolbar").eXeUIGetSizeProject();
+    eXe.app.getController("Toolbar").eXeUIGetMaxSizeProject();
+});

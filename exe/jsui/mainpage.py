@@ -279,6 +279,8 @@ class MainPage(RenderableLivePage):
         setUpHandler(self.handleSaveEXeUIversion, 'saveEXeUIversion')
         setUpHandler(self.handleIsExeUIAdvanced, 'eXeUIVersionCheck')
 
+        setUpHandler(self.handleGetSizeProject, 'eXeUIGetSizeProject')
+        setUpHandler(self.handleGetMaxSizeProject, 'eXeUIGetMaxSizeProject')
         setUpHandler(self.handleIsPackageDirty, 'isPackageDirty')
         setUpHandler(self.handleIsPackageTemplate, 'isPackageTemplate')
         setUpHandler(self.handlePackageFileName, 'getPackageFileName')
@@ -359,7 +361,10 @@ class MainPage(RenderableLivePage):
             'user_root': '/',
 			'autosaveTime': float(G.application.config.autosaveTime),
             'publishLabel': self.integration.repo_name,
-            'publishHomeURL': self.integration.repo_home_url
+            'publishHomeURL': self.integration.repo_home_url,
+            'maxSizeImportElp': int(G.application.config.configParser.get('system', 'maxSizeImportElp')),
+            'maxSizePublish': int(G.application.config.configParser.get('system', 'maxSizePublish')),
+            'maxUploadSizeTinyEditorMCE': int(G.application.config.configParser.get('system', 'maxUploadSizeTinyEditorMCE'))
         }
         if session.user:
             config['user'] = session.user.name
@@ -573,8 +578,23 @@ class MainPage(RenderableLivePage):
 
         client.alert(_(u'Template saved: %s') % templatename, onDone)
 
+    def checkMaxSizeKey(self, filename, client, configkey):
+        result = True
+        _tmpmaxsize = int(G.application.config.configParser.get('system', configkey))
+        if os.path.getsize(filename) > _tmpmaxsize:
+            result = False
+            unit = "bytes"
+            if _tmpmaxsize >= 1048576:  # (1 Mb)
+                unit = "MB"
+            msg = unicode(str(self.convert_unit(_tmpmaxsize, unit)) + " " + unit)
+            client.alert(_(u'The size cannot exceed %s') % msg)
+        return result
+
     def handleLoadPackage(self, client, filename, filter_func=None):
         """Load the package named 'filename'"""
+        if not self.checkMaxSizeKey(filename,client,'maxSizeImportElp'):
+            return
+
         if self.integration.enabled_jwt == "0":
             package = self._loadPackage(client, filename, newLoad=True)
             self.session.packageStore.addPackage(package)
@@ -923,9 +943,11 @@ class MainPage(RenderableLivePage):
             log.debug("handleTinyMCEimageChoice copying image from \'"\
                     + local_filename + "\' to \'" \
                     + server_filename.abspath() + "\'.")
-            shutil.copyfile(local_filename, \
-                    server_filename.abspath())
-
+            if self.checkMaxSizeKey(local_filename,client,'maxUploadSizeTinyEditorMCE'):
+                shutil.copyfile(local_filename, \
+                        server_filename.abspath())
+            else:
+                return
             # new optional description file to provide the
             # actual base filename, such that once it is later processed
             # copied into the resources directory, it can be done with
@@ -1313,7 +1335,18 @@ class MainPage(RenderableLivePage):
             """
             Upload the exported package to elp Repository.
             """
-
+            # check file size
+            uploading_package_message = _(u'Checking size...')
+            
+            # Update progress for the user
+            client.call('Ext.MessageBox.updateProgress', 0.6, '25%', uploading_package_message)
+            
+            # Check the size of file, can't be greater than maxSizePublish 
+            if not self.checkMaxSizeKey(filename,client,'maxSizePublish'):
+                return
+            
+            # Update progress for the user
+            client.call('Ext.MessageBox.updateProgress', 0.6, '50%', uploading_package_message)
             uploading_package_message = _(u'Uploading package to %s...')  % self.integration.repo_name
 
             # Update progress for the user
@@ -1560,6 +1593,36 @@ class MainPage(RenderableLivePage):
         status=G.application.config.configParser.get('user', 'eXeUIversion')
         client.call(u'eXe.app.getController("Toolbar").exeUIsetInitialStatus', status)
 
+    def convert_unit(self, size_in_bytes, unit):
+        if unit == "KB":
+            return size_in_bytes/1024
+        elif unit == "MB":
+            return size_in_bytes/(1024*1024)
+        elif unit == "GB":
+            return size_in_bytes/(1024*1024*1024)
+        else:
+            return size_in_bytes
+
+    def handleGetSizeProject(self,client):
+        size = 0
+        unit = "KB" 
+        tmpfile = Path(tempfile.mktemp())
+        filename = Path(tmpfile, 'utf-8')
+        style = self.config.styleStore.getStyle(self.package.style)
+        stylesDir = style.get_style_dir()
+        objwebsiteExport = WebsiteExport(self.config, stylesDir, filename,"",True)
+        objwebsiteExport.export(self.package)
+        size = objwebsiteExport.totalSize
+        if size >= 1048576: # (1 Mb)
+            unit = "MB"            
+        size = unicode(str(self.convert_unit(size, unit)) + " " + unit + " de ")
+        client.call(u'eXe.app.getController("Toolbar").eXeUISetSizeProject', size)
+
+    def handleGetMaxSizeProject(self,client):
+        tmpmaxsize = int(G.application.config.configParser.get('system', 'maxSizePublish'))
+        maxsize = unicode(str(self.convert_unit(tmpmaxsize, "MB")) + " MB.")
+        client.call(u'eXe.app.getController("Toolbar").eXeUISetMaxSizeProject', maxsize)
+
     def handleBrowseURL(self, client, url):
         """
         visit the specified URL using the system browser
@@ -1596,6 +1659,8 @@ class MainPage(RenderableLivePage):
         """
         Load the package and insert in current node
         """
+        if not self.checkMaxSizeKey(filename,client,'maxSizeImportElp'):
+            return
         # For templates, we need to set isChanged to True to prevent the
         # translation mechanism to execute
         if not self.package.isChanged and self.package.isTemplate:

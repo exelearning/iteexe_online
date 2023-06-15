@@ -369,6 +369,19 @@ Ext.define('eXe.controller.Toolbar', {
     exeUIsetInitialStatus : function(value){
         advancedModePreferenceValue = value;
     },
+    eXeUIGetSizeProject : function(){
+        nevow_clientToServerEvent('eXeUIGetSizeProject',this)
+    },
+    eXeUIGetMaxSizeProject : function(){
+        nevow_clientToServerEvent('eXeUIGetMaxSizeProject',this)
+    },
+    eXeUISetSizeProject : function(value){
+        Ext.getCmp("project_size").update(value);
+    },
+    eXeUISetMaxSizeProject : function(value){
+        Ext.getCmp("project_max_size").update(value);
+    },
+
     exeUIalert : function(){
         Ext.Msg.alert(
             _('Info'),
@@ -377,6 +390,22 @@ Ext.define('eXe.controller.Toolbar', {
 
     },
     eXeUIversionSetStatus : function(newValue){
+        eXe.app.getController("Toolbar").eXeUIGetSizeProject();
+        if(Ext.getCmp("project_size").html.indexOf("MB")>0){
+            projectSize = parseInt(Ext.getCmp("project_size").html.replace(/[^0-9]/g,''));
+            projectMaxSize = parseInt(Ext.getCmp("project_max_size").html.replace(/[^0-9]/g,''));
+            if (projectSize >= projectMaxSize){
+                Ext.getCmp("project_size_label").addCls("redcolor");
+                Ext.getCmp("project_size").addCls("redcolor");
+                Ext.getCmp("project_max_size").addCls("redcolor");
+            }
+            else {
+                Ext.getCmp("project_size_label").removeCls("redcolor");
+                Ext.getCmp("project_size").removeCls("redcolor");
+                Ext.getCmp("project_max_size").removeCls("redcolor");
+            }
+        }
+
         advancedModePreferenceValue = newValue;
         let descriptionLabel = Ext.DomQuery.select("label[for=pp_description]");
         let contentPanel = false; // The main content. It should always exist.

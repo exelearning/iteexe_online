@@ -65,7 +65,18 @@ class WebsiteExport(object):
         self.prefix          = prefix
         self.report          = report
         self.styleSecureMode = config.styleSecureMode
+        self.totalSize       = 0
 
+    def appendSizeReport(self, page, package):
+        for idevice in page.node.idevices:
+            ideviceFiles = []
+            for resource in idevice.userResources:
+                if type(resource) == Resource:
+                    try:
+                        resourceSize = os.path.getsize(resource.path)
+                    except:
+                        resourceSize = 0
+                    self.totalSize += resourceSize
 
     def exportZip(self, package):
         """
@@ -125,6 +136,7 @@ class WebsiteExport(object):
                 if type(resource) == Resource:
                     try:
                         resourceSize = os.path.getsize(resource.path)
+                        self.totalSize += resourceSize
                     except:
                         resourceSize = '?'
                     if not resource.checksum in ideviceFiles:

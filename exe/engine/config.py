@@ -74,7 +74,10 @@ class Config(object):
             'audioMediaConverter_au',
             'audioMediaConverter_mp3',
             'audioMediaConverter_wav',
-            'ffmpegPath'
+            'ffmpegPath',
+            'maxUploadSizeTinyEditorMCE',
+            'maxSizeImportElp',
+            'maxSizePublish'
         ),
         'user': (
             'locale',
@@ -168,6 +171,12 @@ class Config(object):
         # port is the port the exe webserver will listen on
         # (previous default, which earlier users might still use, was 8081)
         self.port        = 51235
+        # Default Max upload size for TinyEditorMCE in bytes (10 Mb default)         
+        self.maxUploadSizeTinyEditorMCE = 10485760 
+        # Default Max size for import .elp files in bytes (100 Mb default)         
+        self.maxSizeImportElp = 104857600
+        # Default Max size for publish projects in elp repository (000 Mb default)         
+        self.maxSizePublish = 104857600
         # dataDir is the default directory that is shown to the user
         # to save packages and exports in
         self.dataDir     = Path(".")
@@ -400,6 +409,8 @@ class Config(object):
             self.port           = int(system.port)
             self.browser        = None if system.browser == u"None" else system.browser
             self.stylesRepository = system.stylesRepository
+            self.maxUploadSizeTinyEditorMCE = system.maxUploadSizeTinyEditorMCE
+            self.maxSizeImportElp = system.maxSizeImportElp
 
             if not G.application.portable:
                 self.dataDir        = Path(system.dataDir)
