@@ -175,7 +175,7 @@ class Config(object):
         self.maxUploadSizeTinyEditorMCE = 10485760 
         # Default Max size for import .elp files in bytes (100 Mb default)         
         self.maxSizeImportElp = 104857600
-        # Default Max size for publish projects in elp repository (000 Mb default)         
+        # Default Max size for publish projects in elp repository (100 Mb default)         
         self.maxSizePublish = 104857600
         # dataDir is the default directory that is shown to the user
         # to save packages and exports in

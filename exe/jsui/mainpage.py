@@ -587,7 +587,7 @@ class MainPage(RenderableLivePage):
             if _tmpmaxsize >= 1048576:  # (1 Mb)
                 unit = "MB"
             msg = unicode(str(self.convert_unit(_tmpmaxsize, unit)) + " " + unit)
-            client.alert(_(u'The size cannot exceed %s') % msg)
+            client.alert(_(u'The project size cannot exceed %s') % msg)
         return result
 
     def handleLoadPackage(self, client, filename, filter_func=None):
@@ -1615,12 +1615,12 @@ class MainPage(RenderableLivePage):
         size = objwebsiteExport.totalSize
         if size >= 1048576: # (1 Mb)
             unit = "MB"            
-        size = unicode(str(self.convert_unit(size, unit)) + " " + unit + " de ")
+        size = unicode(str(self.convert_unit(size, unit)) + " " + unit)
         client.call(u'eXe.app.getController("Toolbar").eXeUISetSizeProject', size)
 
     def handleGetMaxSizeProject(self,client):
         tmpmaxsize = int(G.application.config.configParser.get('system', 'maxSizePublish'))
-        maxsize = unicode(str(self.convert_unit(tmpmaxsize, "MB")) + " MB.")
+        maxsize = unicode(str(self.convert_unit(tmpmaxsize, "MB")) + " MB")
         client.call(u'eXe.app.getController("Toolbar").eXeUISetMaxSizeProject', maxsize)
 
     def handleBrowseURL(self, client, url):

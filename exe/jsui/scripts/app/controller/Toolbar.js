@@ -376,7 +376,23 @@ Ext.define('eXe.controller.Toolbar', {
         nevow_clientToServerEvent('eXeUIGetMaxSizeProject',this)
     },
     eXeUISetSizeProject : function(value){
-        Ext.getCmp("project_size").update(value);
+        var e1 = Ext.getCmp("project_size");
+        var t1 = value;
+        e1.update(value);
+        try {
+            var e2 = Ext.getCmp("project_max_size");    
+            if (typeof(e2)=='undefined'||typeof(e2.html)=='undefined'){
+                return;
+            }
+            var t2 = e2.html;
+            if (typeof(t2)=='undefined'||t2==""||t2=="undefined") {
+                return;
+            }
+            var t = _("%s of %s");
+                t = t.replace("%s",t1);
+                t = t.replace("%s",t2);
+            e1.setText(t);            
+        }catch(e){}
     },
     eXeUISetMaxSizeProject : function(value){
         Ext.getCmp("project_max_size").update(value);
@@ -391,18 +407,23 @@ Ext.define('eXe.controller.Toolbar', {
     },
     eXeUIversionSetStatus : function(newValue){
         eXe.app.getController("Toolbar").eXeUIGetSizeProject();
-        if(Ext.getCmp("project_size").html.indexOf("MB")>0){
-            projectSize = parseInt(Ext.getCmp("project_size").html.replace(/[^0-9]/g,''));
-            projectMaxSize = parseInt(Ext.getCmp("project_max_size").html.replace(/[^0-9]/g,''));
+        var e = Ext.getCmp("project_size");
+        if(e&&e.text&&e.text.indexOf("MB")>0){
+            var t = e.text;
+                t = t.split(" ");
+                t = t[0];
+            var projectSize = parseInt(t);
+            if (isNaN(projectSize)) return;
+            var projectMaxSize = parseInt(Ext.getCmp("project_max_size").html.replace(/[^0-9]/g,''));
             if (projectSize >= projectMaxSize){
-                Ext.getCmp("project_size_label").addCls("redcolor");
-                Ext.getCmp("project_size").addCls("redcolor");
-                Ext.getCmp("project_max_size").addCls("redcolor");
+                Ext.getCmp("project_size_label").addCls("max-size-exceeded");
+                Ext.getCmp("project_size").addCls("max-size-exceeded");
+                // Ext.getCmp("project_max_size").addCls("max-size-exceeded");
             }
             else {
-                Ext.getCmp("project_size_label").removeCls("redcolor");
-                Ext.getCmp("project_size").removeCls("redcolor");
-                Ext.getCmp("project_max_size").removeCls("redcolor");
+                Ext.getCmp("project_size_label").removeCls("max-size-exceeded");
+                Ext.getCmp("project_size").removeCls("max-size-exceeded");
+                // Ext.getCmp("project_max_size").removeCls("max-size-exceeded");
             }
         }
 
@@ -1204,6 +1225,14 @@ Ext.define('eXe.controller.Toolbar', {
     },
 
     exportProcomun: function() {
+        // Check if the maximun project size is exceeded
+        if (Ext.getCmp("project_size").hasCls("max-size-exceeded")) {
+            Ext.Msg.show( {
+                title: _('Warning'),
+                msg: _('The project exceeds the maximum size limit. Try removing some large files before publishing.')
+            });
+            return;
+        }        
         this.saveWorkInProgress();
         Ext.Msg.show({
             title: _('Publishing...'),

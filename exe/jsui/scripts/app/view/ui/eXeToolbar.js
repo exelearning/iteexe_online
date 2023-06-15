@@ -487,7 +487,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     items: [
                         {
                             xtype: 'label',
-                            html: '<b>Project size: </b>',
+                            html: _('Project size:')+' ',
                             itemId: 'project_size_label',
                             id: 'project_size_label'
                         },
@@ -503,7 +503,6 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             itemId: 'project_max_size',
                             id: 'project_max_size'
                         },
-                        
                     ]
                 }, 
                 // Advanced user and Preview button
