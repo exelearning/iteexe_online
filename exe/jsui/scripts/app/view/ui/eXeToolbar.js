@@ -501,8 +501,9 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                             xtype: 'label',
                             html: 'maxsize',
                             itemId: 'project_max_size',
-                            id: 'project_max_size'
-                        },
+                            id: 'project_max_size',
+                            hidden: true
+                        }
                     ]
                 }, 
                 // Advanced user and Preview button
