@@ -22,7 +22,7 @@
 """
 This is the main Javascript page.
 """
-
+import jwt
 import copy
 import os
 import json
@@ -614,7 +614,10 @@ class MainPage(RenderableLivePage):
             tmpfile = Path(tempfile.mktemp())
             package.save(tmpfile, preventUpdateRecent=False)
             loadedPackage = self._loadPackage(client, tmpfile, newLoad=False, destinationPackage=self.package, preventUpdateRecent=False)
-            loadedPackage.ode_id=self.package.ode_id
+            try:
+                loadedPackage.ode_id=self.package.ode_id
+            except: 
+                loadedPackage.ode_id=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"]
             self.package=loadedPackage
             self.session.packageStore.addPackage(loadedPackage)
             self.webServer.root.bindNewPackage(loadedPackage, self.session)
