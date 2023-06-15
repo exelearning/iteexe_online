@@ -100,8 +100,8 @@ class PackageRedirectPage(RenderableResource):
             edit_ode_id = request.args['ode_id'][0]
             if not self.integration:
                 self.integration = Integration()
-            if self.integration.repo_home_url:
-                repository = self.integration.repo_home_url
+            if self.integration.repo_name:
+                repository = self.integration.repo_name
             else:
                 repository = 'Unknown Repository'
             self.webServer.importode = ImportOdePage(self.webServer.root, repository, edit_ode_id)
@@ -116,7 +116,7 @@ class PackageRedirectPage(RenderableResource):
                 self.integration = Integration()
             # Repository URL
             if self.integration:
-                repository = self.integration.repo_home_url
+                repository = self.integration.repo_name
             else:
                 repository = "Unknown"
             # Check if ode_id is empty

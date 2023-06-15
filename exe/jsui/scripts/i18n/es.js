@@ -2832,7 +2832,7 @@ translations = {
  "Add an attachment file to your iDevice.": "Agrega un archivo adjunto a su iDevice.", 
  "Result": "Resultado", 
  "Read the paragraph below and fill in the missing words": "Lea el p\u00e1rrafo que aparece abajo y rellene los espacios en blanco", 
- "This may take a bit...": "Puede que tarde un poco...", 
+ "This may take a bit...": "Esto puede tardar un poco...", 
  "LOM Metadata import FAILED!\n%s": "\u00a1FALLO en la importaci\u00f3n de los metadatos LOM!\n%s", 
  "Move on to the next word": "Pasar a la siguiente palabra", 
  "Your score is ": "Su puntuaci\u00f3n es ", 

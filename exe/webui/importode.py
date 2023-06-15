@@ -32,11 +32,11 @@ class ImportOdePage(Renderable, rend.Page):
     _templateFileName = 'importode.html'
     name = 'importode'
 
-    def __init__(self, parent, repository_url, ode_id, error=None):
+    def __init__(self, parent, repo_name, ode_id, error=None):
         """
         Initialize
         """
-        self.repository_url = repository_url
+        self.repo_name = repo_name
         self.ode_id = ode_id
         self.error = error
         parent.putChild(self.name, self)
@@ -70,9 +70,9 @@ class ImportOdePage(Renderable, rend.Page):
     def render_msg1(self, ctx, data):
         ctx.tag.clear()
         if self.error:
-            return ctx.tag()[_("Error importing package with id %s from %s") % (self.ode_id, self.repository_url)]
+            return ctx.tag()[_("Error importing package with id %s from %s") % (self.ode_id, self.repo_name)]
         else:
-            return ctx.tag()[_("Importing package with id %s from %s") % (self.ode_id, self.repository_url)]
+            return ctx.tag()[_("Importing package with id %s from %s") % (self.ode_id, self.repo_name)]
 
     def render_msg2(self, ctx, data):
         ctx.tag.clear()

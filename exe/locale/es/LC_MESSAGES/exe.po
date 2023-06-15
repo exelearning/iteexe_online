@@ -9669,7 +9669,7 @@ msgstr "Importando el contenido con identificador %s desde %s"
 
 #: exe/webui/importode.py:82
 msgid "This may take a bit..."
-msgstr "Puede que tarde un poco..."
+msgstr "Esto puede tardar un poco..."
 
 #: exe/webui/jsblock.py:85
 msgid ""
