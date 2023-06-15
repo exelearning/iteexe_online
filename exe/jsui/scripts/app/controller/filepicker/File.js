@@ -409,7 +409,7 @@ Ext.define('eXe.controller.filepicker.File', {
 				limitB =  eXe.app.config.maxSizeImportElp;
 			}
 			if (file.size > limitB){
-				msg = _('Error: The maximum upload size is') + ' ' + String(limitB / Math.pow(1024,2)) + " MB";
+				msg = _('Error: The maximum upload size is %s MB').replace("%s",(limitB / Math.pow(1024,2)));
                 this.application.fireEvent('error', msg);
 				return;
 			}

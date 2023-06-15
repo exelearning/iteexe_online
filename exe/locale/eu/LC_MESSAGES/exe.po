@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-06-14 12:09+0200\n"
+"POT-Creation-Date: 2023-06-15 11:58+0200\n"
 "PO-Revision-Date: 2022-12-07 19:46+0100\n"
 "Last-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\n"
 "Language: eu\n"
@@ -910,35 +910,35 @@ msgstr "FPD - Hutsuneak Betetzeko Jarduera (Eraldatua)"
 msgid "Clozelang"
 msgstr "Bete hutsuneak"
 
-#: exe/engine/config.py:100 exe/engine/config.py:101 exe/engine/config.py:105
-#: exe/engine/config.py:106 exe/engine/config.py:128 exe/engine/config.py:132
-#: exe/engine/config.py:136 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
+#: exe/engine/config.py:103 exe/engine/config.py:104 exe/engine/config.py:108
+#: exe/engine/config.py:109 exe/engine/config.py:131 exe/engine/config.py:135
+#: exe/engine/config.py:139 exe/jsui/scripts/app/view/ui/LeftPanel.js:107
 msgid "Text and Tasks"
 msgstr "Testua eta atazak"
 
-#: exe/engine/config.py:102 exe/engine/config.py:103 exe/engine/config.py:107
-#: exe/engine/config.py:129 exe/engine/config.py:130 exe/engine/config.py:131
-#: exe/engine/config.py:133 exe/engine/config.py:139
+#: exe/engine/config.py:105 exe/engine/config.py:106 exe/engine/config.py:110
+#: exe/engine/config.py:132 exe/engine/config.py:133 exe/engine/config.py:134
+#: exe/engine/config.py:136 exe/engine/config.py:142
 msgid "Interactive Activities"
 msgstr "Jarduera interaktiboak"
 
-#: exe/engine/config.py:104 exe/engine/config.py:125 exe/engine/config.py:126
-#: exe/engine/config.py:127 exe/engine/config.py:134 exe/engine/config.py:135
-#: exe/engine/config.py:141
+#: exe/engine/config.py:107 exe/engine/config.py:128 exe/engine/config.py:129
+#: exe/engine/config.py:130 exe/engine/config.py:137 exe/engine/config.py:138
+#: exe/engine/config.py:144
 msgid "Other Contents"
 msgstr "Beste eduki batzuk"
 
-#: exe/engine/config.py:108 exe/engine/config.py:109 exe/engine/config.py:110
 #: exe/engine/config.py:111 exe/engine/config.py:112 exe/engine/config.py:113
 #: exe/engine/config.py:114 exe/engine/config.py:115 exe/engine/config.py:116
 #: exe/engine/config.py:117 exe/engine/config.py:118 exe/engine/config.py:119
 #: exe/engine/config.py:120 exe/engine/config.py:121 exe/engine/config.py:122
-#: exe/engine/config.py:123 exe/engine/config.py:124
+#: exe/engine/config.py:123 exe/engine/config.py:124 exe/engine/config.py:125
+#: exe/engine/config.py:126 exe/engine/config.py:127
 msgid "FPD"
 msgstr "FPD"
 
-#: exe/engine/config.py:137 exe/engine/config.py:138 exe/engine/config.py:140
-#: exe/engine/config.py:142
+#: exe/engine/config.py:140 exe/engine/config.py:141 exe/engine/config.py:143
+#: exe/engine/config.py:145
 msgid "Hidden"
 msgstr "Ezkutuan"
 
@@ -2856,7 +2856,7 @@ msgstr ""
 "Ezin da irakurri .XML fitxategia. eXe saiatuko da edukia .data "
 "fitxategiatik irakurtzen."
 
-#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:687
+#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:739
 msgid "iDevice Editor"
 msgstr "iDevice editorea"
 
@@ -3610,7 +3610,7 @@ msgstr ""
 msgid "Don't copy source in target"
 msgstr "Ez kopiatu jatorrizko testua xedean"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1092
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1144
 msgid "Wrap fields in CDATA"
 msgstr "Eremuak CDATA sailetan bildu"
 
@@ -3728,9 +3728,9 @@ msgstr ""
 "errorea exe_do-n: ezin izan da inportatu '%s'.\n"
 "Errorea izan da:"
 
-#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:468
-#: exe/jsui/mainpage.py:1889 exe/jsui/mainpage.py:1935
-#: exe/jsui/mainpage.py:1980 exe/jsui/mainpage.py:2001
+#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:473
+#: exe/jsui/mainpage.py:1954 exe/jsui/mainpage.py:2000
+#: exe/jsui/mainpage.py:2045 exe/jsui/mainpage.py:2066
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3751,7 +3751,7 @@ msgstr "Orria: %s / %s"
 
 #: exe/export/epub3export.py:773 exe/export/epub3subexport.py:689
 #: exe/export/imsexport.py:741 exe/export/scormexport.py:862
-#: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:103
+#: exe/export/singlepageexport.py:113 exe/export/websiteexport.py:114
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3785,7 +3785,7 @@ msgstr "Saltatu nabigazioa"
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:80
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:78
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:159
-#: exe/webui/tools/assistant/js/assistant.js:143
+#: exe/webui/tools/assistant/js/assistant.js:142
 #: exe/webui/tools/assistant/langs/all.js:10
 msgid "Previous"
 msgstr "Aurrekoa"
@@ -3799,7 +3799,7 @@ msgstr "Aurrekoa"
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1236
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1247
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:152
-#: exe/webui/tools/assistant/js/assistant.js:146
+#: exe/webui/tools/assistant/js/assistant.js:145
 #: exe/webui/tools/assistant/langs/all.js:11
 msgid "Next"
 msgstr "Hurrengoa"
@@ -3883,22 +3883,22 @@ msgstr "Esperimentuak"
 msgid "Gamification"
 msgstr "Gamifikazioa"
 
-#: exe/jsui/mainpage.py:497 exe/jsui/mainpage.py:1449 exe/jsui/mainpage.py:1470
-#: exe/jsui/mainpage.py:1629 exe/jsui/mainpage.py:1671
+#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1482 exe/jsui/mainpage.py:1503
+#: exe/jsui/mainpage.py:1694 exe/jsui/mainpage.py:1736
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "Ezin da izendatutako direktoriora sartu "
 
-#: exe/jsui/mainpage.py:497 exe/jsui/mainpage.py:1451 exe/jsui/mainpage.py:1629
-#: exe/jsui/mainpage.py:1671
+#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1484 exe/jsui/mainpage.py:1694
+#: exe/jsui/mainpage.py:1736
 msgid ". Please use ASCII names."
 msgstr ". Mesedez, ASCII izenak erabili."
 
-#: exe/jsui/mainpage.py:505 exe/jsui/mainpage.py:549
+#: exe/jsui/mainpage.py:510 exe/jsui/mainpage.py:554
 msgid "SAVE FAILED!"
 msgstr "EZ DA GORDE!"
 
-#: exe/jsui/mainpage.py:509
+#: exe/jsui/mainpage.py:514
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3907,9 +3907,9 @@ msgstr ""
 "EZ DA GORDE!\n"
 "\"%s\" ez da izen onargarria pakete batentzat"
 
-#: exe/jsui/mainpage.py:515 exe/jsui/mainpage.py:568 exe/jsui/mainpage.py:968
-#: exe/jsui/mainpage.py:1030 exe/jsui/mainpage.py:1088
-#: exe/jsui/mainpage.py:1776
+#: exe/jsui/mainpage.py:520 exe/jsui/mainpage.py:573 exe/jsui/mainpage.py:990
+#: exe/jsui/mainpage.py:1052 exe/jsui/mainpage.py:1110
+#: exe/jsui/mainpage.py:1841
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3918,12 +3918,12 @@ msgstr ""
 "EZ DA GORDE!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:525
+#: exe/jsui/mainpage.py:530
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
 msgstr ""
 
-#: exe/jsui/mainpage.py:553
+#: exe/jsui/mainpage.py:558
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3932,50 +3932,55 @@ msgstr ""
 "EZ DA GORDE!\n"
 "\"%s\" ez da izen onargarria txantiloi batentzat"
 
-#: exe/jsui/mainpage.py:574
+#: exe/jsui/mainpage.py:579
 #, python-format
 msgid "Template saved: %s"
 msgstr "Txantiloia gorde da: %s"
 
-#: exe/jsui/mainpage.py:669 exe/webui/stylemanagerpage.py:445
+#: exe/jsui/mainpage.py:590
+#, python-format
+msgid "The project size cannot exceed %s"
+msgstr ""
+
+#: exe/jsui/mainpage.py:689 exe/webui/stylemanagerpage.py:445
 msgid "Downloading..."
 msgstr "Jaisten..."
 
-#: exe/jsui/mainpage.py:695
+#: exe/jsui/mainpage.py:715
 msgid "Connecting to classification sources repository..."
 msgstr "Sailkapen iturrien biltegira konektatzen..."
 
-#: exe/jsui/mainpage.py:695 exe/jsui/mainpage.py:701
+#: exe/jsui/mainpage.py:715 exe/jsui/mainpage.py:721
 msgid "Sources Download"
 msgstr "Jaitsi iturburuak"
 
-#: exe/jsui/mainpage.py:701
+#: exe/jsui/mainpage.py:721
 msgid ""
 "There has been an error while trying to download classification sources. "
 "Please try again later."
 msgstr "Errorea gertatu da sailkapenen iturburuak jaistean. Saiatu gero."
 
-#: exe/jsui/mainpage.py:891 exe/jsui/mainpage.py:987 exe/jsui/mainpage.py:1052
-#: exe/jsui/mainpage.py:1115 exe/jsui/mainpage.py:1196
+#: exe/jsui/mainpage.py:911 exe/jsui/mainpage.py:1009 exe/jsui/mainpage.py:1074
+#: exe/jsui/mainpage.py:1137 exe/jsui/mainpage.py:1218
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr "%s direktorioaren aurrebista fitxategi bat da, eta ezin da ordeztu"
 
-#: exe/jsui/mainpage.py:910
+#: exe/jsui/mainpage.py:930
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr "%s fitxategi lokala ez da aurkitu eta ezin da aurreikusi"
 
-#: exe/jsui/mainpage.py:1155 exe/jsui/mainpage.py:1181
-#: exe/jsui/mainpage.py:1224
+#: exe/jsui/mainpage.py:1177 exe/jsui/mainpage.py:1203
+#: exe/jsui/mainpage.py:1246
 msgid "Could not create the image"
 msgstr "Ezin izan da irudia sortu"
 
-#: exe/jsui/mainpage.py:1262
+#: exe/jsui/mainpage.py:1284
 msgid "Importing HTML..."
 msgstr "HTMLa inportatzen..."
 
-#: exe/jsui/mainpage.py:1268
+#: exe/jsui/mainpage.py:1290
 #, python-format
 msgid ""
 "LOM Metadata import FAILED!\n"
@@ -3984,29 +3989,33 @@ msgstr ""
 "ERROREA LOM metadatuen inportazioa egiterakoan!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1271
+#: exe/jsui/mainpage.py:1293
 msgid "Error importing HTML:\n"
 msgstr "Errorea HTMLa  inportatzen:\n"
 
-#: exe/jsui/mainpage.py:1299 exe/jsui/scripts/app/controller/Toolbar.js:1239
+#: exe/jsui/mainpage.py:1321 exe/jsui/scripts/app/controller/Toolbar.js:1300
 msgid "Exporting package as SCORM 1.2..."
 msgstr "Paketea SCORM 1.2 modura esportatzen..."
 
-#: exe/jsui/mainpage.py:1317
+#: exe/jsui/mainpage.py:1339
+msgid "Checking the project size..."
+msgstr ""
+
+#: exe/jsui/mainpage.py:1350
 #, fuzzy, python-format
 msgid "Uploading package to %s..."
 msgstr "Paketea Procomún-era igotzen..."
 
-#: exe/jsui/mainpage.py:1333
+#: exe/jsui/mainpage.py:1366
 msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1373
+#: exe/jsui/mainpage.py:1406
 #, fuzzy, python-format
 msgid "Sending document to %s"
 msgstr "Dokumentua Procomún-en argitaratzen"
 
-#: exe/jsui/mainpage.py:1395
+#: exe/jsui/mainpage.py:1428
 #, fuzzy, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
@@ -4015,7 +4024,7 @@ msgstr ""
 "Paketea <a href=\"%s\" target=\"_blank\" title=\"Klik egin esportatutako "
 "paketea ikusteko\">%s</a>-ra esportatu da."
 
-#: exe/jsui/mainpage.py:1399
+#: exe/jsui/mainpage.py:1432
 #, fuzzy, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
@@ -4026,14 +4035,14 @@ msgstr ""
 "target=\"_blank\" title=\"Procomún-eko hasierako orria\">Procomún</a> "
 "webgunean.</small>"
 
-#: exe/jsui/mainpage.py:1410
+#: exe/jsui/mainpage.py:1443
 #, python-format
 msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1456 exe/jsui/mainpage.py:1914
+#: exe/jsui/mainpage.py:1489 exe/jsui/mainpage.py:1979
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -4042,25 +4051,25 @@ msgstr ""
 "EZ DA GORDE!\n"
 "\"%s\" ez da izen onargarria fitxategiarentzat"
 
-#: exe/jsui/mainpage.py:1467 exe/jsui/mainpage.py:1477
-#: exe/jsui/mainpage.py:1480 exe/jsui/mainpage.py:1485
-#: exe/jsui/mainpage.py:1488 exe/jsui/mainpage.py:1491
-#: exe/jsui/mainpage.py:1494 exe/jsui/mainpage.py:1497
-#: exe/jsui/mainpage.py:1502 exe/jsui/mainpage.py:1846
-#: exe/jsui/mainpage.py:1961
+#: exe/jsui/mainpage.py:1500 exe/jsui/mainpage.py:1510
+#: exe/jsui/mainpage.py:1513 exe/jsui/mainpage.py:1518
+#: exe/jsui/mainpage.py:1521 exe/jsui/mainpage.py:1524
+#: exe/jsui/mainpage.py:1527 exe/jsui/mainpage.py:1530
+#: exe/jsui/mainpage.py:1535 exe/jsui/mainpage.py:1911
+#: exe/jsui/mainpage.py:2026
 msgid "EXPORT FAILED!"
 msgstr "EZ DA ESPORTATU!"
 
-#: exe/jsui/mainpage.py:1589
+#: exe/jsui/mainpage.py:1652
 msgid "Correct XLIFF import"
 msgstr "XLIFF inportazio zuzena"
 
-#: exe/jsui/mainpage.py:1592
+#: exe/jsui/mainpage.py:1655
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "Errorea XLIFF inportatzen: %s"
 
-#: exe/jsui/mainpage.py:1656 exe/jsui/mainpage.py:1695
+#: exe/jsui/mainpage.py:1721 exe/jsui/mainpage.py:1760
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -4069,22 +4078,22 @@ msgstr ""
 "EZ DA ATERA!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1658 exe/jsui/mainpage.py:1697
+#: exe/jsui/mainpage.py:1723 exe/jsui/mainpage.py:1762
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "Hurrengora ateratako paketea: %s"
 
-#: exe/jsui/mainpage.py:1709 exe/webui/stylemanagerpage.py:259
+#: exe/jsui/mainpage.py:1774 exe/webui/stylemanagerpage.py:259
 msgid "Directory exists"
 msgstr "Direktorioa jada existitzen da"
 
-#: exe/jsui/mainpage.py:1723 exe/jsui/mainpage.py:1831
-#: exe/jsui/mainpage.py:1854 exe/jsui/mainpage.py:1877
-#: exe/jsui/mainpage.py:1890 exe/jsui/mainpage.py:1896
-#: exe/jsui/mainpage.py:1920 exe/jsui/mainpage.py:1936
-#: exe/jsui/mainpage.py:1946 exe/jsui/mainpage.py:1966
-#: exe/jsui/mainpage.py:1981 exe/jsui/mainpage.py:1987
-#: exe/jsui/mainpage.py:2002 exe/jsui/mainpage.py:2012
+#: exe/jsui/mainpage.py:1788 exe/jsui/mainpage.py:1896
+#: exe/jsui/mainpage.py:1919 exe/jsui/mainpage.py:1942
+#: exe/jsui/mainpage.py:1955 exe/jsui/mainpage.py:1961
+#: exe/jsui/mainpage.py:1985 exe/jsui/mainpage.py:2001
+#: exe/jsui/mainpage.py:2011 exe/jsui/mainpage.py:2031
+#: exe/jsui/mainpage.py:2046 exe/jsui/mainpage.py:2052
+#: exe/jsui/mainpage.py:2067 exe/jsui/mainpage.py:2077
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -4093,12 +4102,12 @@ msgstr ""
 "EZ DA ESPORTATU!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1753 exe/jsui/mainpage.py:1812
+#: exe/jsui/mainpage.py:1818 exe/jsui/mainpage.py:1877
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "%s izeneko beste fitxategi bat dago, eta ezin da ordeztu"
 
-#: exe/jsui/mainpage.py:1760 exe/jsui/mainpage.py:1819
+#: exe/jsui/mainpage.py:1825 exe/jsui/mainpage.py:1884
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
@@ -4107,18 +4116,18 @@ msgstr ""
 "Dagoeneko badago %s izeneko karpeta bat. Mesedez, beste izen bat aukeratu"
 " edo dagoena ezabatu, eta berriz saiatu."
 
-#: exe/jsui/mainpage.py:1783 exe/jsui/mainpage.py:1835
-#: exe/jsui/mainpage.py:1858 exe/jsui/mainpage.py:1879
-#: exe/jsui/mainpage.py:1898 exe/jsui/mainpage.py:1922
-#: exe/jsui/mainpage.py:1952 exe/jsui/mainpage.py:1968
-#: exe/jsui/mainpage.py:1989 exe/jsui/mainpage.py:2016
+#: exe/jsui/mainpage.py:1848 exe/jsui/mainpage.py:1900
+#: exe/jsui/mainpage.py:1923 exe/jsui/mainpage.py:1944
+#: exe/jsui/mainpage.py:1963 exe/jsui/mainpage.py:1987
+#: exe/jsui/mainpage.py:2017 exe/jsui/mainpage.py:2033
+#: exe/jsui/mainpage.py:2054 exe/jsui/mainpage.py:2081
 #, python-format
 msgid "Exported to %s"
 msgstr "%s-era esportatua"
 
-#: exe/jsui/mainpage.py:1785 exe/jsui/mainpage.py:1837
-#: exe/jsui/mainpage.py:1860 exe/jsui/mainpage.py:1954
-#: exe/jsui/mainpage.py:2018
+#: exe/jsui/mainpage.py:1850 exe/jsui/mainpage.py:1902
+#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:2019
+#: exe/jsui/mainpage.py:2083
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -4129,23 +4138,23 @@ msgstr ""
 "Baliabide batzuk ezin izan dira berrizendatu ISO9660-arekin bateragarriak"
 " izateko."
 
-#: exe/jsui/mainpage.py:1949
+#: exe/jsui/mainpage.py:2014
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr "Ondoko eremuak moztu egin dira SCORM 1.2 estandarra betetzeko: %s"
 
-#: exe/jsui/mainpage.py:2055 exe/webui/stylemanagerpage.py:284
+#: exe/jsui/mainpage.py:2120 exe/webui/stylemanagerpage.py:284
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "%s fitxategia ez dago edo ezin da irakurri."
 
-#: exe/jsui/mainpage.py:2062
+#: exe/jsui/mainpage.py:2127
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 "Ezin da fitxategia kargatu. Mesedez, bidali fitxategia "
 "bugs@exelearning.org helbidera"
 
-#: exe/jsui/mainpage.py:2065
+#: exe/jsui/mainpage.py:2130
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
@@ -4154,7 +4163,7 @@ msgstr ""
 "Fitxategiaren formatua okerra da:\n"
 "%s"
 
-#: exe/jsui/mainpage.py:2067
+#: exe/jsui/mainpage.py:2132
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -4171,7 +4180,7 @@ msgstr "Ez dira ezaugarriak gorde"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:59
 #: exe/jsui/scripts/app/controller/Outline.js:222
-#: exe/jsui/scripts/app/controller/Toolbar.js:394 exe/webui/editorpage.py:250
+#: exe/jsui/scripts/app/controller/Toolbar.js:423 exe/webui/editorpage.py:250
 #: exe/webui/editorpane.py:406 exe/webui/scripts/authoring.js:614
 #: exe/webui/scripts/authoring.js:658
 #: exe/webui/tools/mindmaps/src/js/Notification.js:191
@@ -4219,20 +4228,20 @@ msgstr "Irudiak"
 #: exe/jsui/scripts/app/controller/StyleManager.js:294
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
-#: exe/jsui/scripts/app/controller/Toolbar.js:830
-#: exe/jsui/scripts/app/controller/Toolbar.js:856
-#: exe/jsui/scripts/app/controller/Toolbar.js:881
-#: exe/jsui/scripts/app/controller/Toolbar.js:903
-#: exe/jsui/scripts/app/controller/Toolbar.js:938
-#: exe/jsui/scripts/app/controller/Toolbar.js:958
-#: exe/jsui/scripts/app/controller/Toolbar.js:1028
-#: exe/jsui/scripts/app/controller/Toolbar.js:1140
-#: exe/jsui/scripts/app/controller/Toolbar.js:1331
-#: exe/jsui/scripts/app/controller/Toolbar.js:1353
-#: exe/jsui/scripts/app/controller/Toolbar.js:1375
-#: exe/jsui/scripts/app/controller/Toolbar.js:1413
-#: exe/jsui/scripts/app/controller/Toolbar.js:1671
-#: exe/jsui/scripts/app/controller/Toolbar.js:1830
+#: exe/jsui/scripts/app/controller/Toolbar.js:882
+#: exe/jsui/scripts/app/controller/Toolbar.js:908
+#: exe/jsui/scripts/app/controller/Toolbar.js:933
+#: exe/jsui/scripts/app/controller/Toolbar.js:955
+#: exe/jsui/scripts/app/controller/Toolbar.js:990
+#: exe/jsui/scripts/app/controller/Toolbar.js:1010
+#: exe/jsui/scripts/app/controller/Toolbar.js:1080
+#: exe/jsui/scripts/app/controller/Toolbar.js:1192
+#: exe/jsui/scripts/app/controller/Toolbar.js:1392
+#: exe/jsui/scripts/app/controller/Toolbar.js:1414
+#: exe/jsui/scripts/app/controller/Toolbar.js:1436
+#: exe/jsui/scripts/app/controller/Toolbar.js:1474
+#: exe/jsui/scripts/app/controller/Toolbar.js:1732
+#: exe/jsui/scripts/app/controller/Toolbar.js:1891
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
 #: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
 #: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
@@ -4244,11 +4253,11 @@ msgstr "Fitxategi guztiak"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:321
 #: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1300
-#: exe/jsui/scripts/app/controller/Toolbar.js:1324
-#: exe/jsui/scripts/app/controller/Toolbar.js:1346
-#: exe/jsui/scripts/app/controller/Toolbar.js:1368
-#: exe/jsui/scripts/app/controller/Toolbar.js:1406
+#: exe/jsui/scripts/app/controller/Toolbar.js:1361
+#: exe/jsui/scripts/app/controller/Toolbar.js:1385
+#: exe/jsui/scripts/app/controller/Toolbar.js:1407
+#: exe/jsui/scripts/app/controller/Toolbar.js:1429
+#: exe/jsui/scripts/app/controller/Toolbar.js:1467
 #: exe/webui/stylemanagerpage.py:331 exe/webui/stylemanagerpage.py:445
 #: exe/webui/stylemanagerpage.py:601
 msgid "Please wait..."
@@ -4277,7 +4286,7 @@ msgstr "Ezarpenak gorde dira"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1278
+#: exe/jsui/scripts/app/controller/Toolbar.js:1339
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:380
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
@@ -4308,9 +4317,9 @@ msgstr "Errorea"
 #: exe/jsui/scripts/app/controller/MainTab.js:354
 #: exe/jsui/scripts/app/controller/MainTab.js:407
 #: exe/jsui/scripts/app/controller/Outline.js:261
-#: exe/jsui/scripts/app/controller/Toolbar.js:696
-#: exe/jsui/scripts/app/controller/Toolbar.js:755
-#: exe/jsui/scripts/app/controller/Toolbar.js:1160
+#: exe/jsui/scripts/app/controller/Toolbar.js:748
+#: exe/jsui/scripts/app/controller/Toolbar.js:807
+#: exe/jsui/scripts/app/controller/Toolbar.js:1212
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -4470,8 +4479,13 @@ msgstr "Txantiloia ezabatu?"
 msgid "Do you want to delete this template?"
 msgstr "Txantiloi hau ezabatu nahi duzu?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:395
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:512
+#: exe/jsui/scripts/app/controller/Toolbar.js:411
+#, fuzzy, python-format
+msgid "%s of %s"
+msgstr "Orria: %s / %s"
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:424
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:540
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
@@ -4479,17 +4493,17 @@ msgstr ""
 "Aukera hau gaituz gero, elementu gehiago erakutsiko dira menuetan "
 "(Fitxategia, Tresnak, ...) eta Ezaugarriak fitxan ."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:426
+#: exe/jsui/scripts/app/controller/Toolbar.js:478
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:221
 msgid "General description"
 msgstr "Deskribapen orokorra"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:435
+#: exe/jsui/scripts/app/controller/Toolbar.js:487
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:73
 msgid "Package"
 msgstr "Paketea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:449
+#: exe/jsui/scripts/app/controller/Toolbar.js:501
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:240
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:280
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:91
@@ -4503,33 +4517,33 @@ msgstr "Paketea"
 msgid "General"
 msgstr "Orokorra"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:482
+#: exe/jsui/scripts/app/controller/Toolbar.js:534
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:435
-#: exe/webui/tools/assistant/js/assistant.js:58
+#: exe/webui/tools/assistant/js/assistant.js:57
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
 msgstr "Laguntzailea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:512
+#: exe/jsui/scripts/app/controller/Toolbar.js:564
 msgid "About"
 msgstr "Honi buruz"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:529
+#: exe/jsui/scripts/app/controller/Toolbar.js:581
 msgid "Release notes"
 msgstr "Bertsioaren oharrak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:548
+#: exe/jsui/scripts/app/controller/Toolbar.js:600
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:459
 #: exe/webui/tools/assistant/langs/all.js:79
 msgid "Legal Notes"
 msgstr "Ohar-legalak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:627
+#: exe/jsui/scripts/app/controller/Toolbar.js:679
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:373
 msgid "Preferences"
 msgstr "Lehentasunak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:648
+#: exe/jsui/scripts/app/controller/Toolbar.js:700
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:141
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:147
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
@@ -4542,7 +4556,7 @@ msgstr "Lehentasunak"
 msgid "Export"
 msgstr "Esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:697
+#: exe/jsui/scripts/app/controller/Toolbar.js:749
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:357
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:79
 #: exe/webui/tools/mindmaps/src/js/MindMaps.js:110
@@ -4553,124 +4567,124 @@ msgstr ""
 "Aldaketak egin badituzu eta ez badituzu gorde, galduko dira. Benetan "
 "atera nahi duzu?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:726
+#: exe/jsui/scripts/app/controller/Toolbar.js:778
 msgid "Style Manager"
 msgstr "Estiloen kudeatzailea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:744
+#: exe/jsui/scripts/app/controller/Toolbar.js:796
 msgid "Template Manager"
 msgstr "Txantiloi-kudeatzailea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:756
+#: exe/jsui/scripts/app/controller/Toolbar.js:808
 #, python-format
 msgid "Exit without saving changes and go back to %s (home page)?"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:814
+#: exe/jsui/scripts/app/controller/Toolbar.js:866
 msgid "Select package to insert"
 msgstr "Aukeratu txertatuko den paketea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:822
+#: exe/jsui/scripts/app/controller/Toolbar.js:874
 msgid "Inserting package: {filename}"
 msgstr "Paketea txertatzen: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:829
-#: exe/jsui/scripts/app/controller/Toolbar.js:855
-#: exe/jsui/scripts/app/controller/Toolbar.js:880
-#: exe/jsui/scripts/app/controller/Toolbar.js:1670
-#: exe/jsui/scripts/app/controller/Toolbar.js:1829
+#: exe/jsui/scripts/app/controller/Toolbar.js:881
+#: exe/jsui/scripts/app/controller/Toolbar.js:907
+#: exe/jsui/scripts/app/controller/Toolbar.js:932
+#: exe/jsui/scripts/app/controller/Toolbar.js:1731
+#: exe/jsui/scripts/app/controller/Toolbar.js:1890
 msgid "eXe Package Files"
 msgstr "eXe fitxategiak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:839
+#: exe/jsui/scripts/app/controller/Toolbar.js:891
 #, fuzzy
 msgid "Select package to import and Open"
 msgstr "Aukeratu txertatuko den paketea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:848
-#: exe/jsui/scripts/app/controller/Toolbar.js:1664
+#: exe/jsui/scripts/app/controller/Toolbar.js:900
+#: exe/jsui/scripts/app/controller/Toolbar.js:1725
 msgid "Loading package: {filename}"
 msgstr "Paketea kargatzen: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:864
+#: exe/jsui/scripts/app/controller/Toolbar.js:916
 msgid "Save extracted package as"
 msgstr "Ateratako paketea honela gorde"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:870
-#: exe/jsui/scripts/app/controller/Toolbar.js:896
+#: exe/jsui/scripts/app/controller/Toolbar.js:922
+#: exe/jsui/scripts/app/controller/Toolbar.js:948
 msgid "Extracting package: {filename}"
 msgstr "Atera paketea: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:890
+#: exe/jsui/scripts/app/controller/Toolbar.js:942
 msgid "Save extracted SCORM package as"
 msgstr "Sortutako SCORM paketea honela gorde"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:902
+#: exe/jsui/scripts/app/controller/Toolbar.js:954
 msgid "SCORM Files"
 msgstr "SCORM fitxategiak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:964
 msgid "Select the parent folder for import."
 msgstr "Aukeratu karpeta nagusia inportaziorako."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:927
+#: exe/jsui/scripts/app/controller/Toolbar.js:979
 msgid "Select the entry point for import."
 msgstr "Inportazioaren sarbidea aukeratu."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:937
+#: exe/jsui/scripts/app/controller/Toolbar.js:989
 msgid "HTML Files"
 msgstr "HTML fitxategiak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:946
+#: exe/jsui/scripts/app/controller/Toolbar.js:998
 msgid "Select LOM Metadata file to import."
 msgstr "Inportatuko den LOM metadatuen fitxategia aukeratu."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:957
+#: exe/jsui/scripts/app/controller/Toolbar.js:1009
 msgid "XML Files"
 msgstr "XML fitxategiak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:972
+#: exe/jsui/scripts/app/controller/Toolbar.js:1024
 msgid "Waiting progress..."
 msgstr "Itxarotearen aurreratzea..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:980
+#: exe/jsui/scripts/app/controller/Toolbar.js:1032
 msgid "Cancel Import?"
 msgstr "Inportazioa bertan behera utzi?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:981
+#: exe/jsui/scripts/app/controller/Toolbar.js:1033
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "Inportazio bat martxan dago. Deuseztatu nahi duzu?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1004
+#: exe/jsui/scripts/app/controller/Toolbar.js:1056
 msgid "Select Xliff file to import"
 msgstr "Aukeratu XLIFF fitxategia inportatzeko"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1015
+#: exe/jsui/scripts/app/controller/Toolbar.js:1067
 msgid "XLIFF Import Preferences"
 msgstr "XLIFF inportazioaren aukerak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1027
-#: exe/jsui/scripts/app/controller/Toolbar.js:1139
+#: exe/jsui/scripts/app/controller/Toolbar.js:1079
+#: exe/jsui/scripts/app/controller/Toolbar.js:1191
 msgid "XLIFF Files"
 msgstr "XLIFF fitxategiak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1037
+#: exe/jsui/scripts/app/controller/Toolbar.js:1089
 msgid "Export to Xliff as"
 msgstr "XLIFF-era honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1058
+#: exe/jsui/scripts/app/controller/Toolbar.js:1110
 msgid "Select source language"
 msgstr "Jatorrizko hizkuntza aukeratu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1069
+#: exe/jsui/scripts/app/controller/Toolbar.js:1121
 msgid "Select target language"
 msgstr "Xede hizkuntza aukeratu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1080
+#: exe/jsui/scripts/app/controller/Toolbar.js:1132
 msgid "Copy source also in target"
 msgstr "Jatorrizko testua xedean kopiatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1083
+#: exe/jsui/scripts/app/controller/Toolbar.js:1135
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4682,7 +4696,7 @@ msgstr ""
 "egiten dute soilik, eta jatorrizko eremuaren testuarekin aurre-beteta "
 "behar dute."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1094
+#: exe/jsui/scripts/app/controller/Toolbar.js:1146
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4694,7 +4708,7 @@ msgstr ""
 "interesgarri bat izan daiteke aurre-prozesatzeko tresna bat erabili nahi "
 "baduzu (adib. Rainbow) itzulpen tresna erabili aurretik."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1103
+#: exe/jsui/scripts/app/controller/Toolbar.js:1155
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
 #: exe/webui/editorpane.py:277
@@ -4708,25 +4722,25 @@ msgstr ""
 msgid "Cancel"
 msgstr "Ezeztatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1109
+#: exe/jsui/scripts/app/controller/Toolbar.js:1161
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "Ados"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1132
+#: exe/jsui/scripts/app/controller/Toolbar.js:1184
 msgid "XLIFF Export Preferences"
 msgstr "XLIFF esportazioaren aukerak"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1161
+#: exe/jsui/scripts/app/controller/Toolbar.js:1213
 #, fuzzy, python-format
 msgid "Publish on %s?"
 msgstr "argitalpenaren editorea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1161
+#: exe/jsui/scripts/app/controller/Toolbar.js:1213
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1198
+#: exe/jsui/scripts/app/controller/Toolbar.js:1250
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
@@ -4734,16 +4748,22 @@ msgstr ""
 "Pakete honek metadatuak ditu. Agian jatorrizko egileak atxikitutako "
 "informazio okerra esportatzen ari zara. Joan Ezaugarriak-era editatzeko."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1200
+#: exe/jsui/scripts/app/controller/Toolbar.js:1252
 msgid "Do you want to export the package with the current metadata?"
 msgstr "Paketea oraingo metadatuekin esportatu nahi duzu?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1238
+#: exe/jsui/scripts/app/controller/Toolbar.js:1293
+msgid ""
+"The project exceeds the maximum size limit. Try removing some large files"
+" before publishing."
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:1299
 #, fuzzy
 msgid "Publishing..."
 msgstr "argitalpenaren editorea"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1251
+#: exe/jsui/scripts/app/controller/Toolbar.js:1312
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
@@ -4751,20 +4771,20 @@ msgstr ""
 "Baimendu behar duzu eXeLearning-ek  edukiak esportatzea zure Procomún "
 "kontuan"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1252
+#: exe/jsui/scripts/app/controller/Toolbar.js:1313
 msgid "Are you sure you want to start authorization process?"
 msgstr "Baimentze-prozesua hasiko da. Ziur al zaude?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1263
+#: exe/jsui/scripts/app/controller/Toolbar.js:1324
 msgid "Procomún OAuth"
 msgstr "Procomún-aren OAuth-a"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1279
+#: exe/jsui/scripts/app/controller/Toolbar.js:1340
 #, python-format
 msgid "Error exporting package \"%s\" to Procomún."
 msgstr "Errorea \"%s\" paketea Procomún-era esportatzerakoan."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1281
+#: exe/jsui/scripts/app/controller/Toolbar.js:1342
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
@@ -4774,100 +4794,100 @@ msgstr ""
 "baduzu, itxi leiho hau, esportatu SCORM 2004 formatura eta igo sortutako "
 "zip fitxategia Procomún-era."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1293
+#: exe/jsui/scripts/app/controller/Toolbar.js:1354
 msgid "Select the parent folder for export."
 msgstr "Aukeratu esportazioaren karpeta."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1316
+#: exe/jsui/scripts/app/controller/Toolbar.js:1377
 msgid "Export text package as"
 msgstr "Testu paketea honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1330
+#: exe/jsui/scripts/app/controller/Toolbar.js:1391
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:208
 msgid "Text File"
 msgstr "Testu fitxategia"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1338
+#: exe/jsui/scripts/app/controller/Toolbar.js:1399
 msgid "Save package resources report as"
 msgstr "Honela gorde paketearen baliabide txostena"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1352
+#: exe/jsui/scripts/app/controller/Toolbar.js:1413
 msgid "CSV File"
 msgstr "CSV fitxategia"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1360
+#: exe/jsui/scripts/app/controller/Toolbar.js:1421
 msgid "Export EPUB3 package as"
 msgstr "Esportatu EPUB paketea honela"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1374
+#: exe/jsui/scripts/app/controller/Toolbar.js:1435
 msgid "EPUB3 File"
 msgstr "EPUB3 fitxategia"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1384
+#: exe/jsui/scripts/app/controller/Toolbar.js:1445
 msgid "Export SCORM package as"
 msgstr "SCORM paketea honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1386
+#: exe/jsui/scripts/app/controller/Toolbar.js:1447
 msgid "Export IMS package as"
 msgstr "IMS paketea honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1388
+#: exe/jsui/scripts/app/controller/Toolbar.js:1449
 msgid "Export Website package as"
 msgstr "Webgune paketea honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1390
+#: exe/jsui/scripts/app/controller/Toolbar.js:1451
 #, fuzzy
 msgid "Export Single Page package as"
 msgstr "Webgune paketea honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1392
+#: exe/jsui/scripts/app/controller/Toolbar.js:1453
 msgid "Export Common Cartridge as"
 msgstr "Common Cartridge-a honela esportatu"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1394
+#: exe/jsui/scripts/app/controller/Toolbar.js:1455
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "BALIO OKERRA EMAN ZAIO exportPackage-ari"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1412
+#: exe/jsui/scripts/app/controller/Toolbar.js:1473
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM/IMS/Zip fitxategia"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1524
+#: exe/jsui/scripts/app/controller/Toolbar.js:1585
 msgid "No templates available"
 msgstr "Ezin da txantiloirik jaitsi"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1642
+#: exe/jsui/scripts/app/controller/Toolbar.js:1703
 msgid "Loading package..."
 msgstr "Paketea kargatzen..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1659
+#: exe/jsui/scripts/app/controller/Toolbar.js:1720
 msgid "Open File"
 msgstr "Fitxategia ireki"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1683
+#: exe/jsui/scripts/app/controller/Toolbar.js:1744
 msgid "Save Package first?"
 msgstr "Paketea gorde?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1684
+#: exe/jsui/scripts/app/controller/Toolbar.js:1745
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
 msgstr "Paketea aldatu da eta oraindik ez da gorde. Gorde nahi duzu?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1753
-#: exe/jsui/scripts/app/controller/Toolbar.js:1815
+#: exe/jsui/scripts/app/controller/Toolbar.js:1814
+#: exe/jsui/scripts/app/controller/Toolbar.js:1876
 msgid "Saving package..."
 msgstr "Paketea gordetzen..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1784
+#: exe/jsui/scripts/app/controller/Toolbar.js:1845
 msgid "Title for template:"
 msgstr "Txantiloiaren izenburua:"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1785
+#: exe/jsui/scripts/app/controller/Toolbar.js:1846
 msgid "Enter the new name for template:"
 msgstr "Sartu txantiloiaren izen berria:"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1807
+#: exe/jsui/scripts/app/controller/Toolbar.js:1868
 msgid "Save file"
 msgstr "Gorde fitxategia"
 
@@ -4888,29 +4908,34 @@ msgstr "Ez duzu baimenik fitxategia irekitzeko"
 msgid "You do not have the permissions to  save into folder"
 msgstr "Ez duzu baimenik karpetaren barruan ezer gordetzeko"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:425
+#: exe/jsui/scripts/app/controller/filepicker/File.js:430
+#, python-format
+msgid "Error: The maximum upload size is %s MB"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/filepicker/File.js:440
 #, fuzzy
 msgid "Uploading File..."
 msgstr "Jaisten..."
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:457
+#: exe/jsui/scripts/app/controller/filepicker/File.js:472
 msgid "Create Folder"
 msgstr "Karpeta sortu"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:458
+#: exe/jsui/scripts/app/controller/filepicker/File.js:473
 msgid "Enter the new folder name:"
 msgstr "Karpeta berriaren izena sartu:"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:472
+#: exe/jsui/scripts/app/controller/filepicker/File.js:487
 msgid "You do not have the permissions to create a folder in folder"
 msgstr "Ez duzu baimenik karpetaren barruan karpetak sortzeko"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:478
+#: exe/jsui/scripts/app/controller/filepicker/File.js:493
 #: exe/webui/scripts/editor.js:35
 msgid "Confirm?"
 msgstr "Baieztatu?"
 
-#: exe/jsui/scripts/app/controller/filepicker/File.js:479
+#: exe/jsui/scripts/app/controller/filepicker/File.js:494
 msgid "The file already exists. Do you want to replace it?"
 msgstr "Dagoeneko badago fitxategi bat izen horrekin. Ordeztu nahi duzu?"
 
@@ -6628,7 +6653,7 @@ msgid "Tools"
 msgstr "Tresnak"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:379
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:538 exe/webui/editorpane.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:574 exe/webui/editorpane.py:273
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
@@ -6693,12 +6718,17 @@ msgstr "Argitaratu gaia"
 msgid "About eXe"
 msgstr "eXe-ri buruz"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:511
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:510
+#, fuzzy
+msgid "Project size:"
+msgstr "Proiektuaren izenburua"
+
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:539
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr "Modu aurreratua"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:552
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:588
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:73
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:63
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:161
@@ -6709,15 +6739,15 @@ msgstr "Modu aurreratua"
 msgid "Finish"
 msgstr "Amaitu"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:696
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:732
 msgid "You've been working for a long time without saving."
 msgstr "Denbora luzez  egin duzu lan ezer gorde gabe."
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:698
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:734
 msgid "Do you want to save now?"
 msgstr "Orain gorde nahi duzu?"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:700
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:736
 msgid "Hide until the application is closed"
 msgstr "Ezkutatu aplikazioa itxi arte"
 
@@ -6728,7 +6758,8 @@ msgid ""
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1197
+#: exe/jsui/scripts/app/controller/Toolbar.js:1249
+#: exe/jsui/scripts/app/controller/Toolbar.js:1292
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
 #: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
@@ -6751,7 +6782,7 @@ msgstr "eXeLearning bertsio berria argitaratu da (%). Jaitsi nahi duzu?"
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:695 exe/jsui/scripts/exe.js:319
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:731 exe/jsui/scripts/exe.js:319
 msgid "Warning!"
 msgstr "Kontuz!"
 
@@ -6767,7 +6798,7 @@ msgstr "Erakutsi panela"
 msgid "Use the left panel to create pages and add content."
 msgstr "Erabili ezkerreko panela orriak sortzeko eta edukia eransteko."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1203 exe/jsui/scripts/exe.js:469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1255 exe/jsui/scripts/exe.js:469
 msgid "Don't show this warning again"
 msgstr "Ez erakutsi berriro ohar hau"
 
@@ -17647,5 +17678,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Importing package with id ( {} ) from {}"
+#~ msgstr ""
+
+#~ msgid "Checking size..."
+#~ msgstr ""
+
+#~ msgid "Error: The maximum upload size is"
 #~ msgstr ""
 

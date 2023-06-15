@@ -1336,7 +1336,7 @@ class MainPage(RenderableLivePage):
             Upload the exported package to elp Repository.
             """
             # check file size
-            uploading_package_message = _(u'Checking size...')
+            uploading_package_message = _(u'Checking the project size...')
             
             # Update progress for the user
             client.call('Ext.MessageBox.updateProgress', 0.6, '25%', uploading_package_message)
