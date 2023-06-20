@@ -20,4 +20,6 @@ RUN apt-get update && apt-get -yq install cssmin python-webassets
 
 RUN apt-get update && apt-get -yq install python-certifi python-pil
 
+RUN pip install pyjwt
+
 RUN mkdir /var/run/exe
