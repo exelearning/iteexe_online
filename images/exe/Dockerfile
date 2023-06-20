@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 RUN apt-get update && apt-get -yq install python-setuptools python-zope.interface python-imaging python-chardet python-lxml python-feedparser mimetex python-git
 
@@ -8,7 +8,7 @@ RUN apt-get update && apt-get -yq install python-m2crypto python-isodate python-
 
 RUN apt-get update && apt-get -yq install python-bs4 python-oauth2client python-googleapi
 
-RUN apt-get update && apt-get -yq install python-passlib
+RUN apt-get update && apt-get -yq install python-passlib 
 
 RUN apt-get update && apt-get -yq install fuseext2
 
@@ -17,5 +17,7 @@ RUN apt-get update && apt-get -yq install python-suds python-requests-oauthlib p
 RUN pip install dm.xmlsec.binding==1.3.2
 
 RUN apt-get update && apt-get -yq install cssmin python-webassets
+
+RUN apt-get update && apt-get -yq install python-certifi python-pil
 
 RUN mkdir /var/run/exe
