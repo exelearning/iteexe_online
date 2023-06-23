@@ -53,6 +53,7 @@ class SinglePageExport(object):
         self.html           = ""
         self.style          = None
         self.name           = None
+        log.error("OUT --->"+outputDir)
         self.stylesDir      = Path(stylesDir)
         if outputDir.lower().endswith('.zip'):
             self.outputDir  = TempDirPath()
@@ -180,7 +181,7 @@ class SinglePageExport(object):
         listFiles=getFilesJSToMinify('singlepage', self.scriptsDir)
         # To review (it fails due to encoding problems in common.js) exportMinFileJS(listFiles, self.outputDir)
         jsFile = (self.scriptsDir/'common.js')
-        jsFile.copyfile(outputDir/'common.js')
+        jsFile.copyfile(self.outputDir/'common.js')
 
         # Create lang file
         langFile = open(self.outputDir + '/common_i18n.js', "w")

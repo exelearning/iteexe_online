@@ -1430,7 +1430,7 @@ Ext.define('eXe.controller.Toolbar', {
        actualurl = location.href.split("/");
        proyectName = actualurl.pop();
        webPrintDir = tempPrintDir.split("/").slice(3,5).join("/");
-       printurl = webPrintDir+"/"+proyectName;
+       printurl = webPrintDir+"/"+proyectName+"/";
        this.processBrowseEvent(false, false, {url: printurl});
     },
 
