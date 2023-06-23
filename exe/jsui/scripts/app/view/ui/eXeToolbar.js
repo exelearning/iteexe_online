@@ -116,6 +116,14 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 								xtype: 'menuseparator'
                             },
                             {
+                                xtype: 'accesskey_menuitem',
+                                text: _('Download'),
+                                itemId: 'file_extract_all'
+                            },
+                            {
+								xtype: 'menuseparator'
+                            },
+                            {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
                                 text: _('Import') + getSRhelp(),
