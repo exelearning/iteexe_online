@@ -213,10 +213,11 @@ Ext.define('eXe.controller.Toolbar', {
             	click: { fn: this.processExportEvent, exportType: "csvReport" }
             },
             '#tools_preview': {
-                click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
+                click: { fn: this.processBrowseEvent, url: location.href + '/preview/' }
             },
             '#tools_preview_button': {
-                click: { fn: this.processBrowseEvent, url: location.href + '/preview' }
+                click: { fn: this.processBrowseEvent, url: location.href + '/preview/' }
+                
             },
             '#file_export_procomun_b': {
                 click: { fn: this.processExportEvent, exportType: "procomun" }
