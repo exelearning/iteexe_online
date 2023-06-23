@@ -53,7 +53,6 @@ class SinglePageExport(object):
         self.html           = ""
         self.style          = None
         self.name           = None
-        log.error("OUT --->"+outputDir)
         self.stylesDir      = Path(stylesDir)
         if outputDir.lower().endswith('.zip'):
             self.outputDir  = TempDirPath()
