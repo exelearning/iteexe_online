@@ -68,12 +68,6 @@ class PackageRedirectPage(RenderableResource):
         This is probably because the url is in unicode
         """
         session = request.getSession()
-        # Provisional - TEST
-        # Must be eliminated in the future
-        # Login and import ode passing the parameter user
-        if 'user' in request.args and request.args['user'][0]:
-            session.setUser(request.args['user'][0])
-
         #TEST Moodle-eXe Integration
         self.integration = Integration()
         if self.integration.enabled_jwt == "1":
@@ -87,6 +81,17 @@ class PackageRedirectPage(RenderableResource):
             except Exception as e:
                 return error.ForbiddenResource("JWT not valid")
         
+        # If using the JWT system, user dirs are created in a domain_instance_userid dir structure, else, only use the id
+        # Must be eliminated in the future
+        # Login and import ode passing the parameter user
+        if 'user' in request.args and request.args['user'][0]:
+            if self.integration.enabled_jwt == "0":
+                session.setUser(request.args['user'][0])
+            else:
+                multidomainuser=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod")[0]
+                multidomainuser=multidomainuser.split("//")[1].replace("/",".").replace(".","_")
+                session.setUser(multidomainuser+"_"+request.args['user'][0])
+
         # No session
         if self.webServer.application.server and not session.user and not request.getUser():
             if 'login' in request.args and request.args['login'][0] == 'saml':
