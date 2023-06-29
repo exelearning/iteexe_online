@@ -114,7 +114,7 @@ class Integration:
         params = urlencode({self.post_ode:ode})
         try:
             if self.enabled_jwt == "1":
-                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod")[0]
+                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
                 returnurl=returnurl+"/mod/exescorm/set_ode.php"
                 request = urlopen(returnurl,params)
             else:
@@ -141,7 +141,7 @@ class Integration:
         params = urlencode({self.post_ode:ode})
         try:
             if self.enabled_jwt == "1":
-                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod")[0]
+                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
                 returnurl=returnurl+"/mod/exescorm/get_ode.php"
                 request = urlopen(returnurl,params)
             else:               

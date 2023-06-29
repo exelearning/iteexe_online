@@ -88,7 +88,7 @@ class PackageRedirectPage(RenderableResource):
             if self.integration.enabled_jwt == "0":
                 session.setUser(request.args['user'][0])
             else:
-                multidomainuser=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod")[0]
+                multidomainuser=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
                 multidomainuser=multidomainuser.split("//")[1].replace("/",".").replace(".","_")
                 session.setUser(multidomainuser+"_"+request.args['user'][0])
 

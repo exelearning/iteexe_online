@@ -378,6 +378,9 @@ class MainPage(RenderableLivePage):
             # add user styles (/style_user) to webserver path
             self.webServer.root.putChild("style_user_{}".format(config['user']), File(session.user.stylesPath))
 
+        if self.integration.enabled_jwt == "1":
+            config['publishHomeURL'] = jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm/")[0]
+
         # When working with chinese, we need to add the full language string
         # TODO: We should test if we really need to split the locale
         if G.application.config.locale.split('_')[0] == 'zh':
