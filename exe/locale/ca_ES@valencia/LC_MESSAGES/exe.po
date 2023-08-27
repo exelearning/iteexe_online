@@ -13091,7 +13091,7 @@ msgstr "Indiqueu el valor mínim de l'operand"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:252
 msgid "Please define the highest value of the operand"
-msgstr "Indiqueu el valor màxim de l'operand"
+msgstr "Indiqueu el valor màxim de l'operand"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:276
 msgid "No operations selected"
