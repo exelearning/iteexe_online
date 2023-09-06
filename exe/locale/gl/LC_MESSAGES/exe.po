@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
 "POT-Creation-Date: 2023-06-15 14:28+0200\n"
-"PO-Revision-Date: 2022-12-08 19:05+0100\n"
+"PO-Revision-Date: 2023-07-21 11:50+0200\n"
 "Last-Translator: Pablo Nimo Liboreiro <pablonimo@edu.xunta.es>\n"
 "Language: gl\n"
 "Language-Team: eXeLearning.net <cedec@ite.educacion.es >\n"
@@ -37,7 +37,7 @@ msgstr ""
 "seguridade en %s"
 
 #: exe/application.py:335
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
 "   Usage: %s [OPTION] [PACKAGE]\n"
@@ -2539,9 +2539,8 @@ msgid "Documents"
 msgstr "Documentos"
 
 #: exe/engine/locationbuttons.py:59
-#, fuzzy
 msgid "original_text"
-msgstr "Contexto"
+msgstr "original_text"
 
 #: exe/engine/mathidevice.py:41 exe/engine/mathidevice.py:54
 msgid "Maths"
@@ -3988,7 +3987,7 @@ msgstr ""
 #: exe/jsui/mainpage.py:530
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
-msgstr ""
+msgstr "Paquete %s gardado. Non esqueza descargalo no seu equipo"
 
 #: exe/jsui/mainpage.py:558
 #, python-format
@@ -4007,7 +4006,7 @@ msgstr "Plantilla gardada: %s"
 #: exe/jsui/mainpage.py:590
 #, python-format
 msgid "The project size cannot exceed %s"
-msgstr ""
+msgstr "O tamaño do proxecto non pode superar %s"
 
 #: exe/jsui/mainpage.py:689 exe/webui/stylemanagerpage.py:450
 msgid "Downloading..."
@@ -4068,41 +4067,40 @@ msgstr "Exportando paquete como SCORM 1.2..."
 
 #: exe/jsui/mainpage.py:1339
 msgid "Checking the project size..."
-msgstr ""
+msgstr "Comprobando o tamaño do proxecto..."
 
 #: exe/jsui/mainpage.py:1350
-#, fuzzy, python-format
+#, python-format
 msgid "Uploading package to %s..."
-msgstr "Subiendo paquete a Procomún."
+msgstr "Enviando o paquete a %s..."
 
 #: exe/jsui/mainpage.py:1366
 msgid "No response status"
-msgstr ""
+msgstr "Sen resposta"
 
 #: exe/jsui/mainpage.py:1406
-#, fuzzy, python-format
+#, python-format
 msgid "Sending document to %s"
-msgstr "Publicando documento en Procomún"
+msgstr "Enviando o documento a %s"
 
 #: exe/jsui/mainpage.py:1428
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
 "download the exported package\">%s</a>."
 msgstr ""
-"Paquete exportado a  <a href=\"%s\" target=\"_blank\" title=\"Pulse para "
-"ver el paquete exportado\">%s</a>."
+"Paquete exportado a  <a href=\"%s\" target=\"_blank\" title=\"Prema para "
+"descargar o paquete exportado\">%s</a>."
 
 #: exe/jsui/mainpage.py:1432
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
 "target=\"_blank\" title=\"Educational Resource Platform Home\">%s</a>\\'s"
 " web page.</small>"
 msgstr ""
-"<small>Pode ver e xestionar o paquete subido usando a páxina web de  <a "
-"href=\"%s\" target=\"_blank\" title=\"sitio web de "
-"Procomún\">Procomún</a>.</small>"
+"<small>Pódese ver e xestionar o paquete enviado usando a páxina web de <a "
+"href=\"%s\" target=\"_blank\" title=\"Páxina de inicio\">%s</a>.</small>"
 
 #: exe/jsui/mainpage.py:1443
 #, python-format
@@ -4110,6 +4108,7 @@ msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
+"Produciuse un erro ao publicar o paquete en %s. <br />A mensaxe de erro é: %s"
 
 #: exe/jsui/mainpage.py:1489 exe/jsui/mainpage.py:1979
 #, python-format
@@ -4551,9 +4550,9 @@ msgid "Do you want to delete this template?"
 msgstr "Quere eliminar esta plantilla?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:411
-#, fuzzy, python-format
+#, python-format
 msgid "%s of %s"
-msgstr "Páxina %s de %s"
+msgstr "%s de %s"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:424
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:573
@@ -4650,7 +4649,7 @@ msgstr "Xestor de plantillas"
 #: exe/jsui/scripts/app/controller/Toolbar.js:803
 #, python-format
 msgid "Exit without saving changes and go back to %s (home page)?"
-msgstr ""
+msgstr "Saír sen gardar os cambios e volver a %s (páxina de inicio)?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:861
 msgid "Select package to insert"
@@ -4669,9 +4668,8 @@ msgid "eXe Package Files"
 msgstr "Paquetes eXe"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:886
-#, fuzzy
 msgid "Select package to import and Open"
-msgstr "Seleccione o paquete a inserir"
+msgstr "Seleccione o paquete a importar"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:895
 #: exe/jsui/scripts/app/controller/Toolbar.js:1720
@@ -4805,13 +4803,14 @@ msgid "XLIFF Export Preferences"
 msgstr "Opcións de exportación XLIFF"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1208
-#, fuzzy, python-format
+#, python-format
 msgid "Publish on %s?"
-msgstr "editor de publicación"
+msgstr "Publicar en %s?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1208
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
+"Comprobe os contidos da lapela Propiedades (título, autoría, licenza...)."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1245
 msgid ""
@@ -4831,11 +4830,12 @@ msgid ""
 "The project exceeds the maximum size limit. Try removing some large files"
 " before publishing."
 msgstr ""
+"O proxecto supera o tamaño máximo permitido. Probe a borrar algúns ficheiros "
+"pesados antes de publicar."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1294
-#, fuzzy
 msgid "Publishing..."
-msgstr "editor de publicación"
+msgstr "Publicando..."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1307
 msgid ""
@@ -4908,9 +4908,8 @@ msgid "Export Website package as"
 msgstr "Exportar Sitio Web como"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1446
-#, fuzzy
 msgid "Export Single Page package as"
-msgstr "Exportar Sitio Web como"
+msgstr "Exportar páxina como"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1448
 msgid "Export Common Cartridge as"
@@ -4985,12 +4984,11 @@ msgstr "Non tes permisos para escribir no cartafol"
 #: exe/jsui/scripts/app/controller/filepicker/File.js:430
 #, python-format
 msgid "Error: The maximum upload size is %s MB"
-msgstr ""
+msgstr "Erro: o tamaño máximo de envío é de %s MB"
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:440
-#, fuzzy
 msgid "Uploading File..."
-msgstr "Descargando..."
+msgstr "Enviando ficheiro..."
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:472
 msgid "Create Folder"
@@ -5100,14 +5098,12 @@ msgid "Create Directory"
 msgstr "Crear Directorio"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:190
-#, fuzzy
 msgid "Upload File"
-msgstr "Ficheiro local"
+msgstr "Enviar ficheiro"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:299
-#, fuzzy
 msgid "Name:"
-msgstr "Renomear"
+msgstr "Nome:"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:53
 msgid "Dublin Core Metadata"
@@ -6379,9 +6375,8 @@ msgid "Search and download new styles from the styles repository"
 msgstr "Buscar e descargar novos estilos dende o respositorio de estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
-#, fuzzy
 msgid "My styles"
-msgstr "Importar estilo"
+msgstr "Os meus estilos"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
 msgid "List of styles in your system"
@@ -6524,15 +6519,14 @@ msgstr ""
 "dos valores seguintes:"
 
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
-#, fuzzy
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
 " zip file to "
 msgstr ""
-"Se ten problemas ao facer a publicación ou si desexa completar a "
+"Se ten problemas ao facer a publicación ou se desexa completar a "
 "catalogación máis adiante, peche este diálogo, exporte como SCORM 2004 e "
-"suba o ficheiro zip xerado a Procomún."
+"suba o ficheiro .zip xerado a "
 
 #: exe/jsui/scripts/app/view/ui/LeftPanel.js:72
 #: exe/webui/tools/assistant/langs/all.js:42
@@ -6651,7 +6645,7 @@ msgstr "Importar"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:150
 msgid "Project (.elp)"
-msgstr ""
+msgstr "Proxecto (.elp)"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:156
 msgid "Insert elp in the current page"
@@ -6717,9 +6711,8 @@ msgid "IMS"
 msgstr "IMS"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:326
-#, fuzzy
 msgid "Publish"
-msgstr "editor de publicación"
+msgstr "Publicar"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:349 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
@@ -6809,9 +6802,8 @@ msgid "About eXe"
 msgstr "Acerca de eXe"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:542
-#, fuzzy
 msgid "Project size:"
-msgstr "Título do proxecto"
+msgstr "Tamaño do proxecto:"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:572
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
@@ -6847,6 +6839,9 @@ msgid ""
 "prevent \r\n"
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
+"O URL solicitado non é seguro, pero eXe está aloxado nun servidor seguro. "
+"Para evitar \n"
+"restricións do navegador, prema no URL: {0}"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1244
 #: exe/jsui/scripts/app/controller/Toolbar.js:1287
@@ -9217,11 +9212,10 @@ msgid "Enter the instructions for completion here"
 msgstr "Introduza as intrucións para o completado aquí"
 
 #: exe/webui/editorpane.py:160
-#, fuzzy
 msgid "Feedback button will not appear if no data is entered into this field."
 msgstr ""
-"O botón de restroacción non aparecerá se \n"
-"non se introducen datos neste campo."
+"O botón de retroalimentación non aparecerá se non se introducen datos neste "
+"campo."
 
 #: exe/webui/editorpane.py:196
 msgid "Please enter<br />an idevice name."
@@ -9614,18 +9608,18 @@ msgid "Size of magnifying glass: "
 msgstr "Tamaño da lupa: "
 
 #: exe/webui/importode.py:73
-#, fuzzy, python-format
+#, python-format
 msgid "Error importing package with id %s from %s"
-msgstr "Erro exportando o paquete \"%s\" a Procomún."
+msgstr "Erro importando o paquete con id %s desde %s"
 
 #: exe/webui/importode.py:75
 #, python-format
 msgid "Importing package with id %s from %s"
-msgstr ""
+msgstr "Importando o paquete con id %s desde %s"
 
 #: exe/webui/importode.py:82
 msgid "This may take a bit..."
-msgstr ""
+msgstr "Isto pode tardar un pouco..."
 
 #: exe/webui/jsblock.py:85
 msgid ""
@@ -9641,12 +9635,11 @@ msgstr "Outras palabras"
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
-msgstr ""
+msgstr "Sen sesión de usuario"
 
 #: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
-#, fuzzy
 msgid "Login"
-msgstr "Catalogando"
+msgstr "Acceso"
 
 #: exe/webui/memorymatchblock.py:83
 msgid "Number of rows x Number of cols must be an even number<br/>"
@@ -9739,7 +9732,7 @@ msgstr "Erro ao gardar as preferencias"
 
 #: exe/webui/quitpage.py:68
 msgid "User session has been closed"
-msgstr ""
+msgstr "Pechouse a sesión"
 
 #: exe/webui/quiztestblock.py:113
 msgid "Select pass rate: "
@@ -9930,14 +9923,12 @@ msgid "Percentage of hits needed to display the message"
 msgstr "Porcentaxe de acertos necesarios para amosar a mensaxe"
 
 #: exe/webui/scripts/authoring.js:1347
-#, fuzzy
 msgid "Itinerary"
-msgstr "Wiktionary"
+msgstr "Itinerario"
 
 #: exe/webui/scripts/authoring.js:1359
-#, fuzzy
 msgid "Show a message or password"
-msgstr "Amosar unha clave ou mensaxe ao alcanzar o obxectivo marcado"
+msgstr "Amosar unha mensaxe ou contrasinal"
 
 #: exe/webui/scripts/authoring.js:1393
 msgid "You must write a clue"
