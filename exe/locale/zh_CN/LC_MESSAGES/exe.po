@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-15 14:28+0200\n"
+"POT-Creation-Date: 2023-09-07 13:44+0200\n"
 "PO-Revision-Date: 2021-04-23 17:23+0200\n"
 "Last-Translator: Chenggui Duan <chengguiduan@gmail.com>\n"
 "Language: zh_Hans_CN\n"
@@ -675,7 +675,7 @@ msgstr ""
 #: exe/engine/sortidevice.py:53 exe/engine/truefalseidevice.py:164
 #: exe/engine/truefalseidevice.py:391
 #: exe/engine/verdaderofalsofpdidevice.py:166
-#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1070
+#: exe/engine/verdaderofalsofpdidevice.py:394 exe/webui/common.py:1078
 #: exe/webui/scripts/authoring.js:1296 exe/webui/scripts/authoring.js:1299
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:33
 #: exe/webui/scripts/idevices/candado-activity/edition/candado-activity.js:57
@@ -734,7 +734,7 @@ msgstr ""
 #: exe/engine/truefalseidevice.py:125 exe/engine/verdaderofalsofpdidevice.py:51
 #: exe/engine/verdaderofalsofpdidevice.py:126 exe/webui/clozeblock.py:182
 #: exe/webui/clozefpdblock.py:209 exe/webui/clozelangfpdblock.py:221
-#: exe/webui/common.py:977 exe/webui/common.py:987
+#: exe/webui/common.py:985 exe/webui/common.py:995
 #: exe/webui/editorelement.py:148 exe/webui/editorpane.py:253
 #: exe/webui/element.py:2484 exe/webui/element.py:2619
 #: exe/webui/element.py:2734 exe/webui/element.py:2935
@@ -2536,8 +2536,8 @@ msgid ""
 ".data file instead."
 msgstr "无法读取.xml文件。eXe 将尝试从 .data 文件中恢复内容。"
 
-#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:734
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:392
+#: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:735
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:400
 msgid "iDevice Editor"
 msgstr "iDevice 编辑器"
 
@@ -3197,7 +3197,7 @@ msgstr "使用'-i xliff'或 '--export xliff'选择XLIFF导出选项后，可以�
 msgid "Don't copy source in target"
 msgstr "不要在目标中复制源"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1139
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1140
 msgid "Wrap fields in CDATA"
 msgstr "在CDATA中包装字段"
 
@@ -3310,9 +3310,9 @@ msgstr ""
 "exe_do：错误：无法导入'%s'。\n"
 " 错误是："
 
-#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:473
-#: exe/jsui/mainpage.py:1954 exe/jsui/mainpage.py:2000
-#: exe/jsui/mainpage.py:2045 exe/jsui/mainpage.py:2066
+#: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:476
+#: exe/jsui/mainpage.py:1960 exe/jsui/mainpage.py:2006
+#: exe/jsui/mainpage.py:2051 exe/jsui/mainpage.py:2072
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3461,22 +3461,22 @@ msgstr "试验"
 msgid "Gamification"
 msgstr "游戏化"
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1482 exe/jsui/mainpage.py:1503
-#: exe/jsui/mainpage.py:1694 exe/jsui/mainpage.py:1736
+#: exe/jsui/mainpage.py:505 exe/jsui/mainpage.py:1488 exe/jsui/mainpage.py:1509
+#: exe/jsui/mainpage.py:1700 exe/jsui/mainpage.py:1742
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "不能识别路径名称"
 
-#: exe/jsui/mainpage.py:502 exe/jsui/mainpage.py:1484 exe/jsui/mainpage.py:1694
-#: exe/jsui/mainpage.py:1736
+#: exe/jsui/mainpage.py:505 exe/jsui/mainpage.py:1490 exe/jsui/mainpage.py:1700
+#: exe/jsui/mainpage.py:1742
 msgid ". Please use ASCII names."
 msgstr ". 请使用ASCII码。"
 
-#: exe/jsui/mainpage.py:510 exe/jsui/mainpage.py:554
+#: exe/jsui/mainpage.py:513 exe/jsui/mainpage.py:557
 msgid "SAVE FAILED!"
 msgstr "保存失败!"
 
-#: exe/jsui/mainpage.py:514
+#: exe/jsui/mainpage.py:517
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3485,9 +3485,9 @@ msgstr ""
 "保存失败！\n"
 "\"%s\" 不是包的有效名称"
 
-#: exe/jsui/mainpage.py:520 exe/jsui/mainpage.py:573 exe/jsui/mainpage.py:990
-#: exe/jsui/mainpage.py:1052 exe/jsui/mainpage.py:1110
-#: exe/jsui/mainpage.py:1841
+#: exe/jsui/mainpage.py:523 exe/jsui/mainpage.py:576 exe/jsui/mainpage.py:996
+#: exe/jsui/mainpage.py:1058 exe/jsui/mainpage.py:1116
+#: exe/jsui/mainpage.py:1847
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3496,12 +3496,12 @@ msgstr ""
 "保存失败!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:530
+#: exe/jsui/mainpage.py:533
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
 msgstr ""
 
-#: exe/jsui/mainpage.py:558
+#: exe/jsui/mainpage.py:561
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3510,55 +3510,55 @@ msgstr ""
 "保存失败！\n"
 "\"%s\" 不是模板的有效名称"
 
-#: exe/jsui/mainpage.py:579
+#: exe/jsui/mainpage.py:582
 #, python-format
 msgid "Template saved: %s"
 msgstr "保存的模板：%s"
 
-#: exe/jsui/mainpage.py:590
+#: exe/jsui/mainpage.py:593
 #, python-format
 msgid "The project size cannot exceed %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:689 exe/webui/stylemanagerpage.py:450
+#: exe/jsui/mainpage.py:695 exe/webui/stylemanagerpage.py:450
 msgid "Downloading..."
 msgstr "正在下载…"
 
-#: exe/jsui/mainpage.py:715
+#: exe/jsui/mainpage.py:721
 msgid "Connecting to classification sources repository..."
 msgstr "连接到分类源存储库..."
 
-#: exe/jsui/mainpage.py:715 exe/jsui/mainpage.py:721
+#: exe/jsui/mainpage.py:721 exe/jsui/mainpage.py:727
 msgid "Sources Download"
 msgstr "资料下载"
 
-#: exe/jsui/mainpage.py:721
+#: exe/jsui/mainpage.py:727
 msgid ""
 "There has been an error while trying to download classification sources. "
 "Please try again later."
 msgstr "尝试下载分类源时发生错误。请稍后再试。"
 
-#: exe/jsui/mainpage.py:911 exe/jsui/mainpage.py:1009 exe/jsui/mainpage.py:1074
-#: exe/jsui/mainpage.py:1137 exe/jsui/mainpage.py:1218
+#: exe/jsui/mainpage.py:917 exe/jsui/mainpage.py:1015 exe/jsui/mainpage.py:1080
+#: exe/jsui/mainpage.py:1143 exe/jsui/mainpage.py:1224
 #, python-format
 msgid "Preview directory %s is a file, cannot replace it"
 msgstr "予览文件夹%s是个文档, 无法取代它"
 
-#: exe/jsui/mainpage.py:930
+#: exe/jsui/mainpage.py:936
 #, python-format
 msgid "Local file %s is not found, cannot preview it"
 msgstr "找不到本地文件 %s，无法预览"
 
-#: exe/jsui/mainpage.py:1177 exe/jsui/mainpage.py:1203
-#: exe/jsui/mainpage.py:1246
+#: exe/jsui/mainpage.py:1183 exe/jsui/mainpage.py:1209
+#: exe/jsui/mainpage.py:1252
 msgid "Could not create the image"
 msgstr "无法创建图像"
 
-#: exe/jsui/mainpage.py:1284
+#: exe/jsui/mainpage.py:1290
 msgid "Importing HTML..."
 msgstr "正在导入HTML文件..."
 
-#: exe/jsui/mainpage.py:1290
+#: exe/jsui/mainpage.py:1296
 #, python-format
 msgid ""
 "LOM Metadata import FAILED!\n"
@@ -3567,40 +3567,40 @@ msgstr ""
 "LOM元数据导入失败!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1293
+#: exe/jsui/mainpage.py:1299
 msgid "Error importing HTML:\n"
 msgstr "导入HTML时出错:\n"
 
-#: exe/jsui/mainpage.py:1321 exe/jsui/scripts/app/controller/Toolbar.js:1295
+#: exe/jsui/mainpage.py:1327 exe/jsui/scripts/app/controller/Toolbar.js:1296
 msgid "Exporting package as SCORM 1.2..."
 msgstr "将包导出为SCORM 1.2 ..."
 
-#: exe/jsui/mainpage.py:1339
+#: exe/jsui/mainpage.py:1345
 msgid "Checking the project size..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1350
+#: exe/jsui/mainpage.py:1356
 #, fuzzy, python-format
 msgid "Uploading package to %s..."
 msgstr "上传包到Procomún..."
 
-#: exe/jsui/mainpage.py:1366
+#: exe/jsui/mainpage.py:1372
 msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1406
+#: exe/jsui/mainpage.py:1412
 #, fuzzy, python-format
 msgid "Sending document to %s"
 msgstr "将文件发布到Procomún"
 
-#: exe/jsui/mainpage.py:1428
+#: exe/jsui/mainpage.py:1434
 #, fuzzy, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
 "download the exported package\">%s</a>."
 msgstr "包已导出到<a href=\"%s\" target=\"_blank\" title=\"单击以查看导出的包\">%s</a> 。"
 
-#: exe/jsui/mainpage.py:1432
+#: exe/jsui/mainpage.py:1438
 #, fuzzy, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
@@ -3610,14 +3610,14 @@ msgstr ""
 "<small>您可以使用<a href=\"%s\" target=\"_blank\" "
 "title=\"ProcomúnHome\">Procomún</a> \\的网页查看和管理上传的包。</small>"
 
-#: exe/jsui/mainpage.py:1443
+#: exe/jsui/mainpage.py:1449
 #, python-format
 msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1489 exe/jsui/mainpage.py:1979
+#: exe/jsui/mainpage.py:1495 exe/jsui/mainpage.py:1985
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3626,25 +3626,25 @@ msgstr ""
 "保存失败！\n"
 "\"%s\" 不是文件的有效名称"
 
-#: exe/jsui/mainpage.py:1500 exe/jsui/mainpage.py:1510
-#: exe/jsui/mainpage.py:1513 exe/jsui/mainpage.py:1518
-#: exe/jsui/mainpage.py:1521 exe/jsui/mainpage.py:1524
+#: exe/jsui/mainpage.py:1506 exe/jsui/mainpage.py:1516
+#: exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1524
 #: exe/jsui/mainpage.py:1527 exe/jsui/mainpage.py:1530
-#: exe/jsui/mainpage.py:1535 exe/jsui/mainpage.py:1911
-#: exe/jsui/mainpage.py:2026
+#: exe/jsui/mainpage.py:1533 exe/jsui/mainpage.py:1536
+#: exe/jsui/mainpage.py:1541 exe/jsui/mainpage.py:1917
+#: exe/jsui/mainpage.py:2032
 msgid "EXPORT FAILED!"
 msgstr "导出失败!"
 
-#: exe/jsui/mainpage.py:1652
+#: exe/jsui/mainpage.py:1658
 msgid "Correct XLIFF import"
 msgstr "正确的 xliff 导入"
 
-#: exe/jsui/mainpage.py:1655
+#: exe/jsui/mainpage.py:1661
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "导入XLIFF时出错: %s"
 
-#: exe/jsui/mainpage.py:1721 exe/jsui/mainpage.py:1760
+#: exe/jsui/mainpage.py:1727 exe/jsui/mainpage.py:1766
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -3653,22 +3653,22 @@ msgstr ""
 "引出失败!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1723 exe/jsui/mainpage.py:1762
+#: exe/jsui/mainpage.py:1729 exe/jsui/mainpage.py:1768
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "课件存至: %s"
 
-#: exe/jsui/mainpage.py:1774 exe/webui/stylemanagerpage.py:264
+#: exe/jsui/mainpage.py:1780 exe/webui/stylemanagerpage.py:264
 msgid "Directory exists"
 msgstr "目录存在"
 
-#: exe/jsui/mainpage.py:1788 exe/jsui/mainpage.py:1896
-#: exe/jsui/mainpage.py:1919 exe/jsui/mainpage.py:1942
-#: exe/jsui/mainpage.py:1955 exe/jsui/mainpage.py:1961
-#: exe/jsui/mainpage.py:1985 exe/jsui/mainpage.py:2001
-#: exe/jsui/mainpage.py:2011 exe/jsui/mainpage.py:2031
-#: exe/jsui/mainpage.py:2046 exe/jsui/mainpage.py:2052
-#: exe/jsui/mainpage.py:2067 exe/jsui/mainpage.py:2077
+#: exe/jsui/mainpage.py:1794 exe/jsui/mainpage.py:1902
+#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:1948
+#: exe/jsui/mainpage.py:1961 exe/jsui/mainpage.py:1967
+#: exe/jsui/mainpage.py:1991 exe/jsui/mainpage.py:2007
+#: exe/jsui/mainpage.py:2017 exe/jsui/mainpage.py:2037
+#: exe/jsui/mainpage.py:2052 exe/jsui/mainpage.py:2058
+#: exe/jsui/mainpage.py:2073 exe/jsui/mainpage.py:2083
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3677,30 +3677,30 @@ msgstr ""
 "导出失败!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1818 exe/jsui/mainpage.py:1877
+#: exe/jsui/mainpage.py:1824 exe/jsui/mainpage.py:1883
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "文件名%s是个文档, 无法覆盖它"
 
-#: exe/jsui/mainpage.py:1825 exe/jsui/mainpage.py:1884
+#: exe/jsui/mainpage.py:1831 exe/jsui/mainpage.py:1890
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
 "existing one then try again."
 msgstr "文件夹%s 已存在,请选择另一个或删除已有的,然后再试."
 
-#: exe/jsui/mainpage.py:1848 exe/jsui/mainpage.py:1900
-#: exe/jsui/mainpage.py:1923 exe/jsui/mainpage.py:1944
-#: exe/jsui/mainpage.py:1963 exe/jsui/mainpage.py:1987
-#: exe/jsui/mainpage.py:2017 exe/jsui/mainpage.py:2033
-#: exe/jsui/mainpage.py:2054 exe/jsui/mainpage.py:2081
+#: exe/jsui/mainpage.py:1854 exe/jsui/mainpage.py:1906
+#: exe/jsui/mainpage.py:1929 exe/jsui/mainpage.py:1950
+#: exe/jsui/mainpage.py:1969 exe/jsui/mainpage.py:1993
+#: exe/jsui/mainpage.py:2023 exe/jsui/mainpage.py:2039
+#: exe/jsui/mainpage.py:2060 exe/jsui/mainpage.py:2087
 #, python-format
 msgid "Exported to %s"
 msgstr "导出至 %s"
 
-#: exe/jsui/mainpage.py:1850 exe/jsui/mainpage.py:1902
-#: exe/jsui/mainpage.py:1925 exe/jsui/mainpage.py:2019
-#: exe/jsui/mainpage.py:2083
+#: exe/jsui/mainpage.py:1856 exe/jsui/mainpage.py:1908
+#: exe/jsui/mainpage.py:1931 exe/jsui/mainpage.py:2025
+#: exe/jsui/mainpage.py:2089
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -3710,21 +3710,21 @@ msgstr ""
 "已导出到 %s。\n"
 "有些资源无法重命名以与ISO9660兼容。"
 
-#: exe/jsui/mainpage.py:2014
+#: exe/jsui/mainpage.py:2020
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr "以下字段已被切割以满足SCORM 1.2标准: %s"
 
-#: exe/jsui/mainpage.py:2120 exe/webui/stylemanagerpage.py:289
+#: exe/jsui/mainpage.py:2126 exe/webui/stylemanagerpage.py:289
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "文档%s不存在或不可读."
 
-#: exe/jsui/mainpage.py:2127
+#: exe/jsui/mainpage.py:2133
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr "无法加载文件，请将文件发送至bugs@exelearning.org"
 
-#: exe/jsui/mainpage.py:2130
+#: exe/jsui/mainpage.py:2136
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
@@ -3733,7 +3733,7 @@ msgstr ""
 "对不起, 文件格式错误:\n"
 "%s"
 
-#: exe/jsui/mainpage.py:2132
+#: exe/jsui/mainpage.py:2138
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -3750,7 +3750,7 @@ msgstr "无法保存属性"
 
 #: exe/jsui/scripts/app/controller/Idevice.js:59
 #: exe/jsui/scripts/app/controller/Outline.js:222
-#: exe/jsui/scripts/app/controller/Toolbar.js:423 exe/webui/editorpage.py:250
+#: exe/jsui/scripts/app/controller/Toolbar.js:424 exe/webui/editorpage.py:250
 #: exe/webui/editorpane.py:406 exe/webui/scripts/authoring.js:614
 #: exe/webui/scripts/authoring.js:658
 #: exe/webui/tools/mindmaps/src/js/Notification.js:191
@@ -3797,20 +3797,20 @@ msgstr "图像文件"
 #: exe/jsui/scripts/app/controller/StyleManager.js:294
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
-#: exe/jsui/scripts/app/controller/Toolbar.js:877
-#: exe/jsui/scripts/app/controller/Toolbar.js:903
-#: exe/jsui/scripts/app/controller/Toolbar.js:928
-#: exe/jsui/scripts/app/controller/Toolbar.js:950
-#: exe/jsui/scripts/app/controller/Toolbar.js:985
-#: exe/jsui/scripts/app/controller/Toolbar.js:1005
-#: exe/jsui/scripts/app/controller/Toolbar.js:1075
-#: exe/jsui/scripts/app/controller/Toolbar.js:1187
-#: exe/jsui/scripts/app/controller/Toolbar.js:1387
-#: exe/jsui/scripts/app/controller/Toolbar.js:1409
-#: exe/jsui/scripts/app/controller/Toolbar.js:1431
-#: exe/jsui/scripts/app/controller/Toolbar.js:1469
-#: exe/jsui/scripts/app/controller/Toolbar.js:1727
-#: exe/jsui/scripts/app/controller/Toolbar.js:1886
+#: exe/jsui/scripts/app/controller/Toolbar.js:878
+#: exe/jsui/scripts/app/controller/Toolbar.js:904
+#: exe/jsui/scripts/app/controller/Toolbar.js:929
+#: exe/jsui/scripts/app/controller/Toolbar.js:951
+#: exe/jsui/scripts/app/controller/Toolbar.js:986
+#: exe/jsui/scripts/app/controller/Toolbar.js:1006
+#: exe/jsui/scripts/app/controller/Toolbar.js:1076
+#: exe/jsui/scripts/app/controller/Toolbar.js:1188
+#: exe/jsui/scripts/app/controller/Toolbar.js:1388
+#: exe/jsui/scripts/app/controller/Toolbar.js:1410
+#: exe/jsui/scripts/app/controller/Toolbar.js:1432
+#: exe/jsui/scripts/app/controller/Toolbar.js:1470
+#: exe/jsui/scripts/app/controller/Toolbar.js:1728
+#: exe/jsui/scripts/app/controller/Toolbar.js:1887
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
 #: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
 #: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
@@ -3822,11 +3822,11 @@ msgstr "所有文件"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:321
 #: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1356
-#: exe/jsui/scripts/app/controller/Toolbar.js:1380
-#: exe/jsui/scripts/app/controller/Toolbar.js:1402
-#: exe/jsui/scripts/app/controller/Toolbar.js:1424
-#: exe/jsui/scripts/app/controller/Toolbar.js:1462
+#: exe/jsui/scripts/app/controller/Toolbar.js:1357
+#: exe/jsui/scripts/app/controller/Toolbar.js:1381
+#: exe/jsui/scripts/app/controller/Toolbar.js:1403
+#: exe/jsui/scripts/app/controller/Toolbar.js:1425
+#: exe/jsui/scripts/app/controller/Toolbar.js:1463
 #: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
 #: exe/webui/stylemanagerpage.py:606
 msgid "Please wait..."
@@ -3855,7 +3855,7 @@ msgstr "设置已保存"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1334
+#: exe/jsui/scripts/app/controller/Toolbar.js:1335
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:380
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
@@ -3886,9 +3886,9 @@ msgstr "错误"
 #: exe/jsui/scripts/app/controller/MainTab.js:354
 #: exe/jsui/scripts/app/controller/MainTab.js:407
 #: exe/jsui/scripts/app/controller/Outline.js:261
-#: exe/jsui/scripts/app/controller/Toolbar.js:743
-#: exe/jsui/scripts/app/controller/Toolbar.js:802
-#: exe/jsui/scripts/app/controller/Toolbar.js:1207
+#: exe/jsui/scripts/app/controller/Toolbar.js:744
+#: exe/jsui/scripts/app/controller/Toolbar.js:803
+#: exe/jsui/scripts/app/controller/Toolbar.js:1208
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -4049,29 +4049,29 @@ msgstr "删除模板"
 msgid "Do you want to delete this template?"
 msgstr "要删除此模板吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:411
+#: exe/jsui/scripts/app/controller/Toolbar.js:412
 #, fuzzy, python-format
 msgid "%s of %s"
 msgstr "第%s 页，共 %s页"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:424
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:573
+#: exe/jsui/scripts/app/controller/Toolbar.js:425
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:581
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
 msgstr "选中此选项将在菜单（文件，工具...）和“属性”选项卡中显示更多元素。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:478
+#: exe/jsui/scripts/app/controller/Toolbar.js:479
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:221
 msgid "General description"
 msgstr "一般描述"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:487
+#: exe/jsui/scripts/app/controller/Toolbar.js:488
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:73
 msgid "Package"
 msgstr "课件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:501
+#: exe/jsui/scripts/app/controller/Toolbar.js:502
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:240
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:280
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:91
@@ -4085,46 +4085,46 @@ msgstr "课件"
 msgid "General"
 msgstr "常规"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:534
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:467
+#: exe/jsui/scripts/app/controller/Toolbar.js:535
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:475
 #: exe/webui/tools/assistant/js/assistant.js:57
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
 msgstr "助手"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:564
+#: exe/jsui/scripts/app/controller/Toolbar.js:565
 msgid "About"
 msgstr "关于"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:581
+#: exe/jsui/scripts/app/controller/Toolbar.js:582
 msgid "Release notes"
 msgstr "版本說明"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:600
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:491
+#: exe/jsui/scripts/app/controller/Toolbar.js:601
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:499
 #: exe/webui/tools/assistant/langs/all.js:79
 msgid "Legal Notes"
 msgstr "法律说明"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:679
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:379
+#: exe/jsui/scripts/app/controller/Toolbar.js:680
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:387
 msgid "Preferences"
 msgstr "使用偏好"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:700
+#: exe/jsui/scripts/app/controller/Toolbar.js:701
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:141
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:147
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:60
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:102
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:192
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:200
 #: exe/webui/scripts/authoring.js:1571
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:373
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/langs/all.js:13
 msgid "Export"
 msgstr "导出"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:744
+#: exe/jsui/scripts/app/controller/Toolbar.js:745
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:357
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:79
 #: exe/webui/tools/mindmaps/src/js/MindMaps.js:110
@@ -4133,127 +4133,127 @@ msgid ""
 "you really want to quit?"
 msgstr "如果您进行了更改, 但尚未保存这些更改, 则这些更改将丢失。你真的想退出吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:773
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:433
+#: exe/jsui/scripts/app/controller/Toolbar.js:774
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:441
 msgid "Style Manager"
 msgstr "样式管理"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:791
+#: exe/jsui/scripts/app/controller/Toolbar.js:792
 msgid "Template Manager"
 msgstr "模板管理"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:803
+#: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
 msgid "Exit without saving changes and go back to %s (home page)?"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:861
+#: exe/jsui/scripts/app/controller/Toolbar.js:862
 msgid "Select package to insert"
 msgstr "选择要插入的包"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:869
+#: exe/jsui/scripts/app/controller/Toolbar.js:870
 msgid "Inserting package: {filename}"
 msgstr "插入包：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:876
-#: exe/jsui/scripts/app/controller/Toolbar.js:902
-#: exe/jsui/scripts/app/controller/Toolbar.js:927
-#: exe/jsui/scripts/app/controller/Toolbar.js:1726
-#: exe/jsui/scripts/app/controller/Toolbar.js:1885
+#: exe/jsui/scripts/app/controller/Toolbar.js:877
+#: exe/jsui/scripts/app/controller/Toolbar.js:903
+#: exe/jsui/scripts/app/controller/Toolbar.js:928
+#: exe/jsui/scripts/app/controller/Toolbar.js:1727
+#: exe/jsui/scripts/app/controller/Toolbar.js:1886
 msgid "eXe Package Files"
 msgstr "eXe 包文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:886
+#: exe/jsui/scripts/app/controller/Toolbar.js:887
 #, fuzzy
 msgid "Select package to import and Open"
 msgstr "选择要插入的包"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:895
-#: exe/jsui/scripts/app/controller/Toolbar.js:1720
+#: exe/jsui/scripts/app/controller/Toolbar.js:896
+#: exe/jsui/scripts/app/controller/Toolbar.js:1721
 msgid "Loading package: {filename}"
 msgstr "正在加载包：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:911
+#: exe/jsui/scripts/app/controller/Toolbar.js:912
 msgid "Save extracted package as"
 msgstr "将提取的包保存为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:917
-#: exe/jsui/scripts/app/controller/Toolbar.js:943
+#: exe/jsui/scripts/app/controller/Toolbar.js:918
+#: exe/jsui/scripts/app/controller/Toolbar.js:944
 msgid "Extracting package: {filename}"
 msgstr "提取包：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:937
+#: exe/jsui/scripts/app/controller/Toolbar.js:938
 #, fuzzy
 msgid "Save extracted SCORM package as"
 msgstr "将提取的包保存为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:949
+#: exe/jsui/scripts/app/controller/Toolbar.js:950
 #, fuzzy
 msgid "SCORM Files"
 msgstr "添加文档"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:959
+#: exe/jsui/scripts/app/controller/Toolbar.js:960
 msgid "Select the parent folder for import."
 msgstr "选择要导入的父文件夹。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:974
+#: exe/jsui/scripts/app/controller/Toolbar.js:975
 msgid "Select the entry point for import."
 msgstr "选择导入的入口点。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:984
+#: exe/jsui/scripts/app/controller/Toolbar.js:985
 msgid "HTML Files"
 msgstr "HTML 文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:993
+#: exe/jsui/scripts/app/controller/Toolbar.js:994
 msgid "Select LOM Metadata file to import."
 msgstr "选择要导入的LOM元数据文件。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1004
+#: exe/jsui/scripts/app/controller/Toolbar.js:1005
 msgid "XML Files"
 msgstr "XML 文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1019
+#: exe/jsui/scripts/app/controller/Toolbar.js:1020
 msgid "Waiting progress..."
 msgstr "等待进程......"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1027
+#: exe/jsui/scripts/app/controller/Toolbar.js:1028
 msgid "Cancel Import?"
 msgstr "取消导入？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1028
+#: exe/jsui/scripts/app/controller/Toolbar.js:1029
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "有一个正在进行的导入。要取消吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1051
+#: exe/jsui/scripts/app/controller/Toolbar.js:1052
 msgid "Select Xliff file to import"
 msgstr "选择要导入的文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1062
+#: exe/jsui/scripts/app/controller/Toolbar.js:1063
 msgid "XLIFF Import Preferences"
 msgstr "XLIFF导入首选项"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1074
-#: exe/jsui/scripts/app/controller/Toolbar.js:1186
+#: exe/jsui/scripts/app/controller/Toolbar.js:1075
+#: exe/jsui/scripts/app/controller/Toolbar.js:1187
 msgid "XLIFF Files"
 msgstr "XLIFF文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1084
+#: exe/jsui/scripts/app/controller/Toolbar.js:1085
 msgid "Export to Xliff as"
 msgstr "导出到 XLIFF 为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1105
+#: exe/jsui/scripts/app/controller/Toolbar.js:1106
 msgid "Select source language"
 msgstr "选择源语言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1116
+#: exe/jsui/scripts/app/controller/Toolbar.js:1117
 msgid "Select target language"
 msgstr "选择目标语言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1127
+#: exe/jsui/scripts/app/controller/Toolbar.js:1128
 msgid "Copy source also in target"
 msgstr "复制来源到目标"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1130
+#: exe/jsui/scripts/app/controller/Toolbar.js:1131
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4261,7 +4261,7 @@ msgid ""
 "to pre-fill the target field with a copy of the source field."
 msgstr "如果不选择此选项，则目标字段将为空。一些计算机辅助翻译工具（例如OmegaT）只是翻译目标字段的内容。如果您使用此类工具，则需要使用源字段的副本预填充目标字段。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1141
+#: exe/jsui/scripts/app/controller/Toolbar.js:1142
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4271,7 +4271,7 @@ msgstr ""
 "此选项将包装CDATA部分中的所有导出字段。 "
 "XLIFF标准不推荐这种部分，但如果您想在使用计算机辅助翻译软件之前使用预处理工具（ig：Rainbow），这可能是一个不错的选择。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1150
+#: exe/jsui/scripts/app/controller/Toolbar.js:1151
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
 #: exe/webui/editorpane.py:277
@@ -4285,165 +4285,165 @@ msgstr ""
 msgid "Cancel"
 msgstr "取消"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1156
+#: exe/jsui/scripts/app/controller/Toolbar.js:1157
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "OK"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1179
+#: exe/jsui/scripts/app/controller/Toolbar.js:1180
 msgid "XLIFF Export Preferences"
 msgstr "XLIFF导出首选项"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1208
+#: exe/jsui/scripts/app/controller/Toolbar.js:1209
 #, fuzzy, python-format
 msgid "Publish on %s?"
 msgstr "出版商"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1208
+#: exe/jsui/scripts/app/controller/Toolbar.js:1209
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1245
+#: exe/jsui/scripts/app/controller/Toolbar.js:1246
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
 msgstr "这个包有元数据。您可能导出原始作者包含的错误信息。转到“属性”进行编辑。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1247
+#: exe/jsui/scripts/app/controller/Toolbar.js:1248
 msgid "Do you want to export the package with the current metadata?"
 msgstr "是否要使用当前元数据导出包？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1288
+#: exe/jsui/scripts/app/controller/Toolbar.js:1289
 msgid ""
 "The project exceeds the maximum size limit. Try removing some large files"
 " before publishing."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1294
+#: exe/jsui/scripts/app/controller/Toolbar.js:1295
 #, fuzzy
 msgid "Publishing..."
 msgstr "出版商"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1307
+#: exe/jsui/scripts/app/controller/Toolbar.js:1308
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
 msgstr "您必须授权 exeLearning将内容发布到您的 procomún 帐户中"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1308
+#: exe/jsui/scripts/app/controller/Toolbar.js:1309
 msgid "Are you sure you want to start authorization process?"
 msgstr "确实要启动授权过程吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1319
+#: exe/jsui/scripts/app/controller/Toolbar.js:1320
 msgid "Procomún OAuth"
 msgstr "OAuth 身份验证"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1335
+#: exe/jsui/scripts/app/controller/Toolbar.js:1336
 #, python-format
 msgid "Error exporting package \"%s\" to Procomún."
 msgstr "将包 \"%s\" 导出到Procomún时出错。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1337
+#: exe/jsui/scripts/app/controller/Toolbar.js:1338
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
 " zip file to Procomún."
 msgstr "如果您在发布时遇到问题或希望稍后完成编目，请关闭此对话框，导出为SCORM 2004并将生成的zip文件上传到 Procomún。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1349
+#: exe/jsui/scripts/app/controller/Toolbar.js:1350
 msgid "Select the parent folder for export."
 msgstr "选择要导出的父文件夹。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1372
+#: exe/jsui/scripts/app/controller/Toolbar.js:1373
 msgid "Export text package as"
 msgstr "将文本包导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1386
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:261
+#: exe/jsui/scripts/app/controller/Toolbar.js:1387
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:269
 msgid "Text File"
 msgstr "文本文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1394
+#: exe/jsui/scripts/app/controller/Toolbar.js:1395
 msgid "Save package resources report as"
 msgstr "将包资源报告另存为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1408
+#: exe/jsui/scripts/app/controller/Toolbar.js:1409
 msgid "CSV File"
 msgstr "CSV 文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1416
+#: exe/jsui/scripts/app/controller/Toolbar.js:1417
 msgid "Export EPUB3 package as"
 msgstr "导出EPUB3包为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1430
+#: exe/jsui/scripts/app/controller/Toolbar.js:1431
 msgid "EPUB3 File"
 msgstr "EPUB3文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1440
+#: exe/jsui/scripts/app/controller/Toolbar.js:1441
 msgid "Export SCORM package as"
 msgstr "将SCORM包导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1442
+#: exe/jsui/scripts/app/controller/Toolbar.js:1443
 msgid "Export IMS package as"
 msgstr "将IMS包导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1444
+#: exe/jsui/scripts/app/controller/Toolbar.js:1445
 msgid "Export Website package as"
 msgstr "将网站文件包导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1446
+#: exe/jsui/scripts/app/controller/Toolbar.js:1447
 #, fuzzy
 msgid "Export Single Page package as"
 msgstr "将网站文件包导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1448
+#: exe/jsui/scripts/app/controller/Toolbar.js:1449
 msgid "Export Common Cartridge as"
 msgstr "将Common Cartridge导出为"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1450
+#: exe/jsui/scripts/app/controller/Toolbar.js:1451
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "传递给exportPackage的值无效"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1468
+#: exe/jsui/scripts/app/controller/Toolbar.js:1469
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM / IMS / Zip 文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1580
+#: exe/jsui/scripts/app/controller/Toolbar.js:1581
 msgid "No templates available"
 msgstr "无模板"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1698
+#: exe/jsui/scripts/app/controller/Toolbar.js:1699
 msgid "Loading package..."
 msgstr "正在加载包..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1715
+#: exe/jsui/scripts/app/controller/Toolbar.js:1716
 msgid "Open File"
 msgstr "打开文件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1739
+#: exe/jsui/scripts/app/controller/Toolbar.js:1740
 msgid "Save Package first?"
 msgstr "首先保存包吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1740
+#: exe/jsui/scripts/app/controller/Toolbar.js:1741
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
 msgstr "当前包已被修改但尚未保存。你想保存吗？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1809
-#: exe/jsui/scripts/app/controller/Toolbar.js:1871
+#: exe/jsui/scripts/app/controller/Toolbar.js:1810
+#: exe/jsui/scripts/app/controller/Toolbar.js:1872
 msgid "Saving package..."
 msgstr "保存包..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1840
+#: exe/jsui/scripts/app/controller/Toolbar.js:1841
 msgid "Title for template:"
 msgstr "模板标题："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1841
+#: exe/jsui/scripts/app/controller/Toolbar.js:1842
 msgid "Enter the new name for template:"
 msgstr "输入模板的新名称："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1863
+#: exe/jsui/scripts/app/controller/Toolbar.js:1864
 msgid "Save file"
 msgstr "保存文件"
 
@@ -4534,7 +4534,7 @@ msgid "Modified"
 msgstr "已修改的"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:94
-#: exe/webui/common.py:651
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:139 exe/webui/common.py:651
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
 msgid "Download"
@@ -6003,17 +6003,17 @@ msgid "Properties"
 msgstr "属性"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:77
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:166
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:174
 msgid "Metadata"
 msgstr "元数据"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:89
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:176
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:184
 msgid "LOM"
 msgstr "LOM"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:95
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:182
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:190
 msgid "LOM-ES"
 msgstr "LOM-ES"
 
@@ -6045,86 +6045,86 @@ msgstr "节点下移"
 msgid "use the right arrow key"
 msgstr "使用右箭头键"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:140
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
 msgid "Import"
 msgstr "导入"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:150
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:158
 msgid "Project (.elp)"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:156
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:164
 msgid "Insert elp in the current page"
 msgstr "在当前页面中插入elp"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:162
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:170
 msgid "XLIFF File"
 msgstr "XLIFF文件"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:201
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:209
 msgid "Educational Standard"
 msgstr "教育标准"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:209
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:217
 msgid "Common Cartridge"
 msgstr "Common Cartridge"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:215
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:309
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:223
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:317
 msgid "SCORM1.2"
 msgstr "SCORM1.2"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:221
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:229
 msgid "SCORM2004"
 msgstr "SCORM2004"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:227
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:235
 msgid "IMS Content Package"
 msgstr "IMS 内容包"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:237
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:275
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:283
 msgid "Web Site"
 msgstr "网页"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:253
 msgid "Zip File"
 msgstr "Zip文档"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:251
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:282
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:259
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:290
 msgid "Single Page"
 msgstr "单个页面"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:268
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:276
 msgid "XLIFF"
 msgstr "XLIFF"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:288
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:296
 msgid "EPUB3"
 msgstr "EPUB3"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:297
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:305
 msgid "Export the current page as elp"
 msgstr "将当前页面导出为elp文件"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:304
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:312
 #, fuzzy
 msgid "Export the current page as SCORM"
 msgstr "将当前页面导出为elp文件"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:316
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:324
 msgid "IMS"
 msgstr "IMS"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:326
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
 #, fuzzy
 msgid "Publish"
 msgstr "出版商"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:349 exe/webui/common.py:657
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:357 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
 #: exe/webui/style/INTEF/_intef_js.js:125
@@ -6133,40 +6133,40 @@ msgstr "出版商"
 msgid "Print"
 msgstr "打印"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:362 exe/webui/editorpage.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370 exe/webui/editorpage.py:273
 msgid "Quit"
 msgstr "退出"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:369
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:34
 msgid "Tools"
 msgstr "工具"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:385
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:607 exe/webui/editorpane.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:393
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:615 exe/webui/editorpane.py:273
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
 msgid "Preview"
 msgstr "预览"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:399
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:407
 msgid "Resources Report"
 msgstr "资源报告"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:405
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:413
 msgid "Refresh Display"
 msgstr "刷新显示"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:413
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:424
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:437
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:421
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:432
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:445
 msgid "Styles"
 msgstr "样式"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:450
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:457
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:458
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:465
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:151
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:66
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:102
@@ -6185,43 +6185,43 @@ msgstr "样式"
 msgid "Help"
 msgstr "帮助"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:477
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:485
 #: exe/webui/tools/assistant/langs/all.js:72
 msgid "eXe Tutorial"
 msgstr "eXe教程"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:484
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:492
 #: exe/webui/tools/assistant/langs/all.js:78
 msgid "Release Notes"
 msgstr "版本說明"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:501
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:509
 #: exe/webui/tools/assistant/langs/all.js:80
 msgid "eXe Web Site"
 msgstr "exe 网站"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:508
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:516
 #: exe/webui/scripts/authoring.js:1150
 #: exe/webui/tools/assistant/langs/all.js:75
 msgid "Report an Issue"
 msgstr "报告问题"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:527
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:535
 #: exe/webui/tools/assistant/langs/all.js:77
 msgid "About eXe"
 msgstr "关于 exe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:542
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:550
 #, fuzzy
 msgid "Project size:"
 msgstr "项目标题"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:572
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:580
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr "高级模式"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:621
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:629
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:73
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:63
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:161
@@ -6232,15 +6232,15 @@ msgstr "高级模式"
 msgid "Finish"
 msgstr "结束"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:765
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:773
 msgid "You've been working for a long time without saving."
 msgstr "你已经工作了很长时间没有保存。"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:767
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:775
 msgid "Do you want to save now?"
 msgstr "您想现在保存吗?"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:769
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:777
 msgid "Hide until the application is closed"
 msgstr "隐藏，直到应用程序关闭"
 
@@ -6251,8 +6251,8 @@ msgid ""
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1244
-#: exe/jsui/scripts/app/controller/Toolbar.js:1287
+#: exe/jsui/scripts/app/controller/Toolbar.js:1245
+#: exe/jsui/scripts/app/controller/Toolbar.js:1288
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
 #: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
@@ -6275,7 +6275,7 @@ msgstr "有新版本的eXeLearning（％）。您现在要下载吗？"
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:764 exe/jsui/scripts/exe.js:319
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:772 exe/jsui/scripts/exe.js:319
 msgid "Warning!"
 msgstr "警告！"
 
@@ -6292,7 +6292,7 @@ msgstr "显示面板"
 msgid "Use the left panel to create pages and add content."
 msgstr "创建页面后，您可以添加内容。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1250 exe/jsui/scripts/exe.js:469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1251 exe/jsui/scripts/exe.js:469
 msgid "Don't show this warning again"
 msgstr "不再显示本警告"
 
@@ -8225,7 +8225,7 @@ msgstr "exelearning.net"
 msgid "Enable JavaScript"
 msgstr "启用 JavaScript"
 
-#: exe/webui/common.py:646 exe/webui/common.py:952 exe/webui/element.py:1547
+#: exe/webui/common.py:646 exe/webui/common.py:960 exe/webui/element.py:1547
 #: exe/webui/element.py:2476 exe/webui/listablock.py:274
 #: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:24
 #: exe/webui/scripts/idevices/text/edition/text.js:20
@@ -8433,7 +8433,7 @@ msgstr "点击“另一个字”继续。"
 msgid "eXe : elearning XHTML editor"
 msgstr "eXe:  elearning XHTML 编辑器"
 
-#: exe/webui/common.py:1076 exe/webui/common.py:1079
+#: exe/webui/common.py:1084 exe/webui/common.py:1087
 msgid "Click for completion instructions"
 msgstr "点击看完成说明。"
 
@@ -15753,7 +15753,7 @@ msgstr "高亮的文本"
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:135
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:341
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:67
-#: exe/webui/scripts/tinymce_4_settings.js:432
+#: exe/webui/scripts/tinymce_4_settings.js:450
 msgid "Editor"
 msgstr "编辑器"
 
