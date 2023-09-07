@@ -44,7 +44,7 @@ msgstr ""
 "da %s-n"
 
 #: exe/application.py:335
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "eXeLearning, the EXtremely Easy to use eLearning authoring tool\n"
 "   Usage: %s [OPTION] [PACKAGE]\n"
@@ -2478,9 +2478,8 @@ msgid "Documents"
 msgstr "Dokumentuak"
 
 #: exe/engine/locationbuttons.py:59
-#, fuzzy
 msgid "original_text"
-msgstr "Testuingurua"
+msgstr "original_text"
 
 #: exe/engine/mathidevice.py:41 exe/engine/mathidevice.py:54
 msgid "Maths"
@@ -3922,7 +3921,7 @@ msgstr ""
 #: exe/jsui/mainpage.py:533
 #, python-format
 msgid "Package %s saved. Do not forget to download the package on your system"
-msgstr ""
+msgstr "Paketearen %s gordea. Ez ahaztu paketea zure sisteman deskargatzea."
 
 #: exe/jsui/mainpage.py:561
 #, python-format
@@ -3941,7 +3940,7 @@ msgstr "Txantiloia gorde da: %s"
 #: exe/jsui/mainpage.py:593
 #, python-format
 msgid "The project size cannot exceed %s"
-msgstr ""
+msgstr "Proiektuaren tamaina ezin da %s -tik gorakoa izan."
 
 #: exe/jsui/mainpage.py:695 exe/webui/stylemanagerpage.py:450
 msgid "Downloading..."
@@ -4000,7 +3999,7 @@ msgstr "Paketea SCORM 1.2 modura esportatzen..."
 
 #: exe/jsui/mainpage.py:1345
 msgid "Checking the project size..."
-msgstr ""
+msgstr "Proiektuaren tamaina ikusten..."
 
 #: exe/jsui/mainpage.py:1356
 #, fuzzy, python-format
@@ -4009,7 +4008,7 @@ msgstr "Paketea Procomún-era igotzen..."
 
 #: exe/jsui/mainpage.py:1372
 msgid "No response status"
-msgstr ""
+msgstr "Erantzunik gabe"
 
 #: exe/jsui/mainpage.py:1412
 #, fuzzy, python-format
@@ -4017,7 +4016,7 @@ msgid "Sending document to %s"
 msgstr "Dokumentua Procomún-en argitaratzen"
 
 #: exe/jsui/mainpage.py:1434
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
 "download the exported package\">%s</a>."
@@ -4042,6 +4041,8 @@ msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
+"Errorea gertatu da %s-n pakete bat argitaratzean . < br/> Errore-mezua hau "
+"da: %s"
 
 #: exe/jsui/mainpage.py:1495 exe/jsui/mainpage.py:1985
 #, python-format
@@ -4483,7 +4484,7 @@ msgstr "Txantiloi hau ezabatu nahi duzu?"
 #: exe/jsui/scripts/app/controller/Toolbar.js:412
 #, fuzzy, python-format
 msgid "%s of %s"
-msgstr "Orria: %s / %s"
+msgstr "%s / %s"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:425
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:581
@@ -4580,7 +4581,7 @@ msgstr "Txantiloi-kudeatzailea"
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
 msgid "Exit without saving changes and go back to %s (home page)?"
-msgstr ""
+msgstr "Aldaketak gorde gabe irten eta %s -ra itzuli (hasierako orria)?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
 msgid "Select package to insert"
@@ -4599,7 +4600,6 @@ msgid "eXe Package Files"
 msgstr "eXe fitxategiak"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:887
-#, fuzzy
 msgid "Select package to import and Open"
 msgstr "Aukeratu txertatuko den paketea"
 
@@ -4741,6 +4741,8 @@ msgstr "argitalpenaren editorea"
 #: exe/jsui/scripts/app/controller/Toolbar.js:1209
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
+"Mesedez, Propietateak fitxaren edukia berrikusi (izenburua, aitortza, "
+"lizentzia...)."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1246
 msgid ""
@@ -4759,6 +4761,8 @@ msgid ""
 "The project exceeds the maximum size limit. Try removing some large files"
 " before publishing."
 msgstr ""
+"Proiektuak gehienezko tamaina gainditzen du. Saiatu fitxategi handi batzuk "
+"ezabatzen argitaratu aurretik."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1295
 #, fuzzy
@@ -4913,7 +4917,7 @@ msgstr "Ez duzu baimenik karpetaren barruan ezer gordetzeko"
 #: exe/jsui/scripts/app/controller/filepicker/File.js:430
 #, python-format
 msgid "Error: The maximum upload size is %s MB"
-msgstr ""
+msgstr "Errorea: Gehieneko igoeraren tamaina %s MB da."
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:440
 #, fuzzy
@@ -6569,7 +6573,7 @@ msgstr "Inportatu"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:158
 msgid "Project (.elp)"
-msgstr ""
+msgstr "Proiektua (.elp)"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:164
 msgid "Insert elp in the current page"
@@ -6765,6 +6769,8 @@ msgid ""
 "prevent \r\n"
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
+"Eskatutako URLa ez da segurua, baina eXe leku seguruan dago. \r\n"
+"Nabigatzailearen murrizketak saihesteko, URL: {0} sakatu behar duzu."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1245
 #: exe/jsui/scripts/app/controller/Toolbar.js:1288
@@ -9126,10 +9132,9 @@ msgid "Enter the instructions for completion here"
 msgstr "Adierazi hemen argibideak"
 
 #: exe/webui/editorpane.py:160
-#, fuzzy
 msgid "Feedback button will not appear if no data is entered into this field."
 msgstr ""
-"Eremu honetan daturik sartzen ez bada, \n"
+"Eremu honetan daturik sartzen ez bada, "
 "ez da feedbackaren botoia agertuko."
 
 #: exe/webui/editorpane.py:196
@@ -9532,11 +9537,11 @@ msgstr "Errorea \"%s\" paketea Procomún-era esportatzerakoan."
 #: exe/webui/importode.py:75
 #, python-format
 msgid "Importing package with id %s from %s"
-msgstr ""
+msgstr "%s tik Id %s duen paketea inportatzen"
 
 #: exe/webui/importode.py:82
 msgid "This may take a bit..."
-msgstr ""
+msgstr "Hau pixka bat atzeratu daiteke..."
 
 #: exe/webui/jsblock.py:85
 msgid ""
@@ -9552,7 +9557,7 @@ msgstr "Beste hitzak"
 
 #: exe/webui/loginpage.py:57
 msgid "No user session"
-msgstr ""
+msgstr "Ez dago erabiltzaile-saiorik."
 
 #: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
 #, fuzzy
@@ -9647,7 +9652,7 @@ msgstr "Ezin izan dira gorde lehenespenak"
 
 #: exe/webui/quitpage.py:68
 msgid "User session has been closed"
-msgstr ""
+msgstr "Erabiltzailearen saioa itxi egin da."
 
 #: exe/webui/quiztestblock.py:113
 msgid "Select pass rate: "
@@ -9839,7 +9844,6 @@ msgid "Itinerary"
 msgstr "Wikiztegia"
 
 #: exe/webui/scripts/authoring.js:1359
-#, fuzzy
 msgid "Show a message or password"
 msgstr "Erakutsi mezua edo pasahitza helburua lortzean"
 
