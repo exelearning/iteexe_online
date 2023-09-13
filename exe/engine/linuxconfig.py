@@ -58,11 +58,11 @@ class LinuxConfig(Config):
         elif Path("../exe").isdir():
             self.webDir     = Path("../exe")
 
-        self.dataDir      = Path(os.environ['HOME'])
+        self.dataDir      = Path(os.path.expanduser('~'))
         self.configDir    = Path(self.dataDir)/'.exe'
         self.stylesDir    = Path(self.configDir)/'style'
         self.templatesDir = Path(self.configDir)/'content_template'
-        self.lastDir      = Path(os.environ['HOME'])
+        self.lastDir      = Path(os.path.expanduser('~'))
 
         # Media converters - defaults for now
         self.videoMediaConverter_ogv = ""
@@ -80,7 +80,7 @@ class LinuxConfig(Config):
         """
         Returns the best places for a linux config file
         """
-        return [Path(os.environ["HOME"])/'.exe/exe.conf',
+        return [Path(os.path.expanduser('~'))/'.exe/exe.conf',
                 Path('/etc/exe/exe.conf'),
                 self.webDir/'exe.conf']
 
