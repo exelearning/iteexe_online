@@ -53,7 +53,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 				filefield.fileInputEl.dom.click();
 			} else {
 				Ext.Ajax.request({
-					url: window.location.href + '/temp_file',
+					url: window.location.href.split("?")[0] + '/temp_file',
 					params: {
 						filetype: this.filetypes.getAt(0).get('extension'),
 						filename: this.filename,
@@ -73,7 +73,7 @@ Ext.define('eXe.view.filepicker.FilePicker', {
 
 	alert: function(title, message, func) {
 		if (this.remote) {
-			eXe.app.browseURL(window.location.href + '/temp/' + this.file.name, _('Download'), 'download_tab');
+			eXe.app.browseURL(window.location.href.split("?")[0] + '/temp/' + this.file.name, _('Download'), 'download_tab');
 			if (func) {
 				func();
 			} else {

@@ -6,7 +6,7 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
-#
+#Ese nombre lo está usando actualmente en otra ventana de eXeMejorando
 # This program is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -59,7 +59,7 @@ class PackageRedirectPage(RenderableResource):
         self.stopping = None
         self.integration = None
         self.mainpages = {}
-        self.jwt_token=False
+        self.jwt_tokens = {}
 
     def getChild(self, name, request):
         """
@@ -68,19 +68,21 @@ class PackageRedirectPage(RenderableResource):
         This is probably because the url is in unicode
         """
         session = request.getSession()
+        # TO TEST 
+        #The ode_it_jwt maybe a local variable for improvement performance and avoid to run decode the jwt
+        # ode_id_jwt = None
         #TEST Moodle-eXe Integration
         self.integration = Integration()
         if self.integration.enabled_jwt == "1":
             if 'jwt_token' in request.args and request.args['jwt_token'][0]:
-                self.jwt_token=request.args['jwt_token'][0]
-            else:
-                if not self.jwt_token:
-                    raise Exception('jwt_token not found')
-            try:
-                jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)
-            except Exception as e:
-                return error.ForbiddenResource("JWT not valid")
-        
+                try:
+                    ode_id_jwt=str(jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"])
+                    self.jwt_tokens[session.uid]={ode_id_jwt: request.args['jwt_token'][0]}
+                except Exception as e:
+                    return error.ForbiddenResource('jwt_token not valid. Secret HASH mismatch')
+            elif not self.jwt_tokens[session.uid]:
+                raise Exception('Error: jwt_token not found')        
+
         # If using the JWT system, user dirs are created in a domain_instance_userid dir structure, else, only use the id
         # Must be eliminated in the future
         # Login and import ode passing the parameter user
@@ -88,9 +90,12 @@ class PackageRedirectPage(RenderableResource):
             if self.integration.enabled_jwt == "0":
                 session.setUser(request.args['user'][0])
             else:
-                multidomainuser=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
-                multidomainuser=multidomainuser.split("//")[1].replace("/",".").replace(".","_")
-                session.setUser(multidomainuser+"_"+request.args['user'][0])
+                if 'jwt_token' in request.args and request.args['jwt_token'][0]:
+                    multidomainuser=jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
+                    multidomainuser=multidomainuser.split("//")[1].replace("/",".").replace(".","_")
+                    session.setUser(multidomainuser+"_"+request.args['user'][0])
+                else:
+                    raise Exception('Error: jwt_token not found') 
 
         # No session
         if self.webServer.application.server and not session.user and not request.getUser():
@@ -110,7 +115,14 @@ class PackageRedirectPage(RenderableResource):
             else:
                 repository = 'Unknown Repository'
             self.webServer.importode = ImportOdePage(self.webServer.root, repository, edit_ode_id)
-            request.refresh('import?ode_id={}'.format(edit_ode_id))
+            if self.integration.enabled_jwt == "1":
+                ode_id_jwt=jwt.decode(self.jwt_tokens[session.uid][edit_ode_id],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"]
+                if str(edit_ode_id) != str(ode_id_jwt):
+                    raise Exception('ALERT: ode_id_jwt do not match: edit:' +edit_ode_id+' jwt '+ode_id_jwt)
+                url="import?jwt_token="+str(self.jwt_tokens[session.uid][edit_ode_id])+"&ode_id="+str(ode_id_jwt)+"&user_id="+str(session.user.name)  
+                request.refresh(url)
+            else:
+                request.refresh('import?ode_id={}'.format(edit_ode_id))
             return self.webServer.importode
 
         # Importing and redirection
@@ -126,10 +138,18 @@ class PackageRedirectPage(RenderableResource):
                 repository = "Unknown"
             # Check if ode_id is empty
             if edit_ode_id:
-                import_ode_response = self.importOde(session, edit_ode_id,self.jwt_token)
+                # TEST if jwt_tokens is empty. For example in eScholarium
+                import_ode_response = self.importOde(session, edit_ode_id,self.jwt_tokens[session.uid][edit_ode_id]) 
                 if import_ode_response and import_ode_response[0]:
                     imported_package = import_ode_response[1]
-                    request.redirect(imported_package.encode('utf8'))
+                    if self.integration.enabled_jwt == "1":
+                        ode_id_jwt=jwt.decode(self.jwt_tokens[session.uid][edit_ode_id],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"]
+                        if str(edit_ode_id) != str(ode_id_jwt):
+                            raise Exception('ALERT: ode_id_jwt do not match: edit:' +edit_ode_id+' jwt '+ode_id_jwt)
+                        url="?jwt_token="+str(self.jwt_tokens[session.uid][edit_ode_id])+"&ode_id="+str(ode_id_jwt)+"&user_id="+str(session.user.name)  
+                        request.redirect(imported_package.encode('utf8')+url)
+                    else:
+                        request.redirect(imported_package.encode('utf8'))
                     return 'loading package'
                 else:
                     # Error message
@@ -153,7 +173,7 @@ class PackageRedirectPage(RenderableResource):
                 self.integration = Integration()
             if self.integration.enabled_jwt == "1":
                 if name == '' or (name == 'new_ode' and not 'jwt_token' in request.args):            
-                    return error.ForbiddenResource("New package not allowed")
+                    return error.ForbiddenResource("JWT integration. New package not allowed")
                 else:
                     return self
             else:
@@ -168,9 +188,6 @@ class PackageRedirectPage(RenderableResource):
             else:
                 if session.uid in self.mainpages.keys():
                     if name in self.mainpages[session.uid].keys():
-                        if self.jwt_token:
-                            if not self.mainpages[session.uid][name].jwt_token:
-                                self.mainpages[session.uid][name].jwt_token=self.jwt_token
                         return self.mainpages[session.uid][name]
                 # This will just raise an error
                 log.error("child %s not found. uri: %s" % (name, request.uri))
@@ -288,17 +305,21 @@ class PackageRedirectPage(RenderableResource):
             self.integration = Integration()
         if self.integration.enabled_jwt == "1":
             if 'jwt_token' in request.args and request.args['jwt_token'][0]:
-                self.jwt_token=request.args['jwt_token'][0]
-            else:
-                if not self.jwt_token:
-                    raise Exception('jwt_token not found')
-            try:
-                jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)
-            except Exception as e:
-                raise Exception('Error in the secret key. No match')
-
-        self.bindNewPackage(package, session,self.jwt_token)
+                try:
+                    ode_id_jwt=str(jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"])
+                    self.jwt_tokens[session.uid]={ode_id_jwt: request.args['jwt_token'][0]}
+                except Exception as e:
+                    return error.ForbiddenResource('jwt_token not valid. Secret HASH mismatch')
+            elif not self.jwt_tokens[session.uid]:
+                raise Exception('Error: jwt_token not found')        
+            self.bindNewPackage(package, session,self.jwt_tokens[session.uid][ode_id_jwt])
+        else:
+            self.bindNewPackage(package, session,False)
         log.info("Created a new package name=" + package.name)
-        # Tell the web browser to show it
-        request.redirect(package.name.encode('utf8'))
+        if self.integration.enabled_jwt == "1":
+            ode_id_jwt=str(jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"])
+            url="?jwt_token="+str(request.args['jwt_token'][0])+"&ode_id="+str(ode_id_jwt)+"&user_id="+str(session.user.name)  
+            request.redirect(package.name.encode('utf8')+url)
+        else:
+            request.redirect(package.name.encode('utf8'))
         return ''

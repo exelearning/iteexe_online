@@ -28,6 +28,8 @@ import os
 import json
 import sys
 import logging
+# TO TEST: Timer is for delayed logout 
+from threading                  import Timer
 import traceback
 import shutil
 import tempfile
@@ -362,6 +364,7 @@ class MainPage(RenderableLivePage):
 			'autosaveTime': float(G.application.config.autosaveTime),
             'publishLabel': self.integration.repo_name,
             'publishHomeURL': self.integration.repo_home_url,
+            'enabled_jwt' : self.integration.enabled_jwt,
             'maxSizeImportElp': int(G.application.config.configParser.get('system', 'maxSizeImportElp')),
             'maxSizePublish': int(G.application.config.configParser.get('system', 'maxSizePublish')),
             'maxUploadSizeTinyEditorMCE': int(G.application.config.configParser.get('system', 'maxUploadSizeTinyEditorMCE'))
@@ -493,6 +496,10 @@ class MainPage(RenderableLivePage):
             filename = Path(filename, 'utf-8')
         except:
             filename = None
+        # This condition prevents the same package name from being used in the same session
+        if str(filename.basename().splitext()[0]) in self.webServer.root.mainpages[self.session.uid].keys():    
+            client.sendScript('Ext.MessageBox.alert("%s", "%s")' %(_("Error when saving"), _("That name is currently being used in another eXeLearning window")))
+            return
 
         # If the script is not passing a filename to us,
         # Then use the last filename that the package was loaded from/saved to
@@ -537,9 +544,19 @@ class MainPage(RenderableLivePage):
             elif self.package.name != oldName:
                 # Redirect the client if the package name has changed
                 self.session.packageStore.addPackage(self.package)
-                self.webServer.root.bindNewPackage(self.package, self.session)
-                log.info('Package saved, redirecting client to /%s' % self.package.name)
-                client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
+                self.webServer.root.bindNewPackage(self.package, self.session,self.jwt_token)
+
+                if self.integration.enabled_jwt == '0':
+                    log.info('Package saved, redirecting client to /%s' % self.package.name)
+                    client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
+                else:
+                    try:
+                        ode_id_temp=self.package.ode_id
+                    except: 
+                        self.package.ode_id=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"]
+                    url=self.package.name+"?jwt_token="+str(self.jwt_token)+"&ode_id="+str(self.package.ode_id)+"&user_id="+str(self.session.user.name)  
+                    client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
+                                url).encode('utf8'))
             else:
                 #client.filePickerAlert(_(u'Package saved to: %s') % filename, filter_func=otherSessionPackageClients)
 				# A nice notification instead of an alert
@@ -623,7 +640,7 @@ class MainPage(RenderableLivePage):
                 loadedPackage.ode_id=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["cmid"]
             self.package=loadedPackage
             self.session.packageStore.addPackage(loadedPackage)
-            self.webServer.root.bindNewPackage(loadedPackage, self.session)
+            self.webServer.root.bindNewPackage(loadedPackage, self.session,self.jwt_token)
             url=self.package.name+"?jwt_token="+str(self.jwt_token)+"&ode_id="+str( loadedPackage.ode_id)+"&user_id="+str(self.session.user.name)  
             client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
                             url).encode('utf8'))
@@ -762,7 +779,12 @@ class MainPage(RenderableLivePage):
 
     def handleReload(self, client):
         self.location_buttons.updateText()
-        client.sendScript('eXe.app.gotoUrl()')
+        if self.integration.enabled_jwt == '0':
+            client.sendScript('eXe.app.gotoUrl()')
+        else:
+            url=self.package.name+"?jwt_token="+str(self.jwt_token)+"&ode_id="+str(self.package.ode_id)+"&user_id="+str(self.session.user.name)  
+            client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
+                            url).encode('utf8'))
 
     def handleRemoveTempDir(self, client, tempdir, rm_top_dir):
         """
@@ -1308,6 +1330,14 @@ class MainPage(RenderableLivePage):
         log.info('Cancel import')
         Resources.cancelImport()
 
+    # TO TEST: This method improves the memory performance and works as a garbage collector
+    def delayedLogout(self):
+        self.webServer.root.mainpages[self.session.uid].pop(self.package.name)
+        if len(self.webServer.root.mainpages[self.session.uid]) == 0:
+            del self.webServer.root.mainpages[self.session.uid]
+            del G.application.userStore.loaded[self.session.user.name]
+            self.session.expire()
+
     def handleExportProcomun(self, client):
         # If the user hasn't done the OAuth authentication yet, start this process
         if hasattr(client.session,"oauthToken") and client.session.oauthToken:
@@ -1410,7 +1440,8 @@ class MainPage(RenderableLivePage):
 
                 if dict_response['status'] == '0':
                     publish_document_message = _(u'Sending document to %s') % self.integration.repo_name
-
+                    # TO TEST: session and memory management 
+                    #Timer(1, self.delayedLogout).start()
                     if dict_response['ode_id']:
                         self.package.ode_id = dict_response['ode_id']
 
@@ -1685,8 +1716,12 @@ class MainPage(RenderableLivePage):
             tmpfile.remove()
         except:
             pass
+        if self.integration.enabled_jwt == "1":
+            url=self.package.name+"?jwt_token="+str(self.jwt_token)+"&ode_id="+str(self.package.ode_id)+"&user_id="+str(self.session.user.name)  
+        else:
+            url=self.package.name
         client.sendScript((u'eXe.app.gotoUrl("/%s")' % \
-                          self.package.name).encode('utf8'))
+                          url).encode('utf8'))
 
     def handleExtractPackage(self, client, filename, existOk, allPackage=False):
         """
