@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: eXe Translations <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-02 11:35+0100\nPO-Revision-Date: 2022-11-24 09:19+0100\nLast-Translator: Juan Rafael Fern\u00e1ndez <jrfern@telefonica.net>\nLanguage: es\nLanguage-Team: Spanish <jrfern@telefonica.net>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: eXe Translations <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-02 13:04+0100\nPO-Revision-Date: 2022-11-24 09:19+0100\nLast-Translator: Juan Rafael Fern\u00e1ndez <jrfern@telefonica.net>\nLanguage: es\nLanguage-Team: Spanish <jrfern@telefonica.net>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Number of rounds": "N\u00famero de vueltas", 
  "DropDown Activity": "Actividad desplegable", 
  "Create the case story. A good case is one \nthat describes a controversy or sets the scene by describing the characters \ninvolved and the situation. It should also allow for some action to be taken \nin order to gain resolution of the situation.": "Cree el caso pr\u00e1ctico. Un buen caso es aquel \nque describe una controversia o propone una escena describiendo los personajes \ninvolucrados y la situaci\u00f3n. Tambi\u00e9n debe permitir que se realicen acciones \npara obtener la resoluci\u00f3n de la situaci\u00f3n.", 
@@ -993,6 +993,7 @@ translations = {
  "Tigrinya ": "Tigrinya ", 
  "Add another activity": "Agregar otra actividad", 
  "Text and Tasks": "Texto y tareas", 
+ "This will completely overwrite all your project. Continue?": "Esto sobrescribir\u00e1 tu proyecto completo. \u00bfContinuar?", 
  "If you check the Properties - Export - Math content option you can just type LaTeX code directly into the editor instead of using this window.": "Si marca la opci\u00f3n Propiedades - Exportar - Contenido matem\u00e1tico podr\u00e1 escribir c\u00f3digo LaTeX directamente en el editor en lugar de utilizar esta ventana.", 
  "Instructions before sortable list": "Instrucciones que se mostrar\u00e1n antes de la lista ordenable", 
  "Show Location Bar": "Barra de localizaci\u00f3n", 
