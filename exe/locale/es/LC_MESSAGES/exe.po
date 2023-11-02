@@ -1283,6 +1283,8 @@ msgid ""
 "Upload a file. Please avoid names or paths with spaces or special "
 "characters."
 msgstr ""
+"Seleccione un archivo, evitando rutas y nombres muy largos "
+"o con caracteres especiales."
 
 #: exe/engine/extendedfieldengine.py:304
 #: exe/webui/tools/style-designer/langs/all.js:51
@@ -4009,13 +4011,12 @@ msgid "Gamification"
 msgstr "Ludificación"
 
 #: exe/jsui/mainpage.py:501
-#, fuzzy
 msgid "Error when saving"
-msgstr "Error al instalar el estilo"
+msgstr "Error al guardar"
 
 #: exe/jsui/mainpage.py:501
 msgid "That name is currently being used in another eXeLearning window"
-msgstr ""
+msgstr "Ese nombre se está usando en otra ventana de eXeLearning"
 
 #: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1540
 #: exe/jsui/mainpage.py:1735 exe/jsui/mainpage.py:1777
@@ -10165,6 +10166,8 @@ msgid ""
 "Could not upload the file. Please remove any special characters from the "
 "file name or path."
 msgstr ""
+"No se pudo subir el archivo. Por favor, elimine los caracteres especiales "
+"del nombre del fichero y la ruta del archivo."
 
 #: exe/webui/scripts/authoring.js:2011
 msgid "Add a Text iDevice"
@@ -15779,7 +15782,7 @@ msgstr "Detectar automáticamente"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:556
 msgid "Choose a file or paste a link (URL)"
-msgstr ""
+msgstr "Selecciona el archivo o pega una URL"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:578
 msgid "Play controls"
@@ -15790,11 +15793,12 @@ msgid "JavaScript player"
 msgstr "Reproductor JavaScript"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:579
-#, fuzzy
 msgid ""
 "Old browsers compatibility with some formats. Not needed in modern "
 "browsers."
-msgstr "Mejorar la compatibilidad de los navegadores con algunos formatos"
+msgstr ""
+"Compatibilidad con navegadores antiguos. No hace falta en "
+"navegadores modernos."
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:580
 msgid "Autoplay"
