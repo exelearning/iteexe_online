@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: translations@exelearning.net\n"
-"POT-Creation-Date: 2023-11-02 11:35+0100\n"
+"POT-Creation-Date: 2023-11-02 13:04+0100\n"
 "PO-Revision-Date: 2022-11-25 17:28+0100\n"
 "Last-Translator: Franklin Weng <franklin@goodhorse.idv.tw>\n"
 "Language: zh_Hant_TW\n"
@@ -3226,7 +3226,7 @@ msgstr "您用 '-x xliff' 或 '--export xliff' 選擇 XLIFF 後，可以設定�
 msgid "Don't copy source in target"
 msgstr "不要將源碼複製到目標"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1140
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1149
 msgid "Wrap fields in CDATA"
 msgstr "用 CDATA 包裝欄位"
 
@@ -3609,7 +3609,7 @@ msgstr ""
 msgid "Error importing HTML:\n"
 msgstr "匯入 HTML 時發生錯誤：\n"
 
-#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1296
+#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1305
 msgid "Exporting package as SCORM 1.2..."
 msgstr "正在將套件匯出為 SCORM 1.2..."
 
@@ -3835,19 +3835,19 @@ msgstr "影像檔"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
 #: exe/jsui/scripts/app/controller/Toolbar.js:878
-#: exe/jsui/scripts/app/controller/Toolbar.js:904
-#: exe/jsui/scripts/app/controller/Toolbar.js:929
-#: exe/jsui/scripts/app/controller/Toolbar.js:951
-#: exe/jsui/scripts/app/controller/Toolbar.js:986
-#: exe/jsui/scripts/app/controller/Toolbar.js:1006
-#: exe/jsui/scripts/app/controller/Toolbar.js:1076
-#: exe/jsui/scripts/app/controller/Toolbar.js:1188
-#: exe/jsui/scripts/app/controller/Toolbar.js:1388
-#: exe/jsui/scripts/app/controller/Toolbar.js:1410
-#: exe/jsui/scripts/app/controller/Toolbar.js:1432
-#: exe/jsui/scripts/app/controller/Toolbar.js:1470
-#: exe/jsui/scripts/app/controller/Toolbar.js:1728
-#: exe/jsui/scripts/app/controller/Toolbar.js:1887
+#: exe/jsui/scripts/app/controller/Toolbar.js:913
+#: exe/jsui/scripts/app/controller/Toolbar.js:938
+#: exe/jsui/scripts/app/controller/Toolbar.js:960
+#: exe/jsui/scripts/app/controller/Toolbar.js:995
+#: exe/jsui/scripts/app/controller/Toolbar.js:1015
+#: exe/jsui/scripts/app/controller/Toolbar.js:1085
+#: exe/jsui/scripts/app/controller/Toolbar.js:1197
+#: exe/jsui/scripts/app/controller/Toolbar.js:1397
+#: exe/jsui/scripts/app/controller/Toolbar.js:1419
+#: exe/jsui/scripts/app/controller/Toolbar.js:1441
+#: exe/jsui/scripts/app/controller/Toolbar.js:1479
+#: exe/jsui/scripts/app/controller/Toolbar.js:1737
+#: exe/jsui/scripts/app/controller/Toolbar.js:1896
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
 #: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
 #: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
@@ -3859,11 +3859,11 @@ msgstr "所有檔案"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:321
 #: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1357
-#: exe/jsui/scripts/app/controller/Toolbar.js:1381
-#: exe/jsui/scripts/app/controller/Toolbar.js:1403
-#: exe/jsui/scripts/app/controller/Toolbar.js:1425
-#: exe/jsui/scripts/app/controller/Toolbar.js:1463
+#: exe/jsui/scripts/app/controller/Toolbar.js:1366
+#: exe/jsui/scripts/app/controller/Toolbar.js:1390
+#: exe/jsui/scripts/app/controller/Toolbar.js:1412
+#: exe/jsui/scripts/app/controller/Toolbar.js:1434
+#: exe/jsui/scripts/app/controller/Toolbar.js:1472
 #: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
 #: exe/webui/stylemanagerpage.py:606
 msgid "Please wait..."
@@ -3892,7 +3892,7 @@ msgstr "設定已儲存"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1335
+#: exe/jsui/scripts/app/controller/Toolbar.js:1344
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:380
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
@@ -3925,7 +3925,7 @@ msgstr "錯誤"
 #: exe/jsui/scripts/app/controller/Outline.js:261
 #: exe/jsui/scripts/app/controller/Toolbar.js:744
 #: exe/jsui/scripts/app/controller/Toolbar.js:803
-#: exe/jsui/scripts/app/controller/Toolbar.js:1208
+#: exe/jsui/scripts/app/controller/Toolbar.js:1217
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -4192,10 +4192,10 @@ msgid "Inserting package: {filename}"
 msgstr "插入套件中：{filename}"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:877
-#: exe/jsui/scripts/app/controller/Toolbar.js:903
-#: exe/jsui/scripts/app/controller/Toolbar.js:928
-#: exe/jsui/scripts/app/controller/Toolbar.js:1727
-#: exe/jsui/scripts/app/controller/Toolbar.js:1886
+#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:937
+#: exe/jsui/scripts/app/controller/Toolbar.js:1736
+#: exe/jsui/scripts/app/controller/Toolbar.js:1895
 msgid "eXe Package Files"
 msgstr "eXe 套件檔"
 
@@ -4204,90 +4204,94 @@ msgstr "eXe 套件檔"
 msgid "Select package to import and Open"
 msgstr "選擇要插入的套件"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:896
-#: exe/jsui/scripts/app/controller/Toolbar.js:1721
+#: exe/jsui/scripts/app/controller/Toolbar.js:894
+msgid "This will completely overwrite all your project. Continue?"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:902
+#: exe/jsui/scripts/app/controller/Toolbar.js:1730
 msgid "Loading package: {filename}"
 msgstr "載入套件中：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:921
 msgid "Save extracted package as"
 msgstr "將展開的套件另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:918
-#: exe/jsui/scripts/app/controller/Toolbar.js:944
+#: exe/jsui/scripts/app/controller/Toolbar.js:927
+#: exe/jsui/scripts/app/controller/Toolbar.js:953
 msgid "Extracting package: {filename}"
 msgstr "展開套件中：{filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:938
+#: exe/jsui/scripts/app/controller/Toolbar.js:947
 msgid "Save extracted SCORM package as"
 msgstr "將展開的 SCORM 套件另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:950
+#: exe/jsui/scripts/app/controller/Toolbar.js:959
 msgid "SCORM Files"
 msgstr "SCORM 檔案"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:960
+#: exe/jsui/scripts/app/controller/Toolbar.js:969
 msgid "Select the parent folder for import."
 msgstr "選擇要匯入的父目錄。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:975
+#: exe/jsui/scripts/app/controller/Toolbar.js:984
 msgid "Select the entry point for import."
 msgstr "選擇要匯入的進入點。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:985
+#: exe/jsui/scripts/app/controller/Toolbar.js:994
 msgid "HTML Files"
 msgstr "HTML 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:994
+#: exe/jsui/scripts/app/controller/Toolbar.js:1003
 msgid "Select LOM Metadata file to import."
 msgstr "選擇要匯入的 LOM 中繼資料檔。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1005
+#: exe/jsui/scripts/app/controller/Toolbar.js:1014
 msgid "XML Files"
 msgstr "XML 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1020
+#: exe/jsui/scripts/app/controller/Toolbar.js:1029
 msgid "Waiting progress..."
 msgstr "等待進度中..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1028
+#: exe/jsui/scripts/app/controller/Toolbar.js:1037
 msgid "Cancel Import?"
 msgstr "要取消匯入嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1029
+#: exe/jsui/scripts/app/controller/Toolbar.js:1038
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "匯入正在進行中。您要取消嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1052
+#: exe/jsui/scripts/app/controller/Toolbar.js:1061
 msgid "Select Xliff file to import"
 msgstr "選擇要匯入的 Xliff 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1063
+#: exe/jsui/scripts/app/controller/Toolbar.js:1072
 msgid "XLIFF Import Preferences"
 msgstr "XLIFF 匯入喜好設定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1075
-#: exe/jsui/scripts/app/controller/Toolbar.js:1187
+#: exe/jsui/scripts/app/controller/Toolbar.js:1084
+#: exe/jsui/scripts/app/controller/Toolbar.js:1196
 msgid "XLIFF Files"
 msgstr "XLIFF 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1085
+#: exe/jsui/scripts/app/controller/Toolbar.js:1094
 msgid "Export to Xliff as"
 msgstr "將 Xliff 匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1106
+#: exe/jsui/scripts/app/controller/Toolbar.js:1115
 msgid "Select source language"
 msgstr "選擇來源語言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1117
+#: exe/jsui/scripts/app/controller/Toolbar.js:1126
 msgid "Select target language"
 msgstr "選擇目標語言"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1128
+#: exe/jsui/scripts/app/controller/Toolbar.js:1137
 msgid "Copy source also in target"
 msgstr "在目標也複製來源"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1131
+#: exe/jsui/scripts/app/controller/Toolbar.js:1140
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4297,7 +4301,7 @@ msgstr ""
 "如果沒有選擇此選項，則目標欄位預設會空白。不過有些電腦輔助翻譯軟體（如 "
 "OmegaT）只會翻譯在目標欄位的內容。如果您使用的是這類工具，則您必須選擇此選項，將來源內容複製到目標欄位。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1142
+#: exe/jsui/scripts/app/controller/Toolbar.js:1151
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4307,7 +4311,7 @@ msgstr ""
 "這個選項會將所有在 CDATA 區段中匯出的欄位折起來。這種區段在 XLIFF "
 "標準中並不建議使用，但若您在使用電腦輔助翻譯軟體前，使用一些預先處理的工具（如 Rainbow）時，CDATA 區段就很有用。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1151
+#: exe/jsui/scripts/app/controller/Toolbar.js:1160
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
 #: exe/webui/editorpane.py:277
@@ -4321,65 +4325,65 @@ msgstr ""
 msgid "Cancel"
 msgstr "取消"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1157
+#: exe/jsui/scripts/app/controller/Toolbar.js:1166
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "確定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1180
+#: exe/jsui/scripts/app/controller/Toolbar.js:1189
 msgid "XLIFF Export Preferences"
 msgstr "XLIFF 匯出喜好設定"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1209
+#: exe/jsui/scripts/app/controller/Toolbar.js:1218
 #, fuzzy, python-format
 msgid "Publish on %s?"
 msgstr "發布者"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1209
+#: exe/jsui/scripts/app/controller/Toolbar.js:1218
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1246
+#: exe/jsui/scripts/app/controller/Toolbar.js:1255
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
 msgstr "這個套件有詮釋資料。您可能從原作者那匯出了不正確的資訊。請到屬性分頁去編輯。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1248
+#: exe/jsui/scripts/app/controller/Toolbar.js:1257
 msgid "Do you want to export the package with the current metadata?"
 msgstr "您要以目前的詮釋資料來匯出套件嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1289
+#: exe/jsui/scripts/app/controller/Toolbar.js:1298
 msgid ""
 "The project exceeds the maximum size limit. Try removing some large files"
 " before publishing."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1295
+#: exe/jsui/scripts/app/controller/Toolbar.js:1304
 #, fuzzy
 msgid "Publishing..."
 msgstr "發布者"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1308
+#: exe/jsui/scripts/app/controller/Toolbar.js:1317
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
 msgstr "您必須先授權，eXe Learning 才能將內容發布到您的 Procomún 帳號"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1309
+#: exe/jsui/scripts/app/controller/Toolbar.js:1318
 msgid "Are you sure you want to start authorization process?"
 msgstr "您確定要開始授權嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1320
+#: exe/jsui/scripts/app/controller/Toolbar.js:1329
 msgid "Procomún OAuth"
 msgstr "Procomún OAuth"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1336
+#: exe/jsui/scripts/app/controller/Toolbar.js:1345
 #, python-format
 msgid "Error exporting package \"%s\" to Procomún."
 msgstr "匯出套件 %s 到 Procomún 時發生錯誤。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1338
+#: exe/jsui/scripts/app/controller/Toolbar.js:1347
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
@@ -4388,100 +4392,100 @@ msgstr ""
 "若您發布時發生問題，或是您稍後才要完成您的目錄，您可以關閉此對話框，匯出成 SCORM 2004 再手動將產生的 zip 壓縮檔上傳至 "
 "Procomún。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1350
+#: exe/jsui/scripts/app/controller/Toolbar.js:1359
 msgid "Select the parent folder for export."
 msgstr "選擇要匯出的父資料夾。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1373
+#: exe/jsui/scripts/app/controller/Toolbar.js:1382
 msgid "Export text package as"
 msgstr "將文字套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1387
+#: exe/jsui/scripts/app/controller/Toolbar.js:1396
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:269
 msgid "Text File"
 msgstr "文字檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1395
+#: exe/jsui/scripts/app/controller/Toolbar.js:1404
 msgid "Save package resources report as"
 msgstr "將套件資源報告另存為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1409
+#: exe/jsui/scripts/app/controller/Toolbar.js:1418
 msgid "CSV File"
 msgstr "CSV 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1417
+#: exe/jsui/scripts/app/controller/Toolbar.js:1426
 msgid "Export EPUB3 package as"
 msgstr "將 EPUB3 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1431
+#: exe/jsui/scripts/app/controller/Toolbar.js:1440
 msgid "EPUB3 File"
 msgstr "EPUB3 檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1441
+#: exe/jsui/scripts/app/controller/Toolbar.js:1450
 msgid "Export SCORM package as"
 msgstr "將 SCORM 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1443
+#: exe/jsui/scripts/app/controller/Toolbar.js:1452
 msgid "Export IMS package as"
 msgstr "將 IMS 套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1445
+#: exe/jsui/scripts/app/controller/Toolbar.js:1454
 msgid "Export Website package as"
 msgstr "將網站套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1447
+#: exe/jsui/scripts/app/controller/Toolbar.js:1456
 #, fuzzy
 msgid "Export Single Page package as"
 msgstr "將網站套件匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1449
+#: exe/jsui/scripts/app/controller/Toolbar.js:1458
 msgid "Export Common Cartridge as"
 msgstr "將共用卡匣匯出為"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1451
+#: exe/jsui/scripts/app/controller/Toolbar.js:1460
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "傳給 exportPackage 的值不合法"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1478
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM/IMS/Zip檔"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1581
+#: exe/jsui/scripts/app/controller/Toolbar.js:1590
 msgid "No templates available"
 msgstr "沒有可用的樣本"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1699
+#: exe/jsui/scripts/app/controller/Toolbar.js:1708
 msgid "Loading package..."
 msgstr "載入套件中..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1716
+#: exe/jsui/scripts/app/controller/Toolbar.js:1725
 msgid "Open File"
 msgstr "開啟檔案"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1740
+#: exe/jsui/scripts/app/controller/Toolbar.js:1749
 msgid "Save Package first?"
 msgstr "要先儲存套件嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1741
+#: exe/jsui/scripts/app/controller/Toolbar.js:1750
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
 msgstr "目前的套件已變更但尚未儲存。您要先儲存嗎？"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1810
-#: exe/jsui/scripts/app/controller/Toolbar.js:1872
+#: exe/jsui/scripts/app/controller/Toolbar.js:1819
+#: exe/jsui/scripts/app/controller/Toolbar.js:1881
 msgid "Saving package..."
 msgstr "儲存套件中..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1841
+#: exe/jsui/scripts/app/controller/Toolbar.js:1850
 msgid "Title for template:"
 msgstr "樣本的標題："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1842
+#: exe/jsui/scripts/app/controller/Toolbar.js:1851
 msgid "Enter the new name for template:"
 msgstr "輸入樣本的新名稱："
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1864
+#: exe/jsui/scripts/app/controller/Toolbar.js:1873
 msgid "Save file"
 msgstr "儲存檔案"
 
@@ -6293,8 +6297,9 @@ msgid ""
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1245
-#: exe/jsui/scripts/app/controller/Toolbar.js:1288
+#: exe/jsui/scripts/app/controller/Toolbar.js:893
+#: exe/jsui/scripts/app/controller/Toolbar.js:1254
+#: exe/jsui/scripts/app/controller/Toolbar.js:1297
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
 #: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
@@ -6333,7 +6338,7 @@ msgstr "顯示面板"
 msgid "Use the left panel to create pages and add content."
 msgstr "用左側面板來建立頁面與新增內容。"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1251 exe/jsui/scripts/exe.js:469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1260 exe/jsui/scripts/exe.js:469
 msgid "Don't show this warning again"
 msgstr "不要再顯示此警告"
 

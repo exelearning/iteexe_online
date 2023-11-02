@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-02 11:35+0100\n"
+"POT-Creation-Date: 2023-11-02 13:04+0100\n"
 "PO-Revision-Date: 2018-12-17 22:42+0000\n"
 "Last-Translator: Waldemar Stoczkowski, 2022\n"
 "Language: pl\n"
@@ -3643,7 +3643,7 @@ msgstr ""
 msgid "Don't copy source in target"
 msgstr "Nie kopiuj źródłowych do docelowych"
 
-#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1140
+#: exe/exe_do:140 exe/jsui/scripts/app/controller/Toolbar.js:1149
 msgid "Wrap fields in CDATA"
 msgstr "Zawijaj pola w CDATA"
 
@@ -4035,7 +4035,7 @@ msgstr ""
 msgid "Error importing HTML:\n"
 msgstr "Błąd importowania HTML:\n"
 
-#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1296
+#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1305
 msgid "Exporting package as SCORM 1.2..."
 msgstr "Eksportowanie pakietu jako SCORM 1.2..."
 
@@ -4266,19 +4266,19 @@ msgstr "Pliki obrazów"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:242
 #: exe/jsui/scripts/app/controller/TemplateManager.js:318
 #: exe/jsui/scripts/app/controller/Toolbar.js:878
-#: exe/jsui/scripts/app/controller/Toolbar.js:904
-#: exe/jsui/scripts/app/controller/Toolbar.js:929
-#: exe/jsui/scripts/app/controller/Toolbar.js:951
-#: exe/jsui/scripts/app/controller/Toolbar.js:986
-#: exe/jsui/scripts/app/controller/Toolbar.js:1006
-#: exe/jsui/scripts/app/controller/Toolbar.js:1076
-#: exe/jsui/scripts/app/controller/Toolbar.js:1188
-#: exe/jsui/scripts/app/controller/Toolbar.js:1388
-#: exe/jsui/scripts/app/controller/Toolbar.js:1410
-#: exe/jsui/scripts/app/controller/Toolbar.js:1432
-#: exe/jsui/scripts/app/controller/Toolbar.js:1470
-#: exe/jsui/scripts/app/controller/Toolbar.js:1728
-#: exe/jsui/scripts/app/controller/Toolbar.js:1887
+#: exe/jsui/scripts/app/controller/Toolbar.js:913
+#: exe/jsui/scripts/app/controller/Toolbar.js:938
+#: exe/jsui/scripts/app/controller/Toolbar.js:960
+#: exe/jsui/scripts/app/controller/Toolbar.js:995
+#: exe/jsui/scripts/app/controller/Toolbar.js:1015
+#: exe/jsui/scripts/app/controller/Toolbar.js:1085
+#: exe/jsui/scripts/app/controller/Toolbar.js:1197
+#: exe/jsui/scripts/app/controller/Toolbar.js:1397
+#: exe/jsui/scripts/app/controller/Toolbar.js:1419
+#: exe/jsui/scripts/app/controller/Toolbar.js:1441
+#: exe/jsui/scripts/app/controller/Toolbar.js:1479
+#: exe/jsui/scripts/app/controller/Toolbar.js:1737
+#: exe/jsui/scripts/app/controller/Toolbar.js:1896
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:158
 #: exe/webui/scripts/authoring.js:181 exe/webui/scripts/authoring.js:205
 #: exe/webui/scripts/authoring.js:508 exe/webui/scripts/authoring.js:518
@@ -4290,11 +4290,11 @@ msgstr "Wszystkie pliki"
 
 #: exe/jsui/scripts/app/controller/MainTab.js:321
 #: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1357
-#: exe/jsui/scripts/app/controller/Toolbar.js:1381
-#: exe/jsui/scripts/app/controller/Toolbar.js:1403
-#: exe/jsui/scripts/app/controller/Toolbar.js:1425
-#: exe/jsui/scripts/app/controller/Toolbar.js:1463
+#: exe/jsui/scripts/app/controller/Toolbar.js:1366
+#: exe/jsui/scripts/app/controller/Toolbar.js:1390
+#: exe/jsui/scripts/app/controller/Toolbar.js:1412
+#: exe/jsui/scripts/app/controller/Toolbar.js:1434
+#: exe/jsui/scripts/app/controller/Toolbar.js:1472
 #: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
 #: exe/webui/stylemanagerpage.py:606
 msgid "Please wait..."
@@ -4323,7 +4323,7 @@ msgstr "Ustawienia zapisane"
 #: exe/jsui/scripts/app/controller/TemplateManager.js:307
 #: exe/jsui/scripts/app/controller/TemplateManager.js:372
 #: exe/jsui/scripts/app/controller/TemplateManager.js:399
-#: exe/jsui/scripts/app/controller/Toolbar.js:1335
+#: exe/jsui/scripts/app/controller/Toolbar.js:1344
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:152
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:380
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:456
@@ -4356,7 +4356,7 @@ msgstr "Błąd"
 #: exe/jsui/scripts/app/controller/Outline.js:261
 #: exe/jsui/scripts/app/controller/Toolbar.js:744
 #: exe/jsui/scripts/app/controller/Toolbar.js:803
-#: exe/jsui/scripts/app/controller/Toolbar.js:1208
+#: exe/jsui/scripts/app/controller/Toolbar.js:1217
 #: exe/webui/scripts/editor.js:66
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:356
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/plugin.min.js:78
@@ -4628,10 +4628,10 @@ msgid "Inserting package: {filename}"
 msgstr "Wstawianie pakietu: {filename}"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:877
-#: exe/jsui/scripts/app/controller/Toolbar.js:903
-#: exe/jsui/scripts/app/controller/Toolbar.js:928
-#: exe/jsui/scripts/app/controller/Toolbar.js:1727
-#: exe/jsui/scripts/app/controller/Toolbar.js:1886
+#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:937
+#: exe/jsui/scripts/app/controller/Toolbar.js:1736
+#: exe/jsui/scripts/app/controller/Toolbar.js:1895
 msgid "eXe Package Files"
 msgstr "Pliki pakietu eXe"
 
@@ -4640,92 +4640,96 @@ msgstr "Pliki pakietu eXe"
 msgid "Select package to import and Open"
 msgstr "Wybierz pakiet do wstawienia"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:896
-#: exe/jsui/scripts/app/controller/Toolbar.js:1721
+#: exe/jsui/scripts/app/controller/Toolbar.js:894
+msgid "This will completely overwrite all your project. Continue?"
+msgstr ""
+
+#: exe/jsui/scripts/app/controller/Toolbar.js:902
+#: exe/jsui/scripts/app/controller/Toolbar.js:1730
 msgid "Loading package: {filename}"
 msgstr "Ładowanie pakietu: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:912
+#: exe/jsui/scripts/app/controller/Toolbar.js:921
 msgid "Save extracted package as"
 msgstr "Zapisz wyodrębniony pakiet jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:918
-#: exe/jsui/scripts/app/controller/Toolbar.js:944
+#: exe/jsui/scripts/app/controller/Toolbar.js:927
+#: exe/jsui/scripts/app/controller/Toolbar.js:953
 msgid "Extracting package: {filename}"
 msgstr "Wyodrębnianie pakietu: {filename}"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:938
+#: exe/jsui/scripts/app/controller/Toolbar.js:947
 #, fuzzy
 msgid "Save extracted SCORM package as"
 msgstr "Zapisz wyodrębniony pakiet jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:950
+#: exe/jsui/scripts/app/controller/Toolbar.js:959
 #, fuzzy
 msgid "SCORM Files"
 msgstr "Dodaj pliki"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:960
+#: exe/jsui/scripts/app/controller/Toolbar.js:969
 msgid "Select the parent folder for import."
 msgstr "Wybierz folder macierzysty do zaimportowania."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:975
+#: exe/jsui/scripts/app/controller/Toolbar.js:984
 msgid "Select the entry point for import."
 msgstr "Wybierz punkt wejścia do importu."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:985
+#: exe/jsui/scripts/app/controller/Toolbar.js:994
 msgid "HTML Files"
 msgstr "Pliki HTML"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:994
+#: exe/jsui/scripts/app/controller/Toolbar.js:1003
 msgid "Select LOM Metadata file to import."
 msgstr "Wybierz plik metadanych LOM do zaimportowania."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1005
+#: exe/jsui/scripts/app/controller/Toolbar.js:1014
 msgid "XML Files"
 msgstr "Pliki XML"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1020
+#: exe/jsui/scripts/app/controller/Toolbar.js:1029
 msgid "Waiting progress..."
 msgstr "Oczekiwanie na postęp..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1028
+#: exe/jsui/scripts/app/controller/Toolbar.js:1037
 msgid "Cancel Import?"
 msgstr "Anulować Importowanie?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1029
+#: exe/jsui/scripts/app/controller/Toolbar.js:1038
 msgid "There is an ongoing import. Do you want to cancel?"
 msgstr "Trwa import. Czy chcesz anulować?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1052
+#: exe/jsui/scripts/app/controller/Toolbar.js:1061
 msgid "Select Xliff file to import"
 msgstr "Wybierz plik Xliff do zaimportowania"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1063
+#: exe/jsui/scripts/app/controller/Toolbar.js:1072
 msgid "XLIFF Import Preferences"
 msgstr "Preferencje importu XLIFF"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1075
-#: exe/jsui/scripts/app/controller/Toolbar.js:1187
+#: exe/jsui/scripts/app/controller/Toolbar.js:1084
+#: exe/jsui/scripts/app/controller/Toolbar.js:1196
 msgid "XLIFF Files"
 msgstr "Pliki XLIFF"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1085
+#: exe/jsui/scripts/app/controller/Toolbar.js:1094
 msgid "Export to Xliff as"
 msgstr "Eksportuj do Xliff jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1106
+#: exe/jsui/scripts/app/controller/Toolbar.js:1115
 msgid "Select source language"
 msgstr "Wybierz język źródłowy"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1117
+#: exe/jsui/scripts/app/controller/Toolbar.js:1126
 msgid "Select target language"
 msgstr "Wybierz docelowy język"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1128
+#: exe/jsui/scripts/app/controller/Toolbar.js:1137
 msgid "Copy source also in target"
 msgstr "Skopiuj źródło również w miejscu docelowym"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1131
+#: exe/jsui/scripts/app/controller/Toolbar.js:1140
 msgid ""
 "If you don't choose this option, target field will be empty. Some "
 "Computer Aided Translation tools (e.g. OmegaT) just translate the content"
@@ -4737,7 +4741,7 @@ msgstr ""
 "tłumaczą zawartość pola docelowego. Jeśli używasz tego rodzaju narzędzi, "
 "musisz wstępnie wypełnić pole docelowe kopią pola źródłowego."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1142
+#: exe/jsui/scripts/app/controller/Toolbar.js:1151
 msgid ""
 "This option will wrap all the exported fields in CDATA sections. This "
 "kind of sections are not recommended by XLIFF standard but it could be a "
@@ -4750,7 +4754,7 @@ msgstr ""
 "wstępnego (i.g .: Rainbow) przed użyciem oprogramowania Computer Aided "
 "Translation."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1151
+#: exe/jsui/scripts/app/controller/Toolbar.js:1160
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:127
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:125
 #: exe/webui/editorpane.py:277
@@ -4764,25 +4768,25 @@ msgstr ""
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1157
+#: exe/jsui/scripts/app/controller/Toolbar.js:1166
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:36
 msgid "Ok"
 msgstr "Ok"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1180
+#: exe/jsui/scripts/app/controller/Toolbar.js:1189
 msgid "XLIFF Export Preferences"
 msgstr "Preferencje eksportu XLIFF"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1209
+#: exe/jsui/scripts/app/controller/Toolbar.js:1218
 #, fuzzy, python-format
 msgid "Publish on %s?"
 msgstr "wydawca"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1209
+#: exe/jsui/scripts/app/controller/Toolbar.js:1218
 msgid "Please check the Properties tab contents (title, authorship, license...)."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1246
+#: exe/jsui/scripts/app/controller/Toolbar.js:1255
 msgid ""
 "This package has metadata. You might be exporting incorrect information "
 "included by the original author. Go to Properties to edit it."
@@ -4791,22 +4795,22 @@ msgstr ""
 "zawarte przez oryginalnego autora. Przejdź do Właściwości, aby go "
 "edytować."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1248
+#: exe/jsui/scripts/app/controller/Toolbar.js:1257
 msgid "Do you want to export the package with the current metadata?"
 msgstr "Czy chcesz wyeksportować pakiet z aktualnymi metadanymi?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1289
+#: exe/jsui/scripts/app/controller/Toolbar.js:1298
 msgid ""
 "The project exceeds the maximum size limit. Try removing some large files"
 " before publishing."
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1295
+#: exe/jsui/scripts/app/controller/Toolbar.js:1304
 #, fuzzy
 msgid "Publishing..."
 msgstr "wydawca"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1308
+#: exe/jsui/scripts/app/controller/Toolbar.js:1317
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
 "account"
@@ -4814,20 +4818,20 @@ msgstr ""
 "Musisz autoryzować eXe Learning do publikowania treści na swoim koncie "
 "Procomún"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1309
+#: exe/jsui/scripts/app/controller/Toolbar.js:1318
 msgid "Are you sure you want to start authorization process?"
 msgstr "Czy na pewno chcesz rozpocząć proces autoryzacji?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1320
+#: exe/jsui/scripts/app/controller/Toolbar.js:1329
 msgid "Procomún OAuth"
 msgstr "Procomún OAuth – otwarty standard autoryzujący"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1336
+#: exe/jsui/scripts/app/controller/Toolbar.js:1345
 #, python-format
 msgid "Error exporting package \"%s\" to Procomún."
 msgstr "Błąd podczas eksportowania pakietu \"%s\" do Procomún."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1338
+#: exe/jsui/scripts/app/controller/Toolbar.js:1347
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
@@ -4837,81 +4841,81 @@ msgstr ""
 "później, zamknij to okno dialogowe, wyeksportuj jako SCORM 2004 i "
 "prześlij wygenerowany plik zip do Procomún."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1350
+#: exe/jsui/scripts/app/controller/Toolbar.js:1359
 msgid "Select the parent folder for export."
 msgstr "Wybierz folder nadrzędny do eksportu."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1373
+#: exe/jsui/scripts/app/controller/Toolbar.js:1382
 msgid "Export text package as"
 msgstr "Eksportuj pakiet tekstowy jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1387
+#: exe/jsui/scripts/app/controller/Toolbar.js:1396
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:269
 msgid "Text File"
 msgstr "Plik tekstowy"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1395
+#: exe/jsui/scripts/app/controller/Toolbar.js:1404
 msgid "Save package resources report as"
 msgstr "Zapisz raport zasobów pakietu jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1409
+#: exe/jsui/scripts/app/controller/Toolbar.js:1418
 msgid "CSV File"
 msgstr "Plik CSV"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1417
+#: exe/jsui/scripts/app/controller/Toolbar.js:1426
 msgid "Export EPUB3 package as"
 msgstr "Eksportuj pakiet EPUB3 jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1431
+#: exe/jsui/scripts/app/controller/Toolbar.js:1440
 msgid "EPUB3 File"
 msgstr "Plik EPUB3"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1441
+#: exe/jsui/scripts/app/controller/Toolbar.js:1450
 msgid "Export SCORM package as"
 msgstr "Eksportuj pakiet SCORM jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1443
+#: exe/jsui/scripts/app/controller/Toolbar.js:1452
 msgid "Export IMS package as"
 msgstr "Eksportuj pakiet IMS jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1445
+#: exe/jsui/scripts/app/controller/Toolbar.js:1454
 msgid "Export Website package as"
 msgstr "Eksportuj pakiet witryny jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1447
+#: exe/jsui/scripts/app/controller/Toolbar.js:1456
 #, fuzzy
 msgid "Export Single Page package as"
 msgstr "Eksportuj pakiet witryny jako"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1449
+#: exe/jsui/scripts/app/controller/Toolbar.js:1458
 msgid "Export Common Cartridge as"
 msgstr "Eksportuj jako Wspólny Wkład - Common Cartridge"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1451
+#: exe/jsui/scripts/app/controller/Toolbar.js:1460
 msgid "INVALID VALUE PASSED TO exportPackage"
 msgstr "NIEPRAWIDŁOWA WARTOŚĆ PRZEKAZANA DO eksportujPakiet"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1478
 msgid "SCORM/IMS/ZipFile"
 msgstr "SCORM/IMS/Zip"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1581
+#: exe/jsui/scripts/app/controller/Toolbar.js:1590
 msgid "No templates available"
 msgstr "Brak dostępnych szablonów"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1699
+#: exe/jsui/scripts/app/controller/Toolbar.js:1708
 msgid "Loading package..."
 msgstr "Ładowanie pakietu..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1716
+#: exe/jsui/scripts/app/controller/Toolbar.js:1725
 msgid "Open File"
 msgstr "Otwórz plik"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1740
+#: exe/jsui/scripts/app/controller/Toolbar.js:1749
 msgid "Save Package first?"
 msgstr "Najpierw zapisz pakiet?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1741
+#: exe/jsui/scripts/app/controller/Toolbar.js:1750
 msgid ""
 "The current package has been modified and not yet saved. Would you like "
 "to save it?"
@@ -4919,20 +4923,20 @@ msgstr ""
 "Obecny pakiet został zmodyfikowany i jeszcze nie zapisany. Czy chcesz go "
 "zapisać?"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1810
-#: exe/jsui/scripts/app/controller/Toolbar.js:1872
+#: exe/jsui/scripts/app/controller/Toolbar.js:1819
+#: exe/jsui/scripts/app/controller/Toolbar.js:1881
 msgid "Saving package..."
 msgstr "Zapisuję pakiet..."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1841
+#: exe/jsui/scripts/app/controller/Toolbar.js:1850
 msgid "Title for template:"
 msgstr "Tytuł szablonu:"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1842
+#: exe/jsui/scripts/app/controller/Toolbar.js:1851
 msgid "Enter the new name for template:"
 msgstr "Wprowadź nową nazwę dla szablonu:"
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1864
+#: exe/jsui/scripts/app/controller/Toolbar.js:1873
 msgid "Save file"
 msgstr "Zapisz plik"
 
@@ -6816,8 +6820,9 @@ msgid ""
 "browser restrictions, you must click on the URL: {0}"
 msgstr ""
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1245
-#: exe/jsui/scripts/app/controller/Toolbar.js:1288
+#: exe/jsui/scripts/app/controller/Toolbar.js:893
+#: exe/jsui/scripts/app/controller/Toolbar.js:1254
+#: exe/jsui/scripts/app/controller/Toolbar.js:1297
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
 #: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
 msgid "Warning"
@@ -6857,7 +6862,7 @@ msgstr "Pokaż panel"
 msgid "Use the left panel to create pages and add content."
 msgstr "Po utworzeniu strony możesz dodać treść."
 
-#: exe/jsui/scripts/app/controller/Toolbar.js:1251 exe/jsui/scripts/exe.js:469
+#: exe/jsui/scripts/app/controller/Toolbar.js:1260 exe/jsui/scripts/exe.js:469
 msgid "Don't show this warning again"
 msgstr "Nie wyświetlaj ponownie tego ostrzeżenia"
 
