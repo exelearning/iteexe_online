@@ -840,14 +840,23 @@ Ext.define('eXe.controller.Toolbar', {
             modal: true,
             scope: this,
             callback: function(fp) {
-                if (fp.status == eXe.view.filepicker.FilePicker.returnOk) {
-                    if (!fp.file.loaded)
-                    {
-                        fp.file.loaded = true;
-                        Ext.Msg.wait(new Ext.Template(_('Loading package: {filename}')).apply({filename: fp.file.name}));
-                        nevow_clientToServerEvent('loadPackage', this, '', fp.file.path);
+                Ext.Msg.show( {
+                    title: _('Warning'),
+                    msg: _('This will completely overwrite all your project. Continue?'),
+                    buttons: Ext.Msg.YESNO,
+                    fn: function(button) {
+                        if (button === 'yes') {
+                            if (fp.status == eXe.view.filepicker.FilePicker.returnOk) {
+                                if (!fp.file.loaded)
+                                {
+                                    fp.file.loaded = true;
+                                    Ext.Msg.wait(new Ext.Template(_('Loading package: {filename}')).apply({filename: fp.file.name}));
+                                    nevow_clientToServerEvent('loadPackage', this, '', fp.file.path);
+                                }
+                            }
+                        }
                     }
-                }
+                });
             }
         });
         fp.appendFilters([
