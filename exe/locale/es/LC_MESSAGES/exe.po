@@ -4743,7 +4743,7 @@ msgstr "Seleccione qué paquete insertar"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:894
 msgid "This will completely overwrite all your project. Continue?"
-msgstr "Esto sobrescribirá tu proyecto completo. ¿Continuar?"
+msgstr "Esto sobrescribirá su proyecto completo. ¿Continuar?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:902
 #: exe/jsui/scripts/app/controller/Toolbar.js:1730
