@@ -993,7 +993,7 @@ translations = {
  "Tigrinya ": "Tigrinya ", 
  "Add another activity": "Agregar otra actividad", 
  "Text and Tasks": "Texto y tareas", 
- "This will completely overwrite all your project. Continue?": "Esto sobrescribir\u00e1 su proyecto completo. \u00bfContinuar?", 
+ "This will completely overwrite all your project. Continue?": "Esto sobrescribir\u00e1 por completo todo su proyecto actual. \u00bfContinuar?", 
  "If you check the Properties - Export - Math content option you can just type LaTeX code directly into the editor instead of using this window.": "Si marca la opci\u00f3n Propiedades - Exportar - Contenido matem\u00e1tico podr\u00e1 escribir c\u00f3digo LaTeX directamente en el editor en lugar de utilizar esta ventana.", 
  "Instructions before sortable list": "Instrucciones que se mostrar\u00e1n antes de la lista ordenable", 
  "Show Location Bar": "Barra de localizaci\u00f3n", 
