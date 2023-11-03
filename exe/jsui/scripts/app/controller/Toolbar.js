@@ -756,7 +756,7 @@ Ext.define('eXe.controller.Toolbar', {
     fileQuit: function() {
 		Ext.Msg.show( {
 			title: _('Confirm'),
-			msg: _('Exit without saving changes and go back to %s (home page)?').replace("%s",config['publishLabel']),
+			msg: _('Exit without saving changes and go back to %s?').replace("%s",config['publishLabel']),
 			//scope: this,
 			//modal: true,
 			buttons: Ext.Msg.YESNO,

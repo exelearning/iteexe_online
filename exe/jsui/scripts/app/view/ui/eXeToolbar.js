@@ -107,7 +107,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         items: [
                             {
                                 xtype: 'accesskey_menuitem',
-                                text: _('Save'),
+                                text: _('Save draft'),
                                 accesskey: 's',
                                 tooltip: 'Ctrl+S',
                                 itemId: 'file_save'
@@ -348,7 +348,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 itemId: 'file_quit',
                                 accesskey: 'q',
                                 tooltip: 'Ctrl+Q',
-                                text: _('Quit')
+                                text: _('Quit without saving')
                             }
                         ]
                     }

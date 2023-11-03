@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: eXe Translations <translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-11-02 13:04+0100\n"
+"POT-Creation-Date: 2023-11-03 12:38+0100\n"
 "PO-Revision-Date: 2023-01-06 13:58+0100\n"
 "Last-Translator: Yannis Kaskamanidis <ttnfy17@yahoo.gr>\n"
 "Language: el\n"
@@ -4723,7 +4723,7 @@ msgstr "Διαχειριστής πρότυπων"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
-msgid "Exit without saving changes and go back to %s (home page)?"
+msgid "Exit without saving changes and go back to %s?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
@@ -5153,7 +5153,7 @@ msgstr "Άνοιγμα"
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:371
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129 exe/webui/editorpage.py:264
+#: exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -6745,6 +6745,11 @@ msgstr "Μετακίνηση κόμβου κάτω"
 msgid "use the right arrow key"
 msgstr "χρησιμοποιήστε το δεξί βελάκι"
 
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#, fuzzy
+msgid "Save draft"
+msgstr "πρόχειρο"
+
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
@@ -6832,9 +6837,10 @@ msgstr "εκδότης"
 msgid "Print"
 msgstr "Εκτύπωση"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370 exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "Έξοδος"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#, fuzzy
+msgid "Quit without saving"
+msgstr "Έξοδος χωρίς αποθήκευση;"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -9241,6 +9247,10 @@ msgstr "Εισαγωγή η-Σύνεργου"
 #: exe/webui/editorpage.py:269
 msgid "Export iDevice"
 msgstr "Εξαγωγή η-Σύνεργου"
+
+#: exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "Έξοδος"
 
 #: exe/webui/editorpage.py:294
 msgid "New iDevice"
@@ -18002,5 +18012,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Error: The maximum upload size is"
+#~ msgstr ""
+
+#~ msgid "Exit without saving changes and go back to %s (home page)?"
 #~ msgstr ""
 

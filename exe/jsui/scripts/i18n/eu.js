@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-02 13:04+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-03 12:38+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Number of rounds": "Bira kopurua", 
  "DropDown Activity": "Jarduera zabalgarria", 
  "Create the case story. A good case is one \nthat describes a controversy or sets the scene by describing the characters \ninvolved and the situation. It should also allow for some action to be taken \nin order to gain resolution of the situation.": "Sortu kasu-istorioa. Kasuak, ona izateko, \ngatazka bat deskribatu beharko luke, edo pertsonaien bidez egoera azaldu. \nGainera, gatazka konpondu ahal izateko \nhainbat ekintza gauzatzeko aukera eman beharko luke.", 
@@ -40,7 +40,6 @@ translations = {
  "Word to guess": "Asmatu beharreko hitza", 
  "Memory Match Game": "Buruz parekatu motako jokoa", 
  "Paste your embed code below:": "Zure kodea behean itsatsi:", 
- "Select as many correct answer \noptions as required by clicking the check box beside the option.": "Aukeratu behar beste erantzun zuzen, \naukera bakoitzaren ondoko koadroa markatuta.", 
  "<p>You can choose to display links or not below<\/p>": "<p>Estekak beheko aldean erakutsiko diren ala ez aukera dezakezu<\/p>", 
  "What is eXeLearning": "Zer da eXeLearning", 
  "Time to remind the user about saving (in minutes)": "Erabiltzaileari gordetze-gogorarazpenak egiteko denbora (minututan)", 
@@ -1191,7 +1190,7 @@ translations = {
  "It's so easy to create contents.": "Hain da erraza edukiak sortzea...", 
  "Select the entry point for import.": "Inportazioaren sarbidea aukeratu.", 
  "Before adding a download link to your page, please go to the Properties tab and check if the information is right.": "Paketea jaisteko esteka zure orrian jarri aurretik, joan Ezaugarriak fitxara eta egiaztatu informazioa zuzena dela.", 
- "Exit without saving changes and go back to %s (home page)?": "Aldaketak gorde gabe irten eta %s -ra itzuli (hasierako orria)?", 
+ "Select as many correct answer \noptions as required by clicking the check box beside the option.": "Aukeratu behar beste erantzun zuzen, \naukera bakoitzaren ondoko koadroa markatuta.", 
  "Gifted Learner": "Gaitasun altuko ikaslea", 
  "Hide after match": "Ezkutatu parekatu ondoren", 
  "security level": "segurtasun maila", 

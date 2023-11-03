@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-02 13:04+0100\n"
+"POT-Creation-Date: 2023-11-03 12:38+0100\n"
 "PO-Revision-Date: 2021-04-23 17:23+0200\n"
 "Last-Translator: Chenggui Duan <chengguiduan@gmail.com>\n"
 "Language: zh_Hans_CN\n"
@@ -4159,7 +4159,7 @@ msgstr "模板管理"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
-msgid "Exit without saving changes and go back to %s (home page)?"
+msgid "Exit without saving changes and go back to %s?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
@@ -4572,7 +4572,7 @@ msgstr "打开"
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:371
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129 exe/webui/editorpage.py:264
+#: exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -6064,6 +6064,11 @@ msgstr "节点下移"
 msgid "use the right arrow key"
 msgstr "使用右箭头键"
 
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#, fuzzy
+msgid "Save draft"
+msgstr "草稿"
+
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
@@ -6152,9 +6157,10 @@ msgstr "出版商"
 msgid "Print"
 msgstr "打印"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370 exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "退出"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#, fuzzy
+msgid "Quit without saving"
+msgstr "数据未保存，退出吗？"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -8533,6 +8539,10 @@ msgstr "导入 iDevice 模块"
 #: exe/webui/editorpage.py:269
 msgid "Export iDevice"
 msgstr "导出 iDevice 模块"
+
+#: exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "退出"
 
 #: exe/webui/editorpage.py:294
 msgid "New iDevice"
@@ -17044,5 +17054,8 @@ msgstr "您的idevices模块 / generic.data文件或您正在加载的课件包�
 #~ msgstr ""
 
 #~ msgid "Improve browser compatibility with some formats"
+#~ msgstr ""
+
+#~ msgid "Exit without saving changes and go back to %s (home page)?"
 #~ msgstr ""
 

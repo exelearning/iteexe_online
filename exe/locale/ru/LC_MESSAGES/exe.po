@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-02 13:04+0100\n"
+"POT-Creation-Date: 2023-11-03 12:38+0100\n"
 "PO-Revision-Date: 2021-06-08 10:30+0200\n"
 "Last-Translator: Dmytro Abaydullin <abaidullin11@gmail.com>, 2021\n"
 "Language: ru\n"
@@ -4669,7 +4669,7 @@ msgstr "Менеджер шаблонов"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
-msgid "Exit without saving changes and go back to %s (home page)?"
+msgid "Exit without saving changes and go back to %s?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
@@ -5098,7 +5098,7 @@ msgstr "Открыть"
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:371
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129 exe/webui/editorpage.py:264
+#: exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -6657,6 +6657,11 @@ msgstr "Переместить узел вниз"
 msgid "use the right arrow key"
 msgstr "используйте клавишу со стрелкой вправо"
 
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#, fuzzy
+msgid "Save draft"
+msgstr "черновик"
+
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
@@ -6745,9 +6750,10 @@ msgstr "издатель"
 msgid "Print"
 msgstr "Печать"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370 exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "Выход"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#, fuzzy
+msgid "Quit without saving"
+msgstr "Выйти без сохранения?"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -9140,6 +9146,10 @@ msgstr "Импорт iDevice"
 #: exe/webui/editorpage.py:269
 msgid "Export iDevice"
 msgstr "Экспорт iDevice"
+
+#: exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "Выход"
 
 #: exe/webui/editorpage.py:294
 msgid "New iDevice"
@@ -17912,5 +17922,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Improve browser compatibility with some formats"
+#~ msgstr ""
+
+#~ msgid "Exit without saving changes and go back to %s (home page)?"
 #~ msgstr ""
 

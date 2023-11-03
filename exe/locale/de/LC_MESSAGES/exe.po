@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-02 13:04+0100\n"
+"POT-Creation-Date: 2023-11-03 12:38+0100\n"
 "PO-Revision-Date: 2020-08-01 14:07+0200\n"
 "Last-Translator: Jan Joscha Finger <j.joscha.finger@educarex.es>\n"
 "Language: de\n"
@@ -4622,7 +4622,7 @@ msgstr "Dokumentvorlagen-Manager"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
 #, python-format
-msgid "Exit without saving changes and go back to %s (home page)?"
+msgid "Exit without saving changes and go back to %s?"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
@@ -5053,7 +5053,7 @@ msgstr "Öffnen"
 #: exe/jsui/scripts/app/view/forms/LomDataPanel.js:291
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:680
 #: exe/jsui/scripts/app/view/forms/PreferencesPanel.js:371
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129 exe/webui/editorpage.py:264
+#: exe/webui/editorpage.py:264
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:4
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:149
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:385
@@ -6625,6 +6625,10 @@ msgstr "Abwärts"
 msgid "use the right arrow key"
 msgstr "Benutzen Sie die Cursortaste \"Rechts\""
 
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+msgid "Save draft"
+msgstr ""
+
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
@@ -6713,9 +6717,10 @@ msgstr "Herausgeber"
 msgid "Print"
 msgstr "Drucken"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370 exe/webui/editorpage.py:273
-msgid "Quit"
-msgstr "Beenden"
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#, fuzzy
+msgid "Quit without saving"
+msgstr "Ohne Änderungen exportieren"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -9116,6 +9121,10 @@ msgstr "iDevice importieren"
 #: exe/webui/editorpage.py:269
 msgid "Export iDevice"
 msgstr "iDevice exportieren"
+
+#: exe/webui/editorpage.py:273
+msgid "Quit"
+msgstr "Beenden"
 
 #: exe/webui/editorpage.py:294
 msgid "New iDevice"
@@ -17801,5 +17810,8 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Improve browser compatibility with some formats"
+#~ msgstr ""
+
+#~ msgid "Exit without saving changes and go back to %s (home page)?"
 #~ msgstr ""
 
