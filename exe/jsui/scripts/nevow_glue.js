@@ -37,9 +37,13 @@ function connect(outputNum) {
                     // alert(EXCEPTION_ + e.toString()+'\n'+CAUSED_BY_SCRIPT_+xmlhttp.responseText)
                     // throw e
                     if (typeof(Ext)=='object') {
-                        Ext.Msg.alert(_("Warning"), _("An unexpected error has occurred") + " (Nevow)");
+                        // Nevow error
+                        Ext.Msg.alert(_("An unexpected error has occurred"), _("Page will be reloaded. "),function(btn){
+                            if (btn=="ok"||btn=="cancel") top.window.location.reload();
+                        });
                     } else {
-                        alert(_("An unexpected error has occurred") + " (Nevow)");
+                        alert(_("An unexpected error has occurred") + "\n\n" + _("Page will be reloaded. "));
+                        top.window.location.reload();
                     }
                 }
                 if (!liveevil_unload && auto_open) {
