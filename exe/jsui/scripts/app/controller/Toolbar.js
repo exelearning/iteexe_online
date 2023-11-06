@@ -213,10 +213,10 @@ Ext.define('eXe.controller.Toolbar', {
             	click: { fn: this.processExportEvent, exportType: "csvReport" }
             },
             '#tools_preview': {
-                click: { fn: this.processBrowseEvent, url: location.href + '/preview/' }
+                click: { fn: this.processBrowseEvent,  url: location.href.split("?")[0] + '/preview/?'+location.href.split("?")[1] }
             },
             '#tools_preview_button': {
-                click: { fn: this.processBrowseEvent, url: location.href + '/preview/' }
+                click: { fn: this.processBrowseEvent,  url: location.href.split("?")[0] + '/preview/?'+location.href.split("?")[1] }
                 
             },
             '#file_export_procomun_b': {
