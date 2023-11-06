@@ -90,7 +90,7 @@ class PackageRedirectPage(RenderableResource):
                 session.setUser(request.args['user'][0])
             else:
                 if 'jwt_token' in request.args and request.args['jwt_token'][0]:
-                    multidomainuser=jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0]
+                    multidomainuser=jwt.decode(request.args['jwt_token'][0],self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0].split("/course/view.php")[0]
                     multidomainuser=multidomainuser.split("//")[1].replace("/",".").replace(".","_")
                     session.setUser(multidomainuser+"_"+request.args['user'][0])
                 else:
