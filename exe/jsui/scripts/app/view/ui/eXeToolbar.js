@@ -98,6 +98,17 @@ Ext.define('eXe.view.ui.eXeToolbar', {
         Ext.applyIf(me, {
             items: [
                 {
+                    xtype: 'fieldcontainer',
+                    defaultType: 'label',
+                    margin: '0 4 0 6',
+                    items: [
+                        {
+                            html: '<img src="/images/exe_header_logo.png" alt="eXeLearning" width="21" height="20" />',
+                            id: 'exe_online_header_logo'
+                        }
+                    ]
+                },
+                {
                     xtype: 'accesskey_button',
                     text: _('File'),
                     itemId: 'file',
@@ -373,6 +384,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 'v',
                                 text: _('Preview')
                             },                            
+                            /* Disabled on this version: 
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
@@ -380,6 +392,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                                 accesskey: 'i',
                                 text: _('iDevice Editor')
                             },
+                            */
                             {
                                 cls: 'exe-advanced',
                                 xtype: 'accesskey_menuitem',
@@ -397,7 +410,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                     }
                 },
                 {
-                    cls: 'exe-simplified',
+                    // cls: 'exe-simplified', Remove // and this comment if styles_button_advanced_wrapper exists
                     xtype: 'accesskey_button',
                     text: _('Styles'),
                     accesskey: 's',
@@ -407,6 +420,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
 	                    itemId: 'styles_menu'
                     }
                 },
+                /* Disabled on this version:
                 {
                     cls: 'exe-advanced',
                     xtype: 'accesskey_button',
@@ -433,6 +447,7 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         ]
                     }
                 },
+                */
                 {
                     cls: 'exe-simplified',
                     xtype: 'accesskey_button',
@@ -600,7 +615,8 @@ Ext.define('eXe.view.ui.eXeToolbar', {
                         {
                             xtype: 'button',
                             text: _('Finish'),
-                            itemId: 'file_export_procomun_b'
+                            itemId: 'file_export_procomun_b',
+                            cls: 'file_export_finish_btn'
                         }
                     ]
                 }
