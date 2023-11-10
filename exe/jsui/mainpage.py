@@ -1339,6 +1339,10 @@ class MainPage(RenderableLivePage):
             self.session.expire()
 
     def handleExportProcomun(self, client):
+        """
+        Export the current package to SCORM 1.2 or webzip and upload it to Educational Resource Platform.
+        < set_ode >
+        """
         # If the user hasn't done the OAuth authentication yet, start this process
         if hasattr(client.session,"oauthToken") and client.session.oauthToken:
             if not client.session.oauthToken.get('procomun'):
@@ -1350,20 +1354,29 @@ class MainPage(RenderableLivePage):
 
         def exportScorm():
             """
-            Exports the package we are about to upload to Educational Resource Platform to SCORM 1.2.
+            Exports the package we are about to upload to Educational Resource Platform.
             :returns: Full path to the exported ZIP.
             """
             # Update progress for the user
-            client.call('Ext.MessageBox.updateProgress', 0.3, '30%', _(u'Exporting package as SCORM 1.2...'))
+            client.call('Ext.MessageBox.updateProgress', 0.3, '30%', _(u'Please wait...'))
 
             style = G.application.config.styleStore.getStyle(self.package.style)
             stylesDir = style.get_style_dir()
 
             fd, filename = mkstemp('.zip')
             os.close(fd)
-
-            scorm = ScormExport(self.config, stylesDir, filename, 'scorm1.2')
-            scorm.export(self.package)
+            if self.integration.enabled_jwt == "1":
+                jwt_data=jwt.decode(self.jwt_token,self.integration.jwt_secret_key, algorithms=self.integration.jwt_secret_hash)
+                if 'pkgtype' in jwt_data and "webzip" in jwt_data['pkgtype']:
+                    filename = self.b4save(client, filename, '.zip', _(u'EXPORT FAILED!'))
+                    websiteExport = WebsiteExport(self.config, stylesDir, filename)
+                    websiteExport.exportZip(self.package)
+                else:
+                    scorm = ScormExport(self.config, stylesDir, filename, 'scorm1.2')
+                    scorm.export(self.package)
+            else:
+                scorm = ScormExport(self.config, stylesDir, filename, 'scorm1.2')
+                scorm.export(self.package)
 
             return filename
 

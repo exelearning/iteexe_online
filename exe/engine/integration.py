@@ -114,8 +114,13 @@ class Integration:
         params = urlencode({self.post_ode:ode})
         try:
             if self.enabled_jwt == "1":
-                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0].split("/course/view.php")[0]
-                returnurl=returnurl+"/mod/exescorm/set_ode.php"
+                jwt_data=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)
+                if 'pkgtype' in jwt_data and "webzip" in jwt_data['pkgtype']:
+                    returnurl=jwt_data["returnurl"].split("/mod/exeweb")[0].split("/course/view.php")[0]
+                    returnurl=returnurl+"/mod/exeweb/set_ode.php"
+                else:
+                    returnurl=jwt_data["returnurl"].split("/mod/exescorm")[0].split("/course/view.php")[0]
+                    returnurl=returnurl+"/mod/exescorm/set_ode.php"
                 request = urlopen(returnurl,params)
             else:
                 request = urlopen(self.repo_set_ode_url,params)
@@ -141,8 +146,13 @@ class Integration:
         params = urlencode({self.post_ode:ode})
         try:
             if self.enabled_jwt == "1":
-                returnurl=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)["returnurl"].split("/mod/exescorm")[0].split("/course/view.php")[0]
-                returnurl=returnurl+"/mod/exescorm/get_ode.php"
+                jwt_data=jwt.decode(jwt_token,self.jwt_secret_key, algorithms=self.jwt_secret_hash)
+                if 'pkgtype' in jwt_data and "webzip" in jwt_data['pkgtype']:
+                    returnurl=jwt_data["returnurl"].split("/mod/exeweb")[0].split("/course/view.php")[0]
+                    returnurl=returnurl+"/mod/exeweb/get_ode.php"
+                else:
+                    returnurl=jwt_data["returnurl"].split("/mod/exescorm")[0].split("/course/view.php")[0]
+                    returnurl=returnurl+"/mod/exescorm/get_ode.php"                
                 request = urlopen(returnurl,params)
             else:               
                 request = urlopen(self.repo_get_ode_url,params)
