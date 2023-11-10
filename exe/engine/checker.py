@@ -33,7 +33,7 @@ class Inconsistency:
         self.msg = msg
         self.itype = itype
         self.params = params
-        log.error('New inconsistency of type %s: %s' % (itype, msg))
+        log.info('New inconsistency of type %s: %s' % (itype, msg))
 
     def fix(self):
         fn = getattr(self, 'fix_' + self.itype, None)
