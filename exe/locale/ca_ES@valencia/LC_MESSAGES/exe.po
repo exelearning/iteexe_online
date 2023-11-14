@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
 "POT-Creation-Date: 2023-11-03 12:38+0100\n"
-"PO-Revision-Date: 2023-06-30 15:01+0200\n"
+"PO-Revision-Date: 2023-11-13 23:21+0100\n"
 "Last-Translator: Ricardo Nutz <nutz_ric@gva.es>\n"
 "Language: ca_ES@valencia\n"
 "Language-Team: Catalán, Valenciano\n"
@@ -1259,6 +1259,8 @@ msgid ""
 "Upload a file. Please avoid names or paths with spaces or special "
 "characters."
 msgstr ""
+"Seleccioneu un fitxer, evitant rutes i noms molt llargs o amb caràcters "
+"especials."
 
 #: exe/engine/extendedfieldengine.py:304
 #: exe/webui/tools/style-designer/langs/all.js:51
@@ -3964,13 +3966,12 @@ msgid "Gamification"
 msgstr "Ludificació"
 
 #: exe/jsui/mainpage.py:501
-#, fuzzy
 msgid "Error when saving"
-msgstr "S'ha produït un error mentre s'instal·lava l'estil"
+msgstr "Ha fallat en guard"
 
 #: exe/jsui/mainpage.py:501
 msgid "That name is currently being used in another eXeLearning window"
-msgstr ""
+msgstr "Aquest nom s'està usant en una altra finestra d'eXeLearning"
 
 #: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1540
 #: exe/jsui/mainpage.py:1735 exe/jsui/mainpage.py:1777
@@ -4667,9 +4668,9 @@ msgid "Template Manager"
 msgstr "Gestor de plantilles"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
-#, fuzzy, python-format
+#, python-format
 msgid "Exit without saving changes and go back to %s?"
-msgstr "Eixir sense guardar canvis i tornar a %s (pàgina d'inici)?"
+msgstr "Eixir sense guardar canvis i tornar a %s?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
 msgid "Select package to insert"
@@ -4694,6 +4695,7 @@ msgstr "Seleccioneu quin paquet inserir"
 #: exe/jsui/scripts/app/controller/Toolbar.js:894
 msgid "This will completely overwrite all your project. Continue?"
 msgstr ""
+"Això sobreescriurà per complet tot el seu projecte actual. Voleu continuar?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:902
 #: exe/jsui/scripts/app/controller/Toolbar.js:1730
@@ -6660,9 +6662,8 @@ msgid "use the right arrow key"
 msgstr "utilitzeu la tecla de fletxa dreta"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
-#, fuzzy
 msgid "Save draft"
-msgstr "esborrany"
+msgstr "Guardar esborrany"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
@@ -6751,9 +6752,8 @@ msgid "Print"
 msgstr "Imprimeix"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
-#, fuzzy
 msgid "Quit without saving"
-msgstr "Voleu eixir sense guardar els canvis?"
+msgstr "Eixir sense guardar"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -10111,6 +10111,8 @@ msgid ""
 "Could not upload the file. Please remove any special characters from the "
 "file name or path."
 msgstr ""
+"No es va poder pujar el fitxer. Per favor, elimineu els caràcters especials del "
+"nom del fitxer i de la seua ruta d'accés."
 
 #: exe/webui/scripts/authoring.js:2011
 msgid "Add a Text iDevice"
@@ -15733,7 +15735,7 @@ msgstr "Detectar automàticament"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:556
 msgid "Choose a file or paste a link (URL)"
-msgstr ""
+msgstr "Seleccioneu el fitxer o apegueu una URL"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:578
 msgid "Play controls"
@@ -15744,11 +15746,10 @@ msgid "JavaScript player"
 msgstr "Reproductor JavaScript"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:579
-#, fuzzy
 msgid ""
 "Old browsers compatibility with some formats. Not needed in modern "
 "browsers."
-msgstr "Millorar la compatibilitat dels navegadors amb alguns formats"
+msgstr "Compatibilitat amb navegadors antics. No fa falta en navegadors moderns."
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:580
 msgid "Autoplay"
