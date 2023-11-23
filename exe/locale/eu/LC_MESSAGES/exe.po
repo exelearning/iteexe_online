@@ -1257,6 +1257,8 @@ msgid ""
 "Upload a file. Please avoid names or paths with spaces or special "
 "characters."
 msgstr ""
+"Igo artxibo bat. Mesedez, saihestu espazio edo ezaugarri bereziak dituzten "
+"izenak edo ibilbideak."
 
 #: exe/engine/extendedfieldengine.py:304
 #: exe/webui/tools/style-designer/langs/all.js:51
@@ -3890,13 +3892,12 @@ msgid "Gamification"
 msgstr "Gamifikazioa"
 
 #: exe/jsui/mainpage.py:501
-#, fuzzy
 msgid "Error when saving"
-msgstr "Errorea estiloa instalatzerakoan"
+msgstr "Errorea gordetzean"
 
 #: exe/jsui/mainpage.py:501
 msgid "That name is currently being used in another eXeLearning window"
-msgstr ""
+msgstr "Izen hori beste eXeLearning leiho batean erabiltzen ari da"
 
 #: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1540
 #: exe/jsui/mainpage.py:1735 exe/jsui/mainpage.py:1777
@@ -4017,18 +4018,18 @@ msgid "Checking the project size..."
 msgstr "Proiektuaren tamaina ikusten..."
 
 #: exe/jsui/mainpage.py:1386
-#, fuzzy, python-format
+#, python-format
 msgid "Uploading package to %s..."
-msgstr "Paketea Procomún-era igotzen..."
+msgstr "Paketea % s-ra igotzen..."
 
 #: exe/jsui/mainpage.py:1402
 msgid "No response status"
 msgstr "Erantzunik gabe"
 
 #: exe/jsui/mainpage.py:1442
-#, fuzzy, python-format
+#, python-format
 msgid "Sending document to %s"
-msgstr "Dokumentua Procomún-en argitaratzen"
+msgstr "Dokumentua %s-ra bidaltzen"
 
 #: exe/jsui/mainpage.py:1465
 #, python-format
@@ -4047,7 +4048,7 @@ msgid ""
 " web page.</small>"
 msgstr ""
 "<small>Igotako paketea ikus eta kudea dezakezu <a href=\"%s\" "
-"target=\"_blank\" title=\"Procomún-eko hasierako orria\">Procomún</a> "
+"target=\"_blank\">%s</a> "
 "webgunean.</small>"
 
 #: exe/jsui/mainpage.py:1480
@@ -4497,9 +4498,9 @@ msgid "Do you want to delete this template?"
 msgstr "Txantiloi hau ezabatu nahi duzu?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:412
-#, fuzzy, python-format
+#, python-format
 msgid "%s of %s"
-msgstr "%s / %s"
+msgstr "%s-en %s-a"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:425
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:581
@@ -4594,9 +4595,9 @@ msgid "Template Manager"
 msgstr "Txantiloi-kudeatzailea"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:804
-#, fuzzy, python-format
+#, python-format
 msgid "Exit without saving changes and go back to %s?"
-msgstr "Aldaketak gorde gabe irten eta %s -ra itzuli (hasierako orria)?"
+msgstr "Aldaketak gorde gabe irten eta % ra itzuli?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:862
 msgid "Select package to insert"
@@ -4620,7 +4621,7 @@ msgstr "Aukeratu txertatuko den paketea"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:894
 msgid "This will completely overwrite all your project. Continue?"
-msgstr ""
+msgstr "Honek zure proiektu osoa gainidatziko du. Jarraitu nahi duzu?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:902
 #: exe/jsui/scripts/app/controller/Toolbar.js:1730
@@ -4753,9 +4754,9 @@ msgid "XLIFF Export Preferences"
 msgstr "XLIFF esportazioaren aukerak"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1218
-#, fuzzy, python-format
+#, python-format
 msgid "Publish on %s?"
-msgstr "argitalpenaren editorea"
+msgstr " %s-(e)n argitaratu?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1218
 msgid "Please check the Properties tab contents (title, authorship, license...)."
@@ -4784,9 +4785,8 @@ msgstr ""
 "batzuk ezabatzen argitaratu aurretik."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1304
-#, fuzzy
 msgid "Publishing..."
-msgstr "argitalpenaren editorea"
+msgstr "Argitaratzen..."
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1317
 msgid ""
@@ -4861,9 +4861,8 @@ msgid "Export Website package as"
 msgstr "Webgune paketea honela esportatu"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1456
-#, fuzzy
 msgid "Export Single Page package as"
-msgstr "Webgune paketea honela esportatu"
+msgstr "Esportatu orri bakarreko paketea honela"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1458
 msgid "Export Common Cartridge as"
@@ -4939,9 +4938,8 @@ msgid "Error: The maximum upload size is %s MB"
 msgstr "Errorea: Gehieneko igoeraren tamaina %s MB da."
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:440
-#, fuzzy
 msgid "Uploading File..."
-msgstr "Jaisten..."
+msgstr "Fitxategia igotzen..."
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:472
 msgid "Create Folder"
@@ -5051,14 +5049,12 @@ msgid "Create Directory"
 msgstr "Direktorioa sortu"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:190
-#, fuzzy
 msgid "Upload File"
-msgstr "Fitxategi lokala"
+msgstr "Igo fitxategia"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:299
-#, fuzzy
 msgid "Name:"
-msgstr "Berrizendatu"
+msgstr "Izena:"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:53
 msgid "Dublin Core Metadata"
@@ -6320,9 +6316,8 @@ msgid "Search and download new styles from the styles repository"
 msgstr "Bilatu eta jaitsi estilo berriak estilo-biltegitik"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:322
-#, fuzzy
 msgid "My styles"
-msgstr "Inportatu estiloa"
+msgstr "Nire estiloak"
 
 #: exe/jsui/scripts/app/view/forms/StyleManagerPanel.js:329
 msgid "List of styles in your system"
@@ -6465,15 +6460,14 @@ msgstr ""
 "bat:"
 
 #: exe/jsui/scripts/app/view/forms/ValidatePanel.js:179
-#, fuzzy
 msgid ""
 "If you have problems publishing or you want to complete your cataloguing "
 "later, close this dialogue, export as SCORM 2004 and upload the generated"
 " zip file to "
 msgstr ""
-"Argitaratzean arazoak badituzu edo zure katalogazioa gero osatu nahi "
-"baduzu, itxi leiho hau, esportatu SCORM 2004 formatura eta igo sortutako "
-"zip fitxategia Procomún-era."
+"Argitaratzeko arazoak badituzu edo katalogazioa amaitu nahi baduzu, "
+"elkarrizketa hau itxi, 2004ko SCORM gisa esportatu eta sortutako zip "
+"fitxategia igo."
 
 #: exe/jsui/scripts/app/view/ui/LeftPanel.js:72
 #: exe/webui/tools/assistant/langs/all.js:42
@@ -6585,9 +6579,8 @@ msgid "use the right arrow key"
 msgstr "erabili eskuineko gezi tekla"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
-#, fuzzy
 msgid "Save draft"
-msgstr "zirriborroa"
+msgstr "Gorde zirriborroa"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
 #: exe/webui/scripts/authoring.js:1565
@@ -6663,9 +6656,8 @@ msgid "IMS"
 msgstr "IMS"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
-#, fuzzy
 msgid "Publish"
-msgstr "argitalpenaren editorea"
+msgstr "Argitaratu"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:357 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
@@ -6677,9 +6669,8 @@ msgid "Print"
 msgstr "Inprimatu"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
-#, fuzzy
 msgid "Quit without saving"
-msgstr "Gorde gabe atera?"
+msgstr "Utzi gorde gabe"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
@@ -6756,9 +6747,8 @@ msgid "About eXe"
 msgstr "eXe-ri buruz"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:550
-#, fuzzy
 msgid "Project size:"
-msgstr "Proiektuaren izenburua"
+msgstr "Proiektuaren tamaina:"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:580
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
@@ -9558,9 +9548,9 @@ msgid "Size of magnifying glass: "
 msgstr "Luparen neurria: "
 
 #: exe/webui/importode.py:73
-#, fuzzy, python-format
+#, python-format
 msgid "Error importing package with id %s from %s"
-msgstr "Errorea \"%s\" paketea Procomún-era esportatzerakoan."
+msgstr "Errorea paketea id %s-tik %s -ra inportatzean"
 
 #: exe/webui/importode.py:75
 #, python-format
@@ -9588,9 +9578,8 @@ msgid "No user session"
 msgstr "Ez dago erabiltzaile-saiorik."
 
 #: exe/webui/loginpage.py:62 exe/webui/quitpage.py:73
-#, fuzzy
 msgid "Login"
-msgstr "Katalogazioa"
+msgstr "Sartu"
 
 #: exe/webui/memorymatchblock.py:83
 msgid "Number of rows x Number of cols must be an even number<br/>"
@@ -9867,9 +9856,8 @@ msgid "Percentage of hits needed to display the message"
 msgstr "Mezua erakusteko beharrezkoa den asmaketa ehunekoa"
 
 #: exe/webui/scripts/authoring.js:1347
-#, fuzzy
 msgid "Itinerary"
-msgstr "Wikiztegia"
+msgstr "Ibilbidea"
 
 #: exe/webui/scripts/authoring.js:1359
 msgid "Show a message or password"
@@ -10030,6 +10018,8 @@ msgid ""
 "Could not upload the file. Please remove any special characters from the "
 "file name or path."
 msgstr ""
+"Ezin da fitxategia igo. Mesedez, kendu karaktere berezi guztiak "
+"fitxategiaren izenetik edo ibilbidetik."
 
 #: exe/webui/scripts/authoring.js:2011
 msgid "Add a Text iDevice"
@@ -15608,7 +15598,7 @@ msgstr "Automatikoki detektatzea"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:556
 msgid "Choose a file or paste a link (URL)"
-msgstr ""
+msgstr "Aukeratu fitxategi bat edo itsatsi esteka bat (URL)"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:578
 msgid "Play controls"
@@ -15619,11 +15609,12 @@ msgid "JavaScript player"
 msgstr "Javascript erreproduzigailua"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:579
-#, fuzzy
 msgid ""
 "Old browsers compatibility with some formats. Not needed in modern "
 "browsers."
-msgstr "Hobetu nabigatzailearen eta zenbait formatuen bateragarritasuna"
+msgstr ""
+"Nabigatzaile zaharrak formatu batzuekin bateragarriak dira. Ez da "
+"beharrezkoa nabigatzaile modernoetan."
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:580
 msgid "Autoplay"
