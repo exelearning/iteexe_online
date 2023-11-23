@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
-"POT-Creation-Date: 2023-11-03 12:38+0100\n"
+"POT-Creation-Date: 2023-11-23 13:42+0100\n"
 "PO-Revision-Date: 2018-12-02 17:14+0100\n"
 "Last-Translator: eXeLearning.net Translation Team "
 "<translations@exelearning.net>\n"
@@ -1079,7 +1079,7 @@ msgid "Upload"
 msgstr "আপলোড\"আপলোড করুন\","
 
 #: exe/engine/extendedfieldengine.py:318
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:121
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:132
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:114
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:401
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:224
@@ -2431,7 +2431,6 @@ msgid ""
 msgstr ""
 
 #: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:735
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:400
 msgid "iDevice Editor"
 msgstr "আই-ডিভাইস সম্পাদক"
 
@@ -3185,8 +3184,8 @@ msgid ""
 msgstr ""
 
 #: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:479
-#: exe/jsui/mainpage.py:1995 exe/jsui/mainpage.py:2041
-#: exe/jsui/mainpage.py:2086 exe/jsui/mainpage.py:2107
+#: exe/jsui/mainpage.py:2008 exe/jsui/mainpage.py:2054
+#: exe/jsui/mainpage.py:2099 exe/jsui/mainpage.py:2120
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3343,14 +3342,14 @@ msgstr ""
 msgid "That name is currently being used in another eXeLearning window"
 msgstr ""
 
-#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1540
-#: exe/jsui/mainpage.py:1735 exe/jsui/mainpage.py:1777
+#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1532 exe/jsui/mainpage.py:1553
+#: exe/jsui/mainpage.py:1748 exe/jsui/mainpage.py:1790
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "অ্যাক্সেস করতে পারছে না ডাইরেক্টরি যার নাম "
 
-#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1521 exe/jsui/mainpage.py:1735
-#: exe/jsui/mainpage.py:1777
+#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1534 exe/jsui/mainpage.py:1748
+#: exe/jsui/mainpage.py:1790
 msgid ". Please use ASCII names."
 msgstr ". অনুগ্রহ করে ASCII নাম ব্যবহার করুন।"
 
@@ -3367,7 +3366,7 @@ msgstr ""
 
 #: exe/jsui/mainpage.py:530 exe/jsui/mainpage.py:593 exe/jsui/mainpage.py:1018
 #: exe/jsui/mainpage.py:1080 exe/jsui/mainpage.py:1138
-#: exe/jsui/mainpage.py:1882
+#: exe/jsui/mainpage.py:1895
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -3449,36 +3448,53 @@ msgstr ""
 msgid "Error importing HTML:\n"
 msgstr "HTML আমদানি করতে ত্রুটি:\n"
 
-#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1305
-msgid "Exporting package as SCORM 1.2..."
+#: exe/jsui/mainpage.py:1361 exe/jsui/scripts/app/controller/MainTab.js:321
+#: exe/jsui/scripts/app/controller/StyleManager.js:288
+#: exe/jsui/scripts/app/controller/Toolbar.js:1366
+#: exe/jsui/scripts/app/controller/Toolbar.js:1390
+#: exe/jsui/scripts/app/controller/Toolbar.js:1412
+#: exe/jsui/scripts/app/controller/Toolbar.js:1434
+#: exe/jsui/scripts/app/controller/Toolbar.js:1472
+#: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
+#: exe/webui/stylemanagerpage.py:606
+msgid "Please wait..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1375
+#: exe/jsui/mainpage.py:1371 exe/jsui/mainpage.py:1550
+#: exe/jsui/mainpage.py:1560 exe/jsui/mainpage.py:1563
+#: exe/jsui/mainpage.py:1568 exe/jsui/mainpage.py:1571
+#: exe/jsui/mainpage.py:1574 exe/jsui/mainpage.py:1577
+#: exe/jsui/mainpage.py:1580 exe/jsui/mainpage.py:1585
+#: exe/jsui/mainpage.py:1965 exe/jsui/mainpage.py:2080
+msgid "EXPORT FAILED!"
+msgstr "রপ্তানি ব্যার্থ!"
+
+#: exe/jsui/mainpage.py:1388
 msgid "Checking the project size..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1386
+#: exe/jsui/mainpage.py:1399
 #, fuzzy, python-format
 msgid "Uploading package to %s..."
 msgstr "প্যাকেজ লোড করা হচ্ছে..."
 
-#: exe/jsui/mainpage.py:1402
+#: exe/jsui/mainpage.py:1415
 msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1442
+#: exe/jsui/mainpage.py:1455
 #, fuzzy, python-format
 msgid "Sending document to %s"
 msgstr "প্রকাশ করুন"
 
-#: exe/jsui/mainpage.py:1465
+#: exe/jsui/mainpage.py:1478
 #, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
 "download the exported package\">%s</a>."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1469
+#: exe/jsui/mainpage.py:1482
 #, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
@@ -3486,39 +3502,30 @@ msgid ""
 " web page.</small>"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1480
+#: exe/jsui/mainpage.py:1493
 #, python-format
 msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1526 exe/jsui/mainpage.py:2020
+#: exe/jsui/mainpage.py:1539 exe/jsui/mainpage.py:2033
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
 "\"%s\" is not a valid name for the file"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1537 exe/jsui/mainpage.py:1547
-#: exe/jsui/mainpage.py:1550 exe/jsui/mainpage.py:1555
-#: exe/jsui/mainpage.py:1558 exe/jsui/mainpage.py:1561
-#: exe/jsui/mainpage.py:1564 exe/jsui/mainpage.py:1567
-#: exe/jsui/mainpage.py:1572 exe/jsui/mainpage.py:1952
-#: exe/jsui/mainpage.py:2067
-msgid "EXPORT FAILED!"
-msgstr "রপ্তানি ব্যার্থ!"
-
-#: exe/jsui/mainpage.py:1689
+#: exe/jsui/mainpage.py:1702
 msgid "Correct XLIFF import"
 msgstr "ঠিক XLIFF আমদানি"
 
-#: exe/jsui/mainpage.py:1692
+#: exe/jsui/mainpage.py:1705
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "XLIFF আমদানি করতে ত্রুটি: %s"
 
-#: exe/jsui/mainpage.py:1762 exe/jsui/mainpage.py:1801
+#: exe/jsui/mainpage.py:1775 exe/jsui/mainpage.py:1814
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -3527,22 +3534,22 @@ msgstr ""
 "সম্প্রসারণ ব্যর্থ!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1764 exe/jsui/mainpage.py:1803
+#: exe/jsui/mainpage.py:1777 exe/jsui/mainpage.py:1816
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "প্যাকেজ সম্প্রসারণ করা হচ্ছে এখানে: %s"
 
-#: exe/jsui/mainpage.py:1815 exe/webui/stylemanagerpage.py:264
+#: exe/jsui/mainpage.py:1828 exe/webui/stylemanagerpage.py:264
 msgid "Directory exists"
 msgstr "ডাইরেক্টরি বিদ্যমান"
 
-#: exe/jsui/mainpage.py:1829 exe/jsui/mainpage.py:1937
-#: exe/jsui/mainpage.py:1960 exe/jsui/mainpage.py:1983
-#: exe/jsui/mainpage.py:1996 exe/jsui/mainpage.py:2002
-#: exe/jsui/mainpage.py:2026 exe/jsui/mainpage.py:2042
-#: exe/jsui/mainpage.py:2052 exe/jsui/mainpage.py:2072
-#: exe/jsui/mainpage.py:2087 exe/jsui/mainpage.py:2093
-#: exe/jsui/mainpage.py:2108 exe/jsui/mainpage.py:2118
+#: exe/jsui/mainpage.py:1842 exe/jsui/mainpage.py:1950
+#: exe/jsui/mainpage.py:1973 exe/jsui/mainpage.py:1996
+#: exe/jsui/mainpage.py:2009 exe/jsui/mainpage.py:2015
+#: exe/jsui/mainpage.py:2039 exe/jsui/mainpage.py:2055
+#: exe/jsui/mainpage.py:2065 exe/jsui/mainpage.py:2085
+#: exe/jsui/mainpage.py:2100 exe/jsui/mainpage.py:2106
+#: exe/jsui/mainpage.py:2121 exe/jsui/mainpage.py:2131
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -3551,12 +3558,12 @@ msgstr ""
 "রপ্তানি ব্যার্থ!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1859 exe/jsui/mainpage.py:1918
+#: exe/jsui/mainpage.py:1872 exe/jsui/mainpage.py:1931
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "ফাইলের নাম %s হল একটি ফাইল, তাকে প্রতিস্থাপণ করা যাচ্ছে না"
 
-#: exe/jsui/mainpage.py:1866 exe/jsui/mainpage.py:1925
+#: exe/jsui/mainpage.py:1879 exe/jsui/mainpage.py:1938
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
@@ -3565,18 +3572,18 @@ msgstr ""
 "ফোল্ডার নাম %s আগে থেকে বিদ্যমান। অনুগ্রহ করে আরেকটি বাছুন অথবা "
 "বিদ্যমানটিকে মুছুন, তারপরে আবার চেষ্টা করুন।"
 
-#: exe/jsui/mainpage.py:1889 exe/jsui/mainpage.py:1941
-#: exe/jsui/mainpage.py:1964 exe/jsui/mainpage.py:1985
-#: exe/jsui/mainpage.py:2004 exe/jsui/mainpage.py:2028
-#: exe/jsui/mainpage.py:2058 exe/jsui/mainpage.py:2074
-#: exe/jsui/mainpage.py:2095 exe/jsui/mainpage.py:2122
+#: exe/jsui/mainpage.py:1902 exe/jsui/mainpage.py:1954
+#: exe/jsui/mainpage.py:1977 exe/jsui/mainpage.py:1998
+#: exe/jsui/mainpage.py:2017 exe/jsui/mainpage.py:2041
+#: exe/jsui/mainpage.py:2071 exe/jsui/mainpage.py:2087
+#: exe/jsui/mainpage.py:2108 exe/jsui/mainpage.py:2135
 #, python-format
 msgid "Exported to %s"
 msgstr "রপ্তানি করা হচ্ছে এখানে %s"
 
-#: exe/jsui/mainpage.py:1891 exe/jsui/mainpage.py:1943
-#: exe/jsui/mainpage.py:1966 exe/jsui/mainpage.py:2060
-#: exe/jsui/mainpage.py:2124
+#: exe/jsui/mainpage.py:1904 exe/jsui/mainpage.py:1956
+#: exe/jsui/mainpage.py:1979 exe/jsui/mainpage.py:2073
+#: exe/jsui/mainpage.py:2137
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -3584,28 +3591,28 @@ msgid ""
 "ISO9660."
 msgstr ""
 
-#: exe/jsui/mainpage.py:2055
+#: exe/jsui/mainpage.py:2068
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:2161 exe/webui/stylemanagerpage.py:289
+#: exe/jsui/mainpage.py:2174 exe/webui/stylemanagerpage.py:289
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "ফাইল %s -এর অস্তিত্ব নেই অথবা সেটি পড়া যাচ্ছে না।"
 
-#: exe/jsui/mainpage.py:2168
+#: exe/jsui/mainpage.py:2181
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 
-#: exe/jsui/mainpage.py:2171
+#: exe/jsui/mainpage.py:2184
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
 "%s"
 msgstr "দুঃখিত ভুল ফাইল ফরম্যাট %s"
 
-#: exe/jsui/mainpage.py:2173
+#: exe/jsui/mainpage.py:2186
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -3690,18 +3697,6 @@ msgstr "চিত্র ফাইলগুলি"
 #: exe/webui/scripts/stylemanager.js:43 exe/webui/scripts/stylemanager.js:68
 msgid "All Files"
 msgstr "সব ফাইলগুলি"
-
-#: exe/jsui/scripts/app/controller/MainTab.js:321
-#: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1366
-#: exe/jsui/scripts/app/controller/Toolbar.js:1390
-#: exe/jsui/scripts/app/controller/Toolbar.js:1412
-#: exe/jsui/scripts/app/controller/Toolbar.js:1434
-#: exe/jsui/scripts/app/controller/Toolbar.js:1472
-#: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
-#: exe/webui/stylemanagerpage.py:606
-msgid "Please wait..."
-msgstr ""
 
 #: exe/jsui/scripts/app/controller/MainTab.js:327 exe/webui/editorpage.py:134
 #: exe/webui/editorpage.py:145
@@ -3927,7 +3922,7 @@ msgid "%s of %s"
 msgstr ""
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:425
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:581
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:597
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
@@ -3958,7 +3953,7 @@ msgid "General"
 msgstr "সাধারণ"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:535
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:475
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:491
 #: exe/webui/tools/assistant/js/assistant.js:57
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
@@ -3974,14 +3969,14 @@ msgid "Release notes"
 msgstr "রিলিজ নোটগুলি"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:601
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:499
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:515
 #: exe/webui/tools/assistant/langs/all.js:79
 #, fuzzy
 msgid "Legal Notes"
 msgstr "রিলিজ নোটগুলি"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:680
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:387
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:398
 msgid "Preferences"
 msgstr "পছন্দগুলি"
 
@@ -3991,7 +3986,7 @@ msgstr "পছন্দগুলি"
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:60
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:102
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:200
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:211
 #: exe/webui/scripts/authoring.js:1571
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:373
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/langs/all.js:13
@@ -4010,7 +4005,6 @@ msgstr ""
 "হারিয়ে যাবে। আপনি কি সত্যিই ছেড়ে যেতে চান?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:774
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:441
 msgid "Style Manager"
 msgstr "শৈলি ম্যানেজার"
 
@@ -4202,6 +4196,10 @@ msgstr ""
 msgid "Publishing..."
 msgstr "প্রকাশ করুন"
 
+#: exe/jsui/scripts/app/controller/Toolbar.js:1305
+msgid "Exporting package as SCORM 1.2..."
+msgstr ""
+
 #: exe/jsui/scripts/app/controller/Toolbar.js:1317
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
@@ -4238,7 +4236,7 @@ msgid "Export text package as"
 msgstr "টেক্সট প্যাকেজকে রপ্তানি করুন এই প্রকারে"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1396
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:269
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:280
 msgid "Text File"
 msgstr "টেক্সট ফাইল"
 
@@ -4415,7 +4413,7 @@ msgid "Modified"
 msgstr "পরিবর্তিত হয়েছিল"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:94
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:139 exe/webui/common.py:651
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:150 exe/webui/common.py:651
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
 msgid "Download"
@@ -5885,17 +5883,17 @@ msgid "Properties"
 msgstr "বৈশিষ্ট্যগুলি"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:77
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:174
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:185
 msgid "Metadata"
 msgstr "মেটাডেটা"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:89
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:184
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:195
 msgid "LOM"
 msgstr "LOM"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:95
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:190
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:201
 msgid "LOM-ES"
 msgstr "LOM-ES"
 
@@ -5927,90 +5925,90 @@ msgstr "নোট নিচে নিয়ে যান"
 msgid "use the right arrow key"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:140
 msgid "Save draft"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:159
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
 msgid "Import"
 msgstr "আমদানি"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:158
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:169
 msgid "Project (.elp)"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:164
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:175
 msgid "Insert elp in the current page"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:170
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:181
 msgid "XLIFF File"
 msgstr "XLIFF ফাইল"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:209
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:220
 msgid "Educational Standard"
 msgstr "শিক্ষাগত মান"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:217
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:228
 msgid "Common Cartridge"
 msgstr "সাধারণ কার্টিজ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:223
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:317
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:234
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:328
 msgid "SCORM1.2"
 msgstr "SCORM1.2"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:229
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:240
 msgid "SCORM2004"
 msgstr "SCORM2004"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:235
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:246
 msgid "IMS Content Package"
 msgstr "IMS বিষয়বস্তু প্যাকেজ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:283
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:256
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:294
 msgid "Web Site"
 msgstr "ওয়েব সাইট"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:253
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:264
 msgid "Zip File"
 msgstr "জিপ ফাইল"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:259
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:290
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:270
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:301
 msgid "Single Page"
 msgstr "একটি পৃষ্ঠা"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:276
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:287
 msgid "XLIFF"
 msgstr "XLIFF"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:296
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:307
 msgid "EPUB3"
 msgstr "EPUB3"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:305
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:316
 msgid "Export the current page as elp"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:312
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:323
 #, fuzzy
 msgid "Export the current page as SCORM"
 msgstr "টেক্সট প্যাকেজকে রপ্তানি করুন এই প্রকারে"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:324
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:335
 msgid "IMS"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:345
 #, fuzzy
 msgid "Publish"
 msgstr "প্রকাশ করুন"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:357 exe/webui/common.py:657
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:368 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
 #: exe/webui/style/INTEF/_intef_js.js:125
@@ -6019,40 +6017,38 @@ msgstr "প্রকাশ করুন"
 msgid "Print"
 msgstr "মুদ্রণ"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:381
 msgid "Quit without saving"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:388
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:34
 msgid "Tools"
 msgstr "টুলগুলি"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:393
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:615 exe/webui/editorpane.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:404
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:631 exe/webui/editorpane.py:273
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
 msgid "Preview"
 msgstr "প্রাক-দর্শন"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:407
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:420
 msgid "Resources Report"
 msgstr "রিসোর্স রিপোর্ট"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:413
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:426
 msgid "Refresh Display"
 msgstr "প্রদর্শন সতেজ করুন"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:421
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:432
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:445
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:435
 msgid "Styles"
 msgstr "শৈলিগুলি"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:458
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:465
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:474
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:481
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:151
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:66
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:102
@@ -6071,43 +6067,43 @@ msgstr "শৈলিগুলি"
 msgid "Help"
 msgstr "সাহায্য"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:485
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:501
 #: exe/webui/tools/assistant/langs/all.js:72
 msgid "eXe Tutorial"
 msgstr "eXe টিউটোরিয়াল"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:492
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:508
 #: exe/webui/tools/assistant/langs/all.js:78
 msgid "Release Notes"
 msgstr "রিলিজ নোটগুলি"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:509
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:525
 #: exe/webui/tools/assistant/langs/all.js:80
 msgid "eXe Web Site"
 msgstr "eXe ওয়েবসাইট"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:516
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:532
 #: exe/webui/scripts/authoring.js:1150
 #: exe/webui/tools/assistant/langs/all.js:75
 msgid "Report an Issue"
 msgstr "একটি সমস্যা জানান"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:535
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:551
 #: exe/webui/tools/assistant/langs/all.js:77
 msgid "About eXe"
 msgstr "eXe সম্বন্ধে"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:550
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:566
 #, fuzzy
 msgid "Project size:"
 msgstr "প্রোজেক্টের বৈশিষ্ট্যগুলি"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:580
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:596
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:629
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:645
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:73
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:63
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:161
@@ -6118,15 +6114,15 @@ msgstr ""
 msgid "Finish"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:773
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:790
 msgid "You've been working for a long time without saving."
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:775
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:792
 msgid "Do you want to save now?"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:777
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:794
 msgid "Hide until the application is closed"
 msgstr ""
 
@@ -6141,7 +6137,7 @@ msgstr ""
 #: exe/jsui/scripts/app/controller/Toolbar.js:1254
 #: exe/jsui/scripts/app/controller/Toolbar.js:1297
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
-#: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
+#: exe/jsui/scripts/exe.js:252
 msgid "Warning"
 msgstr "সতর্কতা"
 
@@ -6162,7 +6158,7 @@ msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:772 exe/jsui/scripts/exe.js:319
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:789 exe/jsui/scripts/exe.js:319
 msgid "Warning!"
 msgstr "সতর্কতা!"
 
@@ -7787,11 +7783,16 @@ msgstr ""
 msgid "education expert"
 msgstr ""
 
-#: exe/jsui/scripts/nevow_glue.js:43 exe/jsui/scripts/nevow_glue.js:45
+#: exe/jsui/scripts/nevow_glue.js:45 exe/jsui/scripts/nevow_glue.js:49
 #: exe/webui/stylemanagerpage.py:356 exe/webui/stylemanagerpage.py:562
 #: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
 msgid "An unexpected error has occurred"
 msgstr "একটি অপ্রত্যাশিত ত্রুটি ঘটেছে"
+
+#: exe/jsui/scripts/nevow_glue.js:45 exe/jsui/scripts/nevow_glue.js:49
+#: exe/webui/tools/style-designer/js/app.js:1522
+msgid "Page will be reloaded. "
+msgstr ""
 
 #: exe/jsui/stylemenu.py:37 exe/jsui/templatemenu.py:35
 msgid "INTEF with horizontal menu"
@@ -16268,10 +16269,6 @@ msgstr "শৈলি মুছবেন?"
 
 #: exe/webui/tools/style-designer/js/app.js:1519
 msgid "Style Designer windows will be closed. "
-msgstr ""
-
-#: exe/webui/tools/style-designer/js/app.js:1522
-msgid "Page will be reloaded. "
 msgstr ""
 
 #: exe/webui/tools/style-designer/langs/all.js:15

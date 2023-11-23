@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-11-03 12:38+0100\n"
+"POT-Creation-Date: 2023-11-23 13:42+0100\n"
 "PO-Revision-Date: 2021-06-08 10:30+0200\n"
 "Last-Translator: Dmytro Abaydullin <abaidullin11@gmail.com>, 2021\n"
 "Language: ru\n"
@@ -1290,7 +1290,7 @@ msgid "Upload"
 msgstr "Выгрузить"
 
 #: exe/engine/extendedfieldengine.py:318
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:121
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:132
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:114
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:401
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:224
@@ -2924,7 +2924,6 @@ msgstr ""
 "файла .data."
 
 #: exe/engine/package.py:1752 exe/jsui/scripts/app/controller/Toolbar.js:735
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:400
 msgid "iDevice Editor"
 msgstr "Редактор iDevice"
 
@@ -3807,8 +3806,8 @@ msgstr ""
 "Была ошибка:"
 
 #: exe/export/cmdlineexporter.py:75 exe/jsui/mainpage.py:479
-#: exe/jsui/mainpage.py:1995 exe/jsui/mainpage.py:2041
-#: exe/jsui/mainpage.py:2086 exe/jsui/mainpage.py:2107
+#: exe/jsui/mainpage.py:2008 exe/jsui/mainpage.py:2054
+#: exe/jsui/mainpage.py:2099 exe/jsui/mainpage.py:2120
 #, python-format
 msgid ""
 "\"%s\" already exists.\n"
@@ -3970,14 +3969,14 @@ msgstr "Ошибка при установке стиля"
 msgid "That name is currently being used in another eXeLearning window"
 msgstr ""
 
-#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1519 exe/jsui/mainpage.py:1540
-#: exe/jsui/mainpage.py:1735 exe/jsui/mainpage.py:1777
+#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1532 exe/jsui/mainpage.py:1553
+#: exe/jsui/mainpage.py:1748 exe/jsui/mainpage.py:1790
 #: exe/jsui/scripts/app/controller/TemplateManager.js:101
 msgid "Cannot access directory named "
 msgstr "Невозможно получить доступ к названному каталогу "
 
-#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1521 exe/jsui/mainpage.py:1735
-#: exe/jsui/mainpage.py:1777
+#: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1534 exe/jsui/mainpage.py:1748
+#: exe/jsui/mainpage.py:1790
 msgid ". Please use ASCII names."
 msgstr ""
 ". Пожалуйста, используйте имена из символов ASCII (латинские буквы и "
@@ -3998,7 +3997,7 @@ msgstr ""
 
 #: exe/jsui/mainpage.py:530 exe/jsui/mainpage.py:593 exe/jsui/mainpage.py:1018
 #: exe/jsui/mainpage.py:1080 exe/jsui/mainpage.py:1138
-#: exe/jsui/mainpage.py:1882
+#: exe/jsui/mainpage.py:1895
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -4084,29 +4083,46 @@ msgstr ""
 msgid "Error importing HTML:\n"
 msgstr "Ошибка импорта HTML:\n"
 
-#: exe/jsui/mainpage.py:1357 exe/jsui/scripts/app/controller/Toolbar.js:1305
-msgid "Exporting package as SCORM 1.2..."
-msgstr "Экспортировать пакет как SCORM 1.2..."
+#: exe/jsui/mainpage.py:1361 exe/jsui/scripts/app/controller/MainTab.js:321
+#: exe/jsui/scripts/app/controller/StyleManager.js:288
+#: exe/jsui/scripts/app/controller/Toolbar.js:1366
+#: exe/jsui/scripts/app/controller/Toolbar.js:1390
+#: exe/jsui/scripts/app/controller/Toolbar.js:1412
+#: exe/jsui/scripts/app/controller/Toolbar.js:1434
+#: exe/jsui/scripts/app/controller/Toolbar.js:1472
+#: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
+#: exe/webui/stylemanagerpage.py:606
+msgid "Please wait..."
+msgstr "Пожалуйста, подождите..."
 
-#: exe/jsui/mainpage.py:1375
+#: exe/jsui/mainpage.py:1371 exe/jsui/mainpage.py:1550
+#: exe/jsui/mainpage.py:1560 exe/jsui/mainpage.py:1563
+#: exe/jsui/mainpage.py:1568 exe/jsui/mainpage.py:1571
+#: exe/jsui/mainpage.py:1574 exe/jsui/mainpage.py:1577
+#: exe/jsui/mainpage.py:1580 exe/jsui/mainpage.py:1585
+#: exe/jsui/mainpage.py:1965 exe/jsui/mainpage.py:2080
+msgid "EXPORT FAILED!"
+msgstr "ОШИБКА ЭКСПОРТА!"
+
+#: exe/jsui/mainpage.py:1388
 msgid "Checking the project size..."
 msgstr ""
 
-#: exe/jsui/mainpage.py:1386
+#: exe/jsui/mainpage.py:1399
 #, fuzzy, python-format
 msgid "Uploading package to %s..."
 msgstr "Выгрузка пакета в Procomún..."
 
-#: exe/jsui/mainpage.py:1402
+#: exe/jsui/mainpage.py:1415
 msgid "No response status"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1442
+#: exe/jsui/mainpage.py:1455
 #, fuzzy, python-format
 msgid "Sending document to %s"
 msgstr "Публикация документа в Procomún"
 
-#: exe/jsui/mainpage.py:1465
+#: exe/jsui/mainpage.py:1478
 #, fuzzy, python-format
 msgid ""
 "Package exported to <a href=\"%s\" target=\"_blank\" title=\"Click to "
@@ -4115,7 +4131,7 @@ msgstr ""
 "Пакет, экспортированный в <a href=\"%s\" target=\"_blank\" title=\"Click "
 "to view the exported package\">%s</a>."
 
-#: exe/jsui/mainpage.py:1469
+#: exe/jsui/mainpage.py:1482
 #, fuzzy, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
@@ -4126,14 +4142,14 @@ msgstr ""
 "веб-страницы <a href=\"%s\" target=\"_blank\" title=\"Procomún "
 "Home\">Procomún</a></small>."
 
-#: exe/jsui/mainpage.py:1480
+#: exe/jsui/mainpage.py:1493
 #, python-format
 msgid ""
 "An error has ocurred while trying to publish a package to %s. <br />The "
 "error message is: %s"
 msgstr ""
 
-#: exe/jsui/mainpage.py:1526 exe/jsui/mainpage.py:2020
+#: exe/jsui/mainpage.py:1539 exe/jsui/mainpage.py:2033
 #, python-format
 msgid ""
 "SAVE FAILED!\n"
@@ -4142,25 +4158,16 @@ msgstr ""
 "ОШИБКА СОХРАНЕНИЯ!\n"
 "\"%s\" не является корректным именем для файла"
 
-#: exe/jsui/mainpage.py:1537 exe/jsui/mainpage.py:1547
-#: exe/jsui/mainpage.py:1550 exe/jsui/mainpage.py:1555
-#: exe/jsui/mainpage.py:1558 exe/jsui/mainpage.py:1561
-#: exe/jsui/mainpage.py:1564 exe/jsui/mainpage.py:1567
-#: exe/jsui/mainpage.py:1572 exe/jsui/mainpage.py:1952
-#: exe/jsui/mainpage.py:2067
-msgid "EXPORT FAILED!"
-msgstr "ОШИБКА ЭКСПОРТА!"
-
-#: exe/jsui/mainpage.py:1689
+#: exe/jsui/mainpage.py:1702
 msgid "Correct XLIFF import"
 msgstr "Откорректируйте импорт XLIFF"
 
-#: exe/jsui/mainpage.py:1692
+#: exe/jsui/mainpage.py:1705
 #, python-format
 msgid "Error importing XLIFF: %s"
 msgstr "Ошибка импорта XLIFF: %s"
 
-#: exe/jsui/mainpage.py:1762 exe/jsui/mainpage.py:1801
+#: exe/jsui/mainpage.py:1775 exe/jsui/mainpage.py:1814
 #, python-format
 msgid ""
 "EXTRACT FAILED!\n"
@@ -4169,22 +4176,22 @@ msgstr ""
 "ОШИБКА РАСПАКОВКИ!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1764 exe/jsui/mainpage.py:1803
+#: exe/jsui/mainpage.py:1777 exe/jsui/mainpage.py:1816
 #, python-format
 msgid "Package extracted to: %s"
 msgstr "Пакет распакован в: %s"
 
-#: exe/jsui/mainpage.py:1815 exe/webui/stylemanagerpage.py:264
+#: exe/jsui/mainpage.py:1828 exe/webui/stylemanagerpage.py:264
 msgid "Directory exists"
 msgstr "Директория существует"
 
-#: exe/jsui/mainpage.py:1829 exe/jsui/mainpage.py:1937
-#: exe/jsui/mainpage.py:1960 exe/jsui/mainpage.py:1983
-#: exe/jsui/mainpage.py:1996 exe/jsui/mainpage.py:2002
-#: exe/jsui/mainpage.py:2026 exe/jsui/mainpage.py:2042
-#: exe/jsui/mainpage.py:2052 exe/jsui/mainpage.py:2072
-#: exe/jsui/mainpage.py:2087 exe/jsui/mainpage.py:2093
-#: exe/jsui/mainpage.py:2108 exe/jsui/mainpage.py:2118
+#: exe/jsui/mainpage.py:1842 exe/jsui/mainpage.py:1950
+#: exe/jsui/mainpage.py:1973 exe/jsui/mainpage.py:1996
+#: exe/jsui/mainpage.py:2009 exe/jsui/mainpage.py:2015
+#: exe/jsui/mainpage.py:2039 exe/jsui/mainpage.py:2055
+#: exe/jsui/mainpage.py:2065 exe/jsui/mainpage.py:2085
+#: exe/jsui/mainpage.py:2100 exe/jsui/mainpage.py:2106
+#: exe/jsui/mainpage.py:2121 exe/jsui/mainpage.py:2131
 #, python-format
 msgid ""
 "EXPORT FAILED!\n"
@@ -4193,12 +4200,12 @@ msgstr ""
 "ОШИБКА ЭКСПОРТА!\n"
 "%s"
 
-#: exe/jsui/mainpage.py:1859 exe/jsui/mainpage.py:1918
+#: exe/jsui/mainpage.py:1872 exe/jsui/mainpage.py:1931
 #, python-format
 msgid "Filename %s is a file, cannot replace it"
 msgstr "Имя %s - это файл, невозможно заменить его"
 
-#: exe/jsui/mainpage.py:1866 exe/jsui/mainpage.py:1925
+#: exe/jsui/mainpage.py:1879 exe/jsui/mainpage.py:1938
 #, python-format
 msgid ""
 "Folder name %s already exists. Please choose another one or delete "
@@ -4207,18 +4214,18 @@ msgstr ""
 "Папка с именем %s уже существует. Выберите другую или удалите "
 "существующую и попробуйте снова."
 
-#: exe/jsui/mainpage.py:1889 exe/jsui/mainpage.py:1941
-#: exe/jsui/mainpage.py:1964 exe/jsui/mainpage.py:1985
-#: exe/jsui/mainpage.py:2004 exe/jsui/mainpage.py:2028
-#: exe/jsui/mainpage.py:2058 exe/jsui/mainpage.py:2074
-#: exe/jsui/mainpage.py:2095 exe/jsui/mainpage.py:2122
+#: exe/jsui/mainpage.py:1902 exe/jsui/mainpage.py:1954
+#: exe/jsui/mainpage.py:1977 exe/jsui/mainpage.py:1998
+#: exe/jsui/mainpage.py:2017 exe/jsui/mainpage.py:2041
+#: exe/jsui/mainpage.py:2071 exe/jsui/mainpage.py:2087
+#: exe/jsui/mainpage.py:2108 exe/jsui/mainpage.py:2135
 #, python-format
 msgid "Exported to %s"
 msgstr "Экспорт в %s"
 
-#: exe/jsui/mainpage.py:1891 exe/jsui/mainpage.py:1943
-#: exe/jsui/mainpage.py:1966 exe/jsui/mainpage.py:2060
-#: exe/jsui/mainpage.py:2124
+#: exe/jsui/mainpage.py:1904 exe/jsui/mainpage.py:1956
+#: exe/jsui/mainpage.py:1979 exe/jsui/mainpage.py:2073
+#: exe/jsui/mainpage.py:2137
 #, python-format
 msgid ""
 "Exported to %s.\n"
@@ -4229,23 +4236,23 @@ msgstr ""
 "Были некоторые ресурсы, которые нельзя было переименовать для "
 "совместимости с ISO9660."
 
-#: exe/jsui/mainpage.py:2055
+#: exe/jsui/mainpage.py:2068
 #, python-format
 msgid "The following fields have been cut to meet the SCORM 1.2 standard: %s"
 msgstr "Следующие поля были разрезаны для соответствия стандарту SCORM 1.2: %s"
 
-#: exe/jsui/mainpage.py:2161 exe/webui/stylemanagerpage.py:289
+#: exe/jsui/mainpage.py:2174 exe/webui/stylemanagerpage.py:289
 #, python-format
 msgid "File %s does not exist or is not readable."
 msgstr "Файл %s не существует или недоступен для чтения."
 
-#: exe/jsui/mainpage.py:2168
+#: exe/jsui/mainpage.py:2181
 msgid "Couldn't load file, please email file to bugs@exelearning.org"
 msgstr ""
 "Невозможно загрузить файл, пожалуйста сообщите об ошибке по электронной "
 "почте (bugs@exelearning.org)"
 
-#: exe/jsui/mainpage.py:2171
+#: exe/jsui/mainpage.py:2184
 #, python-format
 msgid ""
 "Sorry, wrong file format:\n"
@@ -4254,7 +4261,7 @@ msgstr ""
 "Извините, неправильный формат файла:\n"
 "%s"
 
-#: exe/jsui/mainpage.py:2173
+#: exe/jsui/mainpage.py:2186
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:130
 #: exe/webui/tools/mindmaps/src/js/OpenDocument.js:159
 msgid "Sorry, wrong file format"
@@ -4340,18 +4347,6 @@ msgstr "Галерея изображений"
 #: exe/webui/scripts/stylemanager.js:43 exe/webui/scripts/stylemanager.js:68
 msgid "All Files"
 msgstr "Все файлы"
-
-#: exe/jsui/scripts/app/controller/MainTab.js:321
-#: exe/jsui/scripts/app/controller/StyleManager.js:288
-#: exe/jsui/scripts/app/controller/Toolbar.js:1366
-#: exe/jsui/scripts/app/controller/Toolbar.js:1390
-#: exe/jsui/scripts/app/controller/Toolbar.js:1412
-#: exe/jsui/scripts/app/controller/Toolbar.js:1434
-#: exe/jsui/scripts/app/controller/Toolbar.js:1472
-#: exe/webui/stylemanagerpage.py:336 exe/webui/stylemanagerpage.py:450
-#: exe/webui/stylemanagerpage.py:606
-msgid "Please wait..."
-msgstr "Пожалуйста, подождите..."
 
 #: exe/jsui/scripts/app/controller/MainTab.js:327 exe/webui/editorpage.py:134
 #: exe/webui/editorpage.py:145
@@ -4576,7 +4571,7 @@ msgid "%s of %s"
 msgstr "Страница %s из %s"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:425
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:581
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:597
 msgid ""
 "Checking this option will show more elements in the menus (File, "
 "Tools...) and the Properties tab."
@@ -4609,7 +4604,7 @@ msgid "General"
 msgstr "Общий"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:535
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:475
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:491
 #: exe/webui/tools/assistant/js/assistant.js:57
 #: exe/webui/tools/assistant/langs/all.js:8
 msgid "Assistant"
@@ -4624,13 +4619,13 @@ msgid "Release notes"
 msgstr "Примечания к выпуску"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:601
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:499
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:515
 #: exe/webui/tools/assistant/langs/all.js:79
 msgid "Legal Notes"
 msgstr "Юридические примечания"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:680
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:387
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:398
 msgid "Preferences"
 msgstr "Настройки"
 
@@ -4640,7 +4635,7 @@ msgstr "Настройки"
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:54
 #: exe/jsui/scripts/app/view/forms/TemplateManagerPanel.js:60
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:102
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:200
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:211
 #: exe/webui/scripts/authoring.js:1571
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:373
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/langs/all.js:13
@@ -4659,7 +4654,6 @@ msgstr ""
 "действительно хотите выйти?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:774
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:441
 msgid "Style Manager"
 msgstr "Менеджер стилей"
 
@@ -4864,6 +4858,10 @@ msgstr ""
 msgid "Publishing..."
 msgstr "издатель"
 
+#: exe/jsui/scripts/app/controller/Toolbar.js:1305
+msgid "Exporting package as SCORM 1.2..."
+msgstr "Экспортировать пакет как SCORM 1.2..."
+
 #: exe/jsui/scripts/app/controller/Toolbar.js:1317
 msgid ""
 "You must authorize eXe Learning to publish content into your Procomún "
@@ -4904,7 +4902,7 @@ msgid "Export text package as"
 msgstr "Экспортировать текстовый пакет как"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:1396
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:269
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:280
 msgid "Text File"
 msgstr "Текстовый файл"
 
@@ -5079,7 +5077,7 @@ msgid "Modified"
 msgstr "Изменён"
 
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:94
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:139 exe/webui/common.py:651
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:150 exe/webui/common.py:651
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:10
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:377
 msgid "Download"
@@ -6615,17 +6613,17 @@ msgid "Properties"
 msgstr "Свойства"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:77
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:174
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:185
 msgid "Metadata"
 msgstr "Метаданные"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:89
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:184
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:195
 msgid "LOM"
 msgstr "LOM"
 
 #: exe/jsui/scripts/app/view/ui/MainTabPanel.js:95
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:190
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:201
 msgid "LOM-ES"
 msgstr "LOM-ES"
 
@@ -6657,91 +6655,91 @@ msgstr "Переместить узел вниз"
 msgid "use the right arrow key"
 msgstr "используйте клавишу со стрелкой вправо"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:129
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:140
 #, fuzzy
 msgid "Save draft"
 msgstr "черновик"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:148
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:159
 #: exe/webui/scripts/authoring.js:1565
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:361
 msgid "Import"
 msgstr "Импорт"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:158
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:169
 msgid "Project (.elp)"
 msgstr ""
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:164
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:175
 msgid "Insert elp in the current page"
 msgstr "Вставить elp на текущую страницу"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:170
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:181
 msgid "XLIFF File"
 msgstr "Файл XLIFF"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:209
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:220
 msgid "Educational Standard"
 msgstr "Образовательный стандарт"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:217
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:228
 msgid "Common Cartridge"
 msgstr "Common Cartridge"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:223
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:317
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:234
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:328
 msgid "SCORM1.2"
 msgstr "SCORM1.2"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:229
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:240
 msgid "SCORM2004"
 msgstr "SCORM2004"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:235
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:246
 msgid "IMS Content Package"
 msgstr "Содержимое IMS пакета"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:245
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:283
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:256
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:294
 msgid "Web Site"
 msgstr "Веб-сайт"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:253
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:264
 msgid "Zip File"
 msgstr "Zip файл"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:259
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:290
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:270
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:301
 msgid "Single Page"
 msgstr "Простая страница"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:276
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:287
 msgid "XLIFF"
 msgstr "XLIFF"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:296
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:307
 msgid "EPUB3"
 msgstr "EPUB3"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:305
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:316
 msgid "Export the current page as elp"
 msgstr "Экспортировать текущую страницу как elp"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:312
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:323
 #, fuzzy
 msgid "Export the current page as SCORM"
 msgstr "Экспортировать текущую страницу как elp"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:324
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:335
 msgid "IMS"
 msgstr "IMS"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:334
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:345
 #, fuzzy
 msgid "Publish"
 msgstr "издатель"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:357 exe/webui/common.py:657
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:368 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
 #: exe/webui/style/INTEF/_intef_js.js:125
@@ -6750,41 +6748,39 @@ msgstr "издатель"
 msgid "Print"
 msgstr "Печать"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:370
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:381
 #, fuzzy
 msgid "Quit without saving"
 msgstr "Выйти без сохранения?"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:377
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:388
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:227
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemindmap/editor/js/custom.js:34
 msgid "Tools"
 msgstr "Утилиты"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:393
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:615 exe/webui/editorpane.py:273
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:404
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:631 exe/webui/editorpane.py:273
 #: exe/webui/element.py:2105
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:147
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:6
 msgid "Preview"
 msgstr "Предпросмотр"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:407
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:420
 msgid "Resources Report"
 msgstr "Отчёт по ресурсам"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:413
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:426
 msgid "Refresh Display"
 msgstr "Обновить дисплей"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:421
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:432
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:445
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:435
 msgid "Styles"
 msgstr "Стили"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:458
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:465
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:474
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:481
 #: exe/webui/scripts/idevices/adivina-activity/edition/adivina-activity.js:151
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:66
 #: exe/webui/scripts/idevices/desafio-activity/edition/desafio-activity.js:102
@@ -6803,43 +6799,43 @@ msgstr "Стили"
 msgid "Help"
 msgstr "Помощь"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:485
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:501
 #: exe/webui/tools/assistant/langs/all.js:72
 msgid "eXe Tutorial"
 msgstr "Учебник eXe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:492
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:508
 #: exe/webui/tools/assistant/langs/all.js:78
 msgid "Release Notes"
 msgstr "Примечания к выпуску"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:509
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:525
 #: exe/webui/tools/assistant/langs/all.js:80
 msgid "eXe Web Site"
 msgstr "Веб-сайт eXe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:516
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:532
 #: exe/webui/scripts/authoring.js:1150
 #: exe/webui/tools/assistant/langs/all.js:75
 msgid "Report an Issue"
 msgstr "Сообщить о проблеме"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:535
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:551
 #: exe/webui/tools/assistant/langs/all.js:77
 msgid "About eXe"
 msgstr "О программе eXe"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:550
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:566
 #, fuzzy
 msgid "Project size:"
 msgstr "Заголовок проекта"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:580
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:596
 #: exe/webui/scripts/idevices/identifica-activity/edition/identifica-activity.js:366
 msgid "Advanced mode"
 msgstr "Расширенный режим"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:629
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:645
 #: exe/webui/scripts/idevices/flipcards-activity/edition/flipcards-activity.js:73
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:63
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:161
@@ -6850,15 +6846,15 @@ msgstr "Расширенный режим"
 msgid "Finish"
 msgstr "Финиш"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:773
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:790
 msgid "You've been working for a long time without saving."
 msgstr "Вы работали длительное время без сохранения."
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:775
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:792
 msgid "Do you want to save now?"
 msgstr "Вы хотите сохранить сейчас?"
 
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:777
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:794
 msgid "Hide until the application is closed"
 msgstr "Скрыть, пока приложение закрыто."
 
@@ -6873,7 +6869,7 @@ msgstr ""
 #: exe/jsui/scripts/app/controller/Toolbar.js:1254
 #: exe/jsui/scripts/app/controller/Toolbar.js:1297
 #: exe/jsui/scripts/app/view/forms/PackagePanel.js:607
-#: exe/jsui/scripts/exe.js:252 exe/jsui/scripts/nevow_glue.js:43
+#: exe/jsui/scripts/exe.js:252
 msgid "Warning"
 msgstr "Предупреждение"
 
@@ -6894,7 +6890,7 @@ msgstr "Доступна новая версия eXeLearning (%). Хотите �
 
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:171
 #: exe/jsui/scripts/app/view/forms/LomWidgets.js:203
-#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:772 exe/jsui/scripts/exe.js:319
+#: exe/jsui/scripts/app/view/ui/eXeToolbar.js:789 exe/jsui/scripts/exe.js:319
 msgid "Warning!"
 msgstr "Предупреждение!"
 
@@ -8524,11 +8520,16 @@ msgstr "компьютерный учёный"
 msgid "education expert"
 msgstr "образовательный эксперт"
 
-#: exe/jsui/scripts/nevow_glue.js:43 exe/jsui/scripts/nevow_glue.js:45
+#: exe/jsui/scripts/nevow_glue.js:45 exe/jsui/scripts/nevow_glue.js:49
 #: exe/webui/stylemanagerpage.py:356 exe/webui/stylemanagerpage.py:562
 #: exe/webui/templatemanagerpage.py:269 exe/webui/templatemanagerpage.py:303
 msgid "An unexpected error has occurred"
 msgstr "Произошла непредвиденная ошибка"
+
+#: exe/jsui/scripts/nevow_glue.js:45 exe/jsui/scripts/nevow_glue.js:49
+#: exe/webui/tools/style-designer/js/app.js:1522
+msgid "Page will be reloaded. "
+msgstr "Страница будет перезагружена."
 
 #: exe/jsui/stylemenu.py:37 exe/jsui/templatemenu.py:35
 msgid "INTEF with horizontal menu"
@@ -17210,10 +17211,6 @@ msgstr "Имя нового стиля"
 #: exe/webui/tools/style-designer/js/app.js:1519
 msgid "Style Designer windows will be closed. "
 msgstr "Окно Дизайнера стилей будет закрыто."
-
-#: exe/webui/tools/style-designer/js/app.js:1522
-msgid "Page will be reloaded. "
-msgstr "Страница будет перезагружена."
 
 #: exe/webui/tools/style-designer/langs/all.js:15
 msgid "Page width"
