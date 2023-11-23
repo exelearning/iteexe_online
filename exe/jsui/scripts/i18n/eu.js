@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-03 12:38+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.8.1\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2023-11-23 13:42+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Number of rounds": "Bira kopurua", 
  "DropDown Activity": "Jarduera zabalgarria", 
  "Create the case story. A good case is one \nthat describes a controversy or sets the scene by describing the characters \ninvolved and the situation. It should also allow for some action to be taken \nin order to gain resolution of the situation.": "Sortu kasu-istorioa. Kasuak, ona izateko, \ngatazka bat deskribatu beharko luke, edo pertsonaien bidez egoera azaldu. \nGainera, gatazka konpondu ahal izateko \nhainbat ekintza gauzatzeko aukera eman beharko luke.", 
@@ -1960,7 +1960,7 @@ translations = {
  "Skip navigation": "Saltatu nabigazioa", 
  "Exporting a project": "Proiektua esportatze-bidean", 
  "Semantic networks": "Sare semantikoak", 
- "Please write a quote": "Mesedez, aipua idatzi", 
+ "<small>You can view and manage the uploaded package using <a href=\"%s\" target=\"_blank\" title=\"Educational Resource Platform Home\">%s<\/a>\\'s web page.<\/small>": "<small>Igotako paketea ikus eta kudea dezakezu <a href=\"%s\" target=\"_blank\">%s<\/a> webgunean.<\/small>", 
  "Click on \"Play\" to start a new game.": "Klik egin \"Jolastu\"-n jokoa hasteko.", 
  "CEDEC's rubrics": "CEDECaren errubrikak", 
  "Letter Button Style Right Guess": "Letra botoiaren estiloa; asmatu denean", 
@@ -2339,6 +2339,7 @@ translations = {
  "Maximum score:": "Puntuazio maximoa:", 
  "Include only one activity with a \"Save score\" button in the page.": "Erantsi \"Gorde puntuak\" botoia duen jarduera bakarra orriko.", 
  "These are the most common options, but there are more. In the next section we will explain where to find them.": "Hauek dira aukera nagusiak baina gehiago daude. Hurrengo atalean non topa ditzakezun azalduko dugu.", 
+ "Please write a quote": "Mesedez, aipua idatzi", 
  "produce": "produzitu", 
  "Automatic Numbering": "Numerazio automatikoa", 
  "Add point": "Erantsi puntua", 

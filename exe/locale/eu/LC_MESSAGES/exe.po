@@ -4057,7 +4057,7 @@ msgstr ""
 "paketea ikusteko\">%s</a>-ra esportatu da."
 
 #: exe/jsui/mainpage.py:1482
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "<small>You can view and manage the uploaded package using <a href=\"%s\" "
 "target=\"_blank\" title=\"Educational Resource Platform Home\">%s</a>\\'s"
