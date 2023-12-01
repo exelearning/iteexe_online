@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
 "POT-Creation-Date: 2023-11-23 13:42+0100\n"
-"PO-Revision-Date: 2023-07-21 11:50+0200\n"
+"PO-Revision-Date: 2023-12-01 10:00+0200\n"
 "Last-Translator: Xunta de Galicia <sipe@edu.xunta.gal>\n"
 "Language: gl\n"
 "Language-Team: eXeLearning.net <cedec@ite.educacion.es >\n"
@@ -1269,6 +1269,7 @@ msgid ""
 "Upload a file. Please avoid names or paths with spaces or special "
 "characters."
 msgstr ""
+"Envíe un ficheiro. Evite nomes ou rutas con espazos ou caracteres especiais."
 
 #: exe/engine/extendedfieldengine.py:304
 #: exe/webui/tools/style-designer/langs/all.js:51
@@ -3967,11 +3968,11 @@ msgstr "Ludificación"
 
 #: exe/jsui/mainpage.py:501
 msgid "Error when saving"
-msgstr ""
+msgstr "Erro ao gardar"
 
 #: exe/jsui/mainpage.py:501
 msgid "That name is currently being used in another eXeLearning window"
-msgstr ""
+msgstr "Ese nome está a ser empregado noutra xanela de eXeLearning"
 
 #: exe/jsui/mainpage.py:512 exe/jsui/mainpage.py:1532 exe/jsui/mainpage.py:1553
 #: exe/jsui/mainpage.py:1748 exe/jsui/mainpage.py:1790
@@ -4693,7 +4694,7 @@ msgstr "Seleccione o paquete a importar"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:894
 msgid "This will completely overwrite all your project. Continue?"
-msgstr ""
+msgstr "Isto sobrescribirá completamente o proxecto. Desexa continuar?"
 
 #: exe/jsui/scripts/app/controller/Toolbar.js:902
 #: exe/jsui/scripts/app/controller/Toolbar.js:1730
@@ -6665,7 +6666,7 @@ msgstr "utilizar a tecla de frecha cara a dereita"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:140
 msgid "Save draft"
-msgstr ""
+msgstr "Gardar o borrador"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:159
 #: exe/webui/scripts/authoring.js:1565
@@ -10123,6 +10124,8 @@ msgid ""
 "Could not upload the file. Please remove any special characters from the "
 "file name or path."
 msgstr ""
+"Non se puido enviar o ficheiro. Non empregue caracteres especiais no nome do "
+"ficheiro ou na ruta."
 
 #: exe/webui/scripts/authoring.js:2011
 msgid "Add a Text iDevice"
@@ -15721,7 +15724,7 @@ msgstr "Detectar automaticamente"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:556
 msgid "Choose a file or paste a link (URL)"
-msgstr ""
+msgstr "Escolla un ficheiro ou pegue un URL"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:578
 msgid "Play controls"
@@ -15736,6 +15739,7 @@ msgid ""
 "Old browsers compatibility with some formats. Not needed in modern "
 "browsers."
 msgstr ""
+"Compatibilidade con navegadores antigos. Non se precisa en navegadores modernos."
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:580
 msgid "Autoplay"
