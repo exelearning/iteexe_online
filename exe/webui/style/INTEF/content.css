@@ -136,11 +136,11 @@ li{list-style-position:outside}
 	.hidden-idevice .iDevice_header{box-shadow:none}
 	.iDevice_inner{box-shadow:none;padding:10px 0}
 	.iDevice_header{padding:5px 0}
-	.toggle-idevice{display:none}
+	.toggle-idevice{display:none}	
 	/* Uncomment this to print URL after links:
 	a[href^=http]{font-weight:bold;text-decoration:none!important}
 	a[href^=http]:after{content:" <" attr(href) "> "}
-	*/
+	*/	
 }
 
 /* Hint & Feedback */
