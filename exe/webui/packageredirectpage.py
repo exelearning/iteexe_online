@@ -79,8 +79,9 @@ class PackageRedirectPage(RenderableResource):
                     self.jwt_tokens[session.uid]={ode_id_jwt: request.args['jwt_token'][0]}
                 except Exception as e:
                     return error.ForbiddenResource('jwt_token not valid. Secret HASH mismatch')
-            elif not self.jwt_tokens[session.uid]:
-                raise Exception('Error: jwt_token not found')        
+            elif not session.uid in self.jwt_tokens or not self.jwt_tokens[session.uid]:
+                return error.ForbiddenResource('jwt_token not found')        
+     
 
         # If using the JWT system, user dirs are created in a domain_instance_userid dir structure, else, only use the id
         # Must be eliminated in the future
