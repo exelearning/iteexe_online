@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: Juan Rafael Fernández <jrfern@gmail.com>\n"
-"POT-Creation-Date: 2023-11-23 13:42+0100\n"
+"POT-Creation-Date: 2023-12-29 09:11+0100\n"
 "PO-Revision-Date: 2019-06-12 22:57+0200\n"
 "Last-Translator: Dionisio Martínez Soler <dmsoler@edu.xunta.gal>\n"
 "Language: pt\n"
@@ -1288,7 +1288,7 @@ msgstr "Upload"
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:401
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:224
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:665
-#: exe/webui/style/INTEF/_intef_js.js:125
+#: exe/webui/style/INTEF/_intef_js.js:113
 msgid "File"
 msgstr "Ficheiro"
 
@@ -3810,7 +3810,7 @@ msgstr "descrição geral"
 msgid "educational description"
 msgstr "descrição educacional"
 
-#: exe/export/singlepage.py:261
+#: exe/export/singlepage.py:271
 msgid "You can close this window"
 msgstr "Pode fechar esta janela"
 
@@ -6715,7 +6715,7 @@ msgstr "publicador"
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:368 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
-#: exe/webui/style/INTEF/_intef_js.js:125
+#: exe/webui/style/INTEF/_intef_js.js:113
 #: exe/webui/tools/mindmaps/src/js/Command.js:341
 #: exe/webui/tools/mindmaps/src/js/Command.js:343
 msgid "Print"

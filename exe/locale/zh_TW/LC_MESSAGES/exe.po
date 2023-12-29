@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.8.1\n"
 "Report-Msgid-Bugs-To: translations@exelearning.net\n"
-"POT-Creation-Date: 2023-11-23 13:42+0100\n"
+"POT-Creation-Date: 2023-12-29 09:11+0100\n"
 "PO-Revision-Date: 2022-11-25 17:28+0100\n"
 "Last-Translator: Franklin Weng <franklin@goodhorse.idv.tw>\n"
 "Language: zh_Hant_TW\n"
@@ -1150,7 +1150,7 @@ msgstr "上傳"
 #: exe/webui/scripts/idevices/interactive-video/edition/interactive-video.js:401
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:224
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:665
-#: exe/webui/style/INTEF/_intef_js.js:125
+#: exe/webui/style/INTEF/_intef_js.js:113
 msgid "File"
 msgstr "檔案"
 
@@ -3376,7 +3376,7 @@ msgstr "一般描述"
 msgid "educational description"
 msgstr "教育性描述"
 
-#: exe/export/singlepage.py:261
+#: exe/export/singlepage.py:271
 msgid "You can close this window"
 msgstr "您可以關閉此視窗"
 
@@ -6176,7 +6176,7 @@ msgstr "發布者"
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:368 exe/webui/common.py:657
 #: exe/webui/scripts/idevices/rubrics/edition/exe-rubrics.js:27
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:148
-#: exe/webui/style/INTEF/_intef_js.js:125
+#: exe/webui/style/INTEF/_intef_js.js:113
 #: exe/webui/tools/mindmaps/src/js/Command.js:341
 #: exe/webui/tools/mindmaps/src/js/Command.js:343
 msgid "Print"
