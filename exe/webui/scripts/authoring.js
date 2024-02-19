@@ -694,6 +694,19 @@ function browseURL(e,elm) {
         return false;
     }
     // window.parent.nevow_clientToServerEvent('browseURL', this, '', e);
+
+    // #8 Link to file failed while editing
+    if (document.domain!="localhost"&&e.indexOf("http://localhost")==0) {
+        e = e.split("//");
+        if (e.length==2) {
+            e = e[1];
+            e = e.replace("/","~");
+            e = e.split("~");
+            e = e[1];
+            e = window.location.protocol+"//"+document.domain+"/"+e;
+        }
+    }
+	
     window.open(e);
 }
 
