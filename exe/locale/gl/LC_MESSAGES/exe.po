@@ -4498,7 +4498,7 @@ msgstr "Produciuse un erro descoñecido."
 
 #: exe/jsui/scripts/app/controller/StyleManager.js:136
 msgid "Cannot delete the current style."
-msgstr "Non se pode eliminar o estilo actual."
+msgstr "Non se pode eliminar un estilo namentres estea a ser usado."
 
 #: exe/jsui/scripts/app/controller/StyleManager.js:136
 #: exe/jsui/scripts/app/view/forms/HelpContainer.js:61 exe/webui/block.py:270
@@ -5036,7 +5036,7 @@ msgstr "Confirmar?"
 
 #: exe/jsui/scripts/app/controller/filepicker/File.js:494
 msgid "The file already exists. Do you want to replace it?"
-msgstr "O nome de estilo xa existe:  %s Desexa substituílo?"
+msgstr "O ficheiro xa existe. Quere substituílo?"
 
 #: exe/jsui/scripts/app/view/filepicker/FileList.js:66
 #: exe/jsui/scripts/app/view/filepicker/FilePicker.js:130
@@ -15717,7 +15717,7 @@ msgstr "Seleccione o ficheiro de medios para editalo"
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1047
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:1257
 msgid "Standard YouTube License"
-msgstr "Licencia estándar de YouTube"
+msgstr "Licenza estándar de YouTube"
 
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/exemedia/plugin.min.js:530
 msgid "Detect automatically"
