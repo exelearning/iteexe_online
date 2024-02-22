@@ -308,6 +308,14 @@ function createPanelStyles(styles) {
         margin: 10,
         items: itemsShow
     })
+    panel.push({
+        xtype: 'button',
+        text: _('Close'),
+        style:'float:right;margin-right:10px;margin-bottom:10px;',
+        handler: function () { 
+            this.up('window').close();
+        }
+    })
     return panel;
 }
 
