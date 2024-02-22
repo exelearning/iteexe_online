@@ -26,6 +26,8 @@ var $exeDevice = {
         zero: 1 // Allow zero in results
     },
     iDevicePath: "/scripts/idevices/mathproblems-activity/edition/",
+    id:false,
+    domains:false,
     ci18n: {
         "msgReply": _("Reply"),
         "msgSubmit": _("Submit"),
@@ -77,8 +79,12 @@ var $exeDevice = {
         "msgEndGameM": _("You finished the game. Your score is %s."),
         "msgFeedBack": _("FeedBack"),
         "msgNoImage": _("No image"),
-        "msgMoveOne": _("Move on")
-
+        "msgMoveOne": _("Move on"),
+        "msgDuplicateAnswer": _("You can\'t give repeated solutions"),
+        "msgUncompletedActivity": _("Incomplete activity"),
+        "msgSuccessfulActivity": _("Activity: Passed. Score: %S"),
+        "msgUnsuccessfulActivity": _("Activity: Not passed. Score: %S"),
+        "msgTypeGame":_('Math Problems')
     },
     version: 2,
     active: 0,
@@ -95,6 +101,7 @@ var $exeDevice = {
         msgs.msgEOneQuestion = _("Please provide at least one question");
         msgs.msgNoSuportBrowser = _("Your browser is not compatible with this tool.");
         msgs.msgProvideFB = _('Message to display when passing the game');
+        msgs.msgIDLenght = _('The report identifier must have at least 5 characters');
 
     },
     createForm: function () {
@@ -140,11 +147,40 @@ var $exeDevice = {
                             <p style="display:none">\
                                 <label for="eCQModeBoard"><input type="checkbox" id="eCQModeBoard"> ' + _("Digital blackboard mode") + ' </label>\
                             </p>\
+                            <p>\
+                                <strong class="GameModeLabel"><a href="#eCQEEvaluationHelp" id="eCQEEvaluationHelpLnk" class="GameModeHelpLink" title="' + _("Help") + '"><img src="' + $exeDevice.iDevicePath + 'quextIEHelp.gif"  width="16" height="16" alt="' + _("Help") + '"/></a></strong>\
+								<label for="eCQEEvaluation"><input type="checkbox" id="eCQEEvaluation"> ' + _("Progress report") + '. </label> \
+								<label for="eCQEEvaluationID">' + _("Identifier") + ':\
+								<input type="text" id="eCQEEvaluationID" disabled/> </label>\
+                            </p>\
+                            <div id="eCQEEvaluationHelp" class="MTOE-TypeGameHelp">\
+                                <p>' +_("You must indicate the ID. It can be a word, a phrase or a number of more than four characters. You will use this ID to mark the activities covered by this progress report. It must be the same in all iDevices of a report and different in each report.") + '</p>\
+                            </div>\
                         </div>\
                     </fieldset>\
                     <fieldset class="exe-fieldset" style="position:relative">\
 						<legend><a href="#">' + _("Problems") + '</a></legend>\
                         <div>\
+                            <p>\
+                                <label for="eCQTime">' + _("Time (s)") + ':\
+                                <input type="number" name="eCQTime" id="eCQTime" value="180" min="1" max="3600" style="width:70px"/> </label>\
+                                </p>\
+                         </div>\
+                         <p id="eCQformulaDiv">\
+                            <label for="eCQformula">' + _("Formula") + ':\
+                            <input id="eCQformula" type="text" style="width:50%" value="{b}*{h}/2" />\
+                            </label>\
+                            <span><span class="sr-av">' + _("Operations:") + ' </span><a href="https://www.w3schools.com/js/js_arithmetic.asp" target="_blank" rel="noopener" hreflang="en" title="+  -  *  /  **  ()">' + _("Help") + '</a> - <a href="https://www.w3schools.com/js/js_math.asp" target="_blank" rel="noopener" hreflang="en" title="JavaScript Math">' + _("More") + '</a></span>\
+                         </p>\
+                         <p>\
+                         <label for="eCQwording">' + _("Question text:") + '</label>\
+                            <textarea name="eCQwording" id="eCQwording" class="exe-html-editor" cols="90" rows="6">' + _("Calculate in square metres the surface of a triangle with a base of {b}m and a height of {h}m") + '</textarea>\
+                        <p>\
+                        <p>\
+                            <label for="eCQDefinidedVariables"><input type="checkbox" id="eCQDefinidedVariables"> ' + _("Define the domain of each variable") + ' </label>\
+                        </p>\
+                         <p id="eQCVariablesContainer"></p>\
+                         <div id="eCQAleaContainer" >\
                             <p><label for="eCQmin">' + _("Smallest number:") + '\
                                 <input id="eCQmin" type="text" style="width:80px"  value="1" onkeyup="$exeDevice.onlyNumbers(this)" />\
                             </label>\
@@ -158,21 +194,9 @@ var $exeDevice = {
                                     <option value="2">2</option>\
                                     <option value="3">3</option>\
                                 </select>\
-                            </label></p>\
-                            <p>\
-                                <label for="eCQTime">' + _("Time (s)") + ':\
-                                <input type="number" name="eCQTime" id="eCQTime" value="180" min="1" max="3600" style="width:70px"/> </label>\
-                                </p>\
-                         </div>\
-                         <p><label for="eCQformula">' + _("Formula") + ':\
-                            <input id="eCQformula" type="text" style="width:200px" value="{b}*{h}/2" />\
-                         </label>\
-                         <span><span class="sr-av">' + _("Operations:") + ' </span><a href="https://www.w3schools.com/js/js_arithmetic.asp" target="_blank" rel="noopener" hreflang="en" title="+  -  *  /  **  ()">' + _("Help") + '</a> - <a href="https://www.w3schools.com/js/js_math.asp" target="_blank" rel="noopener" hreflang="en" title="JavaScript Math">' + _("More") + '</a></span>\
-                         </p>\
-                        <p>\
-                            <label for="eCQwording">' + _("Question text:") + '</label>\
-                            <textarea name="eCQwording" id="eCQwording" class="exe-html-editor" cols="90" rows="6">' + _("Calculate in square metres the surface of a triangle with a base of {b}m and a height of {h}m") + '</textarea>\
-                        <p>\
+                            </label>\
+                        </p>\
+                        </div>\
                         <p>\
                             <a href="#" id="eCQfeedbackLink">' + _("Feedback (optional)") + '</a>\
                             <div  id="eCQfeedbackQuestionDiv" style="display:none">\
@@ -220,6 +244,8 @@ var $exeDevice = {
         p.formula = '';
         p.textFeedBack = '';
         p.time = 180;
+        p.domains = false;
+        p.definedVariables = false;
 
         return p;
     },
@@ -227,12 +253,24 @@ var $exeDevice = {
         var num = i < 0 ? 0 : i;
         num = num >= $exeDevice.questions.length ? $exeDevice.questions.length - 1 : num;
         var p = $exeDevice.questions[num];
+        p.definedVariables = typeof p.definedVariables == "undefined" ? false: p.definedVariables;
+        p.domains = typeof p.domains == "undefined" ? false: p.domains;
         $('#eCQmin').val(p.min);
         $("#eCQmax").val(p.max)
         $('#eCQTime').val(p.time);
-
         $('#eCQdecimals').val(p.decimals);
         $('#eCQformula').val(p.formula);
+        $exeDevice.updateVariables()
+        $('#eCQDefinidedVariables').prop('checked',p.definedVariables )
+        if( p.definedVariables && p.domains ){
+            $exeDevice.domains = p.domains;
+            $exeDevice.updateVariablesValues(p.domains);
+            $('#eQCVariablesContainer').show();
+            $('#eCQAleaContainer').hide();
+        }else{
+            $('#eQCVariablesContainer').hide();
+            $('#eCQAleaContainer').show();
+        }
         if (tinyMCE.get('eCQwording')) {
             tinyMCE.get('eCQwording').setContent(p.wording);
         } else {
@@ -255,6 +293,126 @@ var $exeDevice = {
         return txt;
     },
 
+    updateVariables: function() {
+        $("#eQCVariablesContainer").empty();
+        var formula = $("#eCQformula").val(),
+            matches = formula.match(/{(.*?)}/g);
+        if (!matches) return;
+        var addedVariables = {};
+        $.each(matches, function (index, variable) {
+            variable = variable.replace(/[{}]/g, "");
+            if (!addedVariables[variable]) { 
+                var variableDiv = $("<div class='MTOE-VariableDiv' />"),
+                    label = $("<label class='MTOE-VariableName' />").text(variable),
+                    valuesInput = $("<input type='text' class='MTOE-ValuesInput' placeholder='-9 - 9, !0, 12' />");
+                variableDiv.append(label).append(valuesInput);
+                $("#eQCVariablesContainer").append(variableDiv);
+                addedVariables[variable] = true; 
+            }
+        });
+    },
+
+  
+    validateIntervals: function(domain) {
+        const allowedCharactersRegex = /^[0-9\s\-!]+$/;
+        let dm = domain.replace(/\s+/g, ' ').trim(); 
+        if (!allowedCharactersRegex.test(dm)) {
+            return false;
+        }
+        const formatRegex = /^(!?-?\d+)(\s+-\s+!?-?\d+)?$/;
+        let isValid = formatRegex.test(dm);
+        if (isValid && dm.includes(' - ')) {
+            let [start, end] = dm.split(' - ').map(Number); // Convierte los números y compara
+            isValid = start <= end;
+        }
+        return isValid;
+    },
+    
+    validateIntervalsWithHash: function(domain) {
+        const regex = /^-?\d+\s+-\s*-?\d+\s+#\s*\d+$/;
+        let dm = domain.replace(/\s+/g, ' ').trim(); 
+        if (!regex.test(dm)) {
+            return false;
+        }
+        if(!dm.includes(' - ')){
+            return false;
+        }
+        let [interval, hashNumber] = domain.split('#');
+        let [start, end] = interval.split(' - ').map(str => Number(str.trim()));
+        let hashNum = Number(hashNumber.trim());
+        return start < end && hashNum > 0;
+    },
+
+    areVariablesValid: function() {
+        var variables = [];
+        var isValid = true;
+        $(".MTOE-VariableDiv").each(function() {
+            if (!isValid) return false;
+            var valname = $(this).find('label.MTOE-VariableName').eq(0).text().trim();
+            var value = $(this).find('input.MTOE-ValuesInput').eq(0).val().trim();
+            value = value.replace(/\s+/g, ' ').trim();
+            const elements = value.split(',');
+            for (const el of elements) {
+                const trimmedEl = el.trim();
+                if (!($exeDevice.validateIntervals(trimmedEl)) && !($exeDevice.validateIntervalsWithHash(trimmedEl)) ) {
+                    isValid = false;
+                    break;
+                }
+            }
+            if (!isValid) return false;
+            variables.push({
+                'name': valname,
+                'value': value
+            });
+        });
+        return isValid ? variables : false;
+    },
+
+    updateVariablesValues: function(values){
+        if (values){
+            $(".MTOE-VariableDiv").each(function() {
+                var valname = $(this).find('label.MTOE-VariableName').eq(0).text().trim();
+                for (var i = 0; i < values.length; i++){
+                    if(valname == values[i].name){
+                        value = $(this).find('input.MTOE-ValuesInput').eq(0).val(values[i].value)
+                    }
+                }
+            });
+        }
+    },
+    getRandomAllowedValue: function(str) {
+        str = str.trim().replace(/\s+/g, ' '); 
+        const regex = /^((!?-?\d+ - -?\d+(#\d+)?|!?-?\d+ - \d+(#\d+)?|!?-?\d+)\s*,\s*)*(!?-?\d+ - -?\d+(#\d+)?|!?-?\d+ - \d+(#\d+)?|!?-?\d+)$/;
+        if (!regex.test(str)) return null; 
+        const elements = str.split(/\s*,\s*/);
+        let allowed = new Set();
+        let disallowed = new Set();
+        elements.forEach(el => {
+            let skip = 1; 
+            let range = el;
+            if (el.includes('#')) {
+                [range, skip] = el.split('#');
+                skip = Number(skip);
+            }
+            const exclude = range.startsWith('!');
+            const value = exclude ? range.substring(1) : range;
+            if (value.includes('-')) {
+                const [start, end] = value.split(' - ').map(Number);
+                for (let i = start; i <= end; i += skip) { // Se utiliza el valor de skip para incrementar el índice.
+                    exclude ? disallowed.add(i) : allowed.add(i);
+                }
+            } else {
+                exclude ? disallowed.add(Number(value)) : allowed.add(Number(value));
+            }
+        });
+        allowed = [...allowed].filter(value => !disallowed.has(value));
+
+        if (!allowed.length) return null; 
+
+        const randomIndex = Math.floor(Math.random() * allowed.length);
+        return allowed[randomIndex];
+    },
+
     addQuestion: function () {
         if ($exeDevice.validateQuestion() != false) {
             $exeDevice.clearQuestion();
@@ -266,6 +424,8 @@ var $exeDevice = {
             $('#eCQNumQuestions').text($exeDevice.questions.length);
             $('#eCQNumberQuestion').val($exeDevice.active + 1);
             $exeDevice.updateQuestionsNumber();
+            $('#eQCVariablesContainer').empty();
+
         }
     },
 
@@ -336,7 +496,6 @@ var $exeDevice = {
             if ($exeDevice.active < $exeDevice.questions.length - 1) {
                 $exeDevice.active++;
                 $exeDevice.showQuestion($exeDevice.active);
-
             }
         }
     },
@@ -394,13 +553,13 @@ var $exeDevice = {
     },
 
     validateQuestion: function () {
-        var message = '',
-            msgs = $exeDevice.msgs,
+        var message = ''
             p = new Object();
         p.min = parseInt($("#eCQmin").val());
         p.max = parseInt($("#eCQmax").val());
         p.decimals = parseInt($("#eCQdecimals").val());
         p.time = parseInt($("#eCQTime").val());
+        p.definedVariables =  $('#eCQDefinidedVariables').is(':checked');
         if (tinyMCE.get('eCQwording')) {
             p.wording = tinyMCE.get('eCQwording').getContent();
         } else {
@@ -411,10 +570,8 @@ var $exeDevice = {
         } else {
             p.textFeedBack = $('#eCQfeedbackQuestion').val()
         }
-
-
         p.formula = $("#eCQformula").val();
-        if (p.min.length == 0 || p.max.length == 0) {
+        if (!p.definedVariables && (p.min.length == 0 || p.max.length == 0)) {
             message = _("Only the Feedback is optional");
         } else if (p.formula.trim().length == 0) {
             message = _("Only the Feedback is optional");
@@ -422,26 +579,31 @@ var $exeDevice = {
             message = _("Please write the question text");
         } else {
             var expresion = /\{[a-zA-z]\}/g,
-                vf = p.formula.match(expresion),
+                vfs = p.formula.split('|'),
                 vw = p.wording.match(expresion);
-            if (vf == null && vw == null) {
-                message = '';
-            } else if (vf && vw) {
-                if (vf.length > 0) {
-                    vf = vf.filter($exeDevice.onlyUnique);
+            for (var i = 0; i < vfs.length; i++) {
+                var vf0 = (vfs[i]).trim(),
+                    vf = vf0.match(expresion);
+                if (vf == null && vw == null) {} else if (vf && vw) {
+                    if (vf.length > 0) {
+                        vf = vf.filter($exeDevice.onlyUnique);
+                    } else {
+                        message = _("Only the Feedback is optional");
+                    }
+                    if (vw.length > 0) {
+                        vw = vw.filter($exeDevice.onlyUnique);
+                    }
+                    if (vf.length != vw.length) {
+                        message = _("The question text and the formula should have the same variables");
+                    }
                 } else {
-                    message = _("Only the Feedback is optional");
-                }
-                if (vw.length > 0) {
-                    vw = vw.filter($exeDevice.onlyUnique);
-                }
-                if (vf.length != vw.length) {
                     message = _("The question text and the formula should have the same variables");
                 }
-            } else {
-                message = _("The question text and the formula should have the same variables");
             }
-
+        }
+        p.domains = $exeDevice.areVariablesValid();
+        if (p.definedVariables &&  p.domains === false){
+            message = _("The domain of at least one variable is not correct");
         }
         if (message.length == 0) {
             $exeDevice.questions[$exeDevice.active] = Object.assign({}, p);;
@@ -450,14 +612,11 @@ var $exeDevice = {
             $exeDevice.showMessage(message);
             message = false;
         }
-
         return message;
     },
     onlyUnique: function (value, index, self) {
         return self.indexOf(value) === index;
     },
-
-
 
     validateData: function () {
         var clear = $exeDevice.removeTags,
@@ -475,13 +634,15 @@ var $exeDevice = {
             errorAbsolute = parseFloat(clear($('#eCQPercentajeAbsolute').val())),
             errorRelative = parseFloat(clear($('#eCQPercentajeRelative').val())),
             textFeedBack = '',
-            errorType = 0;
+            errorType = 0,
+            evaluation = $('#eCQEEvaluation').is(':checked'),
+            evaluationID = $('#eCQEEvaluationID').val(),
+            id = $exeDevice.id ? $exeDevice.id : $exeDevice.generarID();
         if ($('#eCQRelative').is(':checked')) {
             errorType = 1;
         } else if ($('#eCQAbsolute').is(':checked')) {
             errorType = 2;
         }
-
         if (tinyMCE.get('eCQFeedBackEditor')) {
             textFeedBack = tinyMCE.get('eCQFeedBackEditor').getContent();
         } else {
@@ -509,6 +670,10 @@ var $exeDevice = {
             eXe.app.alert($exeDevice.msgs.msgProvideFB);
             return false;
         }
+        if (evaluation && evaluationID.length < 5) {
+            eXe.app.alert($exeDevice.msgs.msgIDLenght);
+            return false;
+        }
         var questions = $exeDevice.questions;
         if (questions.length == 0) {
             eXe.app.alert($exeDevice.msgs.msgEOneQuestion);
@@ -534,10 +699,14 @@ var $exeDevice = {
             'version': $exeDevice.version,
             'errorAbsolute': errorAbsolute,
             'errorRelative': errorRelative,
-            'errorType': errorType
+            'errorType': errorType,
+            'evaluation':evaluation,
+            'evaluationID':evaluationID,
+            'id': id
         }
         return data;
     },
+
     onlyNumbers: function (e) {
         var str = e.value;
         var lastCharacter = str.slice(-1);
@@ -556,6 +725,8 @@ var $exeDevice = {
 
     loadPreviousValues: function (field) {
         var originalHTML = field.val();
+        $exeDevice.updateVariables();
+        $("#eQCVariablesContainer").hide();
         if (originalHTML != '') {
             var wrapper = $("<div></div>");
             wrapper.html(originalHTML);
@@ -572,6 +743,7 @@ var $exeDevice = {
                 }
             }
             $exeDevice.setTexts(dataGame.questions, $wordings, $feeebacks)
+
             $exeDevice.updateFieldGame(dataGame);
             var instructions = $(".mathproblems-instructions", wrapper);
             if (instructions.length == 1) {
@@ -863,7 +1035,7 @@ var $exeDevice = {
 
         $('#eCQPercentajeRelative').on('keypress', function (evt) {
             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-            if (ASCIICode != 054 && ASCIICode != 056 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            if (ASCIICode != 0o54 && ASCIICode != 0o56 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
                 return false;
             return true;
         });
@@ -875,7 +1047,7 @@ var $exeDevice = {
 
         $('#eCQPercentajeAbsolute').on('keypress', function (evt) {
             var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-            if (ASCIICode != 054 && ASCIICode != 056 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+            if (ASCIICode != 0o54 && ASCIICode != 0o56 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
                 return false;
             return true;
         });
@@ -884,9 +1056,34 @@ var $exeDevice = {
             this.value = this.value > 100 ? 100 : this.value;
             this.value = this.value < 0 ? 0 : this.value;
         });
+        $('#eCQEEvaluation').on('change', function () {
+            var marcado = $(this).is(':checked');
+            $('#eCQEEvaluationID').prop('disabled', !marcado);
+        });
+        $("#eCQEEvaluationHelpLnk").click(function () {
+            $("#eCQEEvaluationHelp").toggle();
+            return false;
 
-
+        });
+        $('#eQCVariablesContainer').on('input', '.MTOE-ValuesInput', function () {
+            var valorInicial = $(this).val();
+            var valorFiltrado = valorInicial.replace(/[^0-9,#!\- ]/g, ''); // Se añade un espacio al final de la clase de caracteres.
+            if (valorFiltrado !== valorInicial) {
+                $(this).val(valorFiltrado); // Asignar el valor filtrado de vuelta al input
+            }
+        });
+        $('#eCQDefinidedVariables').change(function() {
+            if ($(this).is(':checked')) {
+                $('#eQCVariablesContainer').show();
+                $('#eCQAleaContainer').hide();
+            } else {
+                $('#eQCVariablesContainer').hide();
+                $('#eCQAleaContainer').show();
+            }
+        });
+        $(document).on('input', '#eCQformula', $exeDevice.updateVariables);
         $exeAuthoring.iDevice.gamification.itinerary.addEvents();
+
     },
 
     setErrorType: function (type) {
@@ -904,9 +1101,22 @@ var $exeDevice = {
     },
     onlyNumberKey: function (evt) {
         var ASCIICode = (evt.which) ? evt.which : evt.keyCode
-        if (ASCIICode != 054 && ASCIICode != 056 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        if (ASCIICode != 0o54 && ASCIICode != 0o56 && ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
             return false;
         return true;
+    },
+    generarID: function () {
+        var fecha = new Date(),
+            a = fecha.getUTCFullYear(),
+            m = fecha.getUTCMonth() + 1,
+            d = fecha.getUTCDate(),
+            h = fecha.getUTCHours(),
+            min = fecha.getUTCMinutes(),
+            s = fecha.getUTCSeconds(),
+            o = fecha.getTimezoneOffset();
+
+        var IDE = `${a}${m}${d}${h}${min}${s}${o}`;
+        return IDE;
     },
     updateFieldGame: function (game) {
         $exeDevice.active = 0;
@@ -915,7 +1125,9 @@ var $exeDevice = {
         game.errorAbsolute = typeof game.errorAbsolute == "undefined" ? 0.0 : game.errorAbsolute;
         game.errorRelative = game.version == 1 && typeof game.percentajeError != 'undefinided' && game.percentajeError > 0 ? game.percentajeError / 100 : game.errorRelative;
         game.errorType = game.version == 1 && typeof game.percentajeError != 'undefinided' && game.percentajeError > 0 ? 1 : game.errorType;
-
+        game.evaluation = typeof game.evaluation != "undefined" ? game.evaluation : false;
+        game.evaluationID = typeof game.evaluationID != "undefined" ? game.evaluationID : '';
+        $exeDevice.id = typeof game.id != "undefined" ? game.id : false;
         $('#eCQShowMinimize').prop('checked', game.showMinimize);
         $('#eCQOptionsRamdon').prop('checked', game.optionsRamdon);
         $('#eCQShowSolution').prop('checked', game.showSolution);
@@ -929,6 +1141,9 @@ var $exeDevice = {
         $('#eCQModeBoard').prop("checked", game.modeBoard);
         $('#eCQPercentajeFB').prop('disabled', !game.feedBack);
         $('#eCQHasFeedBack').prop('checked', game.feedBack);
+        $('#eCQEEvaluation').prop('checked', game.evaluation);
+        $('#eCQEEvaluationID').val(game.evaluationID);
+        $("#eCQEEvaluationID").prop('disabled', (!game.evaluation));
         $exeDevice.setErrorType(game.errorType)
         if (game.feedBack) {
             $('#eCQFeedbackP').slideDown();
@@ -978,8 +1193,8 @@ var $exeDevice = {
             $exeDevice.showMessage($exeDevice.msgs.msgESelectFile);
             return;
         }
+        game.id = $exeDevice.generarID();
         $exeDevice.updateFieldGame(game);
-
         var instructions = game.instructionsExe || game.instructions || "",
             tAfter = game.textAfter || "",
             textFeedBack = game.textFeedBack || "";

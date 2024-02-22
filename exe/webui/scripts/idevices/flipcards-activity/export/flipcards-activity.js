@@ -273,6 +273,9 @@ var $eXeFlipCards = {
             }
         });
         mOptions.time = typeof mOptions.time == "undefined" ? 0 : mOptions.time;
+        mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+        mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
         mOptions.hits = 0;
         mOptions.errors = 0;
         mOptions.score = 0;
@@ -524,6 +527,7 @@ var $eXeFlipCards = {
                 $('#flcdsRepeatActivity-' + instance).text(mOptions.msgs.msgYouScore + ': ' + score);
             }
         }
+        $eXeFlipCards.saveEvaluation(instance);
         var $marcados = $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardContainerMemory[data-number="' + number + '"]').find('.FLCDSP-Card1Memory')
         $marcados.each(function () {
             $(this).data('valid', '1');
@@ -552,6 +556,7 @@ var $eXeFlipCards = {
         } else {
             mOptions.gameActived = true;
         }
+
     },
     gameOverMemory: function (type, instance) {
         var mOptions = $eXeFlipCards.options[instance];
@@ -573,6 +578,7 @@ var $eXeFlipCards = {
                 $eXeFlipCards.initialScore = score;
             }
         }
+        $eXeFlipCards.saveEvaluation(instance);
         //$eXeFlipCards.showFeedBack(instance);
         $('#flcdsReboot-' + instance).show();
         if (mOptions.isScorm > 0 && !mOptions.repeatActivity) {
@@ -621,16 +627,7 @@ var $eXeFlipCards = {
         return (mMinutes < 10 ? "0" + mMinutes : mMinutes) + ":" + (mSeconds < 10 ? "0" + mSeconds : mSeconds);
     },
 
-    refreshCardsMemory: function (instance) {
-        var mOptions = $eXeFlipCards.options[instance],
-            $cards = $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardContainer');
-        mOptions.refreshCard = true;
-        $eXeFlipCards.setSize(instance);
-        $cards.each(function () {
-            $eXeFlipCards.showCard($(this), instance)
-        });
-        mOptions.refreshCard = false;
-    },
+
     activeHoverMemory: function ($card, instance) {
         var mOptions = $eXeFlipCards.options[instance],
             state = $card.data('state');
@@ -703,19 +700,9 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (x > 0 || y > 0) {
-                            var left = Math.round(mData.x + (x * mData.w));
-                            var top = Math.round(mData.y + (y * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,1,instance);
                         return true;
                     }
                 }).on('error', function () {
@@ -729,19 +716,9 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (x > 0 || y > 0) {
-                            var left = Math.round(mData.x + (x * mData.w));
-                            var top = Math.round(mData.y + (y * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,1, instance);
                         return true;
                     }
                 }).on('error', function () {
@@ -873,6 +850,9 @@ var $eXeFlipCards = {
                     }
 
                 }
+                if (mOptions.type < 2) {
+                    $eXeFlipCards.saveEvaluation(instance);
+                }
                 if (!mOptions.type == 2) $eXeFlipCards.showClue(instance);
             } else {
                 $(this).find('.flip-card-inner').eq(0).removeClass('flipped');
@@ -889,6 +869,7 @@ var $eXeFlipCards = {
                     $(this).find('.FLCDSP-LinkAudio-Front').show();
                 }
             }
+
             $eXeFlipCards.stopSound(instance);
             $eXeFlipCards.checkAudio($(this), 1000, instance);
         });
@@ -1061,7 +1042,7 @@ var $eXeFlipCards = {
             path = $eXeFlipCards.idevicePath,
             msgs = $eXeFlipCards.options[instance].msgs,
             html = '';
-        html += '<div class="FLCDSP-MainContainer">\
+        html += '<div class="FLCDSP-MainContainer"  id="flcdsMainContainer-' + instance + '">\
         <div class="FLCDSP-GameMinimize" id="flcdsGameMinimize-' + instance + '">\
             <a href="#" class="FLCDSP-LinkMaximize" id="flcdsLinkMaximize-' + instance + '" title="' + msgs.msgMaximize + '"><img src="' + path + 'flipcardsIcon.png"  class="FLCDSP-IconMinimize FLCDSP-Activo"  alt="">\
             <div class="FLCDSP-MessageMaximize" id="flcdsMessageMaximize-' + instance + '">' + msgs.msgPlayStart + '</div>\
@@ -1201,6 +1182,7 @@ var $eXeFlipCards = {
                 $eXeFlipCards.initialScore = $eXeFlipCards.showScoreFooter(instance);
             }
         }
+        $eXeFlipCards.saveEvaluation(instance);
         $('#flcdsReboot-' + instance).show();
         if (mOptions.isScorm > 0 && !mOptions.repeatActivity) {
             $('#flcdsReboot-' + instance).hide();
@@ -1291,10 +1273,121 @@ var $eXeFlipCards = {
         $('#flcdsLinkV-' + instance).css('opacity', 1);
         $('#flcdsLinkF-' + instance).css('opacity', 1);
         $('#flcdsRepeatActivity-' + instance).text(mOptions.msgs.msgYouScore + ': 0.00');
-
         $eXeFlipCards.refreshCards(instance);
 
     },
+    updateEvaluationIcon: function (instance) {
+        var mOptions = $eXeFlipCards.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var node = $('#nodeTitle').text(),
+                data = $eXeFlipCards.getDataStorage(mOptions.evaluationID)
+            var score = '',
+                state = 0;
+            if (!data) {
+                $eXeFlipCards.showEvaluationIcon(instance, state, score);
+                return;
+            }
+            const findObject = data.activities.find(
+                obj => obj.id == mOptions.id && obj.node === node
+            );
+            if (findObject) {
+                state = findObject.state;
+                score = findObject.score;
+            }
+            $eXeFlipCards.showEvaluationIcon(instance, state, score);
+            var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#flcdsMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+        }
+    },
+    showEvaluationIcon: function (instance, state, score) {
+        var mOptions = $eXeFlipCards.options[instance];
+        var $header = $('#flcdsGameContainer-' + instance).parents('article').find('header.iDevice_header');
+        var icon = 'exequextsq.png',
+            alt = mOptions.msgs.msgUncompletedActivity;
+        if (state == 1) {
+            icon = 'exequextrerrors.png';
+            alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+        } else if (state == 2) {
+            icon = 'exequexthits.png';
+            alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+        }
+        $('#flcdsEvaluationIcon-' + instance).remove();
+        var sicon = '<div id="flcdsEvaluationIcon-' + instance + '" class="FLCDSP-EvaluationDivIcon"><img  src="' + $eXeFlipCards.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+        $header.eq(0).append(sicon);
+        $('#flcdsEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+    },
+    updateEvaluation: function (obj1, obj2, id1) {
+        if (!obj1) {
+            obj1 = {
+                id: id1,
+                activities: []
+            };
+        }
+        const findObject = obj1.activities.find(
+            obj => obj.id === obj2.id && obj.node === obj2.node
+        );
+
+        if (findObject) {
+            findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+        } else {
+            obj1.activities.push({
+                'id': obj2.id,
+                'type': obj2.type,
+                'node': obj2.node,
+                'name': obj2.name,
+                'score': obj2.score,
+                'date': obj2.date,
+                'state': obj2.state,
+            });
+        }
+        return obj1;
+    },
+    getDateString: function () {
+        var currentDate = new Date();
+        var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+            (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+            currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+            currentDate.getHours().toString().padStart(2, '0') + ':' +
+            currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+            currentDate.getSeconds().toString().padStart(2, '0');
+        return formattedDate;
+
+    },
+
+    saveEvaluation: function (instance) {
+        var mOptions = $eXeFlipCards.options[instance],
+            score = mOptions.type > 1 ? (mOptions.hits * 10 / mOptions.realNumberCards).toFixed(2) : $eXeFlipCards.getScoreVisited(instance);
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var name = $('#flcdsGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+                node = $('#nodeTitle').text();
+            var formattedDate = $eXeFlipCards.getDateString();
+            var scorm = {
+                'id': mOptions.id,
+                'type': mOptions.msgs.msgTypeGame,
+                'node': node,
+                'name': name,
+                'score': score,
+                'date': formattedDate,
+                'state': (parseFloat(score) >= 5 ? 2 : 1)
+            }
+            var data = $eXeFlipCards.getDataStorage(mOptions.evaluationID);
+            data = $eXeFlipCards.updateEvaluation(data, scorm);
+            data = JSON.stringify(data, mOptions.evaluationID);
+            localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+            $eXeFlipCards.showEvaluationIcon(instance, scorm.state, scorm.score)
+        }
+    },
+    getDataStorage: function (id) {
+        var id = 'dataEvaluation-' + id,
+            data = $eXeFlipCards.isJsonString(localStorage.getItem(id));
+        return data;
+    },
+
     sendScore: function (instance, auto) {
         var mOptions = $eXeFlipCards.options[instance],
             score = mOptions.type > 1 ? (mOptions.hits * 10 / mOptions.realNumberCards) : $eXeFlipCards.getScoreVisited(instance);
@@ -1326,7 +1419,7 @@ var $eXeFlipCards = {
         }
         if (!auto) alert(message);
     },
-    addCards: function (cardsGame, instance, ) {
+    addCards: function (cardsGame, instance) {
         var flcds = "";
         $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardDraw').remove();
         for (var i = 0; i < cardsGame.length; i++) {
@@ -1373,8 +1466,8 @@ var $eXeFlipCards = {
     createCardMemory: function (j, card) {
         var malt = card.alt || '',
             saudio = "";
-        if (card.url.trim().length > 0 && card.eText.trim() > 0) {
-            saudio = '<a href="#" data-audio="' + card.audio + '" class="FLCDSP-LinkAudioMemroy"  title="Audio"><img src="' + $eXeFlipCards.idevicePath + 'exequextplayaudio.svg" class="FLCDSP-Audio"  alt="Audio"></a>';
+        if ( card.url.trim().length == 0 && card.eText.trim() == 0 ) {
+            saudio = '<a href="#" data-audio="' + card.audio + '" class="FLCDSP-LinkAudioMemoryBig"  title="Audio"><img src="' + $eXeFlipCards.idevicePath + 'exequextplayaudio.svg" class="FLCDSP-Audio"  alt="Audio"></a>';
         } else {
             saudio = '<a href="#" data-audio="' + card.audio + '" class="FLCDSP-LinkAudioMemory"  title="Audio"><img src="' + $eXeFlipCards.idevicePath + 'exequextplayaudio.svg" class="FLCDSP-Audio"  alt="Audio"></a>'
 
@@ -1447,7 +1540,6 @@ var $eXeFlipCards = {
             mOptions.fullscreen = false;
             $eXeFlipCards.exitFullscreen(element);
         }
-        $eXeFlipCards.refreshCards(instance)
     },
     exitFullscreen: function () {
         if (document.exitFullscreen) {
@@ -1522,6 +1614,7 @@ var $eXeFlipCards = {
             }
             return true;
         });
+        
         $('#flcdsPNumber-' + instance).text(mOptions.realNumberCards);
         $(window).on('unload', function () {
             if (typeof ($eXeFlipCards.mScorm) != "undefined") {
@@ -1534,6 +1627,7 @@ var $eXeFlipCards = {
         $('#flcdsSendScore-' + instance).click(function (e) {
             e.preventDefault();
             $eXeFlipCards.sendScore(instance, false);
+            $eXeFlipCards.saveEvaluation(instance);
         });
         $('#flcdsImage-' + instance).hide();
         window.addEventListener('resize', function () {
@@ -1585,9 +1679,10 @@ var $eXeFlipCards = {
         }
         $('#flcdsLinkFullScreen-' + instance).on('click touchstart', function (e) {
             e.preventDefault();
-            var element = document.getElementById('flcdsGameContainer-'+instance);
+            var element = document.getElementById('flcdsGameContainer-' + instance);
             $eXeFlipCards.toggleFullscreen(element, instance)
         });
+        $eXeFlipCards.updateEvaluationIcon(instance)
 
     },
     cardClick: function (cc, instance) {
@@ -1677,7 +1772,7 @@ var $eXeFlipCards = {
             }
 
         }
-
+        $eXeFlipCards.saveEvaluation(instance);
         mOptions.activeCard.find('.FLCDSP-ImageMessage').stop().fadeIn(500).delay(2000).fadeOut(500, function () {
             if (mOptions.active < mOptions.cardsGame.length - 1) {
                 message = mOptions.msgs.mgsClickCard;
@@ -1746,7 +1841,34 @@ var $eXeFlipCards = {
         return "rgb" + color;
     },
 
-    showFrontCard: function (card) {
+    positionPointerCard: function($cursor, x, y, type, instance) {
+		var mOptions = $eXeFlipCards.options[instance];
+        $cursor.hide();
+        if(x > 0 || y > 0){
+            var parentClass = type == 0 ? '.FLCDSP-ImageContain':'.FLCDSP-ImageContainMemory',
+                siblingClass = type == 0 ? '.FLCDSP-Image':'.FLCDSP-ImageMemory',
+			    containerElement= $cursor.parents(parentClass).eq(0),
+                imgElement =$cursor.siblings(siblingClass).eq(0),
+                containerPos=containerElement.offset(),
+                imgPos = imgElement.offset(),
+                marginTop = imgPos.top - containerPos.top,
+                marginLeft = imgPos.left - containerPos.left,
+                mx = marginLeft + (x * imgElement.width()),
+                my = marginTop + (y * imgElement.height());
+            $cursor.css({ left: mx, top: my, 'z-index': 30 });
+            if ($cursor.parents('.flip-card-inner').hasClass('flipped') && $cursor.hasClass('FLCDSP-Cursor-Back')){
+                $cursor.show();
+            }
+            if (!($cursor.parents('.flip-card-inner').hasClass('flipped')) && $cursor.hasClass('FLCDSP-Cursor-Front')){
+                $cursor.show();
+            }
+            if (mOptions.type == 3){
+                $cursor.show();
+            }
+        }
+	},
+
+    showFrontCard: function (card, instance) {
         var $card = card,
             $text = $card.find('.FLCDSP-EText-Front').eq(0),
             $image = $card.find('.FLCDSP-Image-Front').eq(0),
@@ -1760,7 +1882,6 @@ var $eXeFlipCards = {
             text = $text.html() || "",
             color = $text.data('color') || '#000000',
             backcolor = $text.data('backcolor') || '#ffffff';
-
         $text.hide();
         $image.hide();
         $cursor.hide();
@@ -1773,19 +1894,9 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (x > 0 || y > 0) {
-                            var left = Math.round(mData.x + (x * mData.w));
-                            var top = Math.round(mData.y + (y * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,0, instance)
                         return true;
                     }
                 }).on('error', function () {
@@ -1796,7 +1907,6 @@ var $eXeFlipCards = {
                 'color': color,
                 'background-color': $eXeFlipCards.hexToRgba(backcolor, 0.70)
             });
-
 
         } else if (text.length > 0) {
             $text.show();
@@ -1812,19 +1922,9 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (x > 0 || y > 0) {
-                            var left = Math.round(mData.x + (x * mData.w));
-                            var top = Math.round(mData.y + (y * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,0,instance)
                         return true;
                     }
                 }).on('error', function () {
@@ -1848,14 +1948,14 @@ var $eXeFlipCards = {
         }).concat(isFinite(opacity) ? opacity : 1).join(',') + ')';
     },
 
-    showBackCard: function (card) {
+    showBackCard: function (card, instance) {
         var $card = card,
             $text = $card.find('.FLCDSP-EText-Back').eq(0),
             $image = $card.find('.FLCDSP-Image-Back').eq(0),
             $audio = $card.find('.FLCDSP-LinkAudio-Back').eq(0),
             $cursor = $card.find('.FLCDSP-Cursor-Back').eq(0),
-            xb = parseFloat($image.data('x')) || 0,
-            yb = parseFloat($image.data('y')) || 0,
+            x = parseFloat($image.data('x')) || 0,
+            y = parseFloat($image.data('y')) || 0,
             url = $image.data('url') || '',
             alt = $image.attr('alt') || "No disponible",
             audio = $audio.data('audio') || '',
@@ -1873,19 +1973,9 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (xb > 0 || yb > 0) {
-                            var left = Math.round(mData.x + (xb * mData.w));
-                            var top = Math.round(mData.y + (yb * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,0, instance)
                         return true;
                     }
                 }).on('error', function () {
@@ -1896,7 +1986,6 @@ var $eXeFlipCards = {
                 'color': color,
                 'background-color': $eXeFlipCards.hexToRgba(backcolor, 0.70)
             });
-
 
         } else if (text.length > 0) {
             $text.show();
@@ -1912,38 +2001,26 @@ var $eXeFlipCards = {
                     if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                         $cursor.hide();
                     } else {
-                        var mData = $eXeFlipCards.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeFlipCards.drawImage(this, mData);
                         $image.show();
                         $cursor.hide();
-                        if (xb > 0 || yb > 0) {
-                            var left = Math.round(mData.x + (xb * mData.w));
-                            var top = Math.round(mData.y + (yb * mData.h));
-                            $cursor.css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $cursor.show();
-                        }
+                        $eXeFlipCards.positionPointerCard($cursor,x,y,0,instance)
                         return true;
                     }
                 }).on('error', function () {
                     //$cursor.hide();
                 });
         }
-
         $audio.removeClass('FLCDSP-LinkAudioBig');
         if (audio.length > 0) {
             if (url.trim().length == 0 && text.trim().length == 0) {
                 $audio.addClass('FLCDSP-LinkAudioBig')
             }
-
         }
     },
-    showCard: function (card, instance) {
-        $eXeFlipCards.showFrontCard(card);
-        $eXeFlipCards.showBackCard(card);
 
+    showCard: function (card, instance) {
+        $eXeFlipCards.showFrontCard(card, instance);
+        $eXeFlipCards.showBackCard(card, instance);
     },
 
     alfaBColor: function (bcolor) {
@@ -1951,14 +2028,34 @@ var $eXeFlipCards = {
         return newBGColor
     },
 
+    refreshCardsMemory: function (instance) {
+        var mOptions = $eXeFlipCards.options[instance],
+            $cards = $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardContainer');
+        mOptions.refreshCard = true;
+        $eXeFlipCards.setSize(instance);
+        $cards.each(function () {
+            $eXeFlipCards.showCard($(this), instance)
+        });
+        mOptions.refreshCard = false;
+    },
+
     refreshCards: function (instance) {
         var mOptions = $eXeFlipCards.options[instance],
-            $flcds = $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardDraw');
+            $flcds = $('#flcdsMultimedia-' + instance).find('.FLCDSP-CardDraw')
         mOptions.refreshCard = true;
         $eXeFlipCards.setSize(instance);
         $flcds.each(function () {
-            $eXeFlipCards.showCard($(this), instance);
-
+            var $card= $(this),
+                $imageF = $card.find('.FLCDSP-Image-Front').eq(0),
+                $cursorF = $card.find('.FLCDSP-Cursor-Front').eq(0),
+                xF = parseFloat($imageF.data('x')) || 0,
+                yF = parseFloat($imageF.data('y')) || 0;
+            $eXeFlipCards.positionPointerCard($cursorF,xF,yF,0,instance)
+            var $imageB = $card.find('.FLCDSP-Image-Back').eq(0),
+                $cursorB = $card.find('.FLCDSP-Cursor-Back').eq(0),
+                xB = parseFloat($imageB.data('x')) || 0,
+                yB = parseFloat($imageB.data('y')) || 0;
+            $eXeFlipCards.positionPointerCard($cursorB,xB,yB,0,instance)
         });
         if (mOptions.type == 1) {
             var audio = mOptions.activeCard.find('.FLCDSP-LinkAudio-Front').data('audio');
@@ -1983,14 +2080,11 @@ var $eXeFlipCards = {
 
     setSize: function (instance) {
         var mOptions = $eXeFlipCards.options[instance],
-            fontsz = 26;
-
-        var $pw = $('#flcdsGameButtons-' + instance).parents('.FLCDSP-MainContainer').eq(0).width();
-        var swidth = $pw < 450 ? $pw * 0.8 : 300;
+            fontsz = 26,
+            $pw = $('#flcdsGameButtons-' + instance).parents('.FLCDSP-MainContainer').eq(0).width(),
+            swidth = $pw < 450 ? $pw * 0.8 : 300;
         swidth = swidth > 300 ? 300 : swidth;
         if (mOptions.type == 1 || mOptions.type == 2) {
-
-
             if ($pw > 450) {
                 $('#flcdsGameButtons-' + instance).removeClass('FLCDSP-GameButtons-Movil');
                 $('.FLCDSP-GameContainer').find('div.exeQuextButtonsF').removeClass('exeQuextButtonsF-movil');
@@ -2014,19 +2108,15 @@ var $eXeFlipCards = {
             $('#flcdsGameButtons-' + instance).height($('#flcdsMultimedia-' + instance).find('.FLCDSP-CardDraw').eq(0).height());
 
         }
-
         $('#flcdsMultimedia-' + instance).find('.flip-card').each(function () {
             $(this).width(swidth);
             $(this).height(swidth);
-        })
-
+        });
 
         $('#flcdsMultimedia-' + instance).find('.flip-card-back').each(function () {
             $eXeFlipCards.textfill(this, fontsz, instance);
 
-        })
-
-
+        });
         $('#flcdsMultimedia-' + instance).find('.flip-card-front').each(function () {
             $eXeFlipCards.textfill(this, fontsz, instance);
 
@@ -2057,12 +2147,9 @@ var $eXeFlipCards = {
         if ($eXeFlipCards.hasLATEX) {
             $eXeFlipCards.updateLatex('flcdsMultimedia-' + instance);
         }
-
-
     },
 
     isMobile: function () {
-
         return (navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/BlackBerry/i) ||
             navigator.userAgent.match(/iPhone|iPad|iPod/i) || navigator.userAgent.match(/Opera Mini/i) ||
             navigator.userAgent.match(/IEMobile/i))
@@ -2071,24 +2158,6 @@ var $eXeFlipCards = {
     shuffleAds: function (arr) {
         for (var j, x, i = arr.length; i; j = parseInt(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
         return arr;
-    },
-
-    paintMouse: function (image, cursor, x, y) {
-        x = parseFloat(x) || 0;
-        y = parseFloat(y) || 0;
-        $(cursor).hide();
-        if (x > 0 || y > 0) {
-            var wI = $(image).width() > 0 ? $(image).width() : 1,
-                hI = $(image).height() > 0 ? $(image).height() : 1,
-                lI = $(image).position().left + (wI * x),
-                tI = $(image).position().top + (hI * y);
-            $(cursor).css({
-                left: lI + 'px',
-                top: tI + 'px',
-                'z-index': 230
-            });
-            $(cursor).show();
-        }
     },
 
     loadMathJax: function () {
@@ -2133,41 +2202,6 @@ var $eXeFlipCards = {
         $flcdsMessage.show();
     },
 
-    drawImage: function (image, mData) {
-        $(image).css({
-            'left': mData.x + 'px',
-            'top': mData.y + 'px',
-            'width': mData.w + 'px',
-            'height': mData.h + 'px'
-        });
-    },
-
-    placeImageWindows: function (image, naturalWidth, naturalHeight) {
-        var wDiv = $(image).parent().width() > 0 ? $(image).parent().width() : 1,
-            hDiv = $(image).parent().height() > 0 ? $(image).parent().height() : 1,
-            varW = naturalWidth / wDiv,
-            varH = naturalHeight / hDiv,
-            wImage = wDiv,
-            hImage = hDiv,
-            xImagen = 0,
-            yImagen = 0;
-        if (varW > varH) {
-            wImage = parseInt(wDiv);
-            hImage = parseInt(naturalHeight / varW);
-            yImagen = parseInt((hDiv - hImage) / 2);
-        } else {
-            wImage = parseInt(naturalWidth / varH);
-            hImage = parseInt(hDiv);
-            xImagen = parseInt((wDiv - wImage) / 2);
-        }
-        return {
-            w: wImage,
-            h: hImage,
-            x: xImagen,
-            y: yImagen
-        }
-    },
-
     supportedBrowser: function (idevice) {
         var ua = window.navigator.userAgent,
             msie = ua.indexOf('MSIE '),
@@ -2182,6 +2216,7 @@ var $eXeFlipCards = {
         }
         return sp;
     },
+
     getURLAudioMediaTeca: function (url) {
         if (url) {
             var matc = url.indexOf("https://mediateca.educa.madrid.org/audio/") != -1;
@@ -2203,11 +2238,12 @@ var $eXeFlipCards = {
             return false;
         }
     },
+    
     extractURLGD: function (urlmedia) {
         var sUrl = urlmedia;
         if (urlmedia.toLowerCase().indexOf("https://drive.google.com") == 0 && urlmedia.toLowerCase().indexOf("sharing") != -1) {
             sUrl = sUrl.replace(/https:\/\/drive\.google\.com\/file\/d\/(.*?)\/.*?\?usp=sharing/g, "https://docs.google.com/uc?export=open&id=$1");
-        }else if (typeof urlmedia != "undefined" && urlmedia.length > 10 && $eXeFlipCards.getURLAudioMediaTeca(urlmedia)) {
+        } else if (typeof urlmedia != "undefined" && urlmedia.length > 10 && $eXeFlipCards.getURLAudioMediaTeca(urlmedia)) {
             sUrl = $eXeFlipCards.getURLAudioMediaTeca(urlmedia);
         }
         return sUrl;
@@ -2216,3 +2252,4 @@ var $eXeFlipCards = {
 $(function () {
     $eXeFlipCards.init();
 });
+

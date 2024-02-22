@@ -191,6 +191,10 @@ var $eXeRosco = {
 		mOptions.playerAudio = "";
 		mOptions.gameOver = false;
 		mOptions.modeBoard = typeof mOptions.modeBoard == "undefined" ? false : mOptions.modeBoard;
+		mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+		mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
+
 		imgsLink.each(function (index) {
 			mOptions.wordsGame[index].url = $(this).attr('href');
 			if (mOptions.wordsGame[index].url.length < 4) {
@@ -259,10 +263,10 @@ var $eXeRosco = {
 						<div class="sr-av">' + msgs.msgClue + ':</div>\
 						<p class="rosco-PShowClue rosco-parpadea" id="roscoPShowClue-' + instance + '"></p>\
 			   		</div>\
-					<div class="rosco-Multimedia" id="roscoMultimedia-' + instance + '">\
+					<div class="rosco-MultimediaNeo" id="roscoMultimedia-' + instance + '">\
 						<div class="rosco-Protector" id="roscoProtector-' + instance + '"></div>\
 						<img src="' + path + 'exequextcursor.gif" class="rosco-Cursor" alt="" id="roscoCursor-' + instance + '"/> \
-						<img src="" class="rosco-Image" alt="' + msgs.msgNoImage + '" id="roscoHomeImage-' + instance + '"/> \
+						<img src="" class="rosco-ImageNeo" alt="' + msgs.msgNoImage + '" id="roscoImage-' + instance + '"/> \
 						<img src="' + path + 'roscoHome.png" class="rosco-NoImage" alt="' + msgs.msgNoImage + '" id="roscoNoImage-' + instance + '"/> \
 						<a href="#" class="rosco-LinkAudio" id="roscoLinkAudio-' + instance + '" title="' + msgs.msgAudio + '"><img src="' + path + 'exequextaudio.png" alt="' + msgs.msgAudio + '"></a>\
 					</div>\
@@ -275,6 +279,7 @@ var $eXeRosco = {
 					</div>\
 					<div class="sr-av" id="roscoStartGameSRAV-' + instance + '">' + msgs.msgPlayStart + ':</div>\
 					<div class="rosco-StartGame"><a href="#" id="roscoStartGame-' + instance + '"></a></div>\
+					<div class="rosco-StartGame"><a href="#" id="roscoShowWords-' + instance + '" style="display:none">' + msgs.msgShowWords + '</a></div>\
 					<div class= "rosco-QuestionDiv" id="roscoQuestionDiv-' + instance + '">\
 						<div  class="rosco-TypeDefinition"  id="roscoTypeDefinition-' + instance + '">\
 							<p  id="roscoPStartWith-' + instance + '">' + msgs.msgStartWith + '</p>\
@@ -295,6 +300,11 @@ var $eXeRosco = {
 							</a>\
 						</div>\
 					</div>\
+					<div class="rosco-DivModeBoard" id="roscoDivModeBoard-' + instance + '">\
+						<a href="#" class="rosco-ModeBoard" id="roscoModeBoardOK-' + instance + '" title="">' + msgs.msgCorrect + '</a>\
+						<a href="#" class="rosco-ModeBoard" id="roscoModeBoardMoveOn-' + instance + '" title="">' + msgs.msgMoveOne + '</a>\
+						<a href="#" class="rosco-ModeBoard" id="roscoModeBoardKO-' + instance + '" title="">' + msgs.msgIncorrect + '</a>\
+					</div>\
 					<div class="rosco-DivInstructions" id="roscoDivInstructions-' + instance + '">' + msgs.msgWrote + '</div>\
 				</div>\
 				<div id="roscoGame-' + instance + '"class="rosco-Game">\
@@ -313,13 +323,18 @@ var $eXeRosco = {
 							</a>\
 						</div>\
 					</div>\
+					<div class="rosco-ShowWordsDiv" id="roscoShowWordsDiv-' + instance + '">\
+						<div class="rosco-ShowAnswerDiv">\
+							<a href="#" id="roscoShowAll-' + instance + '">' + msgs.msgAll + '</a>\
+							<a href="#" id="roscoShowHits-' + instance + '">' + msgs.msgHits + '</a>\
+							<a href="#" id="roscoShowErrors-' + instance + '">' + msgs.msgErrors + '</a>\
+							<a href="#" id="roscoShowUnanswered-' + instance + '">' + msgs.msgUnanswered + '</a>\
+						</div>\
+						<div class="rosco-Words" id="roscoWords-' + instance + '"></div>\
+					    <a href="#"  class="rosco-WordsClose" id="roscoWordsClose-' + instance + '" title=""><strong>' + msgs.msgClose + '</strong></a>\
+					</div>\
                 </div>\
             </div>\
-			</div>\
-			<div class="rosco-DivModeBoard" id="roscoDivModeBoard-' + instance + '">\
-				<a href="#" class="rosco-ModeBoard" id="roscoModeBoardOK-' + instance + '" title="">' + msgs.msgCorrect + '</a>\
-				<a href="#" class="rosco-ModeBoard" id="roscoModeBoardMoveOn-' + instance + '" title="">' + msgs.msgMoveOne + '</a>\
-				<a href="#" class="rosco-ModeBoard" id="roscoModeBoardKO-' + instance + '" title="">' + msgs.msgIncorrect + '</a>\
 			</div>\
 			' + this.addButtonScore(instance) +
 			'</div>';
@@ -331,6 +346,49 @@ var $eXeRosco = {
 			return;
 		}
 		$('#roscoCubierta-' + instance).fadeIn();
+	},
+	renderWords: function (instance, type, mode) {
+		mOptions = $eXeRosco.options[instance],
+		words = mOptions.wordsGame;
+		if(!type){
+			$('#roscoCubierta-' + instance).slideUp();
+			$('#roscoShowWordsDiv-' + instance).slideUp();
+			$('#roscoShowWords-' + instance).show();
+			return;
+		}
+		var $links = $('#roscoCubierta-' + instance).find('.rosco-ShowAnswerDiv').find('a');
+			$links.removeClass('rosco-ModeShow');
+			$links.eq(mode).addClass('rosco-ModeShow');
+		var $wordsDiv = $('#roscoWords-' + instance);
+		$wordsDiv.empty();
+		var j = 0;
+		$.each(words, function(index, wordObj) {
+			if(wordObj.word && wordObj.word.trim().length > 0){
+				if (mode == 1 && wordObj.correct != 1) return;
+				if (mode == 2 && wordObj.correct != 2) return;
+				if (mode == 3 && wordObj.correct != 0) return;
+				var className = "rosco-unanswered";
+				if(wordObj.correct == 1){
+					className = "rosco-correct"
+				} else if(wordObj.correct == 2){
+					className = "rosco-incorrect"
+				}
+				var typeText = wordObj.type === 0 ? mOptions.msgs.msgStartWith : mOptions.msgs.msgContaint;
+				typeText = typeText.replace('%1', wordObj.letter);
+				let bgColorClass = j % 2 === 0 ? 'rosco-bg-gray-1' : 'rosco-bg-gray-2'; // Alternar fondo
+				let paragraph = `<p class="${className} ${bgColorClass}"><span>${typeText}. ${wordObj.word}</span>: ${wordObj.definition}`;
+				if (wordObj.audio) {
+					paragraph += `<img src="${$eXeRosco.idevicePath}exequextaudio.png" class="rosco-audioicon" data-audio="${wordObj.audio}" alt="${mOptions.msgs.msgAudio}" />`;
+				}
+				paragraph += '</p>';
+				$wordsDiv.append(paragraph);
+				j++;
+			}
+		});
+		$('#roscoShowWords-' + instance).hide();
+		$('#roscoCodeAccessDiv-' + instance).hide();
+		$('#roscoCubierta-' + instance).show();
+		$('#roscoShowWordsDiv-' + instance).slideDown();
 	},
 	changeTextInit: function (big, message, instance) {
 		var html = message;
@@ -367,6 +425,121 @@ var $eXeRosco = {
 		}
 		return butonScore;
 	},
+	updateEvaluationIcon: function (instance) {
+		var mOptions = $eXeRosco.options[instance];
+		if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+			var node = $('#nodeTitle').text(),
+				data = $eXeRosco.getDataStorage(mOptions.evaluationID)
+			var score = '',
+				state = 0;
+			if (!data) {
+				$eXeRosco.showEvaluationIcon(instance, state, score);
+				return;
+			}
+			const findObject = data.activities.find(
+				obj => obj.id == mOptions.id && obj.node === node
+			);
+			if (findObject) {
+				state = findObject.state;
+				score = findObject.score;
+			}
+			$eXeRosco.showEvaluationIcon(instance, state, score);
+			var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#roscoMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+
+		}
+	},
+	showEvaluationIcon: function (instance, state, score) {
+		var mOptions = $eXeRosco.options[instance];
+		var $header = $('#roscoGameContainer-' + instance).parents('article').find('header.iDevice_header');
+		var icon = 'exequextsq.png',
+			alt = mOptions.msgs.msgUncompletedActivity;
+		if (state == 1) {
+			icon = 'exequextrerrors.png';
+			alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+		} else if (state == 2) {
+			icon = 'exequexthits.png';
+			alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+		}
+		$('#roscoEvaluationIcon-' + instance).remove();
+		var sicon = '<div id="roscoEvaluationIcon-' + instance + '" class="rosco-EvaluationDivIcon"><img  src="' + $eXeRosco.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+		$header.eq(0).append(sicon);
+		$('#roscoEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+	},
+	updateEvaluation: function (obj1, obj2, id1) {
+		if (!obj1) {
+			obj1 = {
+				id: id1,
+				activities: []
+			};
+		}
+		const findObject = obj1.activities.find(
+			obj => obj.id === obj2.id && obj.node === obj2.node
+		);
+
+		if (findObject) {
+			findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+		} else {
+			obj1.activities.push({
+				'id': obj2.id,
+				'type': obj2.type,
+				'node': obj2.node,
+				'name': obj2.name,
+				'score': obj2.score,
+				'date': obj2.date,
+				'state': obj2.state,
+			});
+		}
+		return obj1;
+	},
+	getDateString: function () {
+        var currentDate = new Date();
+        var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+            (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+            currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+            currentDate.getHours().toString().padStart(2, '0') + ':' +
+            currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+            currentDate.getSeconds().toString().padStart(2, '0');
+        return formattedDate;
+
+    },
+
+	saveEvaluation: function (instance) {
+		var mOptions = $eXeRosco.options[instance];
+		if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+			var name = $('#roscoGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+				node = $('#nodeTitle').text(),
+				score = ((mOptions.hits * 10) / mOptions.validWords).toFixed(2),
+				formattedDate = $eXeRosco.getDateString(),
+				scorm = {
+					'id': mOptions.id,
+					'type': mOptions.msgs.msgTypeGame,
+					'node': node,
+					'name': name,
+					'score': score,
+					'date': formattedDate,
+					'state': (parseFloat(score) >= 5 ? 2 : 1)
+				}
+			var data = $eXeRosco.getDataStorage(mOptions.evaluationID);
+			data = $eXeRosco.updateEvaluation(data, scorm);
+			data = JSON.stringify(data, mOptions.evaluationID);
+			localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+			$eXeRosco.showEvaluationIcon(instance, scorm.state, scorm.score)
+		}
+
+
+	},
+	getDataStorage: function (id) {
+		var id = 'dataEvaluation-' + id,
+			data = $eXeRosco.isJsonString(localStorage.getItem(id));
+		return data;
+	},
+
 	sendScore: function (instance, auto) {
 		var mOptions = $eXeRosco.options[instance],
 			message = '',
@@ -422,7 +595,7 @@ var $eXeRosco = {
 
 	addEvents: function (instance) {
 		var mOptions = $eXeRosco.options[instance];
-		$('#roscoHomeImage-' + instance).hide();
+		$('#roscoImage-' + instance).hide();
 		$('#roscoCursor-' + instance).hide();
 		$('#roscoQuestionDiv-' + instance).hide();
 		$('#roscoStartGame-' + instance).show();
@@ -482,9 +655,12 @@ var $eXeRosco = {
 		var mTime = mOptions.durationGame,
 			sTime = $eXeRosco.getTimeToString(mTime),
 			altTurn = mOptions.numberTurns === 1 ? mOptions.msgOneRound : mOptions.msgTowRounds;
-		if (mOptions.numberTurns === 1) {
+		if (mOptions.numberTurns === 0) {
+            $('#roscoNumberRounds-' + instance).hide();
+            $('#roscoNumberRoundsSpan-' + instance).hide();
+        } else if (mOptions.numberTurns === 1) {
 			$('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-OneRound").removeClass("exeQuextIcons-TwoRounds").attr('alt', 'One turn');
-		} else {
+		} else if (mOptions.numberTurns === 2) {
 			$('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-TwoRounds").removeClass("exeQuextIcons-OneRound").attr('alt', 'Two turns');
 		}
 		$('#roscoNumberRoundsSpan-' + instance).text(altTurn);
@@ -539,6 +715,7 @@ var $eXeRosco = {
 		$("#roscoSendScore-" + instance).click(function (e) {
 			e.preventDefault();
 			$eXeRosco.sendScore(instance, false);
+			$eXeRosco.saveEvaluation(instance);
 		});
 		if (mOptions.isScorm > 0) {
 			$eXeRosco.updateScorm($eXeRosco.previousScore, mOptions.repeatActivity, instance);
@@ -568,7 +745,7 @@ var $eXeRosco = {
 				$('#roscoGame-' + instance).hide();
 				$('#roscoTypeGame-' + instance).hide();
 			}
-			$eXeRosco.refreshImageActive(instance);
+			$eXeRosco.refreshImageActiveNeo(instance);
 		});
 
 		$('#roscoLinkAudio-' + instance).on('click', function (e) {
@@ -597,8 +774,37 @@ var $eXeRosco = {
 			e.preventDefault();
 			$eXeRosco.passWord(instance);
 		});
+		$('#roscoShowWords-' + instance).on('click', function (e) {
+			e.preventDefault();
+			$eXeRosco.renderWords(instance, true, 0);
+		});
+		$('#roscoWordsClose-' + instance).on('click', function (e) {
+			e.preventDefault();
+			$eXeRosco.renderWords(instance, false, 0);
+		});
+		$("#roscoShowAll-" + instance).click(function(e) {
+			e.preventDefault(); 
+			$eXeRosco.renderWords(instance, true, 0);
+		});
+		$("#roscoShowHits-" + instance).click(function(e) {
+			e.preventDefault();
+			$eXeRosco.renderWords(instance, true, 1);
+		});
+		$("#roscoShowErrors-" + instance).click(function(e) {
+			e.preventDefault();
+			$eXeRosco.renderWords(instance, true, 2);
+		});
+		$("#roscoShowUnanswered-" + instance).click(function(e) {
+			e.preventDefault();
+			$eXeRosco.renderWords(instance, true, 3);
+		});
+		$('#roscoCubierta-' + instance).on('click', '.rosco-audioicon', function(e) {
+			e.preventDefault();
+			var audioSrc = $(this).data('audio');
+			new Audio(audioSrc).play()
+		});
 
-
+		$eXeRosco.updateEvaluationIcon(instance);
 	},
 
 	startGame: function (instance) {
@@ -610,6 +816,7 @@ var $eXeRosco = {
 		$('#roscoCodeAccessDiv-' + instance).hide();
 		$('#roscoQuestionDiv-' + instance).show();
 		$('#roscoDivInstructions-' + instance).hide();
+		$('#roscoShowWords-' + instance).hide();
 		mOptions.obtainedClue = false;
 		mOptions.hits = 0;
 		mOptions.solucion = '';
@@ -625,6 +832,7 @@ var $eXeRosco = {
 		for (var i = 0; i < mOptions.wordsGame.length; i++) {
 			mOptions.wordsGame[i].state = mOptions.wordsGame[i].word.trim().length == 0 ? 0 : 1;
 			var mBackColor = $eXeRosco.colors.black;
+			mOptions.wordsGame[i].correct = 0;
 			if (mOptions.wordsGame[i].state == 1) {
 				mOptions.validWords++;
 				mBackColor = $eXeRosco.colors.blue;
@@ -657,9 +865,12 @@ var $eXeRosco = {
 		var mTime = mOptions.durationGame,
 			sTime = $eXeRosco.getTimeToString(mTime),
 			altTurn = mOptions.numberTurns === 1 ? mOptions.msgOneRound : mOptions.msgTowRounds;
-		if (mOptions.numberTurns === 1) {
+		if (mOptions.numberTurns === 0) {
+			$('#roscoNumberRounds-' + instance).hide();
+			$('#roscoNumberRoundsSpan-' + instance).hide();
+        } else if (mOptions.numberTurns === 1) {
 			$('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-OneRound").removeClass("exeQuextIcons-TwoRounds").attr('alt', 'One turn');
-		} else {
+		} else if (mOptions.numberTurns === 2) {
 			$('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-TwoRounds").removeClass("exeQuextIcons-OneRound").attr('alt', 'Two turns');
 		}
 		$('#roscoNumberRoundsSpan-' + instance).text(altTurn);
@@ -712,7 +923,7 @@ var $eXeRosco = {
 		$eXeRosco.drawRosco(instance);
 		$eXeRosco.drawText(msgs.msgGameOver, $eXeRosco.colors.red, instance);
 		$('#roscoEdReply-' + instance).val('');
-		$eXeRosco.showImage('', 0, 0, '', '', instance);
+		$eXeRosco.showImageNeo('', instance);
 		mOptions.gameStarted = false;
 		if (mOptions.isScorm == 1) {
 			if (mOptions.repeatActivity || $eXeRosco.initialScore === '') {
@@ -722,9 +933,11 @@ var $eXeRosco = {
 				$eXeRosco.initialScore = score;
 			}
 		}
+		$eXeRosco.saveEvaluation(instance);
 		$('#roscoPMessages-' + instance).text(msg).css("color", $eXeRosco.colors.blackl);
 		$eXeRosco.stopSound(instance);
 		$('#roscoLinkAudio-' + instance).hide();
+		$('#roscoShowWords-' + instance).show();
 	},
 
 	drawText: function (texto, color, instance) {
@@ -752,12 +965,20 @@ var $eXeRosco = {
 		ctxt.closePath();
 		$('#roscoPMessages-' + instance).css("color", color).text(texto);
 	},
-
+	getRandomDefinition:function(definition) {
+		var array = definition.split('|');
+		if (array.length > 1) {
+			var index = Math.floor(Math.random() * array.length);
+			return array[index].trim();
+		} else {
+			return definition;
+		}
+	},
 	showWord: function (activeLetter, instance) {
 		var mOptions = $eXeRosco.options[instance],
 			msgs = mOptions.msgs,
 			mWord = mOptions.wordsGame[activeLetter],
-			definition = mWord.definition,
+			definition = $eXeRosco.getRandomDefinition(mWord.definition),
 			letter = $eXeRosco.getRealLetter(mOptions.letters.charAt(activeLetter)),
 			start = mWord.type == 0 ? msgs.msgStartWith : msgs.msgContaint;
 		start = start.replace('%1', letter);
@@ -771,7 +992,7 @@ var $eXeRosco = {
 		$eXeRosco.options[instance].gameActived = true;
 		$('#roscoBtnReply-' + instance).prop('disabled', false);
 		$('#roscoBtnMoveOn-' + instance).prop('disabled', false);
-		$eXeRosco.showImage(mWord.url, mWord.x, mWord.y, mWord.author, mWord.alt, instance);
+		$eXeRosco.showImageNeo(mWord.url, instance);
 		$('#roscoEdReply-' + instance).prop('disabled', false).focus();
 		if (mOptions.isScorm == 1) {
 			if (mOptions.repeatActivity || $eXeRosco.initialScore === '') {
@@ -781,6 +1002,7 @@ var $eXeRosco = {
 
 			}
 		}
+		$eXeRosco.saveEvaluation(instance);
 		if (mWord.audio.length > 4) {
 			$('#roscoLinkAudio-' + instance).show();
 		}
@@ -804,10 +1026,7 @@ var $eXeRosco = {
 		var mOptions = $eXeRosco.options[instance];
 		selectedFile = $eXeRosco.extractURLGD(selectedFile);
 		mOptions.playerAudio = new Audio(selectedFile);
-		mOptions.playerAudio.addEventListener("canplaythrough", function (event) {
-			mOptions.playerAudio.play();
-		});
-
+		mOptions.playerAudio.play().catch(error => console.error("Error playing audio:", error));
 	},
 	stopSound: function (instance) {
 		var mOptions = $eXeRosco.options[instance];
@@ -816,10 +1035,12 @@ var $eXeRosco = {
 		}
 	},
 
-	showImage: function (url, x, y, author, alt, instance) {
-		var $cursor = $('#roscoCursor-' + instance),
+	showImageNeo: function (url, instance) {
+		var mOptions = $eXeRosco.options[instance],
+			mWord = mOptions.wordsGame[mOptions.activeWord],
+		    $cursor = $('#roscoCursor-' + instance),
 			$noImage = $('#roscoNoImage-' + instance),
-			$Image = $('#roscoHomeImage-' + instance),
+			$Image = $('#roscoImage-' + instance),
 			$Author = $('#roscoAuthor-' + instance);
 		$Image.attr('alt', 'No image');
 		$cursor.hide();
@@ -832,24 +1053,22 @@ var $eXeRosco = {
 			$Author.text('');
 			return false;
 		};
-		$Image.prop('src', url)
+		$Image.attr('src', ''); 
+		$Image.attr('src', url)
 			.on('load', function () {
 				if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
 					$cursor.hide();
 					$Image.hide();
 					$noImage.show();
 					$Author.text('');
-					return false;
 				} else {
-					var mData = $eXeRosco.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-					$eXeRosco.drawImage(this, mData);
 					$Image.show();
 					$cursor.show();
 					$noImage.hide();
-					$Author.text(author);
-					$Image.attr('alt', alt);
-					$eXeRosco.paintMouse(this, $cursor, x, y);
-					return true;
+					$Author.text(mWord.author);
+					$Image.attr('alt', mWord.alt);
+					$eXeRosco.positionPointer(instance);
+					console.log('showImage: imagen cargada', url)
 				}
 			}).on('error', function () {
 				$cursor.hide();
@@ -860,63 +1079,31 @@ var $eXeRosco = {
 			});
 	},
 
-	drawImage: function (image, mData) {
-		$(image).css({
-			'left': mData.x + 'px',
-			'top': mData.y + 'px',
-			'width': mData.w + 'px',
-			'height': mData.h + 'px'
-		});
-	},
-
-	paintMouse: function (image, cursor, x, y) {
-		x = parseFloat(x) || 0;
-		y = parseFloat(y) || 0;
-		$(cursor).hide();
-		if (x > 0 || y > 0) {
-			var wI = $(image).width() > 0 ? $(image).width() : 1,
-				hI = $(image).height() > 0 ? $(image).height() : 1,
-				lI = $(image).position().left + (wI * x),
-				tI = $(image).position().top + (hI * y);
-			$(cursor).css({
-				left: lI + 'px',
-				top: tI + 'px',
-				'z-index': 3000
-			});
-			$(cursor).show();
-		}
-	},
-
-	placeImageWindows: function (image, naturalWidth, naturalHeight) {
-		var wDiv = $(image).parent().width() > 0 ? $(image).parent().width() : 1,
-			hDiv = $(image).parent().height() > 0 ? $(image).parent().height() : 1,
-			varW = naturalWidth / wDiv,
-			varH = naturalHeight / hDiv,
-			wImage = wDiv,
-			hImage = hDiv,
-			xImagen = 0,
-			yImagen = 0;
-		if (varW > varH) {
-			wImage = parseInt(wDiv);
-			hImage = parseInt(naturalHeight / varW);
-			yImagen = parseInt((hDiv - hImage) / 2);
-		} else {
-			wImage = parseInt(naturalWidth / varH);
-			hImage = parseInt(hDiv);
-			xImagen = parseInt((wDiv - wImage) / 2);
-		}
-		return {
-			w: wImage,
-			h: hImage,
-			x: xImagen,
-			y: yImagen
+	 positionPointer: function(instance) {
+		var mOptions = $eXeRosco.options[instance],
+			mWord = mOptions.wordsGame[mOptions.activeWord],
+		    x = parseFloat(mWord.x) || 0;
+		    y = parseFloat(mWord.y) || 0, 
+			$cursor=$('#roscoCursor-' + instance);
+			$cursor.hide();
+		if(x > 0 || y > 0){
+			var containerElement = document.getElementById('roscoMultimedia-' + instance),
+			    containerPos = containerElement.getBoundingClientRect(),
+			    imgElement = document.getElementById('roscoImage-' + instance),
+			    imgPos = imgElement.getBoundingClientRect(),
+  		        marginTop = imgPos.top - containerPos.top,
+			    marginLeft = imgPos.left - containerPos.left,
+			    x = marginLeft + (x * imgPos.width),
+			    y = marginTop + (y * imgPos.height);
+				$cursor.show();
+				$cursor.css({ left: x, top: y, 'z-index': 30 });
 		}
 	},
 
 	newWord: function (instance) {
-		var mOptions = $eXeRosco.options[instance],
-			mActiveWord = $eXeRosco.updateNumberWord(mOptions.activeWord, instance);
+		var mOptions = $eXeRosco.options[instance];
 		if (mOptions.gameOver) return;
+		var mActiveWord = $eXeRosco.updateNumberWord(mOptions.activeWord, instance);
 		if (mActiveWord == -10) {
 			$eXeRosco.gameOver(0, instance);
 		} else {
@@ -925,35 +1112,40 @@ var $eXeRosco = {
 		}
 	},
 
-	refreshImageActive: function (instance) {
+	refreshImageActiveNeo: function (instance) {
 		var mOptions = $eXeRosco.options[instance],
-			mWord = mOptions.wordsGame[mOptions.activeWord];
-
-		$eXeRosco.showImage('', 0, 0, '', '', instance)
-		if (typeof mWord == "undefined") {
-			return;
+			mWord = mOptions.wordsGame[mOptions.activeWord],
+			imgElement = $('img#roscoImage-'+instance)[0];
+		if (typeof mWord !== "undefined" && mWord.url && mWord.url.length > 3 ) {
+			if (!imgElement.complete && (!imgElement.src ||imgElement.src === '')) {
+				$eXeRosco.showImageNeo(mWord.url, instance);
+			}else{
+				$('#roscoCursor-' + instance).hide();
+				setTimeout(function(){
+					$eXeRosco.positionPointer(instance)
+				}, 1000)
+			}
 		}
-		if (mWord.url.length > 3) {
-			$eXeRosco.showImage(mWord.url, mWord.x, mWord.y, mWord.author, mWord.alt, instance);
-		}
-
-	},
+    },
 	updateNumberWord: function (quextion, instance) {
 		var end = true,
 			numActiveWord = quextion,
 			mOptions = $eXeRosco.options[instance];
+			
 		while (end) {
 			numActiveWord++;
 			if (numActiveWord > mOptions.letters.length - 1) {
-				if (mOptions.activeGameSpin < mOptions.numberTurns) {
+				if (mOptions.numberTurns ==0 || mOptions.activeGameSpin < mOptions.numberTurns) {
 					if (mOptions.answeredWords >= mOptions.validWords) {
 						end = false
 						return -10;
 					}
-					mOptions.activeGameSpin++;
-					$('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-OneRound").removeClass("exeQuextIcons-TwoRounds").attr('alt', 'Two turns');
-					$('#roscoNumberRoundsSpan-' + instance).text(mOptions.msgOneRound);
-					numActiveWord = 0;
+					if(mOptions.numberTurns > 0){
+						mOptions.activeGameSpin++;
+                        $('#roscoNumberRounds-' + instance).addClass("exeQuextIcons-OneRound").removeClass("exeQuextIcons-TwoRounds").attr('alt', 'Two turns');
+                        $('#roscoNumberRoundsSpan-' + instance).text(mOptions.msgOneRound);
+                    }
+					 numActiveWord = 0;
 				} else {
 					end = false
 					return -10;
@@ -1025,6 +1217,7 @@ var $eXeRosco = {
 			mFontColor = $eXeRosco.colors.white;
 			mBackColor = $eXeRosco.colors.red;
 		}
+		mOptions.wordsGame[mOptions.activeWord].correct = Hit ? 1 : 2;
 		var percentageHits = (mOptions.hits / mOptions.validWords) * 100;
 		mOptions.answeredWords++;
 		$('#roscotPHits-' + instance).text(mOptions.hits);
@@ -1476,7 +1669,7 @@ var $eXeRosco = {
 		} else {
 			$eXeRosco.exitFullscreen(element);
 		}
-		$eXeRosco.refreshImageActive(instance);
+		$eXeRosco.refreshImageActiveNeo(instance);
 	},
 	supportedBrowser: function (idevice) {
 		var sp = !(window.navigator.appName == 'Microsoft Internet Explorer' || window.navigator.userAgent.indexOf('MSIE ') > 0);

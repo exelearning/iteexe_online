@@ -28,6 +28,7 @@ var $exeDevice = {
     desafioVersion: 1,
     clipBoard: '',
     desafioID: 0,
+    id: false,
     ci18n: {
         "msgStartGame": _("Click here to start"),
         "msgSubmit": _("Submit"),
@@ -73,7 +74,11 @@ var $exeDevice = {
         "msgSeveralScore": _("You can save the score as many times as you want"),
         "msgYouLastScore": _("The last score saved is"),
         "msgActityComply": _("You have already done this activity."),
-        "msgPlaySeveralTimes": _("You can do this activity as many times as you want")
+        "msgPlaySeveralTimes": _("You can do this activity as many times as you want"),
+        "msgUncompletedActivity": _("Incomplete activity"),
+        "msgSuccessfulActivity": _("Activity: Passed. Score: %S"),
+        "msgUnsuccessfulActivity": _("Activity: Not passed. Score: %S"),
+        "msgTypeGame": _('Challenge')
 
     },
     getId: function () {
@@ -83,8 +88,6 @@ var $exeDevice = {
         this.desafioID = this.getId();
         this.setMessagesInfo();
         this.createForm();
-        
-
     },
     setMessagesInfo: function () {
         var msgs = this.msgs;
@@ -97,6 +100,8 @@ var $exeDevice = {
         msgs.msgDataChanllenge = _("Please write the title, description and solution of all the trials.");
         msgs.msgNoSuportBrowser = _("Your browser is not compatible with this tool.");
         msgs.msgClue = _("Help");
+        msgs.msgIDLenght = _('The report identifier must have at least 5 characters');
+
     },
     showMessage: function (msg) {
         eXe.app.alert(msg);
@@ -279,6 +284,15 @@ var $exeDevice = {
                             <p>\
                                 <label for="desafioEShowMinimize"><input type="checkbox" id="desafioEShowMinimize">' + _("Show minimized.") + '</label>\
                             </p>\
+                            <p>\
+                                <strong class="GameModeLabel"><a href="#desafioEEvaluationHelp" id="desafioEEvaluationHelpLnk" class="GameModeHelpLink" title="' + _("Help") + '"><img src="' + path + 'quextIEHelp.gif"  width="16" height="16" alt="' + _("Help") + '"/></a></strong>\
+								<label for="desafioEEvaluation"><input type="checkbox" id="desafioEEvaluation"> ' + _("Progress report") + '. </label> \
+								<label for="desafioEEvaluationID">' + _("Identifier") + ':\
+								<input type="text" id="desafioEEvaluationID" disabled/> </label>\
+                            </p>\
+                            <div id="desafioEEvaluationHelp" class="desafioTypeGameHelp">\
+                                <p>' +_("You must indicate the ID. It can be a word, a phrase or a number of more than four characters. You will use this ID to mark the activities covered by this progress report. It must be the same in all iDevices of a report and different in each report.") + '</p>\
+                            </div>\
                         </div>\
                     </fieldset>\
                     <fieldset class="exe-fieldset">\
@@ -583,9 +597,28 @@ var $exeDevice = {
             return '';
         }
     },
+    generarID: function () {
+        var fecha = new Date(),
+            a = fecha.getUTCFullYear(),
+            m = fecha.getUTCMonth() + 1,
+            d = fecha.getUTCDate(),
+            h = fecha.getUTCHours(),
+            min = fecha.getUTCMinutes(),
+            s = fecha.getUTCSeconds(),
+            o = fecha.getTimezoneOffset();
+
+        var IDE = `${a}${m}${d}${h}${min}${s}${o}`;
+        return IDE;
+    },
     updateFieldGame: function (game) {
-        $('#desafioEShowMinimize').prop('checked', game.showMinimize);
         $exeDevice.desafioID = typeof game.desafioID == "undefined" ? $exeDevice.desafioID : game.desafioID;
+        game.evaluation = typeof game.evaluation != "undefined" ? game.evaluation : false;
+        game.evaluationID = typeof game.evaluationID != "undefined" ? game.evaluationID : '';
+        $exeDevice.id = typeof game.id != "undefined" ? game.id : false;
+        $('#desafioEShowMinimize').prop('checked', game.showMinimize);
+        $('#desafioEEvaluation').prop('checked', game.evaluation);
+        $('#desafioEEvaluationID').val(game.evaluationID);
+        $("#desafioEEvaluationID").prop('disabled', (!game.evaluation));
         $exeAuthoring.iDevice.gamification.scorm.setValues(game.isScorm, game.textButtonScorm, game.repeatActivity);
         $exeDevice.showDesafio();
 
@@ -711,6 +744,7 @@ var $exeDevice = {
             $exeDevice.showMessage($exeDevice.msgs.msgESelectFile);
             return;
         }
+        game.id = $exeDevice.generarID();
         $exeDevice.active = 0;
         $exeDevice.desafioTitle = game.desafioTitle;
         $exeDevice.desafioSolution = game.desafioSolution;
@@ -731,7 +765,11 @@ var $exeDevice = {
         $exeDevice.saveChallenge();
         var instructions = $('#eXeGameInstructions').text(),
             instructionsExe = (tinyMCE.get('eXeGameInstructions').getContent()),
-            showMinimize = $('#desafioEShowMinimize').is(':checked');
+            showMinimize = $('#desafioEShowMinimize').is(':checked'),
+            evaluation=$('#desafioEEvaluation').is(':checked'),
+            evaluationID=$('#desafioEEvaluationID').val(),
+            id = $exeDevice.id ? $exeDevice.id : $exeDevice.generarID();
+
         if ($exeDevice.desafioTitle.length == 0) {
             $exeDevice.showMessage($exeDevice.msgs.msgTitleDesafio);
             return false;
@@ -740,6 +778,10 @@ var $exeDevice = {
             return false;
         } else if ($exeDevice.desafioDescription == 0) {
             $exeDevice.showMessage($exeDevice.msgs.msgDescriptionDesafio);
+            return false;
+        }
+        if (evaluation && evaluationID.length < 5) {
+            eXe.app.alert($exeDevice.msgs.msgIDLenght);
             return false;
         }
         var challengesGame = $exeDevice.challengesGame;
@@ -770,6 +812,9 @@ var $exeDevice = {
             'textButtonScorm': scorm.textButtonScorm,
             'repeatActivity': scorm.repeatActivity,
             'desafioID': $exeDevice.desafioID,
+            'evaluation':evaluation,
+            'evaluationID':evaluationID,
+            'id': id
         }
         return data;
     },
@@ -875,6 +920,15 @@ var $exeDevice = {
         } else {
             $('#eXeGameExportImport').hide();
         }
+        $('#desafioEEvaluation').on('change', function () {
+            var marcado = $(this).is(':checked');
+            $('#desafioEEvaluationID').prop('disabled', !marcado);
+        });
+        $("#desafioEEvaluationHelpLnk").click(function () {
+            $("#desafioEEvaluationHelp").toggle();
+            return false;
+
+        });
 
     },
     showClues: function (show) {

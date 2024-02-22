@@ -145,6 +145,119 @@ var $eXeSelecciona = {
         $('#seleccionaRepeatActivity-' + instance).text(text);
         $('#seleccionaRepeatActivity-' + instance).fadeIn(1000);
     },
+    updateEvaluationIcon: function (instance) {
+        var mOptions = $eXeSelecciona.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var node = $('#nodeTitle').text(),
+                data = $eXeSelecciona.getDataStorage(mOptions.evaluationID)
+            var score = '',
+                state = 0;
+            if (!data) {
+                $eXeSelecciona.showEvaluationIcon(instance, state, score);
+                return;
+            }
+            const findObject = data.activities.find(
+                obj => obj.id == mOptions.id && obj.node === node
+            );
+            if (findObject) {
+                state = findObject.state;
+                score = findObject.score;
+            }
+            $eXeSelecciona.showEvaluationIcon(instance, state, score);
+            var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#seleccionaMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+
+        }
+    },
+    showEvaluationIcon: function (instance, state, score) {
+        var mOptions = $eXeSelecciona.options[instance];
+        var $header = $('#seleccionaGameContainer-' + instance).parents('article').find('header.iDevice_header');
+        var icon = 'exequextsq.png',
+            alt = mOptions.msgs.msgUncompletedActivity;
+        if (state == 1) {
+            icon = 'exequextrerrors.png';
+            alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+        } else if (state == 2) {
+            icon = 'exequexthits.png';
+            alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+        }
+        $('#seleccionaEvaluationIcon-' + instance).remove();
+        var sicon = '<div id="seleccionaEvaluationIcon-' + instance + '" class="gameQP-EvaluationDivIcon"><img  src="' + $eXeSelecciona.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+        $header.eq(0).append(sicon);
+        $('#seleccionaEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+    },
+    updateEvaluation: function (obj1, obj2, id1) {
+        if (!obj1) {
+            obj1 = {
+                id: id1,
+                activities: []
+            };
+        }
+        const findObject = obj1.activities.find(
+            obj => obj.id === obj2.id && obj.node === obj2.node
+        );
+
+        if (findObject) {
+            findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+        } else {
+            obj1.activities.push({
+                'id': obj2.id,
+                'type': obj2.type,
+                'node': obj2.node,
+                'name': obj2.name,
+                'score': obj2.score,
+                'date': obj2.date,
+                'state': obj2.state,
+            });
+        }
+        return obj1;
+    },
+    getDateString: function () {
+        var currentDate = new Date();
+        var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+            (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+            currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+            currentDate.getHours().toString().padStart(2, '0') + ':' +
+            currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+            currentDate.getSeconds().toString().padStart(2, '0');
+        return formattedDate;
+
+    },
+
+
+    saveEvaluation: function (instance) {
+        var mOptions = $eXeSelecciona.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var name = $('#seleccionaGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+                node = $('#nodeTitle').text(),
+                score = ((10 * mOptions.scoreGame) / mOptions.scoreTotal).toFixed(2),
+                formattedDate = $eXeSelecciona.getDateString();
+            var scorm = {
+                'id': mOptions.id,
+                'type': mOptions.msgs.msgTypeGame,
+                'node': node,
+                'name': name,
+                'score': score,
+                'date': formattedDate,
+                'state': (parseFloat(score) >= 5 ? 2 : 1)
+            }
+            var data = $eXeSelecciona.getDataStorage(mOptions.evaluationID);
+            data = $eXeSelecciona.updateEvaluation(data, scorm);
+            data = JSON.stringify(data, mOptions.evaluationID);
+            localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+            $eXeSelecciona.showEvaluationIcon(instance, scorm.state, scorm.score)
+        }
+    },
+    getDataStorage: function (id) {
+        var id = 'dataEvaluation-' + id,
+            data = $eXeSelecciona.isJsonString(localStorage.getItem(id));
+        return data;
+    },
     sendScore: function (auto, instance) {
         var mOptions = $eXeSelecciona.options[instance],
             message = '',
@@ -255,7 +368,7 @@ var $eXeSelecciona = {
         var html = '',
             path = $eXeSelecciona.idevicePath,
             msgs = $eXeSelecciona.options[instance].msgs;
-        html += '<div class="gameQP-MainContainer">\
+        html += '<div class="gameQP-MainContainer"  id="seleccionaMainContainer-' + instance + '">\
         <div class="gameQP-GameMinimize" id="seleccionaGameMinimize-' + instance + '">\
             <a href="#" class="gameQP-LinkMaximize" id="seleccionaLinkMaximize-' + instance + '" title="' + msgs.msgMaximize + '"><img src="' + path + 'seleccionaIcon.png" class="gameQP-IconMinimize gameQP-Activo" alt="">\
             <div class="gameQP-MessageMaximize" id="seleccionaMessageMaximize-' + instance + '"></div></a>\
@@ -482,6 +595,9 @@ var $eXeSelecciona = {
         mOptions.audioFeedBach = typeof mOptions.audioFeedBach != "undefined" ? mOptions.audioFeedBach : false;
         mOptions.customMessages = mOptions.order == 2 ? true : mOptions.customMessages;
         mOptions.gameOver = false;
+        mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+        mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
         imgsLink.each(function () {
             var iq = parseInt($(this).text());
             if (!isNaN(iq) && iq < mOptions.selectsGame.length) {
@@ -691,7 +807,7 @@ var $eXeSelecciona = {
             video = event.target.h.id;
         } else if ((event.target.i) && (event.target.i.id)) {
             video = event.target.i.id;
-        }else if ((event.target.g) && (event.target.g.id)) {
+        } else if ((event.target.g) && (event.target.g.id)) {
             video = event.target.g.id;
         }
         video = video.split("-");
@@ -887,6 +1003,7 @@ var $eXeSelecciona = {
         $('#seleccionaSendScore-' + instance).click(function (e) {
             e.preventDefault();
             $eXeSelecciona.sendScore(false, instance);
+            $eXeSelecciona.saveEvaluation(instance);
             return true;
         });
         $('#seleccionaGamerOver-' + instance).hide();
@@ -1029,6 +1146,7 @@ var $eXeSelecciona = {
             e.preventDefault();
             $eXeSelecciona.newQuestion(instance)
         });
+        $eXeSelecciona.updateEvaluationIcon(instance);
     },
     getYTAPI: function (instance) {
         var mOptions = $eXeSelecciona.options[instance];
@@ -1111,45 +1229,117 @@ var $eXeSelecciona = {
         }
 
     },
+    showImage: function (url, instance) {
+		var mOptions = $eXeSelecciona.options[instance],
+			mQuextion = mOptions.selectsGame[mOptions.activeQuestion],
+		    $cursor = $('#seleccionaCursor-' + instance),
+			$noImage = $('#seleccionaCover-' + instance),
+			$Image = $('#seleccionaImagen-' + instance),
+			$Author = $('#seleccionaAuthor-' + instance);
+            $Protect = $('#seleccionaProtector-' + instance);
+        $Image.attr('alt', 'No image');
+		$cursor.hide();
+		$Image.hide();
+		$noImage.hide();
+        $Protect.hide();
+		if ($.trim(url).length == 0) {
+			$cursor.hide();
+			$Image.hide();
+			$noImage.show();
+			$Author.text('');
+			return false;
+		};
+		$Image.attr('src', ''); 
+		$Image.attr('src', url)
+			.on('load', function () {
+				if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+					$cursor.hide();
+					$Image.hide();
+					$noImage.show();
+					$Author.text('');
+				} else {
+					$Image.show();
+					$cursor.show();
+					$noImage.hide();
+					$Author.text(mQuextion.author);
+					$Image.attr('alt', mQuextion.alt);
+                    $eXeSelecciona.centerImage(instance);
+				}
+			}).on('error', function () {
+				$cursor.hide();
+				$Image.hide();
+				$noImage.show();
+				$Author.text('');
+				return false;
+			});
+            $eXeSelecciona.showMessage(0,mQuextion.author , instance);
+	},
     refreshImageActive: function (instance) {
         var mOptions = $eXeSelecciona.options[instance],
-            mQuextion = mOptions.selectsGame[mOptions.activeQuestion],
-            author = '';
-        if (mOptions.gameOver) {
-            return;
-        }
-        if (typeof mQuextion == "undefined") {
+            mQuextion = mOptions.selectsGame[mOptions.activeQuestion];
+        if (typeof mQuextion == "undefined" ) {
             return;
         }
         if (mQuextion.type === 1) {
-
-            $('#seleccionaImagen-' + instance).prop('src', mQuextion.url)
-                .on('load', function () {
-                    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth === 0) {
-                        alt = mOptions.msgs.msgNoImage;
-                        $('#seleccionaAuthor-' + instance).text('');
-                    } else {
-                        var mData = $eXeSelecciona.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeSelecciona.drawImage(this, mData);
-                        $('#seleccionaImagen-' + instance).show();
-                        $('#seleccionaCover-' + instance).hide();
-                        alt = mQuextion.alt;
-                        if (mQuextion.x > 0 || mQuextion.y > 0) {
-                            var left = mData.x + (mQuextion.x * mData.w);
-                            var top = mData.y + (mQuextion.y * mData.h);
-                            $('#seleccionaCursor-' + instance).css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            author = mQuextion.author;
-                            $('#seleccionaCursor-' + instance).show();
-                        }
-                    }
-                    $eXeSelecciona.showMessage(0, author, instance);
-                });
-            $('#seleccionaImagen-' + instance).attr('alt', mQuextion.alt);
+            if (mQuextion.url && mQuextion.url.length > 3 ) {
+                $('#seleccionaCursor-' + instance).hide();
+                $eXeSelecciona.centerImage(instance)
+            }
         }
+
     },
+    centerImage: function (instance) {
+        var $image = $('#seleccionaImagen-' + instance),
+            wDiv =$image.parent().width() > 0 ?  $image.parent().width() : 1,
+            hDiv = $image.parent().height() > 0 ?  $image.parent().height() : 1,
+            naturalWidth = $image[0].naturalWidth,
+            naturalHeight = $image[0].naturalHeight,
+            varW = naturalWidth / wDiv,
+            varH = naturalHeight / hDiv,
+            wImage = wDiv,
+            hImage = hDiv,
+            xImage = 0,
+            yImage = 0;
+        if (varW > varH) {
+            wImage = parseInt(wDiv);
+            hImage = parseInt(naturalHeight / varW);
+            yImage = parseInt((hDiv - hImage) / 2);
+        } else {
+            wImage = parseInt(naturalWidth / varH);
+            hImage = parseInt(hDiv);
+            xImage = parseInt((wDiv - wImage) / 2);
+        }
+        $image.css({
+            width: wImage,
+            height: hImage,
+            position: 'absolute',
+            left: xImage,
+            top: yImage
+        });
+        $eXeSelecciona.positionPointer(instance)
+    },
+
+
+    positionPointer: function(instance) {
+		var mOptions = $eXeSelecciona.options[instance],
+			mQuextion = mOptions.selectsGame[mOptions.activeQuestion],
+		    x = parseFloat(mQuextion.x) || 0;
+		    y = parseFloat(mQuextion.y) || 0, 
+			$cursor=$('#seleccionaCursor-' + instance);
+			$cursor.hide();
+		if(x > 0 || y > 0){
+			var containerElement = document.getElementById('seleccionaMultimedia-' + instance),
+			    containerPos = containerElement.getBoundingClientRect(),
+			    imgElement = document.getElementById('seleccionaImagen-' + instance),
+			    imgPos = imgElement.getBoundingClientRect(),
+  		        marginTop = imgPos.top - containerPos.top,
+			    marginLeft = imgPos.left - containerPos.left,
+			    x = marginLeft + (x * imgPos.width),
+			    y = marginTop + (y * imgPos.height);
+				$cursor.show();
+				$cursor.css({ left: x, top: y, 'z-index': 30 });
+		}
+	},
     enterCodeAccess: function (instance) {
         var mOptions = $eXeSelecciona.options[instance];
         if (mOptions.itinerary.codeAccess.toLowerCase() === $('#seleccionaCodeAccessE-' + instance).val().toLowerCase()) {
@@ -1321,6 +1511,7 @@ var $eXeSelecciona = {
         mOptions.gameStarted = false;
         mOptions.gameActived = false;
         clearInterval(mOptions.counterClock);
+        $eXeSelecciona.showImage('',instance);
         $('#seleccionaDivModeBoard-' + instance).hide()
         $('#seleccionaVideo-' + instance).hide();
         $('#seleccionaVideoLocal-' + instance).hide();
@@ -1351,6 +1542,7 @@ var $eXeSelecciona = {
                 $eXeSelecciona.initialScore = score;
             }
         }
+        $eXeSelecciona.saveEvaluation(instance);
         $eXeSelecciona.showFeedBack(instance);
         if ($eXeSelecciona.getIDYoutube(mOptions.idVideo) !== '' || $eXeSelecciona.getURLVideoMediaTeca(mOptions.idVideo)) {
             $('#seleccionaLinkVideoIntroShow-' + instance).show();
@@ -1451,9 +1643,7 @@ var $eXeSelecciona = {
         mOptions.gameActived = true;
         mOptions.question = mQuextion
         mOptions.respuesta = '';
-        var tiempo = $eXeSelecciona.getTimeToString($eXeSelecciona.getTimeSeconds(mQuextion.time)),
-            author = '',
-            alt = '';
+        var tiempo = $eXeSelecciona.getTimeToString($eXeSelecciona.getTimeSeconds(mQuextion.time));
         $('#seleccionaPTime-' + instance).text(tiempo);
         $('#seleccionaQuestion-' + instance).text(mQuextion.quextion);
         $('#seleccionaImagen-' + instance).hide();
@@ -1472,42 +1662,13 @@ var $eXeSelecciona = {
         mOptions.endSilent = endSonido > q.fVideo ? q.fVideo : endSonido;
         $('#seleccionaAuthor-' + instance).text('');
         if (mQuextion.type === 1) {
-            $('#seleccionaImagen-' + instance).prop('src', mQuextion.url)
-                .on('load', function () {
-                    if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth === 0) {
-                        alt = $eXeSelecciona.msgs.msgNoImage;
-                        $('#seleccionaAuthor-' + instance).text('');
-                    } else {
-                        var mData = $eXeSelecciona.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                        $eXeSelecciona.drawImage(this, mData);
-                        $('#seleccionaImagen-' + instance).show();
-                        $('#seleccionaCover-' + instance).hide();
-                        $('#seleccionaCursor-' + instance).hide();
-                        alt = mQuextion.alt;
-                        author = mQuextion.author;
-                        if (mQuextion.x > 0 || mQuextion.y > 0) {
-                            var left = mData.x + (mQuextion.x * mData.w);
-                            var top = mData.y + (mQuextion.y * mData.h);
-                            $('#seleccionaCursor-' + instance).css({
-                                'left': left + 'px',
-                                'top': top + 'px'
-                            });
-                            $('#seleccionaCursor-' + instance).show();
-                        }
-                    }
-                    $eXeSelecciona.showMessage(0, author, instance);
-                });
-            $('#seleccionaImagen-' + instance).attr('alt', alt);
+            $eXeSelecciona.showImage(mQuextion.url, instance)            
         } else if (mQuextion.type === 3) {
             var text = unescape(mQuextion.eText);
-            if (window.innerWidth < 401) {
-                //text = $eXeSelecciona.reduceText(text);
-            }
             $('#seleccionaEText-' + instance).html(text);
             $('#seleccionaCover-' + instance).hide();
             $('#seleccionaEText-' + instance).show();
             $eXeSelecciona.showMessage(0, '', instance);
-
         } else if (mQuextion.type === 2) {
             $('#seleccionaVideo-' + instance).show();
             var idVideo = $eXeSelecciona.getIDYoutube(mQuextion.url),
@@ -1563,7 +1724,7 @@ var $eXeSelecciona = {
         if (q.audio.length > 4 && q.type != 2 && !mOptions.audioFeedBach) {
             $('#seleccionaLinkAudio-' + instance).show();
         }
-
+        $eXeSelecciona.saveEvaluation(instance);
         $eXeSelecciona.stopSound(instance);
         if (q.type != 2 && q.audio.trim().length > 5 && !mOptions.audioFeedBach) {
             $eXeSelecciona.playSound(q.audio.trim(), instance);
@@ -2077,39 +2238,7 @@ var $eXeSelecciona = {
             'font-weight': weight,
         });
     },
-    drawImage: function (image, mData) {
-        $(image).css({
-            'left': mData.x + 'px',
-            'top': mData.y + 'px',
-            'width': mData.w + 'px',
-            'height': mData.h + 'px'
-        });
-    },
-    placeImageWindows: function (image, naturalWidth, naturalHeight) {
-        var wDiv = $(image).parent().width() > 0 ? $(image).parent().width() : 1,
-            hDiv = $(image).parent().height() > 0 ? $(image).parent().height() : 1,
-            varW = naturalWidth / wDiv,
-            varH = naturalHeight / hDiv,
-            wImage = wDiv,
-            hImage = hDiv,
-            xImagen = 0,
-            yImagen = 0;
-        if (varW > varH) {
-            wImage = parseInt(wDiv);
-            hImage = parseInt(naturalHeight / varW);
-            yImagen = parseInt((hDiv - hImage) / 2);
-        } else {
-            wImage = parseInt(naturalWidth / varH);
-            hImage = parseInt(hDiv);
-            xImagen = parseInt((wDiv - wImage) / 2);
-        }
-        return {
-            w: wImage,
-            h: hImage,
-            x: xImagen,
-            y: yImagen
-        }
-    },
+
     ramdonOptions: function (instance) {
         var mOptions = $eXeSelecciona.options[instance],
             l = 0,
@@ -2272,7 +2401,6 @@ var $eXeSelecciona = {
         } else {
             $eXeSelecciona.exitFullscreen(element);
         }
-        $eXeSelecciona.refreshImageActive(instance);
     },
     supportedBrowser: function (idevice) {
         var sp = !(window.navigator.appName == 'Microsoft Internet Explorer' || window.navigator.userAgent.indexOf('MSIE ') > 0);

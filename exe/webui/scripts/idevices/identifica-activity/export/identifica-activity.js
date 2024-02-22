@@ -118,6 +118,119 @@ var $eXeIdentifica = {
         $('#idfRepeatActivity-' + instance).text(text);
         $('#idfRepeatActivity-' + instance).fadeIn(1000);
     },
+    saveEvaluation: function (instance) {
+        var mOptions = $eXeIdentifica.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var name = $('#idfGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+                node = $('#nodeTitle').text(),
+                score = mOptions.score.toFixed(2)
+            var formattedDate = $eXeIdentifica.getDateString();
+            var scorm = {
+                'id': mOptions.id,
+                'type': mOptions.msgs.msgTypeGame,
+                'node': node,
+                'name': name,
+                'score': score,
+                'date': formattedDate,
+                'state': (parseFloat(score) >= 5 ? 2 : 1)
+
+            }
+            var data = $eXeIdentifica.getDataStorage(mOptions.evaluationID);
+            data = $eXeIdentifica.updateEvaluation(data, scorm);
+            data = JSON.stringify(data, mOptions.evaluationID);
+            localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+            $eXeIdentifica.showEvaluationIcon(instance, scorm.state, scorm.score)
+        }
+    },
+    updateEvaluationIcon: function (instance) {
+        var mOptions = $eXeIdentifica.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var node = $('#nodeTitle').text(),
+                data = $eXeIdentifica.getDataStorage(mOptions.evaluationID)
+            var score = '',
+                state = 0;
+            if (!data) {
+                $eXeIdentifica.showEvaluationIcon(instance, state, score);
+                return;
+            }
+            const findObject = data.activities.find(
+                obj => obj.id == mOptions.id && obj.node === node
+            );
+            if (findObject) {
+                state = findObject.state;
+                score = findObject.score;
+            }
+            $eXeIdentifica.showEvaluationIcon(instance, state, score);
+            var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#idfMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+
+        }
+    },
+    showEvaluationIcon: function (instance, state, score) {
+        var mOptions = $eXeIdentifica.options[instance];
+        var $header = $('#idfGameContainer-' + instance).parents('article').find('header.iDevice_header');
+        var icon = 'exequextsq.png',
+            alt = mOptions.msgs.msgUncompletedActivity;
+        if (state == 1) {
+            icon = 'exequextrerrors.png';
+            alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+        } else if (state == 2) {
+            icon = 'exequexthits.png';
+            alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+        }
+        $('#idfEvaluationIcon-' + instance).remove();
+        var sicon = '<div id="idfEvaluationIcon-' + instance + '" class="IDFP-EvaluationDivIcon"><img  src="' + $eXeIdentifica.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+        $header.eq(0).append(sicon);
+        $('#idfEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+    },
+    updateEvaluation: function (obj1, obj2, id1) {
+        if (!obj1) {
+            obj1 = {
+                id: id1,
+                activities: []
+            };
+        }
+        const findObject = obj1.activities.find(
+            obj => obj.id === obj2.id && obj.node === obj2.node
+        );
+
+        if (findObject) {
+            findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+        } else {
+            obj1.activities.push({
+                'id': obj2.id,
+                'type': obj2.type,
+                'node': obj2.node,
+                'name': obj2.name,
+                'score': obj2.score,
+                'date': obj2.date,
+                'state': obj2.state,
+            });
+        }
+        return obj1;
+    },
+    getDateString: function () {
+        var currentDate = new Date();
+        var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+            (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+            currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+            currentDate.getHours().toString().padStart(2, '0') + ':' +
+            currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+            currentDate.getSeconds().toString().padStart(2, '0');
+        return formattedDate;
+
+    },
+
+    getDataStorage: function (id) {
+        var id = 'dataEvaluation-' + id,
+            data = $eXeIdentifica.isJsonString(localStorage.getItem(id));
+        return data;
+    },
     sendScore: function (auto, instance) {
         var mOptions = $eXeIdentifica.options[instance],
             message = '',
@@ -217,7 +330,7 @@ var $eXeIdentifica = {
         var html = '',
             path = $eXeIdentifica.idevicePath,
             msgs = $eXeIdentifica.options[instance].msgs;
-        html += '<div class="IDFP-MainContainer">\
+        html += '<div class="IDFP-MainContainer"  id="idfMainContainer-' + instance + '">\
         <div class="IDFP-GameMinimize" id="idfGameMinimize-' + instance + '">\
             <a href="#" class="IDFP-LinkMaximize" id="idfLinkMaximize-' + instance + '" title="' + msgs.msgMaximize + '"><img src="' + path + 'identificaIcon.png" class="IDFP-IconMinimize IDFP-Activo" alt="">\
                 <div class="IDFP-MessageMaximize" id="idfMessageMaximize-' + instance + '"></div></a>\
@@ -265,12 +378,12 @@ var $eXeIdentifica = {
                         <div class="IDFP-card">\
                             <div class="IDFP-card-inner" id="idfcardinner-' + instance + '">\
                                 <div class="IDFP-card-front">\
-                                    <div class="IDFP-ImageContain">\
+                                    <div class="IDFP-ImageContain" >\
                                         <img src="' + path + 'identificaHome.png" class="IDFP-Image  IDFP-Image-Front" alt="" />\
                                     </div>\
                                 </div>\
                                 <div class="IDFP-card-back">\
-                                    <div class="IDFP-ImageContain">\
+                                    <div class="IDFP-ImageContain" id="idfImageContainerBack-' + instance + '">\
                                         <img src="" id="idfBackImage-' + instance + '" class="IDFP-Image IDFP-Image-Back" alt="" />\
                                         <img class="IDFP-Cursor IDFP-Cursor-Back" id="idfBackCursor-' + instance + '" src="' + path + 'exequextcursor.gif" alt="Cursor" />\
                                         <a href="#" class="IDFP-LinkAudio IDFP-LinkAudio-Back" id="idfBackAudio-' + instance + '"   title="Audio"><img src="' + path + 'exequextaudio.png" class="IDFP-Audio" alt="Audio"></a>\
@@ -447,7 +560,11 @@ var $eXeIdentifica = {
         }
         mOptions.scoreGame = 0;
         mOptions.scoreTotal = 0;
+        mOptions.score = 0;
         mOptions.playerAudio = "";
+        mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+        mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
         imgsLink.each(function () {
             var iq = parseInt($(this).text());
             if (!isNaN(iq) && iq < mOptions.questionsGame.length) {
@@ -531,9 +648,6 @@ var $eXeIdentifica = {
         window.addEventListener('unload', function () {
             $eXeIdentifica.endScorm();
         });
-        window.addEventListener('resize', function () {
-            $eXeIdentifica.refreshImageActive(instance);
-        });
         $('#idfLinkMaximize-' + instance).on('click touchstart', function (e) {
             e.preventDefault();
             $("#idfGameContainer-" + instance).show()
@@ -551,6 +665,7 @@ var $eXeIdentifica = {
         $('#idfSendScore-' + instance).click(function (e) {
             e.preventDefault();
             $eXeIdentifica.sendScore(false, instance);
+            $eXeIdentifica.saveEvaluation(instance);
             return true;
         });
         $('#idfGamerOver-' + instance).hide();
@@ -580,9 +695,7 @@ var $eXeIdentifica = {
             $('#idfMesajeAccesCodeE-' + instance).text(mOptions.itinerary.messageCodeAccess);
             $eXeIdentifica.showCubiertaOptions(0, instance)
         }
-        $(document).on("webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange", function (e) {
-            $eXeIdentifica.refreshImageActive(instance);
-        });
+
         $('#idfInstruction-' + instance).text(mOptions.instructions);
         $('#idfSendScore-' + instance).attr('value', mOptions.textButtonScorm);
         $('#idfSendScore-' + instance).hide();
@@ -656,7 +769,10 @@ var $eXeIdentifica = {
             $eXeIdentifica.showClue(instance)
         });
         $('#idfUseClue-' + instance).hide();
-
+        window.addEventListener('resize', function () {
+            $eXeIdentifica.refreshImageActive(instance);
+        });
+        $eXeIdentifica.updateEvaluationIcon(instance)
     },
 
     showClue(instance) {
@@ -680,7 +796,7 @@ var $eXeIdentifica = {
         $('#idfUseClue-' + instance).html(mOptions.msgs.msgShowNewClue);
         if (mOptions.activeClue >= numclues) {
             $('#idfUseClue-' + instance).hide();
-            message =  mOptions.msgs.msgUseAllClues.replace('%s', mOptions.pointsClue.toFixed(2));
+            message = mOptions.msgs.msgUseAllClues.replace('%s', mOptions.pointsClue.toFixed(2));
             $('#idfUseClue-' + instance).html(mOptions.msgs.msgShowClue);
         }
         $eXeIdentifica.showMessage(0, message, instance);
@@ -766,44 +882,39 @@ var $eXeIdentifica = {
 
             }
         }
+        $eXeIdentifica.saveEvaluation(instance);
         setTimeout(function () {
             $eXeIdentifica.newQuestion(instance)
         }, timeShowSolution);
     },
     refreshImageActive: function (instance) {
         var mOptions = $eXeIdentifica.options[instance],
-            mQuextion = mOptions.questionsGame[mOptions.activeQuestion],
-            author = '';
-        if (mOptions.gameOver) {
+            mQuextion = mOptions.questionsGame[mOptions.activeQuestion];      
+        if (mOptions.gameOver ||typeof mQuextion == "undefined" ) {
             return;
         }
-        if (typeof mQuextion == "undefined") {
-            return;
-        }
-        $('#idfImagenBack-' + instance).prop('src', mQuextion.url)
-            .on('load', function () {
-                if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth === 0) {
-                    alt = mOptions.msgs.msgNoImage;
-                    $('#idfAuthor-' + instance).text('');
-                } else {
-                    var mData = $eXeIdentifica.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                    $eXeIdentifica.drawImage(this, mData);
-                    alt = mQuextion.alt;
-                    if (mQuextion.x > 0 || mQuextion.y > 0) {
-                        var left = mData.x + (mQuextion.x * mData.w);
-                        var top = mData.y + (mQuextion.y * mData.h);
-                        $('#idfCursor-' + instance).css({
-                            'left': left + 'px',
-                            'top': top + 'px'
-                        });
-                        author = mQuextion.author;
-                        $('#idfCursor-' + instance).show();
-                    }
-                }
-                $eXeIdentifica.showMessage(0, author, instance);
-            });
-        $('#idfImagenBack-' + instance).attr('alt', mQuextion.alt);
+        $eXeIdentifica.positionPointerCard(instance)
     },
+    positionPointerCard: function(instance) {
+		var mOptions = $eXeIdentifica.options[instance],
+			mQuextion = mOptions.questionsGame[mOptions.activeQuestion],
+		    x = parseFloat(mQuextion.x) || 0;
+		    y = parseFloat(mQuextion.y) || 0, 
+			$cursor=$('#idfBackCursor-' + instance);
+			$cursor.hide();
+		if(x > 0 || y > 0){
+			var containerElement = document.getElementById('idfImageContainerBack-' + instance),
+			    containerPos = containerElement.getBoundingClientRect(),
+			    imgElement = document.getElementById('idfBackImage-' + instance),
+			    imgPos = imgElement.getBoundingClientRect(),
+  		        marginTop = imgPos.top - containerPos.top,
+			    marginLeft = imgPos.left - containerPos.left,
+			    x = marginLeft + (x * imgPos.width),
+			    y = marginTop + (y * imgPos.height);
+				$cursor.show();
+				$cursor.css({ left: x, top: y, 'z-index': 30 });
+		}
+	},
     enterCodeAccess: function (instance) {
         var mOptions = $eXeIdentifica.options[instance];
         if (mOptions.itinerary.codeAccess.toLowerCase() === $('#idfCodeAccessE-' + instance).val().toLowerCase()) {
@@ -913,6 +1024,7 @@ var $eXeIdentifica = {
                 $eXeIdentifica.initialScore = score;
             }
         }
+        $eXeIdentifica.saveEvaluation(instance);
         $eXeIdentifica.showFeedBack(instance);
     },
     showFeedBack: function (instance) {
@@ -971,18 +1083,8 @@ var $eXeIdentifica = {
                 if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
                     $cursor.hide();
                 } else {
-                    var mData = $eXeIdentifica.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                    $eXeIdentifica.drawImage(this, mData);
                     $image.show();
-                    if (q.x > 0 && q.y > 0) {
-                        var left = Math.round(mData.x + (q.x * mData.w));
-                        var top = Math.round(mData.y + (q.y * mData.h));
-                        $cursor.css({
-                            'left': left + 'px',
-                            'top': top + 'px'
-                        });
-                        $cursor.show();
-                    }
+                    $eXeIdentifica.positionPointerCard(instance)
                     return true;
                 }
             }).on('error', function () {
@@ -1017,6 +1119,7 @@ var $eXeIdentifica = {
 
             }
         }
+
         $eXeIdentifica.stopSound(instance);
         if (q.audio.trim().length > 4) {
             $eXeIdentifica.playSound(q.audio.trim(), instance);
@@ -1218,7 +1321,6 @@ var $eXeIdentifica = {
         } else {
             $eXeIdentifica.exitFullscreen(element);
         }
-        $eXeIdentifica.refreshImageActive(instance);
     },
 
     supportedBrowser: function (idevice) {

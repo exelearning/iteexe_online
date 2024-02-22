@@ -23,6 +23,7 @@ var $exeDevice = {
     iDevicePath: "/scripts/idevices/flipcards-activity/edition/",
     playerAudio: "",
     version: 1.3,
+    id:false,
     ci18n: {
         "msgSubmit": _("Submit"),
         "msgClue": _("Cool! The clue is:"),
@@ -71,7 +72,11 @@ var $exeDevice = {
         "mgsClickCard": _("Click on the card"),
         "msgEndTime": _("Game time is over. Your score is %s."),
         "msgEnd": _("Finish"),
-        "msgEndGameM": _("You finished the game. Your score is %s.")
+        "msgEndGameM": _("You finished the game. Your score is %s."),
+        "msgUncompletedActivity": _("Incomplete activity"),
+        "msgSuccessfulActivity": _("Activity: Passed. Score: %S"),
+        "msgUnsuccessfulActivity": _("Activity: Not passed. Score: %S"),
+        "msgTypeGame": _('Memory Cards')
 
 
     },
@@ -98,6 +103,8 @@ var $exeDevice = {
         msgs.msgCompleteDataBack = _("Provide an image, text or audio for each card's back side");
         msgs.msgEOneCard = _("Please create at least one card");
         msgs.msgMaxCards = _("Maximum card number: %s.");
+        msgs.msgIDLenght = _('The report identifier must have at least 5 characters');
+
     },
     createForm: function () {
         var path = $exeDevice.iDevicePath,
@@ -144,6 +151,15 @@ var $exeDevice = {
                         <p>\
                             <label for="flipcardsEAuthory">' + _('Authorship') + ': </label><input id="flipcardsEAuthory" type="text" />\
                         </p>\
+                        <p>\
+                            <strong class="GameModeLabel"><a href="#flipcardsEEvaluationHelp" id="flipcardsEEvaluationHelpLnk" class="GameModeHelpLink" title="' + _("Help") + '"><img src="' + path + 'quextIEHelp.gif"  width="16" height="16" alt="' + _("Help") + '"/></a></strong>\
+							<label for="flipcardsEEvaluation"><input type="checkbox" id="flipcardsEEvaluation"> ' + _("Progress report") + '. </label> \
+							<label for="flipcardsEEvaluationID">' + _("Identifier") + ':\
+							<input type="text" id="flipcardsEEvaluationID" disabled/> </label>\
+                        </p>\
+                        <div id="flipcardsEEvaluationHelp" class="FLCRDS-TypeGameHelp">\
+                            <p>' +_("You must indicate the ID. It can be a word, a phrase or a number of more than four characters. You will use this ID to mark the activities covered by this progress report. It must be the same in all iDevices of a report and different in each report.") + '</p>\
+                        </div>\
                     </div>\
                 </fieldset>\
                 <fieldset class="exe-fieldset">\
@@ -529,7 +545,6 @@ var $exeDevice = {
         p.colorBk = $('#flipcardsEColorBack').val();
         p.backcolorBk = $('#flipcardsEBgColorBack').val();
         p.eTextBk = $exeDevice.encodeURIComponentSafe($('#flipcardsETextBack').val());
-
         if (p.eText.length == 0 && p.url.length == 0 && p.audio.length == 0) {
             message = msgs.msgCompleteData;
         }
@@ -893,8 +908,14 @@ var $exeDevice = {
             cardsGame = $exeDevice.cardsGame,
             scorm = $exeAuthoring.iDevice.gamification.scorm.getValues(),
             type = parseInt($('input[name=flctype]:checked').val()),
-            time = parseInt($('#flipcardsETime').val());
-
+            time = parseInt($('#flipcardsETime').val()),
+            evaluation = $('#flipcardsEEvaluation').is(':checked'),
+            evaluationID = $('#flipcardsEEvaluationID').val(),
+            id = $exeDevice.id ? $exeDevice.id : $exeDevice.generarID();
+        if (evaluation && evaluationID.length < 5) {
+            eXe.app.alert($exeDevice.msgs.msgIDLenght);
+            return false;
+        }
 
         var data = {
             'typeGame': 'FlipCards',
@@ -914,8 +935,10 @@ var $exeDevice = {
             'type': type,
             'showSolution': showSolution,
             'timeShowSolution': timeShowSolution,
-            'time':time
-
+            'time': time,
+            'evaluation':evaluation,
+            'evaluationID':evaluationID,
+            'id':id
         }
         return data;
     },
@@ -1147,6 +1170,15 @@ var $exeDevice = {
                 $("#flipcardsETimeDiv").show();
             }
         });
+        $('#flipcardsEEvaluation').on('change', function () {
+            var marcado = $(this).is(':checked');
+            $('#flipcardsEEvaluationID').prop('disabled', !marcado);
+        });
+        $("#flipcardsEEvaluationHelpLnk").click(function () {
+            $("#flipcardsEEvaluationHelp").toggle();
+            return false;
+
+        });
 
         $exeAuthoring.iDevice.gamification.itinerary.addEvents();
     },
@@ -1265,9 +1297,26 @@ var $exeDevice = {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     },
 
+    generarID: function () {
+        var fecha = new Date(),
+            a = fecha.getUTCFullYear(),
+            m = fecha.getUTCMonth() + 1,
+            d = fecha.getUTCDate(),
+            h = fecha.getUTCHours(),
+            min = fecha.getUTCMinutes(),
+            s = fecha.getUTCSeconds(),
+            o = fecha.getTimezoneOffset();
+
+        var IDE = `${a}${m}${d}${h}${min}${s}${o}`;
+        return IDE;
+    },
+
     updateFieldGame: function (game) {
         $exeDevice.active = 0;
         $exeAuthoring.iDevice.gamification.itinerary.setValues(game.itinerary);
+        game.evaluation = typeof game.evaluation != "undefined" ? game.evaluation : false;
+        game.evaluationID = typeof game.evaluationID != "undefined" ? game.evaluationID : '';
+        $exeDevice.id = typeof game.id != "undefined" ? game.id : false;
         $('#flipcardsEShowMinimize').prop('checked', game.showMinimize);
         $('#flipcardsEPercentajeCards').val(game.percentajeCards);
         $('#flipcardsEAuthory').val(game.author);
@@ -1278,6 +1327,9 @@ var $exeDevice = {
         $('#flipcardsETime').val(game.time);
         $("input.FLCRDS-Type[name='flctype'][value='" + game.type + "']").prop("checked", true);
         $("#flipcardsETimeDiv").hide();
+        $('#flipcardsEEvaluation').prop('checked', game.evaluation);
+        $('#flipcardsEEvaluationID').val(game.evaluationID);
+        $("#flipcardsEEvaluationID").prop('disabled', (!game.evaluation));
         if (game.type == 3) {
             $("#flipcardsETimeDiv").show();
         }
@@ -1318,6 +1370,7 @@ var $exeDevice = {
             return;
         } else if (game.typeGame == 'FlipCards') {
             $exeDevice.active = 0;
+            game.id = $exeDevice.generarID();
             $exeDevice.updateFieldGame(game);
             var instructions = game.instructionsExe || game.instructions,
                 tAfter = game.textAfter || "";
@@ -1534,7 +1587,7 @@ var $exeDevice = {
         var $cursor = $('#flipcardsECursorBack'),
             $image = $('#flipcardsEImageBack'),
             $x = $('#flipcardsEXBack'),
-            $y = $('#flipcardsEYCack');
+            $y = $('#flipcardsEYBack');
         var posX = epx - $image.offset().left,
             posY = epy - $image.offset().top,
             wI = $image.width() > 0 ? $image.width() : 1,
@@ -1581,7 +1634,7 @@ var $exeDevice = {
         var sUrl = urlmedia || '';
         if (urlmedia.toLowerCase().indexOf("https://drive.google.com") == 0 && urlmedia.toLowerCase().indexOf("sharing") != -1) {
             sUrl = sUrl.replace(/https:\/\/drive\.google\.com\/file\/d\/(.*?)\/.*?\?usp=sharing/g, "https://docs.google.com/uc?export=open&id=$1");
-        }else if (typeof urlmedia != "undefined" && urlmedia.length > 10 && $exeDevice.getURLAudioMediaTeca(urlmedia)) {
+        } else if (typeof urlmedia != "undefined" && urlmedia.length > 10 && $exeDevice.getURLAudioMediaTeca(urlmedia)) {
             sUrl = $exeDevice.getURLAudioMediaTeca(urlmedia);
         }
         return sUrl;

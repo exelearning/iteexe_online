@@ -32,6 +32,7 @@ var $eXeCompleta = {
     previousScore: '',
     initialScore: '',
     hasLATEX: false,
+    isDragging:false,
     init: function () {
         this.activities = $('.completa-IDevice');
         if (this.activities.length == 0) return;
@@ -94,6 +95,113 @@ var $eXeCompleta = {
 
         $('#cmptRepeatActivity-' + instance).text(text);
         $('#cmptRepeatActivity-' + instance).fadeIn(1000);
+    },
+    saveEvaluation: function (instance) {
+        var mOptions = $eXeCompleta.options[instance],
+            score = ((10 * mOptions.hits) / mOptions.number).toFixed(2);
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var name = $('#cmptGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+                node = $('#nodeTitle').text();
+            var currentDate = new Date();
+            var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+                (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+                currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+                currentDate.getHours().toString().padStart(2, '0') + ':' +
+                currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+                currentDate.getSeconds().toString().padStart(2, '0');
+            var scorm = {
+                'id': mOptions.id,
+                'type': mOptions.msgs.msgTypeGame,
+                'node': node,
+                'name': name,
+                'score': score,
+                'date': formattedDate,
+                'state': (parseFloat(score) >= 5 ? 2 : 1)
+            }
+            var data = $eXeCompleta.getDataStorage(mOptions.evaluationID);
+            data = $eXeCompleta.updateEvaluation(data, scorm);
+            data = JSON.stringify(data, mOptions.evaluationID);
+            localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+            $eXeCompleta.showEvaluationIcon(instance, scorm.state, scorm.score)
+        }
+
+    },
+    updateEvaluationIcon: function (instance) {
+        var mOptions = $eXeCompleta.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var node = $('#nodeTitle').text(),
+                data = $eXeCompleta.getDataStorage(mOptions.evaluationID)
+            var score = '',
+                state = 0;
+            if (!data) {
+                $eXeCompleta.showEvaluationIcon(instance, state, score);
+                return;
+            }
+            const findObject = data.activities.find(
+                obj => obj.id == mOptions.id && obj.node === node
+            );
+            if (findObject) {
+                state = findObject.state;
+                score = findObject.score;
+            }
+            $eXeCompleta.showEvaluationIcon(instance, state, score);
+            var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#cmptMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+        }
+    },
+
+    showEvaluationIcon: function (instance, state, score) {
+        var mOptions = $eXeCompleta.options[instance];
+        var $header = $('#cmptGameContainer-' + instance).parents('article').find('header.iDevice_header');
+        var icon = 'exequextsq.png',
+            alt = mOptions.msgs.msgUncompletedActivity;
+        if (state == 1) {
+            icon = 'exequextrerrors.png';
+            alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+        } else if (state == 2) {
+            icon = 'exequexthits.png';
+            alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+        }
+        $('#cmptEvaluationIcon-' + instance).remove();
+        var sicon = '<div id="cmptEvaluationIcon-' + instance + '" class="CMPT-EvaluationDivIcon"><img  src="' + $eXeCompleta.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+        $header.eq(0).append(sicon);
+        $('#cmptEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+    },
+    getDataStorage: function (id) {
+        var id = 'dataEvaluation-' + id,
+            data = $eXeCompleta.isJsonString(localStorage.getItem(id));
+        return data;
+    },
+    updateEvaluation: function (obj1, obj2, id1) {
+        if (!obj1) {
+            obj1 = {
+                id: id1,
+                activities: []
+            };
+        }
+        const findObject = obj1.activities.find(
+            obj => obj.id === obj2.id && obj.node === obj2.node
+        );
+
+        if (findObject) {
+            findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+        } else {
+            obj1.activities.push({
+                'id': obj2.id,
+                'type': obj2.type,
+                'node': obj2.node,
+                'name': obj2.name,
+                'score': obj2.score,
+                'date': obj2.date,
+                'state': obj2.state,
+            });
+        }
+        return obj1;
     },
     sendScore: function (auto, instance) {
         var mOptions = $eXeCompleta.options[instance],
@@ -205,6 +313,9 @@ var $eXeCompleta = {
         mOptions.counter = 0;
         mOptions.gameOver = false;
         mOptions.gameStarted = false;
+        mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+        mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
         return mOptions;
     },
     loadMathJax: function () {
@@ -240,7 +351,7 @@ var $eXeCompleta = {
             path = $eXeCompleta.idevicePath,
             msgs = $eXeCompleta.options[instance].msgs,
             html = '';
-        html += '<div class="CMPT-MainContainer">\
+        html += '<div class="CMPT-MainContainer"  id="cmptMainContainer-' + instance + '">\
         <div class="CMPT-GameMinimize" id="cmptGameMinimize-' + instance + '">\
             <a href="#" class="CMPT-LinkMaximize" id="cmptLinkMaximize-' + instance + '" title="' + msgs.msgMaximize + '"><img src="' + path + "completaIcon.svg" + '" class="CMPT-IconMinimize CMPT-Activo"  alt="">\
             <div class="CMPT-MessageMaximize" id="cmptMessageMaximize-' + instance + '"></div></a>\
@@ -396,6 +507,7 @@ var $eXeCompleta = {
         $('#cmptSendScore-' + instance).click(function (e) {
             e.preventDefault();
             $eXeCompleta.sendScore(false, instance);
+            $eXeCompleta.saveEvaluation(instance);
         });
 
         $eXeCompleta.loadText(instance);
@@ -483,10 +595,50 @@ var $eXeCompleta = {
         });
         $('#cmptLinkMaximize-' + instance).focus()
         $('#cmptPShowClue-' + instance).hide();
+        $eXeCompleta.updateEvaluationIcon(instance);
+        $(document).on("mousemove", function (e) {
+            e.preventDefault()
+            if (!mOptions.gameStarted || mOptions.gameOver) return;
+            if(mOptions.type == 1 && $eXeCompleta.isDragging){
+                var buffer = 40;
+                var scrollSpeed = 10;
+                var clientY = e.clientY || (e.touches && e.touches[0].clientY);
+                if (clientY < buffer) {
+                    window.scrollBy(0, -scrollSpeed);
+                } else if (window.innerHeight - clientY < buffer) {
+                    window.scrollBy(0, scrollSpeed);
+                }
+            }
+        });
+        document.querySelector("#cmptGameContainer-" + instance).addEventListener( "touchmove", function (e) {
+              if (!mOptions.gameStarted || mOptions.gameOver) return;
+              if (!e.touches || e.touches.length == 0) {
+                return;
+              }
+              var touch = e.touches[0];
+              if(mOptions.type == 1 && $eXeCompleta.isDragging){
+                var buffer = 40;
+                var scrollSpeed = 10;
+                if (touch.clientY < buffer) {
+                  window.scrollBy(0, -scrollSpeed);
+                } else if (window.innerHeight - touch.clientY < buffer) {
+                  window.scrollBy(0, scrollSpeed);
+                }
+            }
+        },
+        { passive: false }
+        );
+        $(document).on("mouseup", function (e) {
+            $eXeCompleta.isDragging = false;
+        });
+        document.querySelector("#cmptGameContainer-" + instance).addEventListener("touchend", function (e) {
+            $eXeCompleta.isDragging = false;
+        });
+
     },
     enterCodeAccess: function (instance) {
         var mOptions = $eXeCompleta.options[instance];
-        if (mOptions.itinerary.codeAccess.toLowerCase() == $('#cmptCodeAccessE-' + instance).val().toLowerCase() ) {
+        if (mOptions.itinerary.codeAccess.toLowerCase() == $('#cmptCodeAccessE-' + instance).val().toLowerCase()) {
             $eXeCompleta.showCubiertaOptions(false, instance)
             if (mOptions.time > 0) {
                 $eXeCompleta.startGame(instance)
@@ -527,7 +679,7 @@ var $eXeCompleta = {
         if (mOptions.gameStarted) {
             return;
         };
-        
+
         $('#cmptGameContainer-' + instance).find('.CMPT-ButtonsDiv').fadeIn();
         $('#cmptButonsDiv-' + instance).hide();
         if (mOptions.type == 1) {
@@ -608,11 +760,11 @@ var $eXeCompleta = {
         $eXeCompleta.showMessage(1, '', instance)
         $eXeCompleta.updateGameBoard(instance);
         $('#cmptMultimedia-' + instance).find('.CMPT-Input').val('');
-        if(mOptions.type==1){
+        if (mOptions.type == 1) {
             $('#cmptMultimedia-' + instance).find('.CMPT-Input').addClass('CMPT-Drag');
             $eXeCompleta.createButtons(instance);
         }
-        
+
         $('#cmptMultimedia-' + instance).find('.CMPT-Input').css({
             'color': '#333333'
         });
@@ -702,12 +854,14 @@ var $eXeCompleta = {
                 $('#cmptPShowClue-' + instance).show();
             }
         }
+        $eXeCompleta.saveEvaluation(instance);
         if (mOptions.attempsNumber <= 0 || mOptions.hits == mOptions.number) {
             $eXeCompleta.gameOver(1, instance);
             return
         }
         $('#cmptReloadPhrase-' + instance).text(mOptions.msgs.msgTry + " (" + mOptions.attempsNumber + ")")
         $('#cmptReloadPhrase-' + instance).show();
+
     },
 
     checkWordLimit: function (word, answord, instance) {
@@ -973,13 +1127,16 @@ var $eXeCompleta = {
         var mOptions = $eXeCompleta.options[instance],
             html = '';
         for (const [key, value] of Object.entries(mOptions.oWords)) {
-            var button = '<a href="@" class="CMPT-WordsButton" draggable="true" dat-number="' + value + '">' + key +
-                '<div class="CMPT-WordsButtonNumber">' + value + '</div></a>';
+            var button = '<div class="CMPT-WordsButton" draggable="true" dat-number="' + value + '">' + key +
+                '<div class="CMPT-WordsButtonNumber">' + value + '</div></div>';
             html += button;
         }
 
         $('#cmptButonsDiv-' + instance).empty();
         $('#cmptButonsDiv-' + instance).append(html);
+        $('#cmptButonsDiv-' + instance).find('.CMPT-WordsButton').click(function (event) {
+            event.preventDefault();
+        });
 
         var $cc = $('#cmptButonsDiv-' + instance).find('.CMPT-WordsButton'),
             pc = '.CMPT-Drag';
@@ -990,10 +1147,16 @@ var $eXeCompleta = {
             }
         });
         $cc.css('cursor', 'pointer');
+
         $cc.draggable({
             revert: true,
             placeholder: false,
             droptarget: pc,
+            start: function(event, ui) {
+                if (!$(this).hasClass('CMPT-Drag')) {
+                    return false;
+                }
+            },
             drop: function (evt, droptarget) {
                 $(this).parent(pc).css({
                     'z-index': '1',
@@ -1001,13 +1164,13 @@ var $eXeCompleta = {
                 $(this).css({
                     'z-index': '1',
                 });
+                $eXeCompleta.isDragging = false;
                 $eXeCompleta.moveCard($(this), droptarget, instance);
             },
         });
         $("#cmptButonsDiv-" + instance).show();
     },
     moveCard: function ($item, destino, instance) {
-
         if ($(destino).attr('disabled')) return;
         var mOptions = $eXeCompleta.options[instance],
             $hijo = $item.find('.CMPT-WordsButtonNumber').eq(0),
@@ -1015,7 +1178,7 @@ var $eXeCompleta = {
             num = $(destino).data('number'),
             $clone = $item.clone(),
             dword = mOptions.words[num];
-        $clone.find('.CMPT-WordsButtonNumber').remove();
+        $clone.find('.CMPT-WordsButtonNumber').remove(); 
         var oword = $clone.text();
         $(destino).val(oword);
         number--;
@@ -1026,9 +1189,10 @@ var $eXeCompleta = {
                 'text-decoration': 'line-through'
             });
             $item.draggable('destroy');
+
         }
         $(destino).attr('disabled', true);
-        $(destino).removeClass('CMPT-Drag')
+        $(destino).removeClass('CMPT-Drag');
 
     },
 
@@ -1326,11 +1490,13 @@ function factory(e) {
                 r.options.placeholder || r.options.revert ? (t = s.clone().removeAttr("id").addClass("draggable_clone").css({
                     position: "absolute"
                 }).appendTo(r.options.container || s.parent()).offset(s.offset()), r.options.placeholder || e(this).invisible()) : t = s, o = new a(t.offset())
+                $eXeCompleta.isDragging = true;
             },
             drag: function (e, r) {
                 n(r), t.offset(o.absolutize(r))
             },
             dragstop: function (a, s) {
+                $eXeCompleta.isDragging = false;
                 var i = e(this),
                     l = n(s);
                 (r.options.revert || r.options.placeholder) && (i.visible(), r.options.revert || i.offset(o.absolutize(s)), t.remove()), t = null, r.options.update && r.options.update.call(i, a, r), i.trigger("update"), l ? (r.options.drop && r.options.drop.call(i, a, l[0]), l.trigger("drop", [i]), l.removeClass("hovering")) : r.options.onrevert && r.options.onrevert.call(i, a)

@@ -35,7 +35,6 @@ var $eXeAdivina = {
     previousScore: '',
     initialScore: '',
     hasLATEX: false,
-
     init: function () {
         this.activities = $('.adivina-IDevice');
         if (this.activities.length == 0) return;
@@ -95,8 +94,6 @@ var $eXeAdivina = {
                 text = mOptions.msgs.msgActityComply + ' ' + mOptions.msgs.msgYouScore + ': ' + prevScore;
             }
         }
-
-
         $('#adivinaRepeatActivity-' + instance).text(text);
         $('#adivinaRepeatActivity-' + instance).fadeIn(1000);
     },
@@ -141,10 +138,12 @@ var $eXeAdivina = {
             $eXeAdivina.addEvents(i);
 
             $('#adivinaDivFeedBack-' + i).hide();
+
         });
         if ($eXeAdivina.hasLATEX && typeof (MathJax) == "undefined") {
             $eXeAdivina.loadMathJax();
         }
+
     },
     Decrypt: function (str) {
         if (!str) str = "";
@@ -188,10 +187,15 @@ var $eXeAdivina = {
         if (hasLatex) {
             $eXeAdivina.hasLATEX = true;
         }
+
         mOptions.hasVideo = false;
         mOptions.waitStart = false;
         mOptions.percentajeQuestions = typeof mOptions.percentajeQuestions != 'undefined' ? mOptions.percentajeQuestions : 100;
         mOptions.modeBoard = typeof mOptions.modeBoard == "undefined" ? false : mOptions.modeBoard;
+        mOptions.evaluation = typeof mOptions.evaluation == "undefined" ? false : mOptions.evaluation;
+        mOptions.evaluationID = typeof mOptions.evaluationID == "undefined" ? '' : mOptions.evaluationID;
+        mOptions.id = typeof mOptions.id == "undefined" ? false : mOptions.id;
+
         for (var i = 0; i < mOptions.wordsGame.length; i++) {
             var p = mOptions.wordsGame[i];
             if (mOptions.wordsGame[i].type != 2) {
@@ -245,6 +249,7 @@ var $eXeAdivina = {
         });
         mOptions.wordsGame = $eXeAdivina.getQuestions(mOptions.wordsGame, mOptions.percentajeQuestions);
         mOptions.numberQuestions = mOptions.wordsGame.length;
+
         return mOptions;
     },
     getQuestions: function (questions, percentaje) {
@@ -298,7 +303,7 @@ var $eXeAdivina = {
             path = $eXeAdivina.idevicePath,
             msgs = $eXeAdivina.options[instance].msgs,
             html = '';
-        html += '<div class="gameQP-MainContainer">\
+        html += '<div class="gameQP-MainContainer"  id="adivinaMainContainer-' + instance + '">\
         <div class="gameQP-GameMinimize" id="adivinaGameMinimize-' + instance + '">\
             <a href="#" class="gameQP-LinkMaximize" id="adivinaLinkMaximize-' + instance + '" title="' + msgs.msgMaximize + '"><img src="' + path + "adivinaIcon.png" + '" class="gameQP-IconMinimize gameQP-Activo"  alt="">\
             <div class="gameQP-MessageMaximize" id="adivinaMessageMaximize-' + instance + '"></div></a>\
@@ -456,6 +461,119 @@ var $eXeAdivina = {
         fB = +'</div>';
         return butonScore;
     },
+
+
+    saveEvaluation: function (instance) {
+        var mOptions = $eXeAdivina.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var name = $('#adivinaGameContainer-' + instance).parents('article').find('.iDeviceTitle').eq(0).text(),
+                node = $('#nodeTitle').text(),
+                score = ((10 * mOptions.hits) / mOptions.wordsGame.length).toFixed(2),
+                formattedDate = $eXeAdivina.getDateString(),
+                scorm = {
+                    'id': mOptions.id,
+                    'type': mOptions.msgs.msgTypeGame,
+                    'node': node,
+                    'name': name,
+                    'score': score,
+                    'date': formattedDate,
+                    'state': (parseFloat(score) >= 5 ? 2 : 1)
+                }
+            var data = $eXeAdivina.getDataStorage(mOptions.evaluationID);
+            data = $eXeAdivina.updateEvaluation(data, scorm);
+            data = JSON.stringify(data, mOptions.evaluationID);
+            localStorage.setItem('dataEvaluation-' + mOptions.evaluationID, data);
+            $eXeAdivina.showEvaluationIcon(instance, scorm.state, scorm.score)
+        }
+    },
+
+    updateEvaluationIcon: function (instance) {
+        var mOptions = $eXeAdivina.options[instance];
+        if (mOptions.id && mOptions.evaluation && mOptions.evaluationID.length > 0) {
+            var node = $('#nodeTitle').text(),
+                data = $eXeAdivina.getDataStorage(mOptions.evaluationID),
+                score = '',
+                state = 0;
+            if (!data) {
+                $eXeAdivina.showEvaluationIcon(instance, state, score);
+                return;
+            }
+            const findObject = data.activities.find(
+                obj => obj.id == mOptions.id && obj.node === node
+            );
+            if (findObject) {
+                state = findObject.state;
+                score = findObject.score;
+            }
+            $eXeAdivina.showEvaluationIcon(instance, state, score);
+            var ancla = 'ac-' + mOptions.id;
+            $('#' + ancla).remove();
+            $('#adivinaMainContainer-' + instance).parents('article').prepend('<div id="' + ancla + '"></div>');
+        }
+    },
+    showEvaluationIcon: function (instance, state, score) {
+        var mOptions = $eXeAdivina.options[instance];
+        var $header = $('#adivinaGameContainer-' + instance).parents('article').find('header.iDevice_header');
+        var icon = 'exequextsq.png',
+            alt = mOptions.msgs.msgUncompletedActivity;
+        if (state == 1) {
+            icon = 'exequextrerrors.png';
+            alt = mOptions.msgs.msgUnsuccessfulActivity.replace('%S', score);
+
+        } else if (state == 2) {
+            icon = 'exequexthits.png';
+            alt = mOptions.msgs.msgSuccessfulActivity.replace('%S', score);
+        }
+        $('#adivinaEvaluationIcon-' + instance).remove();
+        var sicon = '<div id="adivinaEvaluationIcon-' + instance + '" class="gameQP-EvaluationDivIcon"><img  src="' + $eXeAdivina.idevicePath + icon + '"><span>' + mOptions.msgs.msgUncompletedActivity + '</span></div>'
+        $header.eq(0).append(sicon);
+        $('#adivinaEvaluationIcon-' + instance).find('span').eq(0).text(alt)
+    },
+    updateEvaluation: function (obj1, obj2, id1) {
+        if (!obj1) {
+            obj1 = {
+                id: id1,
+                activities: []
+            };
+        }
+        const findObject = obj1.activities.find(
+            obj => obj.id === obj2.id && obj.node === obj2.node
+        );
+        if (findObject) {
+            findObject.state = obj2.state;
+            findObject.score = obj2.score;
+            findObject.name = obj2.name;
+            findObject.date = obj2.date;
+        } else {
+            obj1.activities.push({
+                'id': obj2.id,
+                'type': obj2.type,
+                'node': obj2.node,
+                'name': obj2.name,
+                'score': obj2.score,
+                'date': obj2.date,
+                'state': obj2.state,
+            });
+        }
+        return obj1;
+    },
+    getDateString: function () {
+        var currentDate = new Date();
+        var formattedDate = currentDate.getDate().toString().padStart(2, '0') + '/' +
+            (currentDate.getMonth() + 1).toString().padStart(2, '0') + '/' +
+            currentDate.getFullYear().toString().padStart(4, '0') + ' ' +
+            currentDate.getHours().toString().padStart(2, '0') + ':' +
+            currentDate.getMinutes().toString().padStart(2, '0') + ':' +
+            currentDate.getSeconds().toString().padStart(2, '0');
+        return formattedDate;
+    },
+
+    getDataStorage: function (id) {
+        var id = 'dataEvaluation-' + id,
+            data = $eXeAdivina.isJsonString(localStorage.getItem(id));
+        return data;
+    },
+
     sendScore: function (instance, auto) {
         var mOptions = $eXeAdivina.options[instance],
             message = '',
@@ -637,10 +755,7 @@ var $eXeAdivina = {
             e.preventDefault();
             $eXeAdivina.newQuestion(instance)
         });
-        document.onfullscreenchange = function (event) {
-            var id = event.target.id.split('-')[1];
-            $eXeAdivina.refreshImageActive(id)
-        };
+
         $('#adivinaBtnReply-' + instance).on('click', function (e) {
             e.preventDefault();
             $eXeAdivina.answerQuestion(instance);
@@ -711,6 +826,7 @@ var $eXeAdivina = {
         $('#adivinaSendScore-' + instance).click(function (e) {
             e.preventDefault();
             $eXeAdivina.sendScore(instance, false);
+            $eXeAdivina.saveEvaluation(instance);
         });
         $('#adivinaImage-' + instance).hide();
         window.addEventListener('resize', function () {
@@ -736,7 +852,7 @@ var $eXeAdivina = {
             e.preventDefault();
             $eXeAdivina.newQuestion(instance)
         });
-
+        $eXeAdivina.updateEvaluationIcon(instance)
 
     },
     getYTAPI: function (instance) {
@@ -754,19 +870,6 @@ var $eXeAdivina = {
         } else {
             $eXeAdivina.startGame(instance);
         }
-    },
-    refreshImageActive: function (instance) {
-        var mOptions = $eXeAdivina.options[instance];
-        if (mOptions.gameOver) {
-            return;
-        }
-        if (mOptions.gameStarted) {
-            var q = mOptions.wordsGame[mOptions.activeQuestion];
-            $eXeAdivina.showImage(q.url, q.x, q.y, q.author, q.alt, instance);
-        } else {
-            $eXeAdivina.showImage("", 0, 0, '', '', instance);
-        }
-
     },
     enterCodeAccess: function (instance) {
         var mOptions = $eXeAdivina.options[instance];
@@ -848,7 +951,6 @@ var $eXeAdivina = {
             mTime = $eXeAdivina.getTimeToString(tiempo);
         $('#adivinaPTime-' + instance).text(mTime);
         if (mOptions.gameActived) {
-            //$eXeAdivina.drawLetterActive($eXeAdivina.gameData.activeWord, instance);
         }
     },
     getTimeToString: function (iTime) {
@@ -858,7 +960,7 @@ var $eXeAdivina = {
     },
     gameOver: function (type, instance) {
         var mOptions = $eXeAdivina.options[instance];
-        $eXeAdivina.showImage("", 0, 0, '', '', instance);
+        $eXeAdivina.showImage("", instance);
         mOptions.gameStarted = false;
         mOptions.gameActived = false;
         mOptions.gameOver = true;
@@ -892,6 +994,7 @@ var $eXeAdivina = {
                 $eXeAdivina.initialScore = score;
             }
         }
+        $eXeAdivina.saveEvaluation(instance);
         $eXeAdivina.showFeedBack(instance);
     },
     showFeedBack: function (instance) {
@@ -1031,7 +1134,7 @@ var $eXeAdivina = {
         mOptions.endSilent = endSonido > q.fVideo ? q.fVideo : endSonido;
         $('#adivinaAuthor-' + instance).text('');
         if (q.type === 1) {
-            $eXeAdivina.showImage(q.url, q.x, q.y, q.author, q.alt, instance);
+            $eXeAdivina.showImage(q.url, instance);
             $('#adivinaPAuthor-' + instance).text(q.author);
         } else if (q.type === 3) {
             var text = unescape(q.eText);
@@ -1101,6 +1204,7 @@ var $eXeAdivina = {
             $('#adivinaDivModeBoard-' + instance).css('display', 'flex');
             $('#adivinaDivModeBoard-' + instance).fadeIn();
         }
+        $eXeAdivina.saveEvaluation(instance);
 
     },
     getTimeSeconds: function (iT) {
@@ -1309,69 +1413,116 @@ var $eXeAdivina = {
         }
     },
 
-    showImage: function (url, x, y, author, alt, instance) {
-        var $cursor = $('#adivinaCursor-' + instance),
-            $noImage = $('#adivinaCover-' + instance),
-            $Image = $('#adivinaImage-' + instance),
-            $Author = $('#adivinaPAuthor-' + instance);
-        if ($.trim(url).length == 0) {
-            $cursor.hide();
-            $Image.hide();
-            $noImage.show();
-            return false;
-        };
-
-        $Image.prop('src', url)
-            .on('load', function () {
-                if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
-                    $cursor.hide();
-                    $Image.hide();
-                    $Image.attr('alt', $eXeAdivina.options[instance].msgs.msgNoImage);
-                    $noImage.show();
-                    return false;
-                } else {
-                    var mData = $eXeAdivina.placeImageWindows(this, this.naturalWidth, this.naturalHeight);
-                    $eXeAdivina.drawImage(this, mData);
-                    $Image.show();
-                    $cursor.hide();
-                    $noImage.hide();
-                    $Image.attr('alt', alt);
-                    if (x > 0 && y > 0) {
-                        var left = mData.x + (x * mData.w);
-                        var top = mData.y + (y * mData.h);
-                        $cursor.css({
-                            'left': left + 'px',
-                            'top': top + 'px'
-                        });
-                        $cursor.show();
-                    }
-                    return true;
-                }
-            }).on('error', function () {
-                $cursor.hide();
-                $Image.hide();
-                $Image.attr('alt', $eXeAdivina.options[instance].msgs.msgNoImage);
-                $noImage.show();
-                return false;
-            });
-    },
-    paintMouse: function (image, cursor, x, y) {
-        x = parseFloat(x) || 0;
-        y = parseFloat(y) || 0;
-        $(cursor).hide();
-        if (x > 0 || y > 0) {
-            var wI = $(image).width() > 0 ? $(image).width() : 1,
-                hI = $(image).height() > 0 ? $(image).height() : 1,
-                lI = $(image).position().left + (wI * x),
-                tI = $(image).position().top + (hI * y);
-            $(cursor).css({
-                left: lI + 'px',
-                top: tI + 'px',
-                'z-index': 230
-            });
-            $(cursor).show();
+    showImage: function (url, instance) {
+		var mOptions = $eXeAdivina.options[instance],
+			mQuextion = mOptions.wordsGame[mOptions.activeQuestion],
+		    $cursor = $('#adivinaCursor-' + instance),
+			$noImage = $('#adivinaCover-' + instance),
+			$Image = $('#adivinaImage-' + instance),
+			$Author = $('#adivinaAuthor-' + instance);
+            $Protect = $('#adivinaProtector-' + instance);
+        $Image.attr('alt', 'No image');
+		$cursor.hide();
+		$Image.hide();
+		$noImage.hide();
+        $Protect.hide();
+		if ($.trim(url).length == 0) {
+			$cursor.hide();
+			$Image.hide();
+			$noImage.show();
+			$Author.text('');
+			return false;
+		};
+		$Image.attr('src', ''); 
+		$Image.attr('src', url)
+			.on('load', function () {
+				if (!this.complete || typeof this.naturalWidth == "undefined" || this.naturalWidth == 0) {
+					$cursor.hide();
+					$Image.hide();
+					$noImage.show();
+					$Author.text('');
+				} else {
+					$Image.show();
+					$cursor.show();
+					$noImage.hide();
+					$Author.text(mQuextion.author);
+					$Image.attr('alt', mQuextion.alt);
+					$eXeAdivina.centerImage(instance);
+				}
+			}).on('error', function () {
+				$cursor.hide();
+				$Image.hide();
+				$noImage.show();
+				$Author.text('');
+				return false;
+			});
+            $eXeAdivina.showMessage(0,mQuextion.author , instance);
+	},
+    refreshImageActive: function (instance) {
+        var mOptions = $eXeAdivina.options[instance],
+            mQuextion = mOptions.wordsGame[mOptions.activeQuestion];
+        if (typeof mQuextion == "undefined" ) {
+            return;
         }
+        if (mQuextion.type === 1) {
+            if (mQuextion.url && mQuextion.url.length > 3 ) {
+                 $('#adivinaCursor-' + instance).hide();
+                 $eXeAdivina.centerImage(instance);
+            }
+        }
+
     },
+    centerImage: function (instance) {
+        var $image = $('#adivinaImage-' + instance),
+            wDiv =$image.parent().width() > 0 ?  $image.parent().width() : 1,
+            hDiv = $image.parent().height() > 0 ?  $image.parent().height() : 1,
+            naturalWidth = $image[0].naturalWidth,
+            naturalHeight = $image[0].naturalHeight,
+            varW = naturalWidth / wDiv,
+            varH = naturalHeight / hDiv,
+            wImage = wDiv,
+            hImage = hDiv,
+            xImage = 0,
+            yImage = 0;
+        if (varW > varH) {
+            wImage = parseInt(wDiv);
+            hImage = parseInt(naturalHeight / varW);
+            yImage = parseInt((hDiv - hImage) / 2);
+        } else {
+            wImage = parseInt(naturalWidth / varH);
+            hImage = parseInt(hDiv);
+            xImage = parseInt((wDiv - wImage) / 2);
+        }
+        $image.css({
+            width: wImage,
+            height: hImage,
+            position: 'absolute',
+            left: xImage,
+            top: yImage
+        });
+        $eXeAdivina.positionPointer(instance)
+    },
+
+    positionPointer: function(instance) {
+		var mOptions = $eXeAdivina.options[instance],
+			mQuextion = mOptions.wordsGame[mOptions.activeQuestion],
+		    x = parseFloat(mQuextion.x) || 0;
+		    y = parseFloat(mQuextion.y) || 0, 
+			$cursor=$('#adivinaCursor-' + instance);
+			$cursor.hide();
+		if(x > 0 || y > 0){
+			var containerElement = document.getElementById('adivinaMultimedia-' + instance),
+			    containerPos = containerElement.getBoundingClientRect(),
+			    imgElement = document.getElementById('adivinaImage-' + instance),
+			    imgPos = imgElement.getBoundingClientRect(),
+  		        marginTop = imgPos.top - containerPos.top,
+			    marginLeft = imgPos.left - containerPos.left,
+			    x = marginLeft + (x * imgPos.width),
+			    y = marginTop + (y * imgPos.height);
+				$cursor.show();
+				$cursor.css({ left: x, top: y, 'z-index': 30 });
+		}
+	},
     updateLives: function (instance) {
         var mOptions = $eXeAdivina.options[instance],
             classIconLife = '.exeQuextIcons-Life';
@@ -1420,6 +1571,7 @@ var $eXeAdivina = {
 
             }
         }
+        $eXeAdivina.saveEvaluation(instance);
     },
     updateNumberQuestion: function (numq, instance) {
         var mOptions = $eXeAdivina.options[instance],
@@ -1529,7 +1681,7 @@ var $eXeAdivina = {
                     }
                 } catch (error) {
                     console.log('Error al refrescar cuestiones')
-                }
+               }
 
             }
 
@@ -1632,39 +1784,6 @@ var $eXeAdivina = {
         $('#adivinaPAuthor-' + instance).css({
             'color': color
         });
-    },
-    drawImage: function (image, mData) {
-        $(image).css({
-            'left': mData.x + 'px',
-            'top': mData.y + 'px',
-            'width': mData.w + 'px',
-            'height': mData.h + 'px'
-        });
-    },
-    placeImageWindows: function (image, naturalWidth, naturalHeight) {
-        var wDiv = $(image).parent().width() > 0 ? $(image).parent().width() : 1,
-            hDiv = $(image).parent().height() > 0 ? $(image).parent().height() : 1,
-            varW = naturalWidth / wDiv,
-            varH = naturalHeight / hDiv,
-            wImage = wDiv,
-            hImage = hDiv,
-            xImagen = 0,
-            yImagen = 0;
-        if (varW > varH) {
-            wImage = parseInt(wDiv);
-            hImage = parseInt(naturalHeight / varW);
-            yImagen = parseInt((hDiv - hImage) / 2);
-        } else {
-            wImage = parseInt(naturalWidth / varH);
-            hImage = parseInt(hDiv);
-            xImagen = parseInt((wDiv - wImage) / 2);
-        }
-        return {
-            w: wImage,
-            h: hImage,
-            x: xImagen,
-            y: yImagen
-        }
     },
     supportedBrowser: function (idevice) {
         var ua = window.navigator.userAgent,
