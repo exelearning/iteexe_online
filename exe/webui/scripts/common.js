@@ -27,7 +27,26 @@ if (typeof($exe_i18n)=='undefined') $exe_i18n={previous:"Previous",next:"Next",s
 
 var $exe = {
 	
-    init: function() {
+	options : {
+		// Accessibility toolbar
+		atools : {
+			modeToggler : false,
+			translator : false,
+			i18n : {}
+		}
+	},
+	
+	// Called right after the <body> tag
+	setBodyClass: function(){
+		var c=" js";
+		var b = $("body");
+		if(b.hasClass("exe-atools")&&typeof(localStorage)=='object'){
+			var x=localStorage.getItem('exeAtoolsMode');
+			if(x&&x=="dark") c+=" exe-atools-dm"};
+		document.body.className+=c;
+	},
+	
+	init: function() {
         var bod = $('body');
         $exe.addRoles();
         if (!bod.hasClass("exe-single-page")) {
@@ -209,6 +228,12 @@ var $exe = {
 		});
 		// Search form
 		if (window.DOMParser) this.clientSearch.init(bod); // IE8- do not support the DOMParser object
+		// Accessibility toolbar
+		if ($("body").hasClass("exe-atools")) {
+			var p = "";
+			if (typeof(exe_editor_mode) != "undefined") p = "/scripts/exe_atools/";
+			$exe.loadScript(p + "exe_atools.js", "$exe.atools.init('" + p + "')");
+		}
 		
     },
 	
@@ -382,7 +407,7 @@ var $exe = {
 				$(".exe-client-search-result-link",$exe.clientSearch.results).html(function(_, html) {
 					html = html.replace(/script_/g,"script");
 					var re = new RegExp('('+query+')',"gi");
-					return  html.replace(re, '<span class="exe-client-search-result">$1</span>');
+					return  html.replace(re, '<mark class="exe-client-search-result">$1</mark>');
 				});
 				$(".exe-client-search-result-detail",$exe.clientSearch.results).each(function(i){
 					// Add a "Read more" link if needed
@@ -404,7 +429,7 @@ var $exe = {
 					$(this).html(function(_, html) {
 						html = html.replace(/script_/g,"script");
 						var re = new RegExp('('+query+')',"gi");
-						return  html.replace(re, '<span class="exe-client-search-result">$1</span>');
+						return  html.replace(re, '<mark class="exe-client-search-result">$1</mark>');
 					});
 				});
 				// Make the "Read more" link work
@@ -1900,7 +1925,7 @@ $exe.cloze = {
 			var t = document.getElementById("clozelangVar" + e + ".feedbackId");
 			if (t) {
 				var n = t.value;
-				$exe.cloze.toggle(n);
+				$exe.cloze.toggle(n)
 			}
 		}
 	

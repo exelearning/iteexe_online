@@ -125,7 +125,7 @@ class WebsitePage(Page):
         if dT == "HTML5" or common.nodeHasMediaelement(self.node):
             html += u'<!--[if lt IE 9]><script type="text/javascript" src="exe_html5.js"></script><![endif]-->'+lb
         style = G.application.config.styleStore.getStyle(self.node.package.style)
-        
+
         # jQuery
         if style.hasValidConfig():
             if style.get_jquery()==True:
@@ -160,6 +160,8 @@ class WebsitePage(Page):
             extraCSS = ' exe-search-bar'
         if self.node.package.get_loadMathEngine():
             extraCSS += ' exe-auto-math'
+        if self.node.package.get_addAccessibilityToolbar():
+            extraCSS += ' exe-atools'
         html += u'<body class="exe-web-site'+extraCSS+'" id="exe-node-'+self.node.id+'"><script type="text/javascript">document.body.className+=" js"</script>'+lb
         html += u"<div id=\"content\">"+lb
         html += '<p id="skipNav"><a href="#main" class="sr-av">' + c_('Skip navigation')+'</a></p>'+lb
@@ -212,7 +214,7 @@ class WebsitePage(Page):
                 e=" em_iDevice"
                 if idevice.icon and idevice.icon != "":
                     _iconNameToClass = re.sub('[^A-Za-z0-9_-]+', '', idevice.icon) # Allowed CSS classNames only
-                    if _iconNameToClass!="":
+                    if _iconNameToClass!="":        
                         e += ' em_iDevice_'+_iconNameToClass
                 if unicode(idevice.emphasis)=='0':
                     e=""
@@ -254,7 +256,6 @@ class WebsitePage(Page):
         html = html.encode('utf8')
         # JR: Eliminamos los atributos de las ecuaciones
         aux = re.compile("exe_math_latex=\"[^\"]*\"")
-
         html = aux.sub("", html)
         aux = re.compile("exe_math_size=\"[^\"]*\"")
         html = aux.sub("", html)
@@ -396,3 +397,4 @@ class WebsitePage(Page):
         using the fully exported (and unique) file names for each node.
         """
         return common.renderInternalLinkNodeFilenames(package, html)
+

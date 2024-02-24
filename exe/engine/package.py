@@ -404,6 +404,9 @@ class Package(Persistable):
 
         #Flag to add a search box in the web site export
         self._addSearchBox = False
+        
+        #Flag to add an accessibility toolbar (HTML exports only)
+        self._addAccessibilityToolbar = False
 
         #Flag to export the elp (even if there's no link to the elp in the HTML)
         self._exportElp = False
@@ -808,6 +811,15 @@ class Package(Persistable):
         """
         self._addSearchBox = addSearchBox
         
+    def set_addAccessibilityToolbar(self, addAccessibilityToolbar):
+        """
+        Set _addAccessibilityToolbar flag.
+
+        :type addAccessibilityToolbar: boolean
+        :param addAccessibilityToolbar: New value for the _addAccessibilityToolbar flag.
+        """
+        self._addAccessibilityToolbar = addAccessibilityToolbar
+        
     def set_loadMathEngine(self, loadMathEngine):
         """
         Set _loadMathEngine flag.
@@ -835,6 +847,18 @@ class Package(Persistable):
         """
         if hasattr(self, '_addSearchBox'):
             return self._addSearchBox
+        else:
+            return False
+            
+    def get_addAccessibilityToolbar(self):
+        """
+        Returns _addAccessibilityToolbar flag value.
+
+        :rtype: boolean
+        :return: Flag indicating wheter we should add an accessibility toolbar or not (HTML exports only)
+        """
+        if hasattr(self, '_addAccessibilityToolbar'):
+            return self._addAccessibilityToolbar
         else:
             return False
             
@@ -1213,6 +1237,7 @@ class Package(Persistable):
     extraHeadContent = property(lambda self: self._extraHeadContent, set_extraHeadContent)
     addPagination = property(get_addPagination, set_addPagination)
     addSearchBox = property(get_addSearchBox, set_addSearchBox)
+    addAccessibilityToolbar = property(get_addAccessibilityToolbar, set_addAccessibilityToolbar)
     loadMathEngine = property(get_loadMathEngine, set_loadMathEngine)
     addExeLink = property(get_addExeLink, set_addExeLink)
     exportElp = property(get_exportElp, set_exportElp)
@@ -1824,6 +1849,7 @@ class Package(Persistable):
             'exportMetadataType': 'LOMES',
             'addPagination': False,
             'addSearchBox': False,
+            'addAccessibilityToolbar': False,
             'exportElp': False,
             'docType': G.application.config.docType
         }
@@ -2053,7 +2079,7 @@ class Package(Persistable):
                      '_intendedEndUserRoleType', '_intendedEndUserRoleGroup',
                      '_intendedEndUserRoleTutor', '_contextPlace',
                      '_contextMode', '_extraHeadContent', 'scowsource', 'mxmlprofilelist',
-                     'mxmlforcemediaonly', 'mxmlheight', 'mxmlwidth', '_addSearchBox', '_exportElp']:
+                     'mxmlforcemediaonly', 'mxmlheight', 'mxmlwidth', '_addSearchBox', '_addAccessibilityToolbar', '_exportElp']:
             if hasattr(self, attr):
                     delattr(self, attr)
         self.license = u''
@@ -2190,6 +2216,8 @@ class Package(Persistable):
             self._extraHeadContent = u''
         if not hasattr(self, '_addSearchBox'):
             self._addSearchBox = False
+        if not hasattr(self, '_addAccessibilityToolbar'):
+            self._addAccessibilityToolbar = False
         if not hasattr(self, '_exportElp'):
             self._exportElp = False
         if not hasattr(self, 'release'):
