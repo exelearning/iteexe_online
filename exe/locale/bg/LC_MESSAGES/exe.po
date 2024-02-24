@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-02-24 18:23+0100\n"
+"POT-Creation-Date: 2024-02-24 18:30+0100\n"
 "PO-Revision-Date: 2008-03-16 14:35+0200\n"
 "Last-Translator: Svetoslav Stefanov <lfu.project@gmail.com>\n"
 "Language: bg\n"
@@ -5282,15 +5282,10 @@ msgid "Add an accessibility toolbar (HTML exports only)"
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:123
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:126
 msgid ""
 "The accessibility toolbar allows visitors to manipulate some aspects of "
 "your site, such as font and text size."
-msgstr ""
-
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:126
-msgid ""
-"The accessibility toolbar allow visitors to manipulate some aspects of "
-"your site, like font and text size."
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:132
@@ -19040,5 +19035,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Exit without saving changes and go back to %s (home page)?"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The accessibility toolbar allow visitors "
+#~ "to manipulate some aspects of your "
+#~ "site, like font and text size."
 #~ msgstr ""
 

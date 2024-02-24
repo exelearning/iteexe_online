@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.9\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
-"POT-Creation-Date: 2024-02-24 18:23+0100\n"
+"POT-Creation-Date: 2024-02-24 18:30+0100\n"
 "PO-Revision-Date: 2023-11-13 23:21+0100\n"
 "Last-Translator: Ricardo Nutz <nutz_ric@gva.es>\n"
 "Language: ca_ES@valencia\n"
@@ -5554,15 +5554,10 @@ msgid "Add an accessibility toolbar (HTML exports only)"
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:123
+#: exe/jsui/scripts/app/view/forms/ExportPanel.js:126
 msgid ""
 "The accessibility toolbar allows visitors to manipulate some aspects of "
 "your site, such as font and text size."
-msgstr ""
-
-#: exe/jsui/scripts/app/view/forms/ExportPanel.js:126
-msgid ""
-"The accessibility toolbar allow visitors to manipulate some aspects of "
-"your site, like font and text size."
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/ExportPanel.js:132
@@ -19549,4 +19544,10 @@ msgstr ""
 
 #~ msgid "export process..."
 #~ msgstr "En curs..."
+
+#~ msgid ""
+#~ "The accessibility toolbar allow visitors "
+#~ "to manipulate some aspects of your "
+#~ "site, like font and text size."
+#~ msgstr ""
 
