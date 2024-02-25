@@ -1,5 +1,22 @@
 intef-exe (3:2.9) lucid; urgency=medium
 
+  * Pablo Amaya
+    - Fixed: Single page export duplicated JavaScript files. (#713)
+    - Online version:
+        - eXeLearning online development coordination and full functionality revision.
+        - Configuration options and instructions full revision. New settings: max size for the content and uploaded files.
+        - JWT (JSON Web Token) integration.
+        - Moodle modules compatibility (connection code RFT).
+        - Multiple instances compatibility (one eXe, more than one LMS) when using JWT.
+        - New export configuration option to export in different formats (SCORM or Web Site).
+        - New "Exit without saving" option.
+        - Toolbar contents revision.
+        - Information and error messages revision.
+        - Dockerfile for Ubuntu 16.
+        - Fixed: Single page export and print option errors.
+        - Fixed: Concurrency problems found when working simultaneously.
+        - Fixed: Old "ws" (web server) and "ws28" branches minor bugs.
+
   * Manuel Narváez
     - New iDevice: Progress report (compatible with all games and some iDevices with score).
     - New iDevice: Checklist.
@@ -46,9 +63,6 @@ intef-exe (3:2.9) lucid; urgency=medium
     - Fixed: IFRAME contents resizing problem. (#715)
     - Fixed: Cloze Activity iDevice. Too wide text fields. (#710)
     - Fixed: "Please save your iDevice first" message when no iDevice was open. (#699)
-
-  * Pablo Amaya
-    - Fixed: Single page export duplicated JavaScript files. (#713)
     
   * eXeLearning.net Translation Team
     - New complete Galician translation, by Xunta de Galicia.
