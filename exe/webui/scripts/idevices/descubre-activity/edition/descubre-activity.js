@@ -115,7 +115,7 @@ var $exeDevice = {
         var path = $exeDevice.iDevicePath,
             html = '\
             <div id="gameQEIdeviceForm">\
-            <div class="exe-idevice-info">' + _("Create interactive activities in which players will have to discover pairs, trios or card quartets with images, texts and/or sounds.") + ' <a href="https://youtu.be/f0cv7ouY2qc" hreflang="es" rel="lightbox"  target="_blank">' + _("Use Instructions") + '</a></div>\
+            <div class="exe-idevice-info">' + _("Create interactive activities in which players will have to discover pairs, trios or card quartets with images, texts and/or sounds.") + ' <a href="https://youtu.be/ueYnBkByKr4" hreflang="es" rel="lightbox"  target="_blank">' + _("Use Instructions") + '</a></div>\
             <div class="exe-form-tab" title="' + _('General settings') + '">\
             ' + $exeAuthoring.iDevice.gamification.instructions.getFieldset(_("Birds of a feather flock together.")) + '\
                 <fieldset class="exe-fieldset exe-fieldset-closed">\
@@ -153,7 +153,7 @@ var $exeDevice = {
                             <label for="descubreECustomMessages"><input type="checkbox" id="descubreECustomMessages">' + _("Custom messages") + '.</label>\
                         </p>\
                         <p>\
-                        <label for="descubreETime">' + _("Time") + '(m):</label><input type="number" name="descubreETime" id="descubreETime" value="0" min="0" max="120" step="1" />\
+                        <label for="descubreETime">' + _("Time (minutes)") + ':</label><input type="number" name="descubreETime" id="descubreETime" value="0" min="0" max="120" step="1" />\
                         </p>\
                         <p>\
                             <label for="descubreEAttempts">' + _("Number of attemps") + ':</label><input type="number" name="descubreEAttempts" id="descubreEAttempts" value="0" min="0" max="100" step="1" />\
