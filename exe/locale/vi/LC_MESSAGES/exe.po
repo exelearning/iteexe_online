@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: eXeLearning 2.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-01 14:03+0100\n"
+"POT-Creation-Date: 2024-03-01 16:08+0100\n"
 "PO-Revision-Date: 2012-03-09 07:07+0100\n"
 "Last-Translator: \n"
 "Language: vi\n"
@@ -780,14 +780,14 @@ msgstr ""
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:215
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:146
 #: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:145
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:45
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:52
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:47
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:54
 #: exe/webui/scripts/idevices/quext-activity/edition/quext-activity.js:869
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1051
 #: exe/webui/scripts/idevices/seleccionamedias-activity/edition/seleccionamedias-activity.js:142
 #: exe/webui/scripts/idevices/sopa-activity/edition/sopa-activity.js:163
-#: exe/webui/scripts/idevices/text/edition/text.js:26
-#: exe/webui/scripts/idevices/text/edition/text.js:33
+#: exe/webui/scripts/idevices/text/edition/text.js:28
+#: exe/webui/scripts/idevices/text/edition/text.js:35
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:662
 #: exe/webui/truefalseelement.py:260
 msgid "Feedback"
@@ -2089,9 +2089,9 @@ msgstr "Chọn ảnh"
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1104
 #: exe/webui/scripts/idevices/seleccionamedias-activity/edition/seleccionamedias-activity.js:431
 #: exe/webui/scripts/idevices/seleccionamedias-activity/edition/seleccionamedias-activity.js:433
-#: exe/webui/scripts/idevices/text/edition/text.js:13
-#: exe/webui/scripts/idevices/text/edition/text.js:22
-#: exe/webui/scripts/idevices/text/edition/text.js:47
+#: exe/webui/scripts/idevices/text/edition/text.js:14
+#: exe/webui/scripts/idevices/text/edition/text.js:24
+#: exe/webui/scripts/idevices/text/edition/text.js:51
 #: exe/webui/scripts/idevices/trivial-activity/edition/trivial-activity.js:853
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/all_dlg.js:1
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/style/langs/en_dlg.js:1
@@ -5221,8 +5221,8 @@ msgid "Other Platform Requirements"
 msgstr ""
 
 #: exe/jsui/scripts/app/view/forms/LomSections.js:128
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:18
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:130
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:20
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:142
 msgid "Duration"
 msgstr ""
 
@@ -5339,10 +5339,10 @@ msgstr ""
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:347
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:652
 #: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:326
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:45
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:47
 #: exe/webui/scripts/idevices/relaciona-activity/edition/relaciona-activity.js:281
 #: exe/webui/scripts/idevices/seleccionamedias-activity/edition/seleccionamedias-activity.js:272
-#: exe/webui/scripts/idevices/text/edition/text.js:26
+#: exe/webui/scripts/idevices/text/edition/text.js:28
 msgid "Optional"
 msgstr ""
 
@@ -8453,8 +8453,8 @@ msgstr ""
 
 #: exe/webui/common.py:646 exe/webui/common.py:972 exe/webui/element.py:1547
 #: exe/webui/element.py:2476 exe/webui/listablock.py:274
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:22
-#: exe/webui/scripts/idevices/text/edition/text.js:18
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:24
+#: exe/webui/scripts/idevices/text/edition/text.js:20
 msgid "Show Feedback"
 msgstr "Hiện lời phản hồi"
 
@@ -9744,7 +9744,7 @@ msgid "Supported formats"
 msgstr ""
 
 #: exe/webui/scripts/authoring.js:1797
-#: exe/webui/scripts/idevices/rubrics/export/exe-rubrics.js:48
+#: exe/webui/scripts/idevices/rubrics/export/exe-rubrics.js:50
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/export/exe_abcmusic.js:77
 #: exe/webui/scripts/tinymce_4/js/tinymce/plugins/abcmusic/langs/all.js:14
 msgid "Go to Tools - Preview to see this working"
@@ -12824,7 +12824,6 @@ msgstr "Thêm lựa chọn khác"
 #: exe/webui/scripts/idevices/informe-activity/edition/informe-activity.js:73
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:195
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:551
-#: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:12
 #: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:84
 #: exe/webui/scripts/idevices/ordena-activity/export/ordena-activity.js:41
 #: exe/webui/scripts/idevices/selecciona-activity/edition/selecciona-activity.js:1089
@@ -14191,6 +14190,10 @@ msgstr ""
 msgid "The domain of at least one variable is not correct"
 msgstr ""
 
+#: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:12
+msgid "Sort"
+msgstr ""
+
 #: exe/webui/scripts/idevices/ordena-activity/edition/ordena-activity.js:68
 #, fuzzy
 msgid "You have ordered all the activities!"
@@ -14386,60 +14389,60 @@ msgstr ""
 msgid "Phrases:"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:13
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:14
 #: exe/webui/scripts/idevices/udl-content/edition/udl-content.js:90
 msgid "Task"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:20
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:22
 msgid "Grouping"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:26
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:28
 msgid "Task information"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:28
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:30
 msgid "Estimated duration"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:30
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:36
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:32
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:38
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:125
 msgid "Text to display"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:34
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:139
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:36
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:151
 msgid "Participants"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:35
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:37
 msgid "Number or description"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:41
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:43
 msgid "Describe the tasks that the learners should complete:"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:48
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:171
-#: exe/webui/scripts/idevices/text/edition/text.js:29
-#: exe/webui/scripts/idevices/text/edition/text.js:103
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:50
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:186
+#: exe/webui/scripts/idevices/text/edition/text.js:31
+#: exe/webui/scripts/idevices/text/edition/text.js:113
 msgid "Feedback button text"
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:125
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:137
 #, python-format
 msgid "Please write the text to display in '%s'."
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:153
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:167
 msgid "Please write the task description."
 msgstr ""
 
-#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:170
-#: exe/webui/scripts/idevices/text/edition/text.js:102
+#: exe/webui/scripts/idevices/pbl-tools/edition/pbl-tools.js:185
+#: exe/webui/scripts/idevices/text/edition/text.js:112
 #, python-format
 msgid "Please fill in this field: '%s'."
 msgstr ""
@@ -14985,7 +14988,7 @@ msgstr ""
 msgid "Inverse"
 msgstr ""
 
-#: exe/webui/scripts/idevices/text/edition/text.js:87
+#: exe/webui/scripts/idevices/text/edition/text.js:96
 msgid "Please write some information."
 msgstr ""
 
