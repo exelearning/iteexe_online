@@ -1,11 +1,11 @@
-intef-exe (3:2.9) lucid; urgency=medium
+intef-exe (3:2.9~beta1) lucid; urgency=medium
 
   * Pablo Amaya
     - Fixed: Single page export duplicated JavaScript files. (#713)
     - Online version:
         - eXeLearning online development coordination and full functionality revision.
         - Configuration options and instructions full revision. New settings: max size for the content and uploaded files.
-        - JWT (JSON Web Token) integration.
+        - JWT (JSON Web Token) integration and backward compatibility.
         - Moodle modules compatibility (connection code RFT).
         - Multiple instances compatibility (one eXe, more than one LMS) when using JWT.
         - New export configuration option to export in different formats (SCORM or Web Site).
@@ -42,6 +42,7 @@ intef-exe (3:2.9) lucid; urgency=medium
     - New Properties / Export option: Accessibility Toolbar (it includes Drog.js, by Emanuel Rojas Vásquez).
 
   * Ignacio Gros
+    - iteexe development coordination.
     - Export menu: Show the default Web Site export type.
     - Help menu: Forums replaced by Telegram. (#693)
     - New button to close the style manager panel.
