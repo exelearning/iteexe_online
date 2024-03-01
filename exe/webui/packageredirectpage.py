@@ -138,8 +138,10 @@ class PackageRedirectPage(RenderableResource):
                 repository = "Unknown"
             # Check if ode_id is empty
             if edit_ode_id:
-                # TEST if jwt_tokens is empty. For example in eScholarium
-                import_ode_response = self.importOde(session, edit_ode_id,self.jwt_tokens[session.uid][edit_ode_id]) 
+                if self.integration.enabled_jwt == "1":
+                    import_ode_response = self.importOde(session, edit_ode_id,self.jwt_tokens[session.uid][edit_ode_id]) 
+                else:
+                    import_ode_response = self.importOde(session, edit_ode_id) 
                 if import_ode_response and import_ode_response[0]:
                     imported_package = import_ode_response[1]
                     if self.integration.enabled_jwt == "1":
