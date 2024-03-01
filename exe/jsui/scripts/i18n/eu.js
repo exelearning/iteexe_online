@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.9\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2024-02-28 09:49+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.9\nReport-Msgid-Bugs-To: <translations@exelearning.net>\nPOT-Creation-Date: 2024-03-01 14:03+0100\nPO-Revision-Date: 2022-12-07 19:46+0100\nLast-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\nLanguage: eu\nLanguage-Team: eXe <exelearning.euskaraz@gmail.com>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Number of rounds": "Bira kopurua", 
  "DropDown Activity": "Jarduera zabalgarria", 
  "Create the case story. A good case is one \nthat describes a controversy or sets the scene by describing the characters \ninvolved and the situation. It should also allow for some action to be taken \nin order to gain resolution of the situation.": "Sortu kasu-istorioa. Kasuak, ona izateko, \ngatazka bat deskribatu beharko luke, edo pertsonaien bidez egoera azaldu. \nGainera, gatazka konpondu ahal izateko \nhainbat ekintza gauzatzeko aukera eman beharko luke.", 
@@ -2407,6 +2407,7 @@ translations = {
  "Load": "Kargatu", 
  "Do you want to save now?": "Orain gorde nahi duzu?", 
  "creative commons: attribution - non commercial 3.0": "creative commons: aitortu-ez komertziala 3.0", 
+ "The requested URL is not secure, but eXe is hosted in a secure site. To prevent \r\nbrowser restrictions, you must click on the URL: {0}": "Eskatutako URLa ez da segurua, baina eXe leku seguruan dago. \nNabigatzailearen murrizketak saihesteko, URL: {0} sakatu behar duzu.", 
  "Flip down the card": "Jarri karta ahoz behera", 
  "You must indicate a name for all the selected players.": "Aukeratutako jokalari guztien izenak zehaztu behar dituzu.", 
  "Icons color": "Ikonoen kolorea", 
@@ -2701,7 +2702,6 @@ translations = {
  "GeoGebra Activity": "GeoGebra jarduera", 
  "You can use MathJax for high-quality display of mathematical symbols in web browsers (it will work online only).": "MathJax erabili dezakezu ikur matematikoak kalitate handiz bistaratzeko nabigatzaileetan (bakarrik online funtzionatuko du).", 
  "This will when clicked start the game": "Erabiltzaileak hemen egingo du klik jokoa hasteko", 
- "The requested URL is not secure, but eXe is hosted in a secure site. To prevent \nbrowser restrictions, you must click on the URL: {0}": "Eskatutako URLa ez da segurua, baina eXe leku seguruan dago. \nNabigatzailearen murrizketak saihesteko, URL: {0} sakatu behar duzu.", 
  "<p>If this option is set, the score will be shown.<\/p>": "<p>Aukera hau gaitzen baduzu, puntuazioa erakutsiko da.<\/p>", 
  "Paste activity": "Jarduera Itsatsi", 
  "Text (left) + Image (right)": "Testua (ezkerraldean) + irudia (eskuinaldean)", 
