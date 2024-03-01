@@ -22,7 +22,7 @@ intef-exe (3:2.9~beta1) lucid; urgency=medium
     - New iDevice: Checklist.
     - New iDevice (game): Classify.
     - New iDevice (game): Discover.
-    - New iDevice (game): Order.
+    - New iDevice (game): Sort.
     - New iDevice (game): Relate.
     - New iDevice (game): Select media files.
     - A-Z Quiz Game iDevice: Unlimited rounds.
@@ -66,9 +66,11 @@ intef-exe (3:2.9~beta1) lucid; urgency=medium
     - Fixed: "Please save your iDevice first" message when no iDevice was open. (#699)
     
   * eXeLearning.net Translation Team
+    - Spanish-English translation revision, by INTEF.
     - New complete Basque translation, by Gobierno de Navarra.
     - New complete Catalan translation, by Departament d'Educació de la Generalitat de Catalunya.
     - New complete Galician translation, by Xunta de Galicia.
+    - New complete Valencian translation, by Generalitat Valenciana.
 
  -- eXeLearning <admin@exelearning.net>  Thu, 22 Feb 2024 11:06:00 +0200
 
