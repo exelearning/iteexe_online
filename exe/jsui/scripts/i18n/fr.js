@@ -1,5 +1,5 @@
 translations = {
- "": "Project-Id-Version: eXeLearning 2.9\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-03-01 16:34+0100\nPO-Revision-Date: 2022-11-26 10:37+0100\nLast-Translator: Jes\u00fas Miguel Dom\u00ednguez <miguelcaliban@gmail.com>\nLanguage: fr\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
+ "": "Project-Id-Version: eXeLearning 2.9\nReport-Msgid-Bugs-To: \nPOT-Creation-Date: 2024-03-18 12:52+0100\nPO-Revision-Date: 2022-11-26 10:37+0100\nLast-Translator: Jes\u00fas Miguel Dom\u00ednguez <miguelcaliban@gmail.com>\nLanguage: fr\nLanguage-Team: EXE Team <exe@exelearning.org>\nPlural-Forms: nplurals=2; plural=(n != 1)\nMIME-Version: 1.0\nContent-Type: text\/plain; charset=utf-8\nContent-Transfer-Encoding: 8bit\nGenerated-By: Babel 2.9.1\n", 
  "Number of rounds": "Nombre de tours", 
  "DropDown Activity": "Activit\u00e9 Forum Question-R\u00e9ponse", 
  "Create the case story. A good case is one \nthat describes a controversy or sets the scene by describing the characters \ninvolved and the situation. It should also allow for some action to be taken \nin order to gain resolution of the situation.": "Cr\u00e9ez le sc\u00e9nario du \"cas d'\u00e9tude. Un bon \"cas d'\u00e9tude\" pr\u00e9sente une controverse ou expose un probl\u00e8me en d\u00e9crivant les \u00e9l\u00e9ments d'une probl\u00e9matique. Il peut \u00e9galement proposer diff\u00e9rentes actions qui permettraient de r\u00e9soudre le probl\u00e8me.", 
@@ -301,7 +301,6 @@ translations = {
  "A hint or definition is missing": "Une indication ou d\u00e9finition est n\u00e9cessaire", 
  "&percnt; right to see the feedback": "&percnt; de r\u00e9ponses correctes pour obtenir une r\u00e9ponse en retour", 
  "Search": "Recherche", 
- "Case": "Casse", 
  "QuExt": "QuExt", 
  "Ready?": "Pr\u00eat ?", 
  "Error importing HTML:\n": "Erreur dans l'importation HTML: \n", 
@@ -2271,7 +2270,7 @@ translations = {
  "Wikieducator Content": "Contenu de l'encyclop\u00e9die Wiki\u00e9ducation", 
  "You must provide the time to view the solution": "Vous devez introduire le temps pour voir la solution", 
  "The image could not be created. Insert the code without alternative image?": "Impossible de cr\u00e9er l'image. Ins\u00e9rer le code sans l'image alternative ?", 
- "Create activities in which the student will have to fill in the blanks of a text writing or choosing an answer.": "Cr\u00e9er des activit\u00e9s o\u00f9 l'\u00e9tudiant doit remplir des blancs dans un texte ou choisir une r\u00e9ponse.", 
+ "Case": "Casse", 
  "It is not correct! You have clicked on": "Incorrect ! Vous avez cliqu\u00e9.", 
  "process\/procedure supporting tools": "outils d'appui pour les processus", 
  "Split Question\/Answer Pairs": "S\u00e9parer les paires de Question\/R\u00e9ponse", 
