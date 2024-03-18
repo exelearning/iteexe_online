@@ -15,8 +15,9 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.9\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
 "POT-Creation-Date: 2024-03-18 12:52+0100\n"
-"PO-Revision-Date: 2022-12-07 19:46+0100\n"
-"Last-Translator: Joxemi Andonegi <jm.andonegi@gmail.com>\n"
+"PO-Revision-Date: 2024-03-18 12:05+0100\n"
+"Last-Translator: Gobierno de Navarra - Olatz Benages "
+"<atdlekaroz2@educacion.navarra.es>\n"
 "Language: eu\n"
 "Language-Team: eXe <exelearning.euskaraz@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -12639,7 +12640,6 @@ msgid "You completed the activity"
 msgstr "Jarduera amaitu duzu"
 
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:135
-#, fuzzy
 msgid ""
 "Create activities in which the student will have to fill in the blanks of"
 " a text, writing or choosing an answer."
@@ -14048,7 +14048,6 @@ msgid "point"
 msgstr "puntu"
 
 #: exe/webui/scripts/idevices/listacotejo-activity/edition/listacotejo-activity.js:46
-#, fuzzy
 msgid ""
 "You can use a checklist as a structured and easy way to understand the "
 "suggested activities in this educational resource. It will be a useful "
@@ -14787,16 +14786,15 @@ msgstr "Zeroak onartu emaitza bezala"
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:200
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:137
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:138
-#, fuzzy
 msgid "Relative error"
-msgstr "Direktorioa sortu"
+msgstr "Errore erlatiboa"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:204
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:205
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:142
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:143
 msgid "Absolute error"
-msgstr ""
+msgstr "Errore absolutua"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:276
 msgid "Please specify the number of operations"

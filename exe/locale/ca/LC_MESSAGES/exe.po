@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: eXeLearning 2.9\n"
 "Report-Msgid-Bugs-To: <translations@exelearning.net>\n"
 "POT-Creation-Date: 2024-03-18 12:52+0100\n"
-"PO-Revision-Date: 2024-03-01 14:01+0100\n"
+"PO-Revision-Date: 2024-03-18 12:01+0100\n"
 "Last-Translator: Ramon Pavia Sala - Departament d'Educació de la "
 "Generalitat de Catalunya <rpavia@xtec.cat>\n"
 "Language: ca\n"
@@ -880,7 +880,7 @@ msgstr ""
 #: exe/webui/scripts/idevices/videoquext-activity/edition/videoquext-activity.js:662
 #: exe/webui/truefalseelement.py:260
 msgid "Feedback"
-msgstr "Realimentació"
+msgstr "Retroacció"
 
 #: exe/engine/clozefpdidevice.py:133 exe/engine/clozeidevice.py:133
 #: exe/engine/clozelangfpdidevice.py:133 exe/engine/listaidevice.py:141
@@ -12727,7 +12727,6 @@ msgid "You completed the activity"
 msgstr "Heu completat l'activitat"
 
 #: exe/webui/scripts/idevices/completa-activity/edition/completa-activity.js:135
-#, fuzzy
 msgid ""
 "Create activities in which the student will have to fill in the blanks of"
 " a text, writing or choosing an answer."
@@ -13541,7 +13540,7 @@ msgstr "Proporcioneu l'identificador (ID) d'aquest informe"
 #: exe/webui/scripts/idevices/scrambled-list/edition/scrambled-list.js:15
 #: exe/webui/scripts/idevices/scrambled-list/edition/scrambled-list.js:248
 msgid "Scrambled List"
-msgstr "Llista mesclada"
+msgstr "Llista barrejada"
 
 #: exe/webui/scripts/idevices/informe-activity/edition/informe-activity.js:70
 #: exe/webui/scripts/idevices/mapa-activity/edition/mapa-activity.js:13
@@ -13763,7 +13762,7 @@ msgstr "Relacioneu les parelles"
 
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:38
 msgid "Scrambled list"
-msgstr "Llista mesclada"
+msgstr "Llista barrejada"
 
 #: exe/webui/scripts/idevices/interactive-video/edition/editor/langs/all.js:41
 msgid "Write a text. You can add lists, links..."
@@ -14136,7 +14135,6 @@ msgid "point"
 msgstr "punt"
 
 #: exe/webui/scripts/idevices/listacotejo-activity/edition/listacotejo-activity.js:46
-#, fuzzy
 msgid ""
 "You can use a checklist as a structured and easy way to understand the "
 "suggested activities in this educational resource. It will be a useful "
@@ -14879,16 +14877,15 @@ msgstr "Permetre zero com resultat"
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:200
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:137
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:138
-#, fuzzy
 msgid "Relative error"
-msgstr "Crea carpeta"
+msgstr "Error relatiu"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:204
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:205
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:142
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:143
 msgid "Absolute error"
-msgstr ""
+msgstr "Error absolut"
 
 #: exe/webui/scripts/idevices/mathematicaloperations-activity/edition/mathematicaloperations-activity.js:276
 msgid "Please specify the number of operations"
@@ -14917,7 +14914,7 @@ msgstr "Disculpeu... la resposta correcta és:"
 
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:89
 msgid "FeedBack"
-msgstr "Retroalimentació"
+msgstr "Retroacció"
 
 #: exe/webui/scripts/idevices/mathproblems-activity/edition/mathproblems-activity.js:92
 msgid "You can't give repeated solutions"
