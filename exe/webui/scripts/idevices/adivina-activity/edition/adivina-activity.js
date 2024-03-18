@@ -132,7 +132,7 @@ var $exeDevice = {
         var path = $exeDevice.iDevicePath,
             html = '\
 			<div id="gameQEIdeviceForm">\
-                <div class="exe-idevice-info">' + _("Create activities in which given a definition the student has to complete the word filling in the gaps.") + ' <a href="https://youtu.be/t1tGpTuHN5k" hreflang="es" rel="lightbox" target="_blank">' + _("Use Instructions") + '</a></div>\
+                <div class="exe-idevice-info">' + _("Create activities in which given a definition the student has to complete the word filling in the gaps.") + ' <a href="https://descargas.intef.es/cedec/exe_learning/Manuales/manual_exe29/adivina.html" hreflang="es" target="_blank">' + _("Use Instructions") + '</a></div>\
                 <div class="exe-form-tab" title="' + _('General settings') + '">\
                 ' + $exeAuthoring.iDevice.gamification.instructions.getFieldset(_("Observe the letters, identify and fill in the missing words.")) + '\
 					<fieldset class="exe-fieldset exe-fieldset-closed">\
@@ -2097,7 +2097,6 @@ var $exeDevice = {
         }, 'google_translate_element');
     },
     updateHTML: function (json) {
-        // Actualizar los elementos HTML con los valores del JSON traducido
         const wordsGameElements = document.querySelectorAll('.word-game');
         wordsGameElements.forEach((element, index) => {
             const wordElement = element.querySelector('.word');
@@ -2111,26 +2110,18 @@ var $exeDevice = {
 
     translateJson: function (json, langCode) {
         return new Promise((resolve, reject) => {
-            // Comprobar que la librería de Google Translate se ha cargado correctamente y que el objeto sgoogle se ha inicializado
             if (!$exeDevice.sgoogle) {
                 reject('La librería de Google Translate no se ha cargado correctamente');
             }
-
-            // Obtener los textos a traducir
             const palabras = json.palabras.map(palabra => palabra.texto);
             const definiciones = json.palabras.map(palabra => palabra.definicion);
             const textos = [json.titulo, ...palabras, ...definiciones];
-
-            // Traducir los textos
             $exeDevice.sgoogle.getTranslation(textos, langCode).then(traducciones => {
-                // Actualizar los campos del objeto JSON con las traducciones
                 json.titulo = traducciones[0];
                 for (let i = 0; i < palabras.length; i++) {
                     json.palabras[i].texto = traducciones[i + 1];
                     json.palabras[i].definicion = traducciones[i + palabras.length + 1];
                 }
-
-                // Resolver la promesa con el objeto JSON traducido
                 resolve(json);
             });
         });
@@ -2139,9 +2130,6 @@ var $exeDevice = {
 }
 
 function googleTranslateElementInit() {
-    // Aquí puedes hacer lo que quieras una vez que se cargue la biblioteca de Google Translate.
-    // En este ejemplo, mostramos un mensaje en la consola del navegador.
-    console.log('¡La librería de Google Translate se ha cargado correctamente!');
     $exeDevice.sgoogle = new google.translate.TranslateElement({
         autoDisplay: false
     }, 'google_translate_element');
