@@ -5259,7 +5259,7 @@ msgid ""
 "best practice is to select a value from a controlled vocabulary or formal"
 " classification scheme."
 msgstr ""
-"Polo xeral, o TEMA expresarase como palabras clave, frases ou códigos de "
+"Polo xeral, o Tema expresarase como palabras clave, frases ou códigos de "
 "clasificación que describen o tema do recurso. A práctica máis "
 "recomendada é seleccionar un valor dun vocabulario controlado ou dun "
 "esquema de clasificación formal."
@@ -5272,7 +5272,7 @@ msgstr "Un resumo do contido do recurso."
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:96
 msgid "Publisher"
-msgstr "Editor"
+msgstr "Editor/a"
 
 #: exe/jsui/scripts/app/view/forms/DublinCoreDataPanel.js:97
 msgid "An entity responsible for making the resource available."
@@ -6982,7 +6982,7 @@ msgstr "Informe sobre recursos"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:426
 msgid "Refresh Display"
-msgstr "Actualizar pantalla"
+msgstr "Actualizar interface"
 
 #: exe/jsui/scripts/app/view/ui/eXeToolbar.js:435
 msgid "Styles"
@@ -13366,7 +13366,7 @@ msgstr "Alto"
 #: exe/webui/scripts/tinymce_4/js/tinymce/langs/all.js:170
 #: exe/webui/tools/style-designer/langs/all.js:23
 msgid "Border color"
-msgstr "Cor do borde"
+msgstr "Cor do bordo"
 
 #: exe/webui/scripts/idevices/geogebra-activity/edition/geogebra-activity.js:95
 msgid "Save score button"
