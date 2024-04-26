@@ -1175,10 +1175,6 @@ sendData: function(user, passwd, node, activity, score, date, type, id) {
       mOptions.startX = e.clientX - mOptions.canvasRect.left;
       mOptions.startY = e.clientY - mOptions.canvasRect.top;
       isDragging = false;
-      var sound = $(this).find('.RLCP-TAudio').data('audio');
-        if(sound && sound.length > 4){        
-          $eXeRelaciona.playSound(sound,instance)
-        }
     });
 
     $(document).on("mousemove", function (e) {
@@ -1219,10 +1215,6 @@ sendData: function(user, passwd, node, activity, score, date, type, id) {
             $eXeRelaciona.checkAllConnected(instance);
             mOptions.currentWordDiv = null;
           }
-        }
-        var sound = definitionDiv.find('.RLCP-TAudio').data('audio');
-        if(sound && sound.length > 4){        
-          $eXeRelaciona.playSound(sound,instance)
         }
       }
       $eXeRelaciona.redibujarLineas(instance, false);

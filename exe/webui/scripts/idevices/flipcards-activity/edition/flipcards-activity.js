@@ -1076,22 +1076,15 @@ var $exeDevice = {
         });
 
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-            $('#eXeGameExportImport .exe-field-instructions').eq(0).text( _("Supported formats") + ': json, txt');
             $('#eXeGameExportImport').show();
-            $('#eXeGameImportGame').attr('accept', '.txt, .json, .xml');
             $('#eXeGameImportGame').on('change', function (e) {
                 var file = e.target.files[0];
                 if (!file) {
-                    eXe.app.alert(_('Por favor, selecciona un archivo de texto (.txt) o un archivo JSON (.json)'));
-                    return;
-                }
-                if (!file.type || !(file.type.match('text/plain') || file.type.match('application/json') || file.type.match('application/xml') || file.type.match('text/xml'))) {
-                    eXe.app.alert(_('Por favor, selecciona un archivo de texto (.txt) o un archivo JSON (.json)'));
                     return;
                 }
                 var reader = new FileReader();
                 reader.onload = function (e) {
-                    $exeDevice.importGame(e.target.result, file.type);
+                    $exeDevice.importGame(e.target.result);
                 };
                 reader.readAsText(file);
             });
@@ -1361,7 +1354,7 @@ var $exeDevice = {
         const data = window.URL.createObjectURL(newBlob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = _("Activity") + "-Tarjetas.json";
+        link.download = _("Activity") + "-FlipCards.json";
         document.getElementById('gameIdeviceForm').appendChild(link);
         link.click();
         setTimeout(function () {
@@ -1369,190 +1362,10 @@ var $exeDevice = {
             window.URL.revokeObjectURL(data);
         }, 100);
     },
-    importText: function(content){
-        var lines = content.split('\n'),
-             lineFormat = /^([^#]+)#([^#]+)(#([^#]+))?(#([^#]+))?$/,
-             valids= 0;
-         lines.forEach(function(line) {
-            var p = $exeDevice.getCardDefault();
-            if (lineFormat.test(line)) {
-                var linarray = line.trim().split("#")
-                p.eText = linarray[0];
-                p.eTextBk = linarray[1];
-                $exeDevice.cardsGame.push(p);
-                valids++;
-            }
-        });
-        return valids > 0 ? $exeDevice.cardsGame : false;
-    },
-    importCuestionaryXML1: function(xmlText) {
-        var parser = new DOMParser(),
-            xmlDoc = parser.parseFromString(xmlText, "text/xml");
-        if ($(xmlDoc).find("parsererror").length > 0) {
-            return false;
-        }
-        var quiz = $(xmlDoc).find("quiz").first();
-        if (quiz.length === 0) {
-            return false;
-        }
-        var questions = quiz.find("question"),
-           questionsJson = [];
-        for (var i = 0; i < questions.length; i++) {
-            var question = questions[i],
-                type = $(question).attr('type');
-            if (type !== 'shortanswer') continue;
-            var questionText = $(question).find("questiontext").first().text(),
-                answers = $(question).find("answer"),
-                word = '',
-                maxFraction = -1; 
-                for (var j = 0; j < answers.length; j++) {
-                    var answer = answers[j],
-                        answerHtml = $(answer).find('text').eq(0).text().trim(), 
-                        answerTextParts = answerHtml.split("\n")
-                        answerText = answerTextParts[0].trim(),
-                        currentFraction = parseInt($(answer).attr('fraction'));  
-                    if (currentFraction > maxFraction) { 
-                        maxFraction = currentFraction;
-                        word = answerText;
-                    }
-                }
 
-            questionsJson.push({
-                definition: $exeDevice.removeTags(questionText.trim()),
-                word: word,
-            });
-        }
-        var valids = 0;
-        for (var i = 0; i < questionsJson.length; i++){
-            var question = questionsJson[i],
-            p = $exeDevice.getCardDefault();
-            p.eText= question.word;
-            p.eTextBk = question.definition;
-            if( p.eText &&  p.eText.length > 0  && p.eTextBk && p.eTextBk.length > 0){
-                $exeDevice.cardsGame.push(p);
-                valids++;
-            }
-
-        };
-        return valids > 0 ? $exeDevice.cardsGame : false;
-    },
-    importMoodle(xmlString) {
-        var xmlDoc = $.parseXML(xmlString),
-            $xml = $(xmlDoc);
-        if ($xml.find("GLOSSARY").length > 0) {
-            return $exeDevice.importGlosary(xmlString);
-        }
-        else if ($xml.find("quiz").length > 0) {
-            return $exeDevice.importCuestionaryXML(xmlString);
-        } else {
-            return false;
-        }
-      },
-    importCuestionaryXML: function(xmlText) {
-        var parser = new DOMParser(),
-            xmlDoc = parser.parseFromString(xmlText, "text/xml"),
-            $xml = $(xmlDoc);
-        if ($xml.find("parsererror").length > 0) {
-            return false;
-        }
-        var $quiz = $xml.find("quiz").first();
-        if ($quiz.length === 0) {
-            return false;
-        }
-        var cardsJson = [];
-        $quiz.find("question").each(function() {
-            var $question = $(this),
-                type = $question.attr('type');
-            if (type !== 'shortanswer') {
-                return true
-            }
-            var questionText = $question.find("questiontext").first().text().trim(),
-                $answers = $question.find("answer"),
-                eText = '',
-                maxFraction = -1;
-            $answers.each(function() {
-                var $answer = $(this),
-                    answerText = $answer.find('text').eq(0).text(),
-                    currentFraction = parseInt($answer.attr('fraction'));
-                if (currentFraction > maxFraction) {
-                    maxFraction = currentFraction;
-                    eText = answerText;
-                }
-            });
-            if (eText && eText.length > 0 && questionText && questionText.length > 0  ) {
-                cardsJson.push({
-                    eTextBk: $exeDevice.removeTags(questionText),
-                    eText: $exeDevice.removeTags(eText),
-                });
-            }
-        });
-        var validQuestions = [];
-        cardsJson.forEach(function(card) {
-            var p = $exeDevice.getCardDefault();
-            p.eTextBk = card.eTextBk;
-            p.eText = card.eText;
-            if (p.eText.length > 0 && p.eTextBk.length > 0) {
-                $exeDevice.cardsGame.push(p);
-                validQuestions.push(p);
-            }
-        });
-        return validQuestions.length > 0 ? $exeDevice.cardsGame : false;
-    },
-    importGlosary: function(xmlText) {
-        var parser = new DOMParser(),
-            xmlDoc = parser.parseFromString(xmlText, "text/xml"),
-            $xml = $(xmlDoc);
-        if ($xml.find("parsererror").length > 0) {
-            return false;
-        }
-        var $entries = $xml.find("ENTRIES").first();
-        if ($entries.length === 0) {
-            return false;
-        }
-        var cardsJson = [];
-        $entries.find("ENTRY").each(function() {
-            var $this = $(this),
-                concept = $this.find("CONCEPT").text(),
-                definition = $this.find("DEFINITION").text().replace(/<[^>]*>/g, '');  // Elimina HTML
-            if (concept && definition) {
-                cardsJson.push({
-                    eText: concept,
-                    eTextBk: definition
-                });
-            }
-        });
-        var valids = 0;
-        cardsJson.forEach(function(card) {
-            var p = $exeDevice.getCardDefault();
-            p.eTextBk = card.eTextBk;
-            p.eText = card.eText;
-            if (p.eText.length > 0 && p.eTextBk.length > 0) {
-                $exeDevice.cardsGame.push(p);
-                valids++;
-            }
-        });
-        return valids > 0 ? $exeDevice.cardsGame : false;
-    },
-
-    importGame: function (content, filetype) {
+    importGame: function (content) {
         var game = $exeDevice.isJsonString(content);
-        if (content && content.includes('\u0000')){
-            $exeDevice.showMessage(_('El formato de las preguntas del archivo no es correcto'));
-            return;
-        } else if (!game && content){
-            var cards = false;
-            if(filetype.match('text/plain')){
-                cards = $exeDevice.importText(content);
-            }else if(filetype.match('application/xml') || filetype.match('text/xml')){
-                cards =  $exeDevice.importMoodle(content);
-            }
-            if(cards && cards.length > 0){
-                $exeDevice.cardsGame = cards;
-            }else{
-                $exeDevice.showMessage(_('El formato de las preguntas en el archivo no es correcto'));
-                return
-            }
-        } else if (!game || typeof game.typeGame == "undefined") {
+        if (!game || typeof game.typeGame == "undefined") {
             $exeDevice.showMessage($exeDevice.msgs.msgESelectFile);
             return;
         } else if (game.typeGame == 'FlipCards') {
@@ -1572,23 +1385,43 @@ var $exeDevice = {
                 $("#eXeIdeviceTextAfter").val(unescape(tAfter))
             }
 
+        } else if (game.typeGame == 'flipcards') {
+            game.cardsGame = $exeDevice.importflipcards(game);
         } else if (game.typeGame == 'Rosco') {
-            $exeDevice.cardsGame = $exeDevice.importRosco(game);
+            game.cardsGame = $exeDevice.importRosco(game);
         } else if (game.typeGame == 'QuExt') {
-            $exeDevice.cardsGame = $exeDevice.importQuExt(game);
+            game.cardsGame = $exeDevice.importQuExt(game);
         } else if (game.typeGame == 'Sopa') {
-            $exeDevice.cardsGame = $exeDevice.importSopa(game);
-        } else if (game.typeGame == 'Adivina') {
-            $exeDevice.cardsGame = $exeDevice.importAdivina(game);
+            game.cardsGame = $exeDevice.importSopa(game);
         } else {
             $exeDevice.showMessage($exeDevice.msgs.msgESelectFile);
             return;
         }
+        $exeDevice.cardsGame = game.cardsGame;
         $exeDevice.active = 0;
-        $exeDevice.showCard($exeDevice.active);
         $exeDevice.deleteEmptyQuestion();
-        $exeDevice.updateCardsNumber();
+        $exeDevice.showCard($exeDevice.active);
         $('.exe-form-tabs li:first-child a').click();
+    },
+
+    importflipcards: function (data) {
+        for (var i = 0; i < data.wordsGame.length; i++) {
+            var p = $exeDevice.getCardDefault(),
+                cuestion = data.wordsGame[i];
+            p.eText = cuestion.definition;
+            p.url = cuestion.url;
+            p.audio = typeof cuestion.audio == "undefined" ? "" : cuestion.audio;
+            p.x = cuestion.x;
+            p.y = cuestion.y;
+            p.author = cuestion.author;
+            p.alt = cuestion.alt;
+            p.solution = '';
+            p.eTextBk = cuestion.word;
+            if (p.url.length > 3 || p.audio.length > 3 || p.eText.length > 0) {
+                $exeDevice.cardsGame.push(p);
+            }
+        }
+        return $exeDevice.cardsGame;
     },
     importRosco: function (data) {
         for (var i = 0; i < data.wordsGame.length; i++) {
@@ -1606,30 +1439,11 @@ var $exeDevice = {
             if (p.url.length > 3 || p.audio.length > 3 || p.eText.length > 0) {
                 $exeDevice.cardsGame.push(p);
             }
+
         }
         return $exeDevice.cardsGame;
     },
 
-
-    importSopa: function (data) {
-        for (var i = 0; i < data.wordsGame.length; i++) {
-            var p = $exeDevice.getCardDefault(),
-                cuestion = data.wordsGame[i];
-            p.eText = cuestion.definition;
-            p.url = cuestion.url;
-            p.audio = typeof cuestion.audio == "undefined" ? "" : cuestion.audio;
-            p.x = cuestion.x;
-            p.y = cuestion.y;
-            p.author = cuestion.author;
-            p.alt = cuestion.alt;
-            p.solution = '';
-            p.eTextBk = cuestion.word;
-            if (p.url.length > 3 || p.audio.length > 3 || p.eText.length > 0) {
-                $exeDevice.cardsGame.push(p);
-            }
-        }
-        return $exeDevice.cardsGame;
-    },
     importQuExt: function (data) {
         for (var i = 0; i < data.questionsGame.length; i++) {
             var p = $exeDevice.getCardDefault(),
@@ -1649,14 +1463,15 @@ var $exeDevice = {
             if (p.eText.length > 0) {
                 $exeDevice.cardsGame.push(p);
             }
+
         }
         return $exeDevice.cardsGame;
     },
-    importAdivina: function (data) {
+    importSopa: function (data) {
         for (var i = 0; i < data.wordsGame.length; i++) {
             var p = $exeDevice.getCardDefault(),
                 cuestion = data.wordsGame[i];
-            p.eText = cuestion.word;
+            p.eText = cuestion.definition;
             p.url = cuestion.url;
             p.audio = typeof cuestion.audio == "undefined" ? "" : cuestion.audio;
             p.x = cuestion.x;
@@ -1664,7 +1479,7 @@ var $exeDevice = {
             p.author = cuestion.author;
             p.alt = cuestion.alt;
             p.solution = '';
-            p.eTextBk = cuestion.definition;
+            p.eTextBk = cuestion.word;
             if (p.url.length > 3 || p.audio.length > 3 || p.eText.length > 0) {
                 $exeDevice.cardsGame.push(p);
             }

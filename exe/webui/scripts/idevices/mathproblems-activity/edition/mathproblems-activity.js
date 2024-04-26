@@ -1175,7 +1175,7 @@ var $exeDevice = {
         const data = window.URL.createObjectURL(newBlob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = _("Activity") + "-MathProblems.json";
+        link.download = _("Game") + "MathProblems.json";
         document.getElementById('gameQEIdeviceForm').appendChild(link);
         link.click();
         setTimeout(function () {

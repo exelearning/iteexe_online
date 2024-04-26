@@ -389,7 +389,7 @@ var $exeDevice = {
         const data = window.URL.createObjectURL(newBlob);
         var link = document.createElement('a');
         link.href = data;
-        link.download = _("Activity") + "-Completa.json";
+        link.download = _("Game") + "Completa.json";
         document.getElementById('gameQEIdeviceForm').appendChild(link);
         link.click();
         setTimeout(function () {
