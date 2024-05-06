@@ -548,7 +548,7 @@ class MainPage(RenderableLivePage):
 
                 if self.integration.enabled_jwt == '0':
                     log.info('Package saved, redirecting client to /%s' % self.package.name)
-                    client.filePickerAlert(save_msx, 'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
+                    client.sendScript(u'eXe.app.gotoUrl("/%s")' % self.package.name.encode('utf8'))
                 else:
                     try:
                         ode_id_temp=self.package.ode_id
