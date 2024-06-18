@@ -1,0 +1,24 @@
+version: '3'
+services:
+  exelearning-online:
+    build: 
+      context: ..
+      dockerfile: images/exe/Dockerfile
+    container_name: exelearning-online
+    volumes:
+      - ../../config/publish.conf:/home/app/exe/publish.conf
+    ports:
+      - 51235:51235
+    working_dir: /home/app
+    privileged: true
+    environment:
+      - PYTHONPATH
+      - DEBUG_ENABLE
+      - DEBUG_SERVER_HOST
+      - DEBUG_SERVER_PORT
+    networks:
+      - exelearning-online-network
+
+networks:
+  exelearning-online-network:
+    driver: bridge

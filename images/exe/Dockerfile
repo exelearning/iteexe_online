@@ -1,5 +1,7 @@
 FROM ubuntu:16.04
 
+ENV SSL_CERT_DIR=/etc/ssl/certs
+
 RUN apt-get update && apt-get -yq install python-setuptools python-zope.interface python-imaging python-chardet python-lxml python-feedparser mimetex python-git
 
 RUN apt-get update && apt-get -yq install python-pip python-dev libxml2-dev libxmlsec1-dev swig
@@ -22,4 +24,16 @@ RUN apt-get update && apt-get -yq install python-certifi python-pil
 
 RUN pip install pyjwt
 
+COPY . /home/app
+
+COPY images/exe/example.crt /usr/local/share/ca-certificates/intef-es-chain.crt
+
+RUN update-ca-certificates
+
+ADD images/exe/run.sh /run.sh
+
 RUN mkdir /var/run/exe
+
+WORKDIR /home/app
+
+CMD /run.sh
