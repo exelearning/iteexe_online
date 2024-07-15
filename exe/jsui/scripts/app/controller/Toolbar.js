@@ -1151,7 +1151,20 @@ Ext.define('eXe.controller.Toolbar', {
     },
 
     processExportEvent: function(menu, item, e, eOpts) {
-        this.saveWorkInProgress();
+        var iframe = document.getElementsByTagName('iframe');
+        if (iframe.length==1) {
+            iframe = iframe[0];
+            var doc = iframe.contentWindow.document;
+            var btn = doc.getElementById("exe-submitButton");
+            if (btn) {
+                Ext.Msg.alert(
+                    _('Info'),
+                    _("Please save your iDevice first. The changes you made will be lost if you navigate away from this page.")
+                );				
+                return false;
+            }
+        }         
+        this.saveWorkInProgress(e.exportType);
 
         // Tools - Resources Report should have no validation
         if (e.exportType=="csvReport") {
@@ -1825,7 +1838,7 @@ Ext.define('eXe.controller.Toolbar', {
     },
 
 	// Submit any open iDevices
-	saveWorkInProgress: function() {
+	saveWorkInProgress: function(exportType) {
 	    // Do a submit so any editing is saved to the server
         var authoring = Ext.ComponentQuery.query('#authoring')[0].getWin();
         if (authoring && authoring.getContentForm) {
@@ -1835,9 +1848,10 @@ Ext.define('eXe.controller.Toolbar', {
                     $exeAuthoring.iDevice.save();
                 } catch(e) {
                     console.warn("Error saving iDevice");
-                }
-
-                theForm.submit();
+                }               
+                // See #12 Finish does not save
+                if (typeof(exportType)=='string'&&exportType=="procomun") nevow_clientToServerEvent('savePackage', this, '','','',exportType);
+                else theForm.submit();
             }
         }
     },
