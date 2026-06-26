@@ -1,3 +1,13 @@
+## ⛔️ DEPRECATED
+
+> [!WARNING]
+> This repository is **deprecated** and is no longer maintained.
+>
+> Please use [https://github.com/exelearning/exelearning](https://github.com/exelearning/exelearning) instead.
+>
+> This repository is kept for historical reference only.
+
+```
 ===========================================================================
     eXeLearning, the EXtremely Easy to use eLearning authoring tool
 ===========================================================================
@@ -140,4 +150,4 @@ CREDITS
 =======
 
 Please see the Copyright file.
-
+```
